@@ -11,10 +11,13 @@
 }
 
 .scroller-bar{
-    overflow-y:scroll; 
+    overflow:scroll; 
     overflow-x:hidden; 
     height: 500px;
 }
+.scroller-bar::-webkit-scrollbar {
+    display: none;
+  }
 
 .imageSize{
     width: 150px;

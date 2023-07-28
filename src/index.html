@@ -31,10 +31,11 @@
   <!-- FONT CSS  -->
   <link rel="stylesheet" href="assets/css/stylesheet.css">
   <link rel="stylesheet" href="assets/css/fontcss.css">
+  
   <!-- GOGGLE ICON-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <!-- FLATICON-->
-  >
+  
   <!-- TITLE-->
 
   <!-- FAVICON ICON -->
@@ -209,6 +210,8 @@
   <script src="assets/js/jquery.js"></script>
   <script src="assets/js/sidebar.js"></script>
   <script src="https://unpkg.com/singledivui/dist/singledivui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
 
   <!-- Collapsed RIGHT SIDEBAR -->
   <script>
@@ -220,20 +223,39 @@
         $(".porfile_sec").toggleClass("hide");
       });
     });
+
+    function myfun1() {
+      $("#fee-table").toggle();
+    };
+    // Mycourse page js end//
+
+    // Assignment page js start//
+
+    function assignshow() {
+      $("#taskcard_show").show();
+      $("#down-arrow").hide();
+      $("#up-arrow").show();
+    };
+    function assignhide() {
+      $("#taskcard_show").hide();
+      $("#down-arrow").show();
+      $("#up-arrow").hide();
+    }
+
   
     
-    $(".fee_structure").hide();
-    $(".my_course").click(function(){
-    $(".fee_structure").toggle();
-    });
+    // $(".fee_structure").hide();
+    // $(".my_course").click(function(){
+    // $(".fee_structure").toggle();
+    // });
 
-    $("#taskcard_show").hide();
-    $("#up-arrow").hide();
-    $("#head-show").click(function(){
-    $("#taskcard_show").toggle();
-    $("#down-arrow").toggle();
-    $("#up-arrow").toggle();
-    });
+    // $("#taskcard_show").hide();
+    // $("#up-arrow").hide();
+    // $("#head-show").click(function(){
+    // $("#taskcard_show").toggle();
+    // $("#down-arrow").toggle();
+    // $("#up-arrow").toggle();
+    // });
 
     const { Chart } = SingleDivUI;
 

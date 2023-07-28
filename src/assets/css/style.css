@@ -4,7 +4,7 @@
   padding: 0;
 }
 body{
-  background: linear-gradient(#fefeff 0%, #e7f1f8 100%);
+  /* background: linear-gradient(#fefeff 0%, #e7f1f8 100%); */
   overflow:hidden;
   height: 100vh;
 }
@@ -317,7 +317,10 @@ background: linear-gradient(180deg, #BF78CA 60%, #7C62A3 100%);
 
 /* ************************** LOGIN PAGE CSS END ****************************** */
 /* *************************** LEFT SIDEBAR CSS ********************************* */
-
+.logoleftbar{
+  margin-bottom: 36px;
+  padding: 2px 6px 2px 20px;
+}
 .Dashboard {
   display: flex;
   justify-content: space-between;
@@ -333,7 +336,7 @@ background: linear-gradient(180deg, #BF78CA 60%, #7C62A3 100%);
   transition: 0.5s;
   overflow-x: hidden;
   overflow: hidden;
-  padding-top: 38px;
+  padding-top:20px;
   padding-bottom: 24px;
   white-space: nowrap;
   transition-duration: 0.3s;
@@ -401,11 +404,12 @@ main .sidebar {
 /* ******************* LEFT SIDEBAR CSS END ********************* */
 /* ********************** MIDDLE CONTENT CSS ********************** */
 .scroll_section{
-  overflow: scroll;
+  overflow-y: scroll;
   height: calc(100vh - 96px);
   scroll-behavior: smooth;
   padding-top: 12px;
   padding-bottom: 20px;
+  overflow-x: hidden;
 }
 .scroll_section::-webkit-scrollbar {
   display: none;
@@ -414,7 +418,7 @@ main .sidebar {
   margin-bottom:24px !important;
 }
 .main{
-  width: 100%;
+  width:auto;
   margin-left: 70px;
   padding: 24px;
   transition: ease 0.5s;
@@ -919,9 +923,10 @@ ul.dropdown-menu.show {
   max-width:100%;
 }
 .scroll_dashboard{
-  overflow: scroll;
+  overflow-y: scroll;
   height:calc(100vh - 96px);
   padding-bottom: 20px;
+  overflow-x: hidden;
 }
 .newsdis_scroll::-webkit-scrollbar {
   display: none;
@@ -1019,7 +1024,7 @@ ul.dropdown-menu.show {
 .profile {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
   cursor: pointer;
   margin-bottom:12px;
   /* height: 96px; */
@@ -2285,16 +2290,17 @@ a {
   margin: 0 auto;
 }
 .subject_page {
-  width: 100%;
+  width:auto;
   transition: ease 0.5s;
   padding: 25px 20px;
 }
 .scroll_sec {
-  overflow: scroll;
+  overflow-y: scroll;
   height:calc(100vh - 22vh);
   margin-top: 12px;
   scroll-behavior: smooth;
   padding-bottom: 20px;
+  overflow-x: hidden;
 }
 .scroll_sec::-webkit-scrollbar {
   display: none;
