@@ -1,0 +1,794 @@
+<div id="main" class="main attendance_page">
+  <div class="profile d-flex">
+    <h1 class="font-27 font-700 secondary mb-0">Attendance</h1>
+    <div class="profile">
+      <div class="d-flex align-items-center porfile_sec">
+        <div class="">
+          <img src="assets/images/temp_img/Ellipse 1.png" class="round-img">
+        </div>
+        <div class="text mx-3">
+          <h3 class="font-17 font-600 text-black user-name">Rahil Kothari</h3>
+          <p class="font-14 font-400  text-black mb-0">Ui/Ux Team Lead</p>
+        </div>
+      </div>
+      <a href="#" class="ms-3 right_menu_toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path opacity="0.5" d="M18.7491 9V9.7041C18.7491 10.5491 18.9903 11.3752 19.4422 12.0782L20.5496 13.8012C21.5612 15.3749 20.789 17.5139 19.0296 18.0116C14.4273 19.3134 9.57274 19.3134 4.97036 18.0116C3.21105 17.5139 2.43882 15.3749 3.45036 13.8012L4.5578 12.0782C5.00972 11.3752 5.25087 10.5491 5.25087 9.7041V9C5.25087 5.13401 8.27256 2 12 2C15.7274 2 18.7491 5.13401 18.7491 9Z" fill="#49BFCF"/>
+          <path d="M7.24316 18.5449C7.8941 20.5501 9.77767 21.9997 11.9998 21.9997C14.222 21.9997 16.1055 20.5501 16.7565 18.5449C13.611 19.1352 10.3886 19.1352 7.24316 18.5449Z" fill="#49BFCF"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+  <div class="scroll_section">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 mb-0 mb-md-3 mb-0 mb-md-3">
+        <img src="assets/images/temp_img/calender.png" class="img-fluid">
+      </div>
+      <div class="col-lg-6 col-md-6 mb-0 mb-md-3 mb-0 mb-md-3 ">
+        
+          <div class="attendance-charbar">
+            <h2 class="font-17 font-700 text-light">Attendance</h2>
+            <div class="cell-chartbar">
+              <div id="chart1" style="max-width: 100% max-height fit-content"></div>
+            </div> 
+          </div>         
+      </div>
+    </div>
+  <div class="task_assignment">
+    <div class="row">
+      <div class="col-md-6">
+        <div
+          class="attendance_dropdown d-flex justify-content-between align-items-center"
+        >
+          <h3 class="title1 font-21 font-600 secondary position-relative">
+            Attendance
+          </h3>
+          <div class="dropdown">
+            <a
+              class="attendance_dropdown1 dropdown-toggle font-17 font-500 dark"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              {{ attendanceMonth }}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" (click)="ngOnInit()">All</a></li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(1)"
+                  >January</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(2)"
+                  >February</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(3)"
+                  >March</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(4)"
+                  >April</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(5)"
+                  >May</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(6)"
+                  >June</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(7)"
+                  >July</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(8)"
+                  >August</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(9)"
+                  >September</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(10)"
+                  >October</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(11)"
+                  >November
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" (click)="getAttendanceFilter(12)"
+                  >December
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div [ngClass]="attendances.length > 6 ? 'scroller-bar' : ''">
+          <h3
+            class="font-21 font-600 secondary position-relative"
+            *ngIf="attendances.length == 0"
+          >
+            NO ATTENDANCE FOUND !!!
+          </h3>
+          <div
+            class="all_attendance"
+            *ngFor="let attendance of attendances"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal3"
+          >
+            <div
+              class="attendance d-flex align-items-center bg_attendance position-relative"
+              (click)="attendanceModal(attendance)"
+            >
+              <div class="date_1 mb-0">
+                <h4 class="font-14 font-400 dark mb-0">
+                  <span class="font-20 font-600 text-black mx-1">{{
+                    attendance.checkInDate | date : "dd MMM"
+                  }}</span>
+                </h4>
+              </div>
+              <div class="Check_in">
+                <h2 class="font-13 font-500 sub_heading success">Check in</h2>
+                <h2 class="font-16 font-700 mb-0 success">
+                  {{ attendance.checkInTime }}
+                </h2>
+              </div>
+              <span class="line"></span>
+              <div class="Check_out">
+                <h2 class="font-13 font-500 sub_heading success">Check Out</h2>
+                <h2
+                  class="font-16 font-700 mb-0 success"
+                  *ngIf="attendance.checkOutTime == 'Invalid date'"
+                >
+                  --:--:--
+                </h2>
+                <h2
+                  class="font-16 font-700 mb-0 success"
+                  *ngIf="attendance.checkOutTime != 'Invalid date'"
+                >
+                  {{ attendance.checkOutTime }}
+                </h2>
+              </div>
+              <span class="line"></span>
+              <div class="Hours">
+                <h3 class="font-13 font-500 sub_heading success">Hours in</h3>
+                <h4 class="font-16 font-700 mb-0 success">
+                  {{ attendance.workingHour }}
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div
+          class="attendance_dropdown d-flex justify-content-between align-items-center"
+        >
+          <h3 class="title1 font-21 font-600 secondary position-relative">
+            Leaves
+          </h3>
+          <div class="leave_apply d-flex align-items-center">
+            <button
+              type="button"
+              class="leave_btn font-17 font-500"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal1"
+              (click)="clearData()"
+            >
+              Apply for Leave
+            </button>
+            <div class="dropdown">
+              <a
+                class="attendance_dropdown1 dropdown-toggle font-17 font-500 dark"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {{ leaveMonth }}
+              </a>
+              <ul class="dropdown-menu leaves_dropdown">
+                <li><a class="dropdown-item" (click)="ngOnInit()">All</a></li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(1)"
+                    >January</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(2)"
+                    >February</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(3)"
+                    >March</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(4)"
+                    >April</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(5)">May</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(6)">June</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(7)">July</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(8)"
+                    >August</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(9)"
+                    >September</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(10)"
+                    >October</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(11)"
+                    >November
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="getLeavesFilter(12)"
+                    >December
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div [ngClass]="leavesList.length > 6 ? 'scroller-bar' : ''">
+          <div class="leaves_description">
+            <h3
+              class="font-21 font-600 secondary position-relative"
+              *ngIf="leavesList.length == 0"
+            >
+              NO LEAVES FOUND !!!
+            </h3>
+            <div
+              class="all_summary"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal2"
+              *ngFor="let leave of leavesList"
+            >
+              <div
+                class="leaves d-flex align-items-center position-relative"
+                (click)="leaveModal(leave)"
+              >
+                <div class="leaves_dec">
+                  <h2
+                    class="font-17 font-600 text-black mb-0"
+                    *ngIf="leave.leaveTypeId == 2"
+                  >
+                    CL {{ leave.leaveDuration }} Days
+                  </h2>
+                  <h2
+                    class="font-17 font-600 text-black mb-0"
+                    *ngIf="leave.leaveTypeId == 1"
+                  >
+                    ML {{ leave.leaveDuration }} Days
+                  </h2>
+                  <h2 class="font-14 font-600 text-black java mb-0">
+                    {{ leave.leaveDate | date : "dd/MM/YYYY" }}-{{
+                      leave.leaveEndDate | date : "dd/MM/YYYY"
+                    }}
+                  </h2>
+                  <h3 class="font-14 font-400 text-black">
+                    {{ leave.leaveReason }}
+                  </h3>
+                </div>
+                <h3
+                  class="Approved ms-auto font-13 font-400"
+                  *ngIf="leave.leaveStatus == 0"
+                >
+                  Pending
+                </h3>
+                <h3
+                  class="Approved ms-auto font-13 font-400"
+                  *ngIf="leave.leaveStatus == 1"
+                >
+                  Approved
+                </h3>
+                <h3
+                  class="Approved ms-auto font-13 font-400"
+                  *ngIf="leave.leaveStatus == 2"
+                >
+                  Declined
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal leave for apply start -->
+<div
+  class="modal fade"
+  id="exampleModal1"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header apply_title">
+          <h1
+            class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+            id="exampleModalLabel1"
+          >
+            Apply For Leave
+          </h1>
+          <button
+            type="button"
+            class="close_btn"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <i class="fi fi-rr-cross close_modal"></i>
+          </button>
+        </div>
+        <form #f="ngForm">
+        <div class="">
+          <select
+            class="select_menu"
+            aria-label="Default select example"
+            name="leaveTypeId"
+            [(ngModel)]="leaves.leaveTypeId"
+          >
+            <option disabled>Select Leave Type</option>
+            <option
+              *ngFor="let leaveType of leaveTypes"
+              [ngValue]="leaveType.leaveTypeId"
+            >
+              {{ leaveType.leaveTypeName }}
+            </option>
+          </select>
+
+          <ul class="nav nav-pills days_tabs" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active p-0"
+                id="pills-home-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-home"
+                type="button"
+                role="tab"
+                aria-controls="pills-home"
+                aria-selected="true"
+              >
+                <div
+                  class="form-check d-inline-block position-relative account_option ms-auto apply_radio_box"
+                >
+                  <input
+                    class="d-none"
+                    type="radio"
+                    name="leaveDayType"
+                    id="inlineRadio1"
+                    value="Full Day"
+                    [(ngModel)]="leaves.leaveDayType"
+                  />
+                  <label class="form-check-label" for="inlineRadio1">
+                    <div class="radio-box mb-0 day_box">
+                      <p class="text-center font-13 font-400 info mb-0 text0">
+                        Full Day
+                      </p>
+                    </div>
+                  </label>
+                </div>
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link p-0"
+                id="pills-profile-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#pills-profile"
+                type="button"
+                role="tab"
+                aria-controls="pills-profile"
+                aria-selected="false"
+              >
+                <div
+                  class="form-check d-inline-block position-relative account_option ms-auto apply_radio_box"
+                >
+                  <input
+                    class="d-none"
+                    type="radio"
+                    name="leaveDayType"
+                    id="inlineRadio2"
+                    value="Half Day"
+                    [(ngModel)]="leaves.leaveDayType"
+                  />
+                  <label class="form-check-label" for="inlineRadio2">
+                    <div class="radio-box mb-0 day_box">
+                      <p class="text-center font-13 font-400 info mb-0 text0">
+                        Half Day
+                      </p>
+                    </div>
+                  </label>
+                </div>
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="pills-tabContent">
+            <div
+              class="tab-pane fade show active"
+              id="pills-home"
+              role="tabpanel"
+              aria-labelledby="pills-home-tab"
+              tabindex="0"
+            ></div>
+
+            <div
+              class="tab-pane fade"
+              id="pills-profile"
+              role="tabpanel"
+              aria-labelledby="pills-profile-tab"
+              tabindex="0"
+            >
+              <div class="row">
+                <div class="col-md-6">
+                  <div
+                    class="form-check d-inline-block left position-relative account_option ms-auto apply_radio_box"
+                  >
+                    <input
+                      class="d-none"
+                      type="radio"
+                      name="halfDayType"
+                      id="inlineRadio3"
+                      value="First Half"
+                      [(ngModel)]="leaves.halfDayType"
+                    />
+                    <label class="form-check-label" for="inlineRadio3">
+                      <div class="radio-box mb-0">
+                        <p class="text-center font-13 font-400 info mb-0 text0">
+                          First Half
+                        </p>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="form-check d-inline-block position-relative account_option ms-auto apply_radio_box"
+                  >
+                    <input
+                      class="d-none"
+                      type="radio"
+                      name="halfDayType"
+                      id="inlineRadio4"
+                      value="Second Half"
+                      [(ngModel)]="leaves.halfDayType"
+                    />
+                    <label class="form-check-label" for="inlineRadio4">
+                      <div class="radio-box mb-0">
+                        <p class="text-center font-13 font-400 info mb-0 text0">
+                          Second
+                        </p>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="apply_radio_box">
+          <h4 class="sub-heading font-17 font-500 secondary">Duration</h4>
+          <div class="form-row d-flex">
+            <div class="form-group col-md-6">
+              <div
+                class="input_icon position-relative d-flex align-items-center"
+              >
+                <input
+                  type="date"
+                  id="birthday"
+                  name="leaveDate"
+                  class="form-control input_text"
+                  placeholder="From"
+                  [(ngModel)]="leaves.leaveDate"
+                />
+                <!-- <i class="fi fi-rr-calendar calender_2 lh-0"></i> -->
+              </div>
+            </div>
+            <div
+              class="form-group col-md-6"
+              *ngIf="leaves.leaveDayType == 'Full Day'"
+            >
+              <div
+                class="input_icon position-relative d-flex align-items-center"
+              >
+                <input
+                  type="date"
+                  id="birthday"
+                  name="leaveDate"
+                  class="form-control input_text"
+                  placeholder="To"
+                  [(ngModel)]="leaves.leaveEndDate"
+                />
+                <!-- <i class="fi fi-rr-calendar calender_2 lh-0"></i> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h4 class="sub-heading font-17 font-500 secondary">Reason</h4>
+          <textarea
+            class="form-control text_area"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            placeholder="Start Typing....."
+            name="leaveReason"
+            [(ngModel)]="leaves.leaveReason"
+          ></textarea>
+        </div>
+        <br />
+        <h5 class="text-center" *ngIf="message != ''" [style.color]="color">
+          {{ message }}
+        </h5>
+        <div
+          class="apply_modal_buttons d-flex justify-content-between align-items-center"
+        >
+          <button
+            type="button"
+            class="cancel_modal_btn"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="apply_modal_btn"
+            (click)="addStudentLeave()"
+          >
+            Apply
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal leave for apply end -->
+
+<!-- Modal attendance start -->
+<div
+  class="modal fade"
+  id="exampleModal3"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel3"
+  aria-hidden="true"
+>
+  <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header apply_title">
+          <h1
+            class="modal-title font-21 font-600 secondary modal_line position-relative"
+          >
+            Attendance {{ attendance.checkInDate | date : "dd MMM yyyy" }}
+          </h1>
+          <button
+            type="button"
+            class="close_btn"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <i class="fi fi-rr-cross close_modal"></i>
+          </button>
+        </div>
+        <div
+          class="attendance_heading d-flex justify-content-between align-items-center"
+        >
+          <div class="">
+            <h3 class="attendance_title font-17 font-500 secondary text-center">
+              Check in
+            </h3>
+            <h4 class="font-17 font-600 text_small">
+              {{ attendance.checkInTime }}
+            </h4>
+          </div>
+          <div class="">
+            <h3 class="attendance_title font-17 font-500 secondary text-center">
+              Duration
+            </h3>
+            <h4 class="font-17 font-600 text_small">
+              {{ attendance.workingHour }} Hrs
+            </h4>
+          </div>
+          <div class="">
+            <h3 class="attendance_title font-17 font-500 secondary text-center">
+              Check Out
+            </h3>
+            <h4 class="font-17 font-600 text_small">
+              {{ attendance.checkOutTime }}
+            </h4>
+          </div>
+        </div>
+
+        <div class="attendance_image d-flex justify-content-between">
+          <!-- <img class="imageSize" src="assets/images/temp_img/Options 01 _Selected.png">
+        <img class="imageSize" src="assets/images/temp_img/Options 01 _Selected.png"> -->
+          <img
+            class="imageSize"
+            src="assets/images/temp_img/Options 01 _Selected.png"
+            *ngIf="attendance.checkInImage == undefined"
+          />
+          <img
+            class="imageSize"
+            [src]="imageUrl + attendance.checkInImage"
+            *ngIf="attendance.checkInImage != undefined"
+          />
+          <img
+            class="imageSize"
+            src="assets/images/temp_img/Options 01 _Selected.png"
+            *ngIf="attendance.checkOutImage == undefined"
+          />
+          <img
+            class="imageSize"
+            [src]="imageUrl + attendance.checkOutImage"
+            *ngIf="attendance.checkOutImage != undefined"
+          />
+        </div>
+
+        <div class="attendance_report">
+          <h4 class="sub-heading font-17 font-500 secondary">Report</h4>
+          <textarea
+            class="form-control text_area"
+            id="exampleFormControlTextarea1"
+            rows="3"
+            placeholder="Start Typing....."
+          ></textarea>
+        </div>
+
+        <form
+          class="attachment_file2 d-flex align-items-center position-relative"
+        >
+          <input
+            type="file"
+            name="fileupload"
+            value="fileupload"
+            class="d-none"
+            id="fileupload"
+          />
+          <label
+            for="fileupload"
+            class="font-15 font-700 secondary text-white attachment_file_text"
+          >
+            <i
+              class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"
+            ></i>
+            Attachments
+            <span class="mx-0 ms-2 font-15 font-400 text-white"
+              >Assignment Files.zip</span
+            ></label
+          >
+        </form>
+
+        <div
+          class="apply_modal_buttons d-flex justify-content-between align-items-center"
+        >
+          <button type="button" class="cancel_modal_btn">Cancel</button>
+          <button type="button" class="apply_modal_btn">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal attendance end -->
+
+<!-- Modal leave details start -->
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel2"
+  aria-hidden="true"
+>
+  <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header apply_title">
+          <h1
+            class="modal-title font-21 font-600 secondary modal_line position-relative"
+          >
+            Leave Details
+          </h1>
+          <h1
+            class="modal-title pending peragraph font-600"
+            *ngIf="leavesModal.leaveStatus == 0"
+          >
+            Pending
+          </h1>
+          <h1
+            class="modal-title pending peragraph font-600"
+            *ngIf="leavesModal.leaveStatus == 1"
+          >
+            Approved
+          </h1>
+          <h1
+            class="modal-title pending peragraph font-600"
+            *ngIf="leavesModal.leaveStatus == 2"
+          >
+            Declined
+          </h1>
+          <button
+            type="button"
+            class="close_btn1"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <i class="fi fi-rr-cross close_modal"></i>
+          </button>
+        </div>
+        <div class="leave_heading">
+          <h3 class="input_heading font-17 font-500 secondary">Leave Type</h3>
+          <h4
+            class="input_heading font-17 font-600"
+            *ngIf="leavesModal.leaveTypeId == 2"
+          >
+            Casual Leave
+          </h4>
+          <h4
+            class="input_heading font-17 font-600"
+            *ngIf="leavesModal.leaveTypeId == 1"
+          >
+            Medical Leave
+          </h4>
+        </div>
+        <div class="leave_heading">
+          <h3 class="input_heading font-17 font-500 secondary">Duration</h3>
+          <h4 class="input_heading font-17 font-600">
+            {{ leavesModal.leaveDayType }}
+          </h4>
+        </div>
+        <div class="leave_heading">
+          <h3 class="input_heading font-17 font-500 secondary">Leave Date</h3>
+          <h4 class="input_heading font-17 font-600">
+            {{ leavesModal.leaveDate | date : "dd MMM, YYYY" }}
+          </h4>
+        </div>
+        <div class="leave_heading">
+          <h3 class="input_heading font-17 font-500 secondary">Reason</h3>
+          <h4 class="input_heading font-17 font-600">
+            {{ leavesModal.leaveReason }}
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal leave details end -->
+<app-right-side-bar></app-right-side-bar>

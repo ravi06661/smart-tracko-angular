@@ -1,0 +1,105 @@
+<div id="main" class="main job_alertpage">
+    <div class="row">
+      <div class="col-12 heading_dashboard">
+        <div class="heading">
+          <h4 class="card-title font-30 font-500 secondary mb-0">News And Event</h4>
+        </div>
+        <div class="data_table">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              
+              
+            </div>
+            <div class="col-md-4 ms-auto d-flex justify-content-end align-items-center serch_box">
+              <label class="d-flex align-items-center search dark">Search:<input type="search"
+                  class="form-control form-control-sm" placeholder="" aria-controls="ShowUser" name="search" ngModel (ngModelChange)="searchNewsAndEvents($event)">
+              </label>
+              <button type="button" class="add_btn d-flex justify-content-center align-items-center"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+            </div>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">S. No.</th>
+                <th scope="col">Image</th>
+                <th scope="col">Title</th>
+                <th scope="col">Short Description</th>
+                <th scope="col">Date</th>
+                <th scope="col">Active</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let newsAndEvent of newsAndEvents;let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td><img [src]="imageUrl+newsAndEvent.image" width="48" height="48"></td>
+                <td>{{newsAndEvent.title}}</td>
+                <td>{{newsAndEvent.shortDescription}}</td>
+                <td>{{newsAndEvent.createdDate|date:'dd-MM-YYYY'}}</td>
+                <td><label class="switch">
+                    <input type="checkbox" [checked]="newsAndEvent.isActive" (click)="activeAndInActive(newsAndEvent.id)">
+                    <span class="slider round"></span>
+                  </label></td>
+                <td class="action">
+                  <i class="fi fi-rr-pencil warning"></i>
+                  <i class="fi fi-rr-trash warning mx-0 ms-2" (click)="deleteNewsAndEvents(newsAndEvent.id)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <mat-paginator *ngIf="totalNewsAndEvents>10"
+            [length]="totalNewsAndEvents"
+            [pageSize]="size"
+            (page)="pageChange($event)">
+            >    
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true"
+role="dialog">
+<div class="modal-dialog position-relative leave_modal">
+  <div class="modal-content">
+    <div class="modal-body p-0">
+      <div class="modal-header apply_title">
+        <h4 class="card-title font-21 font-600 secondary">Add</h4>
+        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fi fi-rr-cross close_icon"></i>
+        </button>
+      </div>
+      <div class="POPUP">
+        <div class="mb-3">
+          <label class="form-label danger font-17 font-500 mb-2" for="reasonType">Reason Type</label>
+          <select class="form-select" id="reasonType" name="reasonType">
+            <option value="">select input type</option>
+            <option value="Safety">Safety</option>
+            <option value="HelpCenterQueries">HelpCenterQueries</option>
+            <option value="ContactUs">ContactUs</option>
+            <option value="Dispute">Dispute</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label danger font-17 font-500 mb-2" for="reasonUserType">Reason User Type</label>
+          <select class="form-select valid" id="reasonUserType" name="reasonUserType" aria-invalid="false">
+            <option value="Passenger">Passenger</option>
+            <option value="Driver">Driver</option>
+          </select>
+        </div>
+        <div class="form_input mb-3">
+          <label for="inputEmail4" class="heading_name font-17 font-500  danger mb-2">Heading</label>
+          <input type="email" class="form-control input_text" id="inputEmail4" placeholder="Input Text Here">
+        </div>
+        <div class="mb-3">
+          <label class="form-label danger font-17 font-500 mb-2" for="reason">Reasons</label>
+          <textarea class="form-control" id="reason" name="reason"></textarea>
+        </div>
+        <button type="button" class="add_item">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

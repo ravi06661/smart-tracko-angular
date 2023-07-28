@@ -1,0 +1,52 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { JobAlert } from 'src/app/entity/job-alert';
+import { JobAlertService } from 'src/app/service/job-alert.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { UtilityServiceService } from 'src/app/service/utility-service.service';
+@Component({
+  selector: 'app-jobalert',
+  templateUrl: './jobalert.component.html',
+  styleUrls: ['./jobalert.component.scss']
+})
+export class JobalertComponent {
+  BASE_URL=this.utilityService.getBaseUrl();
+  imageUrl=this.BASE_URL+'/File/getImageApi/technologyStackImage/';
+  
+  
+  internshipJobs: JobAlert[] = []
+  jobs: JobAlert[] = []
+  totalInternJobs: number = 0
+  totalJobs: number = 0
+  constructor(private jobAlertService: JobAlertService,private utilityService:UtilityServiceService) { }
+  ngOnInit() {
+    this.getAllJobs(0, 8);
+    this.getAllInternJobs(0, 8);
+  }
+
+  public getAllInternJobs(page: number, size: number) {
+    this.jobAlertService.getInternShipJobs(page, size).subscribe(
+      (data: any) => {
+        this.internshipJobs = data.content
+        this.totalInternJobs = data.totalElements
+      }
+    )
+  }
+
+  public getAllJobs(page: Number, size: number) {
+    this.jobAlertService.getAllJobs(page, size).subscribe(
+      (data: any) => {
+        this.jobs = data.content
+        this.totalJobs = data.totalElements
+      }
+    )
+  }
+
+  public pageChange2(event: any) {
+    this.getAllJobs(event.pageIndex, event.pageSize);
+  }
+
+  public pageChange1(event: any) {
+    this.getAllInternJobs(event.pageIndex, event.pageSize);
+  }
+}

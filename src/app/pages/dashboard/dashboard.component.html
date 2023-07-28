@@ -1,0 +1,426 @@
+<div id="main" class="main dashboard_page">
+  <div class="profile d-flex">
+    <h1 class="font-27 font-700 secondary mb-0">Dashboard</h1>
+    <div class="profile mb-4 profile-right">
+      <div class="d-flex align-items-center porfile_sec">
+        <div class="">
+          <img src="assets/images/temp_img/Ellipse 1.png" class="round-img">
+        </div>
+        <div class="text">
+          <h3 class="font-17 font-600 text-black user-name">Rahil Kothari</h3>
+          <p class="font-14 font-400  text-black mb-0">Ui/Ux Team Lead</p>
+        </div>
+      </div>
+      <a class="ms-3 right_menu_toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path opacity="0.5" d="M18.7491 9V9.7041C18.7491 10.5491 18.9903 11.3752 19.4422 12.0782L20.5496 13.8012C21.5612 15.3749 20.789 17.5139 19.0296 18.0116C14.4273 19.3134 9.57274 19.3134 4.97036 18.0116C3.21105 17.5139 2.43882 15.3749 3.45036 13.8012L4.5578 12.0782C5.00972 11.3752 5.25087 10.5491 5.25087 9.7041V9C5.25087 5.13401 8.27256 2 12 2C15.7274 2 18.7491 5.13401 18.7491 9Z" fill="#49BFCF"/>
+          <path d="M7.24316 18.5449C7.8941 20.5501 9.77767 21.9997 11.9998 21.9997C14.222 21.9997 16.1055 20.5501 16.7565 18.5449C13.611 19.1352 10.3886 19.1352 7.24316 18.5449Z" fill="#49BFCF"/>
+        </svg>
+        <!-- <i class="fi fi-rr-bell text-light danger open"></i> -->
+      </a>
+    </div>
+  </div>
+   
+  <!-- DASHBOARD START -->
+  <div class="scroll_dashboard">
+  <div class="main-inner">
+
+      <div class="card0 left-card d-flex">
+          <div class="left-content">
+            <button type="button" class="btn-2 text-white font-12 font-400 d-flex flex-column align-items-center justify-content-center"  data-bs-toggle="modal" data-bs-target="#dash_checkout_modal">
+              <img src="assets/images/svg_img/check-in.svg" class="mb-2 img-fluid">
+              CHECK IN
+
+            </button>
+
+            <div class="time text-center">
+              <h6 class="font-21 font-600 light">{{ clock | async | date: "mediumTime" }}</h6>
+            <h6 class="font-14 font-500 light">{{formattedDate}}</h6>
+            </div>
+          </div>
+
+          <div class="right-content">
+            <div class="checkin d-flex align-items-center">
+              <span class="img">
+                <img src="assets/images/svg_img/Vector.svg">
+              </span>
+              <h3 class="font-15 font-400 light mb-0">09:30 AM</h3>
+            </div>
+            <div class="checkin d-flex align-items-center">
+              <span class="img">
+                <img src="assets/images/svg_img/Frame 156.svg">
+              </span>
+              <h3 class="font-15 font-400 light mb-0">06:32 AM</h3>
+            </div>
+            <div class="checkin d-flex align-items-center">
+              <span class="img">
+                <img src="assets/images/svg_img/watch.svg">
+              </span>
+              <h3 class="font-15 font-400 light mb-0">09:02 Hrs</h3>
+            </div>
+          </div>
+   
+      </div>
+    
+      <div class="calender-img">
+        <img src="assets/images/temp_img/calender.png" class="img-fluid">
+      </div>
+
+     <div class="right-task-area d-flex flex-wrap">
+      <div class="task-area text-center">
+        <h1 class="font-38 font-700 mb-0 text-light">5</h1>
+        <p class="font-15 font-500 text-light mb-0">Tasks submitted</p>
+      </div>
+      <div class="task-area text-center ">
+        <h1 class="font-38 font-700 mb-0 text-light">5</h1>
+        <p class="font-15 font-500 text-light mb-0">Tasks submitted</p>
+      </div>
+      <div class="task-area text-center ">
+        <h1 class="font-38 font-700 mb-0 text-light">5</h1>
+        <p class="font-15 font-500 text-light mb-0">Tasks submitted</p>
+      </div>
+      <div class="task-area text-center">
+        <h1 class="font-38 font-700 mb-0 text-light">5</h1>
+        <p class="font-15 font-500 text-light mb-0">Tasks submitted</p>
+      </div>
+     </div>
+   
+  </div> 
+  <div class="task_assignment">
+    <div class="row">
+      <div class="col-md-4">
+        <h3 class="title font-17 font-600 secondary position-relative">Assignments - Day 1</h3>
+        <div class="all_summary">
+
+          <div class="task_summary d-flex align-items-center justify-content-between">
+            <h3 class="font-15 font-500 mb-0">Task1</h3>
+            <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">View</h4>
+          </div>
+
+          <div class="task_summary d-flex align-items-center justify-content-between">
+            <h3 class="font-15 font-500 mb-0">Task1</h3>
+            <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">View</h4>               
+          </div>
+
+          <div class="task_summary d-flex align-items-center justify-content-between">
+            <h3 class="font-15 font-500 mb-0">Task1</h3>
+            <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">View</h4>
+          </div>
+
+          <div class="task_summary d-flex align-items-center justify-content-between">
+            <h3 class="font-15 font-500 mb-0">Task1</h3>
+            <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">View</h4>
+          </div>
+
+          <div class="task_summary d-flex align-items-center justify-content-between">
+            <h3 class="font-15 font-500 mb-0">Task1</h3>
+            <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">View</h4>
+          </div>
+
+          <div class="task_summary d-flex align-items-center justify-content-between">
+            <h3 class="font-15 font-500 mb-0">Task1</h3>
+            <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">View</h4>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <h3 class="title font-17 font-600 secondary position-relative">Tasks</h3>
+        <div class="all_summary">
+
+          <div class="task_summary d-flex align-items-center justify-content-between">
+            <h3 class="font-15 font-500 mb-0">Task1</h3>
+            <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">View</h4>
+          </div>
+
+          <div class="task_summary d-flex align-items-center justify-content-between">
+            <h3 class="font-15 font-500 mb-0">Task1</h3>
+            <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">View</h4>               
+          </div>
+
+          <div class="task_summary d-flex align-items-center justify-content-between">
+            <h3 class="font-15 font-500 mb-0">Task1</h3>
+            <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">View</h4>
+          </div>
+
+          <div class="task_summary d-flex align-items-center justify-content-between">
+            <h3 class="font-15 font-500 mb-0">Task1</h3>
+            <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">View</h4>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <h3 class="title font-17 font-7600 secondary position-relative">Updates</h3>
+        <div class="all_summary assignment-updates">
+
+            <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              <div class="d-flex align-items-center justify-content-between">
+                <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b class="text_light_green ms-1 font-500">Completed</b></h3>
+                <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
+                <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+              </div>
+             </div>
+
+           <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            <div class="d-flex align-items-center justify-content-between">
+              <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b class="text_light_red ms-1 font-500">Reassigned</b></h3>
+              <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <h3 class="font-13 font-400 mb-0">Task-1: Submission did not meet the requirements.</h3>
+              <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+            </div>
+           </div>
+
+           <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            <div class="d-flex align-items-center justify-content-between">
+              <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b class="text_light_blue ms-1 font-500">Reviewing</b></h3>
+              <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <h3 class="font-13 font-400 mb-0">Task-1: Submission is under review.</h3>
+              <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+            </div>
+           </div>
+
+           <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+            <div class="d-flex align-items-center justify-content-between">
+              <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b class="text_light_green ms-1 font-500">Completed</b></h3>
+              <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+            </div>
+            <div class="d-flex align-items-center justify-content-between mb-1">
+              <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
+              <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+            </div>
+           </div>
+         
+          
+          </div>
+      </div>
+
+    </div>
+  </div> 
+  </div>
+  <app-right-side-bar></app-right-side-bar>
+
+  <div class="modal fade" id="dash_checkout_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-header apply_title">
+            <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Attendance 18 Jan, 2023
+            </h1>
+            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+              <i class="fi fi-rr-cross close_icon"></i>
+            </button>
+          </div>
+          <div class="attendance_heading d-flex justify-content-between align-items-center">
+            <div class="">
+              <h3 class="attendance_title font-17 font-500  secondary text-center">Check in</h3>
+              <h4 class="font-17 font-600 text_small">09:03:24 AM</h4>
+            </div>
+            <div class="">
+              <h3 class="attendance_title font-17 font-500  secondary text-center">Duration</h3>
+              <h4 class="font-17 font-600 text_small">00:00 Hrs</h4>
+            </div>
+            <div class="">
+              <h3 class="attendance_title font-17 font-500  secondary text-center">Check Out</h3>
+              <h4 class="font-17 font-600 text_small">06:08:32 PM</h4>
+            </div>
+          </div>
+  
+          <div class="attendance_image d-flex justify-content-between">
+            <img src="assets/images/temp_img/Options 01 _Selected.png">
+            <img src="assets/images/temp_img/Options 01 _Selected.png">
+          </div>
+  
+          <div class="attendance_report">
+            <h4 class="sub-heading font-17 font-500 secondary">Report</h4>
+            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+              placeholder="Start Typing....."></textarea>
+          </div>
+  
+          <form class="attachment_file2 d-inline-flex align-items-center  position-relative">
+            <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+            <label for="fileupload" class="font-15 font-700 secondary text-white attachment_file_text">
+              <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
+              Attachments <span class="mx-0 ms-2 font-15 font-400 text-white">Assignment Files.zip</span></label>
+          </form>
+  
+          <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+            <button type="button" class="cancel_modal_btn">Cancel</button>
+            <button type="button" class="apply_modal_btn">Apply</button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog position-relative assignment_modal">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 font-21 font-700 secondary modal_line position-relative" id="exampleModalLabel">
+              Assignment - 1</h1>
+            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+              <i class="fi fi-rr-cross close_modal"></i>
+            </button>
+            <button type="button" class="submit_buttons font-14 font-500 text-white" data-bs-toggle="modal" data-bs-target="#submit_button">Submit</button>
+          </div>
+          <div class="">
+            <div class="assignment">
+              <div class="question_ans">
+                <h3 class="font-17 font-600">Question - 1</h3>
+                <h4 class="font-17 font-400">How would you reverse the order of elements in an array in Java without
+                  using any built-in methods or additional data structures?</h4>
+              </div>
+              <div class="row advertisement">
+                <div class="col-md-3 bootstrap_cards">
+                  <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
+                 <div class="assinment_image video-img">
+                   <video src="assets/images/temp_img/pexels-max-fischer-5198159-3840x2160-50fps.mp4" autoplay controls
+                     height="" width="270"></video>
+                 </div>
+                </div>
+               <div class="col-md-3 bootstrap_cards">
+                 <h3 class="font-15 font-700  assignment_sub_heading">Image 1</h3>
+                 <div class="assinment_image">
+                   <img src="assets/images/temp_img/modal.png" class="img-fluid">
+                 </div>
+               </div>
+             
+                <div class="col-md-3 bootstrap_cards">
+                  <h3 class="font-15 font-700  assignment_sub_heading">Image 2</h3>
+                 <div class="assinment_image">
+                   <img src="assets/images/temp_img/modal.png" class="img-fluid">
+                 </div>
+                </div>
+               </div>
+            </div>
+
+            <div class="assignment">
+              <h3 class="font-17 font-700 list_bottom1">Hints:-</h3>
+              <ul class="font-17 list_bottom mb-0">
+                <li>How would you reverse the order of elements in an array in Java without using any built-in methods
+                  or additional data structures?</li>
+                <li>How would you reverse the order of elements in an array in Java without using any built-in methods
+                  or additional data structures?</li>
+                <li>How would you reverse the order of elements in an array in Java without using any built-in methods
+                  or additional data structures?</li>
+              </ul>
+            </div>
+
+            <form class="attachment_file1 d-inline-flex align-items-center  position-relative">
+              <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+              <label for="fileupload" class="font-15 font-700 secondary text-white attachment_file_text">
+                <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
+                Attachments <span class="mx-0 ms-2 font-15 font-400 text-white">Assignment Files.zip</span></label>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+    <div class="modal-dialog position-relative assignment_modal" style="width: 514px;">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5 font-17 font-600 secondary modal_line position-relative mb-2" id="exampleModalLabel1">
+              Submission Details</h1>
+            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -15%;">
+              <i class="fi fi-rr-cross close_modal"></i>
+            </button>
+            <h3 class="text_light_blue font-15 font-500">Reviewing</h3>
+          </div>
+          <div class="">
+            <div class="assignment">
+              <div class="question_ans">
+                <h3 class="font-17 font-500 secondary">Report</h3>
+                <ol class="ps-3">
+                  <li class="font-17 font-400 text_dark">as and concepts into visually engaging infographics and illustrations.</li>
+                  <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li>
+                </ol>
+              </div>           
+            <form class="attachment_file1 d-inline-flex align-items-center  position-relative attechment_file">
+              <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+              <label for="fileupload" class="font-15 font-400 text_gray  attachment_file_text">
+                <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
+                File_name.pdf</label>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end dashboard updates modal -->
+
+  <!-- Modal submit button start -->
+  <div class="modal fade" id="submit_button" tabindex="-1" aria-labelledby="submit_button" aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-header apply_title">
+            <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Submit Assignment</h1>
+            <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close">
+              <i class="fi fi-rr-cross close_icon"></i>
+            </button>
+          </div>
+          <div class="form_input">
+            <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
+            <div class="">
+              <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+                placeholder="Input Text Here"></textarea>
+            </div>
+          </div>
+
+          <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading</h4>
+          <form class="select_file d-flex align-items-center  file position-relative">
+            <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+            <label for="fileupload" class="font-15 font-400 secondary w-75">Select A File</label>
+            <button type="button" class="submit_btn0 ms-auto">
+              <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i><a type="btn" value=""
+                class=" font-15 font-400 text-white">Upload File</a>
+            </button>
+          </form>
+
+          <div class="file_option">
+            <div class=" d-flex file_name">
+              <i class="fi fi-rr-paperclip-vertical secondary add_more"></i>
+              <i class="fi fi-rr-trash secondary delete"></i>
+              <h3 class="font-15 font-400 dark mx-1 mb-0">File_name.pdf</h3>
+            </div>
+
+          </div>
+
+
+          <div class="apply_modal_buttons d-inline-flex justify-content-between align-items-center">
+            <button type="button" class="cancel_modal_btn">Save Draft</button>
+            <button type="button" class="apply_modal_btn">Submit</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
