@@ -46,8 +46,8 @@ const routes: Routes = [
     {path:'newandseventsdescription',component:NewsandEventsDescriptionComponent,pathMatch:'full'},
     {path:'attendance',component:AttendanceComponent,pathMatch:'full'},
     {path:'jobalert',component:JobalertComponent,pathMatch:'full'},
-    {path:'jobdescription',component:JobDescriptionComponent,pathMatch:'full'},
-    {path:'internshipsdescription',component:InternshipsDescriptionComponent,pathMatch:'full'},
+    {path:'jobdescription/:id',component:JobDescriptionComponent,pathMatch:'full'},
+    {path:'internshipsdescription/:id',component:InternshipsDescriptionComponent,pathMatch:'full'},
     {path:'testing',component:TestingComponent,pathMatch:'full'}
   ]},
   {

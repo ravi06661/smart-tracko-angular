@@ -7,6 +7,8 @@ export class JobAlert {
     public companyName: string = '';
     public experienceRequired: string = '';
     public technicalSkills: string = '';
+    public companyDescription:string='';
+    public jobResponsibilities:[]=[];
     public type: string = '';
     public jobPackage='';
     public technologyStack: TechnologyStack = new TechnologyStack();
