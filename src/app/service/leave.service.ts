@@ -8,7 +8,7 @@ import { UtilityServiceService } from './utility-service.service';
 })
 export class LeaveService {
   BASE_URL=this.utilityService.getBaseUrl();
-  leaveUrl=this.BASE_URL+'/Leave';
+  leaveUrl=this.BASE_URL+'/leave';
 
   constructor(private http: HttpClient,private utilityService:UtilityServiceService) { }
 
@@ -18,7 +18,7 @@ export class LeaveService {
   }
 
   public addLeave(leave:Leaves) {
-    return this.http.post(`${this.leaveUrl}/addStudentLeave?leaveTypeId=${leave.leaveTypeId}&leaveStartDate=${leave.leaveDate}&leaveEndDate=${leave.leaveEndDate}&leaveReason=${leave.leaveReason}&leaveDayType=${leave.leaveDayType}&halfDayType=${leave.halfDayType}`,{response:'text'});
+    return this.http.post(`${this.leaveUrl}/addStudentLeave?leaveTypeId=${leave.leaveType.leaveTypeId}&leaveStartDate=${leave.leaveDate}&leaveEndDate=${leave.leaveEndDate}&leaveReason=${leave.leaveReason}&leaveDayType=${leave.leaveDayType}&halfDayType=${leave.halfDayType}`,{response:'text'});
   }
 
   public getStudentLeaves(){
