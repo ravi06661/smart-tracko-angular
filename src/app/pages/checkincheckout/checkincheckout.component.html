@@ -1,1 +1,44 @@
-<p>checkincheckout works!</p>
+
+    <div class="left-content">
+      <button type="button" class="btn-2 text-white font-12 font-400 d-flex flex-column align-items-center justify-content-center"  data-bs-toggle="modal" data-bs-target="#dash_checkout_modal">
+        <img src="assets/images/svg_img/check-in.svg" class="mb-2 img-fluid">
+        CHECK IN
+
+      </button>
+    <!-- <button type="button" *ngIf="attendance.checkInTime == null"
+      class="btn-2 text-white font-12 font-400 d-flex flex-column align-items-center justify-content-center checkOutButton" >
+      <img src="assets/images/svg_img/check-in.svg" class="mb-2 img-fluid" >
+      NOT CHECKED IN
+    </button> -->
+
+      <div class="time text-center">
+        <h6 class="font-21 font-600 light">{{ clock | async | date: "mediumTime" }}</h6>
+      <h6 class="font-14 font-500 light">{{formattedDate}}</h6>
+      </div>
+    </div>
+
+    <div class="right-content">
+      <div class="checkin d-flex align-items-center">
+        <span class="img">
+          <img src="assets/images/svg_img/Vector.svg">
+        </span>
+        
+        <h3 class="font-15 font-400 light mb-0" *ngIf="checkInTime!=null">{{formattedCheckInTime}}</h3>
+        <h3 class="font-15 font-400 light mb-0" *ngIf="checkInTime == null"> --:-- </h3>
+      </div>
+      <div class="checkin d-flex align-items-center">
+        <span class="img">
+          <img src="assets/images/svg_img/Frame 156.svg">
+        </span>
+        <h3 class="font-15 font-400 light mb-0" *ngIf="checkOutTime != null">{{formattedCheckOutTime}}</h3>
+        <h3 class="font-15 font-400 light mb-0" *ngIf="checkOutTime == null"> --:-- </h3>
+      </div>
+      <div class="checkin d-flex align-items-center">
+        <span class="img">
+          <img src="assets/images/svg_img/watch.svg">
+        </span>
+        <h3 class="font-15 font-400 light mb-0" *ngIf="checkInTime != null">{{totalHrs}}</h3>
+      <h3 class="font-15 font-400 light mb-0" *ngIf="checkInTime == null"> --:--:-- </h3>
+      </div>
+    </div>
+

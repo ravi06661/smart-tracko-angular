@@ -29,12 +29,14 @@ import { TaskDetailsComponent } from './pages/task-details/task-details.componen
 import { JobDescriptionComponent } from './pages/job-description/job-description.component';
 import { InternshipsDescriptionComponent } from './pages/internships-description/internships-description.component';
 import { NewsandEventsDescriptionComponent } from './pages/newsand-events-description/newsand-events-description.component';
+import { CheckincheckoutComponent } from './pages/checkincheckout/checkincheckout.component';
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
   {path:'login',component:AdminLoginComponent,pathMatch:'full'},
   {path:'student',component:HomeComponent, canActivate:[StudentGuardGuard],children:[
     {path:'',component:DashboardComponent,pathMatch:'full'},
+    {path:'checkInCheckOut',component:CheckincheckoutComponent,pathMatch:'full'},
     {path:'study',component:StudyComponent,pathMatch:'full'},
     {path:'subjectdetails',component:SubjectdetailsComponent,pathMatch:'full'},
     {path:'mycourse',component:MycourseComponent,pathMatch:'full'},
