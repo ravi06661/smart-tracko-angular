@@ -13,14 +13,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-export type ChartOptions = {
-  series: any;
-  chart: any;
-  responsive: any;
-  labels: any;
-  colors:any
-  legend:any
-};
+
 @Component({
   selector: 'app-attendance',
   templateUrl: './attendance.component.html',
@@ -28,11 +21,10 @@ export type ChartOptions = {
 })
 
 export class AttendanceComponent implements OnInit{
-  @ViewChild("chart") chart: ChartComponent | undefined;
-  public chartOptions: Partial<ChartOptions> ;
+
 
   BASE_URL=this.utilityService.getBaseUrl();
-  imageUrl=this.BASE_URL+'/File/getImageApi/images/';
+  imageUrl=this.BASE_URL+'/file/getImageApi/images/';
 
   selectedDate:any
   attendances:Attendance[]=[];
@@ -81,38 +73,7 @@ export class AttendanceComponent implements OnInit{
   };
 
   constructor (private studentService:StudentService,private leaveService:LeaveService,private utilityService:UtilityServiceService) {
-    this.chartOptions = {
-      series: [100, 100, 100],
-      chart: {
-        type: "donut",
-        toolbar: {
-          show: false // Hide the default toolbar
-        }
-      },
-      colors: ["#03a5fc", "#fc6f03", "#fc030b"],
-      labels: ["Present", "Absent", "Leaves"],
-      legend: {
-        position: "bottom", // Show the legend at the bottom
-    formatter: function (seriesName:any, opts:any) {
-      const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
-      const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
-      return seriesName + ": " + percent + "%";
-    }
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend:{
-              position:'bottom'
-            }
-          }
-        }
-      ]
-    };
+    
     
     
   }
@@ -128,7 +89,7 @@ export class AttendanceComponent implements OnInit{
   public getAttendanceHistoy(){
     this.studentService.getAttendanceHistory().subscribe({
       next:(data:any)=>{
-        this.attendances = data.response.Attendance;
+        this.attendances = data.response.attendance;
         this.totalAttendance = this.attendances.length;
         this.formattingTimeAndDate();
       }
@@ -138,7 +99,7 @@ export class AttendanceComponent implements OnInit{
   public getLeaveType(){
     this.leaveService.getLeaveType().subscribe({
       next:(res:any)=>{
-        this.leaveTypes = res
+        this.leaveTypes = res.leaveType
       }
     })
   }
@@ -156,7 +117,7 @@ export class AttendanceComponent implements OnInit{
   public addStudentLeave(){
     this.leaveService.addLeave(this.leaves).subscribe({
       next:(res:any)=>{
-        if(res.Message=='SUCCESS'){
+        if(res.message=='SUCCESS'){
           this.leaves = new Leaves();
           this.message = 'Successfully leave applied';
           this.color = 'green';
@@ -172,7 +133,7 @@ export class AttendanceComponent implements OnInit{
   public getStudentLeaves(){
     this.leaveService.getStudentLeaves().subscribe({
       next:(res:any)=>{
-        this.leavesList = res.content;
+        this.leavesList = res.leavesData.response;
       }
     })
   }
@@ -209,5 +170,6 @@ export class AttendanceComponent implements OnInit{
     this.leaves = new Leaves();
     this.message = '';
   }
+
 
 }
