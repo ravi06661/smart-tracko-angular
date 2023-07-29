@@ -59,7 +59,6 @@ export class LoginQRComponent implements OnInit{
         this.stompClient.disconnect();
       }
     }
-
-   
+  
   }
 

@@ -16,7 +16,7 @@
                 <div class="ms-2">
                   <h2 class="font-21 font-600 secondary job_title">{{jobAlert.jobTitle}}</h2>
                   <h2 class="font-17 font-400 secondary job_title">{{jobAlert.companyName}}</h2>
-                  <h3 class="font-17 font-400 secondary mb-0">Upto {{jobAlert.jobPackage | number}} PA</h3>
+                  <h3 class="font-17 font-400 secondary mb-0">Upto {{jobAlert.jobPackage | number}} LPA</h3>
                 </div>
               </div>
             </div>
@@ -31,11 +31,7 @@
           <h3 class="font-17 font-700">Salary Range</h3>
           <h3 class="font-17 font-400 mb-4">1,80,000 to 2,40,000 P.A.</h3>
           <h3 class="font-17 font-700">Company Description</h3>
-          <h3 class="font-17 font-400 mb-4">We are a dynamic and innovative company seeking a highly skilled Graphic
-            Designer to join our creative team. Our company specializes
-            in [insert relevant industry or niche], and we pride ourselves on delivering exceptional design solutions to
-            our clients. If you have
-            a passion for creating visually appealing and impactful designs, we would love to hear from you.</h3>
+          <h3 class="font-17 font-400 mb-4">{{jobAlert.companyDescription}}</h3>
 
           <h3 class="font-17 font-700">Job Description</h3>
           <h3 class="font-17 font-400 mb-4">{{jobAlert.jobDescription}}</h3>
@@ -45,26 +41,6 @@
             <ul class="discription_list">
               <li *ngFor="let obj of  jobAlert.jobResponsibilities let i =index"
               >{{obj}}</li>
-              <li>Create visually compelling designs for marketing campaigns, including but not limited to digital
-                advertisements, social media graphics,
-                website elements, and email templates.</li>
-              <li>Develop and design eye-catching branding materials, such as logos, business cards, brochures, and
-                signage.</li>
-              <li>Collaborate with the marketing team to understand project requirements and objectives, ensuring that
-                design solutions align with the overall marketing strategy.</li>
-              <li>Translate complex ideas and concepts into visually engaging infographics and illustrations.</li>
-              <li>Maintain a high level of creativity while adhering to brand guidelines and ensuring consistency in
-                design elements.</li>
-              <li>Stay updated with industry trends and emerging design techniques to continuously improve design
-                quality and effectiveness.</li>
-              <li>Manage multiple projects simultaneously and meet deadlines without compromising on quality or
-                attention to detail.</li>
-              <li>Prepare design files for print and digital distribution, ensuring proper formatting, resolution, and
-                color accuracy.</li>
-              <li>Work closely with clients, internal teams, and external vendors to ensure effective communication and
-                collaboration throughout the design process.</li>
-              <li>Contribute to brainstorming sessions and provide valuable input in the ideation and conceptualization
-                of design projects.</li>
             </ul>
           </h3>
         </div>

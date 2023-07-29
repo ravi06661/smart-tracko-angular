@@ -12,7 +12,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 export class MycourseComponent implements OnInit {
 
   BASE_URL=this.utilityService.getBaseUrl();
-  imageUrl=this.BASE_URL+'/File/getImageApi/technologyStackImage/';
+  imageUrl=this.BASE_URL+'/file/getImageApi/technologyStackImage/';
 
   courses:Course[]=[];
 
@@ -25,11 +25,10 @@ export class MycourseComponent implements OnInit {
   public getAllCourses(page:number,size:number){
     this.couserService.getAllCourses(page,size).subscribe({
       next:(data:any)=>{
-        this.courses = data.content;
+        this.courses = data.response;
+        console.log(this.courses);
+        
       }
     })
   }
-
-
-   
 }
