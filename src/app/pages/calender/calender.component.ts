@@ -1,16 +1,29 @@
 import { map } from 'rxjs';
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { error } from 'console';
 import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
+import { ChartComponent } from 'ng-apexcharts';
 
+export type ChartOptions = {
+  series: any;
+  chart: any;
+  responsive: any;
+  labels: any;
+  colors:any
+  legend:any
+
+};
 @Component({
   selector: 'app-calender',
   templateUrl: './calender.component.html',
   styleUrls: ['./calender.component.scss']
 })
+
 export class CalenderComponent {
   
+  @ViewChild("chart") chart: ChartComponent | undefined;
+  public chartOptions: Partial<ChartOptions> ;
   currentMonth: number;
   currentYear: number;
   months: string[];
@@ -27,6 +40,43 @@ export class CalenderComponent {
      this.Present=[];
      this.Absent=[];
       this.Leaves=[];
+
+      this.chartOptions = {
+        series: [100, 100, 100],
+        chart: {
+          type: "donut",
+          toolbar: {
+            show: false // Hide the default toolbar
+          }
+        },
+        colors: ["#03a5fc", "#fc6f03", "#fc030b"],
+        labels: ["Present", "Absent", "Leaves"],
+        legend: {
+          position: "bottom", // Show the legend at the bottom
+      // formatter: function (seriesName:any, opts:any) {
+      //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
+      //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
+      //   return seriesName + ": " + percent + "%";
+      // }
+        },
+      
+        responsive: [
+
+          {
+            breakpoint: 480,
+            options: {
+              chart: {
+                width: 280
+                
+              },
+              legend:{
+                position:'bottom'
+              }
+            }
+          }
+        ]
+      };
+      
   }
 
   ngOnInit(): void {

@@ -1,4 +1,5 @@
-<div class="calender_body">
+
+<!-- <div class="">
     <div class="wrapper">
         <div class="container-calendar calender_background">
             <div class="calendar-hadding">
@@ -14,9 +15,37 @@
             </table>
         </div>
     </div>
-  </div>
-  
-  
-  <!-- <div class="">
-    <img src="assets/images/temp_img/calender.png" class="img-fluid" style="width: -webkit-fill-available;">
   </div> -->
+            
+  
+  <div class="row">
+    <div class="col-md-6">
+        <!-- <img src="assets/images/temp_img/calender.png" class="img-fluid" style="width: -webkit-fill-available;"> -->
+    <div class="calendar-hadding textcolor" >
+        <h3 id="monthAndYear"></h3>
+        <div class="button-container-calendar">
+            <button id="previous" (click)="previous()">&#8249;</button>
+            <button id="next" (click)="next()">&#8250;</button>
+        </div>
+    </div>
+    <table class="table-calendar textcolor" id="calendar"  >
+        <thead id="thead-month"></thead>
+        <tbody id="calendar-body"></tbody>
+    </table>
+
+    
+    </div>
+    <div class="col-md-6" >
+        <div id="chart" class="chartmargin">
+            <apx-chart
+              [colors]="chartOptions.colors"
+              [series]="chartOptions.series"
+              [chart]="chartOptions.chart"
+              [labels]="chartOptions.labels"
+              [responsive]="chartOptions.responsive"
+              [legend]="chartOptions.legend"
+              
+            ></apx-chart>
+          </div>
+    </div>
+  </div>
