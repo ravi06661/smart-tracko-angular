@@ -18,7 +18,7 @@ export class RightSideBarComponent implements OnInit {
   totalHrs: any;
   totalHrs2: any;
 
-  checkInTime: any
+  checkInTime: Time | undefined
   attendance: Attendance = new Attendance();
   
   clock: Observable<Date> | undefined;
