@@ -29,8 +29,7 @@
   <link rel="stylesheet" href="assets/css/uicons-regular-rounded.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <!-- FONT CSS  -->
-  <link rel="stylesheet" href="assets/css/stylesheet.css">
-  <link rel="stylesheet" href="assets/css/fontcss.css">
+
   
   <!-- GOGGLE ICON-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -41,8 +40,23 @@
   <!-- FAVICON ICON -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/temp_img/favicon32.png">    
   <link href="https://unpkg.com/singledivui/dist/singledivui.min.css" rel="stylesheet" />
-  
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- BOOTSTRAP CSS  -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <!-- FONT CSS  -->
+  <link rel="stylesheet" href="assets/css/stylesheet.css">
+  <link rel="stylesheet" href="assets/css/fontcss.css">
+  <!-- GOGGLE ICON-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- FLATICON-->
+  <!-- FLATICON-->
+  <link rel="stylesheet" href="assets/css/uicons-bold-rounded.css">
+  <link rel="stylesheet" href="assets/css/uicons-regular-rounded.css">
+  <link rel="stylesheet" href="assets/css/uicons-regular-straight.css">
+  <link rel="stylesheet" href="assets/css/uicons-solid-rounded.css">
+  <link rel="stylesheet" href="assets/css/uicons-solid-straight.css">
 
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/temp_img/favicon32.png">
   <style>
     .AssignmentCard {
       padding: 12px;
@@ -205,7 +219,10 @@
 </head>
 <body>
   <app-root></app-root>
-  
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/jquery.js"></script>
+  <script src="assets/js/sidebar.js"></script>
+
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/jquery.js"></script>
   <script src="assets/js/sidebar.js"></script>
@@ -278,6 +295,22 @@ new Chart('#chart1',  {
     type: 'bar',
     ...options
 });
+
+
+
+
+      $(document).ready(function () {
+        $(".right_menu_toggle").click(function () {
+          $(".main").toggleClass("shrink");
+          $(".sidepanel").toggleClass("show");
+          $(".right_menu_toggle").toggleClass("close");
+          $(".porfile_sec").toggleClass("hide");
+        });
+      });
+      $(".fee_structure").hide();
+      $(".my_course").click(function () {
+        $(".fee_structure").toggle();
+      })
   </script>
 
   </body>

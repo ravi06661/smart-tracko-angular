@@ -182,4 +182,18 @@ color: green;
   margin-bottom: 12px;
 }
 
+.ProgressBar {
+  height: 6px;
+  padding-right: 264.5px;
+  background: #edf1fa;
+  border-radius: 6px;
+  justify-content: flex-start;
+  align-items: center;
+}
 
+.ProgressW {
+  width: 145.5px;
+  height: 6px;
+  background: #00C012;
+  border-radius: 6px;
+}

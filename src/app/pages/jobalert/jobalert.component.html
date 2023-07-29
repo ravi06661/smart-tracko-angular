@@ -13,14 +13,15 @@
         <a routerLink="/student/internshipsdescription/{{obj.jobId}}">
           <div class="internship_container">
             <div class="container_top d-flex align-items-center">
-              <img style="height:100px;width: 100px;" [src]="imageUrl+obj.technologyStack.imageName">
+              <img style="height:100px;width: 100px; border-radius: 50px;"
+                [src]="imageUrl+obj.technologyStack.imageName">
               <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">{{obj.jobTitle}}</h3>
-                <h4 class="font-14 font-400 sub_title1">{{obj.companyName}}</h4>
-                <h4 class="font-14 font-400 mb-0">{{obj.jobPackage}}</h4>
+                <h3 class="font-17 font-500 title_1">Job Title : {{obj.jobTitle}}</h3>
+                <h4 class="font-14 font-400 sub_title1">CompanyName : {{obj.companyName}}</h4>
+                <h4 class="font-14 font-400 mb-0">Job Package up to :{{obj.jobPackage}} LPA</h4>
               </div>
             </div>
-            <h4 class="Requirement_text font-13 font-400">{{obj.jobDescription}}</h4>
+            <h4 class="Requirement_text font-13 font-400">Job jobDescription : {{obj.jobDescription}}</h4>
           </div>
         </a>
       </div>
@@ -35,14 +36,15 @@
         <a routerLink="/student/jobdescription/{{obj.jobId}}">
           <div class="internship_container">
             <div class="container_top d-flex align-items-center">
-              <img style="height:100px;width: 100px; border-radius: 50px;" [src]="imageUrl+obj.technologyStack.imageName">
+              <img style="height:100px;width: 100px; border-radius: 50px;"
+                [src]="imageUrl+obj.technologyStack.imageName">
               <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">{{obj.jobTitle}}</h3>
-                <h4 class="font-14 font-400 sub_title1">{{obj.companyName}}</h4>
-                <h4 class="font-14 font-400 mb-0">{{obj.jobPackage}}</h4>
+                <h3 class="font-17 font-500 title_1">Job Title : {{obj.jobTitle}}</h3>
+                <h4 class="font-14 font-400 sub_title1">CompanyName : {{obj.companyName}}</h4>
+                <h4 class="font-14 font-400 mb-0">Job Package up to :{{obj.jobPackage}} LPA</h4>
               </div>
             </div>
-            <h4 class="Requirement_text font-13 font-400">{{obj.jobDescription}}</h4>
+            <h4 class="Requirement_text font-13 font-400">Job jobDescription : {{obj.jobDescription}}</h4>
           </div>
         </a>
       </div>
