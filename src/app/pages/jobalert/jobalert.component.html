@@ -9,145 +9,18 @@
     <!-- INTERBSHIP CARD START -->
     <h3 class="Enrolled font-21 font-600 secondary position-relative">Internships</h3>
     <div class="row">
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/internshipsdescription">
+      <div class="col-md-3 bootstrap_cards" *ngFor="let obj of internshipJobs">
+        <a routerLink="/student/internshipsdescription/{{obj.jobId}}">
           <div class="internship_container">
             <div class="container_top d-flex align-items-center">
-              <img src="assets/images/temp_img/image 18.png">
+              <img style="height:100px;width: 100px;" [src]="imageUrl+obj.technologyStack.imageName">
               <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-                <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-                <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
+                <h3 class="font-17 font-500 title_1">{{obj.jobTitle}}</h3>
+                <h4 class="font-14 font-400 sub_title1">{{obj.companyName}}</h4>
+                <h4 class="font-14 font-400 mb-0">{{obj.jobPackage}}</h4>
               </div>
             </div>
-            <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-              UI / UX Design ,
-              UCD Process , Information Architech , Persona Creation,.....</h4>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/internshipsdescription">
-          <div class="internship_container">
-            <div class="container_top d-flex align-items-center">
-              <img src="assets/images/temp_img/image 18.png">
-              <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-                <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-                <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
-              </div>
-            </div>
-            <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-              UI / UX Design ,
-              UCD Process , Information Architech , Persona Creation,.....</h4>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/internshipsdescription">
-          <div class="internship_container">
-            <div class="container_top d-flex align-items-center">
-              <img src="assets/images/temp_img/image 18.png">
-              <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-                <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-                <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
-              </div>
-            </div>
-            <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-              UI / UX Design ,
-              UCD Process , Information Architech , Persona Creation,.....</h4>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/internshipsdescription">
-          <div class="internship_container">
-            <div class="container_top d-flex align-items-center">
-              <img src="assets/images/temp_img/image 18.png">
-              <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-                <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-                <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
-              </div>
-            </div>
-            <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-              UI / UX Design ,
-              UCD Process , Information Architech , Persona Creation,.....</h4>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/internshipsdescription">
-          <div class="internship_container">
-            <div class="container_top d-flex align-items-center">
-              <img src="assets/images/temp_img/image 18.png">
-              <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-                <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-                <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
-              </div>
-            </div>
-            <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-              UI / UX Design ,
-              UCD Process , Information Architech , Persona Creation,.....</h4>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/internshipsdescription">
-          <div class="internship_container">
-            <div class="container_top d-flex align-items-center">
-              <img src="assets/images/temp_img/image 18.png">
-              <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-                <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-                <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
-              </div>
-            </div>
-            <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-              UI / UX Design ,
-              UCD Process , Information Architech , Persona Creation,.....</h4>
-          </div>
-        </a>
-      </div>
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/internshipsdescription">
-          <div class="internship_container">
-            <div class="container_top d-flex align-items-center">
-              <img src="assets/images/temp_img/image 18.png">
-              <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-                <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-                <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
-              </div>
-            </div>
-            <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-              UI / UX Design ,
-              UCD Process , Information Architech , Persona Creation,.....</h4>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/internshipsdescription">
-          <div class="internship_container">
-            <div class="container_top d-flex align-items-center">
-              <img src="assets/images/temp_img/image 18.png">
-              <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-                <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-                <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
-              </div>
-            </div>
-            <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-              UI / UX Design ,
-              UCD Process , Information Architech , Persona Creation,.....</h4>
+            <h4 class="Requirement_text font-13 font-400">{{obj.jobDescription}}</h4>
           </div>
         </a>
       </div>
@@ -158,147 +31,26 @@
     <!-- JOB CARD START -->
     <h3 class="Enrolled font-21 font-600 secondary position-relative">Jobs</h3>
     <div class="row">
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/jobdescription">
-        <div class="internship_container">
-          <div class="container_top d-flex align-items-center">
-            <img src="assets/images/temp_img/image 18.png">
-            <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Graphics Designer</h3>
-              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-              <h4 class="font-14 font-400 mb-0">Upto 2,40,000 PA</h4>
+      <div class="col-md-3 bootstrap_cards" *ngFor="let obj of jobs">
+        <a routerLink="/student/jobdescription/{{obj.jobId}}">
+          <div class="internship_container">
+            <div class="container_top d-flex align-items-center">
+              <img style="height:100px;width: 100px; border-radius: 50px;" [src]="imageUrl+obj.technologyStack.imageName">
+              <div class="internship_title">
+                <h3 class="font-17 font-500 title_1">{{obj.jobTitle}}</h3>
+                <h4 class="font-14 font-400 sub_title1">{{obj.companyName}}</h4>
+                <h4 class="font-14 font-400 mb-0">{{obj.jobPackage}}</h4>
+              </div>
             </div>
+            <h4 class="Requirement_text font-13 font-400">{{obj.jobDescription}}</h4>
           </div>
-          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-            UI / UX Design ,
-            UCD Process , Information Architech , Persona Creation,.....</h4>
-        </div>
-         </a>
-      </div>
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/jobdescription">
-        <div class="internship_container">
-          <div class="container_top d-flex align-items-center">
-            <img src="assets/images/temp_img/image 18.png">
-            <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Graphics Designer</h3>
-              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-              <h4 class="font-14 font-400 mb-0">Upto 2,40,000 PA</h4>
-            </div>
-          </div>
-          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-            UI / UX Design ,
-            UCD Process , Information Architech , Persona Creation,.....</h4>
-        </div>
-         </a>
-      </div>
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/jobdescription">
-        <div class="internship_container">
-          <div class="container_top d-flex align-items-center">
-            <img src="assets/images/temp_img/image 18.png">
-            <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Graphics Designer</h3>
-              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-              <h4 class="font-14 font-400 mb-0">Upto 2,40,000 PA</h4>
-            </div>
-          </div>
-          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-            UI / UX Design ,
-            UCD Process , Information Architech , Persona Creation,.....</h4>
-        </div>
-         </a>
-      </div>
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/jobdescription">
-        <div class="internship_container">
-          <div class="container_top d-flex align-items-center">
-            <img src="assets/images/temp_img/image 18.png">
-            <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Graphics Designer</h3>
-              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-              <h4 class="font-14 font-400 mb-0">Upto 2,40,000 PA</h4>
-            </div>
-          </div>
-          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-            UI / UX Design ,
-            UCD Process , Information Architech , Persona Creation,.....</h4>
-        </div>
-         </a>
-      </div>
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/jobdescription">
-        <div class="internship_container">
-          <div class="container_top d-flex align-items-center">
-            <img src="assets/images/temp_img/image 18.png">
-            <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Graphics Designer</h3>
-              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-              <h4 class="font-14 font-400 mb-0">Upto 2,40,000 PA</h4>
-            </div>
-          </div>
-          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-            UI / UX Design ,
-            UCD Process , Information Architech , Persona Creation,.....</h4>
-        </div>
-         </a>
-      </div>
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/jobdescription">
-        <div class="internship_container">
-          <div class="container_top d-flex align-items-center">
-            <img src="assets/images/temp_img/image 18.png">
-            <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Graphics Designer</h3>
-              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-              <h4 class="font-14 font-400 mb-0">Upto 2,40,000 PA</h4>
-            </div>
-          </div>
-          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-            UI / UX Design ,
-            UCD Process , Information Architech , Persona Creation,.....</h4>
-        </div>
-         </a>
-      </div>
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/jobdescription">
-        <div class="internship_container">
-          <div class="container_top d-flex align-items-center">
-            <img src="assets/images/temp_img/image 18.png">
-            <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Graphics Designer</h3>
-              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-              <h4 class="font-14 font-400 mb-0">Upto 2,40,000 PA</h4>
-            </div>
-          </div>
-          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-            UI / UX Design ,
-            UCD Process , Information Architech , Persona Creation,.....</h4>
-        </div>
-         </a>
-      </div>
-      <div class="col-md-3 bootstrap_cards">
-        <a routerLink="/student/jobdescription">
-        <div class="internship_container">
-          <div class="container_top d-flex align-items-center">
-            <img src="assets/images/temp_img/image 18.png">
-            <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Graphics Designer</h3>
-              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-              <h4 class="font-14 font-400 mb-0">Upto 2,40,000 PA</h4>
-            </div>
-          </div>
-          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-            UI / UX Design ,
-            UCD Process , Information Architech , Persona Creation,.....</h4>
-        </div>
-         </a>
+        </a>
       </div>
 
-   
     </div>
+
     <!-- JOB CARD END -->
   </div>
 
-<app-right-side-bar></app-right-side-bar>
+  <app-right-side-bar></app-right-side-bar>
 </div>

@@ -10,25 +10,23 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   styleUrls: ['./jobalert.component.scss']
 })
 export class JobalertComponent {
-  BASE_URL=this.utilityService.getBaseUrl();
-  imageUrl=this.BASE_URL+'/File/getImageApi/technologyStackImage/';
-  
-  
+  BASE_URL=this.utilityService.getBaseUrl();  
+  imageUrl=this.BASE_URL+'/file/getImageApi/technologyStackImage/';
+
   internshipJobs: JobAlert[] = []
   jobs: JobAlert[] = []
   totalInternJobs: number = 0
   totalJobs: number = 0
   constructor(private jobAlertService: JobAlertService,private utilityService:UtilityServiceService) { }
-  ngOnInit() {
+  ngOnInit() { 
     this.getAllJobs(0, 8);
     this.getAllInternJobs(0, 8);
   }
 
   public getAllInternJobs(page: number, size: number) {
     this.jobAlertService.getInternShipJobs(page, size).subscribe(
-      (data: any) => {
-        this.internshipJobs = data.content
-        this.totalInternJobs = data.totalElements
+      (data: any) => { 
+        this.internshipJobs = data.response
       }
     )
   }
@@ -36,7 +34,7 @@ export class JobalertComponent {
   public getAllJobs(page: Number, size: number) {
     this.jobAlertService.getAllJobs(page, size).subscribe(
       (data: any) => {
-        this.jobs = data.content
+        this.jobs = data.response
         this.totalJobs = data.totalElements
       }
     )

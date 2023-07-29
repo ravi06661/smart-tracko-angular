@@ -2,14 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { JobAlert } from '../entity/job-alert';
 import { UtilityServiceService } from './utility-service.service';
+import { Observable } from 'rxjs';
+import { an } from '@fullcalendar/core/internal-common';
 @Injectable({
   providedIn: 'root'
 })
 export class JobAlertService {
-  BASE_URL=this.utilityService.getBaseUrl();
-  jobUrl=this.BASE_URL+'/job';
+  BASE_URL = this.utilityService.getBaseUrl();
+  jobUrl = this.BASE_URL + '/job';
 
-  constructor(private http: HttpClient,private utilityService:UtilityServiceService) { }
+  constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
 
 
   addJob(data: JobAlert) {
@@ -26,6 +28,7 @@ export class JobAlertService {
     return this.http.post<JobAlert>(`${this.jobUrl}/createJobApi`, formData)
   }
   getInternShipJobs(page: number, size: number) {
+    console.log("temp")
     return this.http.get<JobAlert[]>(`${this.jobUrl}/getAllJobsApi?type=INTERN&page=${page}&size=${size}`)
   }
   getAllJobs(page: Number, size: number) {
@@ -42,7 +45,11 @@ export class JobAlertService {
   delete(id: number) {
     return this.http.delete(`${this.jobUrl}/deleteJobApi?jobId=${id}`)
   }
-  
+
+  getJob(id:number):Observable<any>{
+    return this.http.get<JobAlert>(`${this.jobUrl}/getJobApi?jobId=${id}`)
+  }
+
   searchJobs(data: any, role: string) {
 
     let params = new HttpParams()
