@@ -9,7 +9,7 @@ import { UtilityServiceService } from './utility-service.service';
 export class StudentService {
 
   BASE_URL=this.utilityService.getBaseUrl();
-  studentUrl=this.BASE_URL+'/Student';
+  studentUrl=this.BASE_URL+'/student';
   TIME_URL=this.utilityService.getTimeUrl();
 
   constructor(private http: HttpClient,private utilityService:UtilityServiceService, private datepipe: DatePipe) { }
