@@ -11,7 +11,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 export class NewsandeventsComponent implements OnInit {
 
   BASE_URL=this.utilityService.getBaseUrl();
-  imageUrl=this.BASE_URL+'/File/getImageApi/newsEventImage/';
+  imageUrl=this.BASE_URL+'/file/getImageApi/newsEventImage/';
 
   newsAndEvents:NewsAndEvent[]=[];
   totalNewsAndEvent:number=0;
@@ -24,7 +24,7 @@ export class NewsandeventsComponent implements OnInit {
   public getAllNewsAndEvents(page:number,size:number){
     this.newsAndEventService.getAllNewsAndEventsIsActive(page,size).subscribe({
       next:(data:any)=>{
-        this.newsAndEvents = data.content;
+        this.newsAndEvents = data.response;
         this.totalNewsAndEvent = data.totalElements;
       }
     })

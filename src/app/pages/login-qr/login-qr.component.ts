@@ -17,8 +17,8 @@ export class LoginQRComponent implements OnInit{
   qrImage='';
   qrKey='';
   stompClient: any = null;
- // SOCKET_URL = "http://cicoapi.dollopinfotech.com/socket";
- SOCKET_URL = "http://localhost:8080/socket";
+//  SOCKET_URL = "http://cicoapi.dollopinfotech.com/socket";
+  SOCKET_URL = "http://localhost:8080/socket";
   constructor(public qrService:QRServiceService,private router:Router){}
   
   ngOnInit(): void {

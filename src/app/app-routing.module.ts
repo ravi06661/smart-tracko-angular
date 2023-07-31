@@ -45,7 +45,7 @@ const routes: Routes = [
     {path:'task',component:TaskComponent,pathMatch:'full'},
     {path:'taskdetails',component:TaskDetailsComponent,pathMatch:'full'},
     {path:'newsAndEvent',component:NewsandeventsComponent,pathMatch:'full'},
-    {path:'newandseventsdescription',component:NewsandEventsDescriptionComponent,pathMatch:'full'},
+    {path:'newandseventsdescription/:id',component:NewsandEventsDescriptionComponent,pathMatch:'full'},
     {path:'attendance',component:AttendanceComponent,pathMatch:'full'},
     {path:'jobalert',component:JobalertComponent,pathMatch:'full'},
     {path:'jobdescription/:id',component:JobDescriptionComponent,pathMatch:'full'},
