@@ -18,9 +18,11 @@ export class LoginQRComponent implements OnInit{
   qrImage='';
   qrKey='';
   stompClient: any = null;
+
   BASE_URL = this.utilityService.getBaseUrl();
   SOCKET_URL = this.BASE_URL+'/socket';
   constructor(public qrService:QRServiceService,private router:Router,private utilityService:UtilityServiceService){}
+
   
   ngOnInit(): void {
     this.qrService.generateQRCode().subscribe({

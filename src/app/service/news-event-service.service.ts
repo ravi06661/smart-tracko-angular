@@ -34,4 +34,8 @@ export class NewsEventServiceService  {
   public searchNewsAndEvents(search:string,role:string,page:number,size:number){
     return this.http.get(`${this.newsEventUrl}/searchNewsAndEvents?search=${search}&role=${role}&page=${page}&size=${size}`);
   }
+
+  public getByNewsById(id:number){
+    return this.http.get(`${this.newsEventUrl}/getNewsEvents?id=${id}`);
+  }
 }
