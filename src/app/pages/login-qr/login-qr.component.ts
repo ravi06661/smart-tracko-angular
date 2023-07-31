@@ -6,6 +6,7 @@ import { LoginService } from 'src/app/service/login.service';
 import { QRServiceService } from 'src/app/service/qrservice.service';
 import * as Stomp from "stompjs";
 import * as SockJS from "sockjs-client";
+import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
 @Component({
   selector: 'app-login-qr',
@@ -17,9 +18,9 @@ export class LoginQRComponent implements OnInit{
   qrImage='';
   qrKey='';
   stompClient: any = null;
- // SOCKET_URL = "http://cicoapi.dollopinfotech.com/socket";
- SOCKET_URL = "http://localhost:8080/socket";
-  constructor(public qrService:QRServiceService,private router:Router){}
+  BASE_URL = this.utilityService.getBaseUrl();
+  SOCKET_URL = this.BASE_URL+'/socket';
+  constructor(public qrService:QRServiceService,private router:Router,private utilityService:UtilityServiceService){}
   
   ngOnInit(): void {
     this.qrService.generateQRCode().subscribe({

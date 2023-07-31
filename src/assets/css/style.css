@@ -4,7 +4,7 @@
   padding: 0;
 }
 body{
-  /* background: linear-gradient(#fefeff 0%, #e7f1f8 100%); */
+  background: linear-gradient(#fefeff 0%, #e7f1f8 100%);
   overflow:hidden;
   height: 100vh;
 }
