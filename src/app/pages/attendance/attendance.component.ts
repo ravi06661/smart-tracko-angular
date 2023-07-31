@@ -12,12 +12,14 @@ import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import {  ViewEncapsulation } from '@angular/core';
 
 
 @Component({
   selector: 'app-attendance',
   templateUrl: './attendance.component.html',
-  styleUrls: ['./attendance.component.scss']
+  styleUrls: ['./attendance.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class AttendanceComponent implements OnInit{

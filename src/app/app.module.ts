@@ -52,6 +52,8 @@ import { JobDescriptionComponent } from './pages/job-description/job-description
 import { InternshipsDescriptionComponent } from './pages/internships-description/internships-description.component';
 import { NewsandEventsDescriptionComponent } from './pages/newsand-events-description/newsand-events-description.component';
 import { CheckincheckoutComponent } from './pages/checkincheckout/checkincheckout.component';
+import { ChapterComponent } from './pages/chapter/chapter.component';
+import { QuestionsComponent } from './pages/questions/questions.component';
 
 
 
@@ -91,6 +93,8 @@ import { CheckincheckoutComponent } from './pages/checkincheckout/checkincheckou
     InternshipsDescriptionComponent,
     NewsandEventsDescriptionComponent,
     CheckincheckoutComponent,
+    ChapterComponent,
+    QuestionsComponent,
        
  
   ],

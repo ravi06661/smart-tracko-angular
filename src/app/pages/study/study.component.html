@@ -1,32 +1,32 @@
 
-<div class="Dashboard">
   <div id="main" class="main mycourse_page subject_page">
     <div class="profile mb-0 d-flex">
       <h1 class="font-27 font-700 secondary mb-0">Study</h1>
-
      <app-profile-bar></app-profile-bar>
-
     </div>
 
     <!-- SUBJECT START -->
     <div class="dashboard_title">
       <nav aria-label="breadcrumb" class="font-17 font-600 light-black mb-0 lh-36">
         <ol class="breadcrumb mb-0">
-          <li class="breadcrumb-item"><a href="index.html" class="gray-light">Home</a></li>
+          <li class="breadcrumb-item"><a routerLink="/student" class="gray-light">Home</a></li>
           <li class="breadcrumb-item  light-black" aria-current="page">Subjects</li>
         </ol>
       </nav>
     </div>
     <div class="scroll_sec mt-0">
-      <div class="row"> 
+
+      <div class="row">
+  
+
         <div class="col-md-3 bootstrap_cards">
-          <a href="chapter.html">
+          <a routerLink="/student/chapter">
             <div class="subject_card">
               <div class="subject_card_top">
                 <div class="subject_name_card">
                   <img src="assets/images/svg_img/subject.svg">
                   <div class="subject_name">
-                    <h3 class="subject_heading txt-dark mb-0">Subject Name</h3>
+                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
                     <p class="chapter-cout mb-0">40 Chapters</p>
                   </div>
                 </div>
@@ -45,13 +45,13 @@
           </a>         
         </div>
         <div class="col-md-3 bootstrap_cards">
-          <a href="chapter.html">
+          <a >
             <div class="subject_card">
               <div class="subject_card_top">
                 <div class="subject_name_card">
                   <img src="assets/images/svg_img/subject.svg">
                   <div class="subject_name">
-                    <h3 class="subject_heading txt-dark mb-0">Subject Name</h3>
+                    <h3 class="subject_heading txt-dark mb-0">Advance Java</h3>
                     <p class="chapter-cout mb-0">40 Chapters</p>
                   </div>
                 </div>
@@ -397,7 +397,8 @@
         </div>
 
       </div>
-    </div>
+
     <!-- SUBJECT END -->
+    <app-right-side-bar></app-right-side-bar>
 
    
