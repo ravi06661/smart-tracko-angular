@@ -1,16 +1,22 @@
+<div id="main" class="main mycourse_page pb-0">
+  <div class="profile d-flex">
+  <h1 class="font-27 font-700 secondary mb-0">Chapter Details</h1>
+  <app-profile-bar></app-profile-bar>
+  </div>
 
-<div class="d-flex">
+  <!-- RESULT START -->
+  <div class="d-flex mt_24">
     <div class="main_page">
         <div class="dashboard_title d-flex justify-content-between align-items-center">
           <nav aria-label="breadcrumb" class="font-17 font-600 light-black mb-0 lh-36">
             <ol class="breadcrumb mb-0">
-              <li class="breadcrumb-item"><a routerLink="/student"class="gray-light">Home</a></li>
-              <li class="breadcrumb-item" aria-current="page"><a href="" class="gray-light">Study Material</a></li>
-              <li class="breadcrumb-item" aria-current="page"><a href="" class="gray-light">C</a></li>
-              <li class="breadcrumb-item  light-black" aria-current="page">Printf Scanf</li>
+              <li class="breadcrumb-item"><a routerLink="/student" class="font-17 font-500 gray-light">Home</a></li>
+              <li class="breadcrumb-item" aria-current="page"><a routerLink="/student/study" class="font-17 font-500 gray-light">Study</a></li>
+              <li class="breadcrumb-item" aria-current="page"><a routerLink="/student/chapter" class="font-17 font-500 gray-light">Core Java</a></li>
+              <li class="breadcrumb-item  light-black" aria-current="page">Java- Introduction</li>
             </ol>
           </nav>
-          <a routerLink="/student/study" type="button"
+          <a routerLink="/student/chapter" type="button"
             class="back_button font-15 font-500 d-flex justify-content-center align-items-center"><i
               class="fi fi-rr-arrow-left lh-0"></i>Back</a>
         </div>
@@ -85,9 +91,18 @@
               0.10.Hexa decimal literal starts from 0x.11.sprintf() writes the formatted data into a string.12.scanf
               stores the value at the supllied address.13.sscanf() reads a string from another string.</h4>
           </div>
+<h5 class="font-24 font-500 secondary mb_20">Ready to test yourself?</h5>
+          <a routerLink="/questions" type="button"
+          class="back_button font-15 font-700">Take a test</a>
         </div>
       </div>
-      <a href="#updown_btn" class="scroll_btn d-flex justify-content-center align-items-center">
+      <a [routerLink]="'#updown_btn'" class="scroll_btn d-flex justify-content-center align-items-center">
         <img src="assets/images/svg_img/uparrow.svg">
       </a>
  </div>
+  <!-- RESULT END -->
+
+ <app-right-side-bar></app-right-side-bar>
+ 
+<!-- MIDDLE CONTENT END -->
+</div>
