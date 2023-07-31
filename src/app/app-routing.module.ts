@@ -30,6 +30,8 @@ import { JobDescriptionComponent } from './pages/job-description/job-description
 import { InternshipsDescriptionComponent } from './pages/internships-description/internships-description.component';
 import { NewsandEventsDescriptionComponent } from './pages/newsand-events-description/newsand-events-description.component';
 import { CheckincheckoutComponent } from './pages/checkincheckout/checkincheckout.component';
+import { ChapterComponent } from './pages/chapter/chapter.component';
+import { QuestionsComponent } from './pages/questions/questions.component';
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
@@ -38,7 +40,8 @@ const routes: Routes = [
     {path:'',component:DashboardComponent,pathMatch:'full'},
     {path:'checkInCheckOut',component:CheckincheckoutComponent,pathMatch:'full'},
     {path:'study',component:StudyComponent,pathMatch:'full'},
-    {path:'subjectdetails',component:SubjectdetailsComponent,pathMatch:'full'},
+    {path:'chapter',component:ChapterComponent,pathMatch:'full'},
+    {path:'chapterDetails',component:SubjectdetailsComponent,pathMatch:'full'},
     {path:'mycourse',component:MycourseComponent,pathMatch:'full'},
     {path:'assignmentdetails',component:AssignmentDetailsComponent,pathMatch:'full'},
     {path:'taskAndAssignment',component:TaskandassignmentsComponent,pathMatch:'full'},
@@ -52,6 +55,7 @@ const routes: Routes = [
     {path:'internshipsdescription/:id',component:InternshipsDescriptionComponent,pathMatch:'full'},
     {path:'testing',component:TestingComponent,pathMatch:'full'}
   ]},
+  {path:'questions',component:QuestionsComponent,pathMatch:'full'},
   {
     path:'admin',component:AdminPanelComponent,canActivate:[AdminGuardGuard],children:[
       {path:'',component:AdminDashboardComponent,pathMatch:'full'},
