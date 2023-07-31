@@ -821,10 +821,11 @@ ul.dropdown-menu.show {
   left: -67px !important;
   /* top: 10px !important; */
 }
+/* changeby ravi */
 .leaves{
   font-family: 'Nunito Sans 10pt' !important;
   padding:6px 10px;
-  color: #000000;
+  color: white;
 }
 .leaves_dec::before{
   content: '';
