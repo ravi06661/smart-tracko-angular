@@ -8,20 +8,17 @@
         <div class="row">
           <div class="col-md-12">
             <div class="news">
-              <h4 class="font-27 font-400 text_small mb-0">Breaking News</h4>
-              <h3 class="font-14 font-400 text_small my-15">3 Days Ago</h3>
-              <img src="assets/images/temp_img/image 19.png">
-              <div class="news_text">
-                <h4 class="font-21 font-500 text_small my-3">2nd Heading</h4>
-                <h5 class="news_dis font-16 font-400 text_small">Thinking outside the box zeitgeist, or high performance keywords, or we want to empower the team with the right tools and guidance 
-                  to uplevel our craft and build better, incentivize adoption, for we need to socialize the comms with the wider stakeholder community. 
-                  Effort made was a lot put a record on and see who dances, for hire the best highlights , for product market fit, nor lean into that
-                  problem we need distributors to evangelize the new line to local markets. This vendor is incompetent design thinking, for productize 
-                  work c-suite. Into the weeds downselect, and can we take this offline bench mark, nor back of the net, nor up the flagpole bazooka that 
-                  run it past the boss jump right in and banzai attack will they won't they its all greek to me unless they bother until the end of time maybe
-                  vis a vis too many cooks over the line. My grasp on reality right now is tenuous baseline, for turn the crank wheelhouse. The closest elephant 
-                  is the most dangerous drink from the firehose eat our own dog food hit the ground running
-                </h5>
+              
+              
+                
+                  <div class="news">
+                    <!-- <img src="/assets/images/temp_img/news.png" alt=""> -->
+                    <img class="imageSize" [src]="imageUrl+newsAndEvents.image">
+                    <div class="news_text">
+                      <h3 class="font-11 font-400 small_text">3 Days Ago</h3>
+                      <h4 class="font-21 font-600 small_text">{{newsAndEvents.title}}</h4>
+                      <h5 class="font-14 font-500 small_text">{{newsAndEvents.briefDescription}}</h5>
+                  
               </div>
             </div>
           </div>

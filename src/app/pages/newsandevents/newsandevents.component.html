@@ -28,110 +28,32 @@
     </div>
     <div class="task_assignment">
       <h3 class="title font-21 font-600 secondary position-relative">News</h3>
+      <mat-paginator *ngIf="totalNewsAndEvent>8"
+      [length]="totalNewsAndEvent"
+      [pageSize]="8"
+      aria-label="Select page"
+      (page)="onChangePage($event)">    
+      </mat-paginator> 
       <div class="news_events">
+        <h3 class="font-21 font-600 secondary position-relative" *ngIf="totalNewsAndEvent== 0"> NO NEWS AND EVENTS FOUND !!!</h3>
         <div class="row">
-          <div class="col-md-3 bootstrap_cards">
-            <a routerLink="/student/newandseventsdescription">
-              <div class="news text_dark">
-                <img src="assets/images/temp_img/news.png">
-                <div class="news_text">
-                  <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
-                  <h4 class="font-19 font-500 small_text">Breaking News</h4>
-                  <h5 class="font-14 font-500 small_text">News Is Broken</h5>
-                </div>
+          <div class="col-md-3" *ngFor="let newsAndEvent of newsAndEvents">
+            <a routerLink="/student/newandseventsdescription/{{newsAndEvent.id}}">
+            <div class="news">
+              <!-- <img src="/assets/images/temp_img/news.png" alt=""> -->
+              <img class="imageSize" [src]="imageUrl+newsAndEvent.image">
+              <div class="news_text">
+                <h3 class="font-11 font-400 small_text">3 Days Ago</h3>
+                <h4 class="font-21 font-600 small_text">{{newsAndEvent.title}}</h4>
+                <h5 class="font-14 font-500 small_text">{{newsAndEvent.shortDescription}}</h5>
               </div>
-            </a>
+            </div>
+          </a>
           </div>
-          <div class="col-md-3 bootstrap_cards">
-            <a routerLink="/student/newandseventsdescription">
-              <div class="news text_dark">
-                <img src="assets/images/temp_img/news.png">
-                <div class="news_text">
-                  <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
-                  <h4 class="font-19 font-500 small_text">Breaking News</h4>
-                  <h5 class="font-14 font-500 small_text">News Is Broken</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-3 bootstrap_cards">
-            <a routerLink="/student/newandseventsdescription">
-              <div class="news text_dark">
-                <img src="assets/images/temp_img/news.png">
-                <div class="news_text">
-                  <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
-                  <h4 class="font-19 font-500 small_text">Breaking News</h4>
-                  <h5 class="font-14 font-500 small_text">News Is Broken</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-3 bootstrap_cards">
-            <a routerLink="/student/newandseventsdescription" >
-              <div class="news text_dark">
-                <img src="assets/images/temp_img/news.png">
-                <div class="news_text">
-                  <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
-                  <h4 class="font-19 font-500 small_text">Breaking News</h4>
-                  <h5 class="font-14 font-500 small_text">News Is Broken</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-3 bootstrap_cards">
-            <a routerLink="/student/newandseventsdescription">
-              <div class="news text_dark">
-                <img src="assets/images/temp_img/news.png">
-                <div class="news_text">
-                  <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
-                  <h4 class="font-19 font-500 small_text">Breaking News</h4>
-                  <h5 class="font-14 font-500 small_text">News Is Broken</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-3 bootstrap_cards">
-            <a routerLink="/student/newandseventsdescription">
-              <div class="news text_dark">
-                <img src="assets/images/temp_img/news.png">
-                <div class="news_text">
-                  <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
-                  <h4 class="font-19 font-500 small_text">Breaking News</h4>
-                  <h5 class="font-14 font-500 small_text">News Is Broken</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-3 bootstrap_cards">
-            <a routerLink="/student/newandseventsdescription">
-              <div class="news text_dark">
-                <img src="assets/images/temp_img/news.png">
-                <div class="news_text">
-                  <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
-                  <h4 class="font-19 font-500 small_text">Breaking News</h4>
-                  <h5 class="font-14 font-500 small_text">News Is Broken</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-3 bootstrap_cards">
-            <a routerLink="/student/newandseventsdescription">
-              <div class="news text_dark">
-                <img src="assets/images/temp_img/news.png">
-                <div class="news_text">
-                  <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
-                  <h4 class="font-19 font-500 small_text">Breaking News</h4>
-                  <h5 class="font-14 font-500 small_text">News Is Broken</h5>
-                </div>
-              </div>
-            </a>
-          </div>
-     
         </div>
       </div>
     </div> 
-  </div>    
-</div>
+  </div>  
 
 
 
