@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>CicoAngular</title>
+  <title>CICO</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -28,6 +28,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/temp_img/favicon32.png">    
   <link href="https://unpkg.com/singledivui/dist/singledivui.min.css" rel="stylesheet" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/temp_img/favicon32.png">
+  <script src="https://unpkg.com/singledivui/dist/singledivui.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     
   .main-inner{
@@ -135,23 +137,7 @@
     // $("#up-arrow").toggle();
     // });
 
-    const { Chart } = SingleDivUI;
-
-const options = {
-  data: {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-    series: {
-      points: [15, 9, 25, 18, 31, 25]
-    }
-  },
-  height: 230,
-  width: 572,
-};
-
-new Chart('#chart1',  {
-    type: 'bar',
-    ...options
-});
+    
 
 
 
@@ -169,6 +155,33 @@ new Chart('#chart1',  {
         $(".fee_structure").toggle();
       })
   </script>
+<script>
+  const options = {
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+      datasets: [
+        {
+          label: 'Data Points',
+          data: [15, 9, 25, 18, 31, 25],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+    },
+  };
 
+  // Create the chart using Chart.js
+  const ctx = document.getElementById('chart1').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: options.data,
+    options: options.options,
+  });
+</script>
   </body>
 </html>

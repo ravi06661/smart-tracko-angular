@@ -1,7 +1,4 @@
 
-.chartmargin {
-    margin-top: 148px;
-}
 .textcolor{
     color: aliceblue;
 
@@ -10,4 +7,9 @@
     font-family: 'Nunito Sans 10pt' !important;
     padding:6px 10px;
     color: aliceblue;
+  }
+  #chart {
+    max-width: 380px;
+    margin: 50px auto;
+    padding: 0;
   }
