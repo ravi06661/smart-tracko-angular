@@ -75,7 +75,6 @@ export class CheckincheckoutComponent {
         this.attendance = data.Attendance;
         this.checkInTime = this.attendance.checkInTime
         this.checkOutTime = this.attendance.checkOutTime
-        localStorage.setItem('attendance', JSON.stringify(this.attendance));
         if (this.attendance.checkInTime != null) {
           this.formattedCheckInTime = this.changeTimeFormat(this.attendance.checkInTime);
         }

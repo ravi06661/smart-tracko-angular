@@ -11,7 +11,8 @@ export type ChartOptions = {
   responsive: any;
   labels: any;
   colors:any
-  legend:any
+  legend:any;
+  stroke:any;
 
 };
 @Component({
@@ -42,14 +43,15 @@ export class CalenderComponent {
       this.Leaves=[];
 
       this.chartOptions = {
-        series: [100, 100, 100],
+        series: [75, 20, 5],
         chart: {
+          width: 350,
           type: "donut",
           toolbar: {
             show: false // Hide the default toolbar
           }
         },
-        colors: ["#03a5fc", "#fc6f03", "#fc030b"],
+        colors: ["#5754E5", "#FF4A11", "#F8961E"],
         labels: ["Present", "Absent", "Leaves"],
         legend: {
           position: "bottom", // Show the legend at the bottom
@@ -59,7 +61,9 @@ export class CalenderComponent {
       //   return seriesName + ": " + percent + "%";
       // }
         },
-      
+        stroke: {
+          show: false // Set this to false to remove the borders between the series
+        },
         responsive: [
 
           {

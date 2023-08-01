@@ -41,39 +41,6 @@ export class AttendanceComponent implements OnInit{
   message:string = '';
   color:string = '';
 
-
-  Events: any[] = [
-      {
-        title: 'present',
-        start: '2023-07-15',
-        presence: 'present', // 'present' or 'absent'
-        color: 'green' // default color for present events
-      },
-      {
-        title: 'absent',
-        start: '2023-07-16',
-        presence: 'absent',
-        color: 'red' // default color for absent events
-      },
-  ];
-
-  calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin, interactionPlugin],
-    initialView: 'dayGridMonth',
-    events: this.Events,
-  
-    headerToolbar: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
-    },
-    weekends: true,
-    editable: false,
-    selectable: true,
-    selectMirror: true,
-    dayMaxEvents: true,
-  };
-
   constructor (private studentService:StudentService,private leaveService:LeaveService,private utilityService:UtilityServiceService) {
     
     
