@@ -1,6 +1,6 @@
 import { BatchesService } from 'src/app/service/batches.service';
 import { Course } from './../../entity/course';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { JavaScriptLoaderService } from 'src/app/service/java-script-loader.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
@@ -12,7 +12,7 @@ import { Batch } from 'src/app/entity/batch';
   styleUrls: ['./mycourse.component.scss']
 })
 export class MycourseComponent implements OnInit {
-
+  // @Input() localObject:any
   BASE_URL=this.utilityService.getBaseUrl();
   imageUrl=this.BASE_URL+'/file/getImageApi/technologyStackImage/';
 
