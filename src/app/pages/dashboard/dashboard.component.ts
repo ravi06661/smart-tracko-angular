@@ -34,7 +34,7 @@ export class DashboardComponent implements OnInit {
  
 
   BASE_URL=this.utilityService.getBaseUrl();
-  imageUrl=this.BASE_URL+'/File/getImageApi/workReport/';
+  imageUrl=this.BASE_URL+'/file/getImageApi/workReport/';
 
 
   check: boolean = false;
@@ -92,14 +92,7 @@ export class DashboardComponent implements OnInit {
     });
   }
   
-  test() {
-    this.service.getAssignment(192).subscribe(
-      (data:any) => {
-        this.assignment = data
-        console.log(this.assignment)
-      }
-    )
-  }
+  
 
   public startTimer() {
     {

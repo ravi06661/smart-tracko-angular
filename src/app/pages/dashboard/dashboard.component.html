@@ -10,7 +10,7 @@
 
 
       <div class="punch_btn">
-  <img src="assets/images/svg_img/punch-btn.svg" alt="Punch Button" data-bs-toggle="modal" data-bs-target="#dash_checkout_modal">
+  
 
       <div style="width: 100%;">
         <app-checkincheckout ></app-checkincheckout>
@@ -228,7 +228,7 @@
       <div class="modal-content">
         <div class="modal-body">
           <div class="modal-header apply_title">
-            <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Attendance 18 Jan, 2023
+            <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Attendance {{attendance.checkInDate}}
             </h1>
             <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
               <i class="fi fi-rr-cross close_icon"></i>
@@ -237,15 +237,15 @@
           <div class="attendance_heading d-flex justify-content-between align-items-center">
             <div class="">
               <h3 class="attendance_title font-17 font-500  secondary text-center">Check in</h3>
-              <h4 class="font-17 font-600 text_small">09:03:24 AM</h4>
+              <h4 class="font-17 font-600 text_small">{{attendance.checkInTime}}</h4>
             </div>
             <div class="">
               <h3 class="attendance_title font-17 font-500  secondary text-center">Duration</h3>
-              <h4 class="font-17 font-600 text_small">00:00 Hrs</h4>
+              <h4 class="font-17 font-600 text_small">{{attendance.workingHour}}</h4>
             </div>
             <div class="">
               <h3 class="attendance_title font-17 font-500  secondary text-center">Check Out</h3>
-              <h4 class="font-17 font-600 text_small">06:08:32 PM</h4>
+              <h4 class="font-17 font-600 text_small">{{attendance.checkOutTime}}</h4>
             </div>
           </div>
 
