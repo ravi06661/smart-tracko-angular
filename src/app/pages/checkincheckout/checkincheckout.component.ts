@@ -40,7 +40,9 @@ export class CheckincheckoutComponent {
 
 
   BASE_URL = this.utilityService.getBaseUrl();
+
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
+
 
 
   check: boolean = false;

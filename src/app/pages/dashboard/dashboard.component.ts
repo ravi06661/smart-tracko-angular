@@ -45,6 +45,7 @@ export class DashboardComponent implements OnInit {
     private localst:LocationStrategy,private studentService: StudentService) { }
 
   ngOnInit(): void {
+    
     this.preventBackButton();
 
     //Timer API
