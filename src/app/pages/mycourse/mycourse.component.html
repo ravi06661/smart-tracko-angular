@@ -73,7 +73,7 @@
         <div class="row mx-0">
           <div class="col-md-6">
             <h3 class="title font-21 font-600 secondary position-relative">Upcoming Batches </h3>
-            <h3 class="title font-21 font-600 secondary position-relative"*ngIf="length==0">NO UPCOMING BATCHES!!! </h3>
+            <h3  class="font-21 font-600 secondary position-relative"*ngIf="length==0">NO UPCOMING BATCHES!!! </h3>
 
             
             <div class="all_summary mb-2" *ngFor="let batch of batches">
@@ -100,8 +100,8 @@
 
           <div class="col-md-6">
             <h3 class="title font-21 font-600 secondary position-relative">Other Courses</h3>
-            <h3 class="font-21 font-600 secondary position-relative" *ngIf="courses.length == 0">
-              NO COURSES FOUND !!!
+            <h3  class="font-21 font-600 secondary position-relative" *ngIf="courses.length == 0">
+              NO COURSES AVAILABLE !!!
             </h3>
             <div class="all_summary mb-2" *ngFor="let course of courses">
               <div class="Batches d-flex align-items-center">

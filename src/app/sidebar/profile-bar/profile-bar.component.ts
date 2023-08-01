@@ -11,12 +11,14 @@ import { StudentService } from 'src/app/service/student.service';
   templateUrl: './profile-bar.component.html',
   styleUrls: ['./profile-bar.component.scss']
 })
+
 export class ProfileBarComponent implements OnInit {
   profileData: Profile = new Profile();
   constructor(private qrLogin: QRServiceService) {
     this.profileData.name = ''
     this.profileData.course = ''
   }
+
 
   ngOnInit(): void {
     if (this.profileData != null) {
