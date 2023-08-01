@@ -7,16 +7,58 @@
   <!-- DASHBOARD START -->
   <div class="scroll_dashboard">
     <div class="main-inner">
-      <div class="card0 left-card d-flex">
-        <app-checkincheckout></app-checkincheckout>
+
+      <div class="punch_btn">
+  <img src="assets/images/svg_img/punch-btn.svg" alt="Punch Button" data-bs-toggle="modal" data-bs-target="#dash_checkout_modal">
+
+      <div style="width: 100%;">
+        <app-checkincheckout ></app-checkincheckout>
       </div>
-      <div class="calender-img">
-        <app-calender></app-calender>
       </div>
 
-      <!-- <div class="calender-img">
-        <img src="assets/images/temp_img/calender.png" class="img-fluid">
+
+
+      <!-- <div class="card0 left-card d-flex">
+        <div class="left-content">
+          <button type="button"
+            class="btn-2 text-white font-12 font-400 d-flex flex-column align-items-center justify-content-center m-0"
+            data-bs-toggle="modal" data-bs-target="#dash_checkout_modal">
+            <img src="assets/images/svg_img/check-in.svg" class="mb-2 img-fluid">
+            CHECK IN
+          </button>
+
+          <div class="time text-center">
+            <h6 class="light mb-0">12:17:50 PM</h6>
+            <h5 class="light">Thursday, Oct 13</h5>
+          </div>
+        </div>
+
+        <div class="right-content">
+          <div class="checkin d-flex align-items-center">
+            <span class="img">
+              <img src="assets/images/svg_img/Vector.svg">
+            </span>
+            <h3 class="font-15 font-400 light mb-0">09:30 AM</h3>
+          </div>
+          <div class="checkin d-flex align-items-center">
+            <span class="img">
+              <img src="assets/images/svg_img/Frame 156.svg">
+            </span>
+            <h3 class="font-15 font-400 light mb-0">06:32 AM</h3>
+          </div>
+          <div class="checkin d-flex align-items-center">
+            <span class="img">
+              <img src="assets/images/svg_img/watch.svg">
+            </span>
+            <h3 class="font-15 font-400 light mb-0">09:02 Hrs</h3>
+          </div>
+        </div>
+
       </div> -->
+
+      <div class="calender-img" style="height: 400px;">
+        <app-calender></app-calender>
+      </div>
 
       <div class="right-task-area d-flex flex-wrap">
         <div class="task-area text-center">
@@ -38,6 +80,8 @@
       </div>
 
     </div>
+
+
     <div class="task_assignment">
       <div class="row">
         <div class="col-md-4">

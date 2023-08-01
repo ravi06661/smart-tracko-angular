@@ -18,6 +18,7 @@ export class MycourseComponent implements OnInit {
 
   courses:Course[]=[];
   batches:Batch[]=[]
+  length:number=0;
 
   constructor(private couserService:CourseServiceService,private utilityService:UtilityServiceService,private batchService:BatchesService) {}
 
@@ -38,8 +39,9 @@ export class MycourseComponent implements OnInit {
   public getAllBatches(){
     this.batchService.getAllBatch().subscribe({
       next:(data:any)=>{
-        this.batches = data.response;
+        this.batches = data
         console.log(this.batches);
+        this.length=this.batches.length
         
       }
     })
