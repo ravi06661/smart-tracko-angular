@@ -5,6 +5,8 @@ import { Component } from '@angular/core';
   templateUrl: './profile-bar.component.html',
   styleUrls: ['./profile-bar.component.scss']
 })
-export class ProfileBarComponent {
+export class ProfileBarComponent  {
+
+  
 
 }

@@ -45,7 +45,7 @@ export class CalenderComponent {
       this.chartOptions = {
         series: [75, 20, 5],
         chart: {
-          width: 350,
+          width: 320,
           type: "donut",
           toolbar: {
             show: false // Hide the default toolbar
