@@ -1,32 +1,40 @@
-<div class="punch_btn">
-  <button type="button"
-    class="btn-2 text-white font-12 font-400 d-flex flex-column align-items-center justify-content-center m-0"
-    data-bs-toggle="modal" data-bs-target="#dash_checkout_modal">
-    <img src="assets/images/svg_img/check-in.svg" class="mb-2 img-fluid">
-    CHECK IN
-  </button>
-  <div class="text-center">
-    <h5 class="light mb-0">12:17:50 PM</h5>
-    <h6 class="light mb-0">Thursday, Oct 13</h6>
+
+
+
+<!-- <button type="button"
+  class="btn-2 text-white font-12 font-400 d-flex flex-column align-items-center justify-content-center m-0"
+  data-bs-toggle="modal" data-bs-target="#dash_checkout_modal">
+  <img src="assets/images/svg_img/check-in.svg" class="mb-2 img-fluid">
+  CHECK IN
+</button> -->
+<div class="text-center">
+  <h4 class="light mb-0">{{ clock | async | date: "mediumTime" }}</h4>
+  <h5 class="light mb-0">{{formattedDate}}</h5>
+</div>
+  <div class="timestamps mt-2">
+  <div class="timestamicon">
+    <span class="img">
+      <img src="assets/images/svg_img/Vector.svg">
+    </span>
+    <h3 class="font-15 font-400 light mb-0 mt-1" *ngIf="checkInTime!=null">{{formattedCheckInTime}}</h3>
+    <h3 class="font-15 font-400 light mb-0 mt-1" *ngIf="checkInTime == null"> --:-- </h3>
+
   </div>
-    <div class="timestamps">
-    <div class="timestamicon">
-      <span class="img">
-        <img src="assets/images/svg_img/Vector.svg">
-      </span>
-      <h3 class="font-15 font-400 light mb-0">09:30 AM</h3>
-    </div>
-    <div class="timestamicon">
-      <span class="img">
-        <img src="assets/images/svg_img/Frame 156.svg">
-      </span>
-      <h3 class="font-15 font-400 light mb-0">06:32 AM</h3>
-    </div>
-    <div class="timestamicon">
-      <span class="img">
-        <img src="assets/images/svg_img/watch.svg">
-      </span>
-      <h3 class="font-15 font-400 light mb-0">09:02 Hrs</h3>
-    </div>
+  <div class="timestamicon">
+    <span class="img">
+      <img src="assets/images/svg_img/Frame 156.svg">
+    </span>
+    <h3 class="font-15 font-400 light mb-0 mt-1" *ngIf="checkOutTime != null">{{formattedCheckOutTime}}</h3>
+    <h3 class="font-15 font-400 light mb-0 mt-1" *ngIf="checkOutTime == null"> --:-- </h3>
+
+  </div>
+  <div class="timestamicon">
+    <span class="img">
+      <img src="assets/images/svg_img/watch.svg">
+    </span>
+    <h3 class="font-15 font-400 light mb-0 mt-1"  *ngIf="checkInTime != null">{{totalHrs}}</h3>
+    <h3 class="font-15 font-400 light mb-0 mt-1" *ngIf="checkInTime == null"> --:--:--</h3>
+
   </div>
 </div>
+
