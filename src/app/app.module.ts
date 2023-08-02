@@ -57,6 +57,14 @@ import { AdminAssignmentsComponent } from './admin/admin-assignments/admin-assig
 import { AdminCreateAssignmentsComponent } from './admin/admin-create-assignments/admin-create-assignments.component';
 import { AdminEditAssignmentsComponent } from './admin/admin-edit-assignments/admin-edit-assignments.component';
 import { AdminAttendanceComponent } from './admin/admin-attendance/admin-attendance.component';
+import { AdminTaskComponent } from './admin/admin-task/admin-task.component';
+import { AdminCreateTaskComponent } from './admin/admin-create-task/admin-create-task.component';
+import { AdminEditTaskComponent } from './admin/admin-edit-task/admin-edit-task.component';
+import { AdminCreateNewJobComponent } from './admin/admin-create-new-job/admin-create-new-job.component';
+import { AdminCreateNewsAndEventsComponent } from './admin/admin-create-news-and-events/admin-create-news-and-events.component';
+import { AnnouncementsComponent } from './admin/announcements/announcements.component';
+import { CreateAnnouncementsComponent } from './admin/create-announcements/create-announcements.component';
+import { AdminstudentComponent } from './admin/adminstudent/adminstudent.component';
 
 
 
@@ -102,6 +110,14 @@ import { AdminAttendanceComponent } from './admin/admin-attendance/admin-attenda
     AdminCreateAssignmentsComponent,
     AdminEditAssignmentsComponent,
     AdminAttendanceComponent,
+    AdminTaskComponent,
+    AdminCreateTaskComponent,
+    AdminEditTaskComponent,
+    AdminCreateNewJobComponent,
+    AdminCreateNewsAndEventsComponent,
+    AnnouncementsComponent,
+    CreateAnnouncementsComponent,
+    AdminstudentComponent,
    
        
  

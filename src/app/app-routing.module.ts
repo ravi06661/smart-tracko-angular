@@ -35,6 +35,13 @@ import { AdminAssignmentsComponent } from './admin/admin-assignments/admin-assig
 import { AdminCreateAssignmentsComponent } from './admin/admin-create-assignments/admin-create-assignments.component';
 import { AdminEditAssignmentsComponent } from './admin/admin-edit-assignments/admin-edit-assignments.component';
 import { AdminAttendanceComponent } from './admin/admin-attendance/admin-attendance.component';
+import { AdminTaskComponent } from './admin/admin-task/admin-task.component';
+import { AdminEditTaskComponent } from './admin/admin-edit-task/admin-edit-task.component';
+import { AdminCreateNewJobComponent } from './admin/admin-create-new-job/admin-create-new-job.component';
+import { AdminCreateNewsAndEventsComponent } from './admin/admin-create-news-and-events/admin-create-news-and-events.component';
+import { AnnouncementsComponent } from './admin/announcements/announcements.component';
+import { CreateAnnouncementsComponent } from './admin/create-announcements/create-announcements.component';
+import { AdminstudentComponent } from './admin/adminstudent/adminstudent.component';
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
@@ -65,9 +72,16 @@ const routes: Routes = [
       {path:'assignments',component:AdminAssignmentsComponent,pathMatch:'full'},
       {path:'createassignments',component:AdminCreateAssignmentsComponent,pathMatch:'full'},
       {path:'editassignments',component:AdminEditAssignmentsComponent,pathMatch:'full'},
+      {path:'task',component:AdminTaskComponent,pathMatch:'full'},
+      {path:'edittask',component:AdminEditTaskComponent,pathMatch:'full'},
       {path:'attendance',component:AdminAttendanceComponent,pathMatch:'full'},
       {path:'jobalert',component:AdminJobAlertComponent,pathMatch:'full'},
+      {path:'createjob',component:AdminCreateNewJobComponent,pathMatch:'full'},
       {path:'newsAndEvent',component:AdminNewsAndEventComponent,pathMatch:'full'},
+      {path:'createnewsAndEvent',component:AdminCreateNewsAndEventsComponent,pathMatch:'full'},
+      {path:'announcements',component:AnnouncementsComponent,pathMatch:'full'},
+      {path:'createannouncements',component:CreateAnnouncementsComponent,pathMatch:'full'},
+      {path:'student',component:AdminstudentComponent,pathMatch:'full'},
       {path:'mycourse',component:AdminCoursesComponent,pathMatch:'full'},
       
     ]

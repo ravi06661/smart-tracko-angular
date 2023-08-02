@@ -51,7 +51,7 @@
             >Assignments</span></a>
 
             <a
-            routerLink="/admin"
+            routerLink="/admin/task"
             [ngClass]="check == 'task' ? 'active' : 'box-hover'"
             (click)="getValueById(lsdv4.value)"
           >
@@ -73,7 +73,7 @@
                 >Attendance</span></a>
 
                 <a
-                routerLink="/admin"
+                routerLink="/admin/jobalert"
                 [ngClass]="check == 'jobalert' ? 'active' : 'box-hover'"
                 (click)="getValueById(lsdv6.value)"
               >
@@ -84,7 +84,7 @@
                   >Job Alert</span></a>
 
             <a
-                routerLink="/admin"
+                routerLink="/admin/newsAndEvent"
                 [ngClass]="check == 'newAndEvent' ? 'active' : 'box-hover'"
                 (click)="getValueById(lsdv7.value)"
               >
@@ -95,7 +95,7 @@
                   >News & Events</span></a>
 
                   <a
-                  routerLink="/admin"
+                  routerLink="/admin/announcements"
                   [ngClass]="check == 'announcements' ? 'active' : 'box-hover'"
                   (click)="getValueById(lsdv8.value)"
                 >
@@ -106,7 +106,7 @@
                     >Announcements</span></a>
 
                     <a
-                    routerLink="/admin"
+                    routerLink="/admin/student"
                     [ngClass]="check == 'student' ? 'active' : 'box-hover'"
                     (click)="getValueById(lsdv9.value)"
                   >
