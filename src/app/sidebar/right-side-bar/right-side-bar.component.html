@@ -2,17 +2,17 @@
   <div class="box0 sidepanel">
     <div class="profile mb-4 profile-right">
       <div class="">
-        <img src="assets/images/temp_img/Ellipse 1.png" class="round-img">
+        <img [src]="imageUrl+profileData.profilePic" class="round-img image">
       </div>
       <div class="text">
-        <h3 class="font-17 font-600 light user-name">Rahul Hencha</h3>
-        <p class="font-14 font-400  light mb-0">Java Developer</p>
+        <h3 class="font-17 font-600 text-black user-name">{{profileData.name}}</h3>
+        <p class="font-14 font-400  text-black mb-0">{{profileData.course}}</p>
       </div>
-      <a  class="ms-3 right_menu_toggle">
-        <i class="fi fi-rr-cross-small warning fs-2 close_menu"></i>           
+      <a class="ms-3 right_menu_toggle">
+        <i class="fi fi-rr-cross-small warning fs-2 close_menu"></i>
       </a>
     </div>
-    
+
 
     <div class="text1">
       <h4 class="font-17 font-600 light">Updates</h4>
