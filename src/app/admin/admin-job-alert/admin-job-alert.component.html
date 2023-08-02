@@ -1,145 +1,234 @@
 <div id="main" class="main job_alertpage">
-  <div class="row">
-    <div class="col-12 heading_dashboard">
-      <div class="heading">
-        <h4 class="card-title font-30 font-500 secondary mb-0">Job Alert</h4>
+  <div class="profile d-flex">
+    <div class="profile_top_heading d-flex gap_24">
+      <h1 class="font-27 font-700 secondary mb-0">Job Alerts</h1>
+      <a routerLink="/admin/createjob">
+      <button class="top_profile_sec_btn font-14 font-500">Post New Job</button>
+      </a>
+  </div>
+    <div class="profile">
+      <div class="d-flex align-items-center porfile_sec">
+        <div class="">
+          <img src="assets/images/temp_img/Ellipse 1.png" class="round-img">
+        </div>
+        <div class="text mx-3">
+          <h3 class="font-17 font-600 text-black user-name">Rahil Kothari</h3>
+          <p class="font-14 font-400  text-black mb-0">Ui/Ux Team Lead</p>
+        </div>
       </div>
-      <div class="data_table">
-        <div class="row mb-3">
-          <div class="col-md-6">
-            <div class="" id="">
-              <label class="d-flex align-items-center dark">Show <select name="ShowUser_length" aria-controls="ShowUser"
-                  class="form-select-sm mx-2 dark">
-                  <option value="10">10</option>
-                  <option value="25">25</option>
-                  <option value="50">50</option>
-                  <option value="100">100</option>
-                  <option value="500">500</option>
-                  <option value="1000">1,000</option>
-                </select> entries</label>
+      <a href="#" class="ms-3 right_menu_toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path opacity="0.5" d="M18.7491 9V9.7041C18.7491 10.5491 18.9903 11.3752 19.4422 12.0782L20.5496 13.8012C21.5612 15.3749 20.789 17.5139 19.0296 18.0116C14.4273 19.3134 9.57274 19.3134 4.97036 18.0116C3.21105 17.5139 2.43882 15.3749 3.45036 13.8012L4.5578 12.0782C5.00972 11.3752 5.25087 10.5491 5.25087 9.7041V9C5.25087 5.13401 8.27256 2 12 2C15.7274 2 18.7491 5.13401 18.7491 9Z" fill="#49BFCF"/>
+          <path d="M7.24316 18.5449C7.8941 20.5501 9.77767 21.9997 11.9998 21.9997C14.222 21.9997 16.1055 20.5501 16.7565 18.5449C13.611 19.1352 10.3886 19.1352 7.24316 18.5449Z" fill="#49BFCF"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+
+  <div class="scroll_section">
+    <!-- INTERBSHIP CARD START -->
+    <h3 class="Enrolled font-21 font-600 secondary position-relative">Internships</h3>
+    <div class="row">
+      <div class="col-md-3 bootstrap_cards">
+          <div class="internship_container">
+            <div class="container_top d-flex align-items-center jobaleart_card">
+              <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" id="meat_dot"></i>
+              <div class="meat-dot-dropdown" style="display: none;">
+                <a routerLink="/admin/createjob" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
+                <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
+              </div>
+              <img src="assets/images/temp_img/image 18.png">
+              <div class="internship_title">
+                <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
+                <h4 class="font-14 font-400 sub_title1">Company Name</h4>
+                <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
+              </div>
+            </div>
+            <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
+              UI / UX Design ,
+              UCD Process , Information Architech , Persona Creation,.....</h4>
+          </div>
+
+      </div>
+
+      <div class="col-md-3 bootstrap_cards">
+        <div class="internship_container">
+          <div class="container_top d-flex align-items-center jobaleart_card">
+            <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
+           
+            <img src="assets/images/temp_img/image 18.png">
+            <div class="internship_title">
+              <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
+              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
+              <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
             </div>
           </div>
-          <div class="col-md-4 ms-auto d-flex justify-content-end align-items-center serch_box">
-            <label class="d-flex align-items-center search dark">Search:<input type="search"
-                class="form-control form-control-sm" placeholder="" aria-controls="ShowUser" name="name" ngModel  (ngModelChange)="searchJob($event)">
-            </label>
-            <button type="button" class="add_btn d-flex justify-content-center align-items-center"
-              data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getTechnologyStack()">Add</button>
+          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
+            UI / UX Design ,
+            UCD Process , Information Architech , Persona Creation,.....</h4>
+        </div>
+
+    </div>
+
+    <div class="col-md-3 bootstrap_cards">
+      <div class="internship_container">
+        <div class="container_top d-flex align-items-center jobaleart_card">
+          <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
+         
+          <img src="assets/images/temp_img/image 18.png">
+          <div class="internship_title">
+            <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
+            <h4 class="font-14 font-400 sub_title1">Company Name</h4>
+            <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
           </div>
         </div>
-        <table class="table">
-          <thead>
-            <tr>
-              
-              <th scope="col">S. No</th>
-              <th scope="col">image</th>
-              <th scope="col">Job Title</th>
-            
-              <th scope="col">Company Name</th>
-              <th scope="col">ExperienceRequired</th>
-              <th scope="col">jobPackage</th>
-              <th scope="col">type</th>
-              <th scope="col">Active</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor=" let obj of jobs;let i = index " >
-              <th scope="row">{{i+1}}</th>
-              <td><img class="img" [src]="imageUrl+obj.technologyStack.imageName" height="48" width="48"></td>
-              <td>{{obj.jobTitle}}</td>
-              <td>{{obj.companyName}}</td>
-              <td>{{obj.experienceRequired}}</td>
-              <td>{{obj.jobPackage}}</td>
-              <td>{{obj.type}}</td>
-
-              <td><label class="switch">
-                  <input type="checkbox" [checked]=obj.isActive (click)="activeJob(obj.jobId)">
-                  <span class="slider round"></span>
-                </label></td>
-              <td class="action">
-                <i class="fi fi-rr-pencil warning"></i>
-              <a (click)="delete(obj.jobId)">  <i class="fi fi-rr-trash warning mx-0 ms-2"></i></a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <mat-paginator *ngIf="totaljobAlert>10"
-  [length]="totaljobAlert"
-  [pageSize]="pageSize"
-  aria-label="Select page"
-  (page)="pageChange($event)">
-  >    
-</mat-paginator> 
+        <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
+          UI / UX Design ,
+          UCD Process , Information Architech , Persona Creation,.....</h4>
       </div>
+
+  </div>
+
+
+
+    </div>
+    <!-- INTERNSHIP CARD END -->
+
+    <!-- JOB CARD START -->
+    <h3 class="Enrolled font-21 font-600 secondary position-relative">Jobs</h3>
+    <div class="row">
+      <div class="col-md-3 bootstrap_cards">
+        <div class="internship_container">
+          <div class="container_top d-flex align-items-center jobaleart_card">
+            <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
+           
+            <img src="assets/images/temp_img/image 18.png">
+            <div class="internship_title">
+              <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
+              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
+              <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
+            </div>
+          </div>
+          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
+            UI / UX Design ,
+            UCD Process , Information Architech , Persona Creation,.....</h4>
+        </div>
+
+    </div>
+
+    <div class="col-md-3 bootstrap_cards">
+      <div class="internship_container">
+        <div class="container_top d-flex align-items-center jobaleart_card">
+          <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
+         
+          <img src="assets/images/temp_img/image 18.png">
+          <div class="internship_title">
+            <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
+            <h4 class="font-14 font-400 sub_title1">Company Name</h4>
+            <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
+          </div>
+        </div>
+        <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
+          UI / UX Design ,
+          UCD Process , Information Architech , Persona Creation,.....</h4>
+      </div>
+
+  </div>
+
+  <div class="col-md-3 bootstrap_cards">
+    <div class="internship_container">
+      <div class="container_top d-flex align-items-center jobaleart_card">
+        <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
+       
+        <img src="assets/images/temp_img/image 18.png">
+        <div class="internship_title">
+          <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
+          <h4 class="font-14 font-400 sub_title1">Company Name</h4>
+          <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
+        </div>
+      </div>
+      <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
+        UI / UX Design ,
+        UCD Process , Information Architech , Persona Creation,.....</h4>
+    </div>
+
+</div>
+
+   
+    </div>
+    <!-- JOB CARD END -->
+  </div>
+
+
+<!-- MIDDLE CONTENT END -->
+
+<!-- RIGHT SIDE START-->
+<div class="right-sidebar">
+  <div class="box0 sidepanel">
+    <div class="profile mb-4">
+      <div class="">
+        <img src="assets/images/temp_img/Ellipse 1.png" class="round-img">
+      </div>
+      <div class="text mx-3">
+        <h3 class="font-17 font-600 light user-name">Rahil Kothari</h3>
+        <p class="font-14 font-400  light mb-0">Ui/Ux Team Lead</p>
+      </div>
+      <a href="#" class="ms-3 right_menu_toggle">
+        <i class="fi fi-rr-cross-small warning fs-2 close_menu"></i>           
+      </a>
+    </div>
+
+    <div class="text1">
+      <h4 class="font-17 font-600 light">Updates</h4>
+      <h4 class="font-17 font-600 light">Clear All</h4>
+    </div>
+    <div class="nortification mb-3 position-relative">
+      <div class="nortifications-h">
+        <h6 class="font-17 font-400 light notification_title">Notification Heading</h6>
+        <h6 class="font-14 font-400 light mb-0">Notification Message</h6>
+      </div>
+      <h5 class="font-11 font-400 light">2 Hours ago</h5>
+    </div>
+    <div class="nortification mb-3 position-relative">
+      <div class="nortifications-h">
+        <h6 class="font-17 font-400 light notification_title">Notification Heading</h6>
+        <h6 class="font-14 font-400 light mb-0">Notification Message</h6>
+      </div>
+      <h5 class="font-11 font-400 light">2 Hours ago</h5>
+    </div>
+    <div class="nortification mb-3 position-relative">
+      <div class="nortifications-h">
+        <h6 class="font-17 font-400 light notification_title">Notification Heading</h6>
+        <h6 class="font-14 font-400 light mb-0">Notification Message</h6>
+      </div>
+      <h5 class="font-11 font-400 light">2 Hours ago</h5>
     </div>
   </div>
 </div>
+<!-- RIGHT SIDE END -->
+</div>
+<!-- DASHBOARD END -->
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true"
-  role="dialog">
-  <div class="modal-dialog position-relative leave_modal">
-    <div class="modal-content">
-      <div class="modal-body p-0">
-        <div class="modal-header apply_title">
-          <h4 class="card-title font-21 font-600 secondary ">Add</h4>
-          <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
-            <i class="fi fi-rr-cross close_icon"></i>
-          </button>
-        </div>
-        <div class="POPUP">
-          <div class="form_input mb-3">
-            <label for="inputEmail4" class="heading_name font-17 font-500  danger mb-2">Job Title</label>
-            <input type="text" class="form-control input_text" id="inputEmail4" name="jobTitle"
-              placeholder="Enter Job Title Here...." [(ngModel)]="jobData.jobTitle">
-          </div>
-          <div class="form_input mb-3">
-            <label for="inputEmail4" class="heading_name font-17 font-500  danger mb-2">Company Name</label>
-            <input type="text" class="form-control input_text" id="inputEmail4" name="companyName"
-              placeholder="Enter Company Name Here...." [(ngModel)]="jobData.companyName">
-          </div>
-          <div class="form_input mb-3">
-            <label for="inputEmail4" class="heading_name font-17 font-500  danger mb-2">Skills</label>
-            <input type="text" class="form-control input_text" id="inputEmail4" name="technicalSkills"
-              placeholder="Enter Skills Here...." [(ngModel)]="jobData.technicalSkills">
-          </div>
-          <div class="form_input mb-3">
-            <label for="inputEmail4" class="heading_name font-17 font-500  danger mb-2">Package</label>
-            <input type="number" class="form-control input_text" id="inputEmail4" name="jobPackage"
-              placeholder="Enter Package Here...." [(ngModel)]="jobData.jobPackage">
-          </div>
-          <div class="form_input mb-3">
-            <label for="inputEmail4" class="heading_name font-17 font-500  danger mb-2">Experience</label>
-            <input type="number" class="form-control input_text" id="inputEmail4" name="experienceRequired"
-              placeholder="Enter Experience Here...." [(ngModel)]="jobData.experienceRequired">
-          </div>
-          <div class="mb-3">
-            <label class="form-label danger font-17 font-500 mb-2" for="reasonType">Job Type</label>
-            <select class="form-select" id="reasonType" name="type" [(ngModel)]="jobData.type">
-              <option value="">select input type</option>
-              <option value="INTERN">INTERN</option>
-              <option value="JOB">JOB</option>
-            </select>
-          </div>
 
-          <div class="mb-3">
-            <label class="form-label danger font-17 font-500 mb-2" for="reasonType">Technology Image</label>
-            <select class="form-select" id="reasonType" name="technologyStack" [(ngModel)]="jobData.technologyStack">
-              <option alue="">Select input type</option>
-              <option *ngFor="let obj of technologyStack" [ngValue]="obj">
-                {{obj.technologyName}}
-              </option>
-            </select>
-
-          </div>
-          <div class="mb-3">
-            <label class="form-label danger font-17 font-500 mb-2" for="reason">Description</label>
-            <textarea class="form-control" id="reason" name="jobDescription"
-              [(ngModel)]="jobData.jobDescription"></textarea>
-          </div>
-          <button type="button" class="add_item" (click)="submit()">Submit</button>
-        </div>
+<!-- Modal leave for apply start -->
+<div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+<div class="modal-dialog position-relative leave_modal">
+  <div class="modal-content">
+    <div class="modal-body">
+      <div class="modal-header apply_title">
+       <p>Are You Sure You Want To Delete This Item_Name?</p>
+        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+          <i class="fi fi-rr-cross close_icon"></i>
+        </button>
       </div>
+
+      <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+        <button type="button" class="cancel_modal_btn">Cancel</button>
+        <button type="button" class="apply_modal_btn">Apply</button>
+      </div>
+
     </div>
   </div>
+</div>
 </div>
