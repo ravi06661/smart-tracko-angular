@@ -1,26 +1,602 @@
 <div id="main" class="main dashboard_page">
-    <div class="profile d-flex mb-4">
-      <h1 class="font-32 font-700 secondary mb-4">Dashboard</h1>
-      <!-- <app-profile-bar></app-profile-bar> -->
-    </div>
-  
-    <div class="row mb-4">
-      <div class="col-md-12">
-        <div class="top-content">
-          <div class="row">
-            <div class="col-md-6">
-              <h2 class="heading-1 font-600 secondary heading-2">Learn JAVA From Scratch</h2>
-              <h3 class="font-25 font-400 secondary heading-3">New Batch Starting<br class="d-none d-md-block">
-                From <span class="font-600">1st April</span></h3>
-              <button type="button" class="btn-1 font-17 font-600">
-                Enroll Now
-                <i class="fi fi-rr-arrow-right mt-2 lh-0 ms-0"></i>
-              </button>
+  <div class="profile d-flex">
+    <h1 class="font-27 font-700 secondary mb-0">Dashboard</h1>
+   <app-profile-bar></app-profile-bar>
+  </div>
+
+  <!-- DASHBOARD START -->
+
+  <div class="scroll_dashboard">
+    <div class="main-inner">
+
+      <div class="admin-dash-attendance">
+        <h3 class="admin-title font-17 font-600 secondary position-relative">Attendance</h3>
+        <div class="attendance-area position-relative">
+         <div class="attendance-chart rounded-pill m-auto"> </div>
+         <span class="present-value text_gray font-12 font-600 position-absolute">Present</span>
+         <span class="absent-value text_gray font-12 font-600 position-absolute">Absent</span>
+         <span class="leave-value text_gray font-12 font-600 position-absolute">On Leave</span>
+
+
+        </div>
+      </div>
+
+      <div class="admin-dash-assignment">
+        <h3 class="admin-title font-17 font-600 secondary position-relative">Assignments</h3>
+        <div class="assignment-area">
+          <div class="chart-detail">
+            <div class="submitted-value">
+              <p>Submitted</p>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>120</h2>
             </div>
-            <div class="col-md-6">
-              <img src="assets/images/temp_img/Group 2071.png" class="boy-img">
+            <div class="pending-value">
+              <p>Pending</p>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>30</h2>
             </div>
           </div>
+          <div class="assignment-chart">
+            <div class="submitted"></div>
+            <div class="approve"></div>
+            <div class="pending"></div>
+            <div class="our_due"></div>
+          </div>
+          <div class="chart-detail-bottom">
+            <div class="approve-value">
+              <p>Approved</p>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>120</h2>
+            </div>
+            <div class="over-due-value">
+              <p>Over Due</p>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>30</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="admin-dash-fees">
+        <h3 class="admin-title font-17 font-600 secondary position-relative">Fees</h3>
+        <div class="fees-area">
+          <div class="collect-circle"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="barchart-section mb_20">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 mb-0 mb-md-3 mb-0 mb-md-3">
+          <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Admissions</h3>
+          <div class="attendance-charbar">
+            <div>
+              <canvas id="myChart1"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 mb-0 mb-md-3 mb-0 mb-md-3 ">
+          <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Fee Collection</h3>
+          <div class="attendance-charbar">
+            <div>
+              <canvas id="myChart2"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">New Students</h3>
+        <div class="table_container">
+          <table class="table mb-0">
+            <thead style="background:#EDF9FB;">
+              <tr class="table_heading">
+                <th scope="col" class="font-15 font-600 secondary">Name</th>
+                <th scope="col" class="font-15 font-600 secondary">Course</th>
+                <th scope="col" class="font-15 font-600 secondary">Joining on</th>
+                <th scope="col" class="font-15 font-600 secondary">Fee</th>
+                <th scope="col" class="font-15 font-600 secondary">Phone Number</th>
+              </tr>
+            </thead>
+            <tbody class="bg-light">
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>1,20,000</td>
+                <td>9874653210</td>
+              </tr>
+
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Upcoming Dues</h3>
+        <div class="table_container">
+          <table class="table mb-0">
+            <thead style="background:#EDF9FB;">
+              <tr class="table_heading">
+                <th scope="col" class="font-15 font-600 secondary">Name</th>
+                <th scope="col" class="font-15 font-600 secondary">Course</th>
+                <th scope="col" class="font-15 font-600 secondary">Due on</th>
+                <th scope="col" class="font-15 font-600 secondary">Amount</th>
+                <th scope="col" class="font-15 font-600 secondary">Status</th>
+              </tr>
+            </thead>
+            <tbody class="bg-light">
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>20,000</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>20,000</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>20,000</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>20,000</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>20,000</td>
+                <td>Pending</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <h3 class="admin-title font-17 font-600 secondary position-relative mt-4 mb_20">Recent Collections</h3>
+        <div class="table_container">
+          <table class="table mb-0">
+            <thead style="background:#EDF9FB;">
+              <tr class="table_heading">
+                <th scope="col" class="font-15 font-600 secondary">Name</th>
+                <th scope="col" class="font-15 font-600 secondary">Course</th>
+                <th scope="col" class="font-15 font-600 secondary">Due on</th>
+                <th scope="col" class="font-15 font-600 secondary">Amount</th>
+                <th scope="col" class="font-15 font-600 secondary">Status</th>
+              </tr>
+            </thead>
+            <tbody class="bg-light">
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>20,000</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>20,000</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>20,000</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>20,000</td>
+                <td>Pending</td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center" style="gap:5px;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
+                <td>Core Java</td>
+                <td>1 Jan, 2023</td>
+                <td>20,000</td>
+                <td>Pending</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- DASHBOARD END -->
+
+  <!-- RIGHT SIDE START-->
+  <div class="right-sidebar">
+    <div class="box0 sidepanel">
+      <div class="profile mb-4 profile-right">
+        <div class="">
+          <img src="assets/images/temp_img/Ellipse 1.png" class="round-img">
+        </div>
+        <div class="text">
+          <h3 class="font-17 font-600 light user-name">Rahil Kothari</h3>
+          <p class="font-14 font-400  light mb-0">Ui/Ux Team Lead</p>
+        </div>
+        <a href="#" class="ms-3 right_menu_toggle">
+          <i class="fi fi-rr-cross-small warning fs-2 close_menu"></i>
+        </a>
+      </div>
+
+      <div class="text1">
+        <h4 class="font-17 font-600 light">Updates</h4>
+        <h4 class="font-17 font-600 light">Clear All</h4>
+      </div>
+      <div class="nortification mb-3 position-relative">
+        <div class="nortifications-h">
+          <h6 class="font-17 font-400 light notification_title">Notification Heading</h6>
+          <h6 class="font-14 font-400 light mb-0">Notification Message</h6>
+        </div>
+        <h5 class="font-11 font-400 light">2 Hours ago</h5>
+      </div>
+      <div class="nortification mb-3 position-relative">
+        <div class="nortifications-h">
+          <h6 class="font-17 font-400 light notification_title">Notification Heading</h6>
+          <h6 class="font-14 font-400 light mb-0">Notification Message</h6>
+        </div>
+        <h5 class="font-11 font-400 light">2 Hours ago</h5>
+      </div>
+      <div class="nortification mb-3 position-relative">
+        <div class="nortifications-h">
+          <h6 class="font-17 font-400 light notification_title">Notification Heading</h6>
+          <h6 class="font-14 font-400 light mb-0">Notification Message</h6>
+        </div>
+        <h5 class="font-11 font-400 light">2 Hours ago</h5>
+      </div>
+    </div>
+  </div>
+  <!-- RIGHT SIDE END -->
+
+
+  <!-- MIDDLE CONTENT END -->
+
+
+</div>
+<!--DASHBOARD END -->
+
+
+<!-- Start Dashboard Check Out Modal -->
+
+<div class="modal fade" id="dash_checkout_modal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header apply_title">
+          <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Attendance 18 Jan, 2023
+          </h1>
+          <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fi fi-rr-cross close_icon"></i>
+          </button>
+        </div>
+        <div class="attendance_heading d-flex justify-content-between align-items-center">
+          <div class="">
+            <h3 class="attendance_title font-17 font-500  secondary text-center">Check in</h3>
+            <h4 class="font-17 font-600 text_small">09:03:24 AM</h4>
+          </div>
+          <div class="">
+            <h3 class="attendance_title font-17 font-500  secondary text-center">Duration</h3>
+            <h4 class="font-17 font-600 text_small">00:00 Hrs</h4>
+          </div>
+          <div class="">
+            <h3 class="attendance_title font-17 font-500  secondary text-center">Check Out</h3>
+            <h4 class="font-17 font-600 text_small">06:08:32 PM</h4>
+          </div>
+        </div>
+
+        <div class="attendance_image d-flex justify-content-between">
+          <img src="assets/images/temp_img/Options 01 _Selected.png">
+          <img src="assets/images/temp_img/Options 01 _Selected.png">
+        </div>
+
+        <div class="attendance_report">
+          <h4 class="sub-heading font-17 font-500 secondary">Report</h4>
+          <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+            placeholder="Start Typing....."></textarea>
+        </div>
+
+        <form class="attachment_file2 d-inline-flex align-items-center  position-relative">
+          <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+          <label for="fileupload" class="font-15 font-700 secondary text-white attachment_file_text">
+            <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
+            Attachments <span class="mx-0 ms-2 font-15 font-400 text-white">Assignment Files.zip</span></label>
+        </form>
+
+        <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+          <button type="button" class="cancel_modal_btn">Cancel</button>
+          <button type="button" class="apply_modal_btn">Apply</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- End Dashboard Check Out Modal -->
+
+<!-- Assignment  Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog position-relative assignment_modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 font-21 font-700 secondary modal_line position-relative"
+            id="exampleModalLabel">
+            Assignment - 1</h1>
+          <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fi fi-rr-cross close_modal"></i>
+          </button>
+          <button type="button" class="submit_buttons font-14 font-500 text-white" data-bs-toggle="modal"
+            data-bs-target="#submit_button">Submit</button>
+        </div>
+        <div class="">
+          <div class="assignment">
+            <div class="question_ans">
+              <h3 class="font-17 font-600">Question - 1</h3>
+              <h4 class="font-17 font-400">How would you reverse the order of elements in an array in Java without
+                using any built-in methods or additional data structures?</h4>
+            </div>
+            <div class="row advertisement">
+              <div class="col-md-3 bootstrap_cards">
+                <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
+                <div class="assinment_image video-img">
+                  <video src="assets/images/temp_img/pexels-max-fischer-5198159-3840x2160-50fps.mp4" autoplay
+                    controls height="" width="270"></video>
+                </div>
+              </div>
+              <div class="col-md-3 bootstrap_cards">
+                <h3 class="font-15 font-700  assignment_sub_heading">Image 1</h3>
+                <div class="assinment_image">
+                  <img src="assets/images/temp_img/modal.png" class="img-fluid">
+                </div>
+              </div>
+
+              <div class="col-md-3 bootstrap_cards">
+                <h3 class="font-15 font-700  assignment_sub_heading">Image 2</h3>
+                <div class="assinment_image">
+                  <img src="assets/images/temp_img/modal.png" class="img-fluid">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="assignment">
+            <h3 class="font-17 font-700 list_bottom1">Hints:-</h3>
+            <ul class="font-17 list_bottom mb-0">
+              <li>How would you reverse the order of elements in an array in Java without using any built-in methods
+                or additional data structures?</li>
+              <li>How would you reverse the order of elements in an array in Java without using any built-in methods
+                or additional data structures?</li>
+              <li>How would you reverse the order of elements in an array in Java without using any built-in methods
+                or additional data structures?</li>
+            </ul>
+          </div>
+
+          <form class="attachment_file1 d-inline-flex align-items-center  position-relative">
+            <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+            <label for="fileupload" class="font-15 font-700 secondary text-white attachment_file_text">
+              <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
+              Attachments <span class="mx-0 ms-2 font-15 font-400 text-white">Assignment Files.zip</span></label>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end Assignment  modal -->
+
+
+<!-- Dashboard Updates  Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog position-relative assignment_modal" style="width: 514px;">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 font-17 font-600 secondary modal_line position-relative mb-2"
+            id="exampleModalLabel1">
+            Submission Details</h1>
+          <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -15%;">
+            <i class="fi fi-rr-cross close_modal"></i>
+          </button>
+          <h3 class="text_light_blue font-15 font-500">Reviewing</h3>
+        </div>
+        <div class="">
+          <div class="assignment">
+            <div class="question_ans">
+              <h3 class="font-17 font-500 secondary">Report</h3>
+              <ol class="ps-3">
+                <li class="font-17 font-400 text_dark">as and concepts into visually engaging infographics and
+                  illustrations.</li>
+                <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li>
+              </ol>
+            </div>
+            <form class="attachment_file1 d-inline-flex align-items-center  position-relative attechment_file">
+              <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+              <label for="fileupload" class="font-15 font-400 text_gray  attachment_file_text">
+                <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
+                File_name.pdf</label>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end dashboard updates modal -->
+
+  <!-- Modal submit button start -->
+  <div class="modal fade" id="submit_button" tabindex="-1" aria-labelledby="submit_button" aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="modal-header apply_title">
+            <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Submit Assignment</h1>
+            <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close">
+              <i class="fi fi-rr-cross close_icon"></i>
+            </button>
+          </div>
+          <div class="form_input">
+            <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
+            <div class="">
+              <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+                placeholder="Input Text Here"></textarea>
+            </div>
+          </div>
+
+          <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading</h4>
+          <form class="select_file d-flex align-items-center  file position-relative">
+            <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+            <label for="fileupload" class="font-15 font-400 secondary w-75">Select A File</label>
+            <button type="button" class="submit_btn0 ms-auto">
+              <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i><a type="btn" value=""
+                class=" font-15 font-400 text-white">Upload File</a>
+            </button>
+          </form>
+
+          <div class="file_option">
+            <div class=" d-flex file_name">
+              <i class="fi fi-rr-paperclip-vertical secondary add_more"></i>
+              <i class="fi fi-rr-trash secondary delete"></i>
+              <h3 class="font-15 font-400 dark mx-1 mb-0">File_name.pdf</h3>
+            </div>
+
+          </div>
+
+
+          <div class="apply_modal_buttons d-inline-flex justify-content-between align-items-center">
+            <button type="button" class="cancel_modal_btn">Save Draft</button>
+            <button type="button" class="apply_modal_btn">Submit</button>
+          </div>
+
         </div>
       </div>
     </div>
