@@ -137,10 +137,7 @@
     // $("#up-arrow").toggle();
     // });
 
-    
-
-
-
+  
 
       $(document).ready(function () {
         $(".right_menu_toggle").click(function () {
@@ -176,12 +173,64 @@
   };
 
   // Create the chart using Chart.js
-  const ctx = document.getElementById('chart1').getContext('2d');
+  const ctx1 = document.getElementById('chart1').getContext('2d');
   new Chart(ctx, {
     type: 'bar',
     data: options.data,
     options: options.options,
   });
+
+
+  const ctx = document.getElementById('myChart1');
+
+new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+const ctx2 = document.getElementById('myChart2');
+
+new Chart(ctx2, {
+  type: 'bar',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+$(document).ready(function () {
+          $(".right_menu_toggle").click(function () {
+            $(".main").toggleClass("shrink");
+            $(".sidepanel").toggleClass("show");
+            $(".right_menu_toggle").toggleClass("close");
+            $(".porfile_sec").toggleClass("hide");
+          });
+        });
 </script>
   </body>
 </html>

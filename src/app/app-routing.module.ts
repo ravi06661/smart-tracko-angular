@@ -16,7 +16,6 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AdminJobAlertComponent } from './admin/admin-job-alert/admin-job-alert.component';
 import { AdminNewsAndEventComponent } from './admin/admin-news-and-event/admin-news-and-event.component';
 import { AdminCoursesComponent } from './admin/admin-courses/admin-courses.component';
-import { AdminTaskAndAssignmentsComponent } from './admin/admin-task-and-assignments/admin-task-and-assignments.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { StudentGuardGuard } from './student-guard.guard';
 import { AdminGuardGuard } from './admin-guard.guard';
@@ -32,6 +31,10 @@ import { NewsandEventsDescriptionComponent } from './pages/newsand-events-descri
 import { CheckincheckoutComponent } from './pages/checkincheckout/checkincheckout.component';
 import { ChapterComponent } from './pages/chapter/chapter.component';
 import { QuestionsComponent } from './pages/questions/questions.component';
+import { AdminAssignmentsComponent } from './admin/admin-assignments/admin-assignments.component';
+import { AdminCreateAssignmentsComponent } from './admin/admin-create-assignments/admin-create-assignments.component';
+import { AdminEditAssignmentsComponent } from './admin/admin-edit-assignments/admin-edit-assignments.component';
+import { AdminAttendanceComponent } from './admin/admin-attendance/admin-attendance.component';
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
@@ -59,10 +62,14 @@ const routes: Routes = [
   {
     path:'admin',component:AdminPanelComponent,canActivate:[AdminGuardGuard],children:[
       {path:'',component:AdminDashboardComponent,pathMatch:'full'},
+      {path:'assignments',component:AdminAssignmentsComponent,pathMatch:'full'},
+      {path:'createassignments',component:AdminCreateAssignmentsComponent,pathMatch:'full'},
+      {path:'editassignments',component:AdminEditAssignmentsComponent,pathMatch:'full'},
+      {path:'attendance',component:AdminAttendanceComponent,pathMatch:'full'},
       {path:'jobalert',component:AdminJobAlertComponent,pathMatch:'full'},
       {path:'newsAndEvent',component:AdminNewsAndEventComponent,pathMatch:'full'},
       {path:'mycourse',component:AdminCoursesComponent,pathMatch:'full'},
-      {path:'taskAndAssignment',component:AdminTaskAndAssignmentsComponent,pathMatch:'full'},
+      
     ]
   },
   {path:'**',component:NotFoundComponent,pathMatch:'full'}

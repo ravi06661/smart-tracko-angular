@@ -35,11 +35,14 @@ export class CheckincheckoutComponent {
   formattedDate: string | null | undefined;
   formattedCheckInTime: any
   formattedCheckOutTime: any
+  message:string = '';
 
 
 
   BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/workReport/';
+
+  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
+
 
 
   check: boolean = false;
@@ -61,7 +64,7 @@ export class CheckincheckoutComponent {
     //Timer API ---> get formattedDate
     const datePipe = new DatePipe('en-US');
     this.clock.subscribe((date: Date) => {
-      this.formattedDate = datePipe.transform(date, 'EEEE, MMMM d');
+      this.formattedDate = datePipe.transform(date, 'EEEE, MMM d');
     });
 
     //Student Attendance API
@@ -72,7 +75,9 @@ export class CheckincheckoutComponent {
   public getStudentAttendance() {
     this.studentService.getTodayAttendance(this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
-        this.attendance = data.Attendance;
+        this.message = data.message;
+        if(data.message=='SUCCESS'){
+          this.attendance = data.Attendance;
         this.checkInTime = this.attendance.checkInTime
         this.checkOutTime = this.attendance.checkOutTime
         if (this.attendance.checkInTime != null) {
@@ -93,6 +98,7 @@ export class CheckincheckoutComponent {
           this.timer = duration.asSeconds();
           this.startTimer();
         }
+      }
       },
     });
   }
@@ -131,5 +137,6 @@ export class CheckincheckoutComponent {
   public changeTimeFormat(time: any) {
     return moment(time, "HH:mm:ss").format("hh:mm A");
   }
+
 
 }
