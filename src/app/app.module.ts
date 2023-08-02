@@ -36,7 +36,6 @@ import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar.com
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AdminJobAlertComponent } from './admin/admin-job-alert/admin-job-alert.component';
 import { AdminNewsAndEventComponent } from './admin/admin-news-and-event/admin-news-and-event.component';
-import { AdminTaskAndAssignmentsComponent } from './admin/admin-task-and-assignments/admin-task-and-assignments.component';
 import { AdminCoursesComponent } from './admin/admin-courses/admin-courses.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
@@ -54,6 +53,11 @@ import { NewsandEventsDescriptionComponent } from './pages/newsand-events-descri
 import { CheckincheckoutComponent } from './pages/checkincheckout/checkincheckout.component';
 import { ChapterComponent } from './pages/chapter/chapter.component';
 import { QuestionsComponent } from './pages/questions/questions.component';
+import { AdminAssignmentsComponent } from './admin/admin-assignments/admin-assignments.component';
+import { AdminCreateAssignmentsComponent } from './admin/admin-create-assignments/admin-create-assignments.component';
+import { AdminEditAssignmentsComponent } from './admin/admin-edit-assignments/admin-edit-assignments.component';
+import { AdminAttendanceComponent } from './admin/admin-attendance/admin-attendance.component';
+
 
 
 
@@ -79,7 +83,6 @@ import { QuestionsComponent } from './pages/questions/questions.component';
     AdminDashboardComponent,
     AdminJobAlertComponent,
     AdminNewsAndEventComponent,
-    AdminTaskAndAssignmentsComponent,
     AdminCoursesComponent,
     AdminLoginComponent,
     NotFoundComponent,
@@ -95,6 +98,11 @@ import { QuestionsComponent } from './pages/questions/questions.component';
     CheckincheckoutComponent,
     ChapterComponent,
     QuestionsComponent,
+    AdminAssignmentsComponent,
+    AdminCreateAssignmentsComponent,
+    AdminEditAssignmentsComponent,
+    AdminAttendanceComponent,
+   
        
  
   ],
