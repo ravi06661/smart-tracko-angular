@@ -2,17 +2,21 @@ import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UtilityServiceService } from './utility-service.service';
+import { Profile } from '../entity/profile';
+import { profile } from 'console';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentService {
 
-  BASE_URL=this.utilityService.getBaseUrl();
-  studentUrl=this.BASE_URL+'/student';
-  TIME_URL=this.utilityService.getTimeUrl();
+  BASE_URL = this.utilityService.getBaseUrl();
+  studentUrl = this.BASE_URL + '/student';
+  TIME_URL = this.utilityService.getTimeUrl();
+  profileData: Profile = new Profile();
 
-  constructor(private http: HttpClient,private utilityService:UtilityServiceService, private datepipe: DatePipe) { }
+  constructor(private http: HttpClient, private utilityService: UtilityServiceService, private datepipe: DatePipe, public loginService: LoginService) { }
 
   public getTodayAttendance(studentId: number) {
     return this.http.get(`${this.studentUrl}/getTodayAttendance/${studentId}`);
@@ -29,7 +33,7 @@ export class StudentService {
     }
     return attendance;
   }
-  
+
   public getToken() {
     let token = localStorage.getItem('token')
     return token;
@@ -39,17 +43,37 @@ export class StudentService {
     let joiningDate = this.datepipe.transform("2022-08-01", "yyyy-MM-dd");
     return this.http.get(`${this.studentUrl}/getStudentCheckInCheckOutHistory?startDate=${joiningDate}&endDate=${currentDate}&limit=0&offset=30`)
   }
-  
+
   public getAttendanceFilterData(monthNo: number) {
     return this.http.get(`${this.studentUrl}/studentAttendanceMonthFilter?monthNo=${monthNo}`)
   }
 
-  public getCalenderData(studentId:number,month:number,year:number){
-   var params = new HttpParams();
-   params=params.append('id',studentId.toString());
-   params=params.append('month',month.toString());
-   params=params.append('year',year.toString());
-    return this.http.get(`${this.studentUrl}/getStudentCalenderData`,{params});
+  public getCalenderData(studentId: number, month: number, year: number) {
+    var params = new HttpParams();
+    params = params.append('id', studentId.toString());
+    params = params.append('month', month.toString());
+    params = params.append('year', year.toString());
+    return this.http.get(`${this.studentUrl}/getStudentCalenderData`, { params });
   }
 
+  public getStudentProfileData() {
+
+    if (this.profileData.id == 0) {
+      let id = this.loginService.getStudentId();
+      this.http.get(`${this.studentUrl}/getStudentData/${id}`).subscribe(
+        (data: any) => {
+          this.profileData.name = data.studentName;
+          this.profileData.profilePic = data.profilePic;
+          this.profileData.course = data.course;
+          this.profileData.id = data.id
+          console.log(this.profileData)
+        }, (error) => {
+          console.log(error);
+        }
+      )
+      return this.profileData
+    } else {
+      return this.profileData;
+    }
+  }
 }
