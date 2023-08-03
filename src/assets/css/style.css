@@ -2903,19 +2903,19 @@ table tr td{
 }
 
 .main-inner {
-  height: 300px;
+  min-height: 400px;
   margin-bottom: 20px;
 }
 
 .admin-dash-attendance,
 .admin-dash-fees {
   width: 25%;
-  min-height: 250px;
+  min-height: 400px;
 }
 
 .admin-dash-assignment {
   width: 50%;
-  min-height: 250px;
+  min-height: 400px;
 }
 
 .admin-title:before {
@@ -2933,7 +2933,7 @@ table tr td{
 .attendance-area,.assignment-area,
 .fees-area {
   width: 100%;
-  min-height: 250px;
+  min-height: 400px;
   border-radius: 12px;
   background: #EDF9FB;
   padding: 12px;
