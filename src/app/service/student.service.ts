@@ -5,6 +5,9 @@ import { UtilityServiceService } from './utility-service.service';
 import { Profile } from '../entity/profile';
 import { profile } from 'console';
 import { LoginService } from './login.service';
+import { LeaveService } from './leave.service';
+import { TodayLeavesRequest } from '../entity/today-leaves-request';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +85,12 @@ export class StudentService {
   }
   public getStudentAtiveLeaves() {
     return this.http.get(`${this.studentUrl}/getTotalStudentInLeaves`);
+  }
+  public getTodayLeavesRequest(): Observable<TodayLeavesRequest> {
+    return this.http.get<TodayLeavesRequest>(`${this.studentUrl}/getTotalStudentTodaysInLeaves`);
+  }
+  public approveStudentLeaveReqeust(studentId:number){
+    alert(studentId)
+     return this.http.put(`${this.studentUrl}/approveStudentLeaveReqeust/${studentId}`,null);
   }
 }
