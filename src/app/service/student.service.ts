@@ -76,4 +76,11 @@ export class StudentService {
       return this.profileData;
     }
   }
+
+  public getTodayStudentAbsentData() {
+    return this.http.get(`${this.studentUrl}/getTotalTodayAbsentStudent`);
+  }
+  public getStudentAtiveLeaves() {
+    return this.http.get(`${this.studentUrl}/getTotalStudentInLeaves`);
+  }
 }
