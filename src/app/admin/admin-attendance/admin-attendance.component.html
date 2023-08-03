@@ -103,14 +103,13 @@
             <tbody class="bg-light">
               <tr *ngFor="let obj of absentData">
                 <td class="d-flex align-items-center" style="gap:5px;">
-                 <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
+                  <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid image">
                   <h5 class="font-13 font-500 mb-0">{{obj.fullName}}<br>
                     <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                   </h5>
                 </td>
                 <td>{{obj.mobile}}</td>
               </tr>
-
             </tbody>
           </table>
         </div>
@@ -130,7 +129,7 @@
             <tbody class="bg-light">
               <tr *ngFor="let obj of leavesData">
                 <td class="d-flex align-items-center" style="gap:5px;">
-                  <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
+                  <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid image">
                   <h5 class="font-13 font-500 mb-0">{{obj.name}}<br>
                     <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                   </h5>
@@ -159,92 +158,23 @@
               </tr>
             </thead>
             <tbody class="bg-light">
-              <tr>
+              <tr *ngFor="let obj of leavesRequestData">
                 <td class="d-flex align-items-center" style="gap:5px;">
-                  <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                    <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                  <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid image">
+                  <h5 class="font-13 font-500 mb-0">{{obj.fullName}} <br>
+                    <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                   </h5>
                 </td>
                 <td>
-                  <p class="mb-0">CL 4 Days </p>
-                  <p class="mb-0">26 Jan, 2023 - 30 Jan, 2023</p>
-                  <p class="mb-0">For Brother’s Wedding</p>
+                  <p class="mb-0">CL {{obj.leaveDuration}} Days </p>
+                  <p class="mb-0">{{ obj.leaveDate }} - {{ obj.leaveEndDate }}</p>
+                  <p class="mb-0">For {{obj.leaveReason}}</p>
                 </td>
                 <td>
-                  <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center">Approved</h3>
+                  <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center" (click)="approveStudentLeaveReqeust(obj.studentId)">Approved</h3>
                   <h5 class="warning font-13 font-500 mb-0 text-center">Deny</h5>
                 </td>
               </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                    <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                  </h5>
-                </td>
-                <td>
-                  <p class="mb-0">CL 4 Days </p>
-                  <p class="mb-0">26 Jan, 2023 - 30 Jan, 2023</p>
-                  <p class="mb-0">For Brother’s Wedding</p>
-                </td>
-                <td>
-                  <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center">Approved</h3>
-                  <h5 class="warning font-13 font-500 mb-0 text-center">Deny</h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                    <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                  </h5>
-                </td>
-                <td>
-                  <p class="mb-0">CL 4 Days </p>
-                  <p class="mb-0">26 Jan, 2023 - 30 Jan, 2023</p>
-                  <p class="mb-0">For Brother’s Wedding</p>
-                </td>
-                <td>
-                  <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center">Approved</h3>
-                  <h5 class="warning font-13 font-500 mb-0 text-center">Deny</h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                    <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                  </h5>
-                </td>
-                <td>
-                  <p class="mb-0">CL 4 Days </p>
-                  <p class="mb-0">26 Jan, 2023 - 30 Jan, 2023</p>
-                  <p class="mb-0">For Brother’s Wedding</p>
-                </td>
-                <td>
-                  <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center">Approved</h3>
-                  <h5 class="warning font-13 font-500 mb-0 text-center">Deny</h5>
-                </td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                    <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                  </h5>
-                </td>
-                <td>
-                  <p class="mb-0">CL 4 Days </p>
-                  <p class="mb-0">26 Jan, 2023 - 30 Jan, 2023</p>
-                  <p class="mb-0">For Brother’s Wedding</p>
-                </td>
-                <td>
-                  <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center">Approved</h3>
-                  <h5 class="warning font-13 font-500 mb-0 text-center">Deny</h5>
-                </td>
-              </tr>
-
             </tbody>
           </table>
         </div>
