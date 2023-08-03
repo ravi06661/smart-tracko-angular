@@ -65,6 +65,7 @@ import { AdminCreateNewsAndEventsComponent } from './admin/admin-create-news-and
 import { AnnouncementsComponent } from './admin/announcements/announcements.component';
 import { CreateAnnouncementsComponent } from './admin/create-announcements/create-announcements.component';
 import { AdminstudentComponent } from './admin/adminstudent/adminstudent.component';
+import { StudentProfileComponent } from './admin/student-profile/student-profile.component';
 
 
 
@@ -118,6 +119,7 @@ import { AdminstudentComponent } from './admin/adminstudent/adminstudent.compone
     AnnouncementsComponent,
     CreateAnnouncementsComponent,
     AdminstudentComponent,
+    StudentProfileComponent,
    
        
  
