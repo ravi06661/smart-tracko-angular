@@ -140,14 +140,7 @@
 
   
 
-      $(document).ready(function () {
-        $(".right_menu_toggle").click(function () {
-          $(".main").toggleClass("shrink");
-          $(".sidepanel").toggleClass("show");
-          $(".right_menu_toggle").toggleClass("close");
-          $(".porfile_sec").toggleClass("hide");
-        });
-      });
+     
       $(".fee_structure").hide();
       $(".my_course").click(function () {
         $(".fee_structure").toggle();
@@ -224,14 +217,23 @@ new Chart(ctx2, {
   }
 });
 
-$(document).ready(function () {
-          $(".right_menu_toggle").click(function () {
-            $(".main").toggleClass("shrink");
-            $(".sidepanel").toggleClass("show");
-            $(".right_menu_toggle").toggleClass("close");
-            $(".porfile_sec").toggleClass("hide");
-          });
-        });
+
+
+        // Show/Hide Questions js
+        function showQuestion() {
+            $("#hideQuestion").show();
+            $(".show_less").show();
+            $(".show_more").hide();
+        };
+        function hideQuestion() {
+            $("#hideQuestion").hide();
+            $(".show_less").hide();
+            $(".show_more").show();
+        };
+
+        $('#edit_icon').click(function () {
+    $(".enabled_inp").removeAttr('disabled');
+});
 </script>
   </body>
 </html>
