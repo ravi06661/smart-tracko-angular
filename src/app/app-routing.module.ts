@@ -42,6 +42,7 @@ import { AdminCreateNewsAndEventsComponent } from './admin/admin-create-news-and
 import { AnnouncementsComponent } from './admin/announcements/announcements.component';
 import { CreateAnnouncementsComponent } from './admin/create-announcements/create-announcements.component';
 import { AdminstudentComponent } from './admin/adminstudent/adminstudent.component';
+import { AdminCreateTaskComponent } from './admin/admin-create-task/admin-create-task.component';
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
@@ -73,6 +74,7 @@ const routes: Routes = [
       {path:'createassignments',component:AdminCreateAssignmentsComponent,pathMatch:'full'},
       {path:'editassignments',component:AdminEditAssignmentsComponent,pathMatch:'full'},
       {path:'task',component:AdminTaskComponent,pathMatch:'full'},
+      {path:'createtask',component:AdminCreateTaskComponent,pathMatch:'full'},
       {path:'edittask',component:AdminEditTaskComponent,pathMatch:'full'},
       {path:'attendance',component:AdminAttendanceComponent,pathMatch:'full'},
       {path:'jobalert',component:AdminJobAlertComponent,pathMatch:'full'},
