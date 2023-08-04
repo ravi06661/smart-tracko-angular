@@ -16,6 +16,7 @@ export class NewsandeventsComponent implements OnInit {
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/newsEventImage/';
 
+
   newsAndEvents: NewsAndEvent[] = [];
   news: NewsAndEvent[] = []
   totalNewsAndEvent: number = 0;
@@ -23,6 +24,7 @@ export class NewsandeventsComponent implements OnInit {
   createdDate: any;
   dayAgoForChild:number=0;
   constructor(private newsAndEventService: NewsEventServiceService, private utilityService: UtilityServiceService, private datePipe: DatePipe) { }
+
 
   ngOnInit(): void {
     this.getAllNewsAndEvents(0, 8);
@@ -64,3 +66,4 @@ export class NewsandeventsComponent implements OnInit {
      
    }
 }
+

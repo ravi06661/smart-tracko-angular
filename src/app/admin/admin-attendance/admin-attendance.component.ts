@@ -66,6 +66,8 @@ export class AdminAttendanceComponent implements OnInit {
       ]
     };
   }
+
+
   ngOnInit(): void {
     this.getTotalStudentTodayLeavesRequest();
     this.getAbsents();

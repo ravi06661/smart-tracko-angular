@@ -18,6 +18,10 @@ export class NewsandEventsDescriptionComponent implements OnInit {
  newsAndEvents:NewsAndEvent=new NewsAndEvent
   totalNewsAndEvent:number=0;
   id:number=0
+  createdDate:Date | undefined
+   
+  
+
   constructor (private activatedRoute: ActivatedRoute,private newsAndEventService:NewsEventServiceService,private utilityService:UtilityServiceService) {}
 
   ngOnInit(): void {
@@ -29,4 +33,12 @@ export class NewsandEventsDescriptionComponent implements OnInit {
       }
     })
   }
+
+
+  // getDaysDifference(): number {
+  //   const currentDate = new Date();
+  //   const differenceInTime = currentDate.getTime() - this.createdDate.getTime();
+  //   const differenceInDays = differenceInTime / (1000 * 3600 * 24); // Convert milliseconds to days
+  //   return Math.floor(differenceInDays); // Round down to the nearest integer
+  // }
 }
