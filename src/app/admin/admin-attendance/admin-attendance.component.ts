@@ -48,10 +48,11 @@ export class AdminAttendanceComponent implements OnInit {
       }
     )
   }
-  public approveStudentLeaveReqeust(id: number) {
-    this.studentService.approveStudentLeaveReqeust(id).subscribe(
+  public approveStudentLeaveReqeust(id: number,status:string) {
+    this.studentService.approveStudentLeaveReqeust(id,status).subscribe(
       (data: any) => {
         this.getTotalStudentTodayLeavesRequest();
+        this.getActiveLeaves();
       }, (error) => {
       }
     )
