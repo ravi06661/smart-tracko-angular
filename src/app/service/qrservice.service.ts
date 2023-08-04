@@ -59,4 +59,9 @@ export class QRServiceService {
     return this.http.delete(`${this.qrUrl}/webLogout`);
   }
 
+  public isWebLoggedIn(){
+    let key = localStorage.getItem('key');
+    return this.http.get(`${this.qrUrl}/getLinkedDeviceByUuid?key=${key}`);
+  }
+
 }

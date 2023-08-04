@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SocketServiceService } from 'src/app/service/socket-service.service';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(){}
-
-
+  constructor(private socketService:SocketServiceService){}
   ngOnInit(): void {
-    console.log(localStorage.getItem('key'));
+    this.socketService.connect();
   }
-
+  
 }

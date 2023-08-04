@@ -3,6 +3,8 @@ import { JavaScriptLoaderService } from './service/java-script-loader.service';
 import { LoginService } from './service/login.service';
 import { Router } from '@angular/router';
 import { DisableRightClickService } from './service/disable-right-click.service';
+import { SocketServiceService } from './service/socket-service.service';
+import { QRServiceService } from './service/qrservice.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +16,9 @@ export class AppComponent {
 
   constructor(private jsLoader: JavaScriptLoaderService,private rightClickDisable: DisableRightClickService,
     private loginService:LoginService,
-    private router:Router) {}
+    private router:Router,
+    private socketService:SocketServiceService,
+    private qrService:QRServiceService) {}
 
   ngOnInit(): void {
     // this.rightClickDisable.disableRightClick();
@@ -27,13 +31,23 @@ export class AppComponent {
           this.router.navigate(['login']);
         }
       }
-      if(this.loginService.isLoggedIn()&&this.loginService.getRole()=='STUDENT'){
-        if(!this.loginService.isTokenExpired())
-          this.router.navigate(['student']);
-        else{
-          this.loginService.logout();
-          this.router.navigate(['']);
-      }
-    }
+      this.qrService.isWebLoggedIn().subscribe({
+        next:(data:any)=>{
+          if(data.loginDevice == null){
+            this.loginService.logout();
+            this.router.navigate(['']);
+          }else{
+            if(this.loginService.isLoggedIn()&&this.loginService.getRole()=='STUDENT'){
+              if(!this.loginService.isTokenExpired())
+                this.router.navigate(['student']);
+              else{
+                this.loginService.logout();
+                this.router.navigate(['']);
+            }
+          }
+          }
+        }
+      })
+      
   }
 }
