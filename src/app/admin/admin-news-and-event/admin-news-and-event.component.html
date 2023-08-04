@@ -1,105 +1,62 @@
-<div id="main" class="main job_alertpage">
-    <div class="row">
-      <div class="col-12 heading_dashboard">
-        <div class="heading">
-          <h4 class="card-title font-30 font-500 secondary mb-0">News And Event</h4>
-        </div>
-        <div class="data_table">
-          <div class="row mb-3">
-            <div class="col-md-6">
-              
-              
+<div id="main" class="main main_news">
+  <div class="profile d-flex">
+    <h1 class="font-27 font-700 secondary mb-0">News & Events</h1>
+    <app-profile-bar></app-profile-bar>
+  </div>
+
+  <div class="scroll_section">
+
+    <div class="task_assignment mt-0">
+      <h3 class="title font-21 font-600 secondary position-relative">News</h3>
+      <div class="news_events">
+        <div class="row">
+          <div class="col-md-3 bootstrap_cards">
+              <div class="news text_dark">
+                <img src="assets/images/temp_img/news.png">
+                <div class="news_text position-relative">
+              <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" id="meat_dot"></i>
+              <div class="meat-dot-dropdown" style="display: none;">
+                <a routerLink="/admin/createnewsAndEvent" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
+                <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
+              </div>
+                  <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
+                  <h4 class="font-19 font-500 small_text">Breaking News</h4>
+                  <h5 class="font-14 font-500 small_text">News Is Broken</h5>
+                </div>
+              </div>
+          </div>
+          <div class="col-md-3 bootstrap_cards">
+            <div class="news text_dark">
+              <img src="assets/images/temp_img/news.png">
+              <div class="news_text position-relative">
+            <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
+                <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
+                <h4 class="font-19 font-500 small_text">Breaking News</h4>
+                <h5 class="font-14 font-500 small_text">News Is Broken</h5>
+              </div>
             </div>
-            <div class="col-md-4 ms-auto d-flex justify-content-end align-items-center serch_box">
-              <label class="d-flex align-items-center search dark">Search:<input type="search"
-                  class="form-control form-control-sm" placeholder="" aria-controls="ShowUser" name="search" ngModel (ngModelChange)="searchNewsAndEvents($event)">
-              </label>
-              <button type="button" class="add_btn d-flex justify-content-center align-items-center"
-                data-bs-toggle="modal" data-bs-target="#exampleModal">Add</button>
+        </div>
+        <div class="col-md-3 bootstrap_cards">
+          <div class="news text_dark">
+            <img src="assets/images/temp_img/news.png">
+            <div class="news_text position-relative">
+          <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
+              <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
+              <h4 class="font-19 font-500 small_text">Breaking News</h4>
+              <h5 class="font-14 font-500 small_text">News Is Broken</h5>
             </div>
           </div>
+      </div>
 
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">S. No.</th>
-                <th scope="col">Image</th>
-                <th scope="col">Title</th>
-                <th scope="col">Short Description</th>
-                <th scope="col">Date</th>
-                <th scope="col">Active</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let newsAndEvent of newsAndEvents;let i=index">
-                <th scope="row">{{i+1}}</th>
-                <td><img [src]="imageUrl+newsAndEvent.image" width="48" height="48"></td>
-                <td>{{newsAndEvent.title}}</td>
-                <td>{{newsAndEvent.shortDescription}}</td>
-                <td>{{newsAndEvent.createdDate|date:'dd-MM-YYYY'}}</td>
-                <td><label class="switch">
-                    <input type="checkbox" [checked]="newsAndEvent.isActive" (click)="activeAndInActive(newsAndEvent.id)">
-                    <span class="slider round"></span>
-                  </label></td>
-                <td class="action">
-                  <i class="fi fi-rr-pencil warning"></i>
-                  <i class="fi fi-rr-trash warning mx-0 ms-2" (click)="deleteNewsAndEvents(newsAndEvent.id)"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <mat-paginator *ngIf="totalNewsAndEvents>10"
-            [length]="totalNewsAndEvents"
-            [pageSize]="size"
-            (page)="pageChange($event)">
-            >    
-          </mat-paginator>
+     
         </div>
       </div>
-    </div>
-  </div>
+    </div> 
+  </div>    
+</div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-modal="true"
-role="dialog">
-<div class="modal-dialog position-relative leave_modal">
-  <div class="modal-content">
-    <div class="modal-body p-0">
-      <div class="modal-header apply_title">
-        <h4 class="card-title font-21 font-600 secondary">Add</h4>
-        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
-          <i class="fi fi-rr-cross close_icon"></i>
-        </button>
-      </div>
-      <div class="POPUP">
-        <div class="mb-3">
-          <label class="form-label danger font-17 font-500 mb-2" for="reasonType">Reason Type</label>
-          <select class="form-select" id="reasonType" name="reasonType">
-            <option value="">select input type</option>
-            <option value="Safety">Safety</option>
-            <option value="HelpCenterQueries">HelpCenterQueries</option>
-            <option value="ContactUs">ContactUs</option>
-            <option value="Dispute">Dispute</option>
-          </select>
-        </div>
-        <div class="mb-3">
-          <label class="form-label danger font-17 font-500 mb-2" for="reasonUserType">Reason User Type</label>
-          <select class="form-select valid" id="reasonUserType" name="reasonUserType" aria-invalid="false">
-            <option value="Passenger">Passenger</option>
-            <option value="Driver">Driver</option>
-          </select>
-        </div>
-        <div class="form_input mb-3">
-          <label for="inputEmail4" class="heading_name font-17 font-500  danger mb-2">Heading</label>
-          <input type="email" class="form-control input_text" id="inputEmail4" placeholder="Input Text Here">
-        </div>
-        <div class="mb-3">
-          <label class="form-label danger font-17 font-500 mb-2" for="reason">Reasons</label>
-          <textarea class="form-control" id="reason" name="reason"></textarea>
-        </div>
-        <button type="button" class="add_item">Save</button>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
+<!-- MIDDLE CONTENT END -->
+
+<!-- RIGHT SIDE START-->
+<app-right-side-bar></app-right-side-bar>
+<!-- RIGHT SIDE END -->

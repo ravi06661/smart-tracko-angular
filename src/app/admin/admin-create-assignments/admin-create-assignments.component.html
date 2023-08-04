@@ -1,0 +1,147 @@
+<div id="main" class="main dashboard_page">
+    <div class="profile d-flex">
+
+        <div class="profile_top_heading d-flex gap_24">
+            <h1 class="font-27 font-700 secondary mb-0">Create Assignment</h1>
+            <a routerLink="/admin/assignments">
+            <button class="top_profile_sec_btn font-14 font-500">Done</button>
+            </a>
+        </div>
+
+       <app-profile-bar></app-profile-bar>
+    </div>
+
+    <!-- DASHBOARD START -->
+
+    <div class="scroll_dashboard">
+
+
+        <div class="assignment-stats">
+            <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Assignment Details</h3>
+            <form action="" class="mb_24">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="" class="mb_6 font-17 font-500 secondary">Assignment Name</label>
+                        <div class="input_icon position-relative">
+                            <input type="text" id="" name="" class="form-control input_text gray-input-bg"
+                                placeholder="Day 1">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
+                        <div class="input_icon position-relative">
+                            <input type="text" id="" name="" class="form-control input_text gray-input-bg"
+                                placeholder="Mern Stack">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="" class="mb_6 font-17 font-500 secondary">Subject</label>
+                        <div class="input_icon position-relative">
+                            <input type="text" id="" name="" class="form-control input_text gray-input-bg"
+                                placeholder="Core Java">
+                        </div>
+                    </div>
+
+
+                </div><!-- row -->
+            </form>
+            <!-- assignment task start -->
+            <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Assignment Details</h3>
+            <div class="row">
+                <div class="col-md-4 ">
+                    <div class="admin-task-card d-flex">
+                        <div class="task-card-right">
+                            <h6 class="font-13 font-500 secondary">Task no.1</h6>
+                            <h5 class="font-15 font-500 text_dark">Hello World! in Java, “Hello World!” in Java
+                            </h5>
+                            <p class="font-13 font-400 text_gray">0 Questions</p>
+                        </div>
+                        <div class="task-card-left-icon">
+                            <a href="edit_taskandassignment.html">
+                           <i class="fi fi-rr-edit secondary font-24"></i>
+                        </a>
+                            <h5 data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash delete-icon-color font-24"></i></h5>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4 add_task">
+                    <div class="d-flex align-items-center">
+                        <i class="fi fi-rr-plus-small warning font-36"></i>
+                        <h5 class="font-17 font-500 warning">Add Task</h5>
+                    </div>
+                </div>
+            </div><!-- row -->
+            <!-- assignment task end -->
+        </div>
+
+        <div class="row my-5">
+            <div class="col-md-4 ">
+                <div class="create_task_modal_box">
+                    <div class="input_icon position-relative">
+                        <input type="text" id="" name="" class="form-control input_text"
+                            placeholder="Enter Task Name">
+                    </div>
+                    <button
+                        class="light-btn-secondary font-13 font-500 d-flex align-items-center">Create</button>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="create_task_modal_box">
+
+                    <h5 class="text_dark font-15 font-400 text-center mb-0">Hello World! in Java</h5>
+                    <button
+                        class="main_btn_secondary font-13 font-500 d-flex align-items-center">Create</button>
+                </div>
+            </div>
+
+            <div class="col-md-4 ">
+                <div class="admin-task-card">
+                    <div class="task-card-right">
+                        <h6 class="font-13 font-500 secondary">Task no.1</h6>
+                        <h5 class="font-15 font-500 text_dark">Hello World! in Java, “Hello World!” in Java
+                        </h5>
+                        <p class="font-13 font-400 text_gray">0 Questions</p>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- row -->
+
+
+        <!-- DASHBOARD END -->
+
+        <!-- RIGHT SIDE START-->
+        <app-right-side-bar></app-right-side-bar>
+        <!-- RIGHT SIDE END -->
+
+
+        <!-- MIDDLE CONTENT END -->
+
+
+    </div>
+    <!--DASHBOARD END -->
+
+      <!-- Modal Delete Modal Start -->
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+<div class="modal-dialog position-relative leave_modal">
+<div class="modal-content">
+<div class="modal-body">
+  <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -23%;">
+    <i class="fi fi-rr-cross close_icon"></i>
+  </button>
+
+  <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
+  <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+    <a routerLink="/admin/editassignments">
+      <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes, delete</button>
+    </a>
+    <a routerLink="/admin/editassignments">
+      <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+    </a>
+  </div>
+
+</div>
+</div>
+</div>
+</div>

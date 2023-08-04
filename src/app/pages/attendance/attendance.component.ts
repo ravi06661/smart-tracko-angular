@@ -112,6 +112,7 @@ export class AttendanceComponent implements OnInit{
     this.leaveService.getLeavesFiterData(monthNo).subscribe({
       next:(res:any)=>{
         this.leavesList = res.LeaveData
+        
       }
     })
   }

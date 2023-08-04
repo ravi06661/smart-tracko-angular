@@ -2374,4 +2374,542 @@ a {
 }
 /* ============NEW PAGES CSS START==================== */
 
+/* ============NEW PAGES CSS START==================== */
+/* ============ADMIN DASHBOARD PAGES CSS START==================== */
+
+/* common css start */
+.active_txt_blue {
+  color: #4977CF;
+}
+.active_txt_orange {
+  color: #F0845D;
+}
+.active_txt_green {
+  color: #49CF9F;
+}
+.txt_color_purple {
+  color: #4A42DC;
+}
+.txt_color_light_green {
+  color: #169F6E;
+}
+.txt_color_yellow {
+  color: #BE8C1B;
+}
+.txt_color_orange {
+  color: #DC6B42;
+}
+.over_due_color{
+  color: #F07F66;
+}
+.pending_color{
+  color: #F6C453;
+}
+
+.mb_6{
+  margin-bottom: 6px;
+}
+.mb_12{
+  margin-bottom: 12px;
+}
+.mb_18{
+  margin-bottom: 18px;
+}
+.mb_20 {
+  margin-bottom: 20px;
+}
+.mb_24{
+  margin-bottom: 24px;
+}
+
+.gap_24{
+  gap: 24px;
+}
+.border-radius12{
+  border-radius: 12px;
+}
+.profile {
+  margin-bottom: 0;
+}
+
+.top_profile_sec_btn {
+  height: 38px;
+  background: #49BFCF;
+  color: #ffffff;
+  backdrop-filter: blur(9px);
+  border-radius: 12px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  line-height: 0;
+}
+table tr td{
+  font-size: 13px;
+  font-weight: 400;
+}
+.admin-table tr{
+  background: rgba(230, 246, 248, 0.20);
+}
+.gray-input-bg{
+  background: rgba(0, 0, 0, 0.05) !important;
+}
+.delete-icon-color{
+  color: #F07F66;
+}
+/* common css end */
+
+.Dashboard {
+  display: block !important;
+}
+
+.main-inner {
+  min-height: 400px;
+  margin-bottom: 20px;
+}
+
+.admin-dash-attendance,
+.admin-dash-fees {
+  width: 25%;
+  min-height: 400px;
+}
+
+.admin-dash-assignment {
+  width: 50%;
+  min-height: 400px;
+}
+
+.admin-title:before {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 112px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(238, 236, 250, 0.65) 0%, rgba(238, 236, 250, 0.13) 100%), #49bfcf;
+}
+
+/* Assignments  css start */
+.attendance-area,.assignment-area,
+.fees-area {
+  width: 100%;
+  min-height: 400px;
+  border-radius: 12px;
+  background: #EDF9FB;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.assignment-chart {
+  display: flex;
+  align-items: center;
+  margin: 8px 0px;
+}
+
+.chart-detail {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 30px;
+}
+
+.chart-detail p,
+.chart-detail-bottom p {
+  font-size: 14px;
+  font-weight: 400;
+  color: #515151;
+  margin-bottom: 0;
+}
+
+.chart-detail h2,
+.chart-detail-bottom h2 {
+  margin-bottom: 0;
+}
+
+.submitted-value h2 span,
+.pending-value h2 span {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 1px;
+  background: #8079FF;
+  margin-right: 5px;
+}
+
+.pending-value h2 span {
+  background: #F6C453;
+}
+
+.chart-detail-bottom {
+  display: flex;
+  justify-content: end;
+  gap: 70px;
+  margin: 0 30px;
+}
+
+.approve-value h2 span,
+.over-due-value h2 span {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  border-radius: 1px;
+  background: #49CF9F;
+  margin-right: 5px;
+}
+
+.over-due-value h2 span {
+  background: #F0845D;
+}
+
+.submitted {
+  background: #8079FF;
+  width: 60%;
+  height: 40px;
+}
+
+.approve {
+  background-color: #49CF9F;
+  width: 20%;
+  height: 40px;
+}
+
+.pending {
+  background: #F6C453;
+  width: 15%;
+  height: 40px;
+
+}
+
+.our_due {
+  background: #F0845D;
+  width: 5%;
+  height: 40px;
+}
+
+.collect-circle {
+  background:
+    radial-gradient(circle closest-side,
+      transparent 53%,
+      #EDF9FB 0),
+    conic-gradient(#49CF9F 0,
+      #49CF9F 38%,
+      #4DAAF8 0,
+      #4DAAF8 61%,
+      #8079FF 0,
+      #8079FF 77%,
+      #F6C453 0,
+      #F6C453 100%);
+  position: relative;
+  min-width: 150px;
+  min-height: 150px;
+  margin: 0;
+}
+.attendance-chart{
+  background: radial-gradient(circle closest-side,#edf9fb  0,#edf9fb  43.68%,transparent 43.68%,transparent 84%,#edf9fb  0),conic-gradient(from 42deg,#49CF9F 0,#49CF9F 49.4%,#8079FF 0,#8079FF 79.3%,#F0845D 0,#F0845D 100%);
+  width: 158px;
+  min-height: 158px;
+}
+.present-value{
+  right: 25px;
+}
+.absent-value{
+  top: 25px;
+  left: 40%;
+}
+.leave-value{
+  left: 15px;
+}
+
+/* ============ADMIN DASHBOARD PAGES CSS END==================== */
+
+/* ============ADMIN ASSIGNMENTS PAGES CSS START==================== */
+.assignment-stats-area {
+  width: 100%;
+  min-height: 20px;
+}
+.assignment-stats-area {
+  width: 100%;
+  min-height: 200px;
+  border-radius: 12px;
+  background: #EDF9FB;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.right-side-dropdown-btn{
+  gap: 12px;
+}
+.admin-task-card{
+  background: #ffffff;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    padding: 20px;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+}
+.add_task{
+  border: 2px dashed #49BFCF;
+  border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Create Task All Modal Box css start */
+.create_task_modal_box{
+  background: #ffffff;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 5px;
+    padding: 20px;
+}
+.main_btn_secondary, .light-btn-secondary{
+  background: #49BFCF;
+    color: #ffffff;
+    backdrop-filter: blur(9px);
+    border-radius: 12px;
+    padding: 10px 18px;
+    height: 30px;
+    border: 1px solid transparent;
+    line-height: 0;
+    margin: 15px auto auto;
+}
+.light-btn-secondary{
+  opacity: 0.5;
+}
+/* Create Task All Modal Box css end */
+
+/* ============ADMIN ASSIGNMENTS PAGES CSS END==================== */
+
+/* ============ADMIN STUDENT PROFILE PAGES CSS START==================== */
+.stu-img{
+  width: 112px;
+  height: 112px;
+  margin-right: 20px;
+  position: relative;
+}
+.stu-img img{
+  width: 100%;
+  border-radius: 6px;
+  height: fit-content;
+  object-fit: cover;
+}
+.img_hover_icon {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  position: absolute;
+  top: 35px;
+  left: 9px;
+  transition: all .5s ease-in-out; 
+}
+.hover_icon {
+  background: #fff;
+  padding: 5px 7px;
+  font-size: 24px;
+  border-radius: 6px;
+}
+.student_profile_tabs{
+  margin-bottom: 20px !important;
+}
+.nav-tabs .student_profile_tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+  background-color: #49BFCF !important;
+  color: #fff !important;
+  border-radius: 20px;
+  padding: 6px 12px;
+}
+.nav-link{
+  color: #49BFCF !important;
+  font-size: 17px !important;
+    font-weight: 500 !important;
+}
+.active_approved_btn{
+  background: #49BFCF;
+  padding: 6px 0;
+}
+/* ============ADMIN STUDENT PROFILE PAGES CSS END==================== */
+
+/* ============ADMIN STUDENT  PAGES CSS END==================== */
+
+.student-search input{
+  border: 0;
+    border-radius: 20px;
+    font-size: 15px;
+    padding: 3px 10px 3px 13px;
+}
+
+/* ============ADMIN STUDENT  PAGES CSS END==================== */
+
+/* ============ADMIN TASKS  PAGES CSS START==================== */
+.today_attendance,.admin-attendance-chart{
+  width: 50%;
+  min-height: 250px;
+}
+.table_admin_side tr{
+  border-bottom: 1px solid #dee2e6;
+}
+.table_admin_side td{
+  border-bottom:none;
+}
+/* ============ADMIN TASKS  PAGES CSS END==================== */
+
+/* ============ADMIN DASHBOARD TOP AREA PAGES CSS START==================== */
+.jobaleart_card{
+  position: relative;
+}
+.meat-dot{
+  position: absolute;
+  top: 6px;
+  right: 6px;
+}
+.meat-dot-dropdown {
+  position: absolute;
+  right: 6px;
+  top: 30px;
+  background: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.12);
+}
+.meat-dot-dropdown p i{
+  line-height: 100%;
+}
+/* ============ADMIN DASHBOARD TOP AREA PAGES CSS END==================== */
+
+/* ============ADMIN EDIT TASKS  PAGES CSS START==================== */
+.edit-task-area{
+  background: #fff;
+  padding: 20px;
+  box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.08);
+}
+.line-height-0{
+  line-height: 0;
+}
+.gap_5{
+  gap: 5px;
+}
+.write-que{
+  margin: 24px 0;
+}
+.show-less-question h3 p{
+  color: #115E68;
+}
+.show-less-question{
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.edit-delete-que{
+  display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 20px;
+}
+.que-hint{
+  margin-top: 30px;
+}
+.add-que{
+  border: 2px dashed #49BFCF;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 48px;
+  gap: 5px;
+}
+.add-media-attech{
+  width: 100%;
+  height: 220px;
+}
+.add-attechment{
+  border: 2px dashed #49BFCF;
+  border-radius: 12px;
+  background: none;
+  color: #49BFCF;
+  padding: 16px 43px;
+}
+/* ============ADMIN EDIT TASKS  PAGES CSS END==================== */
+
+/* ============ADMIN CREATE NEW TASKS  PAGES CSS START==================== */
+.top-edit-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.add-media-img-card{
+  width: 100%;
+  height: 161px;
+}
+.add-media-img:hover .hover-delete {
+  transform: translateY(-100%);
+
+
+}
+.hover-delete{
+  background-color: #000;
+  width: 100%;
+  height: 161px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(100%);
+}
+.hover-delete-icon{
+  color: #fff;
+  width: 44px;
+  height: 44px;
+font-size: 25px;
+background-color: #49bfcf;
+border-radius: 36px;
+display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* ============ADMIN CREATE NEW TASKS  PAGES CSS END==================== */
+
+/* ============ADMIN CREATE ANNOUNCEMENT  PAGES CSS START==================== */
+.all-select-course{
+  display: flex;
+  align-items: center;
+  column-gap: 24px;
+    row-gap: 5px;
+    flex-wrap: wrap;
+}
+/* ============ADMIN CREATE ANNOUNCEMENT  PAGES CSS END==================== */
+
+/* ============ADMIN CREATE SUBMISSION  PAGES CSS START==================== */
+.report_title:before {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  width: 65px;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(238, 236, 250, 0.65) 0%, rgba(238, 236, 250, 0.13) 100%), #49bfcf;
+}
+.reject-btn{
+  background-color: #F2F2F2;
+  color: #515151;
+  height: 38px;
+    backdrop-filter: blur(9px);
+    border-radius: 12px;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+    line-height: 0;
+    margin-right: 20px;
+}
+.submission_report{
+  margin-top: 12px;
+}
+.submission_report li{
+  list-style: none;
+  font-size: 17px;
+  font-weight: 400;
+  color: #515151;
+}
 /* *************************************************/
