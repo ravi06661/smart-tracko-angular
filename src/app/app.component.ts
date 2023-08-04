@@ -21,9 +21,11 @@ export class AppComponent {
     private qrService:QRServiceService) {}
 
   ngOnInit(): void {
-    // this.rightClickDisable.disableRightClick();
+    //this.rightClickDisable.disableRightClick();
     this.jsLoader.ScriptLoader('rightSideBar.js');
       if(this.loginService.isLoggedIn()&&this.loginService.getRole()=='ADMIN'){
+        console.log('admin');
+        
         if(!this.loginService.isTokenExpired())
           this.router.navigate(['admin']);
         else{
@@ -31,13 +33,10 @@ export class AppComponent {
           this.router.navigate(['login']);
         }
       }
-      this.qrService.isWebLoggedIn().subscribe({
-        next:(data:any)=>{
-          if(data.loginDevice == null){
-            this.loginService.logout();
-            this.router.navigate(['']);
-          }else{
-            if(this.loginService.isLoggedIn()&&this.loginService.getRole()=='STUDENT'){
+
+      if(this.loginService.isLoggedIn()&&this.loginService.getRole()=='STUDENT'){
+        console.log('student');
+        
               if(!this.loginService.isTokenExpired())
                 this.router.navigate(['student']);
               else{
@@ -45,9 +44,7 @@ export class AppComponent {
                 this.router.navigate(['']);
             }
           }
-          }
-        }
-      })
+     
       
   }
 }
