@@ -14,6 +14,7 @@ export class NewsandeventsComponent implements OnInit {
   imageUrl=this.BASE_URL+'/file/getImageApi/newsEventImage/';
 
   newsAndEvents:NewsAndEvent[]=[];
+  
   totalNewsAndEvent:number=0;
   constructor (private newsAndEventService:NewsEventServiceService,private utilityService:UtilityServiceService) {}
 
@@ -34,3 +35,4 @@ export class NewsandeventsComponent implements OnInit {
     this.getAllNewsAndEvents(event.pageIndex, event.pageSize);
   }
 }
+
