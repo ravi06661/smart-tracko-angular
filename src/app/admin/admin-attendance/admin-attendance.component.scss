@@ -17,3 +17,9 @@
     width: 50px;
     border-radius: 50px;
 }
+.table_scroll{
+  overflow-y: scroll !important;
+}
+.table_scroll::-webkit-scrollbar{
+  display: none;
+}

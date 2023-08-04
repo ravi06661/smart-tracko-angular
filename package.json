@@ -38,6 +38,7 @@
     "net": "^1.0.2",
     "ng-apexcharts": "^1.8.0",
     "ngx": "^2.4.0",
+    "ngx-device-detector": "^6.0.2",
     "ngx-pagination": "^6.0.3",
     "pagination": "^0.4.6",
     "popper.js": "^1.16.1",

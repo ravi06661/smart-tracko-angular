@@ -7,6 +7,8 @@ import { QRServiceService } from 'src/app/service/qrservice.service';
 import * as Stomp from "stompjs";
 import * as SockJS from "sockjs-client";
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { disconnect } from 'process';
 
 @Component({
   selector: 'app-login-qr',
@@ -18,20 +20,24 @@ export class LoginQRComponent implements OnInit{
   qrImage='';
   qrKey='';
   stompClient: any = null;
+  connection = false
 
   BASE_URL = this.utilityService.getBaseUrl();
   SOCKET_URL = this.BASE_URL+'/socket';
-  constructor(public qrService:QRServiceService,private router:Router,private utilityService:UtilityServiceService){}
+  constructor(public qrService:QRServiceService,private loginService:LoginService,private router:Router,private utilityService:UtilityServiceService,private deviceService: DeviceDetectorService){}
+
 
   
   ngOnInit(): void {
+    console.log(this.deviceService.getDeviceInfo())
     this.qrService.generateQRCode().subscribe({
       next:(data:any)=>{
         this.qrImage = data.qrData;
         this.qrKey = data.qrKey;
+        this.qrKey = this.qrKey.split('#')[1];
+        localStorage.setItem('key',this.qrKey);
       }
     });
-    this.disconnect();
       this.connect();
   }
 
@@ -41,21 +47,43 @@ export class LoginQRComponent implements OnInit{
     this.stompClient = Stomp.over(socket);
     let that = this;
     this.stompClient.connect({}, function(frame:any){
+      that.connection = true;
+      
       that.stompClient.subscribe('/queue/messages-'+ that.qrKey,
       function(token:any){
-        console.log(token);
-        
-        that.mobileAuthentication(token.body);
-        that.disconnect();
+        console.log(token.body);
+        if(token.body=='LOGOUT'){
+         that.qrService.webLogout().subscribe({
+          next:(data)=>{
+            localStorage.clear();
+            that.router.navigate(['']);
+            that.stompClient.disconnect();
+          }
+        });
+         return;
+        }
+        that.loginService.setToken(token.body);
+        that.updateLoginStatus(token.body);
+        that.router.navigate(['/student']);
       });
     });
   }
   
-    mobileAuthentication(token:string){
-      this.qrService.qrLogin(token).subscribe(data => {
-        this.router.navigate(['/student']);
-      });
-    }
+  public updateLoginStatus(token:string){
+    const deviceInfo = this.deviceService.getDeviceInfo();
+    this.qrService.updateLoginStatus(deviceInfo,token).subscribe({
+      next:(data)=>{
+        console.log("update s"+data);
+      }
+    })
+  }
+
+    // mobileAuthentication(token:string){
+    //   const deviceInfo = this.deviceService.getDeviceInfo();
+    //   this.qrService.qrLogin(token,deviceInfo).subscribe(data => {
+        
+    //   });
+    // }
   
     disconnect(){
       if(this.stompClient !=null){

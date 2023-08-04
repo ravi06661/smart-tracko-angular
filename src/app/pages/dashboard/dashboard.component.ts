@@ -69,7 +69,6 @@ export class DashboardComponent implements OnInit {
     this.studentService.getTodayAttendance(this.loginService.getStudentId()).subscribe({  
       next: (data: any) => {
           this.attendance = data.Attendance;
-          localStorage.setItem('attendance', JSON.stringify(this.attendance));
           if(this.attendance.checkInTime != null){
             this.formattedCheckInTime = this.changeTimeFormat(this.attendance.checkInTime);
           }

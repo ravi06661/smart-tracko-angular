@@ -20,6 +20,7 @@ export class AdminAttendanceComponent implements OnInit {
   absentData: AbsentTodays[] = []
   leavesData: ActiveLeaves[] = []
   leavesRequestData: TodayLeavesRequest[] = []
+
   constructor(private studentService: StudentService, private utilityService: UtilityServiceService) { }
   ngOnInit(): void {
     this.getTotalStudentTodayLeavesRequest();
