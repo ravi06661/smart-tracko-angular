@@ -1,6 +1,6 @@
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Profile } from '../entity/profile';
 import { profile } from 'console';
@@ -21,8 +21,15 @@ export class QRServiceService {
     return this.http.get(`${this.qrUrl}/qrGenerator`);
   }
 
-  public qrLogin(token: string): Observable<any> {
-    return this.http.post<any>(this.qrUrl + "/clientlogin?token=" + token,
+  public qrLogin(token: string,deviceInfo:any): Observable<any> {
+    console.log(token);
+    
+     var params:HttpParams = new HttpParams;
+     params=params.append('token',token);
+     params = params.append('os',deviceInfo.os)
+     params=params.append('deviceType',deviceInfo.deviceType)
+     params=params.append('browser',deviceInfo.browser)
+    return this.http.post<any>(this.qrUrl + "/clientlogin",{params},
       { headers: { "Content-Type": "application/json; charset=UTF-8" } })
       .pipe(map(response => {
         if (response) {
@@ -38,4 +45,10 @@ export class QRServiceService {
   public getProfileData() {
     return this.profileData;
   }
+
+  public updateLoginStatus(deviceInfo:any,token:string){
+    return this.http.post(`${this.qrUrl}/updateWebLoginStatus?token=${token}&os=${deviceInfo.os}&deviceType=${deviceInfo.deviceType}&browser=${deviceInfo.browser}`,
+    {responseType:'any'})
+  }
+
 }
