@@ -32,9 +32,9 @@ export class LoginQRComponent implements OnInit{
       next:(data:any)=>{
         this.qrImage = data.qrData;
         this.qrKey = data.qrKey;
+        this.qrKey = this.qrKey.split('#')[1];
       }
     });
-    this.disconnect();
       this.connect();
   }
 
@@ -49,7 +49,6 @@ export class LoginQRComponent implements OnInit{
         that.loginService.setToken(token.body);
         that.updateLoginStatus(token.body);
         that.router.navigate(['/student']);
-        that.disconnect();
       });
     });
   }
