@@ -2,12 +2,11 @@
     <div class="profile d-flex">
 
         <div class="profile_top_heading d-flex gap_24">
-            <h1 class="font-27 font-700 secondary mb-0">Assignments</h1>
-            <button class="top_profile_sec_btn font-14 font-500" data-bs-toggle="modal"
-                data-bs-target="#exampleModal1">Register student</button>
+            <h1 class="font-27 font-700 secondary mb-0">Student</h1>
+            <a routerLink="/admin/studentregistration" class="top_profile_sec_btn font-14 font-500 lh-1">Register student</a>
         </div>
 
-        <app-profile-bar></app-profile-bar>
+       <app-profile-bar></app-profile-bar>
     </div>
 
     <!-- DASHBOARD START -->
@@ -187,62 +186,3 @@
 
 </div>
 <!--DASHBOARD END -->
-
-
-<!-- Modal Create New Assignment start -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1"
-    aria-hidden="true">
-    <div class="modal-dialog position-relative leave_modal">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="modal-header apply_title">
-                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                        id="exampleModalLabel1">Assignment Details</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
-                        <i class="fi fi-rr-cross close_icon"></i>
-                    </button>
-                </div>
-
-                <form action="">
-                    <div class="row">
-                        <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Assignment
-                                Title</label>
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Day 1">
-                            </div>
-                        </div>
-                        <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Mern Stack">
-                            </div>
-                        </div>
-                        <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Subject</label>
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Core Java">
-                            </div>
-                        </div>
-                        <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Duration</label>
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="1 Day">
-                            </div>
-                        </div>
-                       
-                    </div><!-- row -->
-                </form>
-
-                <a routerLink="/admin/edittask" class="apply_modal_buttons d-flex justify-content-center align-items-center mt-2">
-                    <button type="button" class="apply_modal_btn">Create</button>
-                </a>
-
-            </div>
-        </div>
-    </div>
-</div>

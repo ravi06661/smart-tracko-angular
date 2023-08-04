@@ -1,237 +1,111 @@
 <div id="main" class="main mycourse_page">
-    <div class="profile d-flex">
-      <h1 class="font-27 font-700 secondary mb-0">Student Profile</h1>
-     <app-profile-bar></app-profile-bar>
+  <div class="profile d-flex">
+    <h1 class="font-27 font-700 secondary mb-0">Student Profile</h1>
+    <div class="profile">
+      <div class="d-flex align-items-center porfile_sec">
+        <div class="">
+          <img src="assets/images/temp_img/Ellipse 1.png" class="round-img">
+        </div>
+        <div class="text mx-3">
+          <h3 class="font-17 font-600 text-black user-name">Rahil Kothari</h3>
+          <p class="font-14 font-400  text-black mb-0">Ui/Ux Team Lead</p>
+        </div>
+      </div>
+      <a  class="ms-3 right_menu_toggle">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path opacity="0.5"
+            d="M18.7491 9V9.7041C18.7491 10.5491 18.9903 11.3752 19.4422 12.0782L20.5496 13.8012C21.5612 15.3749 20.789 17.5139 19.0296 18.0116C14.4273 19.3134 9.57274 19.3134 4.97036 18.0116C3.21105 17.5139 2.43882 15.3749 3.45036 13.8012L4.5578 12.0782C5.00972 11.3752 5.25087 10.5491 5.25087 9.7041V9C5.25087 5.13401 8.27256 2 12 2C15.7274 2 18.7491 5.13401 18.7491 9Z"
+            fill="#49BFCF" />
+          <path
+            d="M7.24316 18.5449C7.8941 20.5501 9.77767 21.9997 11.9998 21.9997C14.222 21.9997 16.1055 20.5501 16.7565 18.5449C13.611 19.1352 10.3886 19.1352 7.24316 18.5449Z"
+            fill="#49BFCF" />
+        </svg>
+      </a>
     </div>
+  </div>
 
 
-    <div class="scroll_section">
-      <div class="row mb-4">
-        <div class="col-md-12">
-          <div class="top-content my_course">
-            <div class="d-flex java">
-              <div class="stu-img">
-                <img src="assets/images/temp_img/Options 01 _Selected.png" class="obj-fit-none">
-                <div class="img_hover_icon">
-                  <i class="fi fi-rr-file-edit hover_icon"></i>
-                  <i class="fi fi-rr-file-edit hover_icon"></i>
-                </div>
+  <div class="scroll_section">
+    <div class="row mb-4">
+      <div class="col-md-12">
+        <div class="top-content my_course">
+          <div class="d-flex java">
+           <div class="profile_change_student d-flex justify-content-center align-items-center position-relative">
+            <div class="stu-img">
+              <div class="img_hover_icon  d-flex align-items-end">
+                <input type="file" id="file" class="change-student-img" onchange="loadFile(event)">
+                <i class="fi fi-rr-file-edit hover_icon secondary"></i>
+                <i class="fi fi-rr-trash hover_icon delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
               </div>
-              <div>
-                <h2 class="font-24 font-600 text-white java mb_6">Rahil Kothari</h2>
-                <h3 class="font-16 font-500 text-white java mb_6">9874653210</h3>
-                <h4 class="font-16 font-500 text-white java mb_6">Emailaddress@email.com</h4>
-                <h5 class="font-16 font-500 text-white mb-0">From - 1 Jan, 23 To 31 Dec, 23/Present</h5>
-              </div>
+            </div>
+            <img src="assets/images/temp_img/Options 01 _Selected.png" class="profile_image" id="output">
+           </div>
+            <div>
+              <h2 class="font-24 font-600 text-white java mb_6">Rahil Kothari</h2>
+              <h3 class="font-16 font-500 text-white java mb_6">9874653210</h3>
+              <h4 class="font-16 font-500 text-white java mb_6">Emailaddress@email.com</h4>
+              <h5 class="font-16 font-500 text-white mb-0">From - 1 Jan, 23 To 31 Dec, 23/Present</h5>
             </div>
           </div>
         </div>
-        <div class="col-md-12">
-          <!-- =========TABS START========= -->
-          <ul class="nav nav-tabs student_profile_tabs mt_24 border-0" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-              <button class="nav-link active" id="assignment-tab" data-bs-toggle="tab" data-bs-target="#assignments"
-                type="button" role="tab" aria-controls="home" aria-selected="true">Assignments</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="tasks-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button"
-                role="tab" aria-controls="profile" aria-selected="false">Tasks</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="payments-tab" data-bs-toggle="tab" data-bs-target="#payments" type="button"
-                role="tab" aria-controls="contact" aria-selected="false">Payments</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button"
-                role="tab" aria-controls="contact" aria-selected="false">Attendance</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="profile-info-tab" data-bs-toggle="tab" data-bs-target="#profile_info"
-                type="button" role="tab" aria-controls="contact" aria-selected="false">Profile Info</button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button class="nav-link" id="enrolment-details-tab" data-bs-toggle="tab" data-bs-target="#enrolment_details"
-                type="button" role="tab" aria-controls="contact" aria-selected="false">Enrolment Details</button>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <!-- assignments tabs start -->
-            <div class="tab-pane fade show active" id="assignments" role="tabpanel" aria-labelledby="assignment-tab">
-              <div class="task_assignment mt-0">
-                <div class="row">
-                  <div class="col-md-6">
-                    <h3 class="title font-17 font-500 secondary position-relative">Assignments</h3>
+      </div>
+      <div class="col-md-12">
+        <!-- =========TABS START========= -->
+        <ul class="nav nav-tabs student_profile_tabs mt_24 border-0" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="assignment-tab" data-bs-toggle="tab" data-bs-target="#assignments"
+              type="button" role="tab" aria-controls="home" aria-selected="true">Assignments</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="tasks-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button"
+              role="tab" aria-controls="profile" aria-selected="false">Tasks</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="payments-tab" data-bs-toggle="tab" data-bs-target="#payments" type="button"
+              role="tab" aria-controls="contact" aria-selected="false">Payments</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button"
+              role="tab" aria-controls="contact" aria-selected="false">Attendance</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-info-tab" data-bs-toggle="tab" data-bs-target="#profile_info"
+              type="button" role="tab" aria-controls="contact" aria-selected="false">Profile Info</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="enrolment-details-tab" data-bs-toggle="tab" data-bs-target="#enrolment_details"
+              type="button" role="tab" aria-controls="contact" aria-selected="false">Enrolment Details</button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <!-- assignments tabs start -->
+          <div class="tab-pane fade show active" id="assignments" role="tabpanel" aria-labelledby="assignment-tab">
+            <div class="task_assignment mt-0">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 class="title font-17 font-500 secondary position-relative">Assignments</h3>
 
-                    <!-- ASSIGNMENT ACCORDION  START-->
-                    <div class="AssignmentCard" id="head-show">
-                      <div class="Head">
-                        <div class="TaskName text-light">Day 1</div>
-                        <div class="Toggle">
-                        
-                                <i class="fi fi-rr-angle-small-down fs-4 lh-2 secondary" id="down-arrow" onclick="assignshow()"></i>
-                                <i class="fi fi-rr-angle-small-up fs-4 lh-2 secondary" id="up-arrow" onclick="assignhide()" style="display: none;"></i>
-                            
-                        </div>
-                      </div>
-                      <div class="Bar">
-                        <div class="Progress">
-                          <div class="Deadline">8/16</div>
-                          <div class="Progress">50%</div>
-                        </div>
-                      </div>
-                      <div class="ProgressBar">
-                        <div class="ProgressW"></div>
-                      </div>
-                      <div id="taskcard_show">
-                        <div class="TaskCard">
-                          <div class="TaskName">Task 1 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                              2023</span></div>
-                          <div class="Button warning">View Submission</div>
-                        </div>
-                        <div class="TaskCard">
-                          <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                              2023</span></div>
-                          <div class="Button warning">View Submission</div>
-                        </div>
-                        <div class="TaskCard">
-                          <div class="TaskName">Task 3 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                              2023</span></div>
-                          <div class="Button warning">View Submission</div>
-                        </div>
-                        <div class="TaskCard">
-                          <div class="TaskName">Task 4 <span class="font-15 font-400 text_gray">Overdue by 6
-                              days</span></div>
-                          <div class="Button over_due_color">Over Due</div>
-                        </div>
-                        <div class="TaskCard">
-                          <div class="TaskName">Task 5</div>
-                          <div class="Button pending_color">Pending</div>
-                        </div>
-
+                  <!-- ASSIGNMENT ACCORDION  START-->
+                  <div class="AssignmentCard" id="head-show">
+                    <div class="Head">
+                      <div class="TaskName text-light">Day 1</div>
+                      <div class="Toggle">
+                        <i class="fi fi-rr-angle-small-down fs-4 lh-2 secondary" id="down-arrow" onclick="assignshow()"></i>
+                        <i class="fi fi-rr-angle-small-up fs-4 lh-2 secondary" id="up-arrow" onclick="assignhide()" style="display: none;"></i>
                       </div>
                     </div>
-
-                    <div class="TaskCard">
-                      <div class="font-15 font-400 text_gray">Day 1</div>
-                      <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="font-15 font-400 text_gray">Day 1</div>
-                      <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="font-15 font-400 text_gray">Day 1</div>
-                      <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="font-15 font-400 text_gray">Day 1</div>
-                      <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="font-15 font-400 text_gray">Day 1</div>
-                      <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="font-15 font-400 text_gray">Day 1</div>
-                      <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="font-15 font-400 text_gray">Day 1</div>
-                      <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                    </div>
-
-                    <!-- ASSIGNMENT ACCORDION  END-->
-
-                  </div>
-
-                  <div class="col-md-6">
-                    <h3 class="title font-17 font-500 secondary position-relative">Submission History</h3>
-
-                    <div class="all_summary assignment-updates">
-
-                      <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                              class="text_light_green ms-1 font-500">Completed</b></h3>
-                          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                          <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                        </div>
+                    <div class="Bar">
+                      <div class="Progress">
+                        <div class="Deadline">8/16</div>
+                        <div class="Progress">50%</div>
                       </div>
-
-                      <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                              class="text_light_red ms-1 font-500">Reassigned</b></h3>
-                          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h3 class="font-13 font-400 mb-0">Task-1: Submission did not meet the requirements.</h3>
-                          <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                        </div>
-                      </div>
-
-                      <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                              class="text_light_blue ms-1 font-500">Reviewing</b></h3>
-                          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h3 class="font-13 font-400 mb-0">Task-1: Submission is under review.</h3>
-                          <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                        </div>
-                      </div>
-
-                      <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                              class="text_light_green ms-1 font-500">Completed</b></h3>
-                          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                          <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                        </div>
-                      </div>
-
-
                     </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- assignments tabs end -->
-
-            <!-- tasks tabs start -->
-            <div class="tab-pane fade" id="tasks" role="tabpanel" aria-labelledby="tasks-tab">
-              <div class="task_assignment mt-0">
-                <div class="row">
-                  <div class="col-md-6">
-                    <h3 class="title font-17 font-500 secondary position-relative">Tasks</h3>
-
-                    <!-- TASK ACCORDION  START-->
-                    <div class="left_task">
+                    <div class="ProgressBar">
+                      <div class="ProgressW"></div>
+                    </div>
+                    <div id="taskcard_show">
                       <div class="TaskCard">
                         <div class="TaskName">Task 1 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                            2023</span></div>
-                        <div class="Button warning">View Submission</div>
-                      </div>
-                      <div class="TaskCard">
-                        <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                            2023</span></div>
-                        <div class="Button warning">View Submission</div>
-                      </div>
-                      <div class="TaskCard">
-                        <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                            2023</span></div>
-                        <div class="Button warning">View Submission</div>
-                      </div>
-                      <div class="TaskCard">
-                        <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
                             2023</span></div>
                         <div class="Button warning">View Submission</div>
                       </div>
@@ -257,553 +131,727 @@
 
                     </div>
                   </div>
-                  <!-- col-md-6/// -->
 
-                  <div class="col-md-6">
-                    <h3 class="title font-17 font-500 secondary position-relative">Submission History</h3>
-                    <div class="all_summary assignment-updates">
-
-                      <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                              class="text_light_green ms-1 font-500">Completed</b></h3>
-                          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                          <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                        </div>
-                      </div>
-
-                      <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                              class="text_light_red ms-1 font-500">Reassigned</b></h3>
-                          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h3 class="font-13 font-400 mb-0">Task-1: Submission did not meet the requirements.</h3>
-                          <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                        </div>
-                      </div>
-
-                      <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                              class="text_light_blue ms-1 font-500">Reviewing</b></h3>
-                          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h3 class="font-13 font-400 mb-0">Task-1: Submission is under review.</h3>
-                          <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                        </div>
-                      </div>
-
-                      <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                              class="text_light_green ms-1 font-500">Completed</b></h3>
-                          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                          <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                        </div>
-                      </div>
-
-                      <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                              class="text_light_green ms-1 font-500">Completed</b></h3>
-                          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                          <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                        </div>
-                      </div>
-                      <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                        <div class="d-flex align-items-center justify-content-between">
-                          <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                              class="text_light_green ms-1 font-500">Completed</b></h3>
-                          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                          <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                          <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                        </div>
-                      </div>
-
-                    </div>
+                  <div class="TaskCard">
+                    <div class="font-15 font-400 text_gray">Day 1</div>
+                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
                   </div>
-                  <!-- col-md-6/// -->
+                  <div class="TaskCard">
+                    <div class="font-15 font-400 text_gray">Day 1</div>
+                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
+                  </div>
+                  <div class="TaskCard">
+                    <div class="font-15 font-400 text_gray">Day 1</div>
+                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
+                  </div>
+                  <div class="TaskCard">
+                    <div class="font-15 font-400 text_gray">Day 1</div>
+                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
+                  </div>
+                  <div class="TaskCard">
+                    <div class="font-15 font-400 text_gray">Day 1</div>
+                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
+                  </div>
+                  <div class="TaskCard">
+                    <div class="font-15 font-400 text_gray">Day 1</div>
+                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
+                  </div>
+                  <div class="TaskCard">
+                    <div class="font-15 font-400 text_gray">Day 1</div>
+                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
+                  </div>
+
+                  <!-- ASSIGNMENT ACCORDION  END-->
 
                 </div>
-              </div>
-            </div>
-            <!-- tasks tabs end -->
 
-            <!-- payments tabs start -->
-            <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="payments-tab">
-              <div class="table_container">
-                <table class="table mb-0">
-                  <thead style="background:#EDF9FB;">
-                    <tr class="table_heading">
-                      <th scope="col" class="font-15 font-600 secondary">EMI no.</th>
-                      <th scope="col" class="font-15 font-600 secondary">Amount</th>
-                      <th scope="col" class="font-15 font-600 secondary">Due on</th>
-                      <th scope="col" class="font-15 font-600 secondary">Status</th>
-                      <th scope="col" class="font-15 font-600 secondary">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody class="bg-light">
-                    <tr>
-                      <td>1/6</td>
-                      <td>10,000</td>
-                      <td>1 Jan, 2023</td>
-                      <td>Paid on 1 Jan, 2023</td>
-                      <td class="text_light_blue">View Details</td>
-                    </tr>
-                    <tr>
-                      <td>1/6</td>
-                      <td>10,000</td>
-                      <td>1 Jan, 2023</td>
-                      <td>Paid on 1 Jan, 2023</td>
-                      <td class="text_light_blue">View Details</td>
-                    </tr>
-                    <tr>
-                      <td>1/6</td>
-                      <td>10,000</td>
-                      <td>1 Jan, 2023</td>
-                      <td class="over_due_color">Over Due</td>
-                      <td class="text_light_blue">View Details</td>
-                    </tr>
-                    <tr>
-                      <td>1/6</td>
-                      <td>10,000</td>
-                      <td>1 Jan, 2023</td>
-                      <td>Due on 1 Jan, 2023</td>
-                      <td class="text_light_blue">View Details</td>
-                    </tr>
-                    <tr>
-                      <td>1/6</td>
-                      <td>10,000</td>
-                      <td>1 Jan, 2023</td>
-                      <td>Paid on 1 Jan, 2023</td>
-                      <td class="text_light_blue">View Details</td>
-                    </tr>
-                    <tr>
-                      <td>1/6</td>
-                      <td>10,000</td>
-                      <td>1 Jan, 2023</td>
-                      <td>Paid on 1 Jan, 2023</td>
-                      <td class="text_light_blue">View Details</td>
-                    </tr>
-                    <tr>
-                      <td>1/6</td>
-                      <td>10,000</td>
-                      <td>1 Jan, 2023</td>
-                      <td>Paid on 1 Jan, 2023</td>
-                      <td class="text_light_blue">View Details</td>
-                    </tr>
+                <div class="col-md-6">
+                  <h3 class="title font-17 font-500 secondary position-relative">Submission History</h3>
 
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <!-- payments tabs end -->
+                  <div class="all_summary assignment-updates">
 
-              <!-- attendance tabs start -->
-              <div class="tab-pane fade" id="attendance" role="tabpanel" aria-labelledby="attendance-tab">
-                <div class="task_assignment mt-0">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <div class="attendance_dropdown d-flex justify-content-between align-items-center">
-                        <h3 class="admin-title font-17 font-600 secondary position-relative">Attendance Log</h3>
-                       <div class="right-side-dropdown-btn d-flex">
-                        <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Month
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">January</a></li>
-                              <li><a class="dropdown-item" href="#">February</a></li>
-                              <li><a class="dropdown-item" href="#">March</a></li>
-                              <li><a class="dropdown-item" href="#">April</a></li>
-                              <li><a class="dropdown-item" href="#">May</a></li>
-                              <li><a class="dropdown-item" href="#">June</a></li>
-                              <li><a class="dropdown-item" href="#">July</a></li>
-                              <li><a class="dropdown-item" href="#">August</a></li>
-                              <li><a class="dropdown-item" href="#">September</a></li>
-                              <li><a class="dropdown-item" href="#">October</a></li>
-                              <li><a class="dropdown-item" href="#">November </a></li>
-                              <li><a class="dropdown-item" href="#">December </a></li>
-                            </ul>
-                          </div>
-
-                            <div class="dropdown">
-                              <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                State
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">January</a></li>
-                                <li><a class="dropdown-item" href="#">February</a></li>
-                                <li><a class="dropdown-item" href="#">March</a></li>
-                                <li><a class="dropdown-item" href="#">April</a></li>
-                                <li><a class="dropdown-item" href="#">May</a></li>
-                                <li><a class="dropdown-item" href="#">June</a></li>
-                                <li><a class="dropdown-item" href="#">July</a></li>
-                                <li><a class="dropdown-item" href="#">August</a></li>
-                                <li><a class="dropdown-item" href="#">September</a></li>
-                                <li><a class="dropdown-item" href="#">October</a></li>
-                                <li><a class="dropdown-item" href="#">November </a></li>
-                                <li><a class="dropdown-item" href="#">December </a></li>
-                              </ul>
-                            </div>
-                       </div>
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
+                            class="text_light_green ms-1 font-500">Completed</b></h3>
+                        <a routerLink="/admin/submission" class="font-13 font-400 warning ms-auto mb-0 task_modal">View</a>
                       </div>
-
-                      <div class="table_container">
-                        <table class="table mb-0">
-                          <thead style="background:#EDF9FB;">
-                            <tr class="table_heading">
-                              <th scope="col" class="font-15 font-600 secondary">Date</th>
-                              <th scope="col" class="font-15 font-600 secondary">Check-in</th>
-                              <th scope="col" class="font-15 font-600 secondary">Check-out</th>
-                              <th scope="col" class="font-15 font-600 secondary">Time in</th>
-                              <th scope="col" class="font-15 font-600 secondary">State</th>
-                            </tr>
-                          </thead>
-                          <tbody class="bg-light">
-                            <tr>
-                              <td>12 Jan 2023</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:05:08</td>
-                              <td>Full Day</td>
-                            </tr>
-                            <tr>
-                              <td>NA</td>
-                              <td>NA</td>
-                              <td>NA</td>
-                              <td>NA</td>
-                              <td>Absent</td>
-                            </tr>
-                            <tr>
-                              <td>12 Jan 2023</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:05:08</td>
-                              <td>Half Day</td>
-                            </tr>
-                            <tr>
-                              <td>12 Jan 2023</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:05:08</td>
-                              <td>Late</td>
-                            </tr>
-                            <tr>
-                              <td>12 Jan 2023</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:05:08</td>
-                              <td>On Leave</td>
-                            </tr>
-                            <tr>
-                              <td>12 Jan 2023</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:05:08</td>
-                              <td>Full Day</td>
-                            </tr>
-                            <tr>
-                              <td>12 Jan 2023</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:03:24 AM</td>
-                              <td>09:05:08</td>
-                              <td>Full Day</td>
-                            </tr>
-
-      
-                          </tbody>
-                        </table>
-                      </div>
-
-                    </div>
-
-                    <div class="col-md-4">
-                        <h3 class="admin-title font-17 font-600 secondary position-relative">Attendance Overview</h3>
-                        <div class="attendance-area position-relative mb_20">
-                         <div class="attendance-chart rounded-pill m-auto"> </div>
-                         <span class="present-value text_gray font-12 font-600 position-absolute">Present</span>
-                         <span class="absent-value text_gray font-12 font-600 position-absolute">Absent</span>
-                         <span class="leave-value text_gray font-12 font-600 position-absolute">On Leave</span>
-                        </div>
-
-                      <div class="attendance_dropdown d-flex justify-content-between align-items-center">
-                        <h3 class="admin-title font-17 font-600 secondary position-relative">Leave Requests</h3>
-                       <div class="right-side-dropdown-btn d-flex">
-                        <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Month
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">January</a></li>
-                              <li><a class="dropdown-item" href="#">February</a></li>
-                              <li><a class="dropdown-item" href="#">March</a></li>
-                              <li><a class="dropdown-item" href="#">April</a></li>
-                              <li><a class="dropdown-item" href="#">May</a></li>
-                              <li><a class="dropdown-item" href="#">June</a></li>
-                              <li><a class="dropdown-item" href="#">July</a></li>
-                              <li><a class="dropdown-item" href="#">August</a></li>
-                              <li><a class="dropdown-item" href="#">September</a></li>
-                              <li><a class="dropdown-item" href="#">October</a></li>
-                              <li><a class="dropdown-item" href="#">November </a></li>
-                              <li><a class="dropdown-item" href="#">December </a></li>
-                            </ul>
-                          </div>
-
-                       </div>
-                      </div>
-
-                      <div class="leaves_description">
-                        <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                          <div class="leaves d-flex align-items-center position-relative justify-content-between">
-                            <div class="leaves_dec">
-                              <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                              <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                              <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                            </div>
-                            <div class="leaves_right d-flex gap_24 align-items-center">
-                              <h5 class="warning font-13 font-500 mb-0">Deny</h5>
-                            <h3 class="active_approved_btn font-13 font-400 mb-0 border-radius12 text-light" style="padding: 6px 10px;">Approved</h3>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                          <div class="leaves d-flex align-items-center position-relative">
-                            <div class="leaves_dec">
-                              <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                              <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                              <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                            </div>
-                            <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                          </div>
-                        </div>
-                        <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                          <div class="leaves d-flex align-items-center position-relative">
-                            <div class="leaves_dec">
-                              <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                              <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                              <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                            </div>
-                            <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                          </div>
-                        </div>
-                        <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                          <div class="leaves d-flex align-items-center position-relative">
-                            <div class="leaves_dec">
-                              <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                              <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                              <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                            </div>
-                            <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                          </div>
-                        </div>
-                        <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                          <div class="leaves d-flex align-items-center position-relative">
-                            <div class="leaves_dec">
-                              <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                              <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                              <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                            </div>
-                            <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                          </div>
-                        </div>
-                        <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                          <div class="leaves d-flex align-items-center position-relative">
-                            <div class="leaves_dec">
-                              <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                              <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                              <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                            </div>
-                            <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                          </div>
-                        </div>
-                        <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                          <div class="leaves d-flex align-items-center position-relative">
-                            <div class="leaves_dec">
-                              <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                              <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                              <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                            </div>
-                            <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                          </div>
-                        </div>
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
                       </div>
                     </div>
+
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
+                            class="text_light_red ms-1 font-500">Reassigned</b></h3>
+                            <a routerLink="/admin/submission" class="font-13 font-400 warning ms-auto mb-0 task_modal">View</a>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h3 class="font-13 font-400 mb-0">Task-1: Submission did not meet the requirements.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                      </div>
+                    </div>
+
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
+                            class="text_light_blue ms-1 font-500">Reviewing</b></h3>
+                            <a routerLink="/admin/submission" class="font-13 font-400 warning ms-auto mb-0 task_modal">View</a>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h3 class="font-13 font-400 mb-0">Task-1: Submission is under review.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                      </div>
+                    </div>
+
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
+                            class="text_light_green ms-1 font-500">Completed</b></h3>
+                            <a routerLink="/admin/submission" class="font-13 font-400 warning ms-auto mb-0 task_modal">View</a>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                      </div>
+                    </div>
+
 
                   </div>
                 </div>
+
               </div>
-              <!-- attendance tabs end -->
-
-            <!-- Profile Info tabs start -->
-            <div class="tab-pane fade" id="profile_info" role="tabpanel" aria-labelledby="profile-info-tab">
-              <form action="" class="mb_24">
-                <div class="row">
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Name</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="Rahil Kothari">
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Phone</label>
-                    <div class="input_icon position-relative">
-                      <input type="number" id="" name="" class="form-control input_text" placeholder="9874653210">
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">E-mail</label>
-                    <div class="input_icon position-relative">
-                      <input type="email" id="" name="" class="form-control input_text"
-                        placeholder="Emailaddress@email.com">
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Mother’s Name</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="Sima Kothari">
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Father's Name</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="Ram Kothari">
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Gender</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="Male">
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">City</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="Indore">
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Address</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text"
-                        placeholder="Nalanda Campus, RNT Marg, Chhoti Gwaltoli, Indore, Madhya Pradesh 452001">
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Branch</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="Computer Science">
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="MCA">
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">City</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="Indore">
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Collage</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text"
-                        placeholder="Nalanda Campus, RNT Marg, Chhoti Gwaltoli, Indore, Madhya Pradesh 452001">
-                    </div>
-                  </div>
-                  <div class="col-md-12 text-center">
-                    <button class="top_profile_sec_btn font-14 font-500">Edit Info</button>
-                  </div>
-
-
-                </div><!-- row -->
-              </form>
             </div>
-            <!-- Profile Info tabs end -->
-
-             <!-- Enrolment Details tabs start -->
-             <div class="tab-pane fade" id="enrolment_details" role="tabpanel" aria-labelledby="enrolment-details-tab">
-              <form action="" class="mb_24">
-                <div class="row">
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="MCA">
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Roll Number</label>
-                    <div class="input_icon position-relative">
-                      <input type="number" id="" name="" class="form-control input_text" placeholder="DS1365428">
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Batch Number</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text"
-                        placeholder="123">
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Joining Date</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="31 Dec, 2023">
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Completion Date</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="20 Feb, 2023">
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb_20">
-                    <label for="" class="mb_6 font-15 font-500 secondary">Total Fee</label>
-                    <div class="input_icon position-relative">
-                      <input type="text" id="" name="" class="form-control input_text" placeholder="50,000">
-                    </div>
-                  </div>
-              
-                  <div class="col-md-12 text-center">
-                    <button class="top_profile_sec_btn font-14 font-500">Edit Info</button>
-                  </div>
-
-
-                </div><!-- row -->
-              </form>
-            </div>
-            <!-- Enrolment Details tabs end -->
-
           </div>
-          <!-- =========TABS END========= -->
+          <!-- assignments tabs end -->
+
+          <!-- tasks tabs start -->
+          <div class="tab-pane fade" id="tasks" role="tabpanel" aria-labelledby="tasks-tab">
+            <div class="task_assignment mt-0">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 class="title font-17 font-500 secondary position-relative">Tasks</h3>
+
+                  <!-- TASK ACCORDION  START-->
+                  <div class="left_task">
+                    <div class="TaskCard">
+                      <div class="TaskName">Task 1 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
+                          2023</span></div>
+                      <div class="Button warning">View Submission</div>
+                    </div>
+                    <div class="TaskCard">
+                      <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
+                          2023</span></div>
+                      <div class="Button warning">View Submission</div>
+                    </div>
+                    <div class="TaskCard">
+                      <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
+                          2023</span></div>
+                      <div class="Button warning">View Submission</div>
+                    </div>
+                    <div class="TaskCard">
+                      <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
+                          2023</span></div>
+                      <div class="Button warning">View Submission</div>
+                    </div>
+                    <div class="TaskCard">
+                      <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
+                          2023</span></div>
+                      <div class="Button warning">View Submission</div>
+                    </div>
+                    <div class="TaskCard">
+                      <div class="TaskName">Task 3 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
+                          2023</span></div>
+                      <div class="Button warning">View Submission</div>
+                    </div>
+                    <div class="TaskCard">
+                      <div class="TaskName">Task 4 <span class="font-15 font-400 text_gray">Overdue by 6
+                          days</span></div>
+                      <div class="Button over_due_color">Over Due</div>
+                    </div>
+                    <div class="TaskCard">
+                      <div class="TaskName">Task 5</div>
+                      <div class="Button pending_color">Pending</div>
+                    </div>
+
+                  </div>
+                </div>
+                <!-- col-md-6/// -->
+
+                <div class="col-md-6">
+                  <h3 class="title font-17 font-500 secondary position-relative">Submission History</h3>
+                  <div class="all_summary assignment-updates">
+
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
+                            class="text_light_green ms-1 font-500">Completed</b></h3>
+                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                      </div>
+                    </div>
+
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
+                            class="text_light_red ms-1 font-500">Reassigned</b></h3>
+                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h3 class="font-13 font-400 mb-0">Task-1: Submission did not meet the requirements.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                      </div>
+                    </div>
+
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
+                            class="text_light_blue ms-1 font-500">Reviewing</b></h3>
+                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h3 class="font-13 font-400 mb-0">Task-1: Submission is under review.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                      </div>
+                    </div>
+
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
+                            class="text_light_green ms-1 font-500">Completed</b></h3>
+                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                      </div>
+                    </div>
+
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
+                            class="text_light_green ms-1 font-500">Completed</b></h3>
+                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                      </div>
+                    </div>
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
+                            class="text_light_green ms-1 font-500">Completed</b></h3>
+                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+                      </div>
+                      <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <!-- col-md-6/// -->
+
+              </div>
+            </div>
+          </div>
+          <!-- tasks tabs end -->
+
+          <!-- payments tabs start -->
+          <div class="tab-pane fade" id="payments" role="tabpanel" aria-labelledby="payments-tab">
+            <div class="table_container">
+              <table class="table mb-0">
+                <thead style="background:#EDF9FB;">
+                  <tr class="table_heading">
+                    <th scope="col" class="font-15 font-600 secondary">EMI no.</th>
+                    <th scope="col" class="font-15 font-600 secondary">Amount</th>
+                    <th scope="col" class="font-15 font-600 secondary">Due on</th>
+                    <th scope="col" class="font-15 font-600 secondary">Status</th>
+                    <th scope="col" class="font-15 font-600 secondary">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-light">
+                  <tr>
+                    <td>1/6</td>
+                    <td>10,000</td>
+                    <td>1 Jan, 2023</td>
+                    <td>Paid on 1 Jan, 2023</td>
+                    <td class="text_light_blue">View Details</td>
+                  </tr>
+                  <tr>
+                    <td>1/6</td>
+                    <td>10,000</td>
+                    <td>1 Jan, 2023</td>
+                    <td>Paid on 1 Jan, 2023</td>
+                    <td class="text_light_blue">View Details</td>
+                  </tr>
+                  <tr>
+                    <td>1/6</td>
+                    <td>10,000</td>
+                    <td>1 Jan, 2023</td>
+                    <td class="over_due_color">Over Due</td>
+                    <td class="text_light_blue">View Details</td>
+                  </tr>
+                  <tr>
+                    <td>1/6</td>
+                    <td>10,000</td>
+                    <td>1 Jan, 2023</td>
+                    <td>Due on 1 Jan, 2023</td>
+                    <td class="text_light_blue">View Details</td>
+                  </tr>
+                  <tr>
+                    <td>1/6</td>
+                    <td>10,000</td>
+                    <td>1 Jan, 2023</td>
+                    <td>Paid on 1 Jan, 2023</td>
+                    <td class="text_light_blue">View Details</td>
+                  </tr>
+                  <tr>
+                    <td>1/6</td>
+                    <td>10,000</td>
+                    <td>1 Jan, 2023</td>
+                    <td>Paid on 1 Jan, 2023</td>
+                    <td class="text_light_blue">View Details</td>
+                  </tr>
+                  <tr>
+                    <td>1/6</td>
+                    <td>10,000</td>
+                    <td>1 Jan, 2023</td>
+                    <td>Paid on 1 Jan, 2023</td>
+                    <td class="text_light_blue">View Details</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- payments tabs end -->
+
+            <!-- attendance tabs start -->
+            <div class="tab-pane fade" id="attendance" role="tabpanel" aria-labelledby="attendance-tab">
+              <div class="task_assignment mt-0">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="attendance_dropdown d-flex justify-content-between align-items-center">
+                      <h3 class="admin-title font-17 font-600 secondary position-relative">Attendance Log</h3>
+                     <div class="right-side-dropdown-btn d-flex">
+                      <div class="dropdown">
+                          <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Month
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">January</a></li>
+                            <li><a class="dropdown-item" href="#">February</a></li>
+                            <li><a class="dropdown-item" href="#">March</a></li>
+                            <li><a class="dropdown-item" href="#">April</a></li>
+                            <li><a class="dropdown-item" href="#">May</a></li>
+                            <li><a class="dropdown-item" href="#">June</a></li>
+                            <li><a class="dropdown-item" href="#">July</a></li>
+                            <li><a class="dropdown-item" href="#">August</a></li>
+                            <li><a class="dropdown-item" href="#">September</a></li>
+                            <li><a class="dropdown-item" href="#">October</a></li>
+                            <li><a class="dropdown-item" href="#">November </a></li>
+                            <li><a class="dropdown-item" href="#">December </a></li>
+                          </ul>
+                        </div>
+
+                          <div class="dropdown">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                              State
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><a class="dropdown-item" href="#">January</a></li>
+                              <li><a class="dropdown-item" href="#">February</a></li>
+                              <li><a class="dropdown-item" href="#">March</a></li>
+                              <li><a class="dropdown-item" href="#">April</a></li>
+                              <li><a class="dropdown-item" href="#">May</a></li>
+                              <li><a class="dropdown-item" href="#">June</a></li>
+                              <li><a class="dropdown-item" href="#">July</a></li>
+                              <li><a class="dropdown-item" href="#">August</a></li>
+                              <li><a class="dropdown-item" href="#">September</a></li>
+                              <li><a class="dropdown-item" href="#">October</a></li>
+                              <li><a class="dropdown-item" href="#">November </a></li>
+                              <li><a class="dropdown-item" href="#">December </a></li>
+                            </ul>
+                          </div>
+                     </div>
+                    </div>
+
+                    <div class="table_container">
+                      <table class="table mb-0">
+                        <thead style="background:#EDF9FB;">
+                          <tr class="table_heading">
+                            <th scope="col" class="font-15 font-600 secondary">Date</th>
+                            <th scope="col" class="font-15 font-600 secondary">Check-in</th>
+                            <th scope="col" class="font-15 font-600 secondary">Check-out</th>
+                            <th scope="col" class="font-15 font-600 secondary">Time in</th>
+                            <th scope="col" class="font-15 font-600 secondary">State</th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-light">
+                          <tr>
+                            <td>12 Jan 2023</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:05:08</td>
+                            <td>Full Day</td>
+                          </tr>
+                          <tr>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td>NA</td>
+                            <td>Absent</td>
+                          </tr>
+                          <tr>
+                            <td>12 Jan 2023</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:05:08</td>
+                            <td>Half Day</td>
+                          </tr>
+                          <tr>
+                            <td>12 Jan 2023</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:05:08</td>
+                            <td>Late</td>
+                          </tr>
+                          <tr>
+                            <td>12 Jan 2023</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:05:08</td>
+                            <td>On Leave</td>
+                          </tr>
+                          <tr>
+                            <td>12 Jan 2023</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:05:08</td>
+                            <td>Full Day</td>
+                          </tr>
+                          <tr>
+                            <td>12 Jan 2023</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:03:24 AM</td>
+                            <td>09:05:08</td>
+                            <td>Full Day</td>
+                          </tr>
+
+    
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+
+                  <div class="col-md-4">
+                      <h3 class="admin-title font-17 font-600 secondary position-relative">Attendance Overview</h3>
+                      <div class="attendance-area position-relative mb_20">
+                       <div class="attendance-chart rounded-pill m-auto"> </div>
+                       <span class="present-value text_gray font-12 font-600 position-absolute">Present</span>
+                       <span class="absent-value text_gray font-12 font-600 position-absolute">Absent</span>
+                       <span class="leave-value text_gray font-12 font-600 position-absolute">On Leave</span>
+                      </div>
+
+                    <div class="attendance_dropdown d-flex justify-content-between align-items-center">
+                      <h3 class="admin-title font-17 font-600 secondary position-relative">Leave Requests</h3>
+                     <div class="right-side-dropdown-btn d-flex">
+                      <div class="dropdown">
+                          <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Month
+                          </a>
+                          <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">January</a></li>
+                            <li><a class="dropdown-item" href="#">February</a></li>
+                            <li><a class="dropdown-item" href="#">March</a></li>
+                            <li><a class="dropdown-item" href="#">April</a></li>
+                            <li><a class="dropdown-item" href="#">May</a></li>
+                            <li><a class="dropdown-item" href="#">June</a></li>
+                            <li><a class="dropdown-item" href="#">July</a></li>
+                            <li><a class="dropdown-item" href="#">August</a></li>
+                            <li><a class="dropdown-item" href="#">September</a></li>
+                            <li><a class="dropdown-item" href="#">October</a></li>
+                            <li><a class="dropdown-item" href="#">November </a></li>
+                            <li><a class="dropdown-item" href="#">December </a></li>
+                          </ul>
+                        </div>
+
+                     </div>
+                    </div>
+
+                    <div class="leaves_description">
+                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <div class="leaves d-flex align-items-center position-relative justify-content-between">
+                          <div class="leaves_dec">
+                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
+                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
+                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
+                          </div>
+                          <div class="leaves_right d-flex gap_24 align-items-center">
+                            <h5 class="warning font-13 font-500 mb-0">Deny</h5>
+                          <h3 class="active_approved_btn font-13 font-400 mb-0 border-radius12 text-light" style="padding: 6px 10px;">Approved</h3>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <div class="leaves d-flex align-items-center position-relative">
+                          <div class="leaves_dec">
+                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
+                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
+                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
+                          </div>
+                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
+                        </div>
+                      </div>
+                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <div class="leaves d-flex align-items-center position-relative">
+                          <div class="leaves_dec">
+                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
+                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
+                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
+                          </div>
+                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
+                        </div>
+                      </div>
+                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <div class="leaves d-flex align-items-center position-relative">
+                          <div class="leaves_dec">
+                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
+                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
+                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
+                          </div>
+                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
+                        </div>
+                      </div>
+                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <div class="leaves d-flex align-items-center position-relative">
+                          <div class="leaves_dec">
+                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
+                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
+                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
+                          </div>
+                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
+                        </div>
+                      </div>
+                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <div class="leaves d-flex align-items-center position-relative">
+                          <div class="leaves_dec">
+                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
+                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
+                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
+                          </div>
+                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
+                        </div>
+                      </div>
+                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <div class="leaves d-flex align-items-center position-relative">
+                          <div class="leaves_dec">
+                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
+                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
+                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
+                          </div>
+                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- attendance tabs end -->
+
+          <!-- Profile Info tabs start -->
+          <div class="tab-pane fade" id="profile_info" role="tabpanel" aria-labelledby="profile-info-tab">
+            <form action="" class="mb_24">
+              <div class="row">
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Name</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="Rahil Kothari">
+                  </div>
+                </div>
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Phone</label>
+                  <div class="input_icon position-relative">
+                    <input type="number" id="" name="" class="form-control input_text" placeholder="9874653210">
+                  </div>
+                </div>
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">E-mail</label>
+                  <div class="input_icon position-relative">
+                    <input type="email" id="" name="" class="form-control input_text"
+                      placeholder="Emailaddress@email.com">
+                  </div>
+                </div>
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Mother’s Name</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="Sima Kothari">
+                  </div>
+                </div>
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Father's Name</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="Ram Kothari">
+                  </div>
+                </div>
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Gender</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="Male">
+                  </div>
+                </div>
+                <div class="col-md-6 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">City</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="Indore">
+                  </div>
+                </div>
+                <div class="col-md-6 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Address</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text"
+                      placeholder="Nalanda Campus, RNT Marg, Chhoti Gwaltoli, Indore, Madhya Pradesh 452001">
+                  </div>
+                </div>
+                <div class="col-md-6 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Branch</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="Computer Science">
+                  </div>
+                </div>
+                <div class="col-md-6 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="MCA">
+                  </div>
+                </div>
+                <div class="col-md-6 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">City</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="Indore">
+                  </div>
+                </div>
+                <div class="col-md-6 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Collage</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text"
+                      placeholder="Nalanda Campus, RNT Marg, Chhoti Gwaltoli, Indore, Madhya Pradesh 452001">
+                  </div>
+                </div>
+                <div class="col-md-12 text-center">
+                  <button class="top_profile_sec_btn font-14 font-500">Edit Info</button>
+                </div>
+
+
+              </div><!-- row -->
+            </form>
+          </div>
+          <!-- Profile Info tabs end -->
+
+           <!-- Enrolment Details tabs start -->
+           <div class="tab-pane fade" id="enrolment_details" role="tabpanel" aria-labelledby="enrolment-details-tab">
+            <form action="" class="mb_24">
+              <div class="row">
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="MCA">
+                  </div>
+                </div>
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Roll Number</label>
+                  <div class="input_icon position-relative">
+                    <input type="number" id="" name="" class="form-control input_text" placeholder="DS1365428">
+                  </div>
+                </div>
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Batch Number</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text"
+                      placeholder="123">
+                  </div>
+                </div>
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Joining Date</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="31 Dec, 2023">
+                  </div>
+                </div>
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Completion Date</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="20 Feb, 2023">
+                  </div>
+                </div>
+                <div class="col-md-4 mb_20">
+                  <label for="" class="mb_6 font-15 font-500 secondary">Total Fee</label>
+                  <div class="input_icon position-relative">
+                    <input type="text" id="" name="" class="form-control input_text" placeholder="50,000">
+                  </div>
+                </div>
+            
+                <div class="col-md-12 text-center">
+                  <button class="top_profile_sec_btn font-14 font-500">Edit Info</button>
+                </div>
+
+
+              </div><!-- row -->
+            </form>
+          </div>
+          <!-- Enrolment Details tabs end -->
+
         </div>
-
-
+        <!-- =========TABS END========= -->
       </div>
+
+
     </div>
-
-    <!-- RIGHT SIDE START-->
-    <app-right-side-bar></app-right-side-bar>
-    <!-- RIGHT SIDE END -->
-
-    <!-- MIDDLE CONTENT END -->
-
-
   </div>
-  <!-- DASHBOARD END -->
+
+  <!-- RIGHT SIDE START-->
+  <app-right-side-bar></app-right-side-bar>
+  <!-- RIGHT SIDE END -->
+
+  <!-- MIDDLE CONTENT END -->
+
+
+</div>
+<!-- DASHBOARD END -->
+
+    <!-- Modal Delete Modal Start -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+      <div class="modal-dialog position-relative leave_modal">
+          <div class="modal-content">
+              <div class="modal-body">
+                  <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                      style="top: -23%;">
+                      <i class="fi fi-rr-cross close_icon"></i>
+                  </button>
+
+                  <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
+                  <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                      <a routerLink="/admin/createassignments">
+                          <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                              delete</button>
+                      </a>
+                      <a routerLink="/admin/createassignments">
+                          <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+                      </a>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Modal Delete Modal End -->

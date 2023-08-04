@@ -66,6 +66,8 @@ import { AnnouncementsComponent } from './admin/announcements/announcements.comp
 import { CreateAnnouncementsComponent } from './admin/create-announcements/create-announcements.component';
 import { AdminstudentComponent } from './admin/adminstudent/adminstudent.component';
 import { StudentProfileComponent } from './admin/student-profile/student-profile.component';
+import { AdminStudentRegistrationComponent } from './admin/admin-student-registration/admin-student-registration.component';
+import { AdminSubmissionComponent } from './admin/admin-submission/admin-submission.component';
 
 
 
@@ -120,6 +122,8 @@ import { StudentProfileComponent } from './admin/student-profile/student-profile
     CreateAnnouncementsComponent,
     AdminstudentComponent,
     StudentProfileComponent,
+    AdminStudentRegistrationComponent,
+    AdminSubmissionComponent,
    
        
  

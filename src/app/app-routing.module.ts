@@ -44,6 +44,8 @@ import { CreateAnnouncementsComponent } from './admin/create-announcements/creat
 import { AdminstudentComponent } from './admin/adminstudent/adminstudent.component';
 import { AdminCreateTaskComponent } from './admin/admin-create-task/admin-create-task.component';
 import { StudentProfileComponent } from './admin/student-profile/student-profile.component';
+import { AdminStudentRegistrationComponent } from './admin/admin-student-registration/admin-student-registration.component';
+import { AdminSubmissionComponent } from './admin/admin-submission/admin-submission.component';
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
@@ -87,6 +89,8 @@ const routes: Routes = [
       {path:'student',component:AdminstudentComponent,pathMatch:'full'},
       {path:'mycourse',component:AdminCoursesComponent,pathMatch:'full'},
       {path:'studentprofile',component:StudentProfileComponent,pathMatch:'full'},
+      {path:'studentregistration',component:AdminStudentRegistrationComponent,pathMatch:'full'},
+      {path:'submission',component:AdminSubmissionComponent,pathMatch:'full'}
       
     ]
   },
