@@ -13,6 +13,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import {  ViewEncapsulation } from '@angular/core';
+import { log } from 'console';
 
 
 @Component({
@@ -102,7 +103,7 @@ export class AttendanceComponent implements OnInit{
   public getStudentLeaves(){
     this.leaveService.getStudentLeaves().subscribe({
       next:(res:any)=>{
-        this.leavesList = res.leavesData.response;
+       this.leavesList = res.leavesData.response;
       }
     })
   }
@@ -111,8 +112,10 @@ export class AttendanceComponent implements OnInit{
     this.leaveMonth = moment(monthNo,"MM").format("MMMM");
     this.leaveService.getLeavesFiterData(monthNo).subscribe({
       next:(res:any)=>{
-        this.leavesList = res.LeaveData
-        
+        this.leavesList =res.leavesData.response;
+      //  if(res.leavesData.response.length==0){
+      //   this.leavesList=res.leavesData.response;
+      //  }
       }
     })
   }

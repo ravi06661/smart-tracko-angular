@@ -23,9 +23,10 @@ export class AdminAttendanceComponent implements OnInit {
 
   constructor(private studentService: StudentService, private utilityService: UtilityServiceService) { }
   ngOnInit(): void {
+    this.getTotalStudentTodayLeavesRequest();
     this.getAbsents();
     this.getActiveLeaves();
-    this.getTotalStudentTodayLeavesRequest()
+
   }
   public getAbsents() {
     this.studentService.getTodayStudentAbsentData().subscribe(
@@ -49,8 +50,9 @@ export class AdminAttendanceComponent implements OnInit {
       }
     )
   }
-  public approveStudentLeaveReqeust(id: number,status:string) {
-    this.studentService.approveStudentLeaveReqeust(id,status).subscribe(
+
+  public approveStudentLeaveReqeust(id: number, leaveId: number, status: string) {
+    this.studentService.approveStudentLeaveReqeust(id, leaveId, status).subscribe(
       (data: any) => {
         this.getTotalStudentTodayLeavesRequest();
         this.getActiveLeaves();
