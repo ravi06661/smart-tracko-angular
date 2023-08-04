@@ -9,6 +9,7 @@ export class NewsAndEvent {
 	public  createdDate:Date | undefined;
 	public  updatedDate:Date | undefined;
 	public  isActive:boolean | undefined;
+	public  dayAgo:number=0;
     
 }
     
