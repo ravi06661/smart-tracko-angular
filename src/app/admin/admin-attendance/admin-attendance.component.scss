@@ -17,6 +17,15 @@
     width: 50px;
     border-radius: 50px;
 }
+
+#chart {
+  max-width: 380px;
+  margin: 35px auto;
+  padding: 0;
+}
+.chart{
+  margin: 80px;
+}
 .table_scroll{
   overflow-y: scroll !important;
 }

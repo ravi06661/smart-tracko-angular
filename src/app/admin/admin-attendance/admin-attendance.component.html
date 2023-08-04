@@ -12,13 +12,21 @@
       <div class="today_attendance">
         <h3 class="admin-title font-17 font-600 secondary position-relative">Today’s Attendance</h3>
         <div class="attendance-area position-relative">
-          <div class="attendance-chart rounded-pill m-auto"> </div>
-          <span class="present-value text_gray font-12 font-600 position-absolute">Present</span>
-          <span class="absent-value text_gray font-12 font-600 position-absolute">Absent</span>
-          <span class="leave-value text_gray font-12 font-600 position-absolute">On Leave</span>
+        <!--The content below is only a placeholder and can be replaced.-->
+        <div class="chart">
+         
+            <apx-chart
+            [colors]="chartOptions.colors"
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [responsive]="chartOptions.responsive"
+            [legend]="chartOptions.legend"
+            [stroke]="chartOptions.stroke"
+          ></apx-chart>
+         </div>
+</div>
 
-
-        </div>
       </div>
 
       <div class="admin-attendance-chart">

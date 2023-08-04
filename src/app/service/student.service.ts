@@ -81,7 +81,7 @@ export class StudentService {
   }
 
   public getTodayStudentAbsentData() {
-    return this.http.get(`${this.studentUrl}/getTotalTodayAbsentStudent`);
+    return this.http.get(`${this.studentUrl}/getTotalTodayAbsentStudentAndPresent`);
   }
   public getStudentAtiveLeaves() {
     return this.http.get(`${this.studentUrl}/getTotalStudentInLeaves`);
