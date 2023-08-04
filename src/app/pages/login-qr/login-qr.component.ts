@@ -8,6 +8,7 @@ import * as Stomp from "stompjs";
 import * as SockJS from "sockjs-client";
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { disconnect } from 'process';
 
 @Component({
   selector: 'app-login-qr',
@@ -19,6 +20,7 @@ export class LoginQRComponent implements OnInit{
   qrImage='';
   qrKey='';
   stompClient: any = null;
+  connection = false
 
   BASE_URL = this.utilityService.getBaseUrl();
   SOCKET_URL = this.BASE_URL+'/socket';
@@ -33,6 +35,7 @@ export class LoginQRComponent implements OnInit{
         this.qrImage = data.qrData;
         this.qrKey = data.qrKey;
         this.qrKey = this.qrKey.split('#')[1];
+        localStorage.setItem('key',this.qrKey);
       }
     });
       this.connect();
@@ -44,8 +47,21 @@ export class LoginQRComponent implements OnInit{
     this.stompClient = Stomp.over(socket);
     let that = this;
     this.stompClient.connect({}, function(frame:any){
+      that.connection = true;
+      
       that.stompClient.subscribe('/queue/messages-'+ that.qrKey,
       function(token:any){
+        console.log(token.body);
+        if(token.body=='LOGOUT'){
+         that.qrService.webLogout().subscribe({
+          next:(data)=>{
+            localStorage.clear();
+            that.router.navigate(['']);
+            that.stompClient.disconnect();
+          }
+        });
+         return;
+        }
         that.loginService.setToken(token.body);
         that.updateLoginStatus(token.body);
         that.router.navigate(['/student']);
@@ -57,8 +73,7 @@ export class LoginQRComponent implements OnInit{
     const deviceInfo = this.deviceService.getDeviceInfo();
     this.qrService.updateLoginStatus(deviceInfo,token).subscribe({
       next:(data)=>{
-        console.log(data);
-        
+        console.log("update s"+data);
       }
     })
   }

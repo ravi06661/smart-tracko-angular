@@ -1,3 +1,4 @@
+import { QRServiceService } from 'src/app/service/qrservice.service';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
@@ -12,7 +13,7 @@ import Swal from 'sweetalert2';
 export class LeftSideBarComponent implements OnInit {
 
   check='';
-  constructor (private location:Location,private loginService:LoginService,private router:Router) {}
+  constructor (private qrService:QRServiceService,private location:Location,private loginService:LoginService,private router:Router) {}
 
   ngOnInit(){
     this.getPath() ;
@@ -50,8 +51,12 @@ export class LeftSideBarComponent implements OnInit {
           'Your are logged out.',
           'success'
         )
-        this.loginService.logout()
-        this.router.navigate([''])
+        this.qrService.webLogout().subscribe({
+          next:(data)=>{
+            localStorage.clear();
+            this.router.navigate(['']);
+          }
+        });;
       }
     })
     }
