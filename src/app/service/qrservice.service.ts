@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { Profile } from '../entity/profile';
 import { profile } from 'console';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,11 @@ export class QRServiceService {
 
   profileData: Profile = new Profile();
 
-  constructor(private utilityService: UtilityServiceService, private http: HttpClient) { }
+  constructor(private utilityService: UtilityServiceService, private http: HttpClient,private route:Router) { }
 
+  
+  
+  
   public generateQRCode() {
     return this.http.get(`${this.qrUrl}/qrGenerator`);
   }
@@ -49,6 +53,10 @@ export class QRServiceService {
   public updateLoginStatus(deviceInfo:any,token:string){
     return this.http.post(`${this.qrUrl}/updateWebLoginStatus?token=${token}&os=${deviceInfo.os}&deviceType=${deviceInfo.deviceType}&browser=${deviceInfo.browser}`,
     {responseType:'any'})
+  }
+
+  public webLogout(){
+    return this.http.delete(`${this.qrUrl}/webLogout`);
   }
 
 }
