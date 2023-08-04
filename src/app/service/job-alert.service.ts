@@ -46,7 +46,7 @@ export class JobAlertService {
     return this.http.delete(`${this.jobUrl}/deleteJobApi?jobId=${id}`)
   }
 
-  getJob(id:number):Observable<any>{
+  getJob(id: number): Observable<any> {
     return this.http.get<JobAlert>(`${this.jobUrl}/getJobApi?jobId=${id}`)
   }
 

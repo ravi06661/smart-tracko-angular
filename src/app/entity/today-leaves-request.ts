@@ -8,4 +8,5 @@ export class TodayLeavesRequest {
     public leaveEndDate: Date | undefined;
     public leaveDuration: number = 0;
     public leaveTypeId: number = 0;
+    public leaveId:number=0;
 }

@@ -89,7 +89,7 @@ export class StudentService {
   public getTodayLeavesRequest(): Observable<TodayLeavesRequest> {
     return this.http.get<TodayLeavesRequest>(`${this.studentUrl}/getTotalStudentTodaysInLeaves`);
   }
-  public approveStudentLeaveReqeust(studentId: number, status: string) {
-    return this.http.put(`${this.studentUrl}/approveStudentLeaveReqeust/${studentId}/${status}`, null);
+  public approveStudentLeaveReqeust(studentId: number,leaveId:number, status: string) {
+    return this.http.put(`${this.studentUrl}/approveStudentLeaveReqeust/${studentId}/${leaveId}/${status}`, null);
   }
 }
