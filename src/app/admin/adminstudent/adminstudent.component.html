@@ -20,7 +20,7 @@
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Student</h3>
                    <div class="right-side-dropdown-btn d-flex">
                     <div class="student-search">
-                        <input type="text" name="" id="" placeholder="Search" class="gray-input-bg">
+                        <input type="text" name="fullNmae" id="" placeholder="Search" class="gray-input-bg" [(ngModel)]="search" (ngModelChange)="searchStudentByName()" >
                     </div>
                     <div class="dropdown">
                         <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -81,9 +81,9 @@
                         </div>
                    </div>
                   </div>
-                <div class="table_container">
+                <div class="table_container" >
                     <table class="table mb-0">
-                        <thead style="background:#EDF9FB;">
+                        <thead style="background:#EDF9FB;" >
                             <tr class="table_heading">
                                 <th scope="col" class="font-15 font-600 secondary">Name</th>
                                 <th scope="col" class="font-15 font-600 secondary">Course</th>
@@ -92,8 +92,20 @@
                                 <th scope="col" class="font-15 font-600 secondary">Phone Num</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-light">
+                        <tbody class="bg-light" *ngFor="let student of students">
                             <tr>
+                                <td>
+                                   <a routerLink="/admin/studentprofile"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
+                                    <img [src]="imageUrl+student.profilePic" alt="" class="img-fluid imagestudent">
+                                    {{student.fullName }}                                        
+                                   </a>
+                                </td>
+                                <td>{{student.applyForCourse}}</td>
+                                <td>{{student.joinDate}}</td>
+                                <td>{{student.email}}</td>
+                                <td>{{student.mobile}}</td>
+                            </tr>
+                            <!-- <tr>
                                 <td>
                                    <a routerLink="/admin/studentprofile"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
                                     <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
@@ -152,22 +164,17 @@
                                 <td>23 Jan, 2023</td>
                                 <td>placement@gmail.com</td>
                                 <td>9632548152</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <a routerLink="/admin/studentprofile"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    Wade Warren                                         
-                                   </a>
-                                </td>
-                                <td>UI/UX Designer</td>
-                                <td>23 Jan, 2023</td>
-                                <td>placement@gmail.com</td>
-                                <td>9632548152</td>
-                            </tr>
+                            </tr> -->
 
                         </tbody>
                     </table>
+                    <mat-paginator *ngIf="totalStudent>=15"
+                        [length]="totalStudent"
+                        [pageSize]="15"
+                        aria-label="Select page"
+                        (page)="onChangePage($event)">    
+                        </mat-paginator>
+                    <!-- {{students |json}} -->
                 </div>
 
             </div>
