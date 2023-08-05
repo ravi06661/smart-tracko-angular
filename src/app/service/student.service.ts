@@ -8,7 +8,9 @@ import { LoginService } from './login.service';
 import { LeaveService } from './leave.service';
 import { TodayLeavesRequest } from '../entity/today-leaves-request';
 import { Observable } from 'rxjs';
+import { StudentDetails } from '../entity/student-details';
 import { Student } from '../entity/student';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +23,10 @@ export class StudentService {
   profileData: Profile = new Profile();
 
   constructor(private http: HttpClient, private utilityService: UtilityServiceService, private datepipe: DatePipe, public loginService: LoginService) { }
+
+  public registerStudent(data: StudentDetails) {
+    return this.http.post(`${this.studentUrl}/registerStudent`, data);
+  }
 
   public getTodayAttendance(studentId: number) {
     return this.http.get(`${this.studentUrl}/getTodayAttendance/${studentId}`);
@@ -90,7 +96,7 @@ export class StudentService {
   public getTodayLeavesRequest(): Observable<TodayLeavesRequest> {
     return this.http.get<TodayLeavesRequest>(`${this.studentUrl}/getTotalStudentTodaysInLeaves`);
   }
-  public approveStudentLeaveReqeust(studentId: number,leaveId:number, status: string) {
+  public approveStudentLeaveReqeust(studentId: number, leaveId: number, status: string) {
     return this.http.put(`${this.studentUrl}/approveStudentLeaveReqeust/${studentId}/${leaveId}/${status}`, null);
   }
 

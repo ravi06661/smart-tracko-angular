@@ -68,7 +68,7 @@ import { AdminstudentComponent } from './admin/adminstudent/adminstudent.compone
 import { StudentProfileComponent } from './admin/student-profile/student-profile.component';
 import { AdminStudentRegistrationComponent } from './admin/admin-student-registration/admin-student-registration.component';
 import { AdminSubmissionComponent } from './admin/admin-submission/admin-submission.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -150,6 +150,7 @@ import { AdminSubmissionComponent } from './admin/admin-submission/admin-submiss
     NgxPaginationModule,
     NgApexchartsModule,
     FullCalendarModule,
+    ReactiveFormsModule
 
   ],
   providers: [DatePipe,authInterceptorProvider],

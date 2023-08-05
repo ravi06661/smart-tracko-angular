@@ -60,6 +60,7 @@ export class AdminAttendanceComponent implements OnInit {
         }
       },
       colors: ["#5754E5", "#FF4A11", "#F8961E"],
+
       labels: ["Present", "Absent", "Leaves"],
       legend: {
         position: "bottom", // Show the legend at the bottom
@@ -67,7 +68,7 @@ export class AdminAttendanceComponent implements OnInit {
     //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
     //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
     //   return seriesName + ": " + percent + "%";
-    // }
+    /}
       },
       stroke: {
         show: false // Set this to false to remove the borders between the series
@@ -79,10 +80,12 @@ export class AdminAttendanceComponent implements OnInit {
           options: {
             chart: {
               width: 280
+
               
             },
             legend:{
               position:'bottom'
+
             }
           }
         }
@@ -96,14 +99,14 @@ export class AdminAttendanceComponent implements OnInit {
     this.getTotalStudentTodayLeavesRequest();
     this.getAbsents();
     this.getActiveLeaves();
-    
+
   }
   public getAbsents() {
     this.studentService.getTodayStudentAbsentData().subscribe(
       (data: any) => {
         this.absentData = data.totalAbsent;
         this.totalAbsent = this.absentData.length;
-        this.totalPresent =data.totalPresent
+        this.totalPresent = data.totalPresent
         this.getChartData();
       }
     )
@@ -113,7 +116,6 @@ export class AdminAttendanceComponent implements OnInit {
       (data: any) => {
         this.leavesData = data;
         this.totaOnleaves = this.leavesData.length;
-        console.log('activeLeaves', this.leavesData);
         this.getChartData();
       }
     )
@@ -135,12 +137,8 @@ export class AdminAttendanceComponent implements OnInit {
       }
     )
   }
-
-   public getChartData() {
-    console.log(this.totaOnleaves);
-    console.log(this.totalAbsent);
-    this.chartOptions.series = [this.totalPresent,this.totalAbsent,this.totaOnleaves]
-  }
+  public getChartData() {
+    this.chartOptions.series = [this.totalAbsent, this.totalPresent, this.totaOnleaves]
 
   public  manageStrackedBar(){
     let absent = 30;
@@ -154,5 +152,6 @@ export class AdminAttendanceComponent implements OnInit {
 
   public getPercentage(num:number,sum:number){
     return Math.floor((num/sum)*100);
+
   }
 }
