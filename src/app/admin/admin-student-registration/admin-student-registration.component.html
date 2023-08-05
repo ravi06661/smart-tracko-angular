@@ -14,7 +14,7 @@
                     <p class="font-14 font-400  text-black mb-0">Ui/Ux Team Lead</p>
                 </div>
             </div>
-            <a  class="ms-3 right_menu_toggle">
+            <a class="ms-3 right_menu_toggle">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path opacity="0.5"
                         d="M18.7491 9V9.7041C18.7491 10.5491 18.9903 11.3752 19.4422 12.0782L20.5496 13.8012C21.5612 15.3749 20.789 17.5139 19.0296 18.0116C14.4273 19.3134 9.57274 19.3134 4.97036 18.0116C3.21105 17.5139 2.43882 15.3749 3.45036 13.8012L4.5578 12.0782C5.00972 11.3752 5.25087 10.5491 5.25087 9.7041V9C5.25087 5.13401 8.27256 2 12 2C15.7274 2 18.7491 5.13401 18.7491 9Z"
@@ -57,63 +57,89 @@
             <div class="form_wrap">
                 <div class="form_1">
                     <h2 class="font-21 secondary mb-3">Personal info</h2>
-                    <form action="">
+                    <form [formGroup]="registrationForm">
                         <div class="row mb-3">
                             <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" class="form-control" formControlName="fullName" placeholder="Student Name..">
+                                    <div *ngIf="registrationForm.get('fullName')?.invalid && registrationForm.get('fullName')?.touched" class="text-danger">
+                                      Full Name is required.
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-md-6 mb_20">
+                                <label for="" class="mb_6 font-17 font-500 secondary">Date of Birth</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="date" id="" name="dob" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.dob" placeholder="Date fo Birth..">
                                 </div>
                             </div>
                             <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Branch</label>
+                                <label for="" class="mb_6 font-17 font-500 secondary">Father's Name</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="text" id="" name="fathersName" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.fathersName" placeholder="father Name..">
                                 </div>
                             </div>
                             <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">College</label>
+                                <label for="" class="mb_6 font-17 font-500 secondary">Mother's Name</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="text" id="" name="mothersName" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.mothersName" placeholder="mother Name..">
                                 </div>
                             </div>
                             <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Monther's Name</label>
+                                <label for="" class="mb_6 font-17 font-500 secondary">Father's Occupation</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="text" id="" name="fathersOccupation" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.fathersOccupation"
+                                        placeholder="father Occupation..">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb_20">
+                                <label for="" class="mb_6 font-17 font-500 secondary">Contact No. Father's</label>
+                                <div class="input_icon position-relative">
+                                    <input type="number" id="" name="contactFather" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.contactFather" placeholder="Conatct..">
                                 </div>
                             </div>
                             <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Phone</label>
+                                <label for="" class="mb_6 font-17 font-500 secondary">Contact No. Mother's</label>
                                 <div class="input_icon position-relative">
-                                    <input type="tel" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="number" id="" name="cotactMother" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.cotactMother" placeholder="Conatct..">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb_20">
+                                <label for="" class="mb_6 font-17 font-500 secondary">Language Known</label>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="languageKnown" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.languageKnown" placeholder="Language Known..">
                                 </div>
                             </div>
                             <div class="col-md-6 mb_20">
                                 <label for="" class="mb_6 font-17 font-500 secondary">Email</label>
                                 <div class="input_icon position-relative">
-                                    <input type="email" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="email" id="" name="email" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.email" placeholder="Email..">
                                 </div>
                             </div>
-                            <div class="col-md-12 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">College</label>
+                            <div class="col-md-6 mb_20">
+                                <label for="" class="mb_6 font-17 font-500 secondary">Mobile</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="email" id="" name="mobile" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.mobile" placeholder="Mobile..">
                                 </div>
                             </div>
+
                         </div><!-- row -->
                         <div class="row">
                             <div class="col-md-12 text-end">
-                                <button
-                                    class="top_profile_sec_btn font-16 font-500 personal_next_btns" onclick="nextfun()">Next
-                            </button>
+                                <button class="top_profile_sec_btn font-16 font-500 personal_next_btns"
+                                    [disabled]="registrationForm.invalid" onclick="nextfun()">Next
+                                </button>
                             </div>
                         </div><!-- row -->
                     </form>
@@ -124,61 +150,50 @@
                     <form action="">
                         <div class="row mb-3">
                             <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
+                                <label for="" class="mb_6 font-17 font-500 secondary">Apply for Course</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="text" id="" name="applyForCourse" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.applyForCourse"
+                                        placeholder="Apply for Course..">
                                 </div>
                             </div>
                             <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Branch</label>
+                                <label for="" class="mb_6 font-17 font-500 secondary"> Current Course</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="text" id="" name="currentCourse" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.currentCourse" placeholder=" Current Course..">
                                 </div>
                             </div>
                             <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">College</label>
+                                <label for="" class="mb_6 font-17 font-500 secondary">Joining Date</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="date" id="" name="joinDate" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.joinDate" placeholder="Joining Date..">
                                 </div>
                             </div>
                             <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Monther's Name</label>
+                                <label for="" class="mb_6 font-17 font-500 secondary">Current Sem</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="number" id="" name="currentSem" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.currentSem" placeholder="Current Sem..">
                                 </div>
                             </div>
                             <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Phone</label>
+                                <label for="" class="mb_6 font-17 font-500 secondary">College Name</label>
                                 <div class="input_icon position-relative">
-                                    <input type="tel" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Email</label>
-                                <div class="input_icon position-relative">
-                                    <input type="email" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">College</label>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="text" id="" name="college" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.college" placeholder="College Name..">
                                 </div>
                             </div>
                         </div><!-- row -->
 
                         <div class="row">
                             <div class="col-md-12 d-flex justify-content-between">
-                                <button class="top_profile_sec_btn font-16 font-500" onclick="enrolment_back_btns()">Back
+                                <button class="top_profile_sec_btn font-16 font-500"
+                                    onclick="enrolment_back_btns()">Back
                                 </button>
-                                <button class="top_profile_sec_btn font-16 font-500" onclick="enrolment_next_btns()">Next
+                                <button class="top_profile_sec_btn font-16 font-500"
+                                    onclick="enrolment_next_btns()">Next
                                 </button>
                             </div>
                         </div><!-- row -->
@@ -190,62 +205,41 @@
                     <form action="">
                         <div class="row mb-3">
                             <div class="col-md-12 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Address</label>
+                                <label for="" class="mb_6 font-17 font-500 secondary">Local Address</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="text" id="" name="localAddress" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.localAddress" placeholder="Address..">
                                 </div>
                             </div>
-                            <div class="col-md-6 mb_20">
+                            <div class="col-md-12 mb_20">
+                                <label for="" class="mb_6 font-17 font-500 secondary">Permanent Address</label>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="parmanentAddress" class="form-control input_text"
+                                        [(ngModel)]="registrationDetails.parmanentAddress"
+                                        placeholder="Permanent Address..">
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6 mb_20">
                                 <label for="" class="mb_6 font-17 font-500 secondary">City</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="text" id="" name="" class="form-control input_text"    [(ngModel)]="registrationDetails.email"  placeholder="Day1">
                                 </div>
                             </div>
                             <div class="col-md-6 mb_20">
                                 <label for="" class="mb_6 font-17 font-500 secondary">State</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
+                                    <input type="text" id="" name="" class="form-control input_text"    [(ngModel)]="registrationDetails.email" placeholder="Day1">
                                 </div>
-                            </div>
+                            </div> -->
 
-                            <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Phone</label>
-                                <div class="input_icon position-relative">
-                                    <input type="tel" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Email</label>
-                                <div class="input_icon position-relative">
-                                    <input type="email" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">Name</label>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb_20">
-                                <label for="" class="mb_6 font-17 font-500 secondary">City</label>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day1">
-                                </div>
-                            </div>
                         </div><!-- row -->
 
                         <div class="row">
                             <div class="col-md-12 d-flex justify-content-between">
                                 <button class="top_profile_sec_btn font-16 font-500" onclick="address_back_btns()">Back
                                 </button>
-                                <a routerLink="/admin/student" class="top_profile_sec_btn font-16 font-500 lh-1 address_complete_btns">Complete</a>
+                                <a class="top_profile_sec_btn font-16 font-500 lh-1 address_complete_btns"
+                                    (click)="submit()"> Complete</a>
                             </div>
                         </div><!-- row -->
                     </form>

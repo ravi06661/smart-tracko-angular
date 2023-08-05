@@ -1,7 +1,7 @@
 <div id="main" class="main dashboard_page">
   <div class="profile d-flex">
     <h1 class="font-27 font-700 secondary mb-0">Attendance</h1>
-   <app-profile-bar></app-profile-bar>
+    <app-profile-bar></app-profile-bar>
   </div>
 
   <!-- DASHBOARD START -->
@@ -12,20 +12,15 @@
       <div class="today_attendance">
         <h3 class="admin-title font-17 font-600 secondary position-relative">Today’s Attendance</h3>
         <div class="attendance-area position-relative">
-        <!--The content below is only a placeholder and can be replaced.-->
-        <div class="chart">
-         
-            <apx-chart
-            [colors]="chartOptions.colors"
-            [series]="chartOptions.series"
-            [chart]="chartOptions.chart"
-            [labels]="chartOptions.labels"
-            [responsive]="chartOptions.responsive"
-            [legend]="chartOptions.legend"
-            [stroke]="chartOptions.stroke"
-          ></apx-chart>
-         </div>
-</div>
+          <!--The content below is only a placeholder and can be replaced.-->
+          <div class="col-md-6">
+            <div id="chart" class="chartmargin">
+              <apx-chart [colors]="chartOptions.colors" [series]="chartOptions.series" [chart]="chartOptions.chart"
+                [labels]="chartOptions.labels" [responsive]="chartOptions.responsive" [legend]="chartOptions.legend"
+                [stroke]="chartOptions.stroke"></apx-chart>
+            </div>
+          </div>
+        </div>
 
       </div>
 
@@ -88,8 +83,8 @@
               </tr>
             </thead>
             <br>
-            <h1  class="font-21 font-600 secondary position-relative" 
-            *ngIf="absentData.length==0">NO ABSENT DATA FOUND !!!</h1>
+            <h1 class="font-21 font-600 secondary position-relative" *ngIf="absentData.length==0">  NO ABSENT DATA FOUND
+              !!!</h1>
             <tbody class="bg-light">
               <tr *ngFor="let obj of absentData">
                 <td class="d-flex align-items-center" style="gap:5px;">
@@ -117,8 +112,8 @@
               </tr>
             </thead>
             <br>
-            <h1  class="font-21 font-600 secondary position-relative" 
-            *ngIf="leavesData.length==0">NO LEAVE DATA FOUND !!!</h1>
+            <h1 class="font-21 font-600 secondary position-relative" *ngIf="leavesData.length==0"> NO LEAVE DATA FOUND
+              !!!</h1>
             <tbody class="bg-light">
               <tr *ngFor="let obj of leavesData">
                 <td class="d-flex align-items-center" style="gap:5px;">
@@ -127,7 +122,7 @@
                     <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                   </h5>
                 </td>
-               
+
                 <td>{{obj.leaveDate|date}}</td>
                 <td>{{obj.leaveEndDate|date}}</td>
               </tr>
@@ -151,10 +146,10 @@
               </tr>
             </thead>
             <br>
-            <h1  class="font-21 font-600 secondary position-relative" 
-            *ngIf="leavesRequestData.length==0">NO LEAVE REQUESTS DATA FOUND !!!</h1>
+            <h1 class="font-21 font-600 secondary position-relative" *ngIf="leavesRequestData.length==0"> NO LEAVE
+              REQUESTS DATA FOUND !!!</h1>
             <tbody class="bg-light">
-              
+
               <tr *ngFor="let obj of leavesRequestData">
                 <td class="d-flex align-items-center" style="gap:5px;">
                   <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid image">
@@ -165,14 +160,16 @@
                 <td>
                   <p class="mb-0">CL {{obj.leaveDuration}} Days </p>
                   <p class="mb-0">{{ obj.leaveDate }} - {{ obj.leaveEndDate }}</p>
-                  <p class="mb-0">For {{obj.leaveReason}}</p>
-                 
+                  <p class="mb-0"> {{obj.leaveReason}}</p>
+
                 </td>
                 <td>
 
-                 
-                  <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center" (click)="approveStudentLeaveReqeust(obj.studentId,'approve') ">Approved</h3>
-                  <h5 class="warning font-13 font-500 mb-0 text-center"(click)="approveStudentLeaveReqeust(obj.studentId,'deny')" >Deny</h5>
+
+                  <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center"
+                    (click)="approveStudentLeaveReqeust(obj.studentId,obj.leaveId,'approve') ">Approved</h3>
+                  <h5 class="warning font-13 font-500 mb-0 text-center"
+                    (click)="approveStudentLeaveReqeust(obj.studentId,obj.leaveId,'deny')">Deny</h5>
 
                 </td>
               </tr>

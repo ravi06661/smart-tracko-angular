@@ -18,17 +18,18 @@
     border-radius: 50px;
 }
 
-#chart {
-  max-width: 380px;
-  margin: 35px auto;
-  padding: 0;
-}
-.chart{
-  margin: 80px;
-}
+
 .table_scroll{
   overflow-y: scroll !important;
 }
 .table_scroll::-webkit-scrollbar{
   display: none;
+}
+.chartmargin {
+  margin-top: 80px;
+}
+#chart {
+  max-width: 380px;
+  margin: 50px auto;
+  padding: 0;
 }

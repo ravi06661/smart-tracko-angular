@@ -18,6 +18,5 @@ export class Attendance {
     public createdDate:Date | undefined
     public updatedDate:Date | undefined
     workReport:string | undefined
-	
 	attachment:string | undefined
 }

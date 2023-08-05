@@ -48,18 +48,36 @@ export class AdminAttendanceComponent implements OnInit {
     this.chartOptions = {
       series: [],
       chart: {
-        type: "donut"
+        width: 320,
+        type: "donut",
+        toolbar: {
+          show: false // Hide the default toolbar
+        }
       },
-      labels: ["Absent", "Present", "OnLeaves"],
+      colors: ["#5754E5", "#FF4A11", "#F8961E"],
+      labels: ["Absent", "Present", "Leaves"],
+      legend: {
+        position: "bottom", // Show the legend at the bottom
+        // formatter: function (seriesName:any, opts:any) {
+        //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
+        //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
+        //   return seriesName + ": " + percent + "%";
+        // }
+      },
+      stroke: {
+        show: false // Set this to false to remove the borders between the series
+      },
       responsive: [
+
         {
           breakpoint: 480,
           options: {
             chart: {
-              width: 200
+              width: 280
+
             },
             legend: {
-              position: "bottom"
+              position: 'bottom'
             }
           }
         }
@@ -72,14 +90,14 @@ export class AdminAttendanceComponent implements OnInit {
     this.getTotalStudentTodayLeavesRequest();
     this.getAbsents();
     this.getActiveLeaves();
-    
+
   }
   public getAbsents() {
     this.studentService.getTodayStudentAbsentData().subscribe(
       (data: any) => {
         this.absentData = data.totalAbsent;
         this.totalAbsent = this.absentData.length;
-        this.totalPresent =data.totalPresent
+        this.totalPresent = data.totalPresent
         this.getChartData();
       }
     )
@@ -89,7 +107,6 @@ export class AdminAttendanceComponent implements OnInit {
       (data: any) => {
         this.leavesData = data;
         this.totaOnleaves = this.leavesData.length;
-        console.log('activeLeaves', this.leavesData);
         this.getChartData();
       }
     )
@@ -111,10 +128,7 @@ export class AdminAttendanceComponent implements OnInit {
       }
     )
   }
-
-   public getChartData() {
-    console.log(this.totaOnleaves);
-    console.log(this.totalAbsent);
-    this.chartOptions.series = [this.totalAbsent,this.totalPresent,this.totaOnleaves]
+  public getChartData() {
+    this.chartOptions.series = [this.totalAbsent, this.totalPresent, this.totaOnleaves]
   }
 }
