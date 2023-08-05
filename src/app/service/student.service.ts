@@ -9,6 +9,8 @@ import { LeaveService } from './leave.service';
 import { TodayLeavesRequest } from '../entity/today-leaves-request';
 import { Observable } from 'rxjs';
 import { StudentDetails } from '../entity/student-details';
+import { Student } from '../entity/student';
+
 
 @Injectable({
   providedIn: 'root'
@@ -97,4 +99,14 @@ export class StudentService {
   public approveStudentLeaveReqeust(studentId: number, leaveId: number, status: string) {
     return this.http.put(`${this.studentUrl}/approveStudentLeaveReqeust/${studentId}/${leaveId}/${status}`, null);
   }
+
+  public getAllStudent(page: Number, size: number) {
+    return this.http.get<Student[]>(`${this.studentUrl}/getAllStudentData?page=${page}&size=${size}`);
+}
+
+public searchStudentByName(fullName:string){
+  console.log('hi');
+  
+  return this.http.get<Student[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
+}
 }

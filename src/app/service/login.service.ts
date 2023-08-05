@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { S } from '@fullcalendar/core/internal-common';
 //import * as jwt_decode from "jwt-decode";
@@ -7,7 +8,7 @@ import jwt_decode from 'jwt-decode';
 })
 export class LoginService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   public setToken(token:any){
     localStorage.setItem('token',token);
@@ -67,6 +68,8 @@ export class LoginService {
   public logout(){
     localStorage.clear();
   }
+
+ 
 }
 
 

@@ -1,57 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { log } from 'console';
-import { KafkaServiceService } from 'src/app/service/kafka-service.service';
-import { LoginService } from 'src/app/service/login.service';
-import { QRServiceService } from 'src/app/service/qrservice.service';
-import * as Stomp from "stompjs";
-import * as SockJS from "sockjs-client";
-import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import * as SockJS from 'sockjs-client';
+import { LoginService } from './login.service';
+import { QRServiceService } from './qrservice.service';
+import { UtilityServiceService } from './utility-service.service';
+import * as Stomp from "stompjs";
 
-
-@Component({
-  selector: 'app-login-qr',
-  templateUrl: './login-qr.component.html',
-  styleUrls: ['./login-qr.component.scss']
+@Injectable({
+  providedIn: 'root'
 })
-export class LoginQRComponent implements OnInit{
+export class SocketServiceService {
 
-  qrImage='';
-  qrKey='';
+  qrKey:any;
   stompClient: any = null;
   connection = false
-
+  token:any
   BASE_URL = this.utilityService.getBaseUrl();
   SOCKET_URL = this.BASE_URL+'/socket';
   constructor(public qrService:QRServiceService,private loginService:LoginService,private router:Router,private utilityService:UtilityServiceService,private deviceService: DeviceDetectorService){}
 
-
-  
-  ngOnInit(): void {
-    console.log(this.deviceService.getDeviceInfo())
-    this.qrService.generateQRCode().subscribe({
-      next:(data:any)=>{
-        this.qrImage = data.qrData;
-        this.qrKey = data.qrKey;
-        this.qrKey = this.qrKey.split('#')[1];
-        localStorage.setItem('key',this.qrKey);
-      }
-    });
-    this.connect();
-  }
-
   
     connect(){
+      this.qrKey = localStorage.getItem('key');
       var socket = new SockJS(this.SOCKET_URL);
     this.stompClient = Stomp.over(socket);
+
     let that = this;
     this.stompClient.connect({}, function(frame:any){
       that.connection = true;
       
       that.stompClient.subscribe('/queue/messages-'+ that.qrKey,
       function(token:any){
-        console.log(token.body);
+        console.log("socket****"+token.body);
         if(token.body=='LOGOUT'){
          that.qrService.webLogout().subscribe({
           next:(data)=>{
@@ -59,7 +40,6 @@ export class LoginQRComponent implements OnInit{
             that.router.navigate(['']);
             that.stompClient.disconnect();
           }
-
         });
          return;
         }
@@ -92,5 +72,4 @@ export class LoginQRComponent implements OnInit{
       }
     }
   
-  }
-
+}

@@ -36,6 +36,11 @@ export class AdminAttendanceComponent implements OnInit {
   leavesData: ActiveLeaves[] = []
   leavesRequestData: TodayLeavesRequest[] = []
 
+  leaveWidth = 0
+  absentWidth = 0
+  presentWidth = 0
+
+
   @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions: Partial<ChartOptions>;
 
@@ -46,7 +51,7 @@ export class AdminAttendanceComponent implements OnInit {
   constructor(private studentService: StudentService, private utilityService: UtilityServiceService) {
 
     this.chartOptions = {
-      series: [],
+      series: [75, 20, 5],
       chart: {
         width: 320,
         type: "donut",
@@ -55,14 +60,15 @@ export class AdminAttendanceComponent implements OnInit {
         }
       },
       colors: ["#5754E5", "#FF4A11", "#F8961E"],
-      labels: ["Absent", "Present", "Leaves"],
+
+      labels: ["Present", "Absent", "Leaves"],
       legend: {
         position: "bottom", // Show the legend at the bottom
-        // formatter: function (seriesName:any, opts:any) {
-        //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
-        //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
-        //   return seriesName + ": " + percent + "%";
-        // }
+    // formatter: function (seriesName:any, opts:any) {
+    //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
+    //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
+    //   return seriesName + ": " + percent + "%";
+    /}
       },
       stroke: {
         show: false // Set this to false to remove the borders between the series
@@ -75,9 +81,11 @@ export class AdminAttendanceComponent implements OnInit {
             chart: {
               width: 280
 
+              
             },
-            legend: {
-              position: 'bottom'
+            legend:{
+              position:'bottom'
+
             }
           }
         }
@@ -87,6 +95,7 @@ export class AdminAttendanceComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.manageStrackedBar()
     this.getTotalStudentTodayLeavesRequest();
     this.getAbsents();
     this.getActiveLeaves();
@@ -130,5 +139,19 @@ export class AdminAttendanceComponent implements OnInit {
   }
   public getChartData() {
     this.chartOptions.series = [this.totalAbsent, this.totalPresent, this.totaOnleaves]
+
+  public  manageStrackedBar(){
+    let absent = 30;
+    let present = 40;
+    let leave = 60;
+    let sum = present+absent+leave
+    this.presentWidth = this.getPercentage(present,sum);
+    this.absentWidth = this.getPercentage(absent,sum);
+    this.leaveWidth = this.getPercentage(leave,sum);
+  }
+
+  public getPercentage(num:number,sum:number){
+    return Math.floor((num/sum)*100);
+
   }
 }

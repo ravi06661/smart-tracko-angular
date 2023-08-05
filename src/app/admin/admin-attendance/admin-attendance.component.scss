@@ -25,6 +25,7 @@
 .table_scroll::-webkit-scrollbar{
   display: none;
 }
+
 .chartmargin {
   margin-top: 80px;
 }
@@ -33,3 +34,41 @@
   margin: 50px auto;
   padding: 0;
 }
+
+
+.Present {
+  background: #1105ee;
+  //width: 60%;
+  height: 40px;
+}
+
+.Present:hover {
+  background: #8581d4;
+  //width: 60%;
+  height: 40px;
+}
+
+.Absent {
+  background-color: #e95b09;
+  //width: 20%;
+  height: 40px;
+}
+
+.Absent:hover {
+  background-color: #d87567;
+  //width: 20%;
+  height: 40px;
+}
+
+.Leave {
+  background: #fbff00;
+  //width: 15%;
+  height: 40px;
+}
+
+.Leave:hover {
+  background: #e6e78a;
+  //width: 15%;
+  height: 40px;
+}
+
