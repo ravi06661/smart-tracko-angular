@@ -47,23 +47,23 @@
         <div class="assignment-area">
           <div class="chart-detail">
             <div class="submitted-value">
-              <p>Submitted</p>
+              <p>Present</p>
               <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>120</h2>
             </div>
             <div class="pending-value">
-              <p>Pending</p>
+              <p>Absent</p>
               <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>30</h2>
             </div>
           </div>
           <div class="assignment-chart">
-            <div class="submitted"></div>
-            <div class="approve"></div>
-            <div class="pending"></div>
-            <div class="our_due"></div>
+            <div class="Present" [style.width]="presentWidth+'%'"></div>
+            <div class="Absent" [style.width]="absentWidth+'%'"></div>
+            <div class="Leave" [style.width]="leaveWidth+'%'"></div>
+            <!-- <div class="our_due" [style.width]="presentWidth"></div> -->
           </div>
           <div class="chart-detail-bottom">
             <div class="approve-value">
-              <p>Approved</p>
+              <p>Leave</p>
               <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>120</h2>
             </div>
             <div class="over-due-value">
@@ -88,7 +88,7 @@
               </tr>
             </thead>
             <br>
-            <h1  class="font-21 font-600 secondary position-relative" 
+            <h1  class="font-15 font-600 secondary position-relative" 
             *ngIf="absentData.length==0">NO ABSENT DATA FOUND !!!</h1>
             <tbody class="bg-light">
               <tr *ngFor="let obj of absentData">
@@ -117,8 +117,8 @@
               </tr>
             </thead>
             <br>
-            <h1  class="font-21 font-600 secondary position-relative" 
-            *ngIf="leavesData.length==0">NO LEAVE DATA FOUND !!!</h1>
+            <h1  class="font-15 font-600 secondary position-relative" 
+            *ngIf="leavesData.length==0">NO LEAVES DATA FOUND !!!</h1>
             <tbody class="bg-light">
               <tr *ngFor="let obj of leavesData">
                 <td class="d-flex align-items-center" style="gap:5px;">
@@ -151,7 +151,7 @@
               </tr>
             </thead>
             <br>
-            <h1  class="font-21 font-600 secondary position-relative" 
+            <h1  class="font-15 font-600 secondary position-relative" 
             *ngIf="leavesRequestData.length==0">NO LEAVE REQUESTS DATA FOUND !!!</h1>
             <tbody class="bg-light">
               
@@ -171,8 +171,8 @@
                 <td>
 
                  
-                  <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center" (click)="approveStudentLeaveReqeust(obj.studentId,'approve') ">Approved</h3>
-                  <h5 class="warning font-13 font-500 mb-0 text-center"(click)="approveStudentLeaveReqeust(obj.studentId,'deny')" >Deny</h5>
+                  <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center" (click)="approveStudentLeaveReqeust(obj.studentId,obj.leaveId,'approve') ">Approved</h3>
+                  <h5 class="warning font-13 font-500 mb-0 text-center"(click)="approveStudentLeaveReqeust(obj.studentId,obj.leaveId,'deny')" >Deny</h5>
 
                 </td>
               </tr>
