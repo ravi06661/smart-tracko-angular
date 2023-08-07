@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UtilityServiceService } from './utility-service.service';
 import { Profile } from '../entity/profile';
-import { profile } from 'console';
 import { LoginService } from './login.service';
 import { LeaveService } from './leave.service';
 import { TodayLeavesRequest } from '../entity/today-leaves-request';
@@ -65,16 +64,17 @@ export class StudentService {
     return this.http.get(`${this.studentUrl}/getStudentCalenderData`, { params });
   }
 
-  public getStudentHeaderProfileData() {
 
-    if (this.profileData.id == 0) {
+  public getStudentProfileData() {
+    if (this.profileData.studentId == 0) {
+ 
       let id = this.loginService.getStudentId();
       this.http.get(`${this.studentUrl}/getStudentData/${id}`).subscribe(
         (data: any) => {
           this.profileData.name = data.studentName;
           this.profileData.profilePic = data.profilePic;
           this.profileData.course = data.course;
-          this.profileData.id = data.id
+          this.profileData.studentId = data.id
           console.log(this.profileData)
         }, (error) => {
           console.log(error);
@@ -82,7 +82,11 @@ export class StudentService {
       )
       return this.profileData
     } else {
-      return this.profileData;
+      if (this.profileData.studentId != this.loginService.getStudentId()) {
+        this.profileData = new Profile();
+        this.getStudentProfileData()
+      }
+      return this.profileData
     }
   }
 
@@ -101,7 +105,7 @@ export class StudentService {
 
   public getAllStudent(page: Number, size: number) {
     return this.http.get<StudentDetails[]>(`${this.studentUrl}/getAllStudentData?page=${page}&size=${size}`);
-}
+  }
 
 public searchStudentByName(fullName:string){
   console.log('hi');
@@ -116,5 +120,4 @@ public getByStudentById(studentId:number){
 public getStudentProfileData(studentId: number) {
   return this.http.get(`${this.studentUrl}/getStudentForWebStudentProfile?studentId=${studentId}`);
 }
-
 }

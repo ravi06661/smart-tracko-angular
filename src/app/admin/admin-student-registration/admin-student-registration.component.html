@@ -112,7 +112,8 @@
                                             name="mothersName" formControlName="mothersName"
                                             [(ngModel)]="registrationDetails.mothersName" placeholder="Enter Mother's Name">
                                             <div *ngIf="isFieldInvalidForpersonlaDetailsForm('mothersName')" class="text-danger mt-1 "class="text-danger">mother's name  is required.</div>
-                                    </div>
+                                       {{registrationDetails.mothersName}}
+                                        </div>
                                 </div>
                             </div>
 

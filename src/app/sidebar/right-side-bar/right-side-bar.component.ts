@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { Observable, interval, map, min, switchMap } from 'rxjs';
 import { Attendance } from 'src/app/entity/attendance';
 import { Profile } from 'src/app/entity/profile';
+import { AdminServiceService } from 'src/app/service/admin-service.service';
 import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
@@ -19,9 +20,13 @@ export class RightSideBarComponent implements OnInit {
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   profileData: Profile = new Profile();
 
-  constructor(private studentService: StudentService, private utilityService: UtilityServiceService) { }
+  constructor(private studentService: StudentService, private utilityService: UtilityServiceService,private loginService:LoginService,private adminService:AdminServiceService) { }
 
   ngOnInit(): void {
-    this.profileData = this.studentService.getStudentHeaderProfileData();
+    if( this.loginService.getRole()=='STUDENT'){
+      this.profileData = this.studentService.getStudentProfileData();
+    }else  if( this.loginService.getRole()=='ADMIN'){
+      this.profileData = this.adminService.getAdminProfileData()
+    } 
   }
 }

@@ -18,7 +18,7 @@ export class StudentDetails {
 	public contactFather: string = '';
 	public contactMother: string = ''
 	public localAddress: string = '';
-	public parmanentAddress = '';
+	public parmanentAddress:string = '';
 	public languageKnown: string = '';
 	public currentCourse: string = '';
 	// public isCompleted:boolean | undefined;

@@ -28,6 +28,26 @@ export class QRServiceService {
   // public qrLogin(token: string,deviceInfo:any): Observable<any> {
   //   console.log(token);
     
+
+     var params:HttpParams = new HttpParams;
+     params=params.append('token',token);
+     params = params.append('os',deviceInfo.os)
+     params=params.append('deviceType',deviceInfo.deviceType)
+     params=params.append('browser',deviceInfo.browser)
+    return this.http.post<any>(this.qrUrl + "/clientlogin",{params},
+      { headers: { "Content-Type": "application/json; charset=UTF-8" } })
+      .pipe(map(response => {
+        if (response) {
+          localStorage.setItem('token', response.token);
+          this.profileData.name = response.name;
+          this.profileData.profilePic = response.profilePic;
+          this.profileData.studentId = response.id;
+          this.profileData.course = response.course;
+        }
+        return response;
+      }));
+  }
+
   //    var params:HttpParams = new HttpParams;
   //    params=params.append('token',token);
   //    params = params.append('os',deviceInfo.os)
@@ -46,7 +66,6 @@ export class QRServiceService {
   //       return response;
   //     }));
   // }
-  
   public getProfileData() {
     return this.profileData;
   }

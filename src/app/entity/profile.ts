@@ -1,6 +1,8 @@
 export class Profile {
-    id: number = 0;
+    studentId: number = 0;
+    adminId: string = ''
     name: string = ''
     profilePic: string = ''
     course: string = ''
+    role: string = ''
 }
