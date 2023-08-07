@@ -67,7 +67,6 @@ export class StudentService {
   }
 
   public getStudentProfileData() {
-
     if (this.profileData.id == 0) {
       let id = this.loginService.getStudentId();
       this.http.get(`${this.studentUrl}/getStudentData/${id}`).subscribe(
@@ -83,7 +82,11 @@ export class StudentService {
       )
       return this.profileData
     } else {
-      return this.profileData;
+      if (this.profileData.id != this.loginService.getStudentId()) {
+        this.profileData = new Profile();
+        this.getStudentProfileData()
+      }
+      return this.profileData
     }
   }
 
@@ -102,11 +105,11 @@ export class StudentService {
 
   public getAllStudent(page: Number, size: number) {
     return this.http.get<Student[]>(`${this.studentUrl}/getAllStudentData?page=${page}&size=${size}`);
-}
+  }
 
-public searchStudentByName(fullName:string){
-  console.log('hi');
-  
-  return this.http.get<Student[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
-}
+  public searchStudentByName(fullName: string) {
+    console.log('hi');
+
+    return this.http.get<Student[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
+  }
 }
