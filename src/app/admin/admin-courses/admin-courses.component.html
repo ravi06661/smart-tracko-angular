@@ -1,1 +1,345 @@
-<p>admin-courses works!</p>
+<div id="main" class="main dashboard_page">
+            <div class="profile d-flex">
+
+                <div class="profile_top_heading d-flex gap_24">
+                    <h1 class="font-27 font-700 secondary mb-0">Courses</h1>
+                    <button class="top_profile_sec_btn font-14 font-500 lh-1" data-bs-toggle="modal"
+                        data-bs-target="#course-add-modal">Create New</button>
+                </div>
+
+                <app-profile-bar></app-profile-bar>
+            </div>
+
+            <!-- DASHBOARD START -->
+
+            <div class="scroll_sec mt-0">
+                <div class="row">
+                    <div class="col-md-3 bootstrap_cards">
+                        <div class="admin-subject_card">
+                            <div class="admin-subject_card_top">
+                                <div class="admin-subject_name_card">
+                                    <div class="admin-sub-left">
+                                        <div class="admin-subject-image">
+                                            <img src="assets/images/svg_img/subject.svg">
+                                        </div>
+                                        <div class="subject-details">
+                                            <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
+                                            <p class="chapter-cout mb-0">5 Batches 8 Subjects</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
+                                <div class="meat-dot-dropdown" style="display: none;" >
+                                    <a routerLink="/admin/coursesbatches"
+                                        class="mb-1 warning d-flex align-items-center gap_5"><i
+                                            class="fi fi-rr-document line-height-0"></i> View</a>
+                                    <p class="mb-0 warning d-flex align-items-center gap_5" data-bs-toggle="modal"
+                                        data-bs-target="#course-edit-modal"><i
+                                            class="fi fi-rr-file-edit line-height-0"></i> Edit</p>
+                                    <p class="mb-0 delete-icon-color d-flex align-items-center gap_5"
+                                        data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                            class="fi fi-rr-trash line-height-0"></i> Delete</p>
+                                </div>
+
+                            </div><!-- subject_card_top -->
+
+                        </div> <!-- subject_card -->
+                    </div>
+
+                    <div class="col-md-3 bootstrap_cards">
+                        <div class="admin-subject_card">
+                            <div class="admin-subject_card_top">
+                                <div class="admin-subject_name_card">
+                                    <div class="admin-sub-left">
+                                        <div class="admin-subject-image">
+                                            <img src="assets/images/svg_img/subject.svg">
+                                        </div>
+                                        <div class="subject-details">
+                                            <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
+                                            <p class="chapter-cout mb-0">5 Batches 8 Subjects</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="subject-meat-dot">
+                                    <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"></i>
+                                </span>
+                            </div><!-- subject_card_top -->
+
+                        </div> <!-- subject_card -->
+                    </div>
+
+                    <div class="col-md-3 bootstrap_cards">
+                        <div class="admin-subject_card">
+                            <div class="admin-subject_card_top">
+                                <div class="admin-subject_name_card">
+                                    <div class="admin-sub-left">
+                                        <div class="admin-subject-image">
+                                            <img src="assets/images/svg_img/subject.svg">
+                                        </div>
+                                        <div class="subject-details">
+                                            <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
+                                            <p class="chapter-cout mb-0">5 Batches 8 Subjects</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="subject-meat-dot">
+                                    <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"></i>
+                                </span>
+                            </div><!-- subject_card_top -->
+
+                        </div> <!-- subject_card -->
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- DASHBOARD END -->
+
+            <!-- RIGHT SIDE START-->
+           <app-right-side-bar></app-right-side-bar>
+            <!-- RIGHT SIDE END -->
+
+
+            <!-- MIDDLE CONTENT END -->
+
+
+        </div>
+        <!--DASHBOARD END -->
+
+        <!-- Modal Delete Modal Start -->
+        <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+            <div class="modal-dialog position-relative leave_modal">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                            style="top: -23%;">
+                            <i class="fi fi-rr-cross close_icon"></i>
+                        </button>
+
+                        <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?
+                        </p>
+                        <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                            <a href="edit_taskandassignment.html">
+                                <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                                    delete</button>
+                            </a>
+                            <a href="admin_subjects.html">
+                                <button type="button" class="apply_modal_btn font-15 font-500">No, Do not
+                                    delete</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Delete Modal End -->
+
+
+        <!-- Modal Admin Course Add Modal Start -->
+        <div class="modal fade" id="course-add-modal" tabindex="-1" aria-labelledby="course-add-modal" aria-hidden="true">
+            <div class="modal-dialog position-relative leave_modal">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="modal-header apply_title">
+                            <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                                id="exampleModalLabel1">Add Course</h1>
+                            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                                <i class="fi fi-rr-cross close_icon"></i>
+                            </button>
+                        </div>
+
+                        <form action="">
+                            <div class="row">
+                                <div class="col-md-12 mb_18">
+                                    <div class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative" style="height: 120px;">
+                                        <input type="file" name="fileupload" value="fileupload" class="d-none"
+                                            id="fileupload">
+                                        <label for="fileupload" class="font-17 font-500 d-flex">
+                                            <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
+                                            Add Media</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb_18">
+                                    <label for="" class="mb_6 font-15 font-500 secondary">Course Name</label>
+                                    <div class="input_icon position-relative">
+                                        <input type="text" id="" name="" class="form-control input_text"
+                                            placeholder="Day 1">
+                                    </div>
+                                </div>
+
+                                <h2 class="font-15 font-500 secondary">Subjects</h2>
+                                <div class="all-subjects-list">
+                                 <div class="col-md-12 mb_18">
+                                    <div class="input_icon position-relative input_text checkbox_area">
+                                        <div class="d-flex gap_5 align-items-center">
+                                            <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                            <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                        </div>
+                                     <input type="checkbox" class="choose-subjects">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb_18">
+                                    <div class="input_icon position-relative input_text checkbox_area">
+                                        <div class="d-flex gap_5 align-items-center">
+                                            <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                            <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                        </div>
+                                     <input type="checkbox" class="choose-subjects">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb_18">
+                                    <div class="input_icon position-relative input_text checkbox_area">
+                                        <div class="d-flex gap_5 align-items-center">
+                                            <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                            <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                        </div>
+                                     <input type="checkbox" class="choose-subjects">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb_18">
+                                    <div class="input_icon position-relative input_text checkbox_area">
+                                        <div class="d-flex gap_5 align-items-center">
+                                            <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                            <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                        </div>
+                                     <input type="checkbox" class="choose-subjects">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb_18">
+                                    <div class="input_icon position-relative input_text checkbox_area">
+                                        <div class="d-flex gap_5 align-items-center">
+                                            <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                            <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                        </div>
+                                     <input type="checkbox" class="choose-subjects">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb_18">
+                                    <div class="input_icon position-relative input_text checkbox_area">
+                                        <div class="d-flex gap_5 align-items-center">
+                                            <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                            <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                        </div>
+                                     <input type="checkbox" class="choose-subjects">
+                                    </div>
+                                </div>
+                            </div> <!-- all-subjects-list -->
+                            </div><!-- row -->
+                        </form>
+                        <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                            <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                                aria-label="Close">Cancel</button>
+                            <a routerLink="/admin/course">
+                                <button type="button" class="apply_modal_btn font-15 font-500">Save Course</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Admin Course Add Modal End -->
+
+                <!-- Modal Admin Course Edit Modal Start -->
+                <div class="modal fade" id="course-edit-modal" tabindex="-1" aria-labelledby="course-edit-modal" aria-hidden="true">
+                    <div class="modal-dialog position-relative leave_modal">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="modal-header apply_title">
+                                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                                        id="exampleModalLabel1">Edit Course</h1>
+                                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="fi fi-rr-cross close_icon"></i>
+                                    </button>
+                                </div>
+        
+                                <form action="">
+                                    <div class="row">
+                                        <div class="col-md-12 mb_18">
+                                            <div class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative" style="height: 120px;">
+                                                <input type="file" name="fileupload" value="fileupload" class="d-none"
+                                                    id="fileupload">
+                                                <label for="fileupload" class="font-17 font-500 d-flex">
+                                                    <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
+                                                    Add Media</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb_18">
+                                            <label for="" class="mb_6 font-15 font-500 secondary">Course Name</label>
+                                            <div class="input_icon position-relative">
+                                                <input type="text" id="" name="" class="form-control input_text"
+                                                    placeholder="Day 1">
+                                            </div>
+                                        </div>
+        
+                                        <h2 class="font-15 font-500 secondary">Subjects</h2>
+                                        <div class="all-subjects-list">
+                                         <div class="col-md-12 mb_18">
+                                            <div class="input_icon position-relative input_text checkbox_area">
+                                                <div class="d-flex gap_5 align-items-center">
+                                                    <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                                    <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                                </div>
+                                             <input type="checkbox" class="choose-subjects" style="border:2px dotted #00f;display:block;background:#ff0000;">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb_18">
+                                            <div class="input_icon position-relative input_text checkbox_area">
+                                                <div class="d-flex gap_5 align-items-center">
+                                                    <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                                    <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                                </div>
+                                             <input type="checkbox" class="choose-subjects">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb_18">
+                                            <div class="input_icon position-relative input_text checkbox_area">
+                                                <div class="d-flex gap_5 align-items-center">
+                                                    <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                                    <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                                </div>
+                                             <input type="checkbox" class="choose-subjects">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb_18">
+                                            <div class="input_icon position-relative input_text checkbox_area">
+                                                <div class="d-flex gap_5 align-items-center">
+                                                    <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                                    <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                                </div>
+                                             <input type="checkbox" class="choose-subjects">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb_18">
+                                            <div class="input_icon position-relative input_text checkbox_area">
+                                                <div class="d-flex gap_5 align-items-center">
+                                                    <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                                    <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                                </div>
+                                             <input type="checkbox" class="choose-subjects">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 mb_18">
+                                            <div class="input_icon position-relative input_text checkbox_area">
+                                                <div class="d-flex gap_5 align-items-center">
+                                                    <img src="assets/images/temp_img/subject-img.png" alt="" width="24" height="24">
+                                                    <h2 class="font-15 font-500 mb-0 secondary">Subject 1</h2>
+                                                </div>
+                                             <input type="checkbox" class="choose-subjects">
+                                            </div>
+                                        </div>
+                                    </div> <!-- all-subjects-list -->
+                                    </div><!-- row -->
+                                </form>
+                                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                                        aria-label="Close">Cancel</button>
+                                    <a href="admin_courses.html">
+                                        <button type="button" class="apply_modal_btn font-15 font-500">Save Course</button>
+                                    </a>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>

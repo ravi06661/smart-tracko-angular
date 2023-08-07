@@ -1,0 +1,416 @@
+<div id="main" class="main dashboard_page">
+    <div class="profile d-flex">
+        <div class="profile_top_heading d-flex gap_24">
+            <h1 class="font-27 font-700 secondary mb-0">Core Java</h1>
+            <button class="top_profile_sec_btn font-14 font-500 lh-1" id="topic_create_new"
+                data-bs-toggle="modal" data-bs-target="#subject-subadd-modal">Create New</button>
+            <button class="top_profile_sec_btn font-14 font-500 lh-1" id="test_add_ques" data-bs-toggle="modal"
+                data-bs-target="#subject-testques-modal" style="display: none;">Add Question</button>
+        </div>
+
+        <app-profile-bar></app-profile-bar>
+    </div>
+
+    <!-- DASHBOARD START -->
+
+    <div class="scroll_sec mt-0">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="subjects_tabs">
+                <h2 id="subject_topic" class="tabs_heading warning tabs_heading_border_active" onclick="subject_topic()">Subject Topic
+                </h2>
+                <h2 id="subject_test" class="tabs_heading text_gray" onclick="subject_test()">Subject Test</h2>
+            </div>
+            <a routerLink="/admin/subject"
+                class="back_button font-14 font-500  text-white line-height-0 d-flex align-items-center gap_5"><i
+                    class="fi fi-rr-arrow-left line-height-0"></i> Back </a>
+        </div>
+
+        <!-- subject topics start-->
+        <div class="subject-topic">
+
+            <div class="row mt-3">
+                <div class="col-md-3 bootstrap_cards">
+                    <div class="admin-subject_card">
+                        <div class="admin-subject_card_top">
+                            <div class="admin-subject_name_card">
+                                <div class="admin-sub-left">
+                                    <div class="admin-subject-image">
+                                        <img src="assets/images/svg_img/subject.svg">
+                                    </div>
+                                    <div class="subject-details">
+                                        <h3 class="subject_heading txt-dark mb-0">Chapter Title</h3>
+                                        <p class="chapter-cout mb-0">Core java Introduction</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
+                            <div class="meat-dot-dropdown" style="display: none;" >
+                                <a routerLink="/admin/subjectchapter"
+                                    class=" warning d-flex align-items-center gap_8"><i
+                                        class="fi fi-rr-document line-height-0 font-16"></i> View</a>
+                                <p class="mb-0 warning d-flex align-items-center gap_8" data-bs-toggle="modal"
+                                data-bs-target="#chapter-edit-modal"><i
+                                        class="fi fi-rr-file-edit line-height-0 font-15"></i> Edit</p>
+                                <p class="mb-0 delete-icon-color d-flex align-items-center gap_8"
+                                    data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                        class="fi fi-rr-trash line-height-0 font-17"></i> Delete</p>
+                            </div>
+
+                        </div><!-- subject_card_top -->
+
+                    </div> <!-- subject_card -->
+                </div>
+
+            </div>
+
+        </div>
+        <!-- subject topics  end-->
+
+        <!-- subject test start-->
+        <div class="subject-test" style="display: none;">
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="top-test-question">
+                        <h2>Question 1</h2>
+                        <div class="test-que-edit-del">
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 secondary" data-bs-toggle="modal"
+                            data-bs-target="#subject-edit_testques-modal"><i
+                                    class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                    class="fi fi-rr-trash line-height-0"></i> Delete</span>
+                        </div>
+                    </div>
+
+                    <div class="subject-test-question">
+                        <ul class="ps-0 mb-0 list-unstyled">
+                            <li>
+                                In class of 27, the overall weight of the students is 997. Can you font out the
+                                average weight of each student in the class?
+                            </li>
+                            <li>
+                                In class of 27, the overall weight of the students is 997. Can you font out the
+                                average weight of each student in the class?
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="subject-test-ques-ans">
+                        <p>A- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>B- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>C- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>D- 36.96</p>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="top-test-question">
+                        <h2>Question 1</h2>
+                        <div class="test-que-edit-del">
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"  data-bs-toggle="modal"
+                            data-bs-target="#subject-edit_testques-modal"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                    class="fi fi-rr-trash line-height-0"></i> Delete</span>
+                        </div>
+                    </div>
+
+                    <div class="subject-test-question">
+                        <ul class="ps-0 mb-0 list-unstyled">
+                            <li>
+                                In class of 27, the overall weight of the students is 997. Can you font out the
+                                average weight of each student in the class?
+                            </li>
+                            <li>
+                                In class of 27, the overall weight of the students is 997. Can you font out the
+                                average weight of each student in the class?
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="subject-test-ques-ans">
+                        <p>A- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>B- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>C- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>D- 36.96</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- subject test  end-->
+
+    </div>
+    <!-- DASHBOARD END -->
+
+    <!-- RIGHT SIDE START-->
+   <app-right-side-bar></app-right-side-bar>
+    <!-- RIGHT SIDE END -->
+
+
+    <!-- MIDDLE CONTENT END -->
+
+
+</div>
+<!--DASHBOARD END -->
+
+    <!-- Modal Delete Modal Start -->
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+<div class="modal-dialog position-relative leave_modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                style="top: -23%;">
+                <i class="fi fi-rr-cross close_icon"></i>
+            </button>
+
+            <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
+            <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                <a href="admin_subject_topic_test.html">
+                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                        delete</button>
+                </a>
+                <a href="admin_subject_topic_test.html">
+                    <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<!-- Modal Delete Modal End -->
+
+<!-- Modal Admin Subject Add Modal Start -->
+<div class="modal fade" id="subject-subadd-modal" tabindex="-1" aria-labelledby="subject-subadd-modal"
+    aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title">
+                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                        id="exampleModalLabel1">Add Course</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
+                </div>
+
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-12 mb_18">
+                            <div
+                                class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative">
+                                <input type="file" name="fileupload" value="fileupload" class="d-none"
+                                    id="fileupload">
+                                <label for="fileupload" class="font-17 font-500 d-flex">
+                                    <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
+                                    Add Media</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Subject Topic</label>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="Chapter Title">
+                            </div>
+                        </div>
+
+                    </div><!-- row -->
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close">Cancel</button>
+                    <a href="admin_subject_topic_test.html">
+                        <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Admin Subject Add Modal End -->
+
+        <!-- Modal Admin Chapter Edit  Modal Start -->
+        <div class="modal fade" id="chapter-edit-modal" tabindex="-1" aria-labelledby="chapter-edit-modal"
+        aria-hidden="true">
+        <div class="modal-dialog position-relative leave_modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-header apply_title">
+                        <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                            id="exampleModalLabel1">Edit Course</h1>
+                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fi fi-rr-cross close_icon"></i>
+                        </button>
+                    </div>
+
+                    <form action="">
+                        <div class="row">
+                            <div class="col-md-12 mb_18">
+                                <div
+                                    class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative">
+                                    <input type="file" name="fileupload" value="fileupload" class="d-none"
+                                        id="fileupload">
+                                    <label for="fileupload" class="font-17 font-500 d-flex">
+                                        <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
+                                        Add Media</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <label for="" class="mb_6 font-15 font-500 secondary">Subject Topic</label>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="" class="form-control input_text"
+                                        placeholder="Chapter Title">
+                                </div>
+                            </div>
+
+                        </div><!-- row -->
+                    </form>
+                    <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                        <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                            aria-label="Close">Cancel</button>
+                        <a href="admin_subject_topic_test.html">
+                            <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Admin Chapter Edit Modal End -->
+
+<!-- Modal Admin Subject Test Add Question Modal Start -->
+<div class="modal fade" id="subject-testques-modal" tabindex="-1" aria-labelledby="subject-testques-modal"
+    aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title">
+                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                        id="exampleModalLabel1">Add Question</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
+                </div>
+
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
+                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+                                placeholder="Start Typing....."></textarea>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="A- 36.93">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="B- 36.93">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="C- 36.93">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="D- 36.93">
+                            </div>
+                        </div>
+
+                    </div><!-- row -->
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close">Cancel</button>
+                    <a href="admin_subject_topic_test.html">
+                        <button type="button" class="apply_modal_btn font-15 font-500">Save Question</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Admin Subject Test Add Question Modal End -->
+
+        <!-- Modal Admin Subject Test Edit Question Modal Start -->
+        <div class="modal fade" id="subject-edit_testques-modal" tabindex="-1" aria-labelledby="subject-edit_testques-modal"
+        aria-hidden="true">
+        <div class="modal-dialog position-relative leave_modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-header apply_title">
+                        <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                            id="exampleModalLabel1">Edit Question</h1>
+                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fi fi-rr-cross close_icon"></i>
+                        </button>
+                    </div>
+
+                    <form action="">
+                        <div class="row">
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
+                                <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+                                    placeholder="Start Typing....."></textarea>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="" class="form-control input_text"
+                                        placeholder="A- 36.93">
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="" class="form-control input_text"
+                                        placeholder="B- 36.93">
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="" class="form-control input_text"
+                                        placeholder="C- 36.93">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="" class="form-control input_text"
+                                        placeholder="D- 36.93">
+                                </div>
+                            </div>
+
+                        </div><!-- row -->
+                    </form>
+                    <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                        <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                            aria-label="Close">Cancel</button>
+                        <a href="admin_subject_topic_test.html">
+                            <button type="button" class="apply_modal_btn font-15 font-500">Save Question</button>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
