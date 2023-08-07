@@ -64,13 +64,13 @@ export class AdminAttendanceComponent {
       labels: ["Present", "Absent", "Leaves"],
       legend: {
         position: "bottom", // Show the legend at the bottom
+
         // formatter: function (seriesName:any, opts:any) {
         //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
         //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
         //   return seriesName + ": " + percent + "%";
         //}
-      }
-      ,
+      },
       stroke: {
         show: false // Set this to false to remove the borders between the series
       },
@@ -141,6 +141,7 @@ export class AdminAttendanceComponent {
   public getChartData() {
     this.chartOptions.series = [this.totalAbsent, this.totalPresent, this.totaOnleaves]
   }
+
   public manageStrackedBar() {
     let absent = 30;
     let present = 40;
