@@ -9,4 +9,5 @@ export class TodayLeavesRequest {
     public leaveDuration: number = 0;
     public leaveTypeId: number = 0;
     public leaveId:number=0;
+    public leaveTypeName:string=''
 }
