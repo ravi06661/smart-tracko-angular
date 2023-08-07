@@ -72,12 +72,10 @@
   height: 40px;
 }
 
-.table_heading {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color: #EDF9FB; /* You can adjust this to match the background color of the table header */
-}
-
 .pointer {cursor: pointer;}
 
+.imagestudent {
+  border-radius: 40px;
+  height: 30px;
+  width: 30px;
+}

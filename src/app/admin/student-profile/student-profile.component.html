@@ -677,63 +677,63 @@
                 <div class="col-md-4 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Name</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text" placeholder="Rahil Kothari">
+                    <input type="text" id="" name="fullName" [(ngModel)]="student.fullName" class="form-control input_text" placeholder="Rahil Kothari">
                   </div>
                 </div>
                 <div class="col-md-4 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Phone</label>
                   <div class="input_icon position-relative">
-                    <input type="number" id="" name="" class="form-control input_text" placeholder="9874653210">
+                    <input type="number" id="" name="mobile" [(ngModel)]="student.mobile" class="form-control input_text" placeholder="9874653210">
                   </div>
                 </div>
                 <div class="col-md-4 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">E-mail</label>
                   <div class="input_icon position-relative">
-                    <input type="email" id="" name="" class="form-control input_text"
-                      placeholder="Emailaddress@email.com">
+                    <input type="email" id="" name="email" [(ngModel)]="student.email" class="form-control input_text"
+                      placeholder="Emailaddress@email.com" readonly>
                   </div>
                 </div>
                 <div class="col-md-4 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Mother’s Name</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text" placeholder="Sima Kothari">
+                    <input type="text" id="" name="mothersName" [(ngModel)]="student.mothersName" class="form-control input_text" placeholder="Sima Kothari">
                   </div>
                 </div>
                 <div class="col-md-4 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Father's Name</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text" placeholder="Ram Kothari">
+                    <input type="text" id="" name="fathersName" [(ngModel)]="student.fathersName" class="form-control input_text" placeholder="Ram Kothari">
                   </div>
                 </div>
                 <div class="col-md-4 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Gender</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text" placeholder="Male">
+                    <input type="text" id="" name="gender"  class="form-control input_text" placeholder="Male">
                   </div>
                 </div>
                 <div class="col-md-6 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">City</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text" placeholder="Indore">
+                    <input type="text" id="" name="localAddress" [(ngModel)]="student.localAddress" class="form-control input_text" placeholder="Indore">
                   </div>
                 </div>
                 <div class="col-md-6 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Address</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text"
+                    <input type="text" id="" name="parmanentAddress" [(ngModel)]="student.parmanentAddress" class="form-control input_text"
                       placeholder="Nalanda Campus, RNT Marg, Chhoti Gwaltoli, Indore, Madhya Pradesh 452001">
                   </div>
                 </div>
                 <div class="col-md-6 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Branch</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text" placeholder="Computer Science">
+                    <input type="text" id="" name="branch" class="form-control input_text" placeholder="Computer Science">
                   </div>
                 </div>
                 <div class="col-md-6 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text" placeholder="MCA">
+                    <input type="text" id="" name="currentCourse" [(ngModel)]="student.currentCourse" class="form-control input_text" placeholder="MCA">
                   </div>
                 </div>
                 <div class="col-md-6 mb_20">
@@ -745,7 +745,7 @@
                 <div class="col-md-6 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Collage</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text"
+                    <input type="text" id="" name="college" [(ngModel)]="student.college" class="form-control input_text"
                       placeholder="Nalanda Campus, RNT Marg, Chhoti Gwaltoli, Indore, Madhya Pradesh 452001">
                   </div>
                 </div>
@@ -766,13 +766,13 @@
                 <div class="col-md-4 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text" placeholder="MCA">
+                    <input type="text" id="" name="applyForCourse" [(ngModel)]="student.applyForCourse" class="form-control input_text" placeholder="MCA">
                   </div>
                 </div>
                 <div class="col-md-4 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Roll Number</label>
                   <div class="input_icon position-relative">
-                    <input type="number" id="" name="" class="form-control input_text" placeholder="DS1365428">
+                    <input type="number" id="" name="studentId" [(ngModel)]="student.studentId" class="form-control input_text" placeholder="DS1365428">
                   </div>
                 </div>
                 <div class="col-md-4 mb_20">
@@ -785,7 +785,7 @@
                 <div class="col-md-4 mb_20">
                   <label for="" class="mb_6 font-15 font-500 secondary">Joining Date</label>
                   <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text" placeholder="31 Dec, 2023">
+                    <input type="text" id="" name="joiningDate" [(ngModel)]="student.joinDate" class="form-control input_text" placeholder="31 Dec, 2023">
                   </div>
                 </div>
                 <div class="col-md-4 mb_20">

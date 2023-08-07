@@ -22,6 +22,6 @@ export class RightSideBarComponent implements OnInit {
   constructor(private studentService: StudentService, private utilityService: UtilityServiceService) { }
 
   ngOnInit(): void {
-    this.profileData = this.studentService.getStudentProfileData();
+    this.profileData = this.studentService.getStudentHeaderProfileData();
   }
 }
