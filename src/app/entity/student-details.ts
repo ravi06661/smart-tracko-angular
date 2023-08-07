@@ -16,7 +16,7 @@ export class StudentDetails {
 	public mothersName: string = '';
 	public fathersOccupation = '';
 	public contactFather: string = '';
-	public cotactMother: string = ''
+	public contactMother: string = ''
 	public localAddress: string = '';
 	public parmanentAddress = '';
 	public languageKnown: string = '';

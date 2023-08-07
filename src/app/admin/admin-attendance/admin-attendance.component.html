@@ -77,12 +77,12 @@
         <div class="table_container table_scroll" style="height: 530px;">
           <table class="table mb-0 table_admin_side">
             <thead style="background:#EDF9FB;">
-              <tr class="table_heading">
+              <tr class="table_heading mt-0">
                 <th scope="col" class="font-15 font-600 secondary">Name</th>
                 <th scope="col" class="font-15 font-600 secondary">Phone Number</th>
               </tr>
             </thead>
-            <br>
+          
 
             <h1  class="font-15 font-600 secondary position-relative" 
             *ngIf="absentData.length==0">NO ABSENT DATA FOUND !!!</h1>
@@ -112,7 +112,7 @@
                 <th scope="col" class="font-15 font-600 secondary">To</th>
               </tr>
             </thead>
-            <br>
+          
 
             <h1  class="font-15 font-600 secondary position-relative" 
             *ngIf="leavesData.length==0">NO LEAVES DATA FOUND !!!</h1>
@@ -148,7 +148,7 @@
                 <th scope="col" class="font-15 font-600 secondary">Action</th>
               </tr>
             </thead>
-            <br>
+          
 
             <h1  class="font-15 font-600 secondary position-relative" 
             *ngIf="leavesRequestData.length==0">NO LEAVE REQUESTS DATA FOUND !!!</h1>
@@ -163,7 +163,7 @@
                   </h5>
                 </td>
                 <td>
-                  <p class="mb-0">CL {{obj.leaveDuration}} Days </p>
+                  <p class="mb-0">{{obj.leaveTypeName}} {{obj.leaveDuration}} Days </p>
                   <p class="mb-0">{{ obj.leaveDate }} - {{ obj.leaveEndDate }}</p>
                   <p class="mb-0"> {{obj.leaveReason}}</p>
 
