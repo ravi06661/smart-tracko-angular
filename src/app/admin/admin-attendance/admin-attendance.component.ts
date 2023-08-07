@@ -139,7 +139,7 @@ export class AdminAttendanceComponent {
     )
   }
   public getChartData() {
-    this.chartOptions.series = [this.totalAbsent, this.totalPresent, this.totaOnleaves]
+    this.chartOptions.series = [ this.totalPresent,this.totalAbsent, this.totaOnleaves]
   }
 
   public manageStrackedBar() {
