@@ -24,7 +24,7 @@ export class RightSideBarComponent implements OnInit {
 
   ngOnInit(): void {
     if( this.loginService.getRole()=='STUDENT'){
-      this.profileData = this.studentService.getStudentProfileData();
+      this.profileData = this.studentService.getStudentHeaderProfileData();
     }else  if( this.loginService.getRole()=='ADMIN'){
       this.profileData = this.adminService.getAdminProfileData()
     } 

@@ -10,7 +10,7 @@ import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { ChartComponent } from "ng-apexcharts";
 import { ViewChild } from "@angular/core";
-import { Student } from 'src/app/entity/student';
+
 export type ChartOptions = {
   series: any;
   chart: any;
