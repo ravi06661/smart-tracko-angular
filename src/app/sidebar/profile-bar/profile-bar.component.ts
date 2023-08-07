@@ -22,7 +22,7 @@ export class ProfileBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileData = this.studentService.getStudentProfileData();
+    this.profileData = this.studentService.getStudentHeaderProfileData();
   }
 }
 

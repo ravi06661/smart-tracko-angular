@@ -64,7 +64,7 @@
                                     <label for="" class="mb_6 font-17 font-500 secondary">Full Name</label>
                                     <div class="input_icon position-relative">
                                         <input type="text" id="fullName" class="form-control input_text" name="fullName" [(ngModel)]="registrationDetails.fullName"
-                                            formControlName="fullName" placeholder="Student Name..">
+                                            formControlName="fullName" placeholder="Enter Student Full Name">
                                             <div *ngIf="isFieldInvalidForpersonlaDetailsForm('fullName')" class="text-danger">Full Name is required.</div>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@
                                     <div class="input_icon position-relative">
                                         <input type="date" id="dob" class="form-control input_text"
                                             formControlName="dob" [(ngModel)]="registrationDetails.dob" name="dob"
-                                            placeholder="Date fo Birth..">
+                                            placeholder="Enter Date Of Birth">
                                         <div *ngIf="isFieldInvalidForpersonlaDetailsForm('dob')" class="text-danger mt-1 "class="text-danger">Date of birth is required.</div>
                                     </div>
                                 </div>
@@ -87,7 +87,7 @@
                                         <input type="text" id="fathersName" class="form-control input_text"
                                             name="fathersName" formControlName="fathersName"
                                             [(ngModel)]="registrationDetails.fathersName"
-                                            placeholder="father's name..">
+                                            placeholder="Enter Father's Name">
                                             <div *ngIf="isFieldInvalidForpersonlaDetailsForm('fathersName')" class="text-danger mt-1 "class="text-danger">father's name  is required.</div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                         <input type="text" id="fathersOccupation" class="form-control input_text"
                                             name="fathersOccupation" formControlName="fathersOccupation"
                                             [(ngModel)]="registrationDetails.fathersOccupation"
-                                            placeholder="fathersOccupation..">
+                                            placeholder="Enter Father's Occupation">
                                             <div *ngIf="isFieldInvalidForpersonlaDetailsForm('fathersOccupation')" class="text-danger mt-1 "class="text-danger">fathersOccupation is required.</div>
                                     </div>
                                 </div>
@@ -110,7 +110,7 @@
                                     <div class="input_icon position-relative">
                                         <input type="text" id="mothersName" class="form-control input_text"
                                             name="mothersName" formControlName="mothersName"
-                                            [(ngModel)]="registrationDetails.mothersName" placeholder="mother's name..">
+                                            [(ngModel)]="registrationDetails.mothersName" placeholder="Enter Mother's Name">
                                             <div *ngIf="isFieldInvalidForpersonlaDetailsForm('mothersName')" class="text-danger mt-1 "class="text-danger">mother's name  is required.</div>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
                                     <label for="" class="mb_6 font-17 font-500 secondary">Contact No. Father's</label>
                                     <div class="input_icon position-relative">
                                         <input type="number" id="contactFather" name="contactFather" class="form-control input_text"   formControlName="contactFather"
-                                        [(ngModel)]="registrationDetails.contactFather" placeholder="Conatct..">
+                                        [(ngModel)]="registrationDetails.contactFather" placeholder="Enter Father's Contact Number">
                                         <div *ngIf="isFieldInvalidForpersonlaDetailsForm('contactFather')" class="text-danger mt-1 "class="text-danger">father's contact is required.</div>
                                     </div>
                                 </div>
@@ -133,7 +133,7 @@
                                     <label for="" class="mb_6 font-17 font-500 secondary">Contact No. Mother's</label>
                                     <div class="input_icon position-relative">
                                         <input type="number" id="contactMother" name="contactMother" class="form-control input_text"   formControlName="contactMother"
-                                        [(ngModel)]="registrationDetails.contactMother" placeholder="Conatct..">
+                                        [(ngModel)]="registrationDetails.contactMother" placeholder="Enter Mother's Contact Number">
                                         <div *ngIf="isFieldInvalidForpersonlaDetailsForm('contactMother')" class="text-danger mt-1 "class="text-danger">mother's contact is required.</div>
                                     </div>
                                 </div>
@@ -143,7 +143,7 @@
                                     <label for="" class="mb_6 font-17 font-500 secondary">Language Known</label>
                                     <div class="input_icon position-relative">
                                         <input type="text" id="languageKnown" name="languageKnown" class="form-control input_text"   formControlName="languageKnown"
-                                        [(ngModel)]="registrationDetails.languageKnown" placeholder="languageKnown..">
+                                        [(ngModel)]="registrationDetails.languageKnown" placeholder="Enter Language Known">
                                         <div *ngIf="isFieldInvalidForpersonlaDetailsForm('languageKnown')" class="text-danger mt-1 "class="text-danger">languageKnown is required.</div>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
                                 <label for="" class="mb_6 font-17 font-500 secondary">Email</label>
                                 <div class="input_icon position-relative">
                                     <input type="email" id="email" name="email" class="form-control input_text"   formControlName="email"
-                                    [(ngModel)]="registrationDetails.email" placeholder="email..">
+                                    [(ngModel)]="registrationDetails.email" placeholder="Enter Email Address">
                                     <div *ngIf="isFieldInvalidForpersonlaDetailsForm('email')" class="text-danger mt-1 "class="text-danger">email is required.</div>
                                 </div>
                             </div>
@@ -163,7 +163,7 @@
                                     <label for="" class="mb_6 font-17 font-500 secondary">Mobile</label>
                                     <div class="input_icon position-relative">
                                         <input type="text" id="mobile" name="mobile" class="form-control input_text"   formControlName="mobile"
-                                        [(ngModel)]="registrationDetails.mobile" placeholder="mobile..">
+                                        [(ngModel)]="registrationDetails.mobile" placeholder="Enter Mobile Number">
                                         <div *ngIf="isFieldInvalidForpersonlaDetailsForm('mobile')" class="text-danger mt-1 "class="text-danger">mobile is required.</div>
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@
                                     <div class="input_icon position-relative">
                                         <input type="text" id="applyForCourse" class="form-control input_text"  name="applyForCourse"
                                             formControlName="applyForCourse"   [(ngModel)]="registrationDetails.applyForCourse"
-                                            placeholder="Apply for Course..">
+                                            placeholder="Apply for Course">
                                             <div *ngIf=" isFieldInvalidForinrollmentForm('applyForCourse')" class="text-danger"> Name is required.</div>
                                     </div>
                                 </div>
@@ -204,7 +204,7 @@
                                     <div class="input_icon position-relative">
                                         <input type="text" id="currentCourse" class="form-control input_text"  name="currentCourse"
                                             formControlName="currentCourse"   [(ngModel)]="registrationDetails.currentCourse"
-                                            placeholder="Apply for Course..">
+                                            placeholder="Enter Current Course">
                                             <div *ngIf=" isFieldInvalidForinrollmentForm('currentCourse')" class="text-danger"> currentCourse is required.</div>
                                     </div>
                                 </div>
@@ -217,7 +217,7 @@
                                     <div class="input_icon position-relative">
                                         <input type="date" id="joinDate" class="form-control input_text"  name="joinDate"
                                             formControlName="joinDate"   [(ngModel)]="registrationDetails.joinDate"
-                                            placeholder="Joining Date..">
+                                            placeholder="Enter Joining Date">
                                             <div *ngIf=" isFieldInvalidForinrollmentForm('joinDate')" class="text-danger">joinDate is required.</div>
                                     </div>
                                 </div>
@@ -229,7 +229,7 @@
                                     <div class="input_icon position-relative">
                                         <input type="number" id="currentSem" class="form-control input_text"  name="currentSem"
                                             formControlName="currentSem"   [(ngModel)]="registrationDetails.currentSem"
-                                            placeholder="currentSem ..">
+                                            placeholder="Enter Current Sem">
                                             <div *ngIf=" isFieldInvalidForinrollmentForm('currentSem')" class="text-danger">currentSem is required.</div>
                                     </div>
                                 </div>
@@ -240,7 +240,7 @@
                                     <div class="input_icon position-relative">
                                         <input type="text" id="college" class="form-control input_text"  name="college"
                                             formControlName="college"   [(ngModel)]="registrationDetails.college"
-                                            placeholder="college ..">
+                                            placeholder="Enter College Name">
                                             <div *ngIf=" isFieldInvalidForinrollmentForm('college')" class="text-danger">college is required.</div>
                                     </div>
                                 </div>
@@ -268,7 +268,7 @@
                                 <label for="" class="mb_6 font-17 font-500 secondary">Local Address</label>
                                 <div class="input_icon position-relative">
                                     <input type="text" id="localAddress" name="localAddress" class="form-control input_text"  formControlName="localAddress" 
-                                        [(ngModel)]="registrationDetails.localAddress" placeholder="Address..">
+                                        [(ngModel)]="registrationDetails.localAddress" placeholder="Enter Local Address">
                                         <div *ngIf=" isFieldInvalidForAddressForm('localAddress')" class="text-danger"> Name is required.</div>
                                 </div>
                             </div>
@@ -279,7 +279,7 @@
                                 <div class="input_icon position-relative">
                                     <input type="text" id="" name="parmanentAddress" class="form-control input_text"
                                         [(ngModel)]="registrationDetails.parmanentAddress"
-                                        placeholder="Permanent Address..">
+                                        placeholder="Enter Permanent Address">
                                 </div>
                             </div>
                             <!-- <div class="col-md-6 mb_20">

@@ -20,17 +20,15 @@ export class StudentProfileComponent implements OnInit{
   ngOnInit(): void {
     
     this.studentId=this.activateRoute.snapshot.params[('studentId')];
-    this.studentService.getByStudentById(this.studentId).subscribe({
-
-      next:(data:any)=>{
-
-        this.student=data
-      }
-    })
+    this.getStudentProfileData();
   }
 
-  public getStudentId(){
-
+  public getStudentProfileData(){
+    this.studentService.getStudentProfileData(this.studentId).subscribe({
+      next:(data:any)=>{
+        this.student = data;
+      }
+    })
   }
  
 }

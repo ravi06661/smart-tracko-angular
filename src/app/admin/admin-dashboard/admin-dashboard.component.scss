@@ -9,9 +9,21 @@
   width: 25%;
 }
 
-.calender-img {
-  width: 50%;
+
+  .calender-img {
+    width: 50%;
+  }
+  .imagestudent {
+    border-radius: 40px;
+    height: 30px;
+    width: 30px;
 }
+
+.pointer {cursor: pointer;}
+
+  
+
 .attendance-area, .assignment-area, .fees-area{
   min-height: 363px;
 }
+

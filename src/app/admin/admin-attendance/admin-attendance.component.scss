@@ -72,6 +72,14 @@
   height: 40px;
 }
 
+.pointer {cursor: pointer;}
+
+.imagestudent {
+  border-radius: 40px;
+  height: 30px;
+  width: 30px;
+}
+
 // .table_heading {
 //   position: sticky;
 //   top: 0;
@@ -79,9 +87,9 @@
 //   background-color: #EDF9FB; /* You can adjust this to match the background color of the table header */
 // }
 
-.pointer {cursor: pointer;}
 
 
 .attendance-area, .assignment-area, .fees-area{
   min-height: 363px;
 }
+

@@ -65,7 +65,7 @@ export class StudentService {
     return this.http.get(`${this.studentUrl}/getStudentCalenderData`, { params });
   }
 
-  public getStudentProfileData() {
+  public getStudentHeaderProfileData() {
 
     if (this.profileData.id == 0) {
       let id = this.loginService.getStudentId();
@@ -112,4 +112,9 @@ public searchStudentByName(fullName:string){
 public getByStudentById(studentId:number){
   return this.http.get(`${this.studentUrl}/getStudentById?studentId=${studentId}`);
 }
+
+public getStudentProfileData(studentId: number) {
+  return this.http.get(`${this.studentUrl}/getStudentForWebStudentProfile?studentId=${studentId}`);
+}
+
 }

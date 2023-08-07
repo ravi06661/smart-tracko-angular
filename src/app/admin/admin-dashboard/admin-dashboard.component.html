@@ -120,112 +120,14 @@
               </tr>
             </thead>
             <tbody class="bg-light">
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
+              <tr *ngFor="let student of students">
+                <td class="d-flex align-items-center pointer" style="gap:5px;" routerLink="/admin/studentprofile/{{student.studentId}}"><img
+                    [src]="imageUrl+student.profilePic" alt="" class="img-fluid imagestudent">{{student.fullName}}</td>
+                <td>{{student.applyForCourse}}</td>
+                <td>{{student.joinDate}}</td>
                 <td>1,20,000</td>
-                <td>9874653210</td>
+                <td>{{student.mobile}}</td>
               </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-
-
             </tbody>
           </table>
         </div>
