@@ -65,7 +65,7 @@ export class StudentService {
   }
 
 
-  public getStudentProfileData() {
+  public getStudentHeaderProfileData() {
     if (this.profileData.studentId == 0) {
  
       let id = this.loginService.getStudentId();
@@ -84,7 +84,7 @@ export class StudentService {
     } else {
       if (this.profileData.studentId != this.loginService.getStudentId()) {
         this.profileData = new Profile();
-        this.getStudentProfileData()
+        this.getStudentHeaderProfileData()
       }
       return this.profileData
     }
