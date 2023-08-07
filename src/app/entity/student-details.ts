@@ -23,5 +23,4 @@ export class StudentDetails {
 	public currentCourse: string = '';
 	// public isCompleted:boolean | undefined;
 	// public isActive:boolean | undefined
-	public joiningDate: Date | undefined
 }

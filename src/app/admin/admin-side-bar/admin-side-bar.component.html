@@ -17,7 +17,7 @@
 
 
    <a
-      routerLink="/admin/"
+      routerLink="/admin/subject"
       [ngClass]="check == 'study' ? 'active' : 'box-hover'"
       (click)="getValueById(lsdv1.value)"
     >
@@ -28,7 +28,7 @@
         >Study</span></a>
 
         <a
-        routerLink="/admin"
+        routerLink="/admin/course"
         [ngClass]="check == 'myCourse' ? 'active' : 'box-hover'"
         (click)="getValueById(lsdv2.value)"
       >
@@ -116,6 +116,16 @@
                       [ngClass]="check == 'student' ? 'icon-text dashboard' : 'icon-text'"
                       >Student</span></a>
 
+
+                      <a
+                    [ngClass]="check == 'logout' ? 'active' : 'box-hover'"
+                    (click)="getValueById(lsdv10.value)" (click)="logout()"
+                  >
+                    <input #lsdv10 type="hidden" value="logout" />
+                  <img src="assets/images/svg_img/New folder/Neutral-Settings.svg"
+                      class="material-icons" id="icon10"><span
+                      [ngClass]="check == 'logout' ? 'icon-text dashboard' : 'icon-text'"
+                      >Logout</span></a>
 
   </div>
 

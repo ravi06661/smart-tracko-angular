@@ -14,77 +14,107 @@
 
 
         <div class="assignment-stats">
-            <form action="" class="mb_24">
 
-        <div class="row mb-3">
-            <div class="col-md-8 col-lg-6">
-                <label for="" class="mb_6 font-17 font-500 secondary">Category</label>
-                <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text"
-                        placeholder="Day1">
+            <div class="row mb-3">
+                <div class="col-md-8 col-lg-6">
+                    <label for="" class="mb_6 font-17 font-500 secondary">Category</label>
+                    <div class="input_icon position-relative">
+                        <input type="text" id="" name="" class="form-control input_text" placeholder="Day1">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row mb-4">
-            <div class="col-md-8 col-lg-6">
-                <label for="" class="mb_6 font-17 font-500 secondary">Heading</label>
-                <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text" placeholder="2">
+            <div class="row mb-4">
+                <div class="col-md-8 col-lg-6">
+                    <label for="" class="mb_6 font-17 font-500 secondary">Heading</label>
+                    <div class="input_icon position-relative">
+                        <input type="text" id="" name="" class="form-control input_text" placeholder="2">
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row mb-4">
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <div class="assinment_image">
-                    <img src="assets/images/temp_img/modal.png" class="img-fluid">
+            <div class="row mb-4">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="profile_change d-flex justify-content-center align-items-center position-relative mx-auto">
+                        <div class="profile_edits">
+                            <div class="profile_buttons d-flex align-items-end">
+                                <i class="fi fi-rr-trash light font-24 line-height-0 hover-delete-icon"
+                                    data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
+                            </div>
+                        </div>
+
+                        <img src="assets/images/temp_img/modal.png" class="profile_image" id="output">
+                    </div>
+                    <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">Attachment Title Here
+                    </h3>
                 </div>
-                <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">Attachment Title Here
-                </h3>
+
+                <div class="col-md-3">
+                    <form
+                        class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
+                        <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload" onchange="loadFile(event)">
+                        <label for="fileupload" class="font-17 font-500 d-flex">
+                            <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
+                            Add Media</label>
+                    </form>
+                </div>
             </div>
 
-            <div class="col-lg-3 col-md-4">
-                <div class="attachment_file2 d-inline-flex align-items-center  position-relative h-100 add-attechment">
-                    <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
-                    <label for="fileupload" class="font-17 font-500 d-flex">
-                      <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
-                      Add Media</label>
-                  </div>
+            <div class="row mb_24">
+                <div class="col-md-8 col-lg-6">
+                    <label for="" class="mb_6 font-17 font-500 secondary">Job Description</label>
+                    <textarea class="form-control text_area" id="exampleFormControlTextarea1" row mb-3s="3"
+                        placeholder="Start Typing....."></textarea>
+                </div>
             </div>
-        </div>
 
-        <div class="row mb_24">
-            <div class="col-md-8 col-lg-6">
-                <label for="" class="mb_6 font-17 font-500 secondary">Job Description</label>
-                <textarea class="form-control text_area" id="exampleFormControlTextarea1" row mb-3s="3"
-                    placeholder="Start Typing....."></textarea>
+            <div class="row">
+                <div class="col-md-12">
+                    <a routerLink="/admin/newsAndEvent" class="top_profile_sec_btn font-14 font-500">Publish
+                        Now</a>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <a href="admin_newsandevents.html" class="top_profile_sec_btn font-14 font-500">Publish Now</a>
-            </div>
-        </div>
+        </div><!-- row -->
+
+    </div>
 
 
+    <!-- DASHBOARD END -->
+
+    <!-- RIGHT SIDE START-->
+   <app-right-side-bar></app-right-side-bar>
+    <!-- RIGHT SIDE END -->
 
 
+    <!-- MIDDLE CONTENT END -->
 
-    </form>
 
 </div>
+<!--DASHBOARD END -->
 
-
-<!-- DASHBOARD END -->
-
-<!-- RIGHT SIDE START-->
-<app-right-side-bar></app-right-side-bar>
-<!-- RIGHT SIDE END -->
-
-
-<!-- MIDDLE CONTENT END -->
-
-
-</div>
+          <!-- Modal Delete Modal Start -->
+          <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+            <div class="modal-dialog position-relative leave_modal">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                            style="top: -23%;">
+                            <i class="fi fi-rr-cross close_icon"></i>
+                        </button>
+    
+                        <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
+                        <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                            <a routerLink="/admin/createnewsAndEvent">
+                                <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                                    delete</button>
+                            </a>
+                            <a routerLink="/admin/createnewsAndEvent">
+                                <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+                            </a>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>

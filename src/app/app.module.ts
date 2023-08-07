@@ -69,6 +69,12 @@ import { StudentProfileComponent } from './admin/student-profile/student-profile
 import { AdminStudentRegistrationComponent } from './admin/admin-student-registration/admin-student-registration.component';
 import { AdminSubmissionComponent } from './admin/admin-submission/admin-submission.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdminLeaveRequestComponent } from './admin/admin-leave-request/admin-leave-request.component';
+import { AdminSubjectsComponent } from './admin/admin-subjects/admin-subjects.component';
+import { AdminSubjectsTopicTestComponent } from './admin/admin-subjects-topic-test/admin-subjects-topic-test.component';
+import { AdminSubjectsChapterComponent } from './admin/admin-subjects-chapter/admin-subjects-chapter.component';
+import { AdminSubjectsChapterQuizComponent } from './admin/admin-subjects-chapter-quiz/admin-subjects-chapter-quiz.component';
+import { AdminCoursesBatchesComponent } from './admin/admin-courses-batches/admin-courses-batches.component';
 
 
 
@@ -124,6 +130,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     StudentProfileComponent,
     AdminStudentRegistrationComponent,
     AdminSubmissionComponent,
+    AdminLeaveRequestComponent,
+    AdminSubjectsComponent,
+    AdminSubjectsTopicTestComponent,
+    AdminSubjectsChapterComponent,
+    AdminSubjectsChapterQuizComponent,
+    AdminCoursesBatchesComponent,
    
        
  

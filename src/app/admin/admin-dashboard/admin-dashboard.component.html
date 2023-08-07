@@ -4,8 +4,6 @@
    <app-profile-bar></app-profile-bar>
   </div>
 
-  <!-- DASHBOARD START -->
-
   <div class="scroll_dashboard">
     <div class="main-inner">
 
@@ -64,7 +62,19 @@
     <div class="barchart-section mb_20">
       <div class="row">
         <div class="col-lg-6 col-md-6 mb-0 mb-md-3 mb-0 mb-md-3">
-          <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Admissions</h3>
+          <div class="d-flex justify-content-between align-items-center mb_12">
+            <h3 class="admin-title font-17 font-600 secondary position-relative">Admissions</h3>
+            <div class="dropdown">
+              <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Month
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">January</a></li>
+                <li><a class="dropdown-item" href="#">February</a></li>
+                <li><a class="dropdown-item" href="#">March</a></li>
+              </ul>
+            </div>
+           </div>
           <div class="attendance-charbar">
             <div>
               <canvas id="myChart1"></canvas>
@@ -73,7 +83,19 @@
         </div>
 
         <div class="col-lg-6 col-md-6 mb-0 mb-md-3 mb-0 mb-md-3 ">
-          <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Fee Collection</h3>
+          <div class="d-flex justify-content-between align-items-center mb_12">
+            <h3 class="admin-title font-17 font-600 secondary position-relative">Fee Collection</h3>
+            <div class="dropdown">
+              <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Month
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">January</a></li>
+                <li><a class="dropdown-item" href="#">February</a></li>
+                <li><a class="dropdown-item" href="#">March</a></li>
+              </ul>
+            </div>
+           </div>
           <div class="attendance-charbar">
             <div>
               <canvas id="myChart2"></canvas>
@@ -98,112 +120,14 @@
               </tr>
             </thead>
             <tbody class="bg-light">
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
+              <tr *ngFor="let student of students">
+                <td class="d-flex align-items-center pointer" style="gap:5px;" routerLink="/admin/studentprofile/{{student.studentId}}"><img
+                    [src]="imageUrl+student.profilePic" alt="" class="img-fluid imagestudent">{{student.fullName}}</td>
+                <td>{{student.applyForCourse}}</td>
+                <td>{{student.joinDate}}</td>
                 <td>1,20,000</td>
-                <td>9874653210</td>
+                <td>{{student.mobile}}</td>
               </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>1,20,000</td>
-                <td>9874653210</td>
-              </tr>
-
-
             </tbody>
           </table>
         </div>
@@ -331,7 +255,7 @@
   <!-- DASHBOARD END -->
 
   <!-- RIGHT SIDE START-->
- <app-right-side-bar></app-right-side-bar>
+  <app-right-side-bar></app-right-side-bar>
   <!-- RIGHT SIDE END -->
 
 

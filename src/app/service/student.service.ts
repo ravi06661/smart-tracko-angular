@@ -8,7 +8,6 @@ import { LeaveService } from './leave.service';
 import { TodayLeavesRequest } from '../entity/today-leaves-request';
 import { Observable } from 'rxjs';
 import { StudentDetails } from '../entity/student-details';
-import { Student } from '../entity/student';
 
 
 @Injectable({
@@ -65,8 +64,10 @@ export class StudentService {
     return this.http.get(`${this.studentUrl}/getStudentCalenderData`, { params });
   }
 
+
   public getStudentProfileData() {
     if (this.profileData.studentId == 0) {
+ 
       let id = this.loginService.getStudentId();
       this.http.get(`${this.studentUrl}/getStudentData/${id}`).subscribe(
         (data: any) => {
@@ -103,12 +104,20 @@ export class StudentService {
   }
 
   public getAllStudent(page: Number, size: number) {
-    return this.http.get<Student[]>(`${this.studentUrl}/getAllStudentData?page=${page}&size=${size}`);
+    return this.http.get<StudentDetails[]>(`${this.studentUrl}/getAllStudentData?page=${page}&size=${size}`);
   }
 
-  public searchStudentByName(fullName: string) {
-    console.log('hi');
+public searchStudentByName(fullName:string){
+  console.log('hi');
+  
+  return this.http.get<StudentDetails[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
+}
 
-    return this.http.get<Student[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
-  }
+public getByStudentById(studentId:number){
+  return this.http.get(`${this.studentUrl}/getStudentById?studentId=${studentId}`);
+}
+
+public getStudentProfileData(studentId: number) {
+  return this.http.get(`${this.studentUrl}/getStudentForWebStudentProfile?studentId=${studentId}`);
+}
 }

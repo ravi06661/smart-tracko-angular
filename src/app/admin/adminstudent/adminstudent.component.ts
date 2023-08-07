@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { log } from 'console';
-import { Student } from 'src/app/entity/student';
+import { StudentDetails } from 'src/app/entity/student-details';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
@@ -13,7 +13,7 @@ export class AdminstudentComponent implements OnInit{
 
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
-  students:Student[]=[];
+  students:StudentDetails[]=[];
   totalStudent:number=0;
   search:string=''
   

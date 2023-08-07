@@ -30,12 +30,21 @@
           <div class="dropdown">
             <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              June
+              month
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">January</a></li>
               <li><a class="dropdown-item" href="#">February</a></li>
               <li><a class="dropdown-item" href="#">March</a></li>
+              <li><a class="dropdown-item" href="#">April</a></li>
+              <li><a class="dropdown-item" href="#">May</a></li>
+              <li><a class="dropdown-item" href="#">June</a></li>
+              <li><a class="dropdown-item" href="#">July</a></li>
+              <li><a class="dropdown-item" href="#">August</a></li>
+              <li><a class="dropdown-item" href="#">September</a></li>
+              <li><a class="dropdown-item" href="#">October</a></li>
+              <li><a class="dropdown-item" href="#">November </a></li>
+              <li><a class="dropdown-item" href="#">December </a></li>
             </ul>
           </div>
         </div>
@@ -73,23 +82,38 @@
 
     <div class="row">
       <div class="col-md-3">
-        <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Absent Today</h3>
-        <div class="table_container table_scroll" style="height: 530px;">
+        <div class="d-flex justify-content-between align-items-center mb_12">
+          <h3 class="admin-title font-17 font-600 secondary position-relative">Absent Today</h3>
+          <div class="dropdown">
+            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Course
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">January</a></li>
+              <li><a class="dropdown-item" href="#">February</a></li>
+              <li><a class="dropdown-item" href="#">March</a></li>
+            </ul>
+          </div>
+         </div>
+        <div class="table_container">
           <table class="table mb-0 table_admin_side">
-            <thead style="background:#EDF9FB;">
-              <tr class="table_heading mt-0">
+            <thead style="background:#fbfefe;">
+              <tr class="">
+
                 <th scope="col" class="font-15 font-600 secondary">Name</th>
                 <th scope="col" class="font-15 font-600 secondary">Phone Number</th>
               </tr>
             </thead>
-          
+          <br>
 
             <h1  class="font-15 font-600 secondary position-relative" 
             *ngIf="absentData.length==0">NO ABSENT DATA FOUND !!!</h1>
+            <div class="table_scroll" style="height: 511px;">
             <tbody class="bg-light">
-              <tr *ngFor="let obj of absentData">
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid image">
+              <tr *ngFor="let obj of absentData" routerLink="/admin/studentprofile/{{obj.studentId}}">
+                <td class="d-flex align-items-center pointer" style="gap:5px;" >
+                  <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
+
                   <h5 class="font-13 font-500 mb-0">{{obj.fullName}}<br>
                     <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                   </h5>
@@ -97,30 +121,43 @@
                 <td>{{obj.mobile}}</td>
               </tr>
             </tbody>
+            </div>
           </table>
         </div>
       </div>
 
       <div class="col-md-4">
-        <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">On Leave</h3>
-        <div class="table_container table_scroll" style="height: 530px;">
+        <div class="d-flex justify-content-between align-items-center mb_12">
+          <h3 class="admin-title font-17 font-600 secondary position-relative">On Leave</h3>
+          <div class="dropdown">
+            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Course
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">January</a></li>
+              <li><a class="dropdown-item" href="#">February</a></li>
+              <li><a class="dropdown-item" href="#">March</a></li>
+            </ul>
+          </div>
+         </div>
+        <div class="table_container">
           <table class="table mb-0">
-            <thead style="background:#EDF9FB;">
+            <thead style="background:#fbfefe;">
               <tr class="table_heading">
                 <th scope="col" class="font-15 font-600 secondary">Name</th>
                 <th scope="col" class="font-15 font-600 secondary">From</th>
                 <th scope="col" class="font-15 font-600 secondary">To</th>
               </tr>
             </thead>
-          
+            <br>
 
             <h1  class="font-15 font-600 secondary position-relative" 
             *ngIf="leavesData.length==0">NO LEAVES DATA FOUND !!!</h1>
-
+            <div class="table_scroll" style="height: 511px;">
             <tbody class="bg-light">
               <tr *ngFor="let obj of leavesData">
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid image">
+                <td class="d-flex align-items-center pointer" style="gap:5px;" routerLink="/admin/studentprofile/{{obj.studentId}}">
+                  <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
                   <h5 class="font-13 font-500 mb-0">{{obj.name}}<br>
                     <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                   </h5>
@@ -130,6 +167,7 @@
                 <td>{{obj.leaveEndDate|date}}</td>
               </tr>
             </tbody>
+            </div>
           </table>
         </div>
       </div>
@@ -137,26 +175,32 @@
       <div class="col-md-5">
         <div class="d-flex justify-content-between">
           <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Leave Requests</h3>
-          <p class="secondary font-13 font-500 mb-0">View All</p>
+          <a routerLink="/admin/leaverequest" class="secondary font-13 font-500 mb-0">View All</a>
         </div>
+        
         <div class="table_container table_scroll" style="height: 530px;">
           <table class="table mb-0 table_admin_side">
-            <thead style="background:#EDF9FB;">
+            <thead style="background:#fbfefe;">
               <tr class="table_heading">
                 <th scope="col" class="font-15 font-600 secondary">Name</th>
                 <th scope="col" class="font-15 font-600 secondary">Duration</th>
                 <th scope="col" class="font-15 font-600 secondary">Action</th>
               </tr>
             </thead>
-          
+            <br>
+
 
             <h1  class="font-15 font-600 secondary position-relative" 
             *ngIf="leavesRequestData.length==0">NO LEAVE REQUESTS DATA FOUND !!!</h1>
+
+
+            <div class="table_scroll" style="height: 511px;">
+
             <tbody class="bg-light">
 
               <tr *ngFor="let obj of leavesRequestData">
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid image">
+                <td class="d-flex align-items-center pointer" style="gap:5px;" routerLink="/admin/studentprofile/{{obj.studentId}}">
+                  <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
                   <h5 class="font-13 font-500 mb-0">{{obj.fullName}} <br>
                     <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                   </h5>
@@ -173,6 +217,7 @@
                 </td>
               </tr>
             </tbody>
+            </div>
           </table>
         </div>
       </div>
