@@ -88,7 +88,7 @@ const routes: Routes = [
       {path:'createannouncements',component:CreateAnnouncementsComponent,pathMatch:'full'},
       {path:'student',component:AdminstudentComponent,pathMatch:'full'},
       {path:'mycourse',component:AdminCoursesComponent,pathMatch:'full'},
-      {path:'studentprofile',component:StudentProfileComponent,pathMatch:'full'},
+      {path:'studentprofile/:studentId',component:StudentProfileComponent,pathMatch:'full'},
       {path:'studentregistration',component:AdminStudentRegistrationComponent,pathMatch:'full'},
       {path:'submission',component:AdminSubmissionComponent,pathMatch:'full'}
       
