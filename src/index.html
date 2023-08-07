@@ -301,17 +301,73 @@ new Chart(ctx2, {
     $(".enabled_inp").removeAttr('disabled');
 });
 
+
+function meat_dot(){
+  $(".meat-dot-dropdown").toggle();
+};
+
 // change student image js//
 var loadFile = function (event) {
       var image = document.getElementById("output");
       image.src = URL.createObjectURL(event.target.files[0]);
     };
+
+    //    Meat dot js//
+    $("#chapter-meat-dot").click(function () {
+                $(".chapter-meat-dot-dropdown").toggle();
+            });
+
+     //  Subject Topic Test JS Start //
+
+     $(".subject-test").hide();
+            $("#test_add_ques").hide();
+
+            function subject_test(){
+              $(".subject-topic").hide();
+                $(".subject-test").show();
+                $("#subject_test").css("color", "#49bfcf");
+                $("#subject_topic").css("color", "#515151");
+                $("#subject_test").addClass("tabs_heading_border_active");
+                $("#subject_topic").removeClass("tabs_heading_border_active");
+                $("#topic_create_new").hide();
+                $("#test_add_ques").show();
+            }
+
+            function subject_topic(){
+              $(".subject-topic").show();
+                $(".subject-test").hide();
+                $("#subject_topic").css("color", "#49bfcf");
+                $("#subject_test").css("color", "#515151");
+                $("#subject_test").removeClass("tabs_heading_border_active");
+                $("#subject_topic").addClass("tabs_heading_border_active");
+                $("#topic_create_new").show();
+                $("#test_add_ques").hide();
+            }
+
+            // $("#subject_test").click(function () {
+            //     $(".subject-topic").hide();
+            //     $(".subject-test").show();
+            //     $("#subject_test").css("color", "#49bfcf");
+            //     $("#subject_topic").css("color", "#515151");
+            //     $("#subject_test").addClass("tabs_heading_border_active");
+            //     $("#subject_topic").removeClass("tabs_heading_border_active");
+            //     $("#topic_create_new").hide();
+            //     $("#test_add_ques").show();
+            // });
+
+            // $("#subject_topic").click(function () {
+            //     $(".subject-topic").show();
+            //     $(".subject-test").hide();
+            //     $("#subject_topic").css("color", "#49bfcf");
+            //     $("#subject_test").css("color", "#515151");
+            //     $("#subject_test").removeClass("tabs_heading_border_active");
+            //     $("#subject_topic").addClass("tabs_heading_border_active");
+            //     $("#topic_create_new").show();
+            //     $("#test_add_ques").hide();
+            // });
+
 </script>
 
-<script type="text/javascript">
-  $(document).ready(function() {
-      $('dropdown-toggle').dropdown()
-  });
-  </script>
+
   </body>
 </html>

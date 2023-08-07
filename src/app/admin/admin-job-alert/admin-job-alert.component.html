@@ -17,8 +17,8 @@
       <div class="col-md-3 bootstrap_cards">
           <div class="internship_container">
             <div class="container_top d-flex align-items-center jobaleart_card">
-              <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" id="meat_dot"></i>
-              <div class="meat-dot-dropdown" style="display: none;">
+              <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
+              <div class="meat-dot-dropdown" style="display: none;" >
                 <a routerLink="/admin/createjob" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
                 <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
               </div>
@@ -84,8 +84,13 @@
     <div class="row">
       <div class="col-md-3 bootstrap_cards">
         <div class="internship_container">
-          <div class="container_top d-flex align-items-center jobaleart_card">
-            <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
+         
+            <div class="container_top d-flex align-items-center jobaleart_card">
+              <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
+              <div class="meat-dot-dropdown" style="display: none;" >
+                <a routerLink="/admin/createjob" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
+                <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
+              </div>
            
             <img src="assets/images/temp_img/image 18.png">
             <div class="internship_title">

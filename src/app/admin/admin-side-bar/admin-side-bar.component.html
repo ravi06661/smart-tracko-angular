@@ -17,7 +17,7 @@
 
 
    <a
-      routerLink="/admin/"
+      routerLink="/admin/subject"
       [ngClass]="check == 'study' ? 'active' : 'box-hover'"
       (click)="getValueById(lsdv1.value)"
     >
@@ -28,7 +28,7 @@
         >Study</span></a>
 
         <a
-        routerLink="/admin"
+        routerLink="/admin/course"
         [ngClass]="check == 'myCourse' ? 'active' : 'box-hover'"
         (click)="getValueById(lsdv2.value)"
       >

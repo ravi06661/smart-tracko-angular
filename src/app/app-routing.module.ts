@@ -46,6 +46,12 @@ import { AdminCreateTaskComponent } from './admin/admin-create-task/admin-create
 import { StudentProfileComponent } from './admin/student-profile/student-profile.component';
 import { AdminStudentRegistrationComponent } from './admin/admin-student-registration/admin-student-registration.component';
 import { AdminSubmissionComponent } from './admin/admin-submission/admin-submission.component';
+import { AdminLeaveRequestComponent } from './admin/admin-leave-request/admin-leave-request.component';
+import { AdminSubjectsComponent } from './admin/admin-subjects/admin-subjects.component';
+import { AdminSubjectsTopicTestComponent } from './admin/admin-subjects-topic-test/admin-subjects-topic-test.component';
+import { AdminSubjectsChapterComponent } from './admin/admin-subjects-chapter/admin-subjects-chapter.component';
+import { AdminSubjectsChapterQuizComponent } from './admin/admin-subjects-chapter-quiz/admin-subjects-chapter-quiz.component';
+import { AdminCoursesBatchesComponent } from './admin/admin-courses-batches/admin-courses-batches.component';
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
@@ -80,6 +86,7 @@ const routes: Routes = [
       {path:'createtask',component:AdminCreateTaskComponent,pathMatch:'full'},
       {path:'edittask',component:AdminEditTaskComponent,pathMatch:'full'},
       {path:'attendance',component:AdminAttendanceComponent,pathMatch:'full'},
+      {path:'leaverequest',component:AdminLeaveRequestComponent,pathMatch:'full'},
       {path:'jobalert',component:AdminJobAlertComponent,pathMatch:'full'},
       {path:'createjob',component:AdminCreateNewJobComponent,pathMatch:'full'},
       {path:'newsAndEvent',component:AdminNewsAndEventComponent,pathMatch:'full'},
@@ -87,7 +94,12 @@ const routes: Routes = [
       {path:'announcements',component:AnnouncementsComponent,pathMatch:'full'},
       {path:'createannouncements',component:CreateAnnouncementsComponent,pathMatch:'full'},
       {path:'student',component:AdminstudentComponent,pathMatch:'full'},
-      {path:'mycourse',component:AdminCoursesComponent,pathMatch:'full'},
+      {path:'subject',component:AdminSubjectsComponent,pathMatch:'full'},
+      {path:'subjecttopictest',component:AdminSubjectsTopicTestComponent,pathMatch:'full'},
+      {path:'subjectchapter',component:AdminSubjectsChapterComponent,pathMatch:'full'},
+      {path:'chapterquiz',component:AdminSubjectsChapterQuizComponent,pathMatch:'full'},
+      {path:'course',component:AdminCoursesComponent,pathMatch:'full'},
+      {path:'coursesbatches',component:AdminCoursesBatchesComponent,pathMatch:'full'},
       {path:'studentprofile/:studentId',component:StudentProfileComponent,pathMatch:'full'},
       {path:'studentregistration',component:AdminStudentRegistrationComponent,pathMatch:'full'},
       {path:'submission',component:AdminSubmissionComponent,pathMatch:'full'}
