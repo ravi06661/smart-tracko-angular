@@ -3,7 +3,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UtilityServiceService } from './utility-service.service';
 import { Profile } from '../entity/profile';
-import { profile } from 'console';
 import { LoginService } from './login.service';
 import { LeaveService } from './leave.service';
 import { TodayLeavesRequest } from '../entity/today-leaves-request';
@@ -67,14 +66,14 @@ export class StudentService {
   }
 
   public getStudentProfileData() {
-    if (this.profileData.id == 0) {
+    if (this.profileData.studentId == 0) {
       let id = this.loginService.getStudentId();
       this.http.get(`${this.studentUrl}/getStudentData/${id}`).subscribe(
         (data: any) => {
           this.profileData.name = data.studentName;
           this.profileData.profilePic = data.profilePic;
           this.profileData.course = data.course;
-          this.profileData.id = data.id
+          this.profileData.studentId = data.id
           console.log(this.profileData)
         }, (error) => {
           console.log(error);
@@ -82,7 +81,7 @@ export class StudentService {
       )
       return this.profileData
     } else {
-      if (this.profileData.id != this.loginService.getStudentId()) {
+      if (this.profileData.studentId != this.loginService.getStudentId()) {
         this.profileData = new Profile();
         this.getStudentProfileData()
       }

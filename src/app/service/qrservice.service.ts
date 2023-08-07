@@ -40,7 +40,7 @@ export class QRServiceService {
           localStorage.setItem('token', response.token);
           this.profileData.name = response.name;
           this.profileData.profilePic = response.profilePic;
-          this.profileData.id = response.id;
+          this.profileData.studentId = response.id;
           this.profileData.course = response.course;
         }
         return response;

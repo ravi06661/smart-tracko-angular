@@ -54,6 +54,15 @@ export class LoginService {
     }
     return null;
   }
+  public getAdminId(){
+    let token = this.getToken();
+    if(token!=null){
+      let tokenData = this.getDecodedAccessToken(token);
+    if(tokenData!=null)
+      return tokenData.adminId;
+    }
+    return null;
+  }
 
   public isTokenExpired(): boolean {
     let token = this.getToken();

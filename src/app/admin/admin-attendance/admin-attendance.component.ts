@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { an } from '@fullcalendar/core/internal-common';
 import { error, log } from 'console';
 import { AbsentTodays } from 'src/app/entity/absent-todays';
@@ -10,11 +10,7 @@ import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { ChartComponent } from "ng-apexcharts";
 import { ViewChild } from "@angular/core";
-import {
-  ApexNonAxisChartSeries,
-  ApexResponsive,
-  ApexChart
-} from "ng-apexcharts";
+import { Student } from 'src/app/entity/student';
 export type ChartOptions = {
   series: any;
   chart: any;
@@ -96,8 +92,10 @@ export class AdminAttendanceComponent {
 
 
   ngOnInit(): void {
+   // this.loadStudents();
     this.manageStrackedBar()
     this.getTotalStudentTodayLeavesRequest();
+
     this.getAbsents();
     this.getActiveLeaves();
 
@@ -155,4 +153,43 @@ export class AdminAttendanceComponent {
     return Math.floor((num / sum) * 100);
 
   }
+  // students: Student[] = [];
+  // currentPage = 1;
+  // pageSize = 5;
+  // isLoading = false;
+
+  // loadStudents() {
+  //   this.isLoading = true;
+  //   this.studentService.getAllStudent(this.currentPage, this.pageSize).subscribe(
+  //     (data: any) => {
+  //       this.students = this.students.concat(data.response); // Append new students to existing list
+  //       this.isLoading = false;
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching students:', error);
+  //       this.isLoading = false;
+  //     }
+  //   );
+  // }
+  
+
+  // @HostListener('mousewheel', ['$event'])
+  // onScroll(event: Event) {
+  //   if (this.isLoading) return;
+  
+  //   // Use clientHeight for window height and scrollHeight for document height.
+  //   const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
+  //   const documentHeight = document.documentElement.scrollHeight || document.body.scrollHeight || 0;
+  
+  //   // Use scrollTop for scroll position.
+  //   const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  //     console.log(this.students);
+  //     this.currentPage++;
+  //     this.loadStudents();
+  //     this.isLoading=false
+  //   if (scrollPosition + windowHeight>= documentHeight) {
+      
+  //   }
+  // }
+  
 }

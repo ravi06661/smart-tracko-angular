@@ -79,3 +79,6 @@
   z-index: 1;
   background-color: #EDF9FB; /* You can adjust this to match the background color of the table header */
 }
+.body {
+  overflow: visible; /* Ensure it is not set to 'hidden' */
+}
