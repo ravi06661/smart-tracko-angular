@@ -109,4 +109,8 @@ public searchStudentByName(fullName:string){
   
   return this.http.get<Student[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
 }
+
+public getByStudentById(studentId:number){
+  return this.http.get(`${this.studentUrl}/getStudentById?studentId=${studentId}`);
+}
 }

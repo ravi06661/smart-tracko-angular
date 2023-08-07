@@ -95,7 +95,7 @@
                         <tbody class="bg-light" *ngFor="let student of students">
                             <tr>
                                 <td>
-                                   <a routerLink="/admin/studentprofile"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
+                                   <a routerLink="/admin/studentprofile/{{student.studentId}}"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
                                     <img [src]="imageUrl+student.profilePic" alt="" class="img-fluid imagestudent">
                                     {{student.fullName }}                                        
                                    </a>

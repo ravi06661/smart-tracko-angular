@@ -38,13 +38,13 @@
                 <i class="fi fi-rr-trash hover_icon delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
               </div>
             </div>
-            <img src="assets/images/temp_img/Options 01 _Selected.png" class="profile_image" id="output">
+            <img [src]="imageUrl+student.profilePic" alr="" class="profile_image" id="output">
            </div>
             <div>
-              <h2 class="font-24 font-600 text-white java mb_6">Rahil Kothari</h2>
-              <h3 class="font-16 font-500 text-white java mb_6">9874653210</h3>
-              <h4 class="font-16 font-500 text-white java mb_6">Emailaddress@email.com</h4>
-              <h5 class="font-16 font-500 text-white mb-0">From - 1 Jan, 23 To 31 Dec, 23/Present</h5>
+              <h2 class="font-24 font-600 text-white java mb_6">{{student.fullName}}</h2>
+              <h3 class="font-16 font-500 text-white java mb_6">{{student.mobile}}</h3>
+              <h4 class="font-16 font-500 text-white java mb_6">{{student.email}}</h4>
+              <h5 class="font-16 font-500 text-white mb-0">{{student.joinDate}} To 31 Dec, 23/Present</h5>
             </div>
           </div>
         </div>
