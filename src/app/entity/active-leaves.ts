@@ -4,4 +4,5 @@ export class ActiveLeaves {
     leaveEndDate:Date | undefined
     applyForCourse:string=''
     name:string=''
+    studentId:number = 0
 }
