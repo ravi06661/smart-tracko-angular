@@ -1,13 +1,14 @@
 .main-inner {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-  }
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
 
-  .card0,
-  .right-task-area {
-    width: 25%;
-  }
+.card0,
+.right-task-area {
+  width: 25%;
+}
+
 
   .calender-img {
     width: 50%;
@@ -21,3 +22,8 @@
 .pointer {cursor: pointer;}
 
   
+
+.attendance-area, .assignment-area, .fees-area{
+  min-height: 363px;
+}
+

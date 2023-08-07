@@ -1,0 +1,384 @@
+<div id="main" class="main dashboard_page">
+    <div class="profile d-flex">
+
+        <div class="profile_top_heading d-flex gap_24">
+            <h1 class="font-27 font-700 secondary mb-0">Advanced JAVA</h1>
+            <a routerLink="/admin/course" class="top_profile_sec_btn font-14 font-500 lh-1">Done</a>
+        </div>
+
+        <app-profile-bar></app-profile-bar>
+    </div>
+
+    <!-- DASHBOARD START -->
+
+    <div class="scroll_sec mt-0">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="top-course-content mb-4 my_course">
+                    <div class="d-flex java align-items-center">
+                        <div class="course-image">
+                            <img src="assets/images/temp_img/image 18.png" class="obj-fit-none">
+                        </div>
+                        <div class="ms-2">
+                            <h2 class="font-27 font-600 text-white java mb-1">Advanced JAVA</h2>
+                            <h3 class="font-14 font-400 text-white">5 Batches 8 Subjects</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <h3 class="admin-title font-17 font-600 secondary position-relative mb_18">Subjects</h3>
+            </div>
+            <div class="col-md-3 bootstrap_cards">
+                <div class="admin-subject_card">
+                    <div class="admin-subject_card_top">
+                        <div class="admin-subject_name_card">
+                            <div class="admin-sub-left">
+                                <div class="admin-subject-image">
+                                    <img src="assets/images/svg_img/subject.svg">
+                                </div>
+                                <div class="subject-details">
+                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- subject_card_top -->
+
+                </div> <!-- subject_card -->
+            </div>
+
+            <div class="col-md-3 bootstrap_cards">
+                <div class="admin-subject_card">
+                    <div class="admin-subject_card_top">
+                        <div class="admin-subject_name_card">
+                            <div class="admin-sub-left">
+                                <div class="admin-subject-image">
+                                    <img src="assets/images/svg_img/subject.svg">
+                                </div>
+                                <div class="subject-details">
+                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- subject_card_top -->
+
+                </div> <!-- subject_card -->
+            </div>
+
+            <div class="col-md-3 bootstrap_cards">
+                <div class="admin-subject_card">
+                    <div class="admin-subject_card_top">
+                        <div class="admin-subject_name_card">
+                            <div class="admin-sub-left">
+                                <div class="admin-subject-image">
+                                    <img src="assets/images/svg_img/subject.svg">
+                                </div>
+                                <div class="subject-details">
+                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- subject_card_top -->
+
+                </div> <!-- subject_card -->
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="d-flex align-items-center justify-content-between mb_18">
+                <h3 class="admin-title font-17 font-600 secondary position-relative">Running Batch</h3>
+                <button class="top_profile_sec_btn font-14 font-500 lh-1" data-bs-toggle="modal"
+                    data-bs-target="#batch-add-modal">Add New Batch</button>
+            </div>
+            <div class="col-md-3 bootstrap_cards">
+                <div class="admin-subject_card">
+                    <div class="admin-subject_card_top mb_20">
+                        <div class="admin-subject_name_card">
+                            <div class="admin-sub-left">
+                                <div class="admin-subject-image">
+                                    <img src="assets/images/svg_img/subject.svg">
+                                </div>
+                                <div class="subject-details">
+                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
+                                    <p class="chapter-cout mb-0">Batch No - 5, 50 Students</p>
+                                </div>
+                            </div>
+                        </div>
+                        <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
+                        <div class="meat-dot-dropdown" style="display: none;" >
+                            <p class="mb-0 warning d-flex align-items-center gap_5" data-bs-toggle="modal"
+                                data-bs-target="#batch-edit-modal"><i
+                                    class="fi fi-rr-file-edit line-height-0"></i> Edit</p>
+                            <p class="mb-0 delete-icon-color d-flex align-items-center gap_5"
+                                data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                    class="fi fi-rr-trash line-height-0"></i> Delete</p>
+                        </div>
+                    </div><!-- subject_card_top -->
+                    <h4 class="mb-0 font-15 font-500 text_dark">Starts From</h4>
+                    <div class="batch-date-time">
+                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
+                                class="fi fi-rr-calendar secondary line-height-0"></i> 31-07-23</p>
+                        <p class="font-17 font-400 secondary">At</p>
+                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
+                                class="fi fi-rr-clock secondary line-height-0"></i> 10:00 PM</p>
+                    </div>
+
+                    <h4 class="mb-0 font-16 font-500 text_dark">Batch Description</h4>
+                    <p class="batch-description">New Batch</p>
+
+                </div> <!-- subject_card -->
+            </div>
+            <div class="col-md-3 bootstrap_cards">
+                <div class="admin-subject_card">
+                    <div class="admin-subject_card_top mb_20">
+                        <div class="admin-subject_name_card">
+                            <div class="admin-sub-left">
+                                <div class="admin-subject-image">
+                                    <img src="assets/images/svg_img/subject.svg">
+                                </div>
+                                <div class="subject-details">
+                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
+                                    <p class="chapter-cout mb-0">Batch No - 5, 50 Students</p>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="subject-meat-dot">
+                            <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"></i>
+                        </span>
+                    </div><!-- subject_card_top -->
+                    <h4 class="mb-0 font-15 font-500 text_dark">Starts From</h4>
+                    <div class="batch-date-time">
+                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
+                                class="fi fi-rr-calendar secondary line-height-0"></i> 31-07-23</p>
+                        <p class="font-17 font-400 secondary">At</p>
+                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
+                                class="fi fi-rr-clock secondary line-height-0"></i> 10:00 PM</p>
+                    </div>
+
+                    <h4 class="mb-0 font-16 font-500 text_dark">Batch Description</h4>
+                    <p class="batch-description">New Batch</p>
+
+                </div> <!-- subject_card -->
+            </div>
+            <div class="col-md-3 bootstrap_cards">
+                <div class="admin-subject_card">
+                    <div class="admin-subject_card_top mb_20">
+                        <div class="admin-subject_name_card">
+                            <div class="admin-sub-left">
+                                <div class="admin-subject-image">
+                                    <img src="assets/images/svg_img/subject.svg">
+                                </div>
+                                <div class="subject-details">
+                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
+                                    <p class="chapter-cout mb-0">Batch No - 5, 50 Students</p>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="subject-meat-dot">
+                            <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"></i>
+                        </span>
+                    </div><!-- subject_card_top -->
+                    <h4 class="mb-0 font-15 font-500 text_dark">Starts From</h4>
+                    <div class="batch-date-time">
+                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
+                                class="fi fi-rr-calendar secondary line-height-0"></i> 31-07-23</p>
+                        <p class="font-17 font-400 secondary">At</p>
+                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
+                                class="fi fi-rr-clock secondary line-height-0"></i> 10:00 PM</p>
+                    </div>
+
+                    <h4 class="mb-0 font-16 font-500 text_dark">Batch Description</h4>
+                    <p class="batch-description">New Batch</p>
+
+                </div> <!-- subject_card -->
+            </div>
+
+        </div>
+    </div>
+    <!-- DASHBOARD END -->
+
+    <!-- RIGHT SIDE START-->
+    <app-right-side-bar></app-right-side-bar>
+    <!-- RIGHT SIDE END -->
+
+
+    <!-- MIDDLE CONTENT END -->
+
+
+</div>
+<!--DASHBOARD END -->
+
+<!-- Modal Delete Modal Start -->
+<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                    style="top: -23%;">
+                    <i class="fi fi-rr-cross close_icon"></i>
+                </button>
+
+                <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?
+                </p>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <a href="edit_taskandassignment.html">
+                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                            delete</button>
+                    </a>
+                    <a href="edit_taskandassignment.html">
+                        <button type="button" class="apply_modal_btn font-15 font-500">No, Do not
+                            delete</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Delete Modal End -->
+
+
+<!-- Modal Admin Subject Add Batch Modal Start -->
+<div class="modal fade" id="batch-add-modal" tabindex="-1" aria-labelledby="batch-add-modal" aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title">
+                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                        id="exampleModalLabel1">Add New Batch</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
+                </div>
+
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-12 mb_18">
+                            <div class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative"
+                                style="height: 120px;">
+                                <input type="file" name="fileupload" value="fileupload" class="d-none"
+                                    id="fileupload">
+                                <label for="fileupload" class="font-17 font-500 d-flex">
+                                    <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
+                                    Add Media</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Batch Title</label>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="Day 1">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Date</label>
+                            <div class="input_icon position-relative">
+                                <input type="date" id="" name="" class="form-control input_text"
+                                    placeholder="Day 1">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Time</label>
+                            <div class="input_icon position-relative">
+                                <input type="time" id="" name="" class="form-control input_text"
+                                    placeholder="Day 1">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Batch Details</label>
+                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+                                placeholder="Start Typing....."></textarea>
+                        </div>
+
+                    </div><!-- row -->
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close">Cancel</button>
+                    <a routerLink="/admin/coursesbatches">
+                        <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Admin Subject Add Batch Modal End -->
+
+<!-- Modal Admin Subject Edit Batch Modal Start -->
+<div class="modal fade" id="batch-edit-modal" tabindex="-1" aria-labelledby="batch-edit-modal"
+    aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title">
+                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                        id="exampleModalLabel1">Edit Batch</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
+                </div>
+
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-12 mb_18">
+                            <div class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative"
+                                style="height: 120px;">
+                                <input type="file" name="fileupload" value="fileupload" class="d-none"
+                                    id="fileupload">
+                                <label for="fileupload" class="font-17 font-500 d-flex">
+                                    <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
+                                    Add Media</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Batch Title</label>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="Day 1">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Date</label>
+                            <div class="input_icon position-relative">
+                                <input type="date" id="" name="" class="form-control input_text"
+                                    placeholder="Day 1">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Time</label>
+                            <div class="input_icon position-relative">
+                                <input type="time" id="" name="" class="form-control input_text"
+                                    placeholder="Day 1">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Batch Details</label>
+                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+                                placeholder="Start Typing....."></textarea>
+                        </div>
+
+                    </div><!-- row -->
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close">Cancel</button>
+                    <a href="admin_courses_batches.html">
+                        <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Admin Subject Edit Batch Modal End -->
