@@ -3109,7 +3109,7 @@ table tr td {
 }
 
 .pending {
-  background: #F6C453;
+  /* background: #F6C453; */
   width: 15%;
   height: 40px;
 
