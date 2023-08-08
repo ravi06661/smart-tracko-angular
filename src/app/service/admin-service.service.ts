@@ -20,9 +20,6 @@ export class AdminServiceService {
       responseType:'any'
     })
   }
-
-
-
   public getAdminProfileData() {
     if (this.profileData.adminId == '') {
       let id = this.loginService.getAdminId();
@@ -46,5 +43,4 @@ export class AdminServiceService {
       return this.profileData
     }
   }
-
 }
