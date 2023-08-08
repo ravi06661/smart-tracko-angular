@@ -43,7 +43,8 @@ export class AdminStudentRegistrationComponent {
 
     });
     this.addressForm = this.formBuilder.group({
-      localAddress: ['', Validators.required]
+      localAddress: ['', Validators.required],
+      parmanentAddress:['', Validators.required]
     });
   }
 
@@ -134,7 +135,6 @@ export class AdminStudentRegistrationComponent {
             icon: 'error',
             title: 'Registration failed !!'
           })
-
         }
       )
   }

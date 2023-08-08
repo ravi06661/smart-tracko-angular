@@ -23,6 +23,8 @@ export class StudentService {
   constructor(private http: HttpClient, private utilityService: UtilityServiceService, private datepipe: DatePipe, public loginService: LoginService) { }
 
   public registerStudent(data: StudentDetails) {
+    console.log('kapil rathore ',data);
+    
     return this.http.post(`${this.studentUrl}/registerStudent`, data);
   }
 
