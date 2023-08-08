@@ -122,4 +122,8 @@ public getByStudentById(studentId:number){
 public getStudentProfileData(studentId: number) {
   return this.http.get(`${this.studentUrl}/getStudentForWebStudentProfile?studentId=${studentId}`);
 }
+
+public updateStudent(student:StudentDetails){
+  return this.http.put(`${this.studentUrl}/updateStudentApi`,student);
+}
 }
