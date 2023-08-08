@@ -30,4 +30,11 @@ export class StudentProfileComponent implements OnInit{
       }
     })
   }
+  public updateStudent(){
+    this.studentService.updateStudent(this.student).subscribe({
+   next:(res:any)=>{
+    this.student=res
+   }
+    })
+  }
 }
