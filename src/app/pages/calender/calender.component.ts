@@ -10,9 +10,9 @@ export type ChartOptions = {
   chart: any;
   responsive: any;
   labels: any;
-  colors:any
-  legend:any;
-  stroke:any;
+  colors: any
+  legend: any;
+  stroke: any;
 
 };
 @Component({
@@ -22,88 +22,88 @@ export type ChartOptions = {
 })
 
 export class CalenderComponent {
-  
+
   @ViewChild("chart") chart: ChartComponent | undefined;
-  public chartOptions: Partial<ChartOptions> ;
+  public chartOptions: Partial<ChartOptions>;
   currentMonth: number;
   currentYear: number;
   months: string[];
   days: string[];
-  Present: number[]=[];
-  Absent: number[]=[];
-  Leaves: number[]=[];
+  Present: number[] = [];
+  Absent: number[] = [];
+  Leaves: number[] = [];
 
-  constructor(private studentService:StudentService,private loginService:LoginService) {
+  constructor(private studentService: StudentService, private loginService: LoginService) {
     this.currentMonth = new Date().getMonth();
     this.currentYear = new Date().getFullYear();
     this.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     this.days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-     this.Present=[];
-     this.Absent=[];
-      this.Leaves=[];
+    this.Present = [];
+    this.Absent = [];
+    this.Leaves = [];
 
-      this.chartOptions = {
-        series: [75, 20, 5],
-        chart: {
-          width: 320,
-          type: "donut",
-          toolbar: {
-            show: false // Hide the default toolbar
-          }
-        },
-        colors: ["#5754E5", "#FF4A11", "#F8961E"],
-        labels: ["Present", "Absent", "Leaves"],
-        legend: {
-          position: "bottom", // Show the legend at the bottom
-      // formatter: function (seriesName:any, opts:any) {
-      //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
-      //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
-      //   return seriesName + ": " + percent + "%";
-      // }
-        },
-        stroke: {
-          show: false // Set this to false to remove the borders between the series
-        },
-        responsive: [
+    this.chartOptions = {
+      series: [75, 20, 5],
+      chart: {
+        width: 320,
+        type: "donut",
+        toolbar: {
+          show: false // Hide the default toolbar
+        }
+      },
+      colors: ["#5754E5", "#FF4A11", "#F8961E"],
+      labels: ["Present", "Absent", "Leaves"],
+      legend: {
+        position: "bottom", // Show the legend at the bottom
+        // formatter: function (seriesName:any, opts:any) {
+        //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
+        //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
+        //   return seriesName + ": " + percent + "%";
+        // }
+      },
+      stroke: {
+        show: false // Set this to false to remove the borders between the series
+      },
+      responsive: [
 
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 280
-                
-              },
-              legend:{
-                position:'bottom'
-              }
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 280
+
+            },
+            legend: {
+              position: 'bottom'
             }
           }
-        ]
-      };
-      
+        }
+      ]
+    };
+
   }
 
   ngOnInit(): void {
-    this.getStudentCalenderData(this.currentMonth+1,this.currentYear);
+    this.getStudentCalenderData(this.currentMonth + 1, this.currentYear);
     //this.showCalendar(this.currentMonth, this.currentYear);
     this.generateTableHeader();
   }
 
-  ngDoCheck():void{
+  ngDoCheck(): void {
     this.showCalendar(this.currentMonth, this.currentYear);
   }
 
   next(): void {
     this.currentYear = (this.currentMonth === 11) ? this.currentYear + 1 : this.currentYear;
     this.currentMonth = (this.currentMonth + 1) % 12;
-    this.getStudentCalenderData(this.currentMonth+1,this.currentYear);
+    this.getStudentCalenderData(this.currentMonth + 1, this.currentYear);
     this.showCalendar(this.currentMonth, this.currentYear);
   }
 
   previous(): void {
     this.currentYear = (this.currentMonth === 0) ? this.currentYear - 1 : this.currentYear;
     this.currentMonth = (this.currentMonth === 0) ? 11 : this.currentMonth - 1;
-    this.getStudentCalenderData(this.currentMonth+1,this.currentYear);
+    this.getStudentCalenderData(this.currentMonth + 1, this.currentYear);
     this.showCalendar(this.currentMonth, this.currentYear);
   }
 
@@ -115,7 +115,7 @@ export class CalenderComponent {
     }
   }
 
-  showCalendar(month: number, year: number): void { 
+  showCalendar(month: number, year: number): void {
     const firstDay = new Date(year, month).getDay();
     const tbl = document.getElementById("calendar-body");
     if (tbl) {
@@ -147,7 +147,7 @@ export class CalenderComponent {
           const adddata = document.getElementsByClassName("date-picker");
           cell.innerHTML = `<span>${date}</span>`;
           if (date === new Date().getDate() && year === new Date().getFullYear() && month === new Date().getMonth()) {
-            cell.className = "date-picker selected"; 
+            cell.className = "date-picker selected";
           }
           if (this.Present.includes(Number(date)) && year === this.currentYear && month === this.currentMonth) {
             cell.className = "date-picker present";
@@ -172,16 +172,20 @@ export class CalenderComponent {
     return 32 - new Date(iYear, iMonth, 32).getDate();
   }
 
-  public getStudentCalenderData(month:number,year:number){
-    this.studentService.getCalenderData(this.loginService.getStudentId(),month,year).subscribe({
-      next:(data:any)=>{
-
+  public getStudentCalenderData(month: number, year: number) {
+    this.studentService.getCalenderData(this.loginService.getStudentId(), month, year).subscribe({
+      next: (data: any) => {
+         if(data.status==false){
+          this.Present =[]
+          this.Absent =[]
+          this.Leaves =[]
+         }
         this.Present = data.StudentCalenderData.present;
         this.Absent = data.StudentCalenderData.absent;
         this.Leaves = data.StudentCalenderData.leaves;
       },
-      error:(err)=>{
-
+      error: (err) => {
+       
       }
     })
   }
