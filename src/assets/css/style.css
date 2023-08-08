@@ -3773,3 +3773,7 @@ input.change-student-img {
     overflow: hidden;
 }
 /* ============ADMIN COURSE PAGES CSS END==================== */
+
+.table td, .table th{
+  border-top: none !important;
+}

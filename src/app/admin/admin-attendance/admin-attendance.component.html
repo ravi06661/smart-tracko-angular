@@ -97,30 +97,38 @@
          </div>
         <div class="table_container">
           <table class="table mb-0 table_admin_side">
-            <thead style="background:#fbfefe;">
-              <tr class="">
-
-                <th scope="col" class="font-15 font-600 secondary">Name</th>
-                <th scope="col" class="font-15 font-600 secondary">Phone Number</th>
-              </tr>
-            </thead>
+            <tr>
+              <td style="padding: 0;">
+                <table style="background:#fbfefe; width: 100%;">
+                    <tr class="">
+                      <td scope="col" class="font-15 font-600 secondary">Name
+                      </td>
+                      <td scope="col" class="font-15 font-600 secondary">Phone Number
+                      </td>
+      
+                    </tr>
+                </table>
+              </td>
+            </tr>
           <br>
 
             <h1  class="font-15 font-600 secondary position-relative" 
             *ngIf="absentData.length==0">NO ABSENT DATA FOUND !!!</h1>
             <div class="table_scroll" style="height: 511px;">
-            <tbody class="bg-light">
-              <tr *ngFor="let obj of absentData" routerLink="/admin/studentprofile/{{obj.studentId}}">
-                <td class="d-flex align-items-center pointer" style="gap:5px;" >
-                  <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
-
-                  <h5 class="font-13 font-500 mb-0">{{obj.fullName}}<br>
-                    <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
-                  </h5>
-                </td>
-                <td>{{obj.mobile}}</td>
-              </tr>
-            </tbody>
+            <table>
+              <tbody class="bg-light">
+                <tr *ngFor="let obj of absentData" routerLink="/admin/studentprofile/{{obj.studentId}}">
+                  <td class="d-flex align-items-center pointer" style="gap:5px;" >
+                    <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
+  
+                    <h5 class="font-13 font-500 mb-0">{{obj.fullName}}<br>
+                      <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
+                    </h5>
+                  </td>
+                  <td>{{obj.mobile}}</td>
+                </tr>
+              </tbody>
+            </table>
             </div>
           </table>
         </div>
