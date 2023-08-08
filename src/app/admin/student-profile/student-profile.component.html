@@ -66,7 +66,7 @@
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button"
-              role="tab" aria-controls="contact" aria-selected="false">Attendance</button>
+              role="tab" aria-controls="contact" aria-selected="false" (click)="getStudentOverAllAttendancesAndLeaves()">Attendance</button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="profile-info-tab" data-bs-toggle="tab" data-bs-target="#profile_info"
@@ -496,57 +496,16 @@
                           </tr>
                         </thead>
                         <tbody class="bg-light">
-                          <tr>
-                            <td>12 Jan 2023</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:05:08</td>
-                            <td>Full Day</td>
+                          <tr *ngFor="let obj of attendanceLog">
+                            <td>{{obj.date | date:'dd MMM YYYY'}}</td>
+                            <td *ngIf="obj.checkIn != null">{{obj.checkIn}}</td>
+                            <td *ngIf="obj.checkOut != null">{{obj.checkOut}}</td>
+                            <td *ngIf="obj.timeIn != null">{{obj.timeIn}}</td>
+                            <td *ngIf="obj.checkIn == null">NA</td>
+                            <td *ngIf="obj.checkOut == null">NA</td>
+                            <td *ngIf="obj.timeIn == null">NA</td>
+                            <td>{{obj.status}}</td>
                           </tr>
-                          <tr>
-                            <td>NA</td>
-                            <td>NA</td>
-                            <td>NA</td>
-                            <td>NA</td>
-                            <td>Absent</td>
-                          </tr>
-                          <tr>
-                            <td>12 Jan 2023</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:05:08</td>
-                            <td>Half Day</td>
-                          </tr>
-                          <tr>
-                            <td>12 Jan 2023</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:05:08</td>
-                            <td>Late</td>
-                          </tr>
-                          <tr>
-                            <td>12 Jan 2023</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:05:08</td>
-                            <td>On Leave</td>
-                          </tr>
-                          <tr>
-                            <td>12 Jan 2023</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:05:08</td>
-                            <td>Full Day</td>
-                          </tr>
-                          <tr>
-                            <td>12 Jan 2023</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:03:24 AM</td>
-                            <td>09:05:08</td>
-                            <td>Full Day</td>
-                          </tr>
-
-    
                         </tbody>
                       </table>
                     </div>

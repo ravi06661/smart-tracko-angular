@@ -126,4 +126,8 @@ public getStudentProfileData(studentId: number) {
 public updateStudent(student:StudentDetails){
   return this.http.put(`${this.studentUrl}/updateStudentApi`,student);
 }
+
+public getStudentOverAllAttendancesAndLeave(studentId: number) {
+  return this.http.get(`${this.studentUrl}/getStudentOverAllAttendanceAndLeavesAndAbsents?studentId=${studentId}`);
+}
 }
