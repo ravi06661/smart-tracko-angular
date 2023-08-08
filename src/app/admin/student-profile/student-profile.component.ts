@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { StudentDetails } from 'src/app/entity/student-details';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-student-profile',
@@ -31,10 +32,25 @@ export class StudentProfileComponent implements OnInit{
     })
   }
   public updateStudent(){
-    this.studentService.updateStudent(this.student).subscribe({
-   next:(res:any)=>{
-    this.student=res
-   }
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.studentService.updateStudent(this.student).subscribe({
+          next:(res:any)=>{
+           this.student=res
+          }
+          })
+        Swal.fire('Saved!', '', 'success')
+      } else if (result.isDenied) {
+        this.getStudentProfileData()
+        Swal.fire('Changes are not saved', '', 'info')
+      }
     })
   }
 }
