@@ -173,19 +173,22 @@ export class CalenderComponent {
   }
 
   public getStudentCalenderData(month: number, year: number) {
+    this.Present = []
+    this.Absent = []
+    this.Leaves = []
     this.studentService.getCalenderData(this.loginService.getStudentId(), month, year).subscribe({
       next: (data: any) => {
-         if(data.status==false){
-          this.Present =[]
-          this.Absent =[]
-          this.Leaves =[]
-         }
+        if (data.status == false) {
+          this.Present = []
+          this.Absent = []
+          this.Leaves = []
+        }
         this.Present = data.StudentCalenderData.present;
         this.Absent = data.StudentCalenderData.absent;
         this.Leaves = data.StudentCalenderData.leaves;
       },
       error: (err) => {
-       
+
       }
     })
   }
