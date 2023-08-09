@@ -83,15 +83,15 @@
     <div class="row">
       <div class="col-md-3">
         <div class="d-flex justify-content-between align-items-center mb_12">
-          <h3 class="admin-title font-17 font-600 secondary position-relative">Absent Today</h3>
+          <h3 class="admin-title font-17 font-600 secondary position-relative">{{attendanceFilter}} Today</h3>
           <div class="dropdown">
             <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Course
+              Filter
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">January</a></li>
-              <li><a class="dropdown-item" href="#">February</a></li>
-              <li><a class="dropdown-item" href="#">March</a></li>
+              <li><a class="dropdown-item" (click)="getTodayAttendanceFilter('Present')" >Present</a></li>
+              <li><a class="dropdown-item" (click)="getTodayAttendanceFilter('Absent')" >Absent</a></li>
+              <li><a class="dropdown-item" (click)="getTodayAttendanceFilter('Early Checkout')"  >Early Checkout</a></li>
             </ul>
           </div>
          </div>
@@ -113,7 +113,8 @@
               </td>
               <td style="font-size: 13px; font-weight: 400;">{{obj.mobile}}</td>
             </tr>
-            
+            <h1  class="font-15 font-600 secondary position-relative" 
+            *ngIf="presentAbsentAndEarlyCheckoutLength==0"><br>NO DATA AVAILABLE !!!</h1>
           </tbody>
         </table>
         <!-- <div class="table_container">
@@ -190,7 +191,8 @@
               <td>{{obj.leaveDate|date}}</td>
               <td>{{obj.leaveEndDate|date}}</td>
             </tr>
-            
+            <h1  class="font-15 font-600 secondary position-relative" 
+            *ngIf="totaOnleaves==0"><br>NO LEAVES DATA AVAILABLE !!!</h1>
           </tbody>
         </table>
         <!-- <div class="table_container">
@@ -259,7 +261,8 @@
                 <h5 class="warning font-13 font-500 mb-0"(click)="approveStudentLeaveReqeust(obj.studentId,obj.leaveId,'deny')" >Deny</h5>
               </td>
             </tr>
-            
+            <h1  class="font-15 font-600 secondary position-relative" 
+            *ngIf="totalLeavesRequests==0"><br>NO LEAVES REQUESTS DATA AVAILABLE !!!</h1>
           </tbody>
         </table>
         

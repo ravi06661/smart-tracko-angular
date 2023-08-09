@@ -10,6 +10,7 @@ import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { ChartComponent } from "ng-apexcharts";
 import { ViewChild } from "@angular/core";
+import { PresentAndEarlyCheckout } from 'src/app/entity/present-and-early-checkout';
 
 export type ChartOptions = {
   series: any;
@@ -36,6 +37,9 @@ export class AdminAttendanceComponent {
   absentWidth = 0;
   presentWidth = 0;
 
+  attendanceFilter='Absent'
+  presentAbsentAndEarlyCheckoutLength = 0;
+  totalLeavesRequests = 0;
 
   @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions: Partial<ChartOptions>;
@@ -103,9 +107,11 @@ export class AdminAttendanceComponent {
   public getAbsents() {
     this.studentService.getTodayStudentAbsentData().subscribe(
       (data: any) => {
+        
         this.absentData = data.totalAbsent;
         this.totalAbsent = this.absentData.length;
         this.totalPresent = data.totalPresent
+        this.presentAbsentAndEarlyCheckoutLength = this.absentData.length
         this.getChartData();
       }
     )
@@ -123,6 +129,7 @@ export class AdminAttendanceComponent {
     this.studentService.getTodayLeavesRequest().subscribe(
       (data: any) => {
         this.leavesRequestData = data;
+        this.totalLeavesRequests = this.leavesRequestData.length
       }
     )
   }
@@ -154,43 +161,20 @@ export class AdminAttendanceComponent {
     return Math.floor((num / sum) * 100);
 
   }
-  // students: Student[] = [];
-  // currentPage = 1;
-  // pageSize = 5;
-  // isLoading = false;
+ 
+  public getTodayAttendanceFilter(value:string){
+    this.attendanceFilter = value
+    if(value=='Absent')
+      this.getAbsents();
+    else{
+      this.studentService.getTodayAttendanceFilter(value).subscribe({
+        next:(data:any)=>{
+          this.absentData = data;
+          this.presentAbsentAndEarlyCheckoutLength  = this.absentData.length;
+        }
+      })
+    }
+  }
 
-  // loadStudents() {
-  //   this.isLoading = true;
-  //   this.studentService.getAllStudent(this.currentPage, this.pageSize).subscribe(
-  //     (data: any) => {
-  //       this.students = this.students.concat(data.response); // Append new students to existing list
-  //       this.isLoading = false;
-  //     },
-  //     (error) => {
-  //       console.error('Error fetching students:', error);
-  //       this.isLoading = false;
-  //     }
-  //   );
-  // }
-  
-
-  // @HostListener('mousewheel', ['$event'])
-  // onScroll(event: Event) {
-  //   if (this.isLoading) return;
-  
-  //   // Use clientHeight for window height and scrollHeight for document height.
-  //   const windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0;
-  //   const documentHeight = document.documentElement.scrollHeight || document.body.scrollHeight || 0;
-  
-  //   // Use scrollTop for scroll position.
-  //   const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-  //     console.log(this.students);
-  //     this.currentPage++;
-  //     this.loadStudents();
-  //     this.isLoading=false
-  //   if (scrollPosition + windowHeight>= documentHeight) {
-      
-  //   }
-  // }
   
 }
