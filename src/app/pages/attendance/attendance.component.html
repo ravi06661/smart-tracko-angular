@@ -16,7 +16,7 @@
         <div class="attendance-charbar">
           <h2 class="font-17 font-700 text-light">Attendance</h2>
           <div class="cell-chartbar">
-            <div id="chart1" style="max-width: 100%; max-height: fit-content;"></div>
+            <div id="chart2" style="max-width: 100%; max-height: fit-content;"></div>
           </div>
         </div>
       </div>
@@ -86,10 +86,11 @@
               <div class="attendance d-flex align-items-center bg_attendance position-relative"
                 (click)="attendanceModal(attendance)">
                 <div class="date_1 mb-0">
-                  <h4 class="font-14 font-400 dark mb-0">
-                    <span class="font-20 font-600 text-black mx-1">{{
-                      attendance.checkInDate | date : "dd MMM"
-                      }}</span>
+                  <h4 class="font-14 font-400 dark mb-0"><span class="font-20 font-600 text-black mx-1">{{
+                    attendance.checkInDate | date : "dd"
+                    }}</span>{{
+                      attendance.checkInDate | date : "MMM"
+                      }}
                   </h4>
                 </div>
                 <div class="Check_in">
@@ -238,7 +239,7 @@
           </div>
           <form #f="ngForm">
             <div class="">
-              <select class="select_menu" aria-label="Default select example" name="leaveTypeId"
+              <select class="form-select" aria-label="Default select example" name="leaveTypeId"
                 [(ngModel)]="leaves.leaveType.leaveTypeId">
                 <option disabled>Select Leave Type</option>
                 <option *ngFor="let leaveType of leaveTypes" [ngValue]="leaveType.leaveTypeId">

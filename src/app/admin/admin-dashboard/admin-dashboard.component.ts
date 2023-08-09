@@ -1,8 +1,9 @@
 import { LocationStrategy } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { StudentService } from 'src/app/service/student.service';
 import { StudentDetails } from 'src/app/entity/student-details';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -14,7 +15,7 @@ export class AdminDashboardComponent implements OnInit{
   students:StudentDetails[] = []
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl= this.BASE_URL+'/file/getImageApi/images/'
-  constructor(private localst:LocationStrategy,private studentService:StudentService,private utilityService:UtilityServiceService) {}
+  constructor(private elementRef: ElementRef,private localst:LocationStrategy,private studentService:StudentService,private utilityService:UtilityServiceService) {}
 
   ngOnInit(): void {
     this.preventBackButton();
