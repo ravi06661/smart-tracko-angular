@@ -95,7 +95,28 @@
             </ul>
           </div>
          </div>
-        <div class="table_container">
+         <table class="scrollable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of absentData" routerLink="/admin/studentprofile/{{obj.studentId}}">
+              <td class="d-flex align-items-center pointer" style="gap:5px;" >
+                <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
+
+                <h5 class="font-13 font-500 mb-0">{{obj.fullName}}<br>
+                  <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
+                </h5>
+              </td>
+              <td style="font-size: 13px; font-weight: 400;">{{obj.mobile}}</td>
+            </tr>
+            
+          </tbody>
+        </table>
+        <!-- <div class="table_container">
           <table class="table mb-0 table_admin_side">
             <tr>
               <td style="padding: 0;">
@@ -131,7 +152,7 @@
             </table>
             </div>
           </table>
-        </div>
+        </div> -->
       </div>
 
       <div class="col-md-4">
@@ -148,7 +169,31 @@
             </ul>
           </div>
          </div>
-        <div class="table_container">
+         <table class="scrollable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>From</th>
+              <th>To</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of leavesData">
+              <td class="d-flex align-items-center pointer" style="gap:5px;" routerLink="/admin/studentprofile/{{obj.studentId}}">
+                <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
+                <h5 class="font-13 font-500 mb-0">{{obj.name}}<br>
+                  <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
+                </h5>
+              </td>
+
+              <td>{{obj.leaveDate|date}}</td>
+              <td>{{obj.leaveEndDate|date}}</td>
+            </tr>
+            
+          </tbody>
+        </table>
+        <!-- <div class="table_container">
           <table class="table mb-0">
             <thead style="background:#fbfefe;">
               <tr class="table_heading">
@@ -177,7 +222,7 @@
             </tbody>
             </div>
           </table>
-        </div>
+        </div> -->
       </div>
 
       <div class="col-md-5">
@@ -185,8 +230,40 @@
           <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Leave Requests</h3>
           <a routerLink="/admin/leaverequest" class="secondary font-13 font-500 mb-0">View All</a>
         </div>
+
+        <table class="scrollable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Duration</th>
+              <th>Action</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let obj of leavesRequestData">
+              <td class="d-flex pointer" style="gap:5px;" routerLink="/admin/studentprofile/{{obj.studentId}}">
+                <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
+                <h5 class="font-13 font-500 mb-0">{{obj.fullName}} <br>
+                  <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
+                </h5>
+              </td>
+              <td>
+                <p class="mb-0 font-13 font-400">{{obj.leaveTypeName}} {{obj.leaveDuration}} Days </p>
+                <p class="mb-0 font-13 font-400">{{ obj.leaveDate }} - {{ obj.leaveEndDate }}</p>
+                <p class="mb-0 font-13 font-400"> {{obj.leaveReason}}</p>
+
+              </td>
+              <td>                 
+                <h3 class="active_approved_btn font-13 font-400 border-radius12 text-light text-center" (click)="approveStudentLeaveReqeust(obj.studentId,obj.leaveId,'approve') ">Approved</h3>
+                <h5 class="warning font-13 font-500 mb-0"(click)="approveStudentLeaveReqeust(obj.studentId,obj.leaveId,'deny')" >Deny</h5>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
         
-        <div class="table_container table_scroll" style="height: 530px;">
+        <!-- <div class="table_container table_scroll" style="height: 530px;">
           <table class="table mb-0 table_admin_side">
             <thead style="background:#fbfefe;">
               <tr class="table_heading">
@@ -227,7 +304,7 @@
             </tbody>
             </div>
           </table>
-        </div>
+        </div> -->
       </div>
 
     </div>

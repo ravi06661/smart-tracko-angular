@@ -104,3 +104,90 @@
   overflow: visible; /* Ensure it is not set to 'hidden' */
 }
 
+table
+{
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+
+thead tr,
+tfoot tr
+{
+	background: #EDF9FB;
+}
+
+tbody tr
+{
+	background: #f8f9fa;
+}
+
+th, td
+{
+	border: 1px solid #dee2e6;
+	padding: 0.5em;
+	text-align: left;
+	vertical-align: top;
+	font-weight: 600;
+  text-transform: capitalize;
+  font-size: 15px;
+}
+th{
+  color: #115e68;
+}
+
+.scrollable thead,
+.scrollable tfoot,
+.scrollable tbody,
+.scrollable th,
+.scrollable td
+{
+	display: block;
+	width: 100%;
+}
+
+.scrollable tfoot,
+.scrollable tbody
+{
+	overflow-y: scroll;
+}
+.scrollable tbody::-webkit-scrollbar{
+  display: none;
+}
+
+.scrollable thead,
+.scrollable tfoot
+{
+	-ms-overflow-style: none;
+}
+
+.scrollable thead::-webkit-scrollbar,
+.scrollable tfoot::-webkit-scrollbar
+{
+	visibility: hidden;
+}
+
+.scrollable tbody
+{
+	max-height: 25em;
+	position: relative;
+	-ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.scrollable tr
+{
+	display: flex;
+}
+
+.scrollable tbody th,
+.scrollable tbody td
+{
+	border-top: none;
+}
+
+.scrollable th:not(:last-child),
+.scrollable td:not(:last-child)
+{
+	border-right: none;
+}
