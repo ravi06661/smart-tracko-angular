@@ -1,7 +1,7 @@
+import { AbsentTodays } from './../../entity/absent-todays';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { an } from '@fullcalendar/core/internal-common';
 import { error, log } from 'console';
-import { AbsentTodays } from 'src/app/entity/absent-todays';
 import { ActiveLeaves } from 'src/app/entity/active-leaves';
 import { Leaves } from 'src/app/entity/leaves';
 import { TodayLeavesRequest } from 'src/app/entity/today-leaves-request';
@@ -97,12 +97,12 @@ export class AdminAttendanceComponent {
 
   ngOnInit(): void {
    // this.loadStudents();
-    this.manageStrackedBar()
     this.getTotalStudentTodayLeavesRequest();
 
     this.getAbsents();
     this.getActiveLeaves();
 
+    this.getMonthWiseAttendanceDataForChart(8)
   }
   public getAbsents() {
     this.studentService.getTodayStudentAbsentData().subscribe(
@@ -147,20 +147,17 @@ export class AdminAttendanceComponent {
     this.chartOptions.series = [ this.totalPresent,this.totalAbsent, this.totaOnleaves]
   }
 
-  public manageStrackedBar() {
-    let absent = 30;
-    let present = 40;
-    let leave = 60;
-    let sum = present + absent + leave
-    this.presentWidth = this.getPercentage(present, sum);
-    this.absentWidth = this.getPercentage(absent, sum);
-    this.leaveWidth = this.getPercentage(leave, sum);
-  }
+  // public manageStrackedBar(absent:number,present:number,leave:number) {
+  //   let sum = present + absent + leave
+  //   this.presentWidth = this.getPercentage(present, sum);
+  //   this.absentWidth = this.getPercentage(absent, sum);
+  //   this.leaveWidth = this.getPercentage(leave, sum);
+  // }
 
-  public getPercentage(num: number, sum: number) {
-    return Math.floor((num / sum) * 100);
+  // public getPercentage(num: number, sum: number) {
+  //   return Math.floor((num / sum) * 100);
 
-  }
+  // }
  
   public getTodayAttendanceFilter(value:string){
     this.attendanceFilter = value
@@ -174,6 +171,17 @@ export class AdminAttendanceComponent {
         }
       })
     }
+  }
+
+  public getMonthWiseAttendanceDataForChart(monthNum:number){
+    this.studentService.getMonthWiseAttendanceData(monthNum).subscribe({
+      next:(data:any)=>{
+        this.leaveWidth = data.OnLeave
+        this.absentWidth = data.Absent
+        this.presentWidth = data.Present
+       // this.manageStrackedBar(data.Absent,data.Present,data.OnLeave);
+      }
+    })
   }
 
   

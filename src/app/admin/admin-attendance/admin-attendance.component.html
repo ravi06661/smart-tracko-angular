@@ -49,16 +49,9 @@
           </div>
         </div>
         <div class="assignment-area">
-          <div class="chart-detail">
-            <div class="submitted-value">
-              <p>Present</p>
-              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>120</h2>
-            </div>
-            <div class="pending-value">
-              <p>Absent</p>
-              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>30</h2>
-            </div>
-          </div>
+          <!-- <div class="chart-detail">
+            
+          </div> -->
           <div class="assignment-chart">
             <div class="Present" [style.width]="presentWidth+'%'"></div>
             <div class="Absent" [style.width]="absentWidth+'%'"></div>
@@ -66,13 +59,17 @@
             <!-- <div class="our_due" [style.width]="presentWidth"></div> -->
           </div>
           <div class="chart-detail-bottom">
+            <div class="submitted-value">
+              <p>Present</p>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{presentWidth}}</h2>
+            </div>
+            <div class="pending-value">
+              <p>Absent</p>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{absentWidth}}</h2>
+            </div>
             <div class="approve-value">
               <p>Leave</p>
-              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>120</h2>
-            </div>
-            <div class="over-due-value">
-              <p>Over Due</p>
-              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>30</h2>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{leaveWidth}}</h2>
             </div>
           </div>
         </div>

@@ -3067,12 +3067,12 @@ table tr td {
   height: 10px;
   display: inline-block;
   border-radius: 1px;
-  background: #8079FF;
+  background: #0d00ff;
   margin-right: 5px;
 }
 
 .pending-value h2 span {
-  background: #F6C453;
+  background: #dd6319;
 }
 
 .chart-detail-bottom {
@@ -3088,7 +3088,7 @@ table tr td {
   height: 10px;
   display: inline-block;
   border-radius: 1px;
-  background: #49CF9F;
+  background: #f9dd04;
   margin-right: 5px;
 }
 
