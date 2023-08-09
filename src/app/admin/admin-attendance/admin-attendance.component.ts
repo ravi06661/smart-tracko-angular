@@ -11,6 +11,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { ChartComponent } from "ng-apexcharts";
 import { ViewChild } from "@angular/core";
 import { PresentAndEarlyCheckout } from 'src/app/entity/present-and-early-checkout';
+import * as moment from 'moment';
 
 export type ChartOptions = {
   series: any;
@@ -40,6 +41,7 @@ export class AdminAttendanceComponent {
   attendanceFilter='Absent'
   presentAbsentAndEarlyCheckoutLength = 0;
   totalLeavesRequests = 0;
+  currentMonth=''
 
   @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions: Partial<ChartOptions>;
@@ -101,8 +103,8 @@ export class AdminAttendanceComponent {
 
     this.getAbsents();
     this.getActiveLeaves();
-
-    this.getMonthWiseAttendanceDataForChart(8)
+    this.currentMonth = moment(new Date().getMonth()+1, "MM").format("MMMM");
+    this.getMonthWiseAttendanceDataForChart(new Date().getMonth()+1);
   }
   public getAbsents() {
     this.studentService.getTodayStudentAbsentData().subscribe(
@@ -174,6 +176,7 @@ export class AdminAttendanceComponent {
   }
 
   public getMonthWiseAttendanceDataForChart(monthNum:number){
+    this.currentMonth = moment(monthNum, "MM").format("MMMM");
     this.studentService.getMonthWiseAttendanceData(monthNum).subscribe({
       next:(data:any)=>{
         this.leaveWidth = data.OnLeave

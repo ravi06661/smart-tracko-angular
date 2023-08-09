@@ -54,18 +54,12 @@ export class CalenderComponent {
       colors: ["#5754E5", "#FF4A11", "#F8961E"],
       labels: ["Present", "Absent", "Leaves"],
       legend: {
-        position: "bottom", // Show the legend at the bottom
-        // formatter: function (seriesName:any, opts:any) {
-        //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
-        //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
-        //   return seriesName + ": " + percent + "%";
-        // }
+        position: "bottom", 
       },
       stroke: {
         show: false // Set this to false to remove the borders between the series
       },
       responsive: [
-
         {
           breakpoint: 480,
           options: {
@@ -85,13 +79,9 @@ export class CalenderComponent {
 
   ngOnInit(): void {
     this.getStudentCalenderData(this.currentMonth + 1, this.currentYear);
-    //this.showCalendar(this.currentMonth, this.currentYear);
     this.generateTableHeader();
   }
 
-  ngDoCheck(): void {
-    this.showCalendar(this.currentMonth, this.currentYear);
-  }
 
   next(): void {
     this.currentYear = (this.currentMonth === 11) ? this.currentYear + 1 : this.currentYear;
@@ -186,11 +176,17 @@ export class CalenderComponent {
         this.Present = data.StudentCalenderData.present;
         this.Absent = data.StudentCalenderData.absent;
         this.Leaves = data.StudentCalenderData.leaves;
+        this.getChartData();
+        this.showCalendar(this.currentMonth, this.currentYear);
       },
       error: (err) => {
 
       }
     })
+  }
+
+  public getChartData() {
+    this.chartOptions.series = [ this.Present.length,this.Absent.length, this.Leaves.length]
   }
 
 }

@@ -30,21 +30,21 @@
           <div class="dropdown">
             <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
               data-bs-toggle="dropdown" aria-expanded="false">
-              month
+              {{currentMonth}}
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">January</a></li>
-              <li><a class="dropdown-item" href="#">February</a></li>
-              <li><a class="dropdown-item" href="#">March</a></li>
-              <li><a class="dropdown-item" href="#">April</a></li>
-              <li><a class="dropdown-item" href="#">May</a></li>
-              <li><a class="dropdown-item" href="#">June</a></li>
-              <li><a class="dropdown-item" href="#">July</a></li>
-              <li><a class="dropdown-item" href="#">August</a></li>
-              <li><a class="dropdown-item" href="#">September</a></li>
-              <li><a class="dropdown-item" href="#">October</a></li>
-              <li><a class="dropdown-item" href="#">November </a></li>
-              <li><a class="dropdown-item" href="#">December </a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(1)">January</a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(2)">February</a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(3)">March</a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(4)">April</a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(5)">May</a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(6)">June</a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(7)">July</a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(8)">August</a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(9)">September</a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(10)">October</a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(11)">November </a></li>
+              <li><a class="dropdown-item" (click)="getMonthWiseAttendanceDataForChart(12)">December </a></li>
             </ul>
           </div>
         </div>
