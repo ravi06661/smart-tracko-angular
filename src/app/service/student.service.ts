@@ -136,4 +136,9 @@ public  getTodayAttendanceFilter(value: string) {
     return this.http.get(`${this.studentUrl}/getTodaysPresentsAndEarlyCheckouts?key=${value}`);
 }
 
+public getMonthWiseAttendanceData(monthNum: number) {
+  return this.http.get(`${this.studentUrl}/getMonthwiseAttendence?month=${monthNum}`);
+}
+
+
 }
