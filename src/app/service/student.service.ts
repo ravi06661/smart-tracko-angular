@@ -15,6 +15,7 @@ import { StudentDetails } from '../entity/student-details';
 })
 export class StudentService {
 
+
   BASE_URL = this.utilityService.getBaseUrl();
   studentUrl = this.BASE_URL + '/student';
   TIME_URL = this.utilityService.getTimeUrl();
@@ -130,4 +131,9 @@ public updateStudent(student:StudentDetails){
 public getStudentOverAllAttendancesAndLeave(studentId: number) {
   return this.http.get(`${this.studentUrl}/getStudentOverAllAttendanceAndLeavesAndAbsents?studentId=${studentId}`);
 }
+
+public  getTodayAttendanceFilter(value: string) {
+    return this.http.get(`${this.studentUrl}/getTodaysPresentsAndEarlyCheckouts?key=${value}`);
+}
+
 }

@@ -93,97 +93,26 @@
                         </thead>
                         <tbody class="bg-light">
                        
-                            <tr>
+                            <tr *ngFor="let obj of leavesRequestData">
                                 <td>
                                     <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                     <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                     <h5 class="font-13 font-500 mb-0">Wade Warren <br>
+                                     <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
+                                     <h5 class="font-13 font-500 mb-0">{{obj.fullName}}<br>
                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
                                     </h5>                                    
                                     </a>
                                  </td>
-                                <td>Casual</td>
-                                <td>5 Days</td>
-                                <td>23 Jan, 2023</td>
-                                <td>23 Jan, 2023</td>
-                                <td>For Brother’s Wedding</td>
+                                <td>{{obj.leaveTypeName}}</td>
+                                <td>{{obj.leaveDuration}} Days</td>
+                                <td>{{obj.leaveDate}}</td>
+                                <td>{{obj.leaveEndDate}}</td>
+                                <td>{{obj.leaveReason}}</td>
                                 <td class="d-flex align-items-center gap_24">
-                                  <h3 class="mb-0 active_approved_btn font-13 font-400 border-radius12 text-light text-center" style="padding: 6px 10px;">Approved</h3>
-                                  <h5 class="warning font-13 font-500 mb-0 text-center">Deny</h5></td>
+                                  <h3 class="mb-0 active_approved_btn font-13 font-400 border-radius12 text-light text-center" style="padding: 6px 10px;" (click)="approveStudentLeaveReqeust(obj.studentId,obj.leaveId,'approve')">Approved</h3>
+                                  <h5 class="warning font-13 font-500 mb-0 text-center" (click)="approveStudentLeaveReqeust(obj.studentId,obj.leaveId,'deny')">Deny</h5></td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                     <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                     <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>                                    
-                                    </a>
-                                 </td>
-                                <td>Casual</td>
-                                <td>5 Days</td>
-                                <td>23 Jan, 2023</td>
-                                <td>23 Jan, 2023</td>
-                                <td>For Brother’s Wedding</td>
-                                <td class="d-flex align-items-center gap_24">
-                                  <h3 class="mb-0 active_approved_btn font-13 font-400 border-radius12 text-light text-center" style="padding: 6px 10px;">Approved</h3>
-                                  <h5 class="warning font-13 font-500 mb-0 text-center">Deny</h5></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                     <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                     <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>                                    
-                                    </a>
-                                 </td>
-                                <td>Casual</td>
-                                <td>5 Days</td>
-                                <td>23 Jan, 2023</td>
-                                <td>23 Jan, 2023</td>
-                                <td>For Brother’s Wedding</td>
-                                <td class="d-flex align-items-center gap_24">
-                                  <h3 class="mb-0 active_approved_btn font-13 font-400 border-radius12 text-light text-center" style="padding: 6px 10px;">Approved</h3>
-                                  <h5 class="warning font-13 font-500 mb-0 text-center">Deny</h5></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                     <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                     <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>                                    
-                                    </a>
-                                 </td>
-                                <td>Casual</td>
-                                <td>5 Days</td>
-                                <td>23 Jan, 2023</td>
-                                <td>23 Jan, 2023</td>
-                                <td>For Brother’s Wedding</td>
-                                <td class="d-flex align-items-center gap_24">
-                                  <h3 class="mb-0 active_approved_btn font-13 font-400 border-radius12 text-light text-center" style="padding: 6px 10px;">Approved</h3>
-                                  <h5 class="warning font-13 font-500 mb-0 text-center">Deny</h5></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                     <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                     <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>                                    
-                                    </a>
-                                 </td>
-                                <td>Casual</td>
-                                <td>5 Days</td>
-                                <td>23 Jan, 2023</td>
-                                <td>23 Jan, 2023</td>
-                                <td>For Brother’s Wedding</td>
-                                <td class="d-flex align-items-center gap_24">
-                                  <h3 class="mb-0 active_approved_btn font-13 font-400 border-radius12 text-light text-center" style="padding: 6px 10px;">Approved</h3>
-                                  <h5 class="warning font-13 font-500 mb-0 text-center">Deny</h5></td>
-                            </tr>
-
+                            <h1 class="font-21 font-600 secondary position-relative" 
+                                *ngIf="length==0"><br>NO DATA AVAILABLE !!!</h1>
                         </tbody>
                     </table>
                 </div>
