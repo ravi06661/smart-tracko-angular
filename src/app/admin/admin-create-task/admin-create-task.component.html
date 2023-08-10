@@ -2,12 +2,29 @@
     <div class="profile d-flex">
         <div class="assign-detail-heading">
             <h1 class="font-27 font-700 secondary mb-0">Create Task</h1>
-            <a routerLink="/admin/task">
-                <button type="button"
-                    class="submit_buttons font-14 font-500 text-white d-inline-flex">Done</button>
+            <a routerLink="/admin/task" class="submit_buttons font-14 font-500  text-white d-inline-flex">Done </a>
+        </div>
+        <div class="profile">
+            <div class="d-flex align-items-center porfile_sec">
+                <div class="">
+                    <img src="assets/images/temp_img/Ellipse 1.png" class="round-img">
+                </div>
+                <div class="text mx-3">
+                    <h3 class="font-17 font-600 text-black user-name">Rahil Kothari</h3>
+                    <p class="font-14 font-400  text-black mb-0">Ui/Ux Team Lead</p>
+                </div>
+            </div>
+            <a href="#" class="ms-3 right_menu_toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path opacity="0.5"
+                        d="M18.7491 9V9.7041C18.7491 10.5491 18.9903 11.3752 19.4422 12.0782L20.5496 13.8012C21.5612 15.3749 20.789 17.5139 19.0296 18.0116C14.4273 19.3134 9.57274 19.3134 4.97036 18.0116C3.21105 17.5139 2.43882 15.3749 3.45036 13.8012L4.5578 12.0782C5.00972 11.3752 5.25087 10.5491 5.25087 9.7041V9C5.25087 5.13401 8.27256 2 12 2C15.7274 2 18.7491 5.13401 18.7491 9Z"
+                        fill="#49BFCF" />
+                    <path
+                        d="M7.24316 18.5449C7.8941 20.5501 9.77767 21.9997 11.9998 21.9997C14.222 21.9997 16.1055 20.5501 16.7565 18.5449C13.611 19.1352 10.3886 19.1352 7.24316 18.5449Z"
+                        fill="#49BFCF" />
+                </svg>
             </a>
         </div>
-       <app-profile-bar></app-profile-bar>
     </div>
 
     <div class="scroll_section">
@@ -53,10 +70,11 @@
                         <div class="col-md-4 mb_24">
                             <label for="" class="mb_6 font-17 font-500 secondary">File Attachments in
                                 Submission</label>
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text gray-input-bg enabled_inp"
-                                    placeholder="Mern Stack" disabled="disabled">
-                            </div>
+                                <select class="form-select enabled_inp" aria-label="Default select example" disabled="disabled" style="background-color: #f2f2f2 !important;">
+                                    <option value="1">Required</option>
+                                    <option selected="">Optional</option>
+                                    <option value="2">Not Allowed</option>
+                                  </select>
                         </div>
 
 
@@ -181,7 +199,10 @@
             </div><!-- col-md-12 -->
 
             <div class="col-md-12">
-                <h3 class="admin-title font-17 font-600 secondary mb_20">Task Questions</h3>
+                <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Task Attechments</h3>
+            </div>
+
+            <div class="col-md-12">
                 <form
                     class="attachment_file2 d-inline-flex align-items-center  position-relative mb-2 add-attechment">
                     <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
@@ -227,11 +248,11 @@
 
             <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                <a href="edit_taskandassignment.html">
+                <a routerLink="/admin/createtask">
                     <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
                         delete</button>
                 </a>
-                <a href="edit_taskandassignment.html">
+                <a routerLink="/admin/createtask">
                     <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
                 </a>
             </div>
@@ -255,11 +276,11 @@ aria-hidden="true">
 
             <p class="secondary font-21 font-500 text-center">Are You Sure You Want To <br> Discard Changes?</p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                <a href="edit_taskandassignment.html">
+                <a routerLink="/admin/createtask">
                     <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Discard
                         changes</button>
                 </a>
-                <a href="edit_taskandassignment.html">
+                <a routerLink="/admin/createtask">
                     <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
                 </a>
             </div>
@@ -283,11 +304,11 @@ aria-hidden="true">
 
             <p class="secondary font-21 font-500 text-center">Are You Sure You Want To<br> Save Changes?</p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                <a href="edit_taskandassignment.html">
+                <a routerLink="/admin/createtask">
                     <button type="button"
                         class="cancel_modal_btn font-15 font-500 delete-icon-color">Cancel</button>
                 </a>
-                <a href="edit_taskandassignment.html">
+                <a routerLink="/admin/createtask">
                     <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
                 </a>
             </div>
