@@ -149,17 +149,18 @@ export class AdminAttendanceComponent {
     this.chartOptions.series = [ this.totalPresent,this.totalAbsent, this.totaOnleaves]
   }
 
-  // public manageStrackedBar(absent:number,present:number,leave:number) {
-  //   let sum = present + absent + leave
-  //   this.presentWidth = this.getPercentage(present, sum);
-  //   this.absentWidth = this.getPercentage(absent, sum);
-  //   this.leaveWidth = this.getPercentage(leave, sum);
-  // }
+  public manageStrackedBar(absent:number,present:number,leave:number) {
+    let sum = present + absent + leave
+    this.presentWidth = this.getPercentage(present, sum);
+    this.absentWidth = this.getPercentage(absent, sum);
+    this.leaveWidth = this.getPercentage(leave, sum);
+  }
 
-  // public getPercentage(num: number, sum: number) {
-  //   return Math.floor((num / sum) * 100);
-
-  // }
+  public getPercentage(num: number, sum: number) {
+    const percentage = (num / sum) * 100;
+    const formattedPercentage = percentage.toFixed(2); // Limit to two decimal places
+    return parseFloat(formattedPercentage); 
+  }
  
   public getTodayAttendanceFilter(value:string){
     this.attendanceFilter = value
@@ -187,5 +188,8 @@ export class AdminAttendanceComponent {
     })
   }
 
+  public changeTimeFormat(time:any){
+    return moment(time, "HH:mm:ss").format("hh:mm A");
+  }
   
 }

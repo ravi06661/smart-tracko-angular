@@ -61,15 +61,15 @@
           <div class="chart-detail-bottom">
             <div class="submitted-value">
               <p>Present</p>
-              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{presentWidth}}</h2>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{presentWidth}}%</h2>
             </div>
             <div class="pending-value">
               <p>Absent</p>
-              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{absentWidth}}</h2>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{absentWidth}}%</h2>
             </div>
             <div class="approve-value">
               <p>Leave</p>
-              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{leaveWidth}}</h2>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{leaveWidth}}%</h2>
             </div>
           </div>
         </div>
@@ -108,7 +108,9 @@
                   <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                 </h5>
               </td>
-              <td style="font-size: 13px; font-weight: 400;">{{obj.mobile}}</td>
+              <td style="font-size: 13px; font-weight: 400;">{{obj.mobile}}
+                <br>
+                <p class="text_gray font-13 font-400 mb-0" *ngIf="obj.checkInTime!=undefined">{{changeTimeFormat(obj.checkInTime)}}</p></td>
             </tr>
             <h1  class="font-15 font-600 secondary position-relative" 
             *ngIf="presentAbsentAndEarlyCheckoutLength==0"><br>NO DATA AVAILABLE !!!</h1>

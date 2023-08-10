@@ -4,4 +4,5 @@ export class AbsentTodays {
     applyForCourse: string = ''
     fullName:string=''
     studentId:number = 0
+    checkInTime:any
 }
