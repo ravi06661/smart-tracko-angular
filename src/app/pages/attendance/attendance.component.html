@@ -8,16 +8,24 @@
   <div class="scroll_section">
     <div class="row">
       <div class="col-lg-6 col-md-6 mb-0 mb-md-3 mb-0 mb-md-3">
-        <div class="calender-img" style="width:100%;">
+        <div class="calender-img" style="width:100%; min-height: 390px;">
           <app-calender></app-calender>
         </div>
       </div>
       <div class="col-lg-6 col-md-6 mb-0 mb-md-3 mb-0 mb-md-3 ">
-        <div class="attendance-charbar">
+        <div class="attendance-charbar" style="height: 390px;">
           <h2 class="font-17 font-700 text-light">Attendance</h2>
-          <div class="cell-chartbar">
-            <div id="chart2" style="max-width: 100%; max-height: fit-content;"></div>
-          </div>
+            <div id="chart">
+              <apx-chart
+                [series]="attendanceOptions.series"
+                [chart]="attendanceOptions.chart"
+                [dataLabels]="attendanceOptions.dataLabels"
+                [plotOptions]="attendanceOptions.plotOptions"
+                [xaxis]="attendanceOptions.xaxis"
+                [colors]="attendanceOptions.colors"
+                [yaxis]="attendanceOptions.yaxis"
+              ></apx-chart>
+            </div>
         </div>
       </div>
     </div>
