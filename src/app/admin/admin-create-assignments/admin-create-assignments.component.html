@@ -4,11 +4,11 @@
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Create Assignment</h1>
             <a routerLink="/admin/assignments">
-            <button class="top_profile_sec_btn font-14 font-500">Done</button>
+                <button class="top_profile_sec_btn font-14 font-500">Done</button>
             </a>
         </div>
 
-       <app-profile-bar></app-profile-bar>
+        <app-profile-bar></app-profile-bar>
     </div>
 
     <!-- DASHBOARD START -->
@@ -57,10 +57,12 @@
                             <p class="font-13 font-400 text_gray">0 Questions</p>
                         </div>
                         <div class="task-card-left-icon">
-                            <a href="edit_taskandassignment.html">
-                           <i class="fi fi-rr-edit secondary font-24"></i>
-                        </a>
-                            <h5 data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash delete-icon-color font-24"></i></h5>
+                            <span data-bs-toggle="modal"
+                            data-bs-target="#create_assignment_modal">
+                                <i class="fi fi-rr-edit secondary font-24"></i>
+                            </span>
+                            <h5 data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                    class="fi fi-rr-trash delete-icon-color font-24"></i></h5>
                         </div>
 
                     </div>
@@ -122,26 +124,91 @@
     </div>
     <!--DASHBOARD END -->
 
-      <!-- Modal Delete Modal Start -->
-<div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+    <!-- Modal Delete Modal Start -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+        <div class="modal-dialog position-relative leave_modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                        style="top: -23%;">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
+
+                    <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This
+                        Question?</p>
+                    <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                        <a routerLink="/admin/createassignments">
+                            <button type="button"
+                                class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes, delete</button>
+                        </a>
+                        <a routerLink="/admin/createassignments">
+                            <button type="button" class="apply_modal_btn font-15 font-500">No, Do not
+                                delete</button>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Delete Modal End -->
+
+            <!-- Modal Edit Assignment start -->
+<div class="modal fade" id="create_assignment_modal" tabindex="-1" aria-labelledby="exampleModalLabel1"
+aria-hidden="true">
 <div class="modal-dialog position-relative leave_modal">
-<div class="modal-content">
-<div class="modal-body">
-  <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -23%;">
-    <i class="fi fi-rr-cross close_icon"></i>
-  </button>
+    <div class="modal-content">
+        <div class="modal-body">
+            <div class="modal-header apply_title">
+                <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                    id="exampleModalLabel1">Assignment Details</h1>
+                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fi fi-rr-cross close_icon"></i>
+                </button>
+            </div>
 
-  <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
-  <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-    <a routerLink="/admin/editassignments">
-      <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes, delete</button>
-    </a>
-    <a routerLink="/admin/editassignments">
-      <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
-    </a>
-  </div>
+            <form action="">
+                <div class="row">
+                    <div class="col-md-12 mb_18">
+                        <label for="" class="mb_6 font-15 font-500 secondary">Assignment
+                            Title</label>
+                        <div class="input_icon position-relative">
+                            <input type="text" id="" name="" class="form-control input_text"
+                                placeholder="Day 1">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb_18">
+                        <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
+                        <div class="input_icon position-relative">
+                            <input type="text" id="" name="" class="form-control input_text"
+                                placeholder="Mern Stack">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb_18">
+                        <label for="" class="mb_6 font-15 font-500 secondary">Subject</label>
+                        <div class="input_icon position-relative">
+                            <input type="text" id="" name="" class="form-control input_text"
+                                placeholder="Core Java">
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb_18">
+                        <label for="" class="mb_6 font-15 font-500 secondary">Duration</label>
+                        <div class="input_icon position-relative">
+                            <input type="text" id="" name="" class="form-control input_text"
+                                placeholder="1 Day">
+                        </div>
+                    </div>
 
+                </div><!-- row -->
+            </form>
+
+            <a routerLink="/admin/createassignments"
+                class="apply_modal_buttons d-flex justify-content-center align-items-center mt-2">
+                <button type="button" class="apply_modal_btn">Create</button>
+            </a>
+
+        </div>
+    </div>
 </div>
 </div>
-</div>
-</div>
+<!-- Modal Edit Assignment end -->

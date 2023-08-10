@@ -6,3 +6,8 @@ $(document).ready(function(){
     $(".porfile_sec").toggleClass("hide");
   });
 });
+
+$('.modal-backdrop').remove();
+$('#edit_icon').click(function () {
+  $(".enabled_inp").removeAttr('disabled');
+});
