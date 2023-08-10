@@ -15,6 +15,15 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { ViewEncapsulation } from '@angular/core';
 import { log } from 'console';
 
+export type ChartOptions = {
+  series: any;
+  chart: any;
+  dataLabels: any;
+  plotOptions: any;
+  xaxis: any;
+  colors:any;
+  yaxis:any;
+};
 
 @Component({
   selector: 'app-attendance',
@@ -24,11 +33,13 @@ import { log } from 'console';
 })
 
 export class AttendanceComponent implements OnInit {
-
+  @ViewChild("chart") chart: ChartComponent | undefined;
+  public attendanceOptions: Partial<ChartOptions>;
 
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
 
+  monthCategories:string[]= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
   selectedDate: any
   attendances: Attendance[] = [];
   attendance: Attendance = new Attendance();
@@ -44,7 +55,38 @@ export class AttendanceComponent implements OnInit {
 
   constructor(private studentService: StudentService, private leaveService: LeaveService, private utilityService: UtilityServiceService) {
 
-
+    this.attendanceOptions = {
+      series: [
+        {
+          name: "Present",
+          data: [2, 10, 4, 15, 12, 25, 14, 7, 6, 9, 10, 3],
+        },
+        {
+          name: "Absent",
+          data: [14, 7, 6, 9, 10, 3,2, 10, 4, 15, 12, 25]
+        },
+        {
+          name: "Leave",
+          data: [2, 10, 6, 9, 10, 3, 4, 15, 12, 25, 14, 7]
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 334
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+       categories:this.monthCategories
+      },
+      colors: ["#5754E5", "#FF4A11", "#F8961E"],
+    };
 
   }
 

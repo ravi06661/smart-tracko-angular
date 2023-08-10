@@ -76,8 +76,16 @@
             </div>
            </div>
           <div class="attendance-charbar">
-            <div>
-              <canvas id="myChart1"></canvas>
+            <div id="chart">
+              <apx-chart
+                [series]="admissinonOptions.series"
+                [chart]="admissinonOptions.chart"
+                [dataLabels]="admissinonOptions.dataLabels"
+                [plotOptions]="admissinonOptions.plotOptions"
+                [xaxis]="admissinonOptions.xaxis"
+                [colors]="admissinonOptions.colors"
+                [yaxis]="admissinonOptions.yaxis"
+              ></apx-chart>
             </div>
           </div>
         </div>
@@ -97,8 +105,16 @@
             </div>
            </div>
           <div class="attendance-charbar">
-            <div>
-              <canvas id="myChart2"></canvas>
+            <div id="chart">
+              <apx-chart
+                [series]="feesOptions.series"
+                [chart]="feesOptions.chart"
+                [dataLabels]="feesOptions.dataLabels"
+                [plotOptions]="feesOptions.plotOptions"
+                [xaxis]="feesOptions.xaxis"
+                [colors]="feesOptions.colors"
+                [yaxis]="feesOptions.yaxis"
+              ></apx-chart>
             </div>
           </div>
         </div>
