@@ -75,6 +75,11 @@ import { AdminSubjectsTopicTestComponent } from './admin/admin-subjects-topic-te
 import { AdminSubjectsChapterComponent } from './admin/admin-subjects-chapter/admin-subjects-chapter.component';
 import { AdminSubjectsChapterQuizComponent } from './admin/admin-subjects-chapter-quiz/admin-subjects-chapter-quiz.component';
 import { AdminCoursesBatchesComponent } from './admin/admin-courses-batches/admin-courses-batches.component';
+import { AdminFeesComponent } from './admin/admin-fees/admin-fees.component';
+import { AdminAddFeesComponent } from './admin/admin-add-fees/admin-add-fees.component';
+import { AdminFeesPendingComponent } from './admin/admin-fees-pending/admin-fees-pending.component';
+import { AdminFeesPayComponent } from './admin/admin-fees-pay/admin-fees-pay.component';
+import { AdminFeesCompletedListComponent } from './admin/admin-fees-completed-list/admin-fees-completed-list.component';
 
 
 
@@ -136,6 +141,11 @@ import { AdminCoursesBatchesComponent } from './admin/admin-courses-batches/admi
     AdminSubjectsChapterComponent,
     AdminSubjectsChapterQuizComponent,
     AdminCoursesBatchesComponent,
+    AdminFeesComponent,
+    AdminAddFeesComponent,
+    AdminFeesPendingComponent,
+    AdminFeesPayComponent,
+    AdminFeesCompletedListComponent,
    
        
  

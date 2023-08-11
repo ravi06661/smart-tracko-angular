@@ -52,6 +52,11 @@ import { AdminSubjectsTopicTestComponent } from './admin/admin-subjects-topic-te
 import { AdminSubjectsChapterComponent } from './admin/admin-subjects-chapter/admin-subjects-chapter.component';
 import { AdminSubjectsChapterQuizComponent } from './admin/admin-subjects-chapter-quiz/admin-subjects-chapter-quiz.component';
 import { AdminCoursesBatchesComponent } from './admin/admin-courses-batches/admin-courses-batches.component';
+import { AdminFeesComponent } from './admin/admin-fees/admin-fees.component';
+import { AdminAddFeesComponent } from './admin/admin-add-fees/admin-add-fees.component';
+import { AdminFeesPendingComponent } from './admin/admin-fees-pending/admin-fees-pending.component';
+import { AdminFeesPayComponent } from './admin/admin-fees-pay/admin-fees-pay.component';
+import { AdminFeesCompletedListComponent } from './admin/admin-fees-completed-list/admin-fees-completed-list.component';
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
@@ -87,6 +92,11 @@ const routes: Routes = [
       {path:'edittask',component:AdminEditTaskComponent,pathMatch:'full'},
       {path:'attendance',component:AdminAttendanceComponent,pathMatch:'full'},
       {path:'leaverequest',component:AdminLeaveRequestComponent,pathMatch:'full'},
+      {path:'fees',component:AdminFeesComponent,pathMatch:'full'},
+      {path:'addfees',component:AdminAddFeesComponent,pathMatch:'full'},
+      {path:'pendingfees',component:AdminFeesPendingComponent,pathMatch:'full'},
+      {path:'payfees',component:AdminFeesPayComponent,pathMatch:'full'},
+      {path:'feescompletedlist',component:AdminFeesCompletedListComponent,pathMatch:'full'},
       {path:'jobalert',component:AdminJobAlertComponent,pathMatch:'full'},
       {path:'createjob',component:AdminCreateNewJobComponent,pathMatch:'full'},
       {path:'newsAndEvent',component:AdminNewsAndEventComponent,pathMatch:'full'},

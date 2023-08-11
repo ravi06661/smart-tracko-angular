@@ -11,3 +11,6 @@ $('.modal-backdrop').remove();
 $('#edit_icon').click(function () {
   $(".enabled_inp").removeAttr('disabled');
 });
+
+
+// $("#dt").datepicker('show');

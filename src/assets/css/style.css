@@ -3777,3 +3777,83 @@ input.change-student-img {
 .table td, .table th{
   border-top: none !important;
 }
+
+/* ============ADMIN FEES ADD PAGES CSS START==================== */
+
+.fees-input {
+  appearance: none;
+  font-size: 15px !important;
+
+}
+.fees-input[type=date][placeholder]:invalid::-webkit-datetime-edit,
+.fees-input[type=month][placeholder]:invalid::-webkit-datetime-edit,
+.fees-input[type=week][placeholder]:invalid::-webkit-datetime-edit {
+  display: none;
+}
+
+.fees-input[type=date][placeholder]:invalid::before,
+.fees-input[type=month][placeholder]:invalid::before,
+.fees-input[type=week][placeholder]:invalid::before {
+  color: #686868;
+  content: attr(placeholder);
+}
+.fees-top-area{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.fees_submit_btn {
+  display: inline-flex;
+  width: 27%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  height: 38px;
+  background: #49BFCF;
+  color: #ffffff;
+  backdrop-filter: blur(9px);
+  border-radius: 12px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+}
+.fees-table th{
+  color: #115e68;
+  font-size: 15px;
+}
+.fees-table thead tr{
+  background: #EDF9FB;
+}
+.amount-left-detail h4{
+  font-size: 17px;
+  font-weight: 500;
+  color: #161616;
+  margin-bottom: 10px;
+}
+.amount-right-detail h5{
+  font-size: 16px;
+  font-weight: 400;
+  color: #515151;
+  margin-bottom: 11px;
+}
+.fees_search_btn{
+  height: 35px;
+    background: #49BFCF;
+    color: #ffffff;
+    backdrop-filter: blur(9px);
+    border-radius: 6px;
+    padding: 10px 18px;
+    border: 1px solid transparent;
+}
+/* ============ADMIN FEES ADD PAGES CSS END==================== */
+
+/* **********************************/
+/* MEDIA QUERY FEES PAGES */
+@media screen and (max-width:1080px){
+.fees-top-area{
+  flex-direction: column;
+  align-items: start;
+  gap: 20px;
+}
+} 
