@@ -70,6 +70,7 @@ export class CheckincheckoutComponent {
     //Student Attendance API
     this.getStudentAttendance();
 
+    
   }
 
   public getStudentAttendance() {
@@ -101,14 +102,6 @@ export class CheckincheckoutComponent {
       }
       },
     });
-  }
-
-  test() {
-    this.service.getAssignment(192).subscribe(
-      (data: any) => {
-        this.assignment = data
-      }
-    )
   }
 
   public startTimer() {

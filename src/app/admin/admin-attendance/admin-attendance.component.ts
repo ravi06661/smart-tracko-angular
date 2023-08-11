@@ -106,6 +106,7 @@ export class AdminAttendanceComponent {
     this.currentMonth = moment(new Date().getMonth()+1, "MM").format("MMMM");
     this.getMonthWiseAttendanceDataForChart(new Date().getMonth()+1);
   }
+  
   public getAbsents() {
     this.studentService.getTodayStudentAbsentData().subscribe(
       (data: any) => {
@@ -183,7 +184,9 @@ export class AdminAttendanceComponent {
         // this.leaveWidth = data.OnLeave
         // this.absentWidth = data.Absent
         // this.presentWidth = data.Present
-        this.manageStrackedBar(data.Absent,data.Present,data.OnLeave);
+
+       this.manageStrackedBar(data.Absent,data.Present,data.OnLeave);
+
       }
     })
   }

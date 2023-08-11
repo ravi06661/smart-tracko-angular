@@ -54,7 +54,7 @@ export class SocketServiceService {
     const deviceInfo = this.deviceService.getDeviceInfo();
     this.qrService.updateLoginStatus(deviceInfo,token).subscribe({
       next:(data)=>{
-        console.log("update s"+data);
+        //console.log("update s"+data);
       }
     })
   }
