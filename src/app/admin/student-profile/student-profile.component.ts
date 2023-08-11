@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 import { AttendanceLog } from 'src/app/entity/attendance-log';
 import { StudentDetails } from 'src/app/entity/student-details';
 import { StudentService } from 'src/app/service/student.service';
@@ -63,5 +64,13 @@ export class StudentProfileComponent implements OnInit{
         console.log(data)
       }
     })
+  }
+
+  public changeTimeFormat(time:any){
+    return moment(time, "HH:mm:ss").format("hh:mm:ss A");
+  }
+
+  public timerFormate(seconds:number){
+    return new Date(seconds * 1000).toISOString().substr(11, 8);
   }
 }

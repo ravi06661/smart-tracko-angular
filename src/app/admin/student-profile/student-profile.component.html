@@ -447,18 +447,9 @@
                               State
                             </a>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">January</a></li>
-                              <li><a class="dropdown-item" href="#">February</a></li>
-                              <li><a class="dropdown-item" href="#">March</a></li>
-                              <li><a class="dropdown-item" href="#">April</a></li>
-                              <li><a class="dropdown-item" href="#">May</a></li>
-                              <li><a class="dropdown-item" href="#">June</a></li>
-                              <li><a class="dropdown-item" href="#">July</a></li>
-                              <li><a class="dropdown-item" href="#">August</a></li>
-                              <li><a class="dropdown-item" href="#">September</a></li>
-                              <li><a class="dropdown-item" href="#">October</a></li>
-                              <li><a class="dropdown-item" href="#">November </a></li>
-                              <li><a class="dropdown-item" href="#">December </a></li>
+                              <li><a class="dropdown-item" href="#">Full Day</a></li>
+                              <li><a class="dropdown-item" href="#">Half Day</a></li>
+                              <li><a class="dropdown-item" href="#">On Leave</a></li>
                             </ul>
                           </div>
                      </div>
@@ -478,9 +469,9 @@
                         <tbody class="bg-light">
                           <tr *ngFor="let obj of attendanceLog">
                             <td>{{obj.date | date:'dd MMM YYYY'}}</td>
-                            <td *ngIf="obj.checkIn != null">{{obj.checkIn}}</td>
-                            <td *ngIf="obj.checkOut != null">{{obj.checkOut}}</td>
-                            <td *ngIf="obj.timeIn != null">{{obj.timeIn}}</td>
+                            <td *ngIf="obj.checkIn != null">{{changeTimeFormat(obj.checkIn)}}</td>
+                            <td *ngIf="obj.checkOut != null">{{changeTimeFormat(obj.checkOut)}}</td>
+                            <td *ngIf="obj.timeIn != null">{{timerFormate(obj.timeIn)}} Hrs</td>
                             <td *ngIf="obj.checkIn == null">NA</td>
                             <td *ngIf="obj.checkOut == null">NA</td>
                             <td *ngIf="obj.timeIn == null">NA</td>

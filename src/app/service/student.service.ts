@@ -14,8 +14,7 @@ import { StudentDetails } from '../entity/student-details';
   providedIn: 'root'
 })
 export class StudentService {
-
-
+  
   BASE_URL = this.utilityService.getBaseUrl();
   studentUrl = this.BASE_URL + '/student';
   TIME_URL = this.utilityService.getTimeUrl();
@@ -140,5 +139,8 @@ public getMonthWiseAttendanceData(monthNum: number) {
   return this.http.get(`${this.studentUrl}/getMonthwiseAttendence?month=${monthNum}`);
 }
 
+public getAdmissinonDataByWiseForYear(year: number) {
+  return this.http.get(`${this.studentUrl}/getMonthwiseAdmissionCountForYear?year=${year}`);
+}
 
 }

@@ -4,6 +4,7 @@ import { StudentService } from 'src/app/service/student.service';
 import { StudentDetails } from 'src/app/entity/student-details';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { ChartComponent } from 'ng-apexcharts';
+import { log } from 'console';
 
 export type ChartOptions = {
   series: any;
@@ -27,13 +28,15 @@ export class AdminDashboardComponent implements OnInit{
   students:StudentDetails[] = []
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl= this.BASE_URL+'/file/getImageApi/images/'
-  monthCategories:string[]= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+  monthCategories:string[]= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  admissionData:[]=[]
+
   constructor(private elementRef: ElementRef,private localst:LocationStrategy,private studentService:StudentService,private utilityService:UtilityServiceService) {
     this.admissinonOptions = {
       series: [
         {
           name: "Student",
-          data: [2, 10, 4, 15, 12, 25, 14, 7, 6, 9, 10, 3]
+          data: []
         }
       ],
       chart: {
@@ -49,7 +52,7 @@ export class AdminDashboardComponent implements OnInit{
         enabled: false
       },
       xaxis: {
-       categories:this.monthCategories
+       categories:[]
       },
       colors: ['#ffffff'] 
     };
@@ -82,6 +85,8 @@ export class AdminDashboardComponent implements OnInit{
   ngOnInit(): void {
     this.preventBackButton();
     this.getNewRegistrationStudents();
+    this.getAdmissinonDataByWiseForYear(new Date().getFullYear());
+    this.getAdmissionBarData()
   }
 
   public preventBackButton(){
@@ -99,5 +104,19 @@ export class AdminDashboardComponent implements OnInit{
     })
   }
 
+  public getAdmissinonDataByWiseForYear(year:number){
+    this.studentService.getAdmissinonDataByWiseForYear(year).subscribe({
+      next:(data:any)=>{
+        this.admissionData = data.count;
+        this.monthCategories = data.months
+        console.log(data.months);
+        this.getAdmissionBarData()
+      }
+    })
+  }
 
+  public getAdmissionBarData(){
+    this.admissinonOptions.series[0].data=this.admissionData
+    this.admissinonOptions.xaxis.categories = this.monthCategories
+  }
 }
