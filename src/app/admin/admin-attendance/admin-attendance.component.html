@@ -53,12 +53,24 @@
             
           </div> -->
           <div class="assignment-chart">
-            <div class="Present" [style.width]="presentWidth+'%'"></div>
-            <div class="Absent" [style.width]="absentWidth+'%'"></div>
-            <div class="Leave" [style.width]="leaveWidth+'%'"></div>
+            <div class="Present tool_tip" [style.width]="presentWidth+'%'">
+              <span class="tooltiptext">
+                <span class="tip-box" style="background: #0d00ff;"></span>Present {{presentWidth}}%
+            </span>
+            </div>
+            <div class="Absent tool_tip_absent" [style.width]="absentWidth+'%'">
+              <span class="tooltiptext_absent">
+                <span class="tip-box" style="background: #dd6319;"></span>Absent {{absentWidth}}%
+            </span>
+            </div>
+            <div class="Leave tool_tip_leave" [style.width]="leaveWidth+'%'">
+              <span class="tooltiptext_leave">
+                <span class="tip-box" style="background: #f9dd04;"></span>Leave {{leaveWidth}}%
+            </span>
+            </div>
             <!-- <div class="our_due" [style.width]="presentWidth"></div> -->
           </div>
-          <div class="chart-detail-bottom">
+          <div class="chart-detail-bottom justify-content-center">
             <div class="submitted-value">
               <p>Present</p>
               <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{presentWidth}}%</h2>

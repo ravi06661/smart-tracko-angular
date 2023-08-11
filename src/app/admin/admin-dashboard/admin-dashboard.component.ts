@@ -28,6 +28,10 @@ export class AdminDashboardComponent implements OnInit{
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl= this.BASE_URL+'/file/getImageApi/images/'
   monthCategories:string[]= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+
+  selectedYear: number | undefined; // To store the selected year
+  years: number[] | undefined;  
+
   constructor(private elementRef: ElementRef,private localst:LocationStrategy,private studentService:StudentService,private utilityService:UtilityServiceService) {
     this.admissinonOptions = {
       series: [
@@ -77,6 +81,9 @@ export class AdminDashboardComponent implements OnInit{
       },
       colors: ['#ffffff'] 
     };
+
+    this.years = this.generateYearsArray(2000, new Date().getFullYear());
+    this.selectedYear = new Date().getFullYear();
   }
 
   ngOnInit(): void {
@@ -99,5 +106,11 @@ export class AdminDashboardComponent implements OnInit{
     })
   }
 
-
+  generateYearsArray(startYear: number, endYear: number): number[] {
+    const years = [];
+    for (let year = endYear; year >= startYear; year--) {
+      years.push(year);
+    }
+    return years;
+  }
 }
