@@ -184,7 +184,9 @@ export class AdminAttendanceComponent {
         // this.leaveWidth = data.OnLeave
         // this.absentWidth = data.Absent
         // this.presentWidth = data.Present
+
        this.manageStrackedBar(data.Absent,data.Present,data.OnLeave);
+
       }
     })
   }
