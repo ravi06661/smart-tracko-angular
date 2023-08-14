@@ -143,4 +143,8 @@ public getAdmissinonDataByWiseForYear(year: number) {
   return this.http.get(`${this.studentUrl}/getMonthwiseAdmissionCountForYear?year=${year}`);
 }
 
+public allStudent(){
+  return this.http.get(`${this.studentUrl}/allStudent`);
+}
+
 }
