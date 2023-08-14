@@ -28,7 +28,9 @@ export class AdminDashboardComponent implements OnInit{
   students:StudentDetails[] = []
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl= this.BASE_URL+'/file/getImageApi/images/'
+
   admissionData:[]=[]
+
   monthCategories:string[]= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 
   selectedYear: number | undefined; // To store the selected year

@@ -251,11 +251,17 @@ new Chart('#chart1',  {
     $(".enabled_inp").removeAttr('disabled');
 });
 
+function meat_dot(cardHeader) {
+    var dropdown = cardHeader.nextElementSibling;
+    $(dropdown).toggle();
+}
 
 function meat_dot(cardHeader) {
     var dropdown = cardHeader.nextElementSibling;
     $(dropdown).toggle();
 }
+
+
 
 // change student image js//
 var loadFile = function (event) {
@@ -300,6 +306,7 @@ var loadFile = function (event) {
           //   viewMode:'years',
           //   format:'yyyy'
           //  });
+
 
 
 </script>
