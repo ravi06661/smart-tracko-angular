@@ -2,7 +2,7 @@
     <div class="profile d-flex mb-4">
 
         <div class="profile_top_heading d-flex gap_24">
-            <h1 class="font-27 font-700 secondary mb-0">Advanced JAVA</h1>
+            <h1 class="font-27 font-700 secondary mb-0">{{course.courseName}}</h1>
             <a routerLink="/admin/course" class="top_profile_sec_btn font-14 font-500 lh-1">Done</a>
         </div>
 
@@ -20,8 +20,8 @@
                             <img src="assets/images/temp_img/image 18.png" class="obj-fit-none">
                         </div>
                         <div class="ms-2">
-                            <h2 class="font-27 font-600 text-white java mb-1">Advanced JAVA</h2>
-                            <h3 class="font-14 font-400 text-white">5 Batches 8 Subjects</h3>
+                            <h2 class="font-27 font-600 text-white java mb-1">{{course.courseName}}</h2>
+                            <h3 class="font-14 font-400 text-white">{{totalBatches}} Batches {{totalSubjects}} Subjects</h3>
                         </div>
                     </div>
 
@@ -31,7 +31,7 @@
             <div class="col-md-12">
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_18">Subjects</h3>
             </div>
-            <div class="col-md-3 bootstrap_cards">
+            <div class="col-md-3 bootstrap_cards" *ngFor="let subject of course.subjects">
                 <div class="admin-subject_card">
                     <div class="admin-subject_card_top">
                         <div class="admin-subject_name_card">
@@ -40,7 +40,7 @@
                                     <img src="assets/images/svg_img/subject.svg">
                                 </div>
                                 <div class="subject-details">
-                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
+                                    <h3 class="subject_heading txt-dark mb-0">{{subject.subjectName}}</h3>
                                 </div>
                             </div>
                         </div>
@@ -48,43 +48,6 @@
 
                 </div> <!-- subject_card -->
             </div>
-
-            <div class="col-md-3 bootstrap_cards">
-                <div class="admin-subject_card">
-                    <div class="admin-subject_card_top">
-                        <div class="admin-subject_name_card">
-                            <div class="admin-sub-left">
-                                <div class="admin-subject-image">
-                                    <img src="assets/images/svg_img/subject.svg">
-                                </div>
-                                <div class="subject-details">
-                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- subject_card_top -->
-
-                </div> <!-- subject_card -->
-            </div>
-
-            <div class="col-md-3 bootstrap_cards">
-                <div class="admin-subject_card">
-                    <div class="admin-subject_card_top">
-                        <div class="admin-subject_name_card">
-                            <div class="admin-sub-left">
-                                <div class="admin-subject-image">
-                                    <img src="assets/images/svg_img/subject.svg">
-                                </div>
-                                <div class="subject-details">
-                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- subject_card_top -->
-
-                </div> <!-- subject_card -->
-            </div>
-
         </div>
         <div class="row">
             <div class="d-flex align-items-center justify-content-between mb_18">
