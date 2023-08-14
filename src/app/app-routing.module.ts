@@ -109,7 +109,7 @@ const routes: Routes = [
       {path:'subjectchapter',component:AdminSubjectsChapterComponent,pathMatch:'full'},
       {path:'chapterquiz',component:AdminSubjectsChapterQuizComponent,pathMatch:'full'},
       {path:'course',component:AdminCoursesComponent,pathMatch:'full'},
-      {path:'coursesbatches',component:AdminCoursesBatchesComponent,pathMatch:'full'},
+      {path:'coursesbatches/:courseId',component:AdminCoursesBatchesComponent,pathMatch:'full'},
       {path:'studentprofile/:studentId',component:StudentProfileComponent,pathMatch:'full'},
       {path:'studentregistration',component:AdminStudentRegistrationComponent,pathMatch:'full'},
       {path:'submission',component:AdminSubmissionComponent,pathMatch:'full'}

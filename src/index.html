@@ -252,9 +252,10 @@ new Chart('#chart1',  {
 });
 
 
-function meat_dot(){
-  $(".meat-dot-dropdown").toggle();
-};
+function meat_dot(cardHeader) {
+    var dropdown = cardHeader.nextElementSibling;
+    $(dropdown).toggle();
+}
 
 // change student image js//
 var loadFile = function (event) {
@@ -299,8 +300,6 @@ var loadFile = function (event) {
           //   viewMode:'years',
           //   format:'yyyy'
           //  });
-
-          $("#dt").datepicker('show');
 
 
 </script>
