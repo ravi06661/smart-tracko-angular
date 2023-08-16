@@ -1,11 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
 import { UtilityServiceService } from './utility-service.service';
 import { HttpClient } from '@angular/common/http';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService{
+  
   BASE_URL=this.utilityService.getBaseUrl();
   Subject_url=this.BASE_URL+'/subject';
 
@@ -21,5 +23,12 @@ export class SubjectService{
     return this.http.get(`${this.Subject_url}/getAllSubjects`);
   }
 
+  public getSubjectById(id: number) {
+    return this.http.get(`${this.Subject_url}/getSubjectById?subjectId=${id}`);
+  }
+
+  public updateSubject(subject:any){
+    return this.http.put(`${this.Subject_url}/updateSubject`,subject);
+  }
 
 }
