@@ -22,6 +22,7 @@ export class AdminCoursesComponent implements OnInit {
   courses:Course[]=[];
   totalBatches = 0;
   totalSubjects = 0;
+  course:Course = new Course();
 
   constructor(private courseService:CourseServiceService,private techService:TechnologyStackService,
     private subjectService:SubjectService){}
@@ -76,4 +77,17 @@ export class AdminCoursesComponent implements OnInit {
       }
     });
   }
+
+  public getCourseById(id:number){
+    this.courseService.getCourseByCourseId(id).subscribe({
+      next:(data:any)=>{
+        this.course = data
+      }
+    })
+  }
+
+  public updateCourse(){
+    console.log(this.course); 
+  }
+
 }
