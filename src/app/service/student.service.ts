@@ -145,4 +145,10 @@ export class StudentService {
   public getStudentPresentsAbsentsAndLeavesYearWise(year: number, studentId: number) {
     return this.http.get(`${this.studentUrl}/getStudentPresentsAbsentsAndLeavesYearWise?year=${year}&studentId=${studentId}`);
 }
+
+
+public allStudent(){
+  return this.http.get(`${this.studentUrl}/allStudent`);
+}
+
 }
