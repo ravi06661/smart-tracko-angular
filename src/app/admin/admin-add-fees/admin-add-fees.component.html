@@ -13,13 +13,15 @@
     <div class="scroll_dashboard">
         <div class="assignment-stats">
             <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Add Fees</h3>
-            <form action="" class="mb_24">
+            <form action="" class="mb_24" [formGroup]="autofillForm">
                 <div class="row">
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Name</label>
-                        <select class="form-select" aria-label="Default select example" >
+                        <select class="form-select" aria-label="Default select example" id="studentId" formControlName="studentId" (change)="getStudent()" >
                             <option selected="">Select Name</option>
+
                             <option value="" *ngFor="let students of student" >{{students.fullName}} ({{students.studentId}})</option>
+
                             <!-- <option value="2">Not Allowed</option> -->
                         </select>
                     </div>
@@ -32,16 +34,16 @@
                         </select>
                     </div>
                     <div class="col-md-4 mb_20">
-                        <label for="" class="mb_6 font-17 font-500 secondary">Email</label>
+                        <label for="email" class="mb_6 font-17 font-500 secondary">Email</label>
                         <div class="input_icon position-relative">
-                            <input type="email" id="" name="" class="form-control input_text"
+                            <input type="email" id="email" name="email" class="form-control input_text"
                                 placeholder="Enter Email">
                         </div>
                     </div>
                     <div class="col-md-4 mb_20">
-                        <label for="" class="mb_6 font-17 font-500 secondary">Mobile No.</label>
+                        <label for="mobile" class="mb_6 font-17 font-500 secondary">Mobile No.</label>
                         <div class="input_icon position-relative">
-                            <input type="tel" id="" name="" class="form-control input_text"
+                            <input type="text" id="mobile" name="mobile" class="form-control input_text"
                                 placeholder="Enter Mobile No.">
                         </div>
                     </div>

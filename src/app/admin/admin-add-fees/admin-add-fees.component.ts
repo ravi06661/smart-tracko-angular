@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { StudentDetails } from 'src/app/entity/student-details';
 import { StudentService } from 'src/app/service/student.service';
 
@@ -10,17 +11,41 @@ import { StudentService } from 'src/app/service/student.service';
 export class AdminAddFeesComponent implements OnInit{
 
   student:StudentDetails[]=[]
-  constructor(private studentService:StudentService){}
-  ngOnInit(): void {
-    
-    this.allStudent();
+  autofillForm: FormGroup ;
+
+  constructor(private studentService:StudentService,private fb: FormBuilder){
+    this.autofillForm = this.fb.group({
+      studentId: new FormControl(''),
+      fullName: new FormControl(''),
+      email: new FormControl(''),
+      mobile: new FormControl(''),
+      // other form controls...
+    });
   }
 
-  public allStudent(){
+  ngOnInit(): void {
+    
     this.studentService.allStudent().subscribe({
       next:(data:any)=>{
         this.student=data
       }
     })
   }
+
+ public getStudent(): void{
+  const studentId = this.autofillForm.get('studentId')?.value;
+  this.studentService.getByStudentById(studentId).subscribe((data:any) => {
+    this.autofillForm.patchValue({
+      fullName: data.fullName,
+      email: data.email,
+      mobile: data.mobile,
+      // update other form fields...
+    });
+  });
 }
+  }
+
+ 
+
+
+
