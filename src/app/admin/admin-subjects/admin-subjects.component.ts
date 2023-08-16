@@ -17,7 +17,9 @@ export class AdminSubjectsComponent implements OnInit{
   subjectData = {
     imageId:'',
     subjectName:''
-  }
+  };
+
+  subject:Subject = new Subject();
 
   constructor(private techService:TechnologyStackService,private subjectService:SubjectService){}
 
@@ -42,6 +44,22 @@ export class AdminSubjectsComponent implements OnInit{
         console.log(data);
       }
     })
-    
+  }
+
+  public getSubjectById(id:number){
+    this.subjectService.getSubjectById(id).subscribe({
+      next:(data:any)=>{
+        this.subject = data.subject
+      }
+    })
+  }
+
+  public updateSubject(){
+    console.log('update');
+    this.subjectService.updateSubject(this.subject).subscribe({
+      next:(data)=>{
+        alert('success');
+      }
+    })
   }
 }

@@ -19,7 +19,9 @@
                         <label for="" class="mb_6 font-17 font-500 secondary">Name</label>
                         <select class="form-select" aria-label="Default select example" id="studentId" formControlName="studentId" (change)="getStudent()" >
                             <option selected="">Select Name</option>
-                            <option  *ngFor="let students of student" [value]="students">{{students.fullName}}</option>
+
+                            <option value="" *ngFor="let students of student" >{{students.fullName}} ({{students.studentId}})</option>
+
                             <!-- <option value="2">Not Allowed</option> -->
                         </select>
                     </div>

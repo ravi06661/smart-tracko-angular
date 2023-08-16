@@ -31,12 +31,12 @@
                         <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot(this)"></i>
               <div class="meat-dot-dropdown" style="display: none;" >
                             <a routerLink="/admin/subjecttopictest"
-                                class=" warning d-flex align-items-center gap_8"><i
+                                class=" warning d-flex align-items-center gap_8 pointer"><i
                                     class="fi fi-rr-document line-height-0 font-16"></i> View</a>
-                            <p class="mb-0 warning d-flex align-items-center gap_8" data-bs-toggle="modal"
-                                data-bs-target="#subject-edit-modal"><i
-                                    class="fi fi-rr-file-edit line-height-0 font-15"></i> Edit</p>
-                            <p class="mb-0 delete-icon-color d-flex align-items-center gap_8"
+                            <p class="mb-0 warning d-flex align-items-center gap_8 pointer" data-bs-toggle="modal"
+                                data-bs-target="#subject-edit-modal" (click)="getSubjectById(subject.subjectId)"><i
+                                    class="fi fi-rr-file-edit line-height-0 font-15" ></i> Edit</p>
+                            <p class="mb-0 delete-icon-color d-flex align-items-center gap_8 pointer"
                                 data-bs-toggle="modal" data-bs-target="#delete-modal"><i
                                     class="fi fi-rr-trash line-height-0 font-17"></i> Delete</p>
                         </div>
@@ -73,11 +73,11 @@
                 <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?
                 </p>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                    <a href="edit_taskandassignment.html">
+                    <a >
                         <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
                             delete</button>
                     </a>
-                    <a href="admin_subjects.html">
+                    <a >
                         <button type="button" class="apply_modal_btn font-15 font-500">No, Do not
                             delete</button>
                     </a>
@@ -113,12 +113,18 @@
                                     <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                                     Add Media</label>
                             </div>
+                            <div class="col-md-12 mb_18">
+                                <label for="" class="mb_6 font-15 font-500 secondary">Add Media</label>
+                                    <select class="form-select enabled_inp" aria-label="Default select example" style="background-color: #f2f2f2 !important;" name="technologyStack" [(ngModel)]="subject.technologyStack.id">
+                                        <option [ngValue]="subject.technologyStack.id">{{subject.technologyStack.technologyName}}</option>
+                                    </select>
+                            </div>
                         </div>
                         <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Course Name</label>
+                            <label for="" class="mb_6 font-15 font-500 secondary">Subject Name</label>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Day 1">
+                                <input type="text" id="" name="subjectName" class="form-control input_text"
+                                    placeholder="Day 1" [(ngModel)]="subject.subjectName">
                             </div>
                         </div>
 
@@ -127,8 +133,8 @@
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                         aria-label="Close">Cancel</button>
-                    <a href="admin_subjects.html">
-                        <button type="button" class="apply_modal_btn font-15 font-500">Save Subject</button>
+                    <a >
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateSubject()">Update Subject</button>
                     </a>
                 </div>
 

@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 import {
   ChartComponent
@@ -10,10 +9,10 @@ import { Leaves } from 'src/app/entity/leaves';
 import { LeaveService } from 'src/app/service/leave.service';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import interactionPlugin from '@fullcalendar/interaction';
 import { ViewEncapsulation } from '@angular/core';
-import { log } from 'console';
+import { LoginService } from 'src/app/service/login.service';
+import { en } from '@fullcalendar/core/internal-common';
+import { arrayBuffer } from 'stream/consumers';
 
 export type ChartOptions = {
   series: any;
@@ -21,8 +20,8 @@ export type ChartOptions = {
   dataLabels: any;
   plotOptions: any;
   xaxis: any;
-  colors:any;
-  yaxis:any;
+  colors: any;
+  yaxis: any;
 };
 
 @Component({
@@ -39,7 +38,7 @@ export class AttendanceComponent implements OnInit {
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
 
-  monthCategories:string[]= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+  monthCategories: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   selectedDate: any
   attendances: Attendance[] = [];
   attendance: Attendance = new Attendance();
@@ -52,22 +51,24 @@ export class AttendanceComponent implements OnInit {
   totalAttendance: number = 0;
   message: string = '';
   color: string = '';
+  presentsMap = new Map<number, number>();
+  leavesMap = new Map<number, number>();
 
-  constructor(private studentService: StudentService, private leaveService: LeaveService, private utilityService: UtilityServiceService) {
-
+  constructor(private cdr: ChangeDetectorRef, private studentService: StudentService, private leaveService: LeaveService, private utilityService: UtilityServiceService, private loginService: LoginService) {
+    this.presentsMap = new Map();
     this.attendanceOptions = {
       series: [
         {
+          data: [],
           name: "Present",
-          data: [2, 10, 4, 15, 12, 25, 14, 7, 6, 9, 10, 3],
         },
         {
           name: "Absent",
-          data: [14, 7, 6, 9, 10, 3,2, 10, 4, 15, 12, 25]
+          data: [1,2,3,4,5,6,7,8,9,10,11,12]
         },
         {
           name: "Leave",
-          data: [2, 10, 6, 9, 10, 3, 4, 15, 12, 25, 14, 7]
+          data: []
         }
       ],
       chart: {
@@ -83,7 +84,7 @@ export class AttendanceComponent implements OnInit {
         enabled: false
       },
       xaxis: {
-       categories:this.monthCategories
+        categories: this.monthCategories
       },
       colors: ["#5754E5", "#FF4A11", "#F8961E"],
     };
@@ -96,6 +97,7 @@ export class AttendanceComponent implements OnInit {
     this.getAttendanceHistoy();
     this.getLeaveType();
     this.getStudentLeaves();
+    this.getStudentPresentsAbsentsAndLeavesYearWise();
   }
 
   public getAttendanceHistoy() {
@@ -169,7 +171,6 @@ export class AttendanceComponent implements OnInit {
     })
   }
 
-
   public attendanceModal(attendance: Attendance) {
     this.attendance = attendance;
   }
@@ -182,6 +183,37 @@ export class AttendanceComponent implements OnInit {
     this.leaves = new Leaves();
     this.message = '';
   }
+  public getStudentPresentsAbsentsAndLeavesYearWise() {
+    this.cdr.detectChanges();
+    this.attendanceOptions.series[0].data = []
+    this.studentService.getStudentPresentsAbsentsAndLeavesYearWise(new Date().getFullYear(), this.loginService.getStudentId()).subscribe(
+      (data: any) => {
+        this.presentsMap = data.presents
+        this.leavesMap = data.leaves;
+        this.setPresentData();
+        this.setLeavesData();
+      }
+    )
+  }
+  public setPresentData() {
+    let arr: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const mapEntries: [number, number][] = Object.entries(this.presentsMap).map(([key, value]) => [parseInt(key), value]);
+    const resultMap: Map<number, number> = new Map<number, number>(mapEntries);
+    for (const entry of resultMap.entries()) {
+      arr[entry[0] - 1] = entry[1];
+    }
+    this.attendanceOptions.series[0].data = arr;
+    this.cdr.detectChanges();
+  }
 
-
+  public setLeavesData() {
+    let arr: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const mapEntries: [number, number][] = Object.entries(this.leavesMap).map(([key, value]) => [parseInt(key), value]);
+    const resultMap: Map<number, number> = new Map<number, number>(mapEntries);
+    for (const entry of resultMap.entries()) {
+      arr[entry[0] - 1] = entry[1];
+    }
+    this.attendanceOptions.series[2].data = arr;
+    this.cdr.detectChanges();
+  }
 }
