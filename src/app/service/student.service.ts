@@ -14,7 +14,7 @@ import { StudentDetails } from '../entity/student-details';
   providedIn: 'root'
 })
 export class StudentService {
-  
+
   BASE_URL = this.utilityService.getBaseUrl();
   studentUrl = this.BASE_URL + '/student';
   TIME_URL = this.utilityService.getTimeUrl();
@@ -23,8 +23,8 @@ export class StudentService {
   constructor(private http: HttpClient, private utilityService: UtilityServiceService, private datepipe: DatePipe, public loginService: LoginService) { }
 
   public registerStudent(data: StudentDetails) {
-    console.log('kapil rathore ',data);
-    
+    console.log('kapil rathore ', data);
+
     return this.http.post(`${this.studentUrl}/registerStudent`, data);
   }
 
@@ -69,7 +69,7 @@ export class StudentService {
 
   public getStudentHeaderProfileData() {
     if (this.profileData.studentId == 0) {
- 
+
       let id = this.loginService.getStudentId();
       this.http.get(`${this.studentUrl}/getStudentData/${id}`).subscribe(
         (data: any) => {
@@ -109,38 +109,40 @@ export class StudentService {
     return this.http.get<StudentDetails[]>(`${this.studentUrl}/getAllStudentData?page=${page}&size=${size}`);
   }
 
-public searchStudentByName(fullName:string){
-  console.log('hi');
-  
-  return this.http.get<StudentDetails[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
-}
+  public searchStudentByName(fullName: string) {
+    console.log('hi');
 
-public getByStudentById(studentId:number){
-  return this.http.get(`${this.studentUrl}/getStudentById?studentId=${studentId}`);
-}
+    return this.http.get<StudentDetails[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
+  }
 
-public getStudentProfileData(studentId: number) {
-  return this.http.get(`${this.studentUrl}/getStudentForWebStudentProfile?studentId=${studentId}`);
-}
+  public getByStudentById(studentId: number) {
+    return this.http.get(`${this.studentUrl}/getStudentById?studentId=${studentId}`);
+  }
 
-public updateStudent(student:StudentDetails){
-  return this.http.put(`${this.studentUrl}/updateStudentApi`,student);
-}
+  public getStudentProfileData(studentId: number) {
+    return this.http.get(`${this.studentUrl}/getStudentForWebStudentProfile?studentId=${studentId}`);
+  }
 
-public getStudentOverAllAttendancesAndLeave(studentId: number) {
-  return this.http.get(`${this.studentUrl}/getStudentOverAllAttendanceAndLeavesAndAbsents?studentId=${studentId}`);
-}
+  public updateStudent(student: StudentDetails) {
+    return this.http.put(`${this.studentUrl}/updateStudentApi`, student);
+  }
 
-public  getTodayAttendanceFilter(value: string) {
+  public getStudentOverAllAttendancesAndLeave(studentId: number) {
+    return this.http.get(`${this.studentUrl}/getStudentOverAllAttendanceAndLeavesAndAbsents?studentId=${studentId}`);
+  }
+
+  public getTodayAttendanceFilter(value: string) {
     return this.http.get(`${this.studentUrl}/getTodaysPresentsAndEarlyCheckouts?key=${value}`);
-}
+  }
 
-public getMonthWiseAttendanceData(monthNum: number) {
-  return this.http.get(`${this.studentUrl}/getMonthwiseAttendence?month=${monthNum}`);
-}
+  public getMonthWiseAttendanceData(monthNum: number) {
+    return this.http.get(`${this.studentUrl}/getMonthwiseAttendence?month=${monthNum}`);
+  }
 
-public getAdmissinonDataByWiseForYear(year: number) {
-  return this.http.get(`${this.studentUrl}/getMonthwiseAdmissionCountForYear?year=${year}`);
+  public getAdmissinonDataByWiseForYear(year: number) {
+    return this.http.get(`${this.studentUrl}/getMonthwiseAdmissionCountForYear?year=${year}`);
+  }
+  public getStudentPresentsAbsentsAndLeavesYearWise(year: number, studentId: number) {
+    return this.http.get(`${this.studentUrl}/getStudentPresentsAbsentsAndLeavesYearWise?year=${year}&studentId=${studentId}`);
 }
-
 }

@@ -1,5 +1,5 @@
 import { map } from 'rxjs';
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { error } from 'console';
 import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
@@ -33,7 +33,7 @@ export class CalenderComponent {
   Absent: number[] = [];
   Leaves: number[] = [];
 
-  constructor(private studentService: StudentService, private loginService: LoginService) {
+  constructor(private studentService: StudentService, private loginService: LoginService,private cdr: ChangeDetectorRef) {
     this.currentMonth = new Date().getMonth();
     this.currentYear = new Date().getFullYear();
     this.months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
