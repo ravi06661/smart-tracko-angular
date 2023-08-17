@@ -80,7 +80,7 @@ import { AdminAddFeesComponent } from './admin/admin-add-fees/admin-add-fees.com
 import { AdminFeesPendingComponent } from './admin/admin-fees-pending/admin-fees-pending.component';
 import { AdminFeesPayComponent } from './admin/admin-fees-pay/admin-fees-pay.component';
 import { AdminFeesCompletedListComponent } from './admin/admin-fees-completed-list/admin-fees-completed-list.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -172,7 +172,8 @@ import { AdminFeesCompletedListComponent } from './admin/admin-fees-completed-li
     NgxPaginationModule,
     NgApexchartsModule,
     FullCalendarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
 
   ],
   providers: [DatePipe,authInterceptorProvider],
