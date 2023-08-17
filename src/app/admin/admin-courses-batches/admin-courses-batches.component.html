@@ -31,6 +31,9 @@
             <div class="col-md-12">
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_18">Subjects</h3>
             </div>
+            <h3 class="font-21 font-600 secondary position-relative" *ngIf="totalSubjects == 0">
+                NO SUBJECTS AVAILABLE
+              </h3>
             <div class="col-md-3 bootstrap_cards" *ngFor="let subject of course.subjects">
                 <div class="admin-subject_card">
                     <div class="admin-subject_card_top">
@@ -55,7 +58,10 @@
                 <button class="top_profile_sec_btn font-14 font-500 lh-1" data-bs-toggle="modal"
                     data-bs-target="#batch-add-modal">Add New Batch</button>
             </div>
-            <div class="col-md-3 bootstrap_cards">
+            <h3 class="font-21 font-600 secondary position-relative" *ngIf="totalBatches == 0">
+                NO RUNNING BATCHES AVAILABLE
+              </h3>
+            <div class="col-md-3 bootstrap_cards" *ngFor="let batch of course.batches;let i=index">
                 <div class="admin-subject_card">
                     <div class="admin-subject_card_top mb_20">
                         <div class="admin-subject_name_card">
@@ -64,96 +70,41 @@
                                     <img src="assets/images/svg_img/subject.svg">
                                 </div>
                                 <div class="subject-details">
-                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
-                                    <p class="chapter-cout mb-0">Batch No - 5, 50 Students</p>
+                                    <h3 class="subject_heading txt-dark mb-0">{{batch.batchName}}</h3>
+                                    <p class="chapter-cout mb-0">Batch No - {{i+1}}, 50 Students</p>
                                 </div>
                             </div>
                         </div>
-                        <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
+                        <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 8rem;">
+                                        <li>  <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding" data-bs-toggle="modal"
+                                          data-bs-target="#batch-edit-modal" (click)="getBatchByBatchId(batch.batchId)"><i
+                                              class="fi fi-rr-file-edit line-height-0"></i> Edit</p></li>
+                                        <li> <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding"
+                                          data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="deleteBatch(batch.batchId)"><i
+                                              class="fi fi-rr-trash line-height-0"></i> Delete</p></li>
+                                      </ul>
+                        <!-- <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot(this)"></i>
                         <div class="meat-dot-dropdown" style="display: none;" >
                             <p class="mb-0 warning d-flex align-items-center gap_5" data-bs-toggle="modal"
-                                data-bs-target="#batch-edit-modal"><i
+                                data-bs-target="#batch-edit-modal" (click)="getBatchByBatchId(batch.batchId)"><i
                                     class="fi fi-rr-file-edit line-height-0"></i> Edit</p>
                             <p class="mb-0 delete-icon-color d-flex align-items-center gap_5"
-                                data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="deleteBatch(batch.batchId)"><i
                                     class="fi fi-rr-trash line-height-0"></i> Delete</p>
-                        </div>
+                        </div> -->
                     </div><!-- subject_card_top -->
                     <h4 class="mb-0 font-15 font-500 text_dark">Starts From</h4>
                     <div class="batch-date-time">
-                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
-                                class="fi fi-rr-calendar secondary line-height-0"></i> 31-07-23</p>
-                        <p class="font-17 font-400 secondary">At</p>
-                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
-                                class="fi fi-rr-clock secondary line-height-0"></i> 10:00 PM</p>
+                        <p class="font-15 font-500 secondary d-flex align-items-center gap_8"><i
+                                class="fi fi-rr-calendar secondary line-height-0"></i> {{batch.batchStartDate |date:'dd-MM-yyyy'}}</p>
+                        <p class="font-15 font-400 secondary">At</p>
+                        <p class="font-15 font-500 secondary d-flex align-items-center gap_8"><i
+                                class="fi fi-rr-clock secondary line-height-0"></i> {{changeTimeFormat(batch.batchTiming)}}</p>
                     </div>
 
                     <h4 class="mb-0 font-16 font-500 text_dark">Batch Description</h4>
-                    <p class="batch-description">New Batch</p>
-
-                </div> <!-- subject_card -->
-            </div>
-            <div class="col-md-3 bootstrap_cards">
-                <div class="admin-subject_card">
-                    <div class="admin-subject_card_top mb_20">
-                        <div class="admin-subject_name_card">
-                            <div class="admin-sub-left">
-                                <div class="admin-subject-image">
-                                    <img src="assets/images/svg_img/subject.svg">
-                                </div>
-                                <div class="subject-details">
-                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
-                                    <p class="chapter-cout mb-0">Batch No - 5, 50 Students</p>
-                                </div>
-                            </div>
-                        </div>
-                        <span class="subject-meat-dot">
-                            <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"></i>
-                        </span>
-                    </div><!-- subject_card_top -->
-                    <h4 class="mb-0 font-15 font-500 text_dark">Starts From</h4>
-                    <div class="batch-date-time">
-                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
-                                class="fi fi-rr-calendar secondary line-height-0"></i> 31-07-23</p>
-                        <p class="font-17 font-400 secondary">At</p>
-                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
-                                class="fi fi-rr-clock secondary line-height-0"></i> 10:00 PM</p>
-                    </div>
-
-                    <h4 class="mb-0 font-16 font-500 text_dark">Batch Description</h4>
-                    <p class="batch-description">New Batch</p>
-
-                </div> <!-- subject_card -->
-            </div>
-            <div class="col-md-3 bootstrap_cards">
-                <div class="admin-subject_card">
-                    <div class="admin-subject_card_top mb_20">
-                        <div class="admin-subject_name_card">
-                            <div class="admin-sub-left">
-                                <div class="admin-subject-image">
-                                    <img src="assets/images/svg_img/subject.svg">
-                                </div>
-                                <div class="subject-details">
-                                    <h3 class="subject_heading txt-dark mb-0">Core Java</h3>
-                                    <p class="chapter-cout mb-0">Batch No - 5, 50 Students</p>
-                                </div>
-                            </div>
-                        </div>
-                        <span class="subject-meat-dot">
-                            <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"></i>
-                        </span>
-                    </div><!-- subject_card_top -->
-                    <h4 class="mb-0 font-15 font-500 text_dark">Starts From</h4>
-                    <div class="batch-date-time">
-                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
-                                class="fi fi-rr-calendar secondary line-height-0"></i> 31-07-23</p>
-                        <p class="font-17 font-400 secondary">At</p>
-                        <p class="font-17 font-500 secondary d-flex align-items-center gap_8"><i
-                                class="fi fi-rr-clock secondary line-height-0"></i> 10:00 PM</p>
-                    </div>
-
-                    <h4 class="mb-0 font-16 font-500 text_dark">Batch Description</h4>
-                    <p class="batch-description">New Batch</p>
+                    <p class="batch-description">{{batch.batchDetails}}</p>
 
                 </div> <!-- subject_card -->
             </div>
@@ -215,47 +166,46 @@
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
-
                 <form action="">
                     <div class="row">
+                   
                         <div class="col-md-12 mb_18">
-                            <div class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative"
-                                style="height: 120px;">
-                                <input type="file" name="fileupload" value="fileupload" class="d-none"
-                                    id="fileupload">
-                                <label for="fileupload" class="font-17 font-500 d-flex">
-                                    <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
-                                    Add Media</label>
-                            </div>
+                            <h6 class="mb_6 font-15 font-500 secondary">Selected Image :- {{imageName}}</h6>
+                            <div class="all-course-images d-flex flex-wrap">
+                                <div class="add-course-img" *ngFor="let image of techImages">
+                                    <img [src]="imageUrl+image.imageName" alt="" (click)="batchRequest.technologyStack = image.id" (click)=" imageName = image.technologyName ">
+                                </div>
+                            </div> <!-- all-course-images -->
                         </div>
+                       
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Title</label>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Day 1">
+                                <input type="text" id="" name="batchName" class="form-control input_text"
+                                    placeholder="Enter Batch title" [(ngModel)]="batchRequest.batchName">
                             </div>
                         </div>
 
                         <div class="col-md-6 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Date</label>
                             <div class="input_icon position-relative">
-                                <input type="date" id="" name="" class="form-control input_text"
-                                    placeholder="Day 1">
+                                <input type="date" id="" name="batchStartDate" class="form-control input_text"
+                                    placeholder="Enter Batch Start Date" [(ngModel)]="batchRequest.batchStartDate">
                             </div>
                         </div>
 
                         <div class="col-md-6 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Time</label>
                             <div class="input_icon position-relative">
-                                <input type="time" id="" name="" class="form-control input_text"
-                                    placeholder="Day 1">
+                                <input type="time" id="" name="batchTiming" class="form-control input_text"
+                                    placeholder="Enter Batch Start Time" [(ngModel)]="batchRequest.batchTiming" >
                             </div>
                         </div>
 
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Details</label>
                             <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Start Typing....."></textarea>
+                                placeholder="Start Typing....." name="batchDetails" [(ngModel)]="batchRequest.batchDetails"></textarea>
                         </div>
 
                     </div><!-- row -->
@@ -263,8 +213,8 @@
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                         aria-label="Close">Cancel</button>
-                    <a routerLink="/admin/coursesbatches">
-                        <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                    <a >
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="createNewBatch()">Save</button>
                     </a>
                 </div>
 
@@ -291,43 +241,42 @@
                 <form action="">
                     <div class="row">
                         <div class="col-md-12 mb_18">
-                            <div class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative"
-                                style="height: 120px;">
-                                <input type="file" name="fileupload" value="fileupload" class="d-none"
-                                    id="fileupload">
-                                <label for="fileupload" class="font-17 font-500 d-flex">
-                                    <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
-                                    Add Media</label>
-                            </div>
+                            <h6 class="mb_6 font-15 font-500 secondary" >Selected Image :- {{batch.technologyStack?.technologyName}}</h6>
+                            <div class="all-course-images d-flex flex-wrap">
+                                <div class="add-course-img" *ngFor="let image of techImages">
+                                    <img [src]="imageUrl+image.imageName"  alt="" (click)="batch.technologyStack= image" (click)="imageName = image.technologyName">
+                                </div>
+                            </div> <!-- all-course-images -->
                         </div>
+                        
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Title</label>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Day 1">
+                                <input type="text" id="" name="batchName" class="form-control input_text"
+                                    placeholder="Day 1" [(ngModel)]="batch.batchName">
                             </div>
                         </div>
 
                         <div class="col-md-6 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Date</label>
                             <div class="input_icon position-relative">
-                                <input type="date" id="" name="" class="form-control input_text"
-                                    placeholder="Day 1">
+                                <input type="date" id="" name="batchStartDate" class="form-control input_text"
+                                    placeholder="Day 1" [(ngModel)]="batch.batchStartDate">
                             </div>
                         </div>
 
                         <div class="col-md-6 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Time</label>
                             <div class="input_icon position-relative">
-                                <input type="time" id="" name="" class="form-control input_text"
-                                    placeholder="Day 1">
+                                <input type="time" id="" name="batchTiming" class="form-control input_text"
+                                    placeholder="Day 1" [(ngModel)]="batch.batchTiming" >
                             </div>
                         </div>
 
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Details</label>
                             <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Start Typing....."></textarea>
+                                placeholder="Start Typing....." name="batchDetails" [(ngModel)]="batch.batchDetails" ></textarea>
                         </div>
 
                     </div><!-- row -->
@@ -335,8 +284,8 @@
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                         aria-label="Close">Cancel</button>
-                    <a href="admin_courses_batches.html">
-                        <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                    <a>
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateBatch()" >Save</button>
                     </a>
                 </div>
 
@@ -345,3 +294,4 @@
     </div>
 </div>
 <!-- Modal Admin Subject Edit Batch Modal End -->
+

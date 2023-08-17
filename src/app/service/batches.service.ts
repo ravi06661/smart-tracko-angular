@@ -6,12 +6,29 @@ import { UtilityServiceService } from './utility-service.service';
   providedIn: 'root'
 })
 export class BatchesService {
+ 
   BASE_URL=this.utilityService.getBaseUrl();
-  courseUrl=this.BASE_URL+'/batch';
+  batchUrl=this.BASE_URL+'/batch';
 
   constructor(private http: HttpClient,private utilityService:UtilityServiceService) { }
 
+  public createNewBatch(batch:any){
+    return this.http.post(`${this.batchUrl}/createBatch`,batch);
+  }
+
   public getAllBatch(){
-    return this.http.get(`${this.courseUrl}/getAllBatches`);
+    return this.http.get(`${this.batchUrl}/getAllBatches`);
+  }
+
+  getBatchById(id: number) {
+    return this.http.get(`${this.batchUrl}/getBatchById/${id}`);
+  }
+  
+  public updateBatch(batch:any) {
+   return this.http.put(`${this.batchUrl}/updateBatch`,batch);
+  }
+
+  public deletBatch(id: number) {
+    return this.http.put(`${this.batchUrl}/deleteBatch/${id}`,{});
   }
 }

@@ -2,11 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UtilityServiceService } from './utility-service.service';
 import { CourseRequest } from '../payload/course-request';
+import { Course } from '../entity/course';
 @Injectable({
   providedIn: 'root'
 })
 export class CourseServiceService {
   
+ 
   BASE_URL=this.utilityService.getBaseUrl();
   courseUrl=this.BASE_URL+'/course';
 
@@ -23,5 +25,18 @@ export class CourseServiceService {
   public getCourseByCourseId(courseId: number) {
     return this.http.get(`${this.courseUrl}/findCourseByIdApi?courseId=${courseId}`)
   }
+
+
+  public deleteCourse(id: number) {
+    return this.http.put(`${this.courseUrl}/deleteCourseByIdApi?courseId=${id}`,{});
+  }
+   
+  public updatCourse(course: Course) {
+    return this.http.put(`${this.courseUrl}/updateCourseApi`,course);
+  }
+  public getAll(){
+    return this.http.get(`${this.courseUrl}/findAllCourse`);
+  }
+
 
 }
