@@ -220,12 +220,13 @@
                     <div class="row">
                         <div class="col-md-12 mb_18">
                             <div class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative"
-                                style="height: 120px;">
-                                <input type="file" name="fileupload" value="fileupload" class="d-none"
-                                    id="fileupload">
-                                <label for="fileupload" class="font-17 font-500 d-flex">
-                                    <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
-                                    Add Media</label>
+                                style="height: 120px;" data-bs-toggle="modal" data-bs-target="#img-modal">
+                                <!-- <input type="file" name="fileupload" value="fileupload" class="d-none"
+                                    id="fileupload"> -->
+                                <!-- <label for="fileupload" class="font-17 font-500 d-flex"> -->
+                                    <i class="fi fi-rr-plus-small warning font-24 line-height-0" ></i>
+                                    Add Media
+                                <!-- </label> -->
                             </div>
                         </div>
                         <div class="col-md-12 mb_18">
@@ -345,3 +346,40 @@
     </div>
 </div>
 <!-- Modal Admin Subject Edit Batch Modal End -->
+<div class="modal fade" id="img-modal" tabindex="-1" aria-labelledby="img-modal" aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title">
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -11%;">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
+                </div>
+
+                <form action="">
+                        <div class="all-subjects-list d-flex gap_24 flex-wrap">
+                        <div class="add-course-img">
+                            <img src="assets/images/temp_img/news.png" alt="">
+                        </div>
+
+                        <div class="add-course-img">
+                            <img src="assets/images/temp_img/news.png" alt="">
+                        </div>
+                        <div class="add-course-img">
+                            <img src="assets/images/temp_img/news.png" alt="">
+                        </div>
+                        <div class="add-course-img">
+                            <img src="assets/images/temp_img/news.png" alt="">
+                        </div>
+                    </div> <!-- all-subjects-list -->
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-center align-items-center">
+                        <button type="button" class="apply_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close">Done</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Image Modal End -->

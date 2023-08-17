@@ -110,7 +110,7 @@ export class StudentService {
   }
 
   public searchStudentByName(fullName: string) {
-    console.log('hi');
+   
 
     return this.http.get<StudentDetails[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
   }

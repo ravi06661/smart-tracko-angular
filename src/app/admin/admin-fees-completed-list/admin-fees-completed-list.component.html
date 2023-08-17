@@ -14,7 +14,8 @@
             <h3 class="admin-title font-17 font-600 secondary position-relative mb-0">Fees Complete List</h3>
             <div class="right-side-dropdown-btn d-flex">
               <div class="student-search me-2">
-                <input type="text" name="" id="" placeholder="Search" class="gray-input-bg" style="height: 35px;">
+                <input type="text" name="" id="" placeholder="Search" class="gray-input-bg" style="height: 35px;"
+                [(ngModel)]="search" (ngModelChange)="searchByName()">
               </div>
               <div class="input_icon position-relative">
                 <input type="date" class="form-control input_text gray-input-bg font-15 fees-input"
@@ -27,7 +28,7 @@
                   style="height: 35px;" placeholder="Select End Date" id="" name="" value="" required>
               </div>
 
-              <button class="fees_search_btn font-15 font-500 lh-0 me-2">Search</button>
+              <button class="fees_search_btn font-15 font-500 lh-0 me-2" >Search</button>
 
               <div class="dropdown">
                 <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark d-inline-flex align-items-center"
@@ -54,131 +55,32 @@
                 <th scope="col">Status</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let fees of feeses">
               <tr>
                 <td class="d-flex align-items-center" style="gap:5px;">
                   <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
+                    <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
                   </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
+                  <h5 class="font-13 font-500 mb-0">{{fees.student.fullName}} <br>
                   </h5>
                 </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022</td>
+                <td>{{fees.student.studentId}}</td>
+                <td>{{fees.course.courseName}}</td>
+                <td>{{fees.student.mobile}}</td>
+                <td>{{fees.finalFees}}</td>
+                <td>{{fees.date}}</td>
                 <td class="text-success font-500">Complete</td>
               </tr>
 
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022</td>
-                <td class="text-success font-500">Complete</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022</td>
-                <td class="text-success font-500">Complete</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022</td>
-                <td class="text-success font-500">Complete</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022</td>
-                <td class="text-success font-500">Complete</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022</td>
-                <td class="text-success font-500">Complete</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022</td>
-                <td class="text-success font-500">Complete</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022</td>
-                <td class="text-success font-500">Complete</td>
-              </tr>
+              
             </tbody>
           </table>
-
+          <mat-paginator *ngIf="feesList>=15"
+            [length]="feesList"
+            [pageSize]="15"
+            aria-label="Select page"
+            (page)="onChangePage($event)">    
+            </mat-paginator>
         </div>
 
       </div>
