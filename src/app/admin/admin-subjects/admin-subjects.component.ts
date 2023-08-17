@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { log } from 'console';
+import { Chapter } from 'src/app/entity/chapter';
 import { Subject } from 'src/app/entity/subject';
 import { TechnologyStack } from 'src/app/entity/technology-stack';
+import { SubjectResponse } from 'src/app/payload/subject-response';
 import { SubjectService } from 'src/app/service/subject.service';
 import { TechnologyStackService } from 'src/app/service/technology-stack-service.service';
 
@@ -13,7 +15,8 @@ import { TechnologyStackService } from 'src/app/service/technology-stack-service
 export class AdminSubjectsComponent implements OnInit{
  
   techImages:TechnologyStack[] = [];
-  subjects:Subject[] = [];
+  chapter:Chapter[]=[]
+  subjects:SubjectResponse[] = [];
   subjectData = {
     imageId:'',
     subjectName:''
@@ -55,11 +58,11 @@ export class AdminSubjectsComponent implements OnInit{
   }
 
   public updateSubject(){
-    console.log('update');
     this.subjectService.updateSubject(this.subject).subscribe({
       next:(data)=>{
         alert('success');
       }
     })
   }
+ 
 }
