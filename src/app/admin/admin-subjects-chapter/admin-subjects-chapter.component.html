@@ -1,147 +1,161 @@
 <div id="main" class="main dashboard_page">
-    <div class="profile d-flex">
-
+    <div class="profile d-flex mb-4">
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Core Java</h1>
-            <button class="top_profile_sec_btn font-14 font-500 lh-1" data-bs-toggle="modal"
-                data-bs-target="#chapter-add-content-modal">Create New</button>
+            <button class="top_profile_sec_btn font-14 font-500 lh-1" id="topic_create_new"
+                data-bs-toggle="modal" data-bs-target="#subject-subadd-modal">Create New</button>
+            <button class="top_profile_sec_btn font-14 font-500 lh-1" id="test_add_ques" data-bs-toggle="modal"
+                data-bs-target="#subject-testques-modal" style="display: none;">Add Question</button>
         </div>
 
         <app-profile-bar></app-profile-bar>
-        </div>
     </div>
 
-<!-- RESULT START -->
-<div class="d-flex mt_24">
-    <div class="main_page">
-      <div class="dashboard_title d-flex justify-content-between align-items-center">
-        <nav aria-label="breadcrumb" class="font-17 font-600 light-black mb-0 lh-36">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a href="index.html" class="font-17 font-500 gray-light">Home</a></li>
-            <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light">Subjects</a>
-            </li>
-            <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light">Core
-                Java</a></li>
-            <li class="breadcrumb-item  light-black" aria-current="page">Java- Introduction</li>
-          </ol>
-        </nav>
-        <a routerLink="/admin/subjecttopictest" type="button"
-          class="back_button font-15 font-500 d-flex justify-content-center align-items-center lh-0"><i
-            class="fi fi-rr-arrow-left lh-0"></i>Back</a>
-      </div>
-      <div class="scroll_sec sub_detail-scroll">
-        <div class="sub_details d-flex flex-column" id="updown_btn">
-            <div class="top-test-question">
-                <h1 class="font-24 font-600 dark-black">Printf Scanf </h1>
-                <div class="test-que-edit-del">
-                    <span class="d-flex align-items-center gap_5 font-17 font-500 secondary" data-bs-toggle="modal"
-                    data-bs-target="#chapter-edit-content-modal"><i
-                            class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
-                    <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
-                            class="fi fi-rr-trash line-height-0"></i> Delete</span>
+    <!-- DASHBOARD START -->
+
+    <div class="scroll_sec mt-0">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="subjects_tabs">
+                <h2 id="subject_topic" class="tabs_heading warning tabs_heading_border_active" onclick="subject_topic()">Subject Topic
+                </h2>
+                <h2 id="subject_test" class="tabs_heading text_gray" onclick="subject_test()">Subject Test</h2>
+            </div>
+            <a routerLink="/admin/subject"
+                class="back_button font-14 font-500  text-white line-height-0 d-flex align-items-center gap_5"><i
+                    class="fi fi-rr-arrow-left line-height-0"></i> Back </a>
+        </div>
+
+        <!-- subject topics start-->
+        <div class="subject-topic">
+
+            <div class="row mt-3" >
+                <div class="col-md-3 bootstrap_cards" *ngFor="let obj of chapter">
+                    <div class="admin-subject_card">
+                        <div class="admin-subject_card_top">
+                            <div class="admin-subject_name_card">
+                                <div class="admin-sub-left">
+                                    <div class="admin-subject-image">
+                                        <img src="assets/images/svg_img/subject.svg">
+                                    </div>
+                                    <div class="subject-details">
+                                        <h3 class="subject_heading txt-dark mb-0">{{obj.chapterName}}</h3>
+                                        <p class="chapter-cout mb-0">{{obj.chapterName}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot(this)"></i>
+                            <div class="meat-dot-dropdown" style="display: none;" >
+                                <a routerLink="/admin/subjectContent/{{obj.chapterId}}"
+                                    class=" warning d-flex align-items-center gap_8"><i
+                                        class="fi fi-rr-document line-height-0 font-16"></i> View</a>
+                                <p class="mb-0 warning d-flex align-items-center gap_8" data-bs-toggle="modal"
+                                data-bs-target="#chapter-edit-modal"><i
+                                        class="fi fi-rr-file-edit line-height-0 font-15"></i> Edit</p>
+                                <p class="mb-0 delete-icon-color d-flex align-items-center gap_8"
+                                    data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                        class="fi fi-rr-trash line-height-0 font-17"></i> Delete</p>
+                            </div>
+
+                        </div><!-- subject_card_top -->
+
+                    </div> <!-- subject_card -->
                 </div>
+
             </div>
 
-          <h3 class="font-17 font-600 dark-black">Basic Info1</h3>
-          <h4 class="font-15 font-400 lh-26">if we dont pass the argument for a format specifier in a printf then
-            the
-            value of initialized elements is printed from right to left of there declaration order. Ex: int
-            a=10,b,c=20;
-            printf("%d %d %d"); output: 20 10 garbage2. printf() prints the message and returns the no of printed
-            characters on the calling place. Ex: int a=printf("Hello\n"); and the value of a is 6.3. The arguments
-            of
-            the printf() is processed from right to left. a=1; printf("%d %d %d",a,a=10,a); output: 10 10 14. First
-            argument of printf must be the format string. Format string may contains format specifiers and other
-            characters, format specifiers are replaced by there respective arguments.5. No of printed arguments
-            depends
-            on no of format specifier. printf("%d",10,20,30); output: 106. We can modify the value of constant
-            variable
-            by using scanf. int x=1; scanf("%d",&x); //Enter: 10=> output is 107. scanf function returns the
-            light-infofully readed arguments from the keyboard8. It reads the values from keyboard and stores on the
-            suplied address. Escape Sequence character: It is also known as non-printable character. It doesn't
-            directoly displayed on the monitor. It has a specific meaning. \a: it generates beep sound \b: it moves
-            the
-            cursor previous possition \t: it prints the tab space(8 space) \r: it sets the cursor on begining
-            character
-            of current line. \n: it sets the cursor on begining position of next line. Format Specifier: %c=> to
-            display/read a character %s=> to display/read a string %*s=>* represents the width %.*s=>* represents
-            the
-            no
-            of printinted character from a supplied string printf("%*.*s",5,3,"abcde"); output: abc %i=> We can
-            read/writ a integer supplied in the form of any radix(octal,hexa,dec). %u=> To read/write unsigned
-            integer
-            %o=> Read/write integer supplied in the form of octal %d=> Read/write an integer supplied in the form of
-            decimal no system. %x=> Read/write an integer supplied in the form of hexa decimal no system. %ld=> To
-            read/write a long argument. %f=> To read/write a float value having default precision value is 6. %g=>
-            To
-            read/write a float value. precision depends on value %e=> To read/write a decimal no in the
-            exponent/scientific form. %*X=> * represents the width default preceded char is space. %0*X=> *
-            represents
-            the width default preceded char is zero. %#X=> it also display the radix form.9. Octal literal starts
-            from
-            0.10.Hexa decimal literal starts from 0x.11.sprintf() writes the formatted data into a string.12.scanf
-            stores the value at the supllied address.13.sscanf() reads a string from another string.</h4>
         </div>
-        <div class="sub_details d-flex flex-column">
-            <div class="top-test-question">
-                <h1 class="font-24 font-600 dark-black">Printf Scanf </h1>
-                <div class="test-que-edit-del">
-                    <span class="d-flex align-items-center gap_5 font-17 font-500 secondary" data-bs-toggle="modal"
-                    data-bs-target="#chapter-edit-content-modal"><i
-                            class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
-                    <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
-                            class="fi fi-rr-trash line-height-0"></i> Delete</span>
+        <!-- subject topics  end-->
+
+        <!-- subject test start-->
+        <div class="subject-test" style="display: none;">
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <div class="top-test-question">
+                        <h2>Question 1</h2>
+                        <div class="test-que-edit-del">
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 secondary" data-bs-toggle="modal"
+                            data-bs-target="#subject-edit_testques-modal"><i
+                                    class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                    class="fi fi-rr-trash line-height-0"></i> Delete</span>
+                        </div>
+                    </div>
+
+                    <div class="subject-test-question">
+                        <ul class="ps-0 mb-0 list-unstyled">
+                            <li>
+                                In class of 27, the overall weight of the students is 997. Can you font out the
+                                average weight of each student in the class?
+                            </li>
+                            <li>
+                                In class of 27, the overall weight of the students is 997. Can you font out the
+                                average weight of each student in the class?
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="subject-test-ques-ans">
+                        <p>A- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>B- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>C- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>D- 36.96</p>
+                    </div>
                 </div>
+
+                <div class="col-md-12">
+                    <div class="top-test-question">
+                        <h2>Question 1</h2>
+                        <div class="test-que-edit-del">
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"  data-bs-toggle="modal"
+                            data-bs-target="#subject-edit_testques-modal"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                    class="fi fi-rr-trash line-height-0"></i> Delete</span>
+                        </div>
+                    </div>
+
+                    <div class="subject-test-question">
+                        <ul class="ps-0 mb-0 list-unstyled">
+                            <li>
+                                In class of 27, the overall weight of the students is 997. Can you font out the
+                                average weight of each student in the class?
+                            </li>
+                            <li>
+                                In class of 27, the overall weight of the students is 997. Can you font out the
+                                average weight of each student in the class?
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="subject-test-ques-ans">
+                        <p>A- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>B- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>C- 36.96</p>
+                    </div>
+                    <div class="subject-test-ques-ans">
+                        <p>D- 36.96</p>
+                    </div>
+                </div>
+
             </div>
-          <h3 class="font-17 font-600 dark-black">Basic Info1</h3>
-          <h4 class="font-15 font-400 lh-26">if we dont pass the argument for a format specifier in a printf then
-            the
-            value of initialized elements is printed from right to left of there declaration order. Ex: int
-            a=10,b,c=20;
-            printf("%d %d %d"); output: 20 10 garbage2. printf() prints the message and returns the no of printed
-            characters on the calling place. Ex: int a=printf("Hello\n"); and the value of a is 6.3. The arguments
-            of
-            the printf() is processed from right to left. a=1; printf("%d %d %d",a,a=10,a); output: 10 10 14. First
-            argument of printf must be the format string. Format string may contains format specifiers and other
-            characters, format specifiers are replaced by there respective arguments.5. No of printed arguments
-            depends
-            on no of format specifier. printf("%d",10,20,30); output: 106. We can modify the value of constant
-            variable
-            by using scanf. int x=1; scanf("%d",&x); //Enter: 10=> output is 107. scanf function returns the
-            light-infofully readed arguments from the keyboard8. It reads the values from keyboard and stores on the
-            suplied address. Escape Sequence character: It is also known as non-printable character. It doesn't
-            directoly displayed on the monitor. It has a specific meaning. \a: it generates beep sound \b: it moves
-            the
-            cursor previous possition \t: it prints the tab space(8 space) \r: it sets the cursor on begining
-            character
-            of current line. \n: it sets the cursor on begining position of next line. Format Specifier: %c=> to
-            display/read a character %s=> to display/read a string %*s=>* represents the width %.*s=>* represents
-            the
-            no
-            of printinted character from a supplied string printf("%*.*s",5,3,"abcde"); output: abc %i=> We can
-            read/writ a integer supplied in the form of any radix(octal,hexa,dec). %u=> To read/write unsigned
-            integer
-            %o=> Read/write integer supplied in the form of octal %d=> Read/write an integer supplied in the form of
-            decimal no system. %x=> Read/write an integer supplied in the form of hexa decimal no system. %ld=> To
-            read/write a long argument. %f=> To read/write a float value having default precision value is 6. %g=>
-            To
-            read/write a float value. precision depends on value %e=> To read/write a decimal no in the
-            exponent/scientific form. %*X=> * represents the width default preceded char is space. %0*X=> *
-            represents
-            the width default preceded char is zero. %#X=> it also display the radix form.9. Octal literal starts
-            from
-            0.10.Hexa decimal literal starts from 0x.11.sprintf() writes the formatted data into a string.12.scanf
-            stores the value at the supllied address.13.sscanf() reads a string from another string.</h4>
+
         </div>
-        <a  routerLink="/admin/chapterquiz" type="button" class="back_button font-17 font-700 text-capitalize">Chapter quiz</a>
-      </div>
+        <!-- subject test  end-->
+
     </div>
-
-  
-  <!-- RESULT END -->
+    <!-- DASHBOARD END -->
 
     <!-- RIGHT SIDE START-->
-    <app-right-side-bar></app-right-side-bar>
+   <app-right-side-bar></app-right-side-bar>
     <!-- RIGHT SIDE END -->
 
 
@@ -151,43 +165,42 @@
 </div>
 <!--DASHBOARD END -->
 
-<!-- Modal Delete Modal Start -->
+    <!-- Modal Delete Modal Start -->
 <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
-    <div class="modal-dialog position-relative leave_modal">
-        <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
-                    style="top: -23%;">
-                    <i class="fi fi-rr-cross close_icon"></i>
-                </button>
+<div class="modal-dialog position-relative leave_modal">
+    <div class="modal-content">
+        <div class="modal-body">
+            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                style="top: -23%;">
+                <i class="fi fi-rr-cross close_icon"></i>
+            </button>
 
-                <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?
-                </p>
-                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                    <a href="admin_subjects_chapter.html">
-                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
-                            delete</button>
-                    </a>
-                    <a href="admin_subjects_chapter.html">
-                        <button type="button" class="apply_modal_btn font-15 font-500">No, Do not
-                            delete</button>
-                    </a>
-                </div>
-
+            <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
+            <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                <a href="admin_subject_topic_test.html">
+                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                        delete</button>
+                </a>
+                <a href="admin_subject_topic_test.html">
+                    <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+                </a>
             </div>
+
         </div>
     </div>
 </div>
+</div>
 <!-- Modal Delete Modal End -->
 
-<!-- Modal Admin Chapter Add Content Modal Start -->
-<div class="modal fade" id="chapter-add-content-modal" tabindex="-1" aria-labelledby="chapter-add-content-modal" aria-hidden="true">
+<!-- Modal Admin Subject Add Modal Start -->
+<div class="modal fade" id="subject-subadd-modal" tabindex="-1" aria-labelledby="subject-subadd-modal"
+    aria-hidden="true">
     <div class="modal-dialog position-relative leave_modal">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                        id="exampleModalLabel1">Add Content</h1>
+                        id="exampleModalLabel1">Add Chapter</h1>
                     <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
@@ -196,8 +209,21 @@
                 <form action="">
                     <div class="row">
                         <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Java Introduction</label>
-                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6" placeholder="Start Typing....."></textarea>
+                            <div
+                                class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative">
+                                <input type="file" name="fileupload" value="fileupload" class="d-none"
+                                    id="fileupload">
+                                <label for="fileupload" class="font-17 font-500 d-flex">
+                                    <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
+                                    Add Media</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Chapter title</label>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="Chapter Title">
+                            </div>
                         </div>
 
                     </div><!-- row -->
@@ -205,7 +231,7 @@
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                         aria-label="Close">Cancel</button>
-                    <a routerLink="/admin/subjectchapter">
+                    <a href="admin_subject_topic_test.html">
                         <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
                     </a>
                 </div>
@@ -214,39 +240,177 @@
         </div>
     </div>
 </div>
-<!-- Modal Admin Chapter Add Content Modal End -->
+<!-- Modal Admin Subject Add Modal End -->
 
-        <!-- Modal Admin Chapter Edit Content Modal Start -->
-        <div class="modal fade" id="chapter-edit-content-modal" tabindex="-1" aria-labelledby="chapter-edit-content-modal" aria-hidden="true">
-            <div class="modal-dialog position-relative leave_modal">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="modal-header apply_title">
-                            <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                                id="exampleModalLabel1">Edit Content</h1>
-                            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="fi fi-rr-cross close_icon"></i>
-                            </button>
-                        </div>
-
-                        <form action="">
-                            <div class="row">
-                                <div class="col-md-12 mb_18">
-                                    <label for="" class="mb_6 font-15 font-500 secondary">Java Introduction</label>
-                                    <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6" placeholder="Start Typing....."></textarea>
-                                </div>
-
-                            </div><!-- row -->
-                        </form>
-                        <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                            <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                                aria-label="Close">Cancel</button>
-                            <a  routerLink="/admin/subjectchapter">
-                                <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
-                            </a>
-                        </div>
-
+        <!-- Modal Admin Chapter Edit  Modal Start -->
+        <div class="modal fade" id="chapter-edit-modal" tabindex="-1" aria-labelledby="chapter-edit-modal"
+        aria-hidden="true">
+        <div class="modal-dialog position-relative leave_modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-header apply_title">
+                        <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                            id="exampleModalLabel1">Edit Course</h1>
+                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fi fi-rr-cross close_icon"></i>
+                        </button>
                     </div>
+
+                    <form action="">
+                        <div class="row">
+                            <div class="col-md-12 mb_18">
+                                <div
+                                    class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative">
+                                    <input type="file" name="fileupload" value="fileupload" class="d-none"
+                                        id="fileupload">
+                                    <label for="fileupload" class="font-17 font-500 d-flex">
+                                        <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
+                                        Add Media</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <label for="" class="mb_6 font-15 font-500 secondary">Subject Topic</label>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="" class="form-control input_text"
+                                        placeholder="Chapter Title">
+                                </div>
+                            </div>
+
+                        </div><!-- row -->
+                    </form>
+                    <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                        <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                            aria-label="Close">Cancel</button>
+                        <a href="admin_subject_topic_test.html">
+                            <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
+    </div>
+    <!-- Modal Admin Chapter Edit Modal End -->
+
+<!-- Modal Admin Subject Test Add Question Modal Start -->
+<div class="modal fade" id="subject-testques-modal" tabindex="-1" aria-labelledby="subject-testques-modal"
+    aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title">
+                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                        id="exampleModalLabel1">Add Question</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
+                </div>
+
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
+                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+                                placeholder="Start Typing....."></textarea>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="A- 36.93">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="B- 36.93">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="C- 36.93">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="" class="form-control input_text"
+                                    placeholder="D- 36.93">
+                            </div>
+                        </div>
+
+                    </div><!-- row -->
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close">Cancel</button>
+                    <a href="admin_subject_topic_test.html">
+                        <button type="button" class="apply_modal_btn font-15 font-500">Save Question</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Admin Subject Test Add Question Modal End -->
+
+        <!-- Modal Admin Subject Test Edit Question Modal Start -->
+        <div class="modal fade" id="subject-edit_testques-modal" tabindex="-1" aria-labelledby="subject-edit_testques-modal"
+        aria-hidden="true">
+        <div class="modal-dialog position-relative leave_modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modal-header apply_title">
+                        <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                            id="exampleModalLabel1">Edit Question</h1>
+                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fi fi-rr-cross close_icon"></i>
+                        </button>
+                    </div>
+
+                    <form action="">
+                        <div class="row">
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
+                                <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+                                    placeholder="Start Typing....."></textarea>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="" class="form-control input_text"
+                                        placeholder="A- 36.93">
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="" class="form-control input_text"
+                                        placeholder="B- 36.93">
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="" class="form-control input_text"
+                                        placeholder="C- 36.93">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="" class="form-control input_text"
+                                        placeholder="D- 36.93">
+                                </div>
+                            </div>
+
+                        </div><!-- row -->
+                    </form>
+                    <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                        <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                            aria-label="Close">Cancel</button>
+                        <a href="admin_subject_topic_test.html">
+                            <button type="button" class="apply_modal_btn font-15 font-500">Save Question</button>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

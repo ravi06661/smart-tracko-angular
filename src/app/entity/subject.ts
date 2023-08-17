@@ -7,5 +7,4 @@ export class Subject {
     public technologyStack:TechnologyStack = new TechnologyStack;
     public isDeleted:boolean = false;
     public isActive:boolean = true;
-
 }

@@ -10,6 +10,7 @@ export class SubjectService{
   
   BASE_URL=this.utilityService.getBaseUrl();
   Subject_url=this.BASE_URL+'/subject';
+  Chapter_url=this.BASE_URL+'/chapter';
 
   constructor(private utilityService:UtilityServiceService,private http:HttpClient) { }
 
@@ -30,5 +31,8 @@ export class SubjectService{
   public updateSubject(subject:any){
     return this.http.put(`${this.Subject_url}/updateSubject`,subject);
   }
-
+ 
+  public getAllSubjectChapters(id:number){
+    return this.http.get(`${this.Chapter_url}/getAllChapters?subjectId=${id}`)
+  }
 }

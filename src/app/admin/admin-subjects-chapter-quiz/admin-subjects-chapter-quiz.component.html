@@ -22,83 +22,31 @@
    </div>
             <div class="row mt-3">
                 <div class="hh">
-                    <div class="col-md-12">
+                    <div class="col-md-12" *ngFor="let obj of questions let a =index">
                         <div class="top-test-question">
-                            <h2>Question 1</h2>
+                            <h2>Question {{a+1}}</h2>
                             <div class="test-que-edit-del">
                                 <span class="d-flex align-items-center gap_5 font-17 font-500 secondary" data-bs-toggle="modal"
                                 data-bs-target="#subject-edit_testques-modal"><i
                                         class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
-                                <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="questionId = obj?.questionId ?? 0"><i
                                         class="fi fi-rr-trash line-height-0"></i> Delete</span>
                             </div>
                         </div>
-
+                    
                         <div class="subject-test-question">
                             <ul class="ps-0 mb-0 list-unstyled">
-                                <li>
-                                    In class of 27, the overall weight of the students is 997. Can you font out the
-                                    average weight of each student in the class?
-                                </li>
-                                <li>
-                                    In class of 27, the overall weight of the students is 997. Can you font out the
-                                    average weight of each student in the class?
+                                <li>{{obj.questionContent}}
                                 </li>
                             </ul>
                         </div>
 
-                        <div class="subject-test-ques-ans">
-                            <p>A- 36.96</p>
-                        </div>
-                        <div class="subject-test-ques-ans">
-                            <p>B- 36.96</p>
-                        </div>
-                        <div class="subject-test-ques-ans">
-                            <p>C- 36.96</p>
-                        </div>
-                        <div class="subject-test-ques-ans">
-                            <p>D- 36.96</p>
+                        <div class="subject-test-ques-ans" *ngFor="let obj1 of obj.options">
+                            <p>{{obj1}}</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-12">
-                    <div class="top-test-question">
-                        <h2>Question 1</h2>
-                        <div class="test-que-edit-del">
-                            <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"  data-bs-toggle="modal"
-                            data-bs-target="#subject-edit_testques-modal"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
-                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
-                                    class="fi fi-rr-trash line-height-0"></i> Delete</span>
-                        </div>
-                    </div>
-
-                    <div class="subject-test-question">
-                        <ul class="ps-0 mb-0 list-unstyled">
-                            <li>
-                                In class of 27, the overall weight of the students is 997. Can you font out the
-                                average weight of each student in the class?
-                            </li>
-                            <li>
-                                In class of 27, the overall weight of the students is 997. Can you font out the
-                                average weight of each student in the class?
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="subject-test-ques-ans">
-                        <p>A- 36.96</p>
-                    </div>
-                    <div class="subject-test-ques-ans">
-                        <p>B- 36.96</p>
-                    </div>
-                    <div class="subject-test-ques-ans">
-                        <p>C- 36.96</p>
-                    </div>
-                    <div class="subject-test-ques-ans">
-                        <p>D- 36.96</p>
-                    </div>
-                </div>
 
             </div>
     </div>
@@ -128,8 +76,8 @@
                 <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?
                 </p>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                    <a  routerLink="/admin/chapterquiz">
-                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                    <a routerLink="/admin/chapterquiz/{{id}}">
+                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" (click)="deleteQuestion()">Yes,
                             delete</button>
                     </a>
                     <a routerLink="/admin/chapterquiz">
