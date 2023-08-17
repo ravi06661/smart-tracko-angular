@@ -26,6 +26,7 @@ export class CourseServiceService {
     return this.http.get(`${this.courseUrl}/findCourseByIdApi?courseId=${courseId}`)
   }
 
+
   public deleteCourse(id: number) {
     return this.http.put(`${this.courseUrl}/deleteCourseByIdApi?courseId=${id}`,{});
   }
@@ -33,4 +34,9 @@ export class CourseServiceService {
   public updatCourse(course: Course) {
     return this.http.put(`${this.courseUrl}/updateCourseApi`,course);
   }
+  public getAll(){
+    return this.http.get(`${this.courseUrl}/findAllCourse`);
+  }
+
+
 }
