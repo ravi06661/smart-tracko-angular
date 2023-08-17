@@ -24,4 +24,8 @@ export class CourseServiceService {
     return this.http.get(`${this.courseUrl}/findCourseByIdApi?courseId=${courseId}`)
   }
 
+  public getAll(){
+    return this.http.get(`${this.courseUrl}/findAllCourse`);
+  }
+
 }

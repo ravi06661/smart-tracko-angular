@@ -13,73 +13,69 @@
     <div class="scroll_dashboard">
         <div class="assignment-stats">
             <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Add Fees</h3>
-            <form action="" class="mb_24" [formGroup]="autofillForm">
+            <form action="" class="mb_24">
                 <div class="row">
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Name</label>
-                        <select class="form-select" aria-label="Default select example" id="studentId" formControlName="studentId" (change)="getStudent()" >
-                            <option selected="">Select Name</option>
-
-                            <option value="" *ngFor="let students of student" >{{students.fullName}} ({{students.studentId}})</option>
-
-                            <!-- <option value="2">Not Allowed</option> -->
+                        <select class="form-select" aria-label="Default select example" id="studentId" name="studentId"  (change)="onStudentChange($event)" >
+                          <option selected="">Select Name</option>
+                          <option [value]="students.studentId" *ngFor="let students of student">{{ students.fullName }} ({{ students.studentId }})  </option>
                         </select>
-                    </div>
-                       <div class="col-md-4">
+                      </div>
+                      
+                      <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Roll No.</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected="">Select Roll No.</option>
-                            <option value="" *ngFor="let students of student">{{students.studentId}} </option>
-                            <!-- <option value="2">Not Allowed</option> -->
-                        </select>
-                    </div>
+                        <input type="text" id="studentId" name="studentId" class="form-control input_text" [(ngModel)]="fees.student.studentId" placeholder="Roll no." readonly>
+                      </div>
+                      
+                      
                     <div class="col-md-4 mb_20">
                         <label for="email" class="mb_6 font-17 font-500 secondary">Email</label>
                         <div class="input_icon position-relative">
                             <input type="email" id="email" name="email" class="form-control input_text"
-                                placeholder="Enter Email">
+                            [(ngModel)]="fees.student.email" placeholder="Enter Email" readonly>
                         </div>
                     </div>
                     <div class="col-md-4 mb_20">
                         <label for="mobile" class="mb_6 font-17 font-500 secondary">Mobile No.</label>
                         <div class="input_icon position-relative">
                             <input type="text" id="mobile" name="mobile" class="form-control input_text"
-                                placeholder="Enter Mobile No.">
+                            [(ngModel)]="fees.student.mobile"  placeholder="Enter Mobile No." readonly>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example" id="courseId" name="courseId" (change)="onCourseChange($event)">
                             <option selected="">Select Course</option>
-                            <option value="1">Java</option>
-                            <option value="2">Core Java</option>
+                            <option [value]="courses.courseId" *ngFor="let courses of course">{{courses.courseName}} </option>
+                           
                         </select>
                     </div>
                     <div class="col-md-4 mb_20">
                         <label for="" class="mb_6 font-17 font-500 secondary">Course Fees</label>
                         <div class="input_icon position-relative">
-                            <input type="text" id="" name="" class="form-control input_text"
-                                placeholder="Enter Course Fees">
+                            <input type="text" id="courseFees" name="courseFees" class="form-control input_text"
+                                placeholder="Enter Course Fees" [(ngModel)]="fees.course.courseFees" readonly>
                         </div>
                     </div>
                     <div class="col-md-4 mb_20">
-                        <label for="" class="mb_6 font-17 font-500 secondary">Finial Fees</label>
+                        <label for="" class="mb_6 font-17 font-500 secondary">Final Fees</label>
                         <div class="input_icon position-relative">
-                            <input type="text" id="" name="" class="form-control input_text"
-                                placeholder="Enter Finial Fees">
+                            <input type="text" id="finalFees" name="finalFees" class="form-control input_text"
+                                placeholder="Enter Finial Fees" [(ngModel)]="fees.finalFees">
                         </div>
                     </div>
                     <div class="col-md-4 mb_20">
                         <label for="" class="mb_6 font-17 font-500 secondary">Date</label>
                         <div class="input_icon position-relative">
-                            <input type="date" id="" name="" class="form-control input_text"
+                            <input type="date" id="date" name="date" class="form-control input_text" [(ngModel)]="fees.date"
                                 placeholder="Enter Mobile No.">
                         </div>
                     </div>
                 </div><!-- row -->
                 <div class="row text-center">
                     <div class="col-md-12">
-                        <a href="#" class="fees_submit_btn font-17 font-500" data-bs-toggle="modal" data-bs-target="#payment-modal">Submit</a>
+                        <a  class="fees_submit_btn font-17 font-500" data-bs-toggle="modal" (click)="addFees()">Submit</a>
                     </div>
                 </div>
             </form>

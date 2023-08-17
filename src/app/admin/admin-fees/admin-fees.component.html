@@ -20,20 +20,21 @@
             <h3 class="admin-title font-17 font-600 secondary position-relative mb-0">Fees List</h3>
             <div class="right-side-dropdown-btn d-flex">
               <div class="student-search me-2">
-                <input type="text" name="" id="" placeholder="Search" class="gray-input-bg" style="height: 35px;">
+                <input type="text" name="fullName" id=""  placeholder="Search" class="gray-input-bg" style="height: 35px;" 
+                [(ngModel)]="search" (ngModelChange)="searchByName()">
               </div>
               <div class="input_icon position-relative">
                 <input type="date" class="form-control input_text gray-input-bg font-15 fees-input"
-                  style="height: 35px;" placeholder="Select Start Date" id="" name="" value=""
+                  style="height: 35px;" placeholder="Select Start Date" id="" name="startDate" value="" [(ngModel)]="startDate"
                   required>
               </div>
               <h4 class="font-18 font-500 text_dark my-0 lh-0 d-flex align-items-center mx-1">To</h4>
               <div class="input_icon position-relative">
                 <input type="date" class="form-control input_text gray-input-bg font-15 fees-input"
-                  style="height: 35px;" placeholder="Select End Date" id="" name="" value="" required>
+                  style="height: 35px;" placeholder="Select End Date" id="" name="endDate" value="" required [(ngModel)]="endDate">
               </div>
 
-              <button class="fees_search_btn font-15 font-500 lh-0 me-2">Search</button>
+              <button class="fees_search_btn font-15 font-500 lh-0 me-2" (click)="findByGivenDate()">Search</button>
 
               <div class="dropdown">
                 <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark d-inline-flex align-items-center"
@@ -61,162 +62,33 @@
                 <th scope="col">Detail</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let fees of feeses">
               <tr>
                 <td class="d-flex align-items-center" style="gap:5px;">
                   <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
+                    <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
                   </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
+                  <h5 class="font-13 font-500 mb-0" >{{fees.student.fullName}}<br>
                   </h5>
                 </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022, 23:12 PM</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal">Detail
+                <td>{{fees.student.studentId}}</td>
+                <td>{{fees.course.courseName}}</td>
+                <td>{{fees.student.email}}</td>
+                <td>{{fees.student.mobile}}</td>
+                <td>{{fees.finalFees}}</td>
+                <td>{{fees.date}}</td>
+                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal" (click)="newFees=fees">Detail
                 </td>
               </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022, 23:12 PM</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal">Detail
-                </td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022, 23:12 PM</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal">Detail
-                </td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022, 23:12 PM</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal">Detail
-                </td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022, 23:12 PM</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal">Detail
-                </td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022, 23:12 PM</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal">Detail
-                </td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022, 23:12 PM</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal">Detail
-                </td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022, 23:12 PM</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal">Detail
-                </td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>02-12-2022, 23:12 PM</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal">Detail
-                </td>
-              </tr>
+           
             </tbody>
           </table>
+          <mat-paginator *ngIf="feesList>=15"
+            [length]="feesList"
+            [pageSize]="15"
+            aria-label="Select page"
+            (page)="onChangePage($event)">    
+            </mat-paginator>
         </div>
 
       </div>
@@ -249,13 +121,13 @@
           <div class="row">
             <div class="col-md-12 mb_18">
               <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                <img src="assets/images/temp_img/news.png" alt="" width="200" height="200" class="rounded"
+                <img  [src]="imageUrl+newFees.student.profilePic" alt="" width="200" height="200" class="rounded"
                   style="object-fit: contain;">
               </div>
             </div>
-            <div class="col-md-12">
+            <div class="col-md-12" >
 
-              <div class="d-flex align-items-center gap_24">
+              <div class="d-flex align-items-center gap_24" >
                 <div class="amount-left-detail">
                   <h4>Student Name:</h4>
                   <h4>College:</h4>
@@ -266,13 +138,13 @@
                   <h4>Finial Fees:</h4>
                 </div>
                 <div class="amount-right-detail">
-                  <h5>Deepak Joshi</h5>
-                  <h5>Excellene School Harda</h5>
-                  <h5>7854126312</h5>
-                  <h5>31-03-2000</h5>
-                  <h5>Deepakjoshi@gmail.com</h5>
-                  <h5>Corporate Training</h5>
-                  <h5>8500</h5>
+                  <h5>{{newFees.student.fullName}}</h5>
+                  <h5>{{newFees.student.college}}</h5>
+                  <h5>{{newFees.student.mobile}}</h5>
+                  <h5>{{newFees.student.dob}}</h5>
+                  <h5>{{newFees.student.email}}</h5>
+                  <h5>{{newFees.student.currentCourse}}</h5>
+                  <h5>{{newFees.finalFees}}</h5>
                 </div>
               </div>
 

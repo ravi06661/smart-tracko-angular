@@ -1,22 +1,75 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Fees } from 'src/app/entity/fees';
 import { StudentDetails } from 'src/app/entity/student-details';
+import { FeesService } from 'src/app/service/fees.service';
 import { StudentService } from 'src/app/service/student.service';
+import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
 @Component({
   selector: 'app-admin-fees',
   templateUrl: './admin-fees.component.html',
   styleUrls: ['./admin-fees.component.scss']
 })
-export class AdminFeesComponent {
+export class AdminFeesComponent implements OnInit{
+  BASE_URL = this.utilityService.getBaseUrl();
+  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
+  feeses:Fees[]=[]
+  feesList:number=0;
+  feesId:number=0
+  selectedFeesId: number | null = null;
   student:StudentDetails=new StudentDetails();
-  constructor(private studentService:StudentService){}
-
-  public allStudent(){
-    this.studentService.allStudent().subscribe({
-      next:(data:any)=>{
-        this.student=data
-      }
-    })
+  newFees:Fees = new Fees();
+  search:string=''
+  startDate:string=''
+  endDate:string=''
+  constructor(private studentService:StudentService,private activateRoute:ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService ){}
+  ngOnInit(): void {
+   this.getAllStudentFeesList(0,15);
+   this.feesId=this.activateRoute.snapshot.params[('feesId')];
   }
 
+  getAllStudentFeesList(page:Number,size:number){
+       this.feesService.getAllFees(page,size).subscribe(
+        (data:any)=>{
+          this.feeses=data.response;
+          this.feesList=data.totalElements;
+        }
+       )
+  }
+ 
+  public onChangePage(event: any) {
+    this.getAllStudentFeesList(event.pageIndex, event.pageSize);
+  }
+
+
+ public findByfeesId(feesId: number) {
+    this.feesService.findByFeesId(feesId).subscribe(
+      (data:any)=>{
+        this.selectedFeesId=data.feesId
+      }
+    )
+  }
+
+  public searchByName(){
+
+    if(this.search=='')
+    this.getAllStudentFeesList(0,15);
+  else{
+    this.feesService.searchByName(this.search).subscribe(
+      (data:any)=>{
+        this.feeses=data;
+        this.feesList=data.totalElements;
+      }
+    )
+  }
+  }
+  public findByGivenDate(){
+    this.feesService.findByDate(this.startDate,this.endDate).subscribe(
+      (data:any)=>{
+        this.feeses=data;
+        this.feesList-data.totalElements
+      }
+    )
+  }
 }
