@@ -3356,6 +3356,7 @@ input.change-student-img {
   padding: 12px;
   border-radius: 6px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.12);
+  z-index: 9;
 }
 
 .meat-dot-dropdown p i {
