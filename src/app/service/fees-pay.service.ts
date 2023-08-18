@@ -1,0 +1,33 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { UtilityServiceService } from './utility-service.service';
+import { Profile } from '../entity/profile';
+import { get } from 'http';
+import { FeesPay } from '../entity/fees-pay';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class FeesPayService {
+
+  BASE_URL = this.utilityService.getBaseUrl();
+  feesUrl = this.BASE_URL + '/fees';
+  TIME_URL = this.utilityService.getTimeUrl();
+  profileData: Profile = new Profile();
+  constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
+
+  public feesPay(feesPay:FeesPay){
+    let params = new FormData()
+    params.append("feesId", feesPay.fees.feesId.toString())
+    params.append("feesPayAmount", feesPay.feesPayAmount.toString())
+    params.append("payDate", feesPay.payDate.toString())
+    params.append("recieptNo", feesPay.recieptNo.toString());
+    params.append("description", feesPay.description.toString());
+
+    return this.http.post(`${this.feesUrl}/feesPay`, params)
+  }
+
+  public feesPayList(page: Number, size: number){
+    return this.http.get<FeesPay[]>(`${this.feesUrl}/feesPayList?page=${page}&size=${size}`);
+  }
+}
