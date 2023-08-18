@@ -11,10 +11,16 @@ export class QuestionServiceService {
   QUESTION_URL = this.BASE_URL + '/question';
 
   constructor(private utilityService: UtilityServiceService, private http: HttpClient) { }
-  public getQuestionByChapterId(chapterId: number): Observable<ChapterQuizeQuestion[]> {
-    return this.http.get<ChapterQuizeQuestion[]>(`${this.QUESTION_URL}/getQuestionByChapterId?chapterId=${chapterId}`);
+  public getAllQuestionByChapterId(chapterId: number): Observable<ChapterQuizeQuestion[]> {
+    return this.http.get<ChapterQuizeQuestion[]>(`${this.QUESTION_URL}/getAllQuestionByChapterId?chapterId=${chapterId}`);
   }
-  public deleteQuestionById(questionId:number){
-    return this.http.delete(`${this.QUESTION_URL}/deleteQuestionById?questionId=${questionId}`)
+  public deleteQuestionById(questionId: number) {
+    return this.http.put(`${this.QUESTION_URL}/deleteQuestionById?questionId=${questionId}`, null)
+  }
+  public getQuestionById(questionId: number): Observable<ChapterQuizeQuestion> {
+    return this.http.get<ChapterQuizeQuestion>(`${this.QUESTION_URL}/getQuestionById?questionId=${questionId}`);
+  }
+  public updateQuestionById(question: ChapterQuizeQuestion) {
+    return this.http.post(`${this.QUESTION_URL}/updateQuestionById`, question);
   }
 }
