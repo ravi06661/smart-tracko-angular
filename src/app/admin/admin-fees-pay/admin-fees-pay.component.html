@@ -58,160 +58,25 @@
                 <th scope="col">Edit</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let fees of feeses">
               <tr>
                 <td class="d-flex align-items-center" style="gap:5px;">
                   <div class="person_image">
                     <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
                   </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
+                  <h5 class="font-13 font-500 mb-0">{{fees.student.fullName}} <br>
                   </h5>
                 </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>2000</td>
-                <td>6500</td>
-                <td>02-12-2022</td>
+                <td>{{fees.student.studentId}}</td>
+                <td>{{fees.course.courseName}}</td>
+                <td>{{fees.student.mobile}}</td>
+                <td>{{fees.finalFees}}</td>
+                <td>{{fees.feesPaid}}</td>
+                <td>{{fees.remainingFees}}</td>
+                <td>{{fees.updatedDate}}</td>
                 <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal">Edit</td>              
               </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>2000</td>
-                <td>6500</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal">Edit</td>              
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>2000</td>
-                <td>6500</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal">Edit</td>              
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>2000</td>
-                <td>6500</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal">Edit</td>              
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>2000</td>
-                <td>6500</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal">Edit</td>              
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>2000</td>
-                <td>6500</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal">Edit</td>              
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>2000</td>
-                <td>6500</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal">Edit</td>              
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>2000</td>
-                <td>6500</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal">Edit</td>              
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>479</td>
-                <td>UI/UX Designer</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>2000</td>
-                <td>6500</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal">Edit</td>              
-              </tr>
+              
 
             </tbody>
           </table>
@@ -250,11 +115,11 @@
                           <div class="row">
 
                               <div class="col-md-12">
-                                  <p class="mb-1">Your Remaining Amount is: 5500/-</p>
+                                  <p class="mb-1">{{feesPays.fees.remainingFees}}</p>
                               </div>
 
                               <div class="col-md-12 mb_18">
-                                  <label for="" class="mb_6 font-15 font-500 secondary">Pay Amount</label>
+                                  <label for="" class="mb_6 font-15 font-500 secondary" >Pay Amount</label>
                                   <div class="input_icon position-relative">
                                       <input type="text" id="" name="" class="form-control input_text"
                                           placeholder="Enter Pay Amount">
