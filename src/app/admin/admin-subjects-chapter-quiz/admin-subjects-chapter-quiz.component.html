@@ -7,48 +7,50 @@
                 data-bs-target="#subject-testques-modal">Add Question</button>
         </div>
 
-       <app-profile-bar></app-profile-bar>
+        <app-profile-bar></app-profile-bar>
 
     </div>
 
     <!-- DASHBOARD START -->
 
     <div class="scroll_sec mt-0">
-   <div class="d-flex align-items-center justify-content-between">
-    <h3 class="admin-title font-17 font-600 secondary position-relative">Chapter Test</h3>
-    <a routerLink="/admin/subjectchapter" type="button"
-          class="back_button font-15 font-500 d-flex justify-content-center align-items-center lh-0"><i
-            class="fi fi-rr-arrow-left lh-0"></i>Back</a>
-   </div>
-            <div class="row mt-3">
-                <div class="hh">
-                    <div class="col-md-12" *ngFor="let obj of questions let a =index">
-                        <div class="top-test-question">
-                            <h2>Question {{a+1}}</h2>
-                            <div class="test-que-edit-del">
-                                <span class="d-flex align-items-center gap_5 font-17 font-500 secondary" data-bs-toggle="modal"
-                                data-bs-target="#subject-edit_testques-modal"><i
-                                        class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
-                                <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="questionId = obj?.questionId ?? 0"><i
-                                        class="fi fi-rr-trash line-height-0"></i> Delete</span>
-                            </div>
-                        </div>
-                    
-                        <div class="subject-test-question">
-                            <ul class="ps-0 mb-0 list-unstyled">
-                                <li>{{obj.questionContent}}
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="subject-test-ques-ans" *ngFor="let obj1 of obj.options">
-                            <p>{{obj1}}</p>
+        <div class="d-flex align-items-center justify-content-between">
+            <h3 class="admin-title font-17 font-600 secondary position-relative">Chapter Test</h3>
+            <a routerLink="/admin/subjectContent/{{id}}" type="button"
+                class="back_button font-15 font-500 d-flex justify-content-center align-items-center lh-0"><i
+                    class="fi fi-rr-arrow-left lh-0"></i>Back</a>
+        </div>
+        <div class="row mt-3">
+            <div class="hh">
+                <div class="col-md-12" *ngFor="let obj of questions let a =index">
+                    <div class="top-test-question">
+                        <h2>Question {{a+1}}</h2>
+                        <div class="test-que-edit-del">
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"
+                                data-bs-toggle="modal" data-bs-target="#subject-edit_testques-modal" (click)="getQuestionById(obj.questionId)"><i
+                                    class="fi fi-rr-file-edit line-height-0" ></i> Edit</span>
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color"
+                                data-bs-toggle="modal" data-bs-target="#delete-modal"
+                                (click)="questionId = obj?.questionId ?? 0"><i class="fi fi-rr-trash line-height-0"
+                                    data-bs-dismiss="modal" aria-label="Close"></i> Delete</span>
                         </div>
                     </div>
+
+                    <div class="subject-test-question">
+                        <ul class="ps-0 mb-0 list-unstyled">
+                            <li>{{obj.questionContent}}
+                            </li>y
+                        </ul>
+                    </div>
+
+                    <div class="subject-test-ques-ans" *ngFor="let obj1 of obj.options">
+                        <p>{{obj1}}</p>
+                    </div>
                 </div>
-
-
             </div>
+
+
+        </div>
     </div>
     <!-- DASHBOARD END -->
 
@@ -68,8 +70,7 @@
     <div class="modal-dialog position-relative leave_modal">
         <div class="modal-content">
             <div class="modal-body">
-                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
-                    style="top: -23%;">
+                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -23%;">
                     <i class="fi fi-rr-cross close_icon"></i>
                 </button>
 
@@ -77,7 +78,8 @@
                 </p>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <a routerLink="/admin/chapterquiz/{{id}}">
-                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" (click)="deleteQuestion()">Yes,
+                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color"
+                            data-bs-dismiss="modal" aria-label="Close" (click)="deleteQuestion()">Yes,
                             delete</button>
                     </a>
                     <a routerLink="/admin/chapterquiz">
@@ -114,26 +116,22 @@
                         </div>
                         <div class="col-md-12 mb_18">
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="A- 36.93">
+                                <input type="text" id="" name="" class="form-control input_text" placeholder="A- 36.93">
                             </div>
                         </div>
                         <div class="col-md-12 mb_18">
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="B- 36.93">
+                                <input type="text" id="" name="" class="form-control input_text" placeholder="B- 36.93">
                             </div>
                         </div>
                         <div class="col-md-12 mb_18">
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="C- 36.93">
+                                <input type="text" id="" name="" class="form-control input_text" placeholder="C- 36.93">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="D- 36.93">
+                                <input type="text" id="" name="" class="form-control input_text" placeholder="D- 36.93">
                             </div>
                         </div>
 
@@ -153,64 +151,44 @@
 </div>
 <!-- Modal Admin Subject Test Add Question Modal End -->
 
-        <!-- Modal Admin Subject Test Edit Question Modal Start -->
-        <div class="modal fade" id="subject-edit_testques-modal" tabindex="-1" aria-labelledby="subject-edit_testques-modal"
-        aria-hidden="true">
-        <div class="modal-dialog position-relative leave_modal">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="modal-header apply_title">
-                        <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                            id="exampleModalLabel1">Edit Question</h1>
-                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fi fi-rr-cross close_icon"></i>
-                        </button>
-                    </div>
-
-                    <form action="">
-                        <div class="row">
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
-                                <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                                    placeholder="Start Typing....."></textarea>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="A- 36.93">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="B- 36.93">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="C- 36.93">
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="D- 36.93">
-                                </div>
-                            </div>
-
-                        </div><!-- row -->
-                    </form>
-                    <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                        <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                            aria-label="Close">Cancel</button>
-                        <a href="admin_subjects_chapter_quiz.html">
-                            <button type="button" class="apply_modal_btn font-15 font-500">Save Question</button>
-                        </a>
-                    </div>
-
+<!-- Modal Admin Subject Test Edit Question Modal Start -->
+<div class="modal fade" id="subject-edit_testques-modal" tabindex="-1" aria-labelledby="subject-edit_testques-modal"
+    aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title">
+                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                        id="exampleModalLabel1">Edit Question</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
                 </div>
+
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-12 mb_18" >
+                            <h4 class="sub-heading font-17 font-500 text_gray">Question Content</h4>
+                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"  name="question.questionContent"
+                                placeholder="Start Typing....." [(ngModel)]="question.questionContent"></textarea>
+                        </div>
+                        <div class="col-md-12 mb_18" *ngFor="let obj of question.options">
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="obj" class="form-control input_text" placeholder="" [ngModel]="obj">
+                            </div>
+                        </div>
+                    </div><!-- row -->
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close" (click)="Cancel()">Cancel</button>
+                    <a href="admin_subjects_chapter_quiz.html">
+                        <button type="button" class="apply_modal_btn font-15 font-500">Save Question</button>
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
-    <!-- Modal Admin Subject Test Edit Question Modal End -->
+</div>
+<!-- Modal Admin Subject Test Edit Question Modal End -->

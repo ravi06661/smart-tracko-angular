@@ -25,7 +25,7 @@
             <li class="breadcrumb-item  light-black" aria-current="page">Java- Introduction</li>
           </ol>
         </nav>
-        <a routerLink="/admin/subjecttopictest" type="button"
+        <a routerLink="/admin/subjectchapter/{{subjectId}}" type="button"
           class="back_button font-15 font-500 d-flex justify-content-center align-items-center lh-0"><i
             class="fi fi-rr-arrow-left lh-0"></i>Back</a>
       </div>
@@ -35,10 +35,10 @@
                 <h1 class="font-24 font-600 dark-black">{{obj.title}} </h1>
                 <div class="test-que-edit-del">
                     <span class="d-flex align-items-center gap_5 font-17 font-500 secondary" data-bs-toggle="modal"
-                    data-bs-target="#chapter-edit-content-modal"><i
-                            class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
-                    <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal" ><i
-                            class="fi fi-rr-trash line-height-0"></i> Delete</span>
+                    data-bs-target="#chapter-edit-content-modal" (click)="getChapterContent(obj.id)"><i
+                            class="fi fi-rr-file-edit line-height-0"  ></i> Edit</span>
+                    <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"  (click)="deleteContentId = obj?.id ?? 0"  ><i
+                            class="fi fi-rr-trash line-height-0" ></i> Delete</span>
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
     <div class="modal-dialog position-relative leave_modal">
         <div class="modal-content">
             <div class="modal-body">
-                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reload()"
                     style="top: -23%;">
                     <i class="fi fi-rr-cross close_icon"></i>
                 </button>
@@ -76,12 +76,12 @@
                 <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?
                 </p>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                    <a href="admin_subjects_chapter.html">
-                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" >Yes,
+                    <a >
+                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" (click)="deleteContent()" >Yes,
                             delete</button>
                     </a>
-                    <a href="admin_subjects_chapter.html">
-                        <button type="button" class="apply_modal_btn font-15 font-500">No, Do not
+                    <a >
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="clearContentDeleteId()">No, Do not
                             delete</button>
                     </a>
                 </div>
@@ -100,25 +100,36 @@
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add Content</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" >
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
 
                 <form action="">
                     <div class="row">
+                       
                         <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Java Introduction</label>
-                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6" placeholder="Start Typing....."></textarea>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="title" class="form-control input_text" placeholder="Title" [(ngModel)]="chapterContent.title">
+                            </div>
                         </div>
-
+                        <div class="col-md-12">
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="subTitle" class="form-control input_text" placeholder="Sub-Title"   [(ngModel)]="chapterContent.subTitle">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Enter Content Here..</label>
+                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6" name="content" placeholder="Start Typing....."  [(ngModel)]="chapterContent.content" ></textarea>
+                        </div>
+                    <h6 *ngIf="erroreMessage!=null">{{erroreMessage}}</h6>
                     </div><!-- row -->
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close">Cancel</button>
-                    <a routerLink="/admin/subjectchapter">
-                        <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                        aria-label="Close" (click)="clearForm()">Cancel</button>
+                    <a >
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="submit()">Save</button>
                     </a>
                 </div>
 
@@ -136,25 +147,38 @@
                         <div class="modal-header apply_title">
                             <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                                 id="exampleModalLabel1">Edit Content</h1>
-                            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"  (click)="reload()">
                                 <i class="fi fi-rr-cross close_icon"></i>
                             </button>
                         </div>
 
                         <form action="">
-                            <div class="row">
-                                <div class="col-md-12 mb_18">
-                                    <label for="" class="mb_6 font-15 font-500 secondary">Java Introduction</label>
-                                    <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6" placeholder="Start Typing....."></textarea>
-                                </div>
-
-                            </div><!-- row -->
+                            <form action="">
+                                <div class="row">
+                                   
+                                    <div class="col-md-12 mb_18">
+                                        <div class="input_icon position-relative">
+                                            <input type="text" id="" name="title" class="form-control input_text" placeholder="Title" [(ngModel)]="chapterContent.title">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="input_icon position-relative">
+                                            <input type="text" id="" name="subTitle" class="form-control input_text" placeholder="Sub-Title"   [(ngModel)]="chapterContent.subTitle">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb_18">
+                                        <label for="" class="mb_6 font-15 font-500 secondary">Enter Content Here..</label>
+                                        <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6" name="content" placeholder="Start Typing....."  [(ngModel)]="chapterContent.content" ></textarea>
+                                    </div>
+                                <h6 *ngIf="erroreMessage!=null">{{erroreMessage}}</h6>
+                                </div><!-- row -->
+                            </form>
                         </form>
                         <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                             <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                                aria-label="Close">Cancel</button>
-                            <a  routerLink="/admin/subjectchapter">
-                                <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                                aria-label="Close" (click)="cancelContent()">Cancel</button>
+                            <a >
+                                <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateContent()">Save</button>
                             </a>
                         </div>
 

@@ -14,22 +14,81 @@ import { SubjectService } from 'src/app/service/subject.service';
   styleUrls: ['./admin-subjects-topic-test.component.scss']
 })
 export class AdminSubjectsTopicTestComponent {
-  questionId:number =0;
+  questionId: number = 0;
   chapter: ChapterContent[] = []
-  chapterId: string = '';
+  chapterId: number = 0;
+  subjectId: number = 0;
+  chapterContent: ChapterContent = new ChapterContent();
+  erroreMessage: string = ''
+  deleteContentId = 0;
   constructor(private chapterService: ChapterServiceService, private route: ActivatedRoute, private questionService: QuestionServiceService) { }
   ngOnInit() {
     this.getChapter();
   }
   public getChapter() {
-    let id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.chapterId = id;
-      this.chapterService.getChapterById(parseInt(id)).subscribe(
-        (data) => {
-          this.chapter = data.chapterContent;
-        }
-      )
-    }
+    this.chapterId = this.route.snapshot.params[('id')];
+    this.chapterService.getChapterById(this.chapterId).subscribe(
+      (data: any) => {
+        this.chapter = data.chapterContent;
+        this.subjectId = data.subject.subjectId;
+      }
+    )
+  }
+  //add chapter content
+  public submit() {
+    this.chapterService.addChapterContent(this.chapterContent, this.chapterId).subscribe(
+      (data) => {
+        this.erroreMessage = 'Success'
+        this.chapterContent = new ChapterContent();
+        this.getChapter();
+      },
+      (error) => {
+        this.erroreMessage = "error occure please submit again.."
+      }
+    )
+  }
+  public clearForm() {
+    this.erroreMessage = ''
+    this.chapterContent = new ChapterContent();
+  }
+
+  public updateContent() {
+    this.chapterService.updateChapterContent(this.chapterId, this.chapterContent).subscribe(
+      (data) => {
+        this.chapterContent = new ChapterContent;
+        this.erroreMessage = " Success.."
+      },
+      (error) => {
+        this.erroreMessage = "error occure please submit again.."
+      }
+    )
+  }
+  public cancelContent() {
+    this.erroreMessage = ''
+    this.chapterContent = new ChapterContent();
+  }
+  public getChapterContent(contentId: number) {
+    this.chapterService.getChapterContent(this.chapterId, contentId).subscribe(
+      (data) => {
+        this.chapterContent = data;
+         console.log(data);
+      }
+    )
+  }
+  public deleteContent() {
+    this.chapterService.deleteContent(this.chapterId, this.deleteContentId).subscribe(
+      (data) => {
+        this.reload();
+      }
+    )
+  }
+  public clearContentDeleteId() {
+    this.deleteContentId = 0;
+  }
+
+  public reload() {
+    this.ngOnInit();
+   this.chapterContent = new ChapterContent();
+    this.erroreMessage=''
   }
 }
