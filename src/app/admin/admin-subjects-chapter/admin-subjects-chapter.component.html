@@ -49,10 +49,10 @@
                                     class=" warning d-flex align-items-center gap_8"><i
                                         class="fi fi-rr-document line-height-0 font-16"></i> View</a>
                                 <p class="mb-0 warning d-flex align-items-center gap_8" data-bs-toggle="modal"
-                                data-bs-target="#chapter-edit-modal"><i
-                                        class="fi fi-rr-file-edit line-height-0 font-15"></i> Edit</p>
+                                data-bs-target="#chapter-edit-modal" (click)="getChapterById(obj.chapterId)"><i
+                                        class="fi fi-rr-file-edit line-height-0 font-15" ></i> Edit</p>
                                 <p class="mb-0 delete-icon-color d-flex align-items-center gap_8"
-                                    data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                    data-bs-toggle="modal" data-bs-target="#delete-modal"  (click)="chapterId = obj?.chapterId ?? 0"><i
                                         class="fi fi-rr-trash line-height-0 font-17"></i> Delete</p>
                             </div>
 
@@ -74,7 +74,7 @@
                         <h2>Question 1</h2>
                         <div class="test-que-edit-del">
                             <span class="d-flex align-items-center gap_5 font-17 font-500 secondary" data-bs-toggle="modal"
-                            data-bs-target="#subject-edit_testques-modal"><i
+                            data-bs-target="#subject-edit_testques-modal" (click)="deleteChapter()"><i
                                     class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
                             <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
                                     class="fi fi-rr-trash line-height-0"></i> Delete</span>
@@ -219,20 +219,20 @@
                             </div>
                         </div>
                         <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Chapter title</label>
+                            <label for="" class="mb_6 font-15 font-500 secondary">Chapter Name.</label>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Chapter Title">
+                                <input type="text" id="" name="chapterName" class="form-control input_text"
+                                    placeholder="Chapter Title" [(ngModel)]="chapterUpdate.chapterName">
                             </div>
                         </div>
-
+                     <h6 *ngIf="message!=null" style="color: red;">{{message}}</h6>
                     </div><!-- row -->
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close">Cancel</button>
-                    <a href="admin_subject_topic_test.html">
-                        <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                        aria-label="Close"(click)="cancel()" >Cancel</button>
+                    <a >
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="addChapter()">Save</button>
                     </a>
                 </div>
 
@@ -251,7 +251,7 @@
                     <div class="modal-header apply_title">
                         <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                             id="exampleModalLabel1">Edit Course</h1>
-                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reload()">
                             <i class="fi fi-rr-cross close_icon"></i>
                         </button>
                     </div>
@@ -269,20 +269,20 @@
                                 </div>
                             </div>
                             <div class="col-md-12 mb_18">
-                                <label for="" class="mb_6 font-15 font-500 secondary">Subject Topic</label>
+                                <label for="" class="mb_6 font-15 font-500 secondary">Chapter Name</label>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Chapter Title">
+                                    <input type="text" id="" name="chapterName" class="form-control input_text"
+                                        placeholder="Chapter Title" [(ngModel)]="chapterUpdate.chapterName">
                                 </div>
                             </div>
-
+                          <h6 *ngIf="message!=null" style="color: red;">{{message}}</h6>
                         </div><!-- row -->
                     </form>
                     <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                         <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                            aria-label="Close">Cancel</button>
-                        <a href="admin_subject_topic_test.html">
-                            <button type="button" class="apply_modal_btn font-15 font-500">Save</button>
+                            aria-label="Close" (click)="cancel()">Cancel</button>
+                        <a >
+                            <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateChapter()">Save</button>
                         </a>
                     </div>
 

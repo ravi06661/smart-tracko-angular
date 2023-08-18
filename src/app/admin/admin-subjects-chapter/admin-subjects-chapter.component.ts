@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { error } from 'console';
 import { Chapter } from 'src/app/entity/chapter';
 import { Subject } from 'src/app/entity/subject';
+import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 
 @Component({
@@ -12,18 +14,77 @@ import { SubjectService } from 'src/app/service/subject.service';
 export class AdminSubjectsChapterComponent {
   chapter: Chapter[] = []
   subjects: Subject[] = [];
-  constructor(private subjectService: SubjectService, private route: ActivatedRoute) { }
+  subjectId: number = 0;
+  chapterName: string = ''
+  message: string = '';
+  chapterId = 0;
+  chapterUpdate: Chapter = new Chapter();
+  constructor(private subjectService: SubjectService, private route: ActivatedRoute, private chapterService: ChapterServiceService) { }
+
   ngOnInit() {
+    this.subjectId = this.route.snapshot.params[('id')];
     this.getAllSubjectChapter();
   }
+
   public getAllSubjectChapter() {
-    let id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.subjectService.getAllSubjectChapters(parseInt(id)).subscribe(
-        (data: any) => {
-          this.chapter = data;
-        }
-      )
-    }
+    this.subjectService.getAllSubjectChapters(this.subjectId).subscribe(
+      (data: any) => {
+        this.chapter = data;
+      }
+    )
+  }
+  public addChapter() {
+    this.chapterService.addChapter(this.subjectId, this.chapterUpdate.chapterName).subscribe(
+      (data) => {
+        this.message = "Success..";
+        this.chapterUpdate = new Chapter();
+      },
+      (error) => {
+        this.message = 'Failed..'
+      }
+    )
+  }
+  public deleteChapter() {
+    this.chapterService.deleteChapter(this.chapterId, this.subjectId).subscribe(
+      (data) => {
+        this.chapterId = 0;
+      },
+      (error) => {
+        this.message = 'Failed..'
+      }
+    )
+  }
+  public cancel() {
+    this.chapterUpdate = new Chapter();
+    this.message = ''
+  }
+  public reload() {
+    this.chapterUpdate = new Chapter();
+    this.message = ''
+    this.getAllSubjectChapter();
+  }
+
+  public updateChapter() {
+    this.chapterService.updateChapter(this.chapterId, this.subjectId, this.chapterUpdate.chapterName).subscribe(
+      (data) => {
+        this.message = 'success';
+        this.chapterUpdate = new Chapter();
+        this.chapterId=0;
+      },
+      (error) => {
+        this.message = 'Failed..'
+      }
+    )
+  }
+  public getChapterById(id:number) {
+    this.chapterId=id;
+    this.chapterService.getChapterById(id).subscribe(
+      (data) => {
+        this.chapterUpdate = data;
+      },
+      (error)=>{
+        this.message="error"
+      }
+    )
   }
 }
