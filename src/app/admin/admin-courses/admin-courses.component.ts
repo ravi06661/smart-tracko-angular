@@ -5,9 +5,10 @@ import { TechnologyStack } from 'src/app/entity/technology-stack';
 import { TechnologyStackService } from 'src/app/service/technology-stack-service.service';
 import { Course } from 'src/app/entity/course';
 import { SubjectService } from 'src/app/service/subject.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { Subject } from 'src/app/entity/subject';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-courses',
@@ -24,19 +25,23 @@ export class AdminCoursesComponent implements OnInit {
   courses:Course[]=[];
   totalBatches = 0;
   totalSubjects = 0;
+  totalCourses = 0 ; 
   course:Course = new Course();
   courseId:number = 0
   imageName = ''
   selectedSubjects:Subject[] = [];
+
   constructor(private courseService:CourseServiceService,private techService:TechnologyStackService,
-    private subjectService:SubjectService,private utilityService:UtilityServiceService){}
+    private subjectService:SubjectService,private utilityService:UtilityServiceService,private router:Router){
+    }
+
+
 
   ngOnInit(): void {
     this.getAllCourses();  
     this.getAllTechImages();
     this.getAllSubjects();
   }
-
 
   checkboxChanged(subjectId: number) {
     console.log(this.selectedSubjectIds);
@@ -70,6 +75,7 @@ export class AdminCoursesComponent implements OnInit {
     this.courseService.getAllCourses(0,10).subscribe({
       next:(data:any)=>{
         this.courses = data.response;
+        this.totalCourses = this.courses.length
       }
     });
   }
@@ -105,6 +111,8 @@ export class AdminCoursesComponent implements OnInit {
     this.courseService.updatCourse(this.course).subscribe({
       next:(data:any)=>{
         alert('success');
+        this.course = new Course()
+        this.getAllCourses()
       }
     })
   }
@@ -112,7 +120,7 @@ export class AdminCoursesComponent implements OnInit {
   public deleteCourse(id:number){
     this.courseService.deleteCourse(id).subscribe({
       next:(data:any)=>{
-        console.log(data);
+        this.getAllCourses();
       }
     })
   }
