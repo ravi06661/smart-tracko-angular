@@ -29,8 +29,7 @@
                             </div>
                         </div>
 
-                        <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot(this)"></i>
-              <div class="meat-dot-dropdown" style="display: none;" >
+              <!-- <div class="meat-dot-dropdown" style="display: none;" >
                             <a routerLink="/admin/subjectchapter/{{subject.subjectId}}"
 
                                 class=" warning d-flex align-items-center gap_8 pointer"><i
@@ -41,10 +40,10 @@
                             <p class="mb-0 delete-icon-color d-flex align-items-center gap_8 pointer"
                                 data-bs-toggle="modal" data-bs-target="#delete-modal"><i
                                     class="fi fi-rr-trash line-height-0 font-17"></i> Delete</p>
-                        </div> -->
+                        </div>  -->
                         <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 8rem;">
-                                        <li><a routerLink="/admin/subjecttopictest"
+                                        <li><a routerLink="/admin/subjectchapter/{{subject.subjectId}}"
                                           class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding"><i
                                               class="fi fi-rr-document line-height-0"></i> View</a></li>
                                         <li>  <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding" data-bs-toggle="modal"

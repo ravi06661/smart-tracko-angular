@@ -17,7 +17,7 @@
                 <div class="top-course-content mb-4 my_course">
                     <div class="d-flex java align-items-center">
                         <div class="course-image">
-                            <img src="assets/images/temp_img/image 18.png" class="obj-fit-none">
+                            <img [src]="imageUrl+course.technologyStack?.imageName" >
                         </div>
                         <div class="ms-2">
                             <h2 class="font-27 font-600 text-white java mb-1">{{course.courseName}}</h2>
@@ -40,7 +40,7 @@
                         <div class="admin-subject_name_card">
                             <div class="admin-sub-left">
                                 <div class="admin-subject-image">
-                                    <img src="assets/images/svg_img/subject.svg">
+                                    <img [src]="imageUrl+subject.technologyStack.imageName">
                                 </div>
                                 <div class="subject-details">
                                     <h3 class="subject_heading txt-dark mb-0">{{subject.subjectName}}</h3>
@@ -67,7 +67,7 @@
                         <div class="admin-subject_name_card">
                             <div class="admin-sub-left">
                                 <div class="admin-subject-image">
-                                    <img src="assets/images/svg_img/subject.svg">
+                                    <img [src]="imageUrl+batch.technologyStack?.imageName">
                                 </div>
                                 <div class="subject-details">
                                     <h3 class="subject_heading txt-dark mb-0">{{batch.batchName}}</h3>
@@ -81,7 +81,7 @@
                                           data-bs-target="#batch-edit-modal" (click)="getBatchByBatchId(batch.batchId)"><i
                                               class="fi fi-rr-file-edit line-height-0"></i> Edit</p></li>
                                         <li> <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding"
-                                          data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="deleteBatch(batch.batchId)"><i
+                                          data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="batchId = batch.batchId" ><i
                                               class="fi fi-rr-trash line-height-0"></i> Delete</p></li>
                                       </ul>
                         <!-- <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot(this)"></i>
@@ -134,15 +134,15 @@
                     <i class="fi fi-rr-cross close_icon"></i>
                 </button>
 
-                <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?
+                <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Batch?
                 </p>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                    <a href="edit_taskandassignment.html">
-                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                    <a >
+                        <button type="button" data-bs-dismiss="modal" aria-label="Close" class="cancel_modal_btn font-15 font-500 delete-icon-color" (click)="deleteBatch(batchId)">Yes,
                             delete</button>
                     </a>
-                    <a href="edit_taskandassignment.html">
-                        <button type="button" class="apply_modal_btn font-15 font-500">No, Do not
+                    <a >
+                        <button type="button" data-bs-dismiss="modal" aria-label="Close" class="apply_modal_btn font-15 font-500">No, Do not
                             delete</button>
                     </a>
                 </div>
@@ -170,7 +170,7 @@
                     <div class="row">
                    
                         <div class="col-md-12 mb_18">
-                            <h6 class="mb_6 font-15 font-500 secondary">Selected Image :- {{imageName}}</h6>
+                            <h6 class="mb-4 font-15 font-500 secondary">Selected Image :- {{imageName}}</h6>
                             <div class="all-course-images d-flex flex-wrap">
                                 <div class="add-course-img" *ngFor="let image of techImages">
                                     <img [src]="imageUrl+image.imageName" alt="" (click)="batchRequest.technologyStack = image.id" (click)=" imageName = image.technologyName ">
@@ -241,7 +241,7 @@
                 <form action="">
                     <div class="row">
                         <div class="col-md-12 mb_18">
-                            <h6 class="mb_6 font-15 font-500 secondary" >Selected Image :- {{batch.technologyStack?.technologyName}}</h6>
+                            <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{batch.technologyStack?.technologyName}}</h6>
                             <div class="all-course-images d-flex flex-wrap">
                                 <div class="add-course-img" *ngFor="let image of techImages">
                                     <img [src]="imageUrl+image.imageName"  alt="" (click)="batch.technologyStack= image" (click)="imageName = image.technologyName">
