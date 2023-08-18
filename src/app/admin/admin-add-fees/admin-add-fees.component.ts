@@ -72,12 +72,13 @@ export class AdminAddFeesComponent implements OnInit {
     )
   }
   onCourseChange(event:any){
-    
-    const selectdCourseId=event.target.value;
-    this.courseService.getCourseByCourseId(selectdCourseId).subscribe(
+
+    const selectedCourseId=event.target.value;
+    this.courseService.getCourseByCourseId(selectedCourseId).subscribe(
     (data:any)=>{
       this.fees.course.courseId=data.courseId;
       this.fees.course.courseFees=data.courseFees;
+     
      
 
     }
