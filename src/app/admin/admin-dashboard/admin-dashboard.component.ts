@@ -36,16 +36,12 @@ export class AdminDashboardComponent implements OnInit {
   public feesOptions: Partial<ChartOptions2>;
   students: StudentDetails[] = []
   BASE_URL = this.utilityService.getBaseUrl();
-
   imageUrl= this.BASE_URL+'/file/getImageApi/images/'
-
   admissionData:[]=[]
-
   monthCategories:string[]= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
-
-
-  selectedYear: number | undefined; // To store the selected year
-  years: number[] | undefined;
+  years: number[] = [];
+  admissionYear:number = 0;
+  feesYear:number = 0;
 
 
   constructor(private elementRef: ElementRef, private localst: LocationStrategy, private studentService: StudentService, private utilityService: UtilityServiceService) {
@@ -99,14 +95,15 @@ export class AdminDashboardComponent implements OnInit {
     };
 
     this.years = this.generateYearsArray(2000, new Date().getFullYear());
-    this.selectedYear = new Date().getFullYear();
+    this.admissionYear = new Date().getFullYear();
+    this.feesYear = new Date().getFullYear();
   }
 
   ngOnInit(): void {
     this.preventBackButton();
     this.getNewRegistrationStudents();
-    this.getAdmissinonDataByWiseForYear(new Date().getFullYear());
-    this.getAdmissionBarData()
+    this.getAdmissinonDataByWiseForYear(this.admissionYear);
+    //this.getAdmissionBarData()
   }
 
   public preventBackButton() {
@@ -126,7 +123,8 @@ export class AdminDashboardComponent implements OnInit {
 
   public getAdmissinonDataByWiseForYear(year: number) {
     //this.admissinonOptions.series[0].data = this.admissionData
-    // this.admissinonOptions.xaxis.categories = this.monthCategories
+    // this.admissinonOptions.xaxis.categories = this.monthCategorie
+    
     this.studentService.getAdmissinonDataByWiseForYear(year).subscribe({
       next: (data: any) => {
         this.admissionData = data.count;
@@ -136,6 +134,10 @@ export class AdminDashboardComponent implements OnInit {
         this.getAdmissionBarData()
       }
     })
+  }
+
+  alet(year:number){
+    console.log(year)
   }
 
   public getAdmissionBarData() {

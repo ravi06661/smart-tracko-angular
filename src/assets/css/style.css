@@ -351,9 +351,7 @@ input.choose-subjects {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(85.69% 168.41% at 56.08% 88.76%,
-      #acd1d6 0%,
-      #49bfcf 100%);
+  background: #E5FBFF;
 }
 
 .login_heading {
@@ -363,7 +361,7 @@ input.choose-subjects {
 
 .login_box1 {
   width: fit-content !important;
-  background: rgba(255, 255, 255, 0.5);
+  background: #86D3DD;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1812,7 +1810,7 @@ ul.dropdown-menu.show {
 /* ************ QR CODE CSS ********** */
 .login_box {
   width: fit-content !important;
-  background: rgba(255, 255, 255, 0.5);
+  background: #86D3DD;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1829,9 +1827,7 @@ ul.dropdown-menu.show {
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(85.69% 168.41% at 56.08% 88.76%,
-      #acd1d6 0%,
-      #49bfcf 100%);
+  background: #E5FBFF;
 }
 
 .qr_img {

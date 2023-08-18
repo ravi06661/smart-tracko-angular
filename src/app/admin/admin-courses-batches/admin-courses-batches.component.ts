@@ -19,6 +19,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 export class AdminCoursesBatchesComponent implements OnInit{
 
   courseId:number = 0
+  batchId:number = 0;
   course:Course = new Course();
   totalSubjects = 0
   totalBatches = 0

@@ -66,8 +66,8 @@
             <h3 class="admin-title font-17 font-600 secondary position-relative">Admissions</h3>
 
             <!-- <label for="year">Select a Year:</label> -->
-<select class="attendance_dropdown1 border-0 font-15 font-500" id="year" name="year" [(ngModel)]="selectedYear">
-  <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+<select class="attendance_dropdown1 border-0 font-15 font-500" id="year" name="year" [(ngModel)]="admissionYear" (change)="getAdmissinonDataByWiseForYear(admissionYear)">
+  <option *ngFor="let year of years" >{{ year }}</option>
 </select>
 
             <!-- <div class="dropdown">
@@ -99,8 +99,8 @@
         <div class="col-lg-6 col-md-6 mb-0 mb-md-3 mb-0 mb-md-3 ">
           <div class="d-flex justify-content-between align-items-center mb_12">
             <h3 class="admin-title font-17 font-600 secondary position-relative">Fee Collection</h3>
-            <select class="attendance_dropdown1 border-0 font-15 font-500" id="year" name="year" [(ngModel)]="selectedYear">
-              <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+            <select class="attendance_dropdown1 border-0 font-15 font-500" id="year" name="year" [(ngModel)]="feesYear">
+              <option *ngFor="let year of years" [value]="year" >{{ year }}</option>
             </select>
             <!-- <div class="dropdown">
               <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
