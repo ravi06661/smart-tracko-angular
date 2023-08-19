@@ -21,12 +21,12 @@ export class LeaveService {
     return this.http.post(`${this.leaveUrl}/addStudentLeave?leaveTypeId=${leave.leaveType.leaveTypeId}&leaveStartDate=${leave.leaveDate}&leaveEndDate=${leave.leaveEndDate}&leaveReason=${leave.leaveReason}&leaveDayType=${leave.leaveDayType}&halfDayType=${leave.halfDayType}`,{response:'text'});
   }
 
-  public getStudentLeaves(){
-    return this.http.get(`${this.leaveUrl}/getStudentLeaves?limit=0&offset=30`);
+  public getStudentLeaves(id:any){
+    return this.http.get(`${this.leaveUrl}/getStudentLeaves?studentId=${id}&limit=0&offset=30`);
   }
 
-  public getLeavesFiterData(monthNo:number){
-    return this.http.get(`${this.leaveUrl}/studentLeaveMonthFilter?monthNo=${monthNo}`)
+  public getLeavesFiterData(id:number,monthNo:number){
+    return this.http.get(`${this.leaveUrl}/studentLeaveMonthFilter?studentId=${id}&monthNo=${monthNo}`)
   }
 
 }

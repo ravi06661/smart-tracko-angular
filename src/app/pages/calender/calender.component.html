@@ -25,7 +25,7 @@
         <h3 id="monthAndYear"></h3>
         <div class="button-container-calendar">
             <button class="text-light" id="previous" (click)="previous()">&#8249;</button>
-            <button class="text-light" id="next" (click)="next()">&#8250;</button>
+            <button class="text-light" id="next" (click)="next()" [disabled]="status">&#8250;</button>
         </div>
     </div>
     <table class="table-calendar textcolor" id="calendar"  >

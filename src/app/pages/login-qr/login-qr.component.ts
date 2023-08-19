@@ -24,12 +24,17 @@ export class LoginQRComponent implements OnInit{
 
   BASE_URL = this.utilityService.getBaseUrl();
   SOCKET_URL = this.BASE_URL+'/socket';
+  userAgent:any
   constructor(public qrService:QRServiceService,private loginService:LoginService,private router:Router,private utilityService:UtilityServiceService,private deviceService: DeviceDetectorService){}
 
 
   
   ngOnInit(): void {
     console.log(this.deviceService.getDeviceInfo())
+    // this.userAgent = this.deviceService.getDeviceInfo().os
+    // if (this.userAgent != null && (this.userAgent=="Android" || this.userAgent=="iOS")) {
+    //   this.router.navigate(['not-found'])
+    //  } else {
     this.qrService.generateQRCode().subscribe({
       next:(data:any)=>{
         this.qrImage = data.qrData;
@@ -39,6 +44,7 @@ export class LoginQRComponent implements OnInit{
       }
     });
     this.connect();
+  // }
   }
 
   

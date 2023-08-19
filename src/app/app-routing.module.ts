@@ -116,7 +116,8 @@ const routes: Routes = [
       
     ]
   },
-  {path:'**',component:NotFoundComponent,pathMatch:'full'}
+  {path:'**',component:NotFoundComponent,pathMatch:'full'},
+  {path:'not-found',redirectTo:"**",pathMatch:'full'},
 ];
 
 @NgModule({

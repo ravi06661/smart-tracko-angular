@@ -143,6 +143,7 @@ export class AdminDashboardComponent implements OnInit {
   public getAdmissionBarData() {
     this.admissinonOptions.series[0].data = this.admissionData
     this.admissinonOptions.xaxis.categories = this.monthCategories
+    window.dispatchEvent(new Event('resize'));
   }
 
   public generateYearsArray(startYear: number, endYear: number): number[] {

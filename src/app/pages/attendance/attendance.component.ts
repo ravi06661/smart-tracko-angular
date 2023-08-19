@@ -64,7 +64,7 @@ export class AttendanceComponent implements OnInit {
         },
         {
           name: "Absent",
-          data: [1,2,3,4,5,6,7,8,9,10,11,12]
+          data: []
         },
         {
           name: "Leave",
@@ -145,7 +145,7 @@ export class AttendanceComponent implements OnInit {
   }
 
   public getStudentLeaves() {
-    this.leaveService.getStudentLeaves().subscribe({
+    this.leaveService.getStudentLeaves(this.loginService.getStudentId()).subscribe({
       next: (res: any) => {
         this.leavesList = res.leavesData.response;
       }
@@ -154,7 +154,7 @@ export class AttendanceComponent implements OnInit {
 
   public getLeavesFilter(monthNo: number) {
     this.leaveMonth = moment(monthNo, "MM").format("MMMM");
-    this.leaveService.getLeavesFiterData(monthNo).subscribe({
+    this.leaveService.getLeavesFiterData(this.loginService.getStudentId(),monthNo).subscribe({
       next: (res: any) => {
         this.leavesList = res.leavesData.response;
       }
@@ -184,7 +184,7 @@ export class AttendanceComponent implements OnInit {
     this.message = '';
   }
   public getStudentPresentsAbsentsAndLeavesYearWise() {
-    this.cdr.detectChanges();
+    
     this.attendanceOptions.series[0].data = []
     this.studentService.getStudentPresentsAbsentsAndLeavesYearWise(new Date().getFullYear(), this.loginService.getStudentId()).subscribe(
       (data: any) => {
@@ -203,7 +203,7 @@ export class AttendanceComponent implements OnInit {
       arr[entry[0] - 1] = entry[1];
     }
     this.attendanceOptions.series[0].data = arr;
-    this.cdr.detectChanges();
+    
   }
 
   public setLeavesData() {
@@ -214,6 +214,6 @@ export class AttendanceComponent implements OnInit {
       arr[entry[0] - 1] = entry[1];
     }
     this.attendanceOptions.series[2].data = arr;
-    this.cdr.detectChanges();
+    
   }
 }

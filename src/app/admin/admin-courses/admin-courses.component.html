@@ -23,7 +23,7 @@
                                 <div class="admin-subject_name_card">
                                     <div class="admin-sub-left">
                                         <div class="admin-subject-image">
-                                            <img [src]="imageUrl+course.technologyStack?.imageName">
+                                            <img [src]="imageUrl+course.technologyStack.imageName">
                                         </div>
                                         <div class="subject-details">
                                             <h3 class="subject_heading txt-dark mb-0">{{course.courseName}}</h3>
@@ -219,7 +219,7 @@
                                             </div>
                                         </div> -->
                                         <div class="col-md-12 mb_18">
-                                            <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{course.technologyStack?.technologyName}}</h6>
+                                            <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{course.technologyStack.technologyName}}</h6>
                                             <div class="all-course-images d-flex flex-wrap">
                                                 <div class="add-course-img" *ngFor="let image of techImages">
                                                     <img [src]="imageUrl+image.imageName"  alt="" (click)="course.technologyStack = image" (click)="imageName = image.technologyName">
