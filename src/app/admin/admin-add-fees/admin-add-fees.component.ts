@@ -98,7 +98,7 @@ export class AdminAddFeesComponent implements OnInit {
         })
         Toast.fire({
           icon: 'success',
-          title: 'Registration success !!'
+          title: 'Fees Add success !!'
         }).then(e => {
           this.fees = new Fees
           this.router.navigate(['/admin/fees']);

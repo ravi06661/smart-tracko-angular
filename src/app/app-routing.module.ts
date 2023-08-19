@@ -57,6 +57,7 @@ import { AdminAddFeesComponent } from './admin/admin-add-fees/admin-add-fees.com
 import { AdminFeesPendingComponent } from './admin/admin-fees-pending/admin-fees-pending.component';
 import { AdminFeesPayComponent } from './admin/admin-fees-pay/admin-fees-pay.component';
 import { AdminFeesCompletedListComponent } from './admin/admin-fees-completed-list/admin-fees-completed-list.component';
+import { AdminEditFeesComponent } from './admin/admin-edit-fees/admin-edit-fees.component';
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
@@ -94,6 +95,7 @@ const routes: Routes = [
       {path:'leaverequest',component:AdminLeaveRequestComponent,pathMatch:'full'},
       {path:'fees',component:AdminFeesComponent,pathMatch:'full'},
       {path:'addfees',component:AdminAddFeesComponent,pathMatch:'full'},
+      {path:'editfees/:feesId',component:AdminEditFeesComponent,pathMatch:'full'},
       {path:'pendingfees',component:AdminFeesPendingComponent,pathMatch:'full'},
       {path:'payfees',component:AdminFeesPayComponent,pathMatch:'full'},
       {path:'feescompletedlist',component:AdminFeesCompletedListComponent,pathMatch:'full'},

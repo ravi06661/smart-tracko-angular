@@ -59,178 +59,26 @@
                 <th scope="col">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let fees of feeses">
               <tr>
                 <td class="d-flex align-items-center" style="gap:5px;">
                   <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
+                    <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
                   </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
+                  <h5 class="font-13 font-500 mb-0">{{fees.student.fullName}}<br>
                   </h5>
                 </td>
-                <td>469</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>5000</td>
-                <td>02-12-2022</td>
+                <td>{{fees.student.studentId}}</td>
+                <td>{{fees.course.courseName}}</td>
+                <td>{{fees.student.mobile}}</td>
+                <td>{{fees.finalFees}}</td>
+                <td>{{fees.feesPaid}}</td>
+                <td>{{fees.remainingFees}}</td>
+                <td>{{fees.updatedDate}}</td>
                 <td class="warning font-500" data-bs-toggle="modal"
-                data-bs-target="#pay-modal">Pay Now</td>    
-                <td><a href="admin_fees.html"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>469</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>5000</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal"
-                data-bs-target="#pay-modal">Pay Now</td>    
-                <td><a href="admin_fees.html"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>469</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>5000</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal"
-                data-bs-target="#pay-modal">Pay Now</td>    
-                <td><a href="admin_fees.html"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>469</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>5000</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal"
-                data-bs-target="#pay-modal">Pay Now</td>    
-                <td><a href="admin_fees.html"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>469</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>5000</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal"
-                data-bs-target="#pay-modal">Pay Now</td>    
-                <td><a href="admin_fees.html"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>469</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>5000</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal"
-                data-bs-target="#pay-modal">Pay Now</td>    
-                <td><a href="admin_fees.html"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>469</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>5000</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal"
-                data-bs-target="#pay-modal">Pay Now</td>    
-                <td><a href="admin_fees.html"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>469</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>5000</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal"
-                data-bs-target="#pay-modal">Pay Now</td>    
-                <td><a href="admin_fees.html"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                  </h5>
-                </td>
-                <td>469</td>
-                <td>UI/UX Designer</td>
-                <td>wadewarren123@gmail.com</td>
-                <td>7452136500</td>
-                <td>8500</td>
-                <td>5000</td>
-                <td>02-12-2022</td>
-                <td class="warning font-500" data-bs-toggle="modal"
-                data-bs-target="#pay-modal">Pay Now</td>    
-                <td><a href="admin_fees.html"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
-              </tr>                
+                data-bs-target="#pay-modal" (click)="getFeesById(fees.feesId)">Pay Now</td>    
+                <td><a routerLink="/admin/editfees/{{fees.feesId}}"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
+              </tr>            
             </tbody>
           </table>
         </div>
@@ -268,31 +116,31 @@
                           <div class="row">
 
                               <div class="col-md-12">
-                                  <p class="mb-1">Your Remaining Amount is: <span class="text-danger">5500/-</span> </p>
+                                  <p class="mb-1">Your Remaining Amount is: <span class="text-danger">{{fees.remainingFees}}/-</span> </p>
                               </div>
 
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Pay Amount</label>
                                   <div class="input_icon position-relative">
-                                      <input type="text" id="" name="" class="form-control input_text"
-                                          placeholder="Enter Pay Amount">
+                                      <input type="text" id="feesPayAmount" name="feesPayAmount" class="form-control input_text"
+                                          placeholder="Enter Pay Amount" [(ngModel)]="feesPays.feesPayAmount">
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Date</label>
                                   <div class="input_icon position-relative">
-                                      <input type="date" id="" name="" class="form-control input_text">
+                                      <input type="date" id="payDate" name="payDate" class="form-control input_text" [(ngModel)]="feesPays.payDate">
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Reciept Number</label>
                                   <div class="input_icon position-relative">
-                                      <input type="text" id="" name="" class="form-control input_text" placeholder="Dollop14709979">
+                                      <input type="text" id="recieptNo" name="recieptNo" class="form-control input_text" placeholder="Dollop14709979" [(ngModel)]="feesPays.recieptNo">
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Description Box</label>
-                                  <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3" placeholder="Start Typing....."></textarea>
+                                  <textarea name="description" class="form-control text_area" id="exampleFormControlTextarea1" rows="3" placeholder="Start Typing....." [(ngModel)]="feesPays.description"></textarea>
                               </div>
 
 
@@ -301,9 +149,9 @@
                       <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                           <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                               aria-label="Close">Cancel</button>
-                          <a href="admin_fees_pending_list.html">
-                              <button type="button" class="apply_modal_btn font-15 font-500">Submit</button>
-                          </a>
+                          
+                              <button type="button" class="apply_modal_btn font-15 font-500" (click)="feesPay()" data-bs-dismiss="modal" aria-label="Close">Submit</button>
+                          
                       </div>
 
                   </div>

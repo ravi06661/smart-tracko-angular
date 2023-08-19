@@ -81,6 +81,7 @@ import { AdminFeesPendingComponent } from './admin/admin-fees-pending/admin-fees
 import { AdminFeesPayComponent } from './admin/admin-fees-pay/admin-fees-pay.component';
 import { AdminFeesCompletedListComponent } from './admin/admin-fees-completed-list/admin-fees-completed-list.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AdminEditFeesComponent } from './admin/admin-edit-fees/admin-edit-fees.component';
 
 
 
@@ -146,6 +147,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AdminFeesPendingComponent,
     AdminFeesPayComponent,
     AdminFeesCompletedListComponent,
+    AdminEditFeesComponent,
    
        
  
