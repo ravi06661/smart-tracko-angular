@@ -8,7 +8,7 @@ export class Batch {
 	batchTiming:any ;
 	batchName:string = '';
 	batchDetails:string = '';
-	technologyStack:TechnologyStack | undefined;
+	technologyStack:TechnologyStack = new TechnologyStack;
 	isDeleted = false;
 	isActive = true;
 	

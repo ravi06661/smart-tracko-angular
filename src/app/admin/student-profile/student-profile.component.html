@@ -46,7 +46,7 @@
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button"
-              role="tab" aria-controls="contact" aria-selected="false" (click)="getStudentOverAllAttendancesAndLeaves()">Attendance</button>
+              role="tab" aria-controls="contact" aria-selected="false" (click)="getStudentOverAllAttendancesAndLeaves()" (click)="getStudentLeaves()">Attendance</button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="profile-info-tab" data-bs-toggle="tab" data-bs-target="#profile_info"
@@ -372,42 +372,6 @@
                     <td>Paid on 1 Jan, 2023</td>
                     <td class="text_light_blue">View Details</td>
                   </tr>
-                  <tr>
-                    <td>1/6</td>
-                    <td>10,000</td>
-                    <td>1 Jan, 2023</td>
-                    <td class="over_due_color">Over Due</td>
-                    <td class="text_light_blue">View Details</td>
-                  </tr>
-                  <tr>
-                    <td>1/6</td>
-                    <td>10,000</td>
-                    <td>1 Jan, 2023</td>
-                    <td>Due on 1 Jan, 2023</td>
-                    <td class="text_light_blue">View Details</td>
-                  </tr>
-                  <tr>
-                    <td>1/6</td>
-                    <td>10,000</td>
-                    <td>1 Jan, 2023</td>
-                    <td>Paid on 1 Jan, 2023</td>
-                    <td class="text_light_blue">View Details</td>
-                  </tr>
-                  <tr>
-                    <td>1/6</td>
-                    <td>10,000</td>
-                    <td>1 Jan, 2023</td>
-                    <td>Paid on 1 Jan, 2023</td>
-                    <td class="text_light_blue">View Details</td>
-                  </tr>
-                  <tr>
-                    <td>1/6</td>
-                    <td>10,000</td>
-                    <td>1 Jan, 2023</td>
-                    <td>Paid on 1 Jan, 2023</td>
-                    <td class="text_light_blue">View Details</td>
-                  </tr>
-
                 </tbody>
               </table>
             </div>
@@ -486,10 +450,16 @@
                   <div class="col-md-4">
                       <h3 class="admin-title font-17 font-600 secondary position-relative">Attendance Overview</h3>
                       <div class="attendance-area position-relative mb_20">
-                       <div class="attendance-chart rounded-pill m-auto"> </div>
-                       <span class="present-value text_gray font-12 font-600 position-absolute">Present</span>
-                       <span class="absent-value text_gray font-12 font-600 position-absolute">Absent</span>
-                       <span class="leave-value text_gray font-12 font-600 position-absolute">On Leave</span>
+                        <div id="chart">
+                          <apx-chart
+                            [series]="chartOptions.series"
+                            [chart]="chartOptions.chart"
+                            [labels]="chartOptions.labels"
+                            [responsive]="chartOptions.responsive"
+                            [legend]="chartOptions.legend"
+                            [colors]="chartOptions.colors"
+                          ></apx-chart>
+                        </div>
                       </div>
 
                     <div class="attendance_dropdown d-flex justify-content-between align-items-center">
@@ -497,21 +467,48 @@
                      <div class="right-side-dropdown-btn d-flex">
                       <div class="dropdown">
                           <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Month
+                            {{leaveMonth}}
                           </a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">January</a></li>
-                            <li><a class="dropdown-item" href="#">February</a></li>
-                            <li><a class="dropdown-item" href="#">March</a></li>
-                            <li><a class="dropdown-item" href="#">April</a></li>
-                            <li><a class="dropdown-item" href="#">May</a></li>
-                            <li><a class="dropdown-item" href="#">June</a></li>
-                            <li><a class="dropdown-item" href="#">July</a></li>
-                            <li><a class="dropdown-item" href="#">August</a></li>
-                            <li><a class="dropdown-item" href="#">September</a></li>
-                            <li><a class="dropdown-item" href="#">October</a></li>
-                            <li><a class="dropdown-item" href="#">November </a></li>
-                            <li><a class="dropdown-item" href="#">December </a></li>
+                          <ul class="dropdown-menu leaves_dropdown">
+                            <li><a class="dropdown-item" (click)="getStudentLeaves()">All</a></li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(1)">January</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(2)">February</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(3)">March</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(4)">April</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(5)">May</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(6)">June</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(7)">July</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(8)">August</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(9)">September</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(10)">October</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(11)">November
+                              </a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" (click)="getLeavesFilter(12)">December
+                              </a>
+                            </li>
                           </ul>
                         </div>
 
@@ -519,77 +516,30 @@
                     </div>
 
                     <div class="leaves_description">
-                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                      <h3 class="font-21 font-600 secondary position-relative" *ngIf="leavesList.length == 0">
+                        NO LEAVES FOUND !!!
+                      </h3>
+                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2" *ngFor="let leave of leavesList">
                         <div class="leaves d-flex align-items-center position-relative justify-content-between">
                           <div class="leaves_dec">
-                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
+                            <h2 class="font-13 font-500 text-black mb-0" *ngIf="leave.leaveType.leaveTypeId == 2">CL 4 Days</h2>
+                            <h2 class="font-13 font-500 text-black mb-0" *ngIf="leave.leaveType.leaveTypeId == 1">CL 4 Days</h2>
+                            <h2 class="font-11 font-500 text-black java mtb_2">{{ leave.leaveDate | date : "dd/MM/YYYY" }}-{{
+                              leave.leaveEndDate | date : "dd/MM/YYYY"
+                              }}</h2>
+                            <h3 class="font-11 font-400 text-black">{{ leave.leaveReason }}</h3>
                           </div>
                           <div class="leaves_right d-flex gap_24 align-items-center">
-                            <h5 class="warning font-13 font-500 mb-0">Deny</h5>
-                          <h3 class="active_approved_btn font-13 font-400 mb-0 border-radius12 text-light" style="padding: 6px 10px;">Approved</h3>
+                            <h3 class="Approved ms-auto font-13 font-400" *ngIf="leave.leaveStatus == 0">
+                              Pending
+                            </h3>
+                            <h3 class="Approved ms-auto font-13 font-400" *ngIf="leave.leaveStatus == 1">
+                              Approved
+                            </h3>
+                            <h3 class="Approved ms-auto font-13 font-400" *ngIf="leave.leaveStatus == 2">
+                              Declined
+                            </h3>
                           </div>
-                        </div>
-                      </div>
-                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                        <div class="leaves d-flex align-items-center position-relative">
-                          <div class="leaves_dec">
-                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                          </div>
-                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                        </div>
-                      </div>
-                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                        <div class="leaves d-flex align-items-center position-relative">
-                          <div class="leaves_dec">
-                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                          </div>
-                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                        </div>
-                      </div>
-                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                        <div class="leaves d-flex align-items-center position-relative">
-                          <div class="leaves_dec">
-                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                          </div>
-                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                        </div>
-                      </div>
-                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                        <div class="leaves d-flex align-items-center position-relative">
-                          <div class="leaves_dec">
-                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                          </div>
-                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                        </div>
-                      </div>
-                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                        <div class="leaves d-flex align-items-center position-relative">
-                          <div class="leaves_dec">
-                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                          </div>
-                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
-                        </div>
-                      </div>
-                      <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                        <div class="leaves d-flex align-items-center position-relative">
-                          <div class="leaves_dec">
-                            <h2 class="font-13 font-500 text-black mb-0">CL 4 Days</h2>
-                            <h2 class="font-11 font-500 text-black java mtb_2">23/03/2023 - 26/03/2023</h2>
-                            <h3 class="font-11 font-400 text-black">For Brother’s Wedding</h3>
-                          </div>
-                          <h3 class="Approved ms-auto font-13 font-400">Approved</h3>
                         </div>
                       </div>
                     </div>

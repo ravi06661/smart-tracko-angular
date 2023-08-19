@@ -25,6 +25,7 @@ export class CalenderComponent {
 
   @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions: Partial<ChartOptions>;
+  today = new Date();
   currentMonth: number;
   currentYear: number;
   months: string[];
@@ -32,7 +33,7 @@ export class CalenderComponent {
   Present: number[] = [];
   Absent: number[] = [];
   Leaves: number[] = [];
-
+  status:boolean=true;
   constructor(private studentService: StudentService, private loginService: LoginService,private cdr: ChangeDetectorRef) {
     this.currentMonth = new Date().getMonth();
     this.currentYear = new Date().getFullYear();
@@ -84,13 +85,16 @@ export class CalenderComponent {
 
 
   next(): void {
+    this.status = ((this.today.getFullYear() == this.currentYear)&&(this.today.getMonth() == this.currentMonth+1)?true:false);
     this.currentYear = (this.currentMonth === 11) ? this.currentYear + 1 : this.currentYear;
     this.currentMonth = (this.currentMonth + 1) % 12;
     this.getStudentCalenderData(this.currentMonth + 1, this.currentYear);
     this.showCalendar(this.currentMonth, this.currentYear);
+
   }
 
   previous(): void {
+    this.status = false
     this.currentYear = (this.currentMonth === 0) ? this.currentYear - 1 : this.currentYear;
     this.currentMonth = (this.currentMonth === 0) ? 11 : this.currentMonth - 1;
     this.getStudentCalenderData(this.currentMonth + 1, this.currentYear);
@@ -188,5 +192,6 @@ export class CalenderComponent {
   public getChartData() {
     this.chartOptions.series = [ this.Present.length,this.Absent.length, this.Leaves.length]
   }
+
 
 }

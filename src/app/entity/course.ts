@@ -14,5 +14,5 @@ export class Course {
 	public  createdDate:Date | undefined;
 	public  updatedDate:Date | undefined;
     public  isDeleted=false;
-    public  technologyStack:TechnologyStack | undefined;
+    public  technologyStack:TechnologyStack = new TechnologyStack;
 }
