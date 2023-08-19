@@ -1,7 +1,10 @@
 export class ChapterQuizeQuestion {
   public questionId:number=0
-  public options:[]=[]
-  public correctOption:string | undefined
-  public questionImage:string | undefined
-  public questionContent:string | undefined
+  public option1:string=''
+  public option2:string=''
+  public option3:string=''
+  public option4:string=''
+  public correctOption:string =''
+  public questionImage:string =''
+  public questionContent:string =''
 }

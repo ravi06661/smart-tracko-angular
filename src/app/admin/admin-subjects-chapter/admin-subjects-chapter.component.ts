@@ -35,12 +35,13 @@ export class AdminSubjectsChapterComponent {
   }
   public addChapter() {
     this.chapterService.addChapter(this.subjectId, this.chapterUpdate.chapterName).subscribe(
-      (data) => {
-        this.message = "Success..";
-        this.chapterUpdate = new Chapter();
-      },
       (error) => {
         this.message = 'Failed..'
+      },
+      (data) => {
+        this.message = 'Success..';
+        this.chapterUpdate = new Chapter();
+        this.getAllSubjectChapter();
       }
     )
   }
@@ -59,8 +60,8 @@ export class AdminSubjectsChapterComponent {
     this.message = ''
   }
   public reload() {
-    this.chapterUpdate = new Chapter();
     this.message = ''
+    this.chapterUpdate = new Chapter();
     this.getAllSubjectChapter();
   }
 

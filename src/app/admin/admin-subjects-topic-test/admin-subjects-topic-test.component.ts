@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { relativeTimeThreshold } from 'moment';
-import { Chapter } from 'src/app/entity/chapter';
+
 import { ChapterContent } from 'src/app/entity/chapter-content';
-import { Subject } from 'src/app/entity/subject';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
-import { SubjectService } from 'src/app/service/subject.service';
-
+import { MyUploadAdapter } from 'src/app/entity/my-upload-adapter';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-admin-subjects-topic-test',
   templateUrl: './admin-subjects-topic-test.component.html',
@@ -21,6 +19,12 @@ export class AdminSubjectsTopicTestComponent {
   chapterContent: ChapterContent = new ChapterContent();
   erroreMessage: string = ''
   deleteContentId = 0;
+  chapterName: string = ''
+  
+  public Editor = ClassicEditor;
+  static images: File[] = []
+  private editorInstance: any;
+
   constructor(private chapterService: ChapterServiceService, private route: ActivatedRoute, private questionService: QuestionServiceService) { }
   ngOnInit() {
     this.getChapter();
@@ -30,6 +34,7 @@ export class AdminSubjectsTopicTestComponent {
     this.chapterService.getChapterById(this.chapterId).subscribe(
       (data: any) => {
         this.chapter = data.chapterContent;
+        this.chapterName = data.chapterName;
         this.subjectId = data.subject.subjectId;
       }
     )
@@ -40,6 +45,7 @@ export class AdminSubjectsTopicTestComponent {
       (data) => {
         this.erroreMessage = 'Success'
         this.chapterContent = new ChapterContent();
+        this.editorInstance =''
         this.getChapter();
       },
       (error) => {
@@ -71,7 +77,7 @@ export class AdminSubjectsTopicTestComponent {
     this.chapterService.getChapterContent(this.chapterId, contentId).subscribe(
       (data) => {
         this.chapterContent = data;
-         console.log(data);
+        console.log(data);
       }
     )
   }
@@ -79,6 +85,7 @@ export class AdminSubjectsTopicTestComponent {
     this.chapterService.deleteContent(this.chapterId, this.deleteContentId).subscribe(
       (data) => {
         this.reload();
+        this.chapterId = 0;
       }
     )
   }
@@ -88,7 +95,11 @@ export class AdminSubjectsTopicTestComponent {
 
   public reload() {
     this.ngOnInit();
-   this.chapterContent = new ChapterContent();
-    this.erroreMessage=''
+    this.chapterContent = new ChapterContent();
+    this.erroreMessage = ''
+  }
+
+  onEditorReady(eventData: any) {
+    this.editorInstance = eventData;
   }
 }
