@@ -18,11 +18,10 @@
         <nav aria-label="breadcrumb" class="font-17 font-600 light-black mb-0 lh-36">
           <ol class="breadcrumb mb-0">
             <li class="breadcrumb-item"><a href="index.html" class="font-17 font-500 gray-light">Home</a></li>
-            <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light">Subjects</a>
+            <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light" routerLink="/admin/subject">Subjects</a>
             </li>
-            <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light">Core
-                Java</a></li>
-            <li class="breadcrumb-item  light-black" aria-current="page">Java- Introduction</li>
+            <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light" routerLink="/admin/subjectchapter/{{subjectId}}">Chapters</a></li>
+            <li class="breadcrumb-item  light-black" aria-current="page">{{chapterName}}</li>
           </ol>
         </nav>
         <a routerLink="/admin/subjectchapter/{{subjectId}}" type="button"
@@ -43,7 +42,7 @@
             </div>
 
           <h3 class="font-17 font-600 dark-black">{{obj.subTitle}}</h3>
-          <h4 class="font-15 font-400 lh-26">{{obj.content}}</h4>
+          <h4 class="font-15 font-400 lh-26"  [innerHTML]="obj.content"></h4>
         </div>
         <a  routerLink="/admin/chapterquiz/{{chapterId}}" type="button" class="back_button font-17 font-700 text-capitalize">Chapter quiz</a>
       </div>
@@ -122,7 +121,10 @@
                         </div>
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Enter Content Here..</label>
-                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6" name="content" placeholder="Start Typing....."  [(ngModel)]="chapterContent.content" ></textarea>
+                            <!-- <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6" name="content" placeholder="Start Typing....."  [(ngModel)]="chapterContent.content" ></textarea> -->
+                            <ckeditor [editor]="Editor" (ready)="onEditorReady($event)" name="content" [(ngModel)]="chapterContent.content">
+                            </ckeditor>
+                           
                         </div>
                     <h6 *ngIf="erroreMessage!=null">{{erroreMessage}}</h6>
                     </div><!-- row -->
@@ -170,7 +172,8 @@
                                     </div>
                                     <div class="col-md-12 mb_18">
                                         <label for="" class="mb_6 font-15 font-500 secondary">Enter Content Here..</label>
-                                        <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6" name="content" placeholder="Start Typing....."  [(ngModel)]="chapterContent.content" ></textarea>
+                                        <ckeditor [editor]="Editor" (ready)="onEditorReady($event)" name="content" [(ngModel)]="chapterContent.content">
+                                        </ckeditor>
                                     </div>
                                 <h6 *ngIf="erroreMessage!=null">{{erroreMessage}}</h6>
                                 </div><!-- row -->

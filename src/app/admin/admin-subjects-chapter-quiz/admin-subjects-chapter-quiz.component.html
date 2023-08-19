@@ -4,7 +4,7 @@
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Core Java</h1>
             <button class="top_profile_sec_btn font-14 font-500 lh-1" data-bs-toggle="modal"
-                data-bs-target="#subject-testques-modal">Add Question</button>
+                data-bs-target="#subject-testques-modal" (click)="reload()">Add Question</button>
         </div>
 
         <app-profile-bar></app-profile-bar>
@@ -38,13 +38,22 @@
 
                     <div class="subject-test-question">
                         <ul class="ps-0 mb-0 list-unstyled">
-                            <li>{{obj.questionContent}}
-                            </li>y
+                            <li [innerHTML]="obj.questionContent">{{obj.questionContent}}
+                            </li>
                         </ul>
                     </div>
 
-                    <div class="subject-test-ques-ans" *ngFor="let obj1 of obj.options">
-                        <p>{{obj1}}</p>
+                    <div class="subject-test-ques-ans" [ngClass]="obj.correctOption==obj.option1?'alert alert-success':''">
+                        <p>A. {{obj.option1}}</p>
+                    </div>
+                    <div class="subject-test-ques-ans" [ngClass]="obj.correctOption==obj.option2?'alert alert-success':''">
+                        <p>A. {{obj.option2}}</p>
+                    </div>
+                    <div class="subject-test-ques-ans" [ngClass]="obj.correctOption==obj.option3?'alert alert-success':''">
+                        <p>A. {{obj.option3}}</p>
+                    </div>
+                    <div class="subject-test-ques-ans" [ngClass]="obj.correctOption==obj.option4?'alert alert-success':''">
+                        <p>A. {{obj.option4}}</p>
                     </div>
                 </div>
             </div>
@@ -70,7 +79,7 @@
     <div class="modal-dialog position-relative leave_modal">
         <div class="modal-content">
             <div class="modal-body">
-                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -23%;">
+                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -23%;" (click)="reload()">
                     <i class="fi fi-rr-cross close_icon"></i>
                 </button>
 
@@ -102,7 +111,7 @@
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add Question</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reload()">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
@@ -111,37 +120,47 @@
                     <div class="row">
                         <div class="col-md-12 mb_18">
                             <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
-                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Start Typing....."></textarea>
+                            <ckeditor [editor]="Editor" (ready)="onEditorReady($event)"  name ="questionContent" [(ngModel)]="question.questionContent"></ckeditor>
                         </div>
                         <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Option-1</h4>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text" placeholder="A- 36.93">
+                                <input type="text" id="" name="option1" class="form-control input_text" placeholder="" [(ngModel)]="question.option1">
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Option-2</h4>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="option2" class="form-control input_text" placeholder="" [(ngModel)]="question.option2">
                             </div>
                         </div>
                         <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Option-3</h4>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text" placeholder="B- 36.93">
+                                <input type="text" id="" name="option3" class="form-control input_text" placeholder="" [(ngModel)]="question.option3">
                             </div>
                         </div>
-                        <div class="col-md-12 mb_18">
+                        <div class="col-md-12  mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Option-4</h4>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text" placeholder="C- 36.93">
+                                <input type="text" id="" name="option4" class="form-control input_text" placeholder=""[(ngModel)]="question.option4">
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12  mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Correct Option </h4>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text" placeholder="D- 36.93">
+                                <input type="text" id="" name="correctOption" class="form-control input_text" placeholder="" [(ngModel)]="question.correctOption">
                             </div>
                         </div>
-
+                        <h6 *ngIf="message!=null">{{message}}</h6>
                     </div><!-- row -->
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close">Cancel</button>
-                    <a href="admin_subjects_chapter_quiz.html">
-                        <button type="button" class="apply_modal_btn font-15 font-500">Save Question</button>
+                        aria-label="Close" (click)="cancel()" >Cancel</button>
+                    <a >
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="addQuestion()">Save Question</button>
                     </a>
                 </div>
 
@@ -160,7 +179,7 @@
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Edit Question</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reload()">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
@@ -169,21 +188,53 @@
                     <div class="row">
                         <div class="col-md-12 mb_18" >
                             <h4 class="sub-heading font-17 font-500 text_gray">Question Content</h4>
-                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"  name="question.questionContent"
-                                placeholder="Start Typing....." [(ngModel)]="question.questionContent"></textarea>
+                            <ckeditor [editor]="Editor" (ready)="onEditorReady($event)" ></ckeditor>
                         </div>
-                        <div class="col-md-12 mb_18" *ngFor="let obj of question.options">
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Option-1</h4>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="obj" class="form-control input_text" placeholder="" [ngModel]="obj">
+                                <input type="text" id="" name="option1" class="form-control input_text" placeholder="" [(ngModel)]="question.option1">
                             </div>
                         </div>
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Option-2</h4>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="option2" class="form-control input_text" placeholder=""  [(ngModel)]="question.option2">
+                            </div>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Option-3</h4>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="option3" class="form-control input_text" placeholder="" [(ngModel)]="question.option3">
+                            </div>
+                            </div>
+                            <div class="col-md-12 mb_18"> <h4 class="sub-heading font-17 font-500 text_gray">Option-4</h4>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="option4" class="form-control input_text" placeholder=""  [(ngModel)]="question.option4">
+                            </div>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Correct Option </h4>
+                            <div class="input_icon position-relative ">
+                                <!-- <input type="text" id="" name="correctOption" class="form-control input_text" placeholder=""  [(ngModel)]="question.correctOption"> -->
+                                <select class="form-select" aria-label="Default select example" id="correctOption" name="correctOption" [(ngModel)]="question.correctOption" >
+                                    <option [value]="question.option1" >{{question.option1}}</option>
+                                    <option [value]="question.option2" >{{question.option2}}</option>
+                                    <option [value]="question.option3" >{{question.option3}}</option>
+                                    <option [value]="question.option4" >{{question.option4}}</option>
+                                  </select>
+                            </div>
+                        </div>
+                        <label for="" class="mb_6 font-17 font-500 secondary">Name</label>
+                       
+                        <h6 *ngif="message!=null" >{{message}}</h6>
                     </div><!-- row -->
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close" (click)="Cancel()">Cancel</button>
-                    <a href="admin_subjects_chapter_quiz.html">
-                        <button type="button" class="apply_modal_btn font-15 font-500">Save Question</button>
+                        aria-label="Close" (click)="cancel()">Cancel</button>
+                    <a  >
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateQuestion()" >Save Question</button>
                     </a>
                 </div>
 
