@@ -46,4 +46,8 @@ export class FeesService {
   public getAllCompletedFeesList(page:number,size:number){
     return this.http.get<Fees[]>(`${this.feesUrl}/feesCompletedList?page=${page}&size=${size}`);
   }
+
+  public updateFeesDetalis(fees:Fees){
+    return this.http.put(`${this.feesUrl}/updateFeesApi`, fees);
+  }
 }

@@ -62,7 +62,7 @@
               <tr>
                 <td class="d-flex align-items-center" style="gap:5px;">
                   <div class="person_image">
-                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
+                    <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
                   </div>
                   <h5 class="font-13 font-500 mb-0">{{fees.student.fullName}} <br>
                   </h5>
@@ -74,7 +74,7 @@
                 <td>{{fees.feesPaid}}</td>
                 <td>{{fees.remainingFees}}</td>
                 <td>{{fees.updatedDate}}</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal">Edit</td>              
+                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal" (click)="getFeesById(fees.feesId)">Edit</td>              
               </tr>
               
 
@@ -112,34 +112,35 @@
                       </div>
 
                       <form action="">
+                      
                           <div class="row">
-
+                                   
                               <div class="col-md-12">
-                                  <p class="mb-1">{{feesPays.fees.remainingFees}}</p>
+                                  <p class="mb-1">Your Remaining Amount is:</p> <h5 style="color: red;">{{fees.remainingFees}}</h5> 
                               </div>
 
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary" >Pay Amount</label>
                                   <div class="input_icon position-relative">
-                                      <input type="text" id="" name="" class="form-control input_text"
-                                          placeholder="Enter Pay Amount">
+                                      <input type="text" id="feesPayAmount" name="feesPayAmount" class="form-control input_text"
+                                          placeholder="Enter Pay Amount" [(ngModel)]="feesPays.feesPayAmount">
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Date</label>
                                   <div class="input_icon position-relative">
-                                      <input type="date" id="" name="" class="form-control input_text">
+                                      <input type="date" id="payDate" name="payDate" class="form-control input_text" [(ngModel)]="feesPays.payDate">
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Reciept Number</label>
                                   <div class="input_icon position-relative">
-                                      <input type="text" id="" name="" class="form-control input_text" placeholder="Dollop14709979">
+                                      <input type="text" id="recieptNo" name="recieptNo" class="form-control input_text" placeholder="Dollop14709979" [(ngModel)]="feesPays.recieptNo">
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Description Box</label>
-                                  <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3" placeholder="Start Typing....."></textarea>
+                                  <textarea class="form-control text_area" name="description" id="exampleFormControlTextarea1" rows="3" placeholder="Start Typing....." [(ngModel)]="feesPays.description"></textarea>
                               </div>
 
 
@@ -148,9 +149,9 @@
                       <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                           <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                               aria-label="Close">Cancel</button>
-                          <a href="admin_fees_pay_list.html">
-                              <button type="button" class="apply_modal_btn font-15 font-500">Update</button>
-                          </a>
+                          <!-- <a href="admin_fees_pay_list.html"> -->
+                              <button type="button"   class="apply_modal_btn font-15 font-500"  (click)="feesPay()" data-bs-dismiss="modal" aria-label="Close">Update</button>
+                          <!-- </a> -->
                       </div>
 
                   </div>
