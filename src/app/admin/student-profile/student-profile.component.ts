@@ -2,9 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment';
 import { ApexNonAxisChartSeries, ApexChart, ApexResponsive, ChartComponent } from 'ng-apexcharts';
+import { PieChart } from 'src/app/charts/pie-chart';
 import { AttendanceLog } from 'src/app/entity/attendance-log';
+import { FeesPay } from 'src/app/entity/fees-pay';
 import { Leaves } from 'src/app/entity/leaves';
 import { StudentDetails } from 'src/app/entity/student-details';
+import { FeesPayService } from 'src/app/service/fees-pay.service';
 import { LeaveService } from 'src/app/service/leave.service';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
@@ -35,36 +38,15 @@ export class StudentProfileComponent implements OnInit{
   attendanceLog:AttendanceLog[] = [];
   leavesList: Leaves[] = [];
   leaveMonth = 'Month';
-
+  feesPay:FeesPay[]=[];
+  pieChart:PieChart = new PieChart();
+  
   constructor(private utilityService:UtilityServiceService,private activateRoute:ActivatedRoute,
-    private studentService:StudentService,private leaveService:LeaveService){
-      this.chartOptions = {
-        series: [33, 33, 33],
-        chart: {
-          width: 300,
-          type: "pie"
-        },
-        colors: ["#5754E5", "#FF4A11", "#F8961E"],
-        legend:{position:'bottom'},
-        labels: ["Present", "Absent", "Leave"],
-        responsive: [
-          {
-            breakpoint: 480,
-            options: {
-              chart: {
-                width: 200
-              },
-            }
-          }
-        ]
-      };
+    private studentService:StudentService,private leaveService:LeaveService,private feesPayService:FeesPayService){
+      this.chartOptions = this.pieChart.chartOptions;
     }
-  
-  
-  
-  
+ 
   ngOnInit(): void {
-    
     this.studentId=this.activateRoute.snapshot.params[('studentId')];
     this.getStudentProfileData();
   }
@@ -131,6 +113,14 @@ export class StudentProfileComponent implements OnInit{
     this.leaveService.getLeavesFiterData(this.studentId,monthNo).subscribe({
       next: (res: any) => {
         this.leavesList = res.leavesData.response;
+      }
+    })
+  }
+
+  public getAllTrasection(){
+    this.feesPayService.getAllTransection(this.studentId).subscribe({
+      next:(data:any)=>{
+        this.feesPay = data
       }
     })
   }

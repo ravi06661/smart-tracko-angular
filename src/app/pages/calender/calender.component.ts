@@ -1,3 +1,4 @@
+import { DonutChart} from './../../charts/donut-chart';
 import { map } from 'rxjs';
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { error } from 'console';
@@ -34,6 +35,8 @@ export class CalenderComponent {
   Absent: number[] = [];
   Leaves: number[] = [];
   status:boolean=true;
+  donutChart:DonutChart = new DonutChart();
+
   constructor(private studentService: StudentService, private loginService: LoginService,private cdr: ChangeDetectorRef) {
     this.currentMonth = new Date().getMonth();
     this.currentYear = new Date().getFullYear();
@@ -42,40 +45,7 @@ export class CalenderComponent {
     this.Present = [];
     this.Absent = [];
     this.Leaves = [];
-
-    this.chartOptions = {
-      series: [75, 20, 5],
-      chart: {
-        width: 320,
-        type: "donut",
-        toolbar: {
-          show: false // Hide the default toolbar
-        }
-      },
-      colors: ["#5754E5", "#FF4A11", "#F8961E"],
-      labels: ["Present", "Absent", "Leaves"],
-      legend: {
-        position: "bottom", 
-      },
-      stroke: {
-        show: false // Set this to false to remove the borders between the series
-      },
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 280
-
-            },
-            legend: {
-              position: 'bottom'
-            }
-          }
-        }
-      ]
-    };
-
+    this.chartOptions = this.donutChart.chartOptions
   }
 
   ngOnInit(): void {
