@@ -42,7 +42,9 @@
                             </li>
                         </ul>
                     </div>
-
+                    <div class="subject-test-ques-ans " >
+                        <img [src]="imageUrl+obj.questionImage" alr="" class="profile_image" id="output" style="width: 80% ;height: 10%">
+                    </div>
                     <div class="subject-test-ques-ans" [ngClass]="obj.correctOption==obj.option1?'alert alert-success':''">
                         <p>A. {{obj.option1}}</p>
                     </div>
@@ -55,10 +57,9 @@
                     <div class="subject-test-ques-ans" [ngClass]="obj.correctOption==obj.option4?'alert alert-success':''">
                         <p>A. {{obj.option4}}</p>
                     </div>
+                   
                 </div>
             </div>
-
-
         </div>
     </div>
     <!-- DASHBOARD END -->
@@ -120,7 +121,14 @@
                     <div class="row">
                         <div class="col-md-12 mb_18">
                             <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
-                            <ckeditor [editor]="Editor" (ready)="onEditorReady($event)"  name ="questionContent" [(ngModel)]="question.questionContent"></ckeditor>
+                            <ckeditor [editor]="Editor" name ="questionContent" [(ngModel)]="question.questionContent"></ckeditor>
+                        </div>
+
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
+                            <div class="input_icon position-relative">
+                                <input type="file"   (change)="handleImageInput($event)" >
+                            </div>
                         </div>
                         <div class="col-md-12 mb_18">
                             <h4 class="sub-heading font-17 font-500 text_gray">Option-1</h4>
@@ -149,9 +157,12 @@
                         </div>
                         <div class="col-md-12  mb_18">
                             <h4 class="sub-heading font-17 font-500 text_gray">Correct Option </h4>
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="correctOption" class="form-control input_text" placeholder="" [(ngModel)]="question.correctOption">
-                            </div>
+                            <select class="form-select" aria-label="Default select example" id="correctOption" name="correctOption" [(ngModel)]="question.correctOption" >
+                                <option [value]="question.option1" >{{question.option1}}</option>
+                                <option [value]="question.option2" >{{question.option2}}</option>
+                                <option [value]="question.option3" >{{question.option3}}</option>
+                                <option [value]="question.option4" >{{question.option4}}</option>
+                              </select>
                         </div>
                         <h6 *ngIf="message!=null">{{message}}</h6>
                     </div><!-- row -->
@@ -188,7 +199,13 @@
                     <div class="row">
                         <div class="col-md-12 mb_18" >
                             <h4 class="sub-heading font-17 font-500 text_gray">Question Content</h4>
-                            <ckeditor [editor]="Editor" (ready)="onEditorReady($event)" ></ckeditor>
+                            <ckeditor [editor]="Editor"  name="questionContent" [(ngModel)]="question.questionContent" ></ckeditor>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
+                            <div class="input_icon position-relative">
+                                <input type="file"  (change)="handleImageInput($event)" >
+                            </div>
                         </div>
                         <div class="col-md-12 mb_18">
                             <h4 class="sub-heading font-17 font-500 text_gray">Option-1</h4>
@@ -225,9 +242,7 @@
                                   </select>
                             </div>
                         </div>
-                        <label for="" class="mb_6 font-17 font-500 secondary">Name</label>
-                       
-                        <h6 *ngif="message!=null" >{{message}}</h6>
+                        <h6 *ngIf="message!=null">{{message}}</h6>
                     </div><!-- row -->
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
