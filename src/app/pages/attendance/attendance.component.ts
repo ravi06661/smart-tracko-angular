@@ -13,6 +13,7 @@ import { ViewEncapsulation } from '@angular/core';
 import { LoginService } from 'src/app/service/login.service';
 import { en } from '@fullcalendar/core/internal-common';
 import { arrayBuffer } from 'stream/consumers';
+import { PresentAbsentLeaveBarChart } from 'src/app/charts/present-absent-leave-bar-chart';
 
 export type ChartOptions = {
   series: any;
@@ -38,7 +39,7 @@ export class AttendanceComponent implements OnInit {
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
 
-  monthCategories: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  monthCategories: string[] = []
   selectedDate: any
   attendances: Attendance[] = [];
   attendance: Attendance = new Attendance();
@@ -53,42 +54,11 @@ export class AttendanceComponent implements OnInit {
   color: string = '';
   presentsMap = new Map<number, number>();
   leavesMap = new Map<number, number>();
+  attendanceChart:PresentAbsentLeaveBarChart = new PresentAbsentLeaveBarChart();
 
   constructor(private cdr: ChangeDetectorRef, private studentService: StudentService, private leaveService: LeaveService, private utilityService: UtilityServiceService, private loginService: LoginService) {
     this.presentsMap = new Map();
-    this.attendanceOptions = {
-      series: [
-        {
-          data: [],
-          name: "Present",
-        },
-        {
-          name: "Absent",
-          data: []
-        },
-        {
-          name: "Leave",
-          data: []
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 334
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: this.monthCategories
-      },
-      colors: ["#5754E5", "#FF4A11", "#F8961E"],
-    };
-
+    this.attendanceOptions = this.attendanceChart.attendanceOptions
   }
 
   ngOnInit(): void {
