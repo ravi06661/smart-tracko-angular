@@ -5,6 +5,8 @@ import { StudentDetails } from 'src/app/entity/student-details';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { ChartComponent } from 'ng-apexcharts';
 import { log } from 'console';
+import { FeesService } from 'src/app/service/fees.service';
+import { an } from '@fullcalendar/core/internal-common';
 
 export type ChartOptions = {
   series: any;
@@ -36,15 +38,15 @@ export class AdminDashboardComponent implements OnInit {
   public feesOptions: Partial<ChartOptions2>;
   students: StudentDetails[] = []
   BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl= this.BASE_URL+'/file/getImageApi/images/'
-  admissionData:[]=[]
-  monthCategories:string[]= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+  imageUrl = this.BASE_URL + '/file/getImageApi/images/'
+  admissionData: [] = []
+  monthCategories: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   years: number[] = [];
-  admissionYear:number = 0;
-  feesYear:number = 0;
-
-
-  constructor(private elementRef: ElementRef, private localst: LocationStrategy, private studentService: StudentService, private utilityService: UtilityServiceService) {
+  admissionYear: number = 0;
+  feesYear: number = 0;
+  admissionMap = new Map<number, number>();
+  feesMap = new Map<number, number>();
+  constructor(private elementRef: ElementRef, private localst: LocationStrategy, private studentService: StudentService, private utilityService: UtilityServiceService, private feesService: FeesService) {
     this.admissinonOptions = {
       series: [
         {
@@ -73,7 +75,7 @@ export class AdminDashboardComponent implements OnInit {
       series: [
         {
           name: "Fees",
-          data: [2, 10, 4, 15, 12, 20, 14, 7, 6, 9, 10, 3]
+          data: []
         }
       ],
       chart: {
@@ -103,6 +105,7 @@ export class AdminDashboardComponent implements OnInit {
     this.preventBackButton();
     this.getNewRegistrationStudents();
     this.getAdmissinonDataByWiseForYear(this.admissionYear);
+    this.getFeesCollectionMonthAndYearWise(2023);
     //this.getAdmissionBarData()
   }
 
@@ -122,27 +125,38 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   public getAdmissinonDataByWiseForYear(year: number) {
-    //this.admissinonOptions.series[0].data = this.admissionData
-    // this.admissinonOptions.xaxis.categories = this.monthCategorie
-    
     this.studentService.getAdmissinonDataByWiseForYear(year).subscribe({
       next: (data: any) => {
-        this.admissionData = data.count;
-        //this.monthCategories = data.months
-        this.admissinonOptions.series.data = data.count;
-        //this.admissinonOptions.xaxis.categories = data.month;
-        this.getAdmissionBarData()
+        this.admissionMap = data
+        this.getAdmissionBarChartData()
       }
     })
   }
 
-  alet(year:number){
+  alet(year: number) {
     console.log(year)
   }
 
-  public getAdmissionBarData() {
-    this.admissinonOptions.series[0].data = this.admissionData
+  public getAdmissionBarChartData() {
+    let arr: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const mapEntries: [number, number][] = Object.entries(this.admissionMap).map(([key, value]) => [parseInt(key), value]);
+    const resultMap: Map<number, number> = new Map<number, number>(mapEntries);
+    for (const entry of resultMap.entries()) {
+      arr[entry[0] - 1] = entry[1];
+    }
+    this.admissinonOptions.series[0].data = arr
     this.admissinonOptions.xaxis.categories = this.monthCategories
+    window.dispatchEvent(new Event('resize'));
+  }
+  public getFessBarData() {
+    let arr: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const mapEntries: [number, number][] = Object.entries(this.feesMap).map(([key, value]) => [parseInt(key), value]);
+    const resultMap: Map<number, number> = new Map<number, number>(mapEntries);
+    for (const entry of resultMap.entries()) {
+      arr[entry[0] - 1] = entry[1];
+    }
+    this.feesOptions.series[0].data = arr
+    this.feesOptions.xaxis.categories = this.monthCategories
     window.dispatchEvent(new Event('resize'));
   }
 
@@ -152,6 +166,15 @@ export class AdminDashboardComponent implements OnInit {
       years.push(year);
     }
     return years;
+  }
+
+  public getFeesCollectionMonthAndYearWise(year: number) {
+    this.feesService.getFeesCollectionMonthAndYearWise(year).subscribe(
+      (data: any) => {
+        this.feesMap = data.body
+        this.getFessBarData();
+      }
+    )
   }
 }
 

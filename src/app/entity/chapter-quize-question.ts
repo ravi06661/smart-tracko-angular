@@ -1,3 +1,5 @@
+import { FILE } from "dns"
+
 export class ChapterQuizeQuestion {
   public questionId:number=0
   public option1:string=''
@@ -7,4 +9,5 @@ export class ChapterQuizeQuestion {
   public correctOption:string =''
   public questionImage:string =''
   public questionContent:string =''
+  public imageIpload: File | undefined;
 }
