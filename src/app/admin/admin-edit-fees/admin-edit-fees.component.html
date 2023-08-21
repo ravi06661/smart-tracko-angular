@@ -9,7 +9,6 @@
     </div>
 
     <!-- DASHBOARD START -->
-
     <div class="scroll_dashboard">
         <div class="assignment-stats">
             <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Edit Fees</h3>
@@ -43,8 +42,8 @@
                     <div class="col-md-4 mb_20">
                         <label for="mobile" class="mb_6 font-17 font-500 secondary">Course</label>
                         <div class="input_icon position-relative">
-                            <input type="text" id="mobile" name="mobile" class="form-control input_text"
-                              placeholder="Enter Mobile No."
+                            <input type="text" id="courseName" name="courseName" class="form-control input_text"
+                              placeholder="Enter Course Name"
                               [(ngModel)]="fees.course.courseName"
                                readonly>
                         </div>
@@ -67,7 +66,7 @@
                         <label for="" class="mb_6 font-17 font-500 secondary">Remainig Fees</label>
                         <div class="input_icon position-relative">
                             <input type="text" id="remainingFees" name="remainingFees" class="form-control input_text"
-                                placeholder="Enter Finial Fees" [(ngModel)]="fees.remainingFees">
+                                placeholder="Enter Finial Fees" [(ngModel)]="fees.finalFees-fees.feesPaid" readonly>
                         </div>
                     </div>
                     
