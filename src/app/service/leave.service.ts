@@ -22,11 +22,11 @@ export class LeaveService {
   }
 
   public getStudentLeaves(id:any){
-    return this.http.get(`${this.leaveUrl}/getStudentLeaves?studentId=${id}&limit=0&offset=30`);
+    return this.http.get(`${this.leaveUrl}/getStudentLeavesById?studentId=${id}&limit=0&offset=30`);
   }
 
   public getLeavesFiterData(id:number,monthNo:number){
-    return this.http.get(`${this.leaveUrl}/studentLeaveMonthFilter?studentId=${id}&monthNo=${monthNo}`)
+    return this.http.get(`${this.leaveUrl}/studentLeaveMonthFilterById?studentId=${id}&monthNo=${monthNo}`)
   }
 
 }

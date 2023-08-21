@@ -32,4 +32,8 @@ export class FeesPayService {
   public feesPayList(page: Number, size: number){
     return this.http.get<FeesPay[]>(`${this.feesUrl}/feesPayList?page=${page}&size=${size}`);
   }
+
+  public getAllTransection(studentId: number) {
+    return this.http.get(`${this.feesUrl}/getAllTransectionsByStudentId?studentId=${studentId}`);
+  }
 }
