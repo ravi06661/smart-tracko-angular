@@ -9,23 +9,33 @@ export class DonutChart {
           }
         },
         colors: ["#5754E5", "#FF4A11", "#F8961E"],
+  
         labels: ["Present", "Absent", "Leaves"],
         legend: {
-          position: "bottom", 
+          position: "bottom", // Show the legend at the bottom
+  
+          // formatter: function (seriesName:any, opts:any) {
+          //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
+          //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
+          //   return seriesName + ": " + percent + "%";
+          //}
         },
         stroke: {
           show: false // Set this to false to remove the borders between the series
         },
         responsive: [
+  
           {
             breakpoint: 480,
             options: {
               chart: {
                 width: 280
   
+  
               },
               legend: {
                 position: 'bottom'
+  
               }
             }
           }

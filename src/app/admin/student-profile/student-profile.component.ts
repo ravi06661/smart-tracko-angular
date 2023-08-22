@@ -21,6 +21,7 @@ export type ChartOptions = {
   labels: any;
   legend:any;
   colors:any;
+  stroke: any;
 };
 
 @Component({
@@ -40,7 +41,7 @@ export class StudentProfileComponent implements OnInit{
   leaveMonth = 'Month';
   feesPay:FeesPay[]=[];
   pieChart:PieChart = new PieChart();
-  
+
   constructor(private utilityService:UtilityServiceService,private activateRoute:ActivatedRoute,
     private studentService:StudentService,private leaveService:LeaveService,private feesPayService:FeesPayService){
       this.chartOptions = this.pieChart.chartOptions;

@@ -7,6 +7,9 @@ import { ChartComponent } from 'ng-apexcharts';
 import { log } from 'console';
 import { FeesService } from 'src/app/service/fees.service';
 import { an } from '@fullcalendar/core/internal-common';
+import { BarChart } from 'src/app/charts/bar-chart';
+import { PieChart } from 'src/app/charts/pie-chart';
+import { DonutChart } from 'src/app/charts/donut-chart';
 
 export type ChartOptions = {
   series: any;
@@ -16,17 +19,12 @@ export type ChartOptions = {
   xaxis: any;
   colors: any;
   yaxis: any;
+  legend: any;
+  responsive: any;
+  labels: any;
+  stroke :any;
 };
 
-export type ChartOptions2 = {
-  series: any;
-  chart: any;
-  dataLabels: any;
-  plotOptions: any;
-  xaxis: any;
-  colors: any;
-  yaxis: any;
-};
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -35,66 +33,39 @@ export type ChartOptions2 = {
 export class AdminDashboardComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent | undefined;
   public admissinonOptions: Partial<ChartOptions>;
-  public feesOptions: Partial<ChartOptions2>;
+  public feesOptions: Partial<ChartOptions>;
+  public feesPieOptions: Partial<ChartOptions>;
+  public attendanceOptions: Partial<ChartOptions>;
   students: StudentDetails[] = []
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/'
   admissionData: [] = []
-  monthCategories: string[] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   years: number[] = [];
   admissionYear: number = 0;
   feesYear: number = 0;
   admissionMap = new Map<number, number>();
   feesMap = new Map<number, number>();
+  admissionBar:BarChart = new BarChart();
+  feesBar:BarChart = new BarChart();
+  pieChart:PieChart = new PieChart();
+  attendanceChart:DonutChart = new DonutChart();
+  totaOnleaves = 0;
+  totalAbsent = 0;
+  totalPresent = 0;
+
   constructor(private elementRef: ElementRef, private localst: LocationStrategy, private studentService: StudentService, private utilityService: UtilityServiceService, private feesService: FeesService) {
-    this.admissinonOptions = {
-      series: [
-        {
-          name: "Student",
-          data: []
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: this.monthCategories
-      },
-      colors: ['#ffffff']
-    };
-    this.feesOptions = {
-      series: [
-        {
-          name: "Fees",
-          data: []
-        }
-      ],
-      chart: {
-        type: "bar",
-        height: 350
-      },
-      plotOptions: {
-        bar: {
-          horizontal: false
-        }
-      },
-      dataLabels: {
-        enabled: false
-      },
-      xaxis: {
-        categories: this.monthCategories
-      },
-      colors: ['#ffffff']
-    };
+    this.admissinonOptions = this.admissionBar.chartOptions
+
+    this.feesOptions = this.feesBar.chartOptions
+    this.feesOptions.series[0].name = 'Fees'
+
+    this.feesPieOptions = this.pieChart.chartOptions
+    this.feesPieOptions.labels = ['Total','Collected','Pending']
+    this.feesPieOptions.colors = ['#49cf9f','#4daaf8','#f6c453']
+
+    this.attendanceOptions = this.attendanceChart.chartOptions
+    this.attendanceChart.chartOptions.colors = ['#49cf9f','#f0845d','#8079ff']
+    this.attendanceChart.chartOptions.labels = ["Present", "Absent", "Leaves"]
 
     this.years = this.generateYearsArray(2000, new Date().getFullYear());
     this.admissionYear = new Date().getFullYear();
@@ -105,7 +76,9 @@ export class AdminDashboardComponent implements OnInit {
     this.preventBackButton();
     this.getNewRegistrationStudents();
     this.getAdmissinonDataByWiseForYear(this.admissionYear);
-    this.getFeesCollectionMonthAndYearWise(2023);
+    this.getFeesCollectionMonthAndYearWise(this.feesYear);
+    this.getAbsents();
+    this.getActiveLeaves();
     //this.getAdmissionBarData()
   }
 
@@ -145,7 +118,6 @@ export class AdminDashboardComponent implements OnInit {
       arr[entry[0] - 1] = entry[1];
     }
     this.admissinonOptions.series[0].data = arr
-    this.admissinonOptions.xaxis.categories = this.monthCategories
     window.dispatchEvent(new Event('resize'));
   }
   public getFessBarData() {
@@ -156,7 +128,6 @@ export class AdminDashboardComponent implements OnInit {
       arr[entry[0] - 1] = entry[1];
     }
     this.feesOptions.series[0].data = arr
-    this.feesOptions.xaxis.categories = this.monthCategories
     window.dispatchEvent(new Event('resize'));
   }
 
@@ -173,6 +144,29 @@ export class AdminDashboardComponent implements OnInit {
       (data: any) => {
         this.feesMap = data.body
         this.getFessBarData();
+      }
+    )
+  }
+
+  public getChartData() {
+    this.attendanceOptions.series = [ this.totalPresent,this.totalAbsent, this.totaOnleaves]
+  }
+
+  public getAbsents() {
+    this.studentService.getTodayStudentAbsentData().subscribe(
+      (data: any) => {
+        this.totalAbsent = data.totalAbsent.length;
+        this.totalPresent = data.totalPresent
+        this.getChartData();
+      }
+    )
+  }
+
+  public getActiveLeaves() {
+    this.studentService.getStudentAtiveLeaves().subscribe(
+      (data: any) => {
+        this.totaOnleaves = data.length;
+        this.getChartData();
       }
     )
   }

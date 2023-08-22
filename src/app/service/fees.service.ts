@@ -35,12 +35,12 @@ export class FeesService {
     return this.http.get(`${this.feesUrl}/findByFeesId?feesId=${feesId}`);
   }
 
-  public searchByName(fullName :string){
-    return this.http.get(`${this.feesUrl}/searchByName?fullName=${fullName}`);
+  public searchByName(fullName :string,status :string){
+    return this.http.get(`${this.feesUrl}/searchByName?fullName=${fullName}&status=${status}`);
   }
 
-  public findByDate(startDate:string,endDate:string){
-    return this.http.get(`${this.feesUrl}/findFeesByDates?startDate=${startDate}&endDate=${endDate}`);
+  public findByDate(startDate:string,endDate:string,status :string){
+    return this.http.get(`${this.feesUrl}/findFeesByDates?startDate=${startDate}&endDate=${endDate}&status=${status}`);
   }
 
   public getAllCompletedFeesList(page:number,size:number){
