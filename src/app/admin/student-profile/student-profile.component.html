@@ -42,7 +42,7 @@
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="payments-tab" data-bs-toggle="tab" data-bs-target="#payments" type="button"
-              role="tab" aria-controls="contact" aria-selected="false">Payments</button>
+              role="tab" aria-controls="contact" aria-selected="false" (click)="getAllTrasection()">Payments</button>
           </li>
           <li class="nav-item" role="presentation">
             <button class="nav-link" id="attendance-tab" data-bs-toggle="tab" data-bs-target="#attendance" type="button"
@@ -358,18 +358,11 @@
                   </tr>
                 </thead>
                 <tbody class="bg-light">
-                  <tr>
-                    <td>1/6</td>
-                    <td>10,000</td>
+                  <tr *ngFor="let fees of feesPay;let i=index">
+                    <td>{{i+1}}/{{feesPay.length}}</td>
+                    <td>{{fees.feesPayAmount}}</td>
                     <td>1 Jan, 2023</td>
-                    <td>Paid on 1 Jan, 2023</td>
-                    <td class="text_light_blue">View Details</td>
-                  </tr>
-                  <tr>
-                    <td>1/6</td>
-                    <td>10,000</td>
-                    <td>1 Jan, 2023</td>
-                    <td>Paid on 1 Jan, 2023</td>
+                    <td>Paid on {{fees.payDate|date:'dd MMM , YYYY'}}</td>
                     <td class="text_light_blue">View Details</td>
                   </tr>
                 </tbody>
@@ -458,6 +451,7 @@
                             [responsive]="chartOptions.responsive"
                             [legend]="chartOptions.legend"
                             [colors]="chartOptions.colors"
+                            [stroke]="chartOptions.stroke"
                           ></apx-chart>
                         </div>
                       </div>

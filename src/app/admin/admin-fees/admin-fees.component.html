@@ -11,11 +11,12 @@
 
     <!-- DASHBOARD START -->
 
-    <div class="scroll_dashboard">
+    <div class="scroll_dashboard mt-4">
 
       <div class="row">
 
         <div class="col-md-12">
+          
           <div class="fees-top-area">
             <h3 class="admin-title font-17 font-600 secondary position-relative mb-0">Fees List</h3>
             <div class="right-side-dropdown-btn d-flex">
@@ -49,46 +50,49 @@
               </div>
             </div>
           </div>
-          <table class="table fees-table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Roll No.</th>
-                <th scope="col">Course</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone Num</th>
-                <th scope="col">Fees</th>
-                <th scope="col">Submit Date</th>
-                <th scope="col">Detail</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let fees of feeses">
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0" >{{fees.student.fullName}}<br>
-                  </h5>
-                </td>
-                <td>{{fees.student.studentId}}</td>
-                <td>{{fees.course.courseName}}</td>
-                <td>{{fees.student.email}}</td>
-                <td>{{fees.student.mobile}}</td>
-                <td>{{fees.finalFees}}</td>
-                <td>{{fees.date}}</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal" (click)="newFees=fees">Detail
-                </td>
-              </tr>
-           
-            </tbody>
-          </table>
-          <mat-paginator *ngIf="feesList>=15"
-            [length]="feesList"
-            [pageSize]="15"
-            aria-label="Select page"
-            (page)="onChangePage($event)">    
-            </mat-paginator>
+          <div class="table_container">
+            <table class="table mb-0">
+              <thead style="background:#EDF9FB;">
+                <tr class="table_heading">
+                  <th scope="col" class="font-15 font-600 secondary">Name</th>
+                <th scope="col" class="font-15 font-600 secondary">Roll No.</th>
+                <th scope="col" class="font-15 font-600 secondary">Course</th>
+                <th scope="col" class="font-15 font-600 secondary">Email</th>
+                <th scope="col" class="font-15 font-600 secondary">Phone Num</th>
+                <th scope="col" class="font-15 font-600 secondary">Fees</th>
+                <th scope="col" class="font-15 font-600 secondary">Submit Date</th>
+                <th scope="col" class="font-15 font-600 secondary">Detail</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let fees of feeses">
+                <tr>
+                  <td class="d-flex align-items-center" style="gap:5px; border-bottom: 0;">
+                    <div class="person_image">
+                      <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
+                    </div>
+                    <h5 class="font-13 font-500 mb-0" >{{fees.student.fullName}}<br>
+                    </h5>
+                  </td>
+                  <td>{{fees.student.studentId}}</td>
+                  <td>{{fees.course.courseName}}</td>
+                  <td>{{fees.student.email}}</td>
+                  <td>{{fees.student.mobile}}</td>
+                  <td>{{fees.finalFees}}</td>
+                  <td>{{fees.date}}</td>
+                  <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal" (click)="newFees=fees">Detail
+                  </td>
+                </tr>
+             
+              </tbody>
+            </table>
+            <mat-paginator *ngIf="feesList>=8"
+              [length]="feesList"
+              [pageSize]="8"
+              aria-label="Select page"
+              (page)="onChangePage($event)">    
+              </mat-paginator>
+          </div>
+          
         </div>
 
       </div>

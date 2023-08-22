@@ -10,12 +10,11 @@
       <div class="admin-dash-attendance">
         <h3 class="admin-title font-17 font-600 secondary position-relative">Attendance</h3>
         <div class="attendance-area position-relative">
-         <div class="attendance-chart rounded-pill m-auto"> </div>
-         <span class="present-value text_gray font-12 font-600 position-absolute">Present</span>
-         <span class="absent-value text_gray font-12 font-600 position-absolute">Absent</span>
-         <span class="leave-value text_gray font-12 font-600 position-absolute">On Leave</span>
-
-
+          <div id="chart" class="chartmargin">
+            <apx-chart [colors]="attendanceOptions.colors" [series]="attendanceOptions.series" [chart]="attendanceOptions.chart"
+              [labels]="attendanceOptions.labels" [responsive]="attendanceOptions.responsive" [legend]="attendanceOptions.legend"
+              [stroke]="attendanceOptions.stroke"></apx-chart>
+          </div>
         </div>
       </div>
 
@@ -53,7 +52,17 @@
       <div class="admin-dash-fees">
         <h3 class="admin-title font-17 font-600 secondary position-relative">Fees</h3>
         <div class="fees-area">
-          <div class="collect-circle"></div>
+          <div id="chart">
+            <apx-chart
+              [series]="feesPieOptions.series"
+              [chart]="feesPieOptions.chart"
+              [labels]="feesPieOptions.labels"
+              [responsive]="feesPieOptions.responsive"
+              [legend]="feesPieOptions.legend"
+              [colors]="feesPieOptions.colors"
+              [stroke]="feesPieOptions.stroke"
+            ></apx-chart>
+          </div>
         </div>
       </div>
 
@@ -99,7 +108,7 @@
         <div class="col-lg-6 col-md-6 mb-0 mb-md-3 mb-0 mb-md-3 ">
           <div class="d-flex justify-content-between align-items-center mb_12">
             <h3 class="admin-title font-17 font-600 secondary position-relative">Fee Collection</h3>
-            <select class="attendance_dropdown1 border-0 font-15 font-500" id="year" name="year" [(ngModel)]="feesYear">
+            <select class="attendance_dropdown1 border-0 font-15 font-500" id="year" name="year" [(ngModel)]="feesYear" (change)="getFeesCollectionMonthAndYearWise(feesYear)" >
               <option *ngFor="let year of years" [value]="year" >{{ year }}</option>
             </select>
             <!-- <div class="dropdown">
