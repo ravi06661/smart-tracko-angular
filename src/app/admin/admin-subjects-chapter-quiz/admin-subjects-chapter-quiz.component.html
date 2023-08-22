@@ -127,7 +127,7 @@
                         <div class="col-md-12 mb_18">
                             <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
                             <div class="input_icon position-relative">
-                                <input type="file"   (change)="handleImageInput($event)" >
+                                <input type="file"   (change)="handleImageInput($event)"   value="image" >
                             </div>
                         </div>
                         <div class="col-md-12 mb_18">
@@ -204,7 +204,7 @@
                         <div class="col-md-12 mb_18">
                             <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
                             <div class="input_icon position-relative">
-                                <input type="file"  (change)="handleImageInput($event)" >
+                                <input type="file"  (change)="handleImageInput($event)" [value]="imageUrl+question.questionImage" >
                             </div>
                         </div>
                         <div class="col-md-12 mb_18">

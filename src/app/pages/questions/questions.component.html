@@ -9,40 +9,22 @@
                 <h6 class="font-17 font-500 light-black mb-0">Time Left: 60:00</h6>
             </div>
             <div class="progressbar">
-                <span class="prosesss complete"></span><span class="prosesss complete"></span><span
-                    class="prosesss complete"></span><span class="prosesss complete"></span><span
-                    class="prosesss complete"></span><span class="prosesss complete"></span><span
-                    class="prosesss complete"></span><span class="prosesss complete"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span><span
-                    class="prosesss"></span><span class="prosesss"></span><span class="prosesss"></span>
+                  <!-- <span class="prosesss complete" *ngIf="index>=0"></span> -->
+                  <span [ngClass]="'prosesss complete'" *ngFor="let obj of questions"></span>
             </div>
             <div class="question_section">
                 <div class="d-flex justify-content-center align-items-center">
-                    <img src="assets/images/temp_img/question.png">
+                    <img [src]="imageUrl+question.questionImage " style="height: 250px; width: 600px;">
                 </div>
                 <div class="question_1 ">
-                    <h5 class="font-17 font-500 txt-dark">In class of 27, the overall weight of the students is 997.
-                        Can you font out the average weight of each student in the class?</h5>
-                    <h5 class="font-17 font-500 mb-0 txt-dark">In class of 27, the overall weight of the students is 997.
-                        Can you font out the average weight of each student in the class?</h5>
+                    <h5 class="font-17 font-500 txt-dark" [innerHTML]="question.questionContent"></h5>
+                 
                 </div>
                 <div class="d-inline-block left position-relative account_option ms-auto">
                     <input class=" d-none" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                     <label class="form-check-label" for="inlineRadio1">
                         <div class="radio-box ">
-                            <p class="font-17 font-600 mb-0 text0"> A-36.93</p>
+                            <p class="font-17 font-600 mb-0 text0"> A- {{question.option1}}</p>
                         </div>
                     </label>
                 </div>
@@ -50,7 +32,7 @@
                     <input class=" d-none" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                     <label class="form-check-label" for="inlineRadio2">
                         <div class="radio-box">
-                            <p class="font-17 font-600 mb-0 text0"> B-36.93 </p>
+                            <p class="font-17 font-600 mb-0 text0"> B- {{question.option2}}</p>
                         </div>
                     </label>
                 </div>
@@ -58,7 +40,7 @@
                     <input class=" d-none" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
                     <label class="form-check-label" for="inlineRadio3">
                         <div class="radio-box">
-                            <p class="font-17 font-600 mb-0 text0"> C-36.93 </p>
+                            <p class="font-17 font-600 mb-0 text0"> C- {{question.option3}} </p>
                         </div>
                     </label>
                 </div>
@@ -66,14 +48,14 @@
                     <input class=" d-none" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
                     <label class="form-check-label" for="inlineRadio4">
                         <div class="radio-box">
-                            <p class="font-17 font-600 mb-0 text0"> D-36.93 </p>
+                            <p class="font-17 font-600 mb-0 text0"> D- {{question.option4}} </p>
                         </div>
                     </label>
                 </div>
 
             </div>
             <div class="question_bottom d-flex justify-content-between align-items-center">
-                <button type="button" class="Previous_btn font-17 font-500 light-info">Previous</button>
+                <button type="button" class="Previous_btn font-17 font-500 light-info" [disabled]="previousButton"   (click)="previousQuestion()">Previous</button>
                 <div class="d-flex flex-column align-items-center">
                     <h4
                         class="ans_details d-flex justify-content-center align-items-center position-relative mb-0 font-15 font-700">
@@ -91,9 +73,10 @@
                         class="not_ans_details d-flex justify-content-center align-items-center position-relative mb-0 font-15 font-700">
                         0</h4>
                     <h5 class="font-13 font-500 txt-dark mb-0 mt-3">Not Answered</h5>
+                    {{index}}
                 </div>
 
-                <button type="button" class="next_btn font-17 font-500 txt-white">Next</button>
+                <button type="button" class="next_btn font-17 font-500 txt-white" [disabled]="nextButton" (click)="nextQuestion()" >Next</button>
             </div>
         </div>
     </div>    

@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { UtilityServiceService } from './utility-service.service';
 import { Profile } from '../entity/profile';
 import { LoginService } from './login.service';
-import { LeaveService } from './leave.service';
 import { TodayLeavesRequest } from '../entity/today-leaves-request';
 import { Observable } from 'rxjs';
 import { StudentDetails } from '../entity/student-details';

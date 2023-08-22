@@ -51,7 +51,6 @@ export class JobAlertService {
   }
 
   searchJobs(data: any, role: string) {
-
     let params = new HttpParams()
     params = params.append('field', data)
     if (role == "student") {

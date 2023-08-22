@@ -9,5 +9,4 @@ export class ChapterQuizeQuestion {
   public correctOption:string =''
   public questionImage:string =''
   public questionContent:string =''
-  public imageIpload: File | undefined;
 }

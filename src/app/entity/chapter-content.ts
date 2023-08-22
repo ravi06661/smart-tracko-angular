@@ -3,5 +3,4 @@ export class ChapterContent {
  public title:string =''
  public subTitle:string =''
  public content:string =''
- 
 }

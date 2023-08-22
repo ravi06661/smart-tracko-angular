@@ -1,108 +1,45 @@
 <div id="main" class="main mycourse_page pb-0">
   <div class="profile d-flex">
-  <h1 class="font-27 font-700 secondary mb-0">Chapter Details</h1>
-  <app-profile-bar></app-profile-bar>
+    <h1 class="font-27 font-700 secondary mb-0">Chapter Details</h1>
+    <app-profile-bar></app-profile-bar>
   </div>
 
   <!-- RESULT START -->
   <div class="d-flex mt_24">
     <div class="main_page">
-        <div class="dashboard_title d-flex justify-content-between align-items-center">
-          <nav aria-label="breadcrumb" class="font-17 font-600 light-black mb-0 lh-36">
-            <ol class="breadcrumb mb-0">
-              <li class="breadcrumb-item"><a routerLink="/student" class="font-17 font-500 gray-light">Home</a></li>
-              <li class="breadcrumb-item" aria-current="page"><a routerLink="/student/study" class="font-17 font-500 gray-light">Study</a></li>
-              <li class="breadcrumb-item" aria-current="page"><a routerLink="/student/chapter" class="font-17 font-500 gray-light">Core Java</a></li>
-              <li class="breadcrumb-item  light-black" aria-current="page">Java- Introduction</li>
-            </ol>
-          </nav>
-          <a routerLink="/student/chapter" type="button"
-            class="back_button font-15 font-500 d-flex justify-content-center align-items-center"><i
-              class="fi fi-rr-arrow-left lh-0"></i>Back</a>
-        </div>
-        <div class="scroll_sec sub_detail-scroll">
-          <div class="sub_details d-flex flex-column" id="updown_btn">
-            <H1 class="font-24 font-600 dark-black">Printf Scanf </H1>
-            <H3 class="font-17 font-600 dark-black">Basic Info1</H3>
-            <h4 class="font-15 font-400 lh-26">if we dont pass the argument for a format specifier in a printf then the
-              value of initialized elements is printed from right to left of there declaration order. Ex: int
-              a=10,b,c=20;
-              printf("%d %d %d"); output: 20 10 garbage2. printf() prints the message and returns the no of printed
-              characters on the calling place. Ex: int a=printf("Hello\n"); and the value of a is 6.3. The arguments of
-              the printf() is processed from right to left. a=1; printf("%d %d %d",a,a=10,a); output: 10 10 14. First
-              argument of printf must be the format string. Format string may contains format specifiers and other
-              characters, format specifiers are replaced by there respective arguments.5. No of printed arguments
-              depends
-              on no of format specifier. printf("%d",10,20,30); output: 106. We can modify the value of constant
-              variable
-              by using scanf. int x=1; scanf("%d",&x); //Enter: 10=> output is 107. scanf function returns the
-              light-infofully readed arguments from the keyboard8. It reads the values from keyboard and stores on the
-              suplied address. Escape Sequence character: It is also known as non-printable character. It doesn't
-              directoly displayed on the monitor. It has a specific meaning. \a: it generates beep sound \b: it moves
-              the
-              cursor previous possition \t: it prints the tab space(8 space) \r: it sets the cursor on begining
-              character
-              of current line. \n: it sets the cursor on begining position of next line. Format Specifier: %c=> to
-              display/read a character %s=> to display/read a string %*s=>* represents the width %.*s=>* represents the
-              no
-              of printinted character from a supplied string printf("%*.*s",5,3,"abcde"); output: abc %i=> We can
-              read/writ a integer supplied in the form of any radix(octal,hexa,dec). %u=> To read/write unsigned integer
-              %o=> Read/write integer supplied in the form of octal %d=> Read/write an integer supplied in the form of
-              decimal no system. %x=> Read/write an integer supplied in the form of hexa decimal no system. %ld=> To
-              read/write a long argument. %f=> To read/write a float value having default precision value is 6. %g=> To
-              read/write a float value. precision depends on value %e=> To read/write a decimal no in the
-              exponent/scientific form. %*X=> * represents the width default preceded char is space. %0*X=> * represents
-              the width default preceded char is zero. %#X=> it also display the radix form.9. Octal literal starts from
-              0.10.Hexa decimal literal starts from 0x.11.sprintf() writes the formatted data into a string.12.scanf
-              stores the value at the supllied address.13.sscanf() reads a string from another string.</h4>
-          </div>
-          <div class="sub_details d-flex flex-column">
-            <H1 class="font-24 font-600 dark-black">Printf Scanf </H1>
-            <H3 class="font-17 font-600 dark-black">Basic Info1</H3>
-            <h4 class="font-15 font-400 lh-26">if we dont pass the argument for a format specifier in a printf then the
-              value of initialized elements is printed from right to left of there declaration order. Ex: int
-              a=10,b,c=20;
-              printf("%d %d %d"); output: 20 10 garbage2. printf() prints the message and returns the no of printed
-              characters on the calling place. Ex: int a=printf("Hello\n"); and the value of a is 6.3. The arguments of
-              the printf() is processed from right to left. a=1; printf("%d %d %d",a,a=10,a); output: 10 10 14. First
-              argument of printf must be the format string. Format string may contains format specifiers and other
-              characters, format specifiers are replaced by there respective arguments.5. No of printed arguments
-              depends
-              on no of format specifier. printf("%d",10,20,30); output: 106. We can modify the value of constant
-              variable
-              by using scanf. int x=1; scanf("%d",&x); //Enter: 10=> output is 107. scanf function returns the
-              light-infofully readed arguments from the keyboard8. It reads the values from keyboard and stores on the
-              suplied address. Escape Sequence character: It is also known as non-printable character. It doesn't
-              directoly displayed on the monitor. It has a specific meaning. \a: it generates beep sound \b: it moves
-              the
-              cursor previous possition \t: it prints the tab space(8 space) \r: it sets the cursor on begining
-              character
-              of current line. \n: it sets the cursor on begining position of next line. Format Specifier: %c=> to
-              display/read a character %s=> to display/read a string %*s=>* represents the width %.*s=>* represents the
-              no
-              of printinted character from a supplied string printf("%*.*s",5,3,"abcde"); output: abc %i=> We can
-              read/writ a integer supplied in the form of any radix(octal,hexa,dec). %u=> To read/write unsigned integer
-              %o=> Read/write integer supplied in the form of octal %d=> Read/write an integer supplied in the form of
-              decimal no system. %x=> Read/write an integer supplied in the form of hexa decimal no system. %ld=> To
-              read/write a long argument. %f=> To read/write a float value having default precision value is 6. %g=> To
-              read/write a float value. precision depends on value %e=> To read/write a decimal no in the
-              exponent/scientific form. %*X=> * represents the width default preceded char is space. %0*X=> * represents
-              the width default preceded char is zero. %#X=> it also display the radix form.9. Octal literal starts from
-              0.10.Hexa decimal literal starts from 0x.11.sprintf() writes the formatted data into a string.12.scanf
-              stores the value at the supllied address.13.sscanf() reads a string from another string.</h4>
-          </div>
-<h5 class="font-24 font-500 secondary mb_20">Ready to test yourself?</h5>
-          <a routerLink="/questions" type="button"
-          class="back_button font-15 font-700">Take a test</a>
-        </div>
+      <div class="dashboard_title d-flex justify-content-between align-items-center">
+        <nav aria-label="breadcrumb" class="font-17 font-600 light-black mb-0 lh-36">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a routerLink="/student" class="font-17 font-500 gray-light">Home</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a routerLink="/student/study"
+                class="font-17 font-500 gray-light">Study</a></li>
+            <li class="breadcrumb-item" aria-current="page"><a routerLink="/student/chapter/{{subjectId}}"
+                class="font-17 font-500 gray-light">Core Java</a></li>
+            <li class="breadcrumb-item  light-black" aria-current="page">{{chapterName}}</li>
+          </ol>
+        </nav>
+        <a routerLink="/student/chapter" type="button"
+          class="back_button font-15 font-500 d-flex justify-content-center align-items-center"><i
+            class="fi fi-rr-arrow-left lh-0"></i>Back</a>
       </div>
-      <a [routerLink]="'#updown_btn'" class="scroll_btn d-flex justify-content-center align-items-center">
-        <img src="assets/images/svg_img/uparrow.svg">
-      </a>
- </div>
+      <div class="scroll_sec sub_detail-scroll">
+        <div class="sub_details d-flex flex-column" id="updown_btn" *ngFor="let obj of chapter">
+          <H1 class="font-24 font-600 dark-black">{{obj.title}}</H1>
+          <H3 class="font-17 font-600 dark-black">{{obj.subTitle}}</H3>
+          <h4 class="font-15 font-400 lh-26">{{obj.content}}</h4>
+        </div>
+
+        <h5 class="font-24 font-500 secondary mb_20">Ready to test yourself?</h5>
+        <a routerLink="/student/questions/{{chapterId}}" type="button" class="back_button font-15 font-700">Take a test</a>
+      </div>
+    </div>
+    <a [routerLink]="'#updown_btn'" class="scroll_btn d-flex justify-content-center align-items-center">
+      <img src="assets/images/svg_img/uparrow.svg">
+    </a>
+  </div>
   <!-- RESULT END -->
 
- <app-right-side-bar></app-right-side-bar>
- 
-<!-- MIDDLE CONTENT END -->
+  <app-right-side-bar></app-right-side-bar>
+
+  <!-- MIDDLE CONTENT END -->
 </div>

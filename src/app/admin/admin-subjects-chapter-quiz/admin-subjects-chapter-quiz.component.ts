@@ -38,6 +38,7 @@ export class AdminSubjectsChapterQuizComponent {
   handleImageInput(event: any) {
     this.question.questionImage = event.target.files[0];
   }
+
   public getAllQuestions() {
     if (this.id) {
       this.questionService.getAllQuestionByChapterId(this.id).subscribe(
@@ -49,11 +50,10 @@ export class AdminSubjectsChapterQuizComponent {
   }
   public deleteQuestion() {
     this.questionService.deleteQuestionById(this.questionId).subscribe(
-      (data) => {
-        this.questionId = 0;
-        this.ngOnInit();
+      (data) => {        
       }, (error) => {
         this.questionId = 0;
+        this.getAllQuestions();
       }
     )
   }
@@ -78,8 +78,7 @@ export class AdminSubjectsChapterQuizComponent {
       }
     )
   }
-
-  public cancel() {
+  public cancel() {    
     this.question = new ChapterQuizeQuestion();
   }
   reload() {
