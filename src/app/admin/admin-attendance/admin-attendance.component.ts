@@ -12,6 +12,7 @@ import { ChartComponent } from "ng-apexcharts";
 import { ViewChild } from "@angular/core";
 import { PresentAndEarlyCheckout } from 'src/app/entity/present-and-early-checkout';
 import * as moment from 'moment';
+import { DonutChart } from 'src/app/charts/donut-chart';
 
 export type ChartOptions = {
   series: any;
@@ -50,50 +51,10 @@ export class AdminAttendanceComponent {
   totalPresent: number = 0;
   totaOnleaves: number = 0;
 
+  attendaceChart:DonutChart = new DonutChart();
+
   constructor(private studentService: StudentService, private utilityService: UtilityServiceService) {
-
-    this.chartOptions = {
-      series: [75, 20, 5],
-      chart: {
-        width: 320,
-        type: "donut",
-        toolbar: {
-          show: false // Hide the default toolbar
-        }
-      },
-      colors: ["#5754E5", "#FF4A11", "#F8961E"],
-
-      labels: ["Present", "Absent", "Leaves"],
-      legend: {
-        position: "bottom", // Show the legend at the bottom
-
-        // formatter: function (seriesName:any, opts:any) {
-        //   const total = opts.w.globals.seriesTotals.reduce((a:any, b:any) => a + b, 0);
-        //   const percent = ((opts.w.globals.series[opts.seriesIndex] / total) * 100).toFixed(2);
-        //   return seriesName + ": " + percent + "%";
-        //}
-      },
-      stroke: {
-        show: false // Set this to false to remove the borders between the series
-      },
-      responsive: [
-
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 280
-
-
-            },
-            legend: {
-              position: 'bottom'
-
-            }
-          }
-        }
-      ]
-    };
+    this.chartOptions = this.attendaceChart.chartOptions
   }
 
 
@@ -119,6 +80,7 @@ export class AdminAttendanceComponent {
       }
     )
   }
+
   public getActiveLeaves() {
     this.studentService.getStudentAtiveLeaves().subscribe(
       (data: any) => {
@@ -128,6 +90,7 @@ export class AdminAttendanceComponent {
       }
     )
   }
+  
   public getTotalStudentTodayLeavesRequest() {
     this.studentService.getTodayLeavesRequest().subscribe(
       (data: any) => {

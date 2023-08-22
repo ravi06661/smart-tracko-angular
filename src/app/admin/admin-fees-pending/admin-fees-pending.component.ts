@@ -22,6 +22,10 @@ export class AdminFeesPendingComponent implements OnInit{
   fees:Fees=new Fees();
   totalNumberOfFeesPay:number=0
   feesId:number=0;
+  startDate='';
+  endDate='';
+  search='';
+  feesList=0
 constructor(private feesPayService:FeesPayService,private router:Router,private route: ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService ){}
 ngOnInit(): void {
   this.getAllfeesPayList(0,15);
@@ -89,4 +93,30 @@ public getFeesById(feesId:number){
   })
 }
 
+public searchByName(){
+
+  if(this.search=='')
+  this.getAllfeesPayList(0,15);
+else{
+  this.feesService.searchByName(this.search,'Pending').subscribe(
+    (data:any)=>{
+      this.feeses=data;
+      this.feesList=data.totalElements;
+    }
+  )
+}
+}
+
+public findByGivenDate(){
+  if(this.startDate=='' && this.endDate == ''){
+    this.getAllfeesPayList(0,15);
+  }else{
+    this.feesService.findByDate(this.startDate,this.endDate,'Pending').subscribe(
+      (data:any)=>{
+        this.feeses=data;
+        this.feesList-data.totalElements
+      }
+    )
+  }
+}
 }

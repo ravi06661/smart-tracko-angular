@@ -40,13 +40,26 @@ export class AdminFeesCompletedListComponent implements OnInit{
     if(this.search=='')
     this.getAllCompletedFeesList(0,15);
   else{
-    this.feesService.searchByName(this.search).subscribe(
+    this.feesService.searchByName(this.search,'Completed').subscribe(
       (data:any)=>{
         this.feeses=data;
         this.feesList=data.totalElements;
       }
     )
   }
-  } 
+  }
+  
+  public findByGivenDate(){
+    if(this.startDate=='' && this.endDate == ''){
+      this.getAllCompletedFeesList(0,15);
+    }else{
+      this.feesService.findByDate(this.startDate,this.endDate,'Completed').subscribe(
+        (data:any)=>{
+          this.feeses=data;
+          this.feesList-data.totalElements
+        }
+      )
+    }
+  }
 
 }

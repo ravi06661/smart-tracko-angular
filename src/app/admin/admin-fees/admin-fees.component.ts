@@ -25,7 +25,7 @@ export class AdminFeesComponent implements OnInit{
   endDate:string=''
   constructor(private studentService:StudentService,private activateRoute:ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService ){}
   ngOnInit(): void {
-   this.getAllStudentFeesList(0,15);
+   this.getAllStudentFeesList(0,8);
    this.feesId=this.activateRoute.snapshot.params[('feesId')];
   }
 
@@ -54,9 +54,9 @@ export class AdminFeesComponent implements OnInit{
   public searchByName(){
 
     if(this.search=='')
-    this.getAllStudentFeesList(0,15);
+    this.getAllStudentFeesList(0,8);
   else{
-    this.feesService.searchByName(this.search).subscribe(
+    this.feesService.searchByName(this.search,'Pending').subscribe(
       (data:any)=>{
         this.feeses=data;
         this.feesList=data.totalElements;
@@ -65,11 +65,15 @@ export class AdminFeesComponent implements OnInit{
   }
   }
   public findByGivenDate(){
-    this.feesService.findByDate(this.startDate,this.endDate).subscribe(
-      (data:any)=>{
-        this.feeses=data;
-        this.feesList-data.totalElements
-      }
-    )
+    if(this.startDate=='' && this.endDate == ''){
+      this.getAllStudentFeesList(0,8);
+    }else{
+      this.feesService.findByDate(this.startDate,this.endDate,'Pending').subscribe(
+        (data:any)=>{
+          this.feeses=data;
+          this.feesList-data.totalElements
+        }
+      )
+    }
   }
 }
