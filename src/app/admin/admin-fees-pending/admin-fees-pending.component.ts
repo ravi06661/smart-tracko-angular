@@ -28,14 +28,14 @@ export class AdminFeesPendingComponent implements OnInit{
   feesList=0
 constructor(private feesPayService:FeesPayService,private router:Router,private route: ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService ){}
 ngOnInit(): void {
-  this.getAllfeesPayList(0,15);
+  this.getAllfeesPayList(0,8);
 }
 
 public getAllfeesPayList(page:Number,size:number){
-  this.feesPayService.feesPayList(page,size).subscribe(
+  this.feesPayService.feesPendingList(page,size).subscribe(
     (data:any)=>{
       this.feeses=data.response;
-      this.totalNumberOfFeesPay=data.totalElements
+      this.feesList=data.totalElements
     }
   )
 }
@@ -44,7 +44,7 @@ public onChangePage(event: any) {
 }
 
 feesPay(){
-  this.feesId = this.route.snapshot.params[('feesId')];
+  // this.feesId = this.route.snapshot.params[('feesId')];
   this.feesPayService.feesPay(this.feesPays).subscribe( 
     (data:any)=>{
       this.feesPays.fees.feesId=data.feesId
@@ -85,6 +85,8 @@ public getFeesById(feesId:number){
   this.feesService.findByFeesId(feesId).subscribe({
     next:(data:any)=>{
      this.fees = data
+     console.log(this.fees);
+     
      this.feesPays.fees =this.fees
      
      
@@ -96,7 +98,7 @@ public getFeesById(feesId:number){
 public searchByName(){
 
   if(this.search=='')
-  this.getAllfeesPayList(0,15);
+  this.getAllfeesPayList(0,8);
 else{
   this.feesService.searchByName(this.search,'Pending').subscribe(
     (data:any)=>{
@@ -109,7 +111,7 @@ else{
 
 public findByGivenDate(){
   if(this.startDate=='' && this.endDate == ''){
-    this.getAllfeesPayList(0,15);
+    this.getAllfeesPayList(0,8);
   }else{
     this.feesService.findByDate(this.startDate,this.endDate,'Pending').subscribe(
       (data:any)=>{

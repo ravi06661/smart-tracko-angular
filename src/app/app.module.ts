@@ -84,6 +84,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AdminEditFeesComponent } from './admin/admin-edit-fees/admin-edit-fees.component';
 import { ReviewComponent } from './pages/review/review.component';
 import { ResultComponent } from './pages/result/result.component';
+import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-submission/admin-assignment-submission.component';
 
 
 
@@ -152,6 +153,7 @@ import { ResultComponent } from './pages/result/result.component';
     AdminEditFeesComponent,
     ReviewComponent,
     ResultComponent,
+    AdminAssignmentSubmissionComponent,
    
        
  

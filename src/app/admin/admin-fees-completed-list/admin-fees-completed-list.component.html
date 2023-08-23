@@ -29,58 +29,58 @@
               </div>
 
               <button class="fees_search_btn font-15 font-500 lh-0 me-2" (click)="findByGivenDate()">Search</button>
+
               <div class="dropdown">
                 <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark d-inline-flex align-items-center"
                   href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="height: 35px;">
                   Status
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" routerLink="/admin/pendingfees">Fees Pending</a></li>
-                    <li><a class="dropdown-item" routerLink="/admin/payfees">Fees Pay</a></li>
-                    <li><a class="dropdown-item" routerLink="/admin/feescompletedlist">Fees Complete</a></li>
+                  <li><a class="dropdown-item" routerLink="/admin/pendingfees">Fees Pending</a></li>
+                  <li><a class="dropdown-item" routerLink="/admin/payfees">Fees Pay</a></li>
+                  <li><a class="dropdown-item" routerLink="/admin/feescompletedlist">Fees Complete</a></li>
                 </ul>
               </div>
             </div>
           </div>
-          
-          <table class="table fees-table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Roll No.</th>
-                <th scope="col">Course</th>
-                <th scope="col">Phone Num</th>
-                <th scope="col">Fees</th>
-                <th scope="col">Date</th>
-                <th scope="col">Status</th>
+          <div class="table_container">
+            <table class="table mb-0">
+              <thead style="background:#EDF9FB;">
+                <tr class="table_heading">
+                <th scope="col" class="font-15 font-600 secondary">Name</th>
+                <th scope="col" class="font-15 font-600 secondary">Roll No.</th>
+                <th scope="col" class="font-15 font-600 secondary">Course</th>
+                <th scope="col" class="font-15 font-600 secondary">Phone Num</th>
+                <th scope="col" class="font-15 font-600 secondary">Fees</th>
+                <th scope="col" class="font-15 font-600 secondary">Date</th>
+                <th scope="col" class="font-15 font-600 secondary">Status</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let fees of feeses">
+                <tr>
+                  <td class="d-flex align-items-center" style="gap:5px; border-bottom: 0;">
+                    <div class="person_image">
+                      <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
+                    </div>
+                    <h5 class="font-13 font-500 mb-0" >{{fees.student.fullName}}<br>
+                    </h5>
+                  </td>
+                  <td>{{fees.student.studentId}}</td>
+                  <td>{{fees.course.courseName}}</td>
+                  <td>{{fees.student.mobile}}</td>
+                  <td>{{fees.finalFees}}</td>
+                  <td>{{fees.date}}</td>
+                  <td class="text-success font-500">Complete</td>           
               </tr>
-            </thead>
-            <tbody *ngFor="let fees of feeses">
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">{{fees.student.fullName}} <br>
-                  </h5>
-                </td>
-                <td>{{fees.student.studentId}}</td>
-                <td>{{fees.course.courseName}}</td>
-                <td>{{fees.student.mobile}}</td>
-                <td>{{fees.finalFees}}</td>
-                <td>{{fees.date}}</td>
-                <td class="text-success font-500">Complete</td>
-              </tr>
-
-              
-            </tbody>
-          </table>
-          <mat-paginator *ngIf="feesList>=15"
-            [length]="feesList"
-            [pageSize]="15"
-            aria-label="Select page"
-            (page)="onChangePage($event)">    
-            </mat-paginator>
+             
+              </tbody>
+            </table>
+            <mat-paginator *ngIf="feesList>=8"
+              [length]="feesList"
+              [pageSize]="8"
+              aria-label="Select page"
+              (page)="onChangePage($event)">    
+              </mat-paginator>
         </div>
 
       </div>

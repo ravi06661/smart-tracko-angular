@@ -60,6 +60,8 @@ import { AdminFeesCompletedListComponent } from './admin/admin-fees-completed-li
 import { AdminEditFeesComponent } from './admin/admin-edit-fees/admin-edit-fees.component';
 import { ResultComponent } from './pages/result/result.component';
 import { ReviewComponent } from './pages/review/review.component';
+import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-submission/admin-assignment-submission.component';
+
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
@@ -93,6 +95,7 @@ const routes: Routes = [
       {path:'assignments',component:AdminAssignmentsComponent,pathMatch:'full'},
       {path:'createassignments',component:AdminCreateAssignmentsComponent,pathMatch:'full'},
       {path:'editassignments',component:AdminEditAssignmentsComponent,pathMatch:'full'},
+      {path:'assignmentsubmission',component:AdminAssignmentSubmissionComponent,pathMatch:'full'},
       {path:'task',component:AdminTaskComponent,pathMatch:'full'},
       {path:'createtask',component:AdminCreateTaskComponent,pathMatch:'full'},
       {path:'edittask',component:AdminEditTaskComponent,pathMatch:'full'},

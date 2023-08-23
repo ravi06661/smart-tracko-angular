@@ -31,43 +31,46 @@
               </div>
 
               <button class="fees_search_btn font-15 font-500 lh-0 me-2" (click)="findByGivenDate()">Search</button>
+
+              <div class="dropdown">
                 <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark d-inline-flex align-items-center"
                   href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="height: 35px;">
                   Status
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" routerLink="/admin/pendingfees">Fees Pending</a></li>
-                    <li><a class="dropdown-item" routerLink="/admin/payfees">Fees Pay</a></li>
-                    <li><a class="dropdown-item" routerLink="/admin/feescompletedlist">Fees Complete</a></li>
+                  <li><a class="dropdown-item" routerLink="/admin/pendingfees">Fees Pending</a></li>
+                  <li><a class="dropdown-item" routerLink="/admin/payfees">Fees Pay</a></li>
+                  <li><a class="dropdown-item" routerLink="/admin/feescompletedlist">Fees Complete</a></li>
                 </ul>
               </div>
             </div>
           </div>
-          <table class="table fees-table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Roll No.</th>
-                <th scope="col">Course</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone Num</th>
-                <th scope="col">Fees Paid</th>
-                <th scope="col">Remaining Fees</th>
-                <th scope="col">Date</th>
-                <th scope="col">Pay Now</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody *ngFor="let fees of feeses">
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">{{fees.student.fullName}}<br>
-                  </h5>
-                </td>
-                <td>{{fees.student.studentId}}</td>
+          <div class="table_container">
+            <table class="table mb-0">
+              <thead style="background:#EDF9FB;">
+                <tr class="table_heading">
+                  <th scope="col" class="font-15 font-600 secondary">Name</th>
+                <th scope="col" class="font-15 font-600 secondary">Roll No.</th>
+                <th scope="col" class="font-15 font-600 secondary">Course</th>
+                <th scope="col" class="font-15 font-600 secondary">Email</th>
+                <th scope="col" class="font-15 font-600 secondary">Phone Num</th>
+                <th scope="col" class="font-15 font-600 secondary">Fees Paid</th>
+                <th scope="col" class="font-15 font-600 secondary">Remaining Fees</th>
+                <th scope="col" class="font-15 font-600 secondary">Date</th>
+                <th scope="col" class="font-15 font-600 secondary">Pay Now</th>
+                <th scope="col" class="font-15 font-600 secondary">Action</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let fees of feeses">
+                <tr>
+                  <td class="d-flex align-items-center" style="gap:5px; border-bottom: 0;">
+                    <div class="person_image">
+                      <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
+                    </div>
+                    <h5 class="font-13 font-500 mb-0" >{{fees.student.fullName}}<br>
+                    </h5>
+                  </td>
+                  <td>{{fees.student.studentId}}</td>
                 <td>{{fees.course.courseName}}</td>
                 <td>{{fees.student.mobile}}</td>
                 <td>{{fees.finalFees}}</td>
@@ -76,10 +79,20 @@
                 <td>{{fees.updatedDate}}</td>
                 <td class="warning font-500" data-bs-toggle="modal"
                 data-bs-target="#pay-modal" (click)="getFeesById(fees.feesId)">Pay Now</td>    
-                <td><a routerLink="/admin/editfees/{{fees.feesId}}"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>
-              </tr>            
-            </tbody>
-          </table>
+                <td><a routerLink="/admin/editfees/{{fees.feesId}}"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>             
+              </tr>
+             
+              </tbody>
+            </table>
+            <mat-paginator *ngIf="feesList>=8"
+              [length]="feesList"
+              [pageSize]="8"
+              aria-label="Select page"
+              (page)="onChangePage($event)">    
+              </mat-paginator>
+
+
+         
         </div>
 
       </div>
