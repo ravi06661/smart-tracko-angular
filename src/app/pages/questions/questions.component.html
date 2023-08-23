@@ -9,8 +9,8 @@
                 <h6 class="font-17 font-500 light-black mb-0">Time Left: 60:00</h6>
             </div>
             <div class="progressbar">
-                  <!-- <span class="prosesss complete" *ngIf="index>=0"></span> -->
-                  <span [ngClass]="'prosesss complete'" *ngFor="let obj of questions"></span>
+                  <span class="prosesss complete" ></span> 
+                  <span [ngClass]="'prosesss '" *ngFor="let obj of questions"></span>
             </div>
             <div class="question_section">
                 <div class="d-flex justify-content-center align-items-center">
@@ -24,7 +24,7 @@
                     <input class=" d-none" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                     <label class="form-check-label" for="inlineRadio1">
                         <div class="radio-box ">
-                            <p class="font-17 font-600 mb-0 text0"> A- {{question.option1}}</p>
+                            <p class="font-17 font-600 mb-0 text0" (click)="questionClick(question.option1,index)"> A- {{question.option1}}</p>
                         </div>
                     </label>
                 </div>
@@ -32,7 +32,7 @@
                     <input class=" d-none" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                     <label class="form-check-label" for="inlineRadio2">
                         <div class="radio-box">
-                            <p class="font-17 font-600 mb-0 text0"> B- {{question.option2}}</p>
+                            <p class="font-17 font-600 mb-0 text0"  (click)="questionClick(question.option2,index)"> B- {{question.option2}}</p>
                         </div>
                     </label>
                 </div>
@@ -40,7 +40,7 @@
                     <input class=" d-none" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
                     <label class="form-check-label" for="inlineRadio3">
                         <div class="radio-box">
-                            <p class="font-17 font-600 mb-0 text0"> C- {{question.option3}} </p>
+                            <p class="font-17 font-600 mb-0 text0" (click)="questionClick(question.option3,index)"> C- {{question.option3}} </p>
                         </div>
                     </label>
                 </div>
@@ -48,7 +48,7 @@
                     <input class=" d-none" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
                     <label class="form-check-label" for="inlineRadio4">
                         <div class="radio-box">
-                            <p class="font-17 font-600 mb-0 text0"> D- {{question.option4}} </p>
+                            <p class="font-17 font-600 mb-0 text0" (click)="questionClick(question.option4,index)"> D- {{question.option4}} </p>
                         </div>
                     </label>
                 </div>

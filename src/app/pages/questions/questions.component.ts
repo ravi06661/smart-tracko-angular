@@ -19,7 +19,10 @@ export class QuestionsComponent {
   imageUrl = this.utilityService.getBaseUrl() + "/file/getImageApi/images/";
   previousButton: boolean = false;
   nextButton: boolean = false;
-  constructor(private utilityService: UtilityServiceService, private questionService: QuestionServiceService, private activateRouter: ActivatedRoute, private subjectService: SubjectService, private chapterService: ChapterServiceService) { }
+  questionClicked = new Map<number, string>();
+  constructor(private utilityService: UtilityServiceService, private questionService: QuestionServiceService, private activateRouter: ActivatedRoute, private subjectService: SubjectService, private chapterService: ChapterServiceService) {
+    this.questionClicked = new Map<number, string>();
+  }
 
   ngOnInit() {
     this.chapterId = this.activateRouter.snapshot.params[('id')];
@@ -37,24 +40,40 @@ export class QuestionsComponent {
   }
 
   public nextQuestion() {
-    if (this.index == this.questions.length-1) {
+    if (this.index == this.questions.length - 1) {
       this.nextButton = true;
     }
     else {
       this.nextButton = false
       this.previousButton = false;
-      this.question = this.questions[this.index=this.index+1]
+      this.question = this.questions[++this.index]
     }
   }
 
   public previousQuestion() {
-    if (this.index ==0) {
+    if (this.index == 0) {
       this.previousButton = true
     }
     else {
       this.previousButton = false;
       this.nextButton = false
-      this.question = this.questions[this.index=this.index-1]
+      this.question = this.questions[--this.index]
     }
   }
+
+  questionClick(option: string, index: number) {
+    console.log('click');
+    
+    if (!this.questionClicked.get(index)) {
+      this.questionClicked.set(index, option);
+    } else {
+      let value = this.questionClicked.get(index);
+      if (value !== undefined) {
+        this.questionClicked.set(index, value);
+      }
+    }
+    console.log('hh',this.questionClicked);
+    
+  }
+
 }
