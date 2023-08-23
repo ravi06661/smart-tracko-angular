@@ -67,7 +67,7 @@
                         <div class="admin-subject_name_card">
                             <div class="admin-sub-left">
                                 <div class="admin-subject-image">
-                                    <img [src]="imageUrl+batch.technologyStack.imageName" alt="">
+                                    <img [src]="imageUrl+batch.subject.technologyStack.imageName" alt="">
                                 </div>
                                 <div class="subject-details">
                                     <h3 class="subject_heading txt-dark mb-0">{{batch.batchName}}</h3>
@@ -169,13 +169,30 @@
                 <form action="">
                     <div class="row">
                    
-                        <div class="col-md-12 mb_18">
+                        <!-- <div class="col-md-12 mb_18">
                             <h6 class="mb-4 font-15 font-500 secondary">Selected Image :- {{imageName}}</h6>
                             <div class="all-course-images d-flex flex-wrap">
                                 <div class="add-course-img" *ngFor="let image of techImages">
                                     <img [src]="imageUrl+image.imageName" alt="" (click)="batchRequest.technologyStack = image.id" (click)=" imageName = image.technologyName ">
                                 </div>
-                            </div> <!-- all-course-images -->
+                            </div>
+                        </div> -->
+                        <h2 class="font-15 font-500 secondary">Subjects</h2>
+                        <div class="all-subjects-list mb_18">
+                            <div class="col-md-12 mb_18" *ngFor="let subject of course.subjects">
+                                <div class="input_icon position-relative input_text checkbox_area">
+                                    <div class="d-flex gap_5 align-items-center">
+                                        <img [src]="imageUrl+subject.technologyStack.imageName" alt="" width="24" height="24">
+                                        <h2 class="font-15 font-500 mb-0 secondary">{{subject.subjectName}}</h2>
+                                    </div>
+                                    <input
+                                    type="radio"
+                                    name="subjects"
+                                    class="choose-subjects"
+                                    (click)="batchRequest.subjectId = subject.subjectId"
+                                    >
+                                </div>
+                            </div>
                         </div>
                        
                         <div class="col-md-12 mb_18">
@@ -240,13 +257,23 @@
 
                 <form action="">
                     <div class="row">
-                        <div class="col-md-12 mb_18">
-                            <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{batch.technologyStack.technologyName}}</h6>
-                            <div class="all-course-images d-flex flex-wrap">
-                                <div class="add-course-img" *ngFor="let image of techImages">
-                                    <img [src]="imageUrl+image.imageName"  alt="" (click)="batch.technologyStack= image" (click)="imageName = image.technologyName">
+                        <h2 class="font-15 font-500 secondary">Subjects</h2>
+                        <div class="all-subjects-list mb_18">
+                            <div class="col-md-12 mb_18" *ngFor="let subject of course.subjects">
+                                <div class="input_icon position-relative input_text checkbox_area">
+                                    <div class="d-flex gap_5 align-items-center">
+                                        <img [src]="imageUrl+subject.technologyStack.imageName" alt="" width="24" height="24">
+                                        <h2 class="font-15 font-500 mb-0 secondary">{{subject.subjectName}}</h2>
+                                    </div>
+                                    <input
+                                    type="radio"
+                                    [checked]="checkSubjectInCourse(subject.subjectId)"
+                                    name="subjects"
+                                    class="choose-subjects"
+                                    (click)="batch.subject = subject"
+                                    >
                                 </div>
-                            </div> <!-- all-course-images -->
+                            </div>
                         </div>
                         
                         <div class="col-md-12 mb_18">

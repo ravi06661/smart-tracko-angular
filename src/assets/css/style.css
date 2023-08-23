@@ -138,6 +138,15 @@ body {
 .bg_attendance {
   background-color: #80E2B3;
 }
+.bg-pending-yellow{
+  background: #f6c453;
+}
+.bg-total-red{
+background: #f0845d;
+}
+.bg-collect-green{
+background: #49cf9f;
+}
 
 /* FONTS SIZE */
 .heading-1 {
@@ -2991,19 +3000,19 @@ table tr td {
 }
 
 .main-inner {
-  height: 400px;
+  min-height: 200px;
   margin-bottom: 20px;
 }
 
 .admin-dash-attendance,
 .admin-dash-fees {
-  width: 25%;
-  min-height: 400px;
+  width: 428px;
+  min-height: 200px;
 }
 
 .admin-dash-assignment {
-  width: 50%;
-  min-height: 400px;
+  width: 428px;
+  min-height: 200px;
 }
 
 .admin-title:before {
@@ -3019,16 +3028,23 @@ table tr td {
 
 /* Assignments  css start */
 .attendance-area,
-.assignment-area,
-.fees-area {
+.assignment-area{
   width: 100%;
-  min-height: 400px;
+  min-height: 200px;
   border-radius: 12px;
   background: #EDF9FB;
   padding: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 20px;
+}
+.fees-area {
+  width: 100%;
+  min-height: 200px;
+  border-radius: 12px;
+  background: #EDF9FB;
+  padding: 12px;
   margin-top: 20px;
 }
 
@@ -3105,7 +3121,7 @@ table tr td {
 }
 
 .pending {
-  /* background: #F6C453; */
+  background: #F6C453;
   width: 15%;
   height: 40px;
 

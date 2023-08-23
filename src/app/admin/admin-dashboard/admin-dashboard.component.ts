@@ -10,6 +10,9 @@ import { an } from '@fullcalendar/core/internal-common';
 import { BarChart } from 'src/app/charts/bar-chart';
 import { PieChart } from 'src/app/charts/pie-chart';
 import { DonutChart } from 'src/app/charts/donut-chart';
+import { FeesPayService } from 'src/app/service/fees-pay.service';
+import { FeesPay } from 'src/app/entity/fees-pay';
+import { Fees } from 'src/app/entity/fees';
 
 export type ChartOptions = {
   series: any;
@@ -45,22 +48,31 @@ export class AdminDashboardComponent implements OnInit {
   feesYear: number = 0;
   admissionMap = new Map<number, number>();
   feesMap = new Map<number, number>();
+
   admissionBar:BarChart = new BarChart();
   feesBar:BarChart = new BarChart();
   pieChart:PieChart = new PieChart();
   attendanceChart:DonutChart = new DonutChart();
+
   totaOnleaves = 0;
   totalAbsent = 0;
   totalPresent = 0;
+  feesPays:FeesPay[]=[];
+  feeses:Fees[]=[];
+  
+  totalFees = 0;
+  collectedFees = 0;
+  pendingFees = 0
 
-  constructor(private elementRef: ElementRef, private localst: LocationStrategy, private studentService: StudentService, private utilityService: UtilityServiceService, private feesService: FeesService) {
+  constructor(private elementRef: ElementRef, private localst: LocationStrategy, private studentService: StudentService, private utilityService: UtilityServiceService, private feesService: FeesService,private feesPayService:FeesPayService) {
+
     this.admissinonOptions = this.admissionBar.chartOptions
 
     this.feesOptions = this.feesBar.chartOptions
     this.feesOptions.series[0].name = 'Fees'
 
     this.feesPieOptions = this.pieChart.chartOptions
-    this.feesPieOptions.labels = ['Total','Collected','Pending']
+    this.feesPieOptions.labels = ['Total','Completed','Pending']
     this.feesPieOptions.colors = ['#49cf9f','#4daaf8','#f6c453']
 
     this.attendanceOptions = this.attendanceChart.chartOptions
@@ -79,7 +91,10 @@ export class AdminDashboardComponent implements OnInit {
     this.getFeesCollectionMonthAndYearWise(this.feesYear);
     this.getAbsents();
     this.getActiveLeaves();
+    this.getAllFeesCollections();
     //this.getAdmissionBarData()
+    this.recentCollection(0,5);
+    this.upcomingDues(0,5);
   }
 
   public preventBackButton() {
@@ -169,6 +184,34 @@ export class AdminDashboardComponent implements OnInit {
         this.getChartData();
       }
     )
+  }
+
+
+  public getAllFeesCollections(){
+    this.feesService.getAllFeesCollection().subscribe({
+      next:(data:any)=>{
+        this.totalFees = data.body.Total
+        this.collectedFees = data.body.Collected
+        this.pendingFees = data.body.Pending
+
+       this.feesPieOptions.series = [data.body.Total,data.body.Collected,data.body.Pending]
+      }
+    })
+
+  public recentCollection(page:Number,size:number){
+    this.feesPayService.feesPayList(page,size).subscribe(
+      (data:any)=>{
+        this.feesPays=data.response;;
+      }
+    )
+  }
+  public upcomingDues(page:Number,size:number){
+    this.feesPayService.feesPendingList(page,size).subscribe(
+      (data:any)=>{
+        this.feeses=data.response;;
+      }
+    )
+
   }
 }
 

@@ -29,11 +29,19 @@ export class FeesPayService {
     return this.http.post(`${this.feesUrl}/feesPay`, params)
   }
 
-  public feesPayList(page: Number, size: number){
-    return this.http.get<FeesPay[]>(`${this.feesUrl}/feesPayList?page=${page}&size=${size}`);
+  public feesPendingList(page: Number, size: number){
+    return this.http.get<FeesPay[]>(`${this.feesUrl}/feesPendingList?page=${page}&size=${size}`);
   }
 
   public getAllTransection(studentId: number) {
     return this.http.get(`${this.feesUrl}/getAllTransectionsByStudentId?studentId=${studentId}`);
+  }
+
+  public feesPayList(page: Number, size: number){
+    return this.http.get<FeesPay[]>(`${this.feesUrl}/feesPayList?page=${page}&size=${size}`);
+  }
+
+  public findByPayId(payId:number){
+    return this.http.get(`${this.feesUrl}/findByPayId?payId=${payId}`);
   }
 }

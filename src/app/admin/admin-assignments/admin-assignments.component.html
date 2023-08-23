@@ -1,10 +1,10 @@
 <div id="main" class="main dashboard_page">
-    <div class="profile d-flex mb-4">
+    <div class="profile d-flex">
 
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Assignments</h1>
             <button class="top_profile_sec_btn font-14 font-500" data-bs-toggle="modal"
-                data-bs-target="#exampleModal1">Create New</button>
+                data-bs-target="#create_assignment_modal">Create New</button>
         </div>
 
         <app-profile-bar></app-profile-bar>
@@ -53,39 +53,42 @@
                 </div>
                 <div class="attendance_dropdown d-flex justify-content-between align-items-center">
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Active Assignments</h3>
-                   <div class="right-side-dropdown-btn d-flex">
-                    <div class="dropdown">
-                        <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Course
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">January</a></li>
-                          <li><a class="dropdown-item" href="#">February</a></li>
-                          <li><a class="dropdown-item" href="#">March</a></li>
-                        </ul>
-                      </div>
-                      <div class="dropdown">
-                          <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Subject
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">January</a></li>
-                            <li><a class="dropdown-item" href="#">February</a></li>
-                            <li><a class="dropdown-item" href="#">March</a></li>
-                          </ul>
+                    <div class="right-side-dropdown-btn d-flex">
+                        <div class="dropdown">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Course
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                            </ul>
                         </div>
                         <div class="dropdown">
-                          <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Status
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">January</a></li>
-                            <li><a class="dropdown-item" href="#">February</a></li>
-                            <li><a class="dropdown-item" href="#">March</a></li>
-                          </ul>
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Subject
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                            </ul>
                         </div>
-                   </div>
-                  </div>
+                        <div class="dropdown">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Status
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="table_container">
                     <table class="table mb-0 admin-table">
                         <thead style="background:#EDF9FB;">
@@ -104,7 +107,7 @@
                                     <h5 class="font-15 font-500 mb-0">Hello World!</h5>
                                     <p class="text_gray font-13 font-400 mb-0">Core Java - Java</p>
                                 </td>
-                                <td class="txt_color_blue">Active</td>
+                                <td class="text_light_blue">Active</td>
                                 <td class="txt_color_purple">214</td>
                                 <td class="txt_color_light_green">126</td>
                                 <td class="txt_color_yellow">72</td>
@@ -115,7 +118,7 @@
                                     <h5 class="font-15 font-500 mb-0">Hello World!</h5>
                                     <p class="text_gray font-13 font-400 mb-0">Core Java - Java</p>
                                 </td>
-                                <td class="txt_color_blue">Active</td>
+                                <td class="text_light_blue">Active</td>
                                 <td class="txt_color_purple">214</td>
                                 <td class="txt_color_light_green">126</td>
                                 <td class="txt_color_yellow">72</td>
@@ -126,13 +129,13 @@
                                     <h5 class="font-15 font-500 mb-0">Hello World!</h5>
                                     <p class="text_gray font-13 font-400 mb-0">Core Java - Java</p>
                                 </td>
-                                <td class="txt_color_blue">Active</td>
+                                <td class="text_light_blue">Active</td>
                                 <td class="txt_color_purple">214</td>
                                 <td class="txt_color_light_green">126</td>
                                 <td class="txt_color_yellow">72</td>
                                 <td class="txt_color_orange">16</td>
                             </tr>
-                            
+
                         </tbody>
                     </table>
                 </div>
@@ -140,67 +143,71 @@
 
             <div class="col-md-6">
                 <div class="attendance_dropdown d-flex justify-content-between align-items-center">
-                    <h3 class="admin-title font-17 font-600 secondary position-relative">Submissions (Recent)</h3>
-                   <div class="right-side-dropdown-btn d-flex">
-                    <div class="dropdown">
-                        <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Course
-                        </a>
-                        <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">January</a></li>
-                          <li><a class="dropdown-item" href="#">February</a></li>
-                          <li><a class="dropdown-item" href="#">March</a></li>
-                          <li><a class="dropdown-item" href="#">April</a></li>
-                          <li><a class="dropdown-item" href="#">May</a></li>
-                          <li><a class="dropdown-item" href="#">June</a></li>
-                          <li><a class="dropdown-item" href="#">July</a></li>
-                          <li><a class="dropdown-item" href="#">August</a></li>
-                          <li><a class="dropdown-item" href="#">September</a></li>
-                          <li><a class="dropdown-item" href="#">October</a></li>
-                          <li><a class="dropdown-item" href="#">November </a></li>
-                          <li><a class="dropdown-item" href="#">December </a></li>
-                        </ul>
-                      </div>
-                      <div class="dropdown">
-                          <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Subject
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">January</a></li>
-                            <li><a class="dropdown-item" href="#">February</a></li>
-                            <li><a class="dropdown-item" href="#">March</a></li>
-                            <li><a class="dropdown-item" href="#">April</a></li>
-                            <li><a class="dropdown-item" href="#">May</a></li>
-                            <li><a class="dropdown-item" href="#">June</a></li>
-                            <li><a class="dropdown-item" href="#">July</a></li>
-                            <li><a class="dropdown-item" href="#">August</a></li>
-                            <li><a class="dropdown-item" href="#">September</a></li>
-                            <li><a class="dropdown-item" href="#">October</a></li>
-                            <li><a class="dropdown-item" href="#">November </a></li>
-                            <li><a class="dropdown-item" href="#">December </a></li>
-                          </ul>
+                    <h3 class="admin-title font-17 font-600 secondary position-relative">Submissions (Recent)
+                    </h3>
+                    <div class="right-side-dropdown-btn d-flex">
+                        <div class="dropdown">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Course
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                                <li><a class="dropdown-item" href="#">April</a></li>
+                                <li><a class="dropdown-item" href="#">May</a></li>
+                                <li><a class="dropdown-item" href="#">June</a></li>
+                                <li><a class="dropdown-item" href="#">July</a></li>
+                                <li><a class="dropdown-item" href="#">August</a></li>
+                                <li><a class="dropdown-item" href="#">September</a></li>
+                                <li><a class="dropdown-item" href="#">October</a></li>
+                                <li><a class="dropdown-item" href="#">November </a></li>
+                                <li><a class="dropdown-item" href="#">December </a></li>
+                            </ul>
                         </div>
                         <div class="dropdown">
-                          <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Status
-                          </a>
-                          <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">January</a></li>
-                            <li><a class="dropdown-item" href="#">February</a></li>
-                            <li><a class="dropdown-item" href="#">March</a></li>
-                            <li><a class="dropdown-item" href="#">April</a></li>
-                            <li><a class="dropdown-item" href="#">May</a></li>
-                            <li><a class="dropdown-item" href="#">June</a></li>
-                            <li><a class="dropdown-item" href="#">July</a></li>
-                            <li><a class="dropdown-item" href="#">August</a></li>
-                            <li><a class="dropdown-item" href="#">September</a></li>
-                            <li><a class="dropdown-item" href="#">October</a></li>
-                            <li><a class="dropdown-item" href="#">November </a></li>
-                            <li><a class="dropdown-item" href="#">December </a></li>
-                          </ul>
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Subject
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                                <li><a class="dropdown-item" href="#">April</a></li>
+                                <li><a class="dropdown-item" href="#">May</a></li>
+                                <li><a class="dropdown-item" href="#">June</a></li>
+                                <li><a class="dropdown-item" href="#">July</a></li>
+                                <li><a class="dropdown-item" href="#">August</a></li>
+                                <li><a class="dropdown-item" href="#">September</a></li>
+                                <li><a class="dropdown-item" href="#">October</a></li>
+                                <li><a class="dropdown-item" href="#">November </a></li>
+                                <li><a class="dropdown-item" href="#">December </a></li>
+                            </ul>
                         </div>
-                   </div>
-                  </div>
+                        <div class="dropdown">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Status
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                                <li><a class="dropdown-item" href="#">April</a></li>
+                                <li><a class="dropdown-item" href="#">May</a></li>
+                                <li><a class="dropdown-item" href="#">June</a></li>
+                                <li><a class="dropdown-item" href="#">July</a></li>
+                                <li><a class="dropdown-item" href="#">August</a></li>
+                                <li><a class="dropdown-item" href="#">September</a></li>
+                                <li><a class="dropdown-item" href="#">October</a></li>
+                                <li><a class="dropdown-item" href="#">November </a></li>
+                                <li><a class="dropdown-item" href="#">December </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="table_container">
                     <table class="table mb-0">
                         <thead style="background:#EDF9FB;">
@@ -213,91 +220,131 @@
                         </thead>
                         <tbody class="bg-light">
                             <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
+                                <td>
+                                   <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
+                                    <div class="person_image">
+                                        <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
+                                            class="img-fluid">
+                                    </div>
+                                    <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
                                     </h5>
+                                   </a>
                                 </td>
                                 <td>Hello World! In Java</td>
                                 <td>08:48 PM, 11/07/23</td>
                                 <td class="active_txt_blue">Unreviewed</td>
                             </tr>
                             <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
+                                <td>
+                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
+                                     <div class="person_image">
+                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
+                                             class="img-fluid">
+                                     </div>
+                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
+                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                                     </h5>
+                                    </a>
+                                 </td>
                                 <td>Hello World! In Java</td>
                                 <td>08:48 PM, 11/07/23</td>
                                 <td class="active_txt_blue">Unreviewed</td>
                             </tr>
                             <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
+                                <td>
+                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
+                                     <div class="person_image">
+                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
+                                             class="img-fluid">
+                                     </div>
+                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
+                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                                     </h5>
+                                    </a>
+                                 </td>
                                 <td>Hello World! In Java</td>
                                 <td>08:48 PM, 11/07/23</td>
                                 <td class="active_txt_blue">Unreviewed</td>
                             </tr>
                             <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
+                                <td>
+                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
+                                     <div class="person_image">
+                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
+                                             class="img-fluid">
+                                     </div>
+                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
+                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                                     </h5>
+                                    </a>
+                                 </td>
                                 <td>Hello World! In Java</td>
                                 <td>08:48 PM, 11/07/23</td>
                                 <td class="active_txt_blue">Unreviewed</td>
                             </tr>
 
                             <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
+                                <td>
+                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
+                                     <div class="person_image">
+                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
+                                             class="img-fluid">
+                                     </div>
+                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
+                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                                     </h5>
+                                    </a>
+                                 </td>
                                 <td>Hello World! In Java</td>
                                 <td>08:48 PM, 11/07/23</td>
                                 <td class="active_txt_blue">Unreviewed</td>
                             </tr>
 
                             <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
+                                <td>
+                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
+                                     <div class="person_image">
+                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
+                                             class="img-fluid">
+                                     </div>
+                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
+                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                                     </h5>
+                                    </a>
+                                 </td>
                                 <td>Hello World! In Java</td>
                                 <td>08:48 PM, 11/07/23</td>
                                 <td class="active_txt_blue">Unreviewed</td>
                             </tr>
                             <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
+                                <td>
+                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
+                                     <div class="person_image">
+                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
+                                             class="img-fluid">
+                                     </div>
+                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
+                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                                     </h5>
+                                    </a>
+                                 </td>
                                 <td>Hello World! In Java</td>
                                 <td>08:48 PM, 11/07/23</td>
                                 <td class="active_txt_orange">Reassigned</td>
                             </tr>
                             <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
+                                <td>
+                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
+                                     <div class="person_image">
+                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
+                                             class="img-fluid">
+                                     </div>
+                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
+                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                                     </h5>
+                                    </a>
+                                 </td>
                                 <td>Hello World! In Java</td>
                                 <td>08:48 PM, 11/07/23</td>
                                 <td class="active_txt_green">Accepted</td>
@@ -327,7 +374,7 @@
 
 
 <!-- Modal Create New Assignment start -->
-<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1"
+<div class="modal fade" id="create_assignment_modal" tabindex="-1" aria-labelledby="exampleModalLabel1"
     aria-hidden="true">
     <div class="modal-dialog position-relative leave_modal">
         <div class="modal-content">
@@ -371,12 +418,13 @@
                                     placeholder="1 Day">
                             </div>
                         </div>
-                       
+
                     </div><!-- row -->
                 </form>
 
-                <a routerLink="/admin/createassignments" class="apply_modal_buttons apply_modal_btn d-flex justify-content-center align-items-center mt-2 m-auto">
-                    Create
+                <a href="admin_create_assignment.html"
+                    class="apply_modal_buttons d-flex justify-content-center align-items-center mt-2">
+                    <button type="button" class="apply_modal_btn">Create</button>
                 </a>
 
             </div>

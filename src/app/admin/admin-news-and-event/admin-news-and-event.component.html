@@ -20,41 +20,52 @@
                 
                 <img src="assets/images/temp_img/news.png">
                 <div class="news_text position-relative">
-                  <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
-              <div class="meat-dot-dropdown" style="display: none;">
-                <a routerLink="/admin/createnewsAndEvent" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
-                <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
-              </div>
                   <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
                   <h4 class="font-19 font-500 small_text">Breaking News</h4>
                   <h5 class="font-14 font-500 small_text">News Is Broken</h5>
                 </div>
+                <div class="dropdown">
+                  <i
+                    class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"
+                    role="button"
+                    id="dropdownMenuLink"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  ></i>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuLink"
+                    style="min-width: 8rem"
+                  >
+                    <li>
+                      <a
+                        routerLink=""
+                        class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding"
+                        ><i class="fi fi-rr-document line-height-0"></i> View</a
+                      >
+                    </li>
+                    <li>
+                      <p
+                        class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding"
+                        data-bs-toggle="modal"
+                        data-bs-target="#course-edit-modal"
+                      >
+                        <i class="fi fi-rr-file-edit line-height-0"></i> Edit
+                      </p>
+                    </li>
+                    <li>
+                      <p
+                        class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding"
+                        data-bs-toggle="modal"
+                        data-bs-target="#delete-modal"
+                      >
+                        <i class="fi fi-rr-trash line-height-0"></i> Delete
+                      </p>
+                    </li>
+                  </ul>
+                </div>
               </div>
           </div>
-          <div class="col-md-3 bootstrap_cards">
-            <div class="news text_dark">
-              <img src="assets/images/temp_img/news.png">
-              <div class="news_text position-relative">
-            <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
-                <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
-                <h4 class="font-19 font-500 small_text">Breaking News</h4>
-                <h5 class="font-14 font-500 small_text">News Is Broken</h5>
-              </div>
-            </div>
-        </div>
-        <div class="col-md-3 bootstrap_cards">
-          <div class="news text_dark">
-            <img src="assets/images/temp_img/news.png">
-            <div class="news_text position-relative">
-          <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
-              <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
-              <h4 class="font-19 font-500 small_text">Breaking News</h4>
-              <h5 class="font-14 font-500 small_text">News Is Broken</h5>
-            </div>
-          </div>
-      </div>
-
-     
         </div>
       </div>
     </div> 

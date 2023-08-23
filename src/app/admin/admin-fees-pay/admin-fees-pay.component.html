@@ -16,20 +16,21 @@
             <h3 class="admin-title font-17 font-600 secondary position-relative mb-0">Fees Pay List</h3>
             <div class="right-side-dropdown-btn d-flex">
               <div class="student-search me-2">
-                <input type="text" name="" id="" placeholder="Search" class="gray-input-bg" style="height: 35px;">
+                <input type="text" name="fullName" id=""  placeholder="Search" class="gray-input-bg" style="height: 35px;" 
+                [(ngModel)]="search" (ngModelChange)="searchByName()">
               </div>
               <div class="input_icon position-relative">
                 <input type="date" class="form-control input_text gray-input-bg font-15 fees-input"
-                  style="height: 35px;" placeholder="Select Start Date" id="" name="" value=""
+                  style="height: 35px;" placeholder="Select Start Date" id="" name="startDate" value="" [(ngModel)]="startDate"
                   required>
               </div>
               <h4 class="font-18 font-500 text_dark my-0 lh-0 d-flex align-items-center mx-1">To</h4>
               <div class="input_icon position-relative">
                 <input type="date" class="form-control input_text gray-input-bg font-15 fees-input"
-                  style="height: 35px;" placeholder="Select End Date" id="" name="" value="" required>
+                  style="height: 35px;" placeholder="Select End Date" id="" name="endDate" value="" required [(ngModel)]="endDate">
               </div>
 
-              <button class="fees_search_btn font-15 font-500 lh-0 me-2" (change)="searchByName()">Search</button>
+              <button class="fees_search_btn font-15 font-500 lh-0 me-2" (click)="findByGivenDate()">Search</button>
 
               <div class="dropdown">
                 <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark d-inline-flex align-items-center"
@@ -37,50 +38,57 @@
                   Status
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" routerLink="/admin/pendingfees">Fees Pending</a></li>
-                    <li><a class="dropdown-item" routerLink="/admin/payfees">Fees Pay</a></li>
-                    <li><a class="dropdown-item" routerLink="/admin/feescompletedlist">Fees Complete</a></li>
+                  <li><a class="dropdown-item" routerLink="/admin/pendingfees">Fees Pending</a></li>
+                  <li><a class="dropdown-item" routerLink="/admin/payfees">Fees Pay</a></li>
+                  <li><a class="dropdown-item" routerLink="/admin/feescompletedlist">Fees Complete</a></li>
                 </ul>
               </div>
             </div>
           </div>
-          <table class="table fees-table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Roll No.</th>
-                <th scope="col">Course</th>
-                <th scope="col">Phone Num</th>
-                <th scope="col">Fees</th>
-                <th scope="col">Fees Paid</th>
-                <th scope="col">Remaining Fees</th>
-                <th scope="col">Date</th>
-                <th scope="col">Edit</th>
+          <div class="table_container">
+            <table class="table mb-0">
+              <thead style="background:#EDF9FB;">
+                <tr class="table_heading">
+                  <th scope="col" class="font-15 font-600 secondary">Name</th>
+                  <th scope="col" class="font-15 font-600 secondary">Roll No.</th>
+                  <th scope="col" class="font-15 font-600 secondary">Course</th>
+                  <th scope="col" class="font-15 font-600 secondary">Phone Num</th>
+                  <th scope="col" class="font-15 font-600 secondary">Fees</th>
+                  <th scope="col" class="font-15 font-600 secondary">Fees Paid</th>
+                  <th scope="col" class="font-15 font-600 secondary">Amount</th>
+                  <th scope="col" class="font-15 font-600 secondary">Date</th>
+                  <th scope="col" class="font-15 font-600 secondary">Edit</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let feesPay of feesPayes">
+                <tr>
+                  <td class="d-flex align-items-center" style="gap:5px; border-bottom: 0;">
+                    <div class="person_image">
+                      <img [src]="imageUrl+feesPay.fees.student.profilePic" alt="" class="img-fluid">
+                    </div>
+                    <h5 class="font-13 font-500 mb-0" >{{feesPay.fees.student.fullName}}<br>
+                    </h5>
+                  </td>
+                  <td>{{feesPay.fees.student.studentId}}</td>
+                <td>{{feesPay.fees.course.courseName}}</td>
+                <td>{{feesPay.fees.student.mobile}}</td>
+                <td>{{feesPay.fees.finalFees}}</td>
+                <td>{{feesPay.fees.feesPaid}}</td>
+                <td>{{feesPay.feesPayAmount}}</td>
+                <td>{{feesPay.payDate}}</td>
+                
+                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal" (click)="getFeesPayByPayId(feesPay.payId)">Edit</td>              
               </tr>
-            </thead>
-            <tbody *ngFor="let fees of feeses">
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;">
-                  <div class="person_image">
-                    <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
-                  </div>
-                  <h5 class="font-13 font-500 mb-0">{{fees.student.fullName}} <br>
-                  </h5>
-                </td>
-                <td>{{fees.student.studentId}}</td>
-                <td>{{fees.course.courseName}}</td>
-                <td>{{fees.student.mobile}}</td>
-                <td>{{fees.finalFees}}</td>
-                <td>{{fees.feesPaid}}</td>
-                <td>{{fees.remainingFees}}</td>
-                <td>{{fees.updatedDate}}</td>
-                <td class="warning font-500" data-bs-toggle="modal" data-bs-target="#pay-modal" (click)="getFeesById(fees.feesId)">Edit</td>              
-              </tr>
-              
-
-            </tbody>
-          </table>
-
+             
+              </tbody>
+            </table>
+            <mat-paginator *ngIf="feesList>=8"
+              [length]="feesList"
+              [pageSize]="8"
+              aria-label="Select page"
+              (page)="onChangePage($event)">    
+              </mat-paginator>
+</div>
         </div>
 
       </div>

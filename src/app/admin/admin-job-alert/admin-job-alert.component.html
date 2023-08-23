@@ -3,79 +3,84 @@
     <div class="profile_top_heading d-flex gap_24">
       <h1 class="font-27 font-700 secondary mb-0">Job Alerts</h1>
       <a routerLink="/admin/createjob">
-      <button class="top_profile_sec_btn font-14 font-500">Post New Job</button>
+        <button class="top_profile_sec_btn font-14 font-500">
+          Post New Job
+        </button>
       </a>
+    </div>
+    <app-profile-bar></app-profile-bar>
   </div>
-  <app-profile-bar></app-profile-bar>
-  </div>
-
 
   <div class="scroll_section">
     <!-- INTERBSHIP CARD START -->
-    <h3 class="Enrolled font-21 font-600 secondary position-relative">Internships</h3>
+    <h3 class="Enrolled font-21 font-600 secondary position-relative">
+      Internships
+    </h3>
     <div class="row">
       <div class="col-md-3 bootstrap_cards">
-          <div class="internship_container">
+        <div class="internship_container">
+          <div class="d-flex justify-content-between">
             <div class="container_top d-flex align-items-center jobaleart_card">
-              <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
-              <div class="meat-dot-dropdown" style="display: none;" >
-                <a routerLink="/admin/createjob" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
-                <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
-              </div>
-              <img src="assets/images/temp_img/image 18.png">
+              <!-- <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
+            <div class="meat-dot-dropdown" style="display: none;" >
+              <a routerLink="/admin/createjob" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
+              <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
+            </div> -->
+              <img src="assets/images/temp_img/image 18.png" />
               <div class="internship_title">
                 <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
                 <h4 class="font-14 font-400 sub_title1">Company Name</h4>
                 <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
               </div>
             </div>
-            <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-              UI / UX Design ,
-              UCD Process , Information Architech , Persona Creation,.....</h4>
-          </div>
-
-      </div>
-
-      <div class="col-md-3 bootstrap_cards">
-        <div class="internship_container">
-          <div class="container_top d-flex align-items-center jobaleart_card">
-            <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
-           
-            <img src="assets/images/temp_img/image 18.png">
-            <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-              <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
+            <div class="dropdown">
+              <i
+                class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              ></i>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="dropdownMenuLink"
+                style="min-width: 8rem"
+              >
+                <li>
+                  <a
+                    routerLink=""
+                    class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding"
+                    ><i class="fi fi-rr-document line-height-0"></i> View</a
+                  >
+                </li>
+                <li>
+                  <p
+                    class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding"
+                    data-bs-toggle="modal"
+                    data-bs-target="#course-edit-modal"
+                  >
+                    <i class="fi fi-rr-file-edit line-height-0"></i> Edit
+                  </p>
+                </li>
+                <li>
+                  <p
+                    class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding"
+                    data-bs-toggle="modal"
+                    data-bs-target="#delete-modal"
+                  >
+                    <i class="fi fi-rr-trash line-height-0"></i> Delete
+                  </p>
+                </li>
+              </ul>
             </div>
           </div>
-          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-            UI / UX Design ,
-            UCD Process , Information Architech , Persona Creation,.....</h4>
+          <h4 class="Requirement_text font-13 font-400">
+            Requirement Gathering , Wirefram Creation , Visual Design , UI / UX
+            Design , UCD Process , Information Architech , Persona
+            Creation,.....
+          </h4>
         </div>
-
-    </div>
-
-    <div class="col-md-3 bootstrap_cards">
-      <div class="internship_container">
-        <div class="container_top d-flex align-items-center jobaleart_card">
-          <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
-         
-          <img src="assets/images/temp_img/image 18.png">
-          <div class="internship_title">
-            <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-            <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-            <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
-          </div>
-        </div>
-        <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-          UI / UX Design ,
-          UCD Process , Information Architech , Persona Creation,.....</h4>
       </div>
-
-  </div>
-
-
-
     </div>
     <!-- INTERNSHIP CARD END -->
 
@@ -84,99 +89,110 @@
     <div class="row">
       <div class="col-md-3 bootstrap_cards">
         <div class="internship_container">
-         
+          <div class="d-flex justify-content-between">
             <div class="container_top d-flex align-items-center jobaleart_card">
-              <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
-              <div class="meat-dot-dropdown" style="display: none;" >
-                <a routerLink="/admin/createjob" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
-                <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
+              <!-- <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot()"></i>
+          <div class="meat-dot-dropdown" style="display: none;" >
+            <a routerLink="/admin/createjob" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
+            <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
+          </div> -->
+              <img src="assets/images/temp_img/image 18.png" />
+              <div class="internship_title">
+                <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
+                <h4 class="font-14 font-400 sub_title1">Company Name</h4>
+                <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
               </div>
-           
-            <img src="assets/images/temp_img/image 18.png">
-            <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-              <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-              <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
+            </div>
+            <div class="dropdown">
+              <i
+                class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"
+                role="button"
+                id="dropdownMenuLink"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              ></i>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="dropdownMenuLink"
+                style="min-width: 8rem"
+              >
+                <li>
+                  <a
+                    routerLink=""
+                    class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding"
+                    ><i class="fi fi-rr-document line-height-0"></i> View</a
+                  >
+                </li>
+                <li>
+                  <p
+                    class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding"
+                    data-bs-toggle="modal"
+                    data-bs-target="#course-edit-modal"
+                  >
+                    <i class="fi fi-rr-file-edit line-height-0"></i> Edit
+                  </p>
+                </li>
+                <li>
+                  <p
+                    class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding"
+                    data-bs-toggle="modal"
+                    data-bs-target="#delete-modal"
+                  >
+                    <i class="fi fi-rr-trash line-height-0"></i> Delete
+                  </p>
+                </li>
+              </ul>
             </div>
           </div>
-          <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-            UI / UX Design ,
-            UCD Process , Information Architech , Persona Creation,.....</h4>
-        </div>
-
-    </div>
-
-    <div class="col-md-3 bootstrap_cards">
-      <div class="internship_container">
-        <div class="container_top d-flex align-items-center jobaleart_card">
-          <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
-         
-          <img src="assets/images/temp_img/image 18.png">
-          <div class="internship_title">
-            <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-            <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-            <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
-          </div>
-        </div>
-        <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-          UI / UX Design ,
-          UCD Process , Information Architech , Persona Creation,.....</h4>
-      </div>
-
-  </div>
-
-  <div class="col-md-3 bootstrap_cards">
-    <div class="internship_container">
-      <div class="container_top d-flex align-items-center jobaleart_card">
-        <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray"></i>
-       
-        <img src="assets/images/temp_img/image 18.png">
-        <div class="internship_title">
-          <h3 class="font-17 font-500 title_1">Graphics Intern</h3>
-          <h4 class="font-14 font-400 sub_title1">Company Name</h4>
-          <h4 class="font-14 font-400 mb-0">For 6 Months</h4>
+          <h4 class="Requirement_text font-13 font-400">
+            Requirement Gathering , Wirefram Creation , Visual Design , UI / UX
+            Design , UCD Process , Information Architech , Persona
+            Creation,.....
+          </h4>
         </div>
       </div>
-      <h4 class="Requirement_text font-13 font-400">Requirement Gathering , Wirefram Creation , Visual Design ,
-        UI / UX Design ,
-        UCD Process , Information Architech , Persona Creation,.....</h4>
-    </div>
-
-</div>
-
-   
     </div>
     <!-- JOB CARD END -->
   </div>
 
+  <!-- MIDDLE CONTENT END -->
 
-<!-- MIDDLE CONTENT END -->
-
-<!-- RIGHT SIDE START-->
-<app-right-side-bar></app-right-side-bar>
-<!-- RIGHT SIDE END -->
+  <!-- RIGHT SIDE START-->
+  <app-right-side-bar></app-right-side-bar>
+  <!-- RIGHT SIDE END -->
 </div>
 <!-- DASHBOARD END -->
 
-
 <!-- Modal leave for apply start -->
-<div class="modal fade" id="delete_modal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-<div class="modal-dialog position-relative leave_modal">
-  <div class="modal-content">
-    <div class="modal-body">
-      <div class="modal-header apply_title">
-       <p>Are You Sure You Want To Delete This Item_Name?</p>
-        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
-          <i class="fi fi-rr-cross close_icon"></i>
-        </button>
-      </div>
+<div
+  class="modal fade"
+  id="delete_modal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel1"
+  aria-hidden="true"
+>
+  <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header apply_title">
+          <p>Are You Sure You Want To Delete This Item_Name?</p>
+          <button
+            type="button"
+            class="close_btn"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            <i class="fi fi-rr-cross close_icon"></i>
+          </button>
+        </div>
 
-      <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-        <button type="button" class="cancel_modal_btn">Cancel</button>
-        <button type="button" class="apply_modal_btn">Apply</button>
+        <div
+          class="apply_modal_buttons d-flex justify-content-between align-items-center"
+        >
+          <button type="button" class="cancel_modal_btn">Cancel</button>
+          <button type="button" class="apply_modal_btn">Apply</button>
+        </div>
       </div>
-
     </div>
   </div>
-</div>
 </div>
