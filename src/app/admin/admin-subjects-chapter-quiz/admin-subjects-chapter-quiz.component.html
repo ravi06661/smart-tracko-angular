@@ -43,7 +43,7 @@
                         </ul>
                     </div>
                     <div class="subject-test-ques-ans " >
-                        <img [src]="imageUrl+obj.questionImage" alr="" class="profile_image" id="output" style="width: 80% ;height: 10%">
+                        <img [src]="imageUrl+obj.questionImage" style="width: 200px ;height: 200px">
                     </div>
                     <div class="subject-test-ques-ans" [ngClass]="obj.correctOption==obj.option1?'alert alert-success':''">
                         <p>A. {{obj.option1}}</p>
@@ -127,7 +127,7 @@
                         <div class="col-md-12 mb_18">
                             <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
                             <div class="input_icon position-relative">
-                                <input type="file"   (change)="handleImageInput($event)" >
+                                <input type="file"   (change)="handleImageInput($event)"   value="image" >
                             </div>
                         </div>
                         <div class="col-md-12 mb_18">
@@ -204,7 +204,7 @@
                         <div class="col-md-12 mb_18">
                             <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
                             <div class="input_icon position-relative">
-                                <input type="file"  (change)="handleImageInput($event)" >
+                                <input type="file"  (change)="handleImageInput($event)" [value]="imageUrl+question.questionImage" >
                             </div>
                         </div>
                         <div class="col-md-12 mb_18">

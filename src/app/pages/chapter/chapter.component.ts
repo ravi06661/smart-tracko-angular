@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Chapter } from 'src/app/entity/chapter';
+import { Subject } from 'src/app/entity/subject';
+import { ChapterServiceService } from 'src/app/service/chapter-service.service';
+import { SubjectService } from 'src/app/service/subject.service';
 
 @Component({
   selector: 'app-chapter',
@@ -7,4 +12,28 @@ import { Component } from '@angular/core';
 })
 export class ChapterComponent {
 
+  subjectId:number=0;
+  chapter: Chapter[] = []
+  subject:Subject= new Subject();
+  constructor(private activateRouter:ActivatedRoute,private subjectService: SubjectService,private chapterService: ChapterServiceService){}
+  ngOnInit(){
+     this.subjectId=this.activateRouter.snapshot.params[('id')];
+     this.getAllSubjectChapter();
+     this.getSubjectById(this.subjectId);
+  }
+  
+  public getAllSubjectChapter() {
+    this.subjectService.getAllSubjectChapters(this.subjectId).subscribe(
+      (data: any) => {
+        this.chapter = data;
+      }
+    )
+  }
+  public getSubjectById(id:number){
+    this.subjectService.getSubjectById(id).subscribe({
+      next:(data:any)=>{
+        this.subject = data.subject
+      }
+    })
+  }
 }

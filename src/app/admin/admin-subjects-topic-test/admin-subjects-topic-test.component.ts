@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
 import { ChapterContent } from 'src/app/entity/chapter-content';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
-import { MyUploadAdapter } from 'src/app/entity/my-upload-adapter';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 @Component({
   selector: 'app-admin-subjects-topic-test',
@@ -12,6 +10,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   styleUrls: ['./admin-subjects-topic-test.component.scss']
 })
 export class AdminSubjectsTopicTestComponent {
+  
   questionId: number = 0;
   chapter: ChapterContent[] = []
   chapterId: number = 0;

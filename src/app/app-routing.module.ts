@@ -70,8 +70,8 @@ const routes: Routes = [
     {path:'',component:DashboardComponent,pathMatch:'full'},
     {path:'checkInCheckOut',component:CheckincheckoutComponent,pathMatch:'full'},
     {path:'study',component:StudyComponent,pathMatch:'full'},
-    {path:'chapter',component:ChapterComponent,pathMatch:'full'},
-    {path:'chapterDetails',component:SubjectdetailsComponent,pathMatch:'full'},
+    {path:'chapter/:id',component:ChapterComponent,pathMatch:'full'},
+    {path:'chapterDetails/:id',component:SubjectdetailsComponent,pathMatch:'full'},
     {path:'mycourse',component:MycourseComponent,pathMatch:'full'},
     {path:'assignmentdetails',component:AssignmentDetailsComponent,pathMatch:'full'},
     {path:'taskAndAssignment',component:TaskandassignmentsComponent,pathMatch:'full'},
@@ -84,7 +84,6 @@ const routes: Routes = [
     {path:'jobdescription/:id',component:JobDescriptionComponent,pathMatch:'full'},
     {path:'internshipsdescription/:id',component:InternshipsDescriptionComponent,pathMatch:'full'},
     {path:'testing',component:TestingComponent,pathMatch:'full'},
-    
   ]},
   {path:'result',component:ResultComponent,pathMatch:'full'},
   {path:'review',component:ReviewComponent,pathMatch:'full'},
