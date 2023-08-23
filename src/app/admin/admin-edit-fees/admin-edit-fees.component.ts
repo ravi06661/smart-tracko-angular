@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Action } from 'igniteui-angular';
 import { Fees } from 'src/app/entity/fees';
 import { FeesPay } from 'src/app/entity/fees-pay';
@@ -17,7 +17,7 @@ export class AdminEditFeesComponent implements OnInit{
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   feesId:number=0;
   fees:Fees=new Fees();
-  constructor(private feesService:FeesService,private utilityService:UtilityServiceService,private activateRoute:ActivatedRoute){}
+  constructor(private feesService:FeesService,private utilityService:UtilityServiceService,private activateRoute:ActivatedRoute,private router:Router){}
   ngOnInit(): void {
     this.feesId=this.activateRoute.snapshot.params[('feesId')];
     this.getFeesById();
@@ -41,6 +41,7 @@ export class AdminEditFeesComponent implements OnInit{
           }
           })
         Swal.fire('Saved!', '', 'success')
+        this.router.navigate(['/admin/pendingfees'])
       } else if (result.isDenied) {
         this.getFeesById()
         Swal.fire('Changes are not saved', '', 'info')

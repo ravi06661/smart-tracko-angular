@@ -180,47 +180,16 @@
                 <th scope="col" class="font-15 font-600 secondary">Status</th>
               </tr>
             </thead>
-            <tbody class="bg-light">
+            <tbody class="bg-light" *ngFor="let fees of feeses">
               <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>20,000</td>
+                <td class="d-flex align-items-center" style="gap:5px; border-bottom: 0;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">{{fees.student.fullName}}</td>
+                <td>{{fees.course.courseName}}</td>
+                <td>{{fees.date}}</td>
+                <td>{{fees.remainingFees}}</td>
                 <td>Pending</td>
               </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>20,000</td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>20,000</td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>20,000</td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>20,000</td>
-                <td>Pending</td>
-              </tr>
+             
 
             </tbody>
           </table>
@@ -228,7 +197,7 @@
         <h3 class="admin-title font-17 font-600 secondary position-relative mt-4 mb_20">Recent Collections</h3>
         <div class="table_container">
           <table class="table mb-0">
-            <thead style="background:#EDF9FB;">
+            <thead style="background:#EDF9FB;" >
               <tr class="table_heading">
                 <th scope="col" class="font-15 font-600 secondary">Name</th>
                 <th scope="col" class="font-15 font-600 secondary">Course</th>
@@ -237,47 +206,16 @@
                 <th scope="col" class="font-15 font-600 secondary">Status</th>
               </tr>
             </thead>
-            <tbody class="bg-light">
+            <tbody class="bg-light" *ngFor="let feesPay of feesPays">
               <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>20,000</td>
+                <td class="d-flex align-items-center" style="gap:5px; border-bottom: 0;"><img
+                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">{{feesPay.fees.student.fullName}}</td>
+                <td>{{feesPay.fees.course.courseName}}</td>
+                <td>{{feesPay.payDate}}</td>
+                <td>{{feesPay.feesPayAmount}}</td>
                 <td>Pending</td>
               </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>20,000</td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>20,000</td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>20,000</td>
-                <td>Pending</td>
-              </tr>
-              <tr>
-                <td class="d-flex align-items-center" style="gap:5px;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid"> Wade Warren</td>
-                <td>Core Java</td>
-                <td>1 Jan, 2023</td>
-                <td>20,000</td>
-                <td>Pending</td>
-              </tr>
+             
 
             </tbody>
           </table>
