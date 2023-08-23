@@ -10,6 +10,9 @@ import { an } from '@fullcalendar/core/internal-common';
 import { BarChart } from 'src/app/charts/bar-chart';
 import { PieChart } from 'src/app/charts/pie-chart';
 import { DonutChart } from 'src/app/charts/donut-chart';
+import { FeesPayService } from 'src/app/service/fees-pay.service';
+import { FeesPay } from 'src/app/entity/fees-pay';
+import { Fees } from 'src/app/entity/fees';
 
 export type ChartOptions = {
   series: any;
@@ -52,8 +55,10 @@ export class AdminDashboardComponent implements OnInit {
   totaOnleaves = 0;
   totalAbsent = 0;
   totalPresent = 0;
+  feesPays:FeesPay[]=[];
+  feeses:Fees[]=[];
 
-  constructor(private elementRef: ElementRef, private localst: LocationStrategy, private studentService: StudentService, private utilityService: UtilityServiceService, private feesService: FeesService) {
+  constructor(private elementRef: ElementRef, private localst: LocationStrategy, private studentService: StudentService, private utilityService: UtilityServiceService, private feesService: FeesService,private feesPayService:FeesPayService) {
     this.admissinonOptions = this.admissionBar.chartOptions
 
     this.feesOptions = this.feesBar.chartOptions
@@ -80,6 +85,8 @@ export class AdminDashboardComponent implements OnInit {
     this.getAbsents();
     this.getActiveLeaves();
     //this.getAdmissionBarData()
+    this.recentCollection(0,5);
+    this.upcomingDues(0,5);
   }
 
   public preventBackButton() {
@@ -167,6 +174,21 @@ export class AdminDashboardComponent implements OnInit {
       (data: any) => {
         this.totaOnleaves = data.length;
         this.getChartData();
+      }
+    )
+  }
+
+  public recentCollection(page:Number,size:number){
+    this.feesPayService.feesPayList(page,size).subscribe(
+      (data:any)=>{
+        this.feesPays=data.response;;
+      }
+    )
+  }
+  public upcomingDues(page:Number,size:number){
+    this.feesPayService.feesPendingList(page,size).subscribe(
+      (data:any)=>{
+        this.feeses=data.response;;
       }
     )
   }
