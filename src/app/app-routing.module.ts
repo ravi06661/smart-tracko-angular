@@ -58,7 +58,10 @@ import { AdminFeesPendingComponent } from './admin/admin-fees-pending/admin-fees
 import { AdminFeesPayComponent } from './admin/admin-fees-pay/admin-fees-pay.component';
 import { AdminFeesCompletedListComponent } from './admin/admin-fees-completed-list/admin-fees-completed-list.component';
 import { AdminEditFeesComponent } from './admin/admin-edit-fees/admin-edit-fees.component';
+import { ResultComponent } from './pages/result/result.component';
+import { ReviewComponent } from './pages/review/review.component';
 import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-submission/admin-assignment-submission.component';
+
 
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
@@ -80,8 +83,11 @@ const routes: Routes = [
     {path:'jobalert',component:JobalertComponent,pathMatch:'full'},
     {path:'jobdescription/:id',component:JobDescriptionComponent,pathMatch:'full'},
     {path:'internshipsdescription/:id',component:InternshipsDescriptionComponent,pathMatch:'full'},
-    {path:'testing',component:TestingComponent,pathMatch:'full'}
+    {path:'testing',component:TestingComponent,pathMatch:'full'},
+    
   ]},
+  {path:'result',component:ResultComponent,pathMatch:'full'},
+  {path:'review',component:ReviewComponent,pathMatch:'full'},
   {path:'questions',component:QuestionsComponent,pathMatch:'full'},
   {
     path:'admin',component:AdminPanelComponent,canActivate:[AdminGuardGuard],children:[

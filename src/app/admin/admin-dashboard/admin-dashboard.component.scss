@@ -4,19 +4,19 @@
   justify-content: space-between;
 }
 
-.card0,
-.right-task-area {
-  width: 25%;
-}
+// .card0,
+// .right-task-area {
+//   width: 25%;
+// }
 
 
-  .calender-img {
-    width: 50%;
-  }
+//   .calender-img {
+//     width: 50%;
+//   }
   .imagestudent {
     border-radius: 40px;
-    height: 30px;
-    width: 30px;
+    height: 24px;
+    width: 24px;
 }
 
 .pointer {cursor: pointer;}
@@ -24,9 +24,21 @@
   
 
 .attendance-area, .assignment-area, .fees-area{
-  min-height: 363px;
+  min-height: 260px;
 }
 // #chart {
 //   max-width: 650px;
 //   margin: 35px auto;
 // }
+
+// // / Fees Chart Css /
+// .left-color-border{
+//   display: inline-block;
+//     width: 5px;
+//     height: 20px;
+//     border-radius: 12px;
+// }
+.apexcharts-legend.apexcharts-align-center.apx-legend-position-right {
+  top: 47px !important;
+  right: 0 !important;
+}

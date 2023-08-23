@@ -1,5 +1,7 @@
 import { Time } from "@angular/common";
 import { TechnologyStack } from "./technology-stack";
+import { Subject } from "./subject";
+
 
 export class Batch {
 
@@ -8,7 +10,7 @@ export class Batch {
 	batchTiming:any ;
 	batchName:string = '';
 	batchDetails:string = '';
-	technologyStack:TechnologyStack = new TechnologyStack;
+	subject:Subject = new Subject();
 	isDeleted = false;
 	isActive = true;
 	

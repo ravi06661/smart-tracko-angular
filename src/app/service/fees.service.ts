@@ -50,9 +50,15 @@ export class FeesService {
   public updateFeesDetalis(fees:Fees){
     return this.http.put(`${this.feesUrl}/updateFeesApi`, fees);
   }
+
   public getFeesCollectionMonthAndYearWise(year:number){
      let params = new HttpParams();
      params = params.append('year',year)
      return this.http.get(`${this.feesUrl}/getFeesCollectionMonthAndYearWise`,{params})
   }
+
+  public getAllFeesCollection() {
+    return this.http.get(`${this.feesUrl}/getTotalFeesCollection`);
+  }
+
 }
