@@ -9,7 +9,10 @@ export class PieChart {
             show: false // Set this to false to remove the borders between the series
           },
         colors: ["#5754E5", "#FF4A11", "#F8961E"],
-        legend:{position:'bottom'},
+        legend:{
+          position:'bottom'
+
+      },
         labels: ["Present", "Absent", "Leave"],
         responsive: [
           {

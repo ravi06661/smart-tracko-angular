@@ -82,6 +82,8 @@ import { AdminFeesPayComponent } from './admin/admin-fees-pay/admin-fees-pay.com
 import { AdminFeesCompletedListComponent } from './admin/admin-fees-completed-list/admin-fees-completed-list.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AdminEditFeesComponent } from './admin/admin-edit-fees/admin-edit-fees.component';
+import { ReviewComponent } from './pages/review/review.component';
+import { ResultComponent } from './pages/result/result.component';
 
 
 
@@ -148,6 +150,8 @@ import { AdminEditFeesComponent } from './admin/admin-edit-fees/admin-edit-fees.
     AdminFeesPayComponent,
     AdminFeesCompletedListComponent,
     AdminEditFeesComponent,
+    ReviewComponent,
+    ResultComponent,
    
        
  

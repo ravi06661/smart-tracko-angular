@@ -103,4 +103,11 @@ export class AdminCoursesBatchesComponent implements OnInit{
   public changeTimeFormat(time:any){
     return moment(time, "HH:mm:ss").format("hh:mm A");
   }
+
+  public checkSubjectInCourse(id:number){
+    if(this.batch.subject.subjectId == id)
+      return true
+    return false;
+  }
+ 
 }
