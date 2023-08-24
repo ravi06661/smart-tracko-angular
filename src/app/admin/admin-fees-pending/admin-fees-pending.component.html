@@ -63,7 +63,7 @@
               </thead>
               <tbody *ngFor="let fees of feeses">
                 <tr>
-                  <td class="d-flex align-items-center" style="gap:5px; border-bottom: 0;">
+                  <td class="d-flex align-items-center pointer" style="gap:5px; border-bottom: 0;" routerLink="/admin/studentprofile/{{fees.student.studentId}}">
                     <div class="person_image">
                       <img [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid">
                     </div>
@@ -77,7 +77,7 @@
                 <td>{{fees.feesPaid}}</td>
                 <td>{{fees.remainingFees}}</td>
                 <td>{{fees.updatedDate}}</td>
-                <td class="warning font-500" data-bs-toggle="modal"
+                <td class="warning font-500 pointer" data-bs-toggle="modal"
                 data-bs-target="#pay-modal" (click)="getFeesById(fees.feesId)">Pay Now</td>    
                 <td><a routerLink="/admin/editfees/{{fees.feesId}}"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>             
               </tr>
