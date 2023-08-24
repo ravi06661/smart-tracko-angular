@@ -345,47 +345,37 @@
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Task Name</label>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Day 1">
+                                <input type="text" id="" name="taskName" class="form-control input_text" [(ngModel)]="task.taskName"
+                                    placeholder="Task Name..">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected="">Mearn Stack</option>
-                                <option value="1">Core Java</option>
-                                <option value="2">UI/UX Designer</option>
+                            <select class="form-select" aria-label="Default select example" name="course"  (change)="getSubjects()" [(ngModel)]="task.course">
+                                <option  [ngValue]="obj" *ngFor="let obj of courses">{{obj.courseName}}</option>
                               </select>
                         </div>
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">Subject</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">Core Java</option>
-                                <option selected="">Mearn Stack</option>
-                                <option value="2">UI/UX Designer</option>
-                              </select>
-                        </div>
-                        <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Duration</label>
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="1 Day">
-                            </div>
-                        </div>
+                            <select class="form-select" aria-label="Default select example" name="subject"  [(ngModel)]="task.subject">
+                              <option [ngValue]="obj" *ngFor="let obj of subjects">{{obj.subjectName}}</option>
+                            </select>
+                          </div>
+                          
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">File Attachments in Submission</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1">Required</option>
-                                <option selected="">Optional</option>
-                                <option value="2">Not Allowed</option>
+                            <select class="form-select" aria-label="Default select example"  name="taskAttachment" [(ngModel)]="task.attachmentStatus">
+                                <option value="Required">Required</option>
+                                <option value="Optional">Optional</option>
+                                <option value="Not Allowed">Not Allowed</option>
                               </select>
                         </div>
                        
                     </div><!-- row -->
                 </form>
 
-                <a [routerLink]="['/admin/createtask']" class="apply_modal_buttons d-flex justify-content-center align-items-center mt-2">
-                    <button type="button" class="apply_modal_btn">Create</button>
+                <a  class="apply_modal_buttons d-flex justify-content-center align-items-center mt-2">
+                    <button type="button" class="apply_modal_btn" (click)="submit()">Create</button>
                 </a>
 
             </div>

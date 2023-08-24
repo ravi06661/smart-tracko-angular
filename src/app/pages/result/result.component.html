@@ -17,27 +17,27 @@
             </div>
             <div class="col-md-3">
               <div class="right_ans text-center">
-                <h5 class="font-21 font-500 mb-1">26</h5>
+                <h5 class="font-21 font-500 mb-1">{{chapterExamResult.correcteQuestions}}</h5>
                 <h6 class="result_heading font-15 font-500 mb-0">Right Answers</h6>
               </div>
             </div>
             <div class="col-md-3">
               <div class="not_ans text-center">
-                <h5 class="font-21 font-500 mb-1">2</h5>
+                <h5 class="font-21 font-500 mb-1">{{chapterExamResult.notSelectedQuestions}}</h5>
                 <h6 class="result_heading font-15 font-500 mb-0">Not Answers</h6>
               </div>
             </div>
             <div class="col-md-3">
               <div class="wrong_ans text-center">
-                <h5 class="font-21 font-500 mb-1">7</h5>
+                <h5 class="font-21 font-500 mb-1">{{chapterExamResult.wrongQuestions}}</h5>
                 <h6 class="result_heading font-15 font-500 mb-0">Wrong Answers</h6>
               </div>
             </div>
           </div>
           <div class="test_btn d-flex justify-content-center align-items-center">
-              <a routerLink="/student" type="button"
+              <a  (click)="exite()" type="button"
                 class="gohome_btn font-19 font-500  d-flex justify-content-center align-items-center">Go home</a>
-              <a routerLink="/review" type="button"
+              <a routerLink="/review/{{resultId}}" type="button"
                 class="reviewans_btn font-19 font-500  d-flex justify-content-center align-items-center">Review Answers</a>
             </div>
         </div>

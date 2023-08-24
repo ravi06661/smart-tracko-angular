@@ -85,9 +85,9 @@ const routes: Routes = [
     {path:'internshipsdescription/:id',component:InternshipsDescriptionComponent,pathMatch:'full'},
     {path:'testing',component:TestingComponent,pathMatch:'full'},
   ]},
-  {path:'result',component:ResultComponent,pathMatch:'full'},
-  {path:'review',component:ReviewComponent,pathMatch:'full'},
-  {path:'questions',component:QuestionsComponent,pathMatch:'full'},
+  {path:'result/:id',component:ResultComponent,pathMatch:'full'},
+  {path:'review/:id',component:ReviewComponent,pathMatch:'full'},
+  {path:'questions/:id',component:QuestionsComponent,pathMatch:'full'},
   {
     path:'admin',component:AdminPanelComponent,canActivate:[AdminGuardGuard],children:[
       {path:'',component:AdminDashboardComponent,pathMatch:'full'},
@@ -96,7 +96,7 @@ const routes: Routes = [
       {path:'editassignments',component:AdminEditAssignmentsComponent,pathMatch:'full'},
       {path:'assignmentsubmission',component:AdminAssignmentSubmissionComponent,pathMatch:'full'},
       {path:'task',component:AdminTaskComponent,pathMatch:'full'},
-      {path:'createtask',component:AdminCreateTaskComponent,pathMatch:'full'},
+      {path:'createtask/:id',component:AdminCreateTaskComponent,pathMatch:'full'},
       {path:'edittask',component:AdminEditTaskComponent,pathMatch:'full'},
       {path:'attendance',component:AdminAttendanceComponent,pathMatch:'full'},
       {path:'leaverequest',component:AdminLeaveRequestComponent,pathMatch:'full'},

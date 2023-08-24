@@ -197,7 +197,7 @@ export class AdminDashboardComponent implements OnInit {
        this.feesPieOptions.series = [data.body.Total,data.body.Collected,data.body.Pending]
       }
     })
-
+  }
   public recentCollection(page:Number,size:number){
     this.feesPayService.feesPayList(page,size).subscribe(
       (data:any)=>{

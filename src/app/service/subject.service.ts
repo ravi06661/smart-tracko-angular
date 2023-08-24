@@ -35,4 +35,5 @@ export class SubjectService{
   public getAllSubjectChapters(id:number){
     return this.http.get(`${this.Chapter_url}/getAllChapters?subjectId=${id}`)
   }
+  
 }
