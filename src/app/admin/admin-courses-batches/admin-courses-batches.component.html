@@ -77,10 +77,10 @@
                         </div>
                         <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 8rem;">
-                                        <li>  <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding" data-bs-toggle="modal"
+                                        <li>  <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer" data-bs-toggle="modal"
                                           data-bs-target="#batch-edit-modal" (click)="getBatchByBatchId(batch.batchId)"><i
                                               class="fi fi-rr-file-edit line-height-0"></i> Edit</p></li>
-                                        <li> <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding"
+                                        <li> <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding pointer"
                                           data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="batchId = batch.batchId" ><i
                                               class="fi fi-rr-trash line-height-0"></i> Delete</p></li>
                                       </ul>
@@ -138,11 +138,11 @@
                 </p>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <a >
-                        <button type="button" data-bs-dismiss="modal" aria-label="Close" class="cancel_modal_btn font-15 font-500 delete-icon-color" (click)="deleteBatch(batchId)">Yes,
+                        <button type="button" data-bs-dismiss="modal" aria-label="Close" class="cancel_modal_btn font-15 font-500 delete-icon-color pointer" (click)="deleteBatch(batchId)">Yes,
                             delete</button>
                     </a>
                     <a >
-                        <button type="button" data-bs-dismiss="modal" aria-label="Close" class="apply_modal_btn font-15 font-500">No, Do not
+                        <button type="button" data-bs-dismiss="modal" aria-label="Close" class="apply_modal_btn font-15 font-500 pointer">No, Do not
                             delete</button>
                     </a>
                 </div>

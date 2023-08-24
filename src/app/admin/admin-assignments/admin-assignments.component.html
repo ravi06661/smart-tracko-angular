@@ -393,38 +393,43 @@
                             <label for="" class="mb_6 font-15 font-500 secondary">Assignment
                                 Title</label>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Day 1">
+                                <input type="text" id="title" name="title" class="form-control input_text"
+                                    placeholder="Enter Assingnment Title" [(ngModel)]="assignmentRequest.title">
                             </div>
                         </div>
-                        <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
+
+                        <div class="col-md-4 mb_24">
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Mern Stack">
+                            <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
+                            <select class="form-select" name="courseId" [(ngModel)]="assignmentRequest.courseId" aria-label="Default select example" (change)="getSubject(assignmentRequest.courseId)">
+                                <option selected="" [value]="course.courseId"  *ngFor="let course of courses">{{course.courseName}}</option>
+                              </select>
                             </div>
                         </div>
-                        <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Subject</label>
+
+                        <div class="col-md-4 mb_24">
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="Core Java">
+                            <label for="" class="mb_6 font-17 font-500 secondary">Subject</label>
+                            <select class="form-select" name="subjectId" [(ngModel)]="assignmentRequest.subjectId" aria-label="Default select example">
+                                <option selected="" [value]="subject.subjectId" *ngFor="let subject of subjects" >{{subject.subjectName}}</option>
+                              </select>
                             </div>
                         </div>
-                        <div class="col-md-12 mb_18">
+
+                        <!-- <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Duration</label>
                             <div class="input_icon position-relative">
                                 <input type="text" id="" name="" class="form-control input_text"
                                     placeholder="1 Day">
                             </div>
-                        </div>
+                        </div> -->
 
                     </div><!-- row -->
                 </form>
 
-                <a href="admin_create_assignment.html"
+                <a routerLink="/admin/createassignments/id" 
                     class="apply_modal_buttons d-flex justify-content-center align-items-center mt-2">
-                    <button type="button" class="apply_modal_btn">Create</button>
+                    <button type="button" class="apply_modal_btn" >Create</button>
                 </a>
 
             </div>

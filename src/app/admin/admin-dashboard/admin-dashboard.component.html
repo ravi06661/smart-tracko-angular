@@ -199,8 +199,8 @@
             </thead>
             <tbody class="bg-light" *ngFor="let fees of feeses">
               <tr>
-                <td class="d-flex align-items-center" style="gap:5px; border-bottom: 0;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">{{fees.student.fullName}}</td>
+                <td class="d-flex align-items-center pointer" style="gap:5px; border-bottom: 0;" routerLink="/admin/studentprofile/{{fees.student.studentId}}"><img
+                  [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid imagestudent">{{fees.student.fullName}}</td>
                 <td>{{fees.course.courseName}}</td>
                 <td>{{fees.date}}</td>
                 <td>{{fees.remainingFees}}</td>
@@ -225,8 +225,8 @@
             </thead>
             <tbody class="bg-light" *ngFor="let feesPay of feesPays">
               <tr>
-                <td class="d-flex align-items-center" style="gap:5px; border-bottom: 0;"><img
-                    src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">{{feesPay.fees.student.fullName}}</td>
+                <td class="d-flex align-items-center pointer" style="gap:5px; border-bottom: 0;" routerLink="/admin/studentprofile/{{feesPay.fees.student.studentId}}"><img
+                  [src]="imageUrl+feesPay.fees.student.profilePic" alt="" class="img-fluid imagestudent">{{feesPay.fees.student.fullName}}</td>
                 <td>{{feesPay.fees.course.courseName}}</td>
                 <td>{{feesPay.payDate}}</td>
                 <td>{{feesPay.feesPayAmount}}</td>

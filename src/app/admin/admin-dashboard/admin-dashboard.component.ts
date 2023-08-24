@@ -93,8 +93,8 @@ export class AdminDashboardComponent implements OnInit {
     this.getActiveLeaves();
     this.getAllFeesCollections();
     //this.getAdmissionBarData()
-    this.recentCollection(0,5);
-    this.upcomingDues(0,5);
+    this.recentCollection(0,6);
+    this.upcomingDues(0,6);
   }
 
   public preventBackButton() {
@@ -198,6 +198,7 @@ export class AdminDashboardComponent implements OnInit {
       }
     })
   }
+
   public recentCollection(page:Number,size:number){
     this.feesPayService.feesPayList(page,size).subscribe(
       (data:any)=>{

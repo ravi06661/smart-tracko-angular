@@ -85,6 +85,7 @@ const routes: Routes = [
     {path:'internshipsdescription/:id',component:InternshipsDescriptionComponent,pathMatch:'full'},
     {path:'testing',component:TestingComponent,pathMatch:'full'},
   ]},
+
   {path:'result/:id',component:ResultComponent,pathMatch:'full'},
   {path:'review/:id',component:ReviewComponent,pathMatch:'full'},
   {path:'questions/:id',component:QuestionsComponent,pathMatch:'full'},
@@ -92,7 +93,7 @@ const routes: Routes = [
     path:'admin',component:AdminPanelComponent,canActivate:[AdminGuardGuard],children:[
       {path:'',component:AdminDashboardComponent,pathMatch:'full'},
       {path:'assignments',component:AdminAssignmentsComponent,pathMatch:'full'},
-      {path:'createassignments',component:AdminCreateAssignmentsComponent,pathMatch:'full'},
+      {path:'createassignments/:id',component:AdminCreateAssignmentsComponent,pathMatch:'full'},
       {path:'editassignments',component:AdminEditAssignmentsComponent,pathMatch:'full'},
       {path:'assignmentsubmission',component:AdminAssignmentSubmissionComponent,pathMatch:'full'},
       {path:'task',component:AdminTaskComponent,pathMatch:'full'},

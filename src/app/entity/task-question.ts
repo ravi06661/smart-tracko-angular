@@ -5,4 +5,6 @@ export class TaskQuestion {
     public question: string = ''
     public videoUrl: string = ''
     public questionImages:string[] = []
+
 } 
+
