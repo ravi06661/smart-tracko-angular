@@ -87,12 +87,12 @@ const routes: Routes = [
   ]},
   {path:'result',component:ResultComponent,pathMatch:'full'},
   {path:'review',component:ReviewComponent,pathMatch:'full'},
-  {path:'questions',component:QuestionsComponent,pathMatch:'full'},
+  {path:'questions/:id',component:QuestionsComponent,pathMatch:'full'},
   {
     path:'admin',component:AdminPanelComponent,canActivate:[AdminGuardGuard],children:[
       {path:'',component:AdminDashboardComponent,pathMatch:'full'},
       {path:'assignments',component:AdminAssignmentsComponent,pathMatch:'full'},
-      {path:'createassignments',component:AdminCreateAssignmentsComponent,pathMatch:'full'},
+      {path:'createassignments/:id',component:AdminCreateAssignmentsComponent,pathMatch:'full'},
       {path:'editassignments',component:AdminEditAssignmentsComponent,pathMatch:'full'},
       {path:'assignmentsubmission',component:AdminAssignmentSubmissionComponent,pathMatch:'full'},
       {path:'task',component:AdminTaskComponent,pathMatch:'full'},
