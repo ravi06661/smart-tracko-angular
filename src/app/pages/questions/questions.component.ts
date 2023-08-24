@@ -1,7 +1,12 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, HostListener } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { timer } from 'rxjs/internal/observable/timer';
 import { ChapterQuizeQuestion } from 'src/app/entity/chapter-quize-question';
+import { ChapterExamResultResponse } from 'src/app/payload/chapter-exam-result-response';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
+import { ExamServiceService } from 'src/app/service/exam-service.service';
+import { LoginService } from 'src/app/service/login.service';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
@@ -20,13 +25,51 @@ export class QuestionsComponent {
   previousButton: boolean = false;
   nextButton: boolean = false;
   questionClicked = new Map<number, string>();
-  constructor(private utilityService: UtilityServiceService, private questionService: QuestionServiceService, private activateRouter: ActivatedRoute, private subjectService: SubjectService, private chapterService: ChapterServiceService) {
+  questionAnswered: number = 0;
+  questionView: number = 0;
+  questionNotAnswered: number = 0
+  options: string = ''
+  remainingTime: any;
+  second: any
+  timerSubscription: Subscription | undefined;
+  chapterExamResultResponse = new ChapterExamResultResponse
+  constructor(private utilityService: UtilityServiceService, private questionService: QuestionServiceService, private activateRouter: ActivatedRoute,
+    private subjectService: SubjectService,
+    private chapterService: ChapterServiceService,
+    private router: Router,
+    private loginService: LoginService,
+    private examServiceService: ExamServiceService) {
     this.questionClicked = new Map<number, string>();
+    this.toggleFullScreen()
   }
 
   ngOnInit() {
+
     this.chapterId = this.activateRouter.snapshot.params[('id')];
     this.getAllQuestions();
+    this.timer();
+
+  }
+  public timer() {
+    const duration = 10// in seconds
+    this.timerSubscription = timer(0, 1000).subscribe((elapsedTime) => {
+      this.second = duration - elapsedTime;
+      this.remainingTime = new Date(this.second * 1000).toISOString().substr(11, 8);
+      if (elapsedTime >= duration) {
+        this.timerSubscription?.unsubscribe();
+        this.submittion();
+      }
+    });
+  }
+  public submittion() {
+    this.chapterExamResultResponse.chapterId = this.chapterId
+    this.chapterExamResultResponse.studentId = this.loginService.getStudentId()
+    this.chapterExamResultResponse.review = Object.fromEntries(this.questionClicked.entries());
+    this.examServiceService.addChapterExam(this.chapterExamResultResponse).subscribe(
+      (data: any) => {
+        this.router.navigate(['result/' + data.id])
+      }
+    )
   }
   public getAllQuestions() {
     if (this.chapterId) {
@@ -34,16 +77,18 @@ export class QuestionsComponent {
         (data) => {
           this.questions = data;
           this.question = this.questions[0]
+          this.questionNotAnswered = this.questions.length
         }
       )
     }
   }
 
-  public nextQuestion() {
+  public nextQuestion(id:number) {
     if (this.index == this.questions.length - 1) {
       this.nextButton = true;
     }
     else {
+      ++this.questionView
       this.nextButton = false
       this.previousButton = false;
       this.question = this.questions[++this.index]
@@ -62,18 +107,39 @@ export class QuestionsComponent {
   }
 
   questionClick(option: string, index: number) {
-    console.log('click');
-    
-    if (!this.questionClicked.get(index)) {
+
+    if (this.questionClicked.get(index) == null) {
+      ++this.questionAnswered
+      --this.questionNotAnswered
       this.questionClicked.set(index, option);
     } else {
-      let value = this.questionClicked.get(index);
-      if (value !== undefined) {
-        this.questionClicked.set(index, value);
-      }
+      this.questionClicked.set(index, option);
     }
-    console.log('hh',this.questionClicked);
-    
   }
 
+  isFullScreen = false;
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyPress(event: KeyboardEvent) {
+    if (event.key.startsWith('F')) {
+      this.submittion();
+    }
+  }
+  toggleFullScreen() {
+    const element = document.documentElement;
+    if (!this.isFullScreen) {
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      }
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+    this.isFullScreen = !this.isFullScreen;
+  }
+  public exite() {
+    this.toggleFullScreen()
+    this.router.navigate(['/student/chapterDetails/' + this.chapterId])
+  }
 }
