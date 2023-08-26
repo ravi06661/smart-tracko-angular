@@ -35,5 +35,7 @@ export class SubjectService{
   public getAllSubjectChapters(id:number){
     return this.http.get(`${this.Chapter_url}/getAllChapters?subjectId=${id}`)
   }
-
+  public deleteSubjectById(id:number){
+   return this.http.put(`${this.Subject_url}/deleteSubjectById?subjectId=${id}`,null)
+  }
 }

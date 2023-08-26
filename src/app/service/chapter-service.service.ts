@@ -55,6 +55,7 @@ export class ChapterServiceService {
     formData.append('chapterName', chapterName)
     return this.http.post<Subject>(`${this.CHAPTER_URL}/addChapter`, formData);
   }
+  
   public deleteChapter(chapterId: number, subjectId: number) {
     let formData = new FormData();
     formData.append('chapterId', chapterId.toString());

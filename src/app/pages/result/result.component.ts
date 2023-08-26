@@ -19,9 +19,6 @@ export class ResultComponent implements OnInit {
     this.examService.getChapterExamResult(this.resultId).subscribe({
       next: (data: any) => {
         this.chapterExamResult = data.examResult;
-
-        console.log(this.chapterExamResult);
-
       }
     })
   }

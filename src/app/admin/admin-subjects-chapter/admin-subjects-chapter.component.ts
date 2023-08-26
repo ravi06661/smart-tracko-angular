@@ -46,6 +46,7 @@ export class AdminSubjectsChapterComponent {
     )
   }
   public deleteChapter() {
+     alert(this.chapterId)
     this.chapterService.deleteChapter(this.chapterId, this.subjectId).subscribe(
       (data) => {
         this.chapterId = 0;
