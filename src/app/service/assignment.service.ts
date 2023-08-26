@@ -1,5 +1,6 @@
+import { AssignmentQuestionRequest } from './../payload/assignment-question-request';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UtilityServiceService } from './utility-service.service';
 import { Profile } from '../entity/profile';
 import { AssignmentRequest } from '../payload/assignment-request';
@@ -8,6 +9,7 @@ import { retry } from 'rxjs';
   providedIn: 'root'
 })
 export class AssignmentServiceService {
+
 
   BASE_URL = this.utilityService.getBaseUrl();
   assignmentUrl = this.BASE_URL + '/assignment';
@@ -20,10 +22,24 @@ export class AssignmentServiceService {
   }
 
   public  getAssignmentById(assignmentId: number) {
-    return this.http.get(`${this.assignmentUrl}/getAssignmentById?assignmentId=${assignmentId}`);
+    return this.http.get(`${this.assignmentUrl}/getAssignment?assignmentId=${assignmentId}`);
   }
 
-
+  public addAssignmentQuestions(assignmentQuestionsData: AssignmentQuestionRequest) {
+   
+    console.log(assignmentQuestionsData);
+    const formData = new FormData();
+   
+    assignmentQuestionsData.assignmentQuestion.forEach((question, questionIndex) => {
+      formData.append(`assignmentQuestion[${questionIndex}]`, JSON.stringify(question));
+      
+      question.questionImages.forEach((image, imageIndex) => {
+        formData.append(`assignmentQuestion[${questionIndex}].questionImages[${imageIndex}]`, image);
+      });
+    });
+    
+    return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`,formData)
+  }
 
   // public getAssignment(id: number) {
   //   return this.http.get(`${this.assignmentUrl}/getAssignment/` + id)

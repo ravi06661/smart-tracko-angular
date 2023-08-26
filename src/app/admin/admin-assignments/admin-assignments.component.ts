@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Course } from 'src/app/entity/course';
 import { Subject } from 'src/app/entity/subject';
 import { AssignmentRequest } from 'src/app/payload/assignment-request';
@@ -20,7 +21,8 @@ export class AdminAssignmentsComponent implements OnInit{
 
   constructor(private courseService:CourseServiceService,
               private subjectService:SubjectService,
-              private assignmentService:AssignmentServiceService){}
+              private assignmentService:AssignmentServiceService,
+              private router:Router){}
 
   ngOnInit(): void {
     this.getAllCourses();
@@ -43,6 +45,7 @@ export class AdminAssignmentsComponent implements OnInit{
   public createAssingment(){
     this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
       next:(data:any)=>{
+        this.router.navigate(['/admin/createassignments/'+data.id])
       }
     })
   }
