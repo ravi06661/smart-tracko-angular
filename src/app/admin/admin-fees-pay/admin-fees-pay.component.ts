@@ -33,6 +33,7 @@ export class AdminFeesPayComponent implements OnInit{
 constructor(private feesPayService:FeesPayService,private router:Router,private route: ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService){}
 ngOnInit(): void {
   this.getAllfeesPayList(0,8);
+  
 }
 
 public getAllfeesPayList(page:Number,size:number){
@@ -47,62 +48,12 @@ public onChangePage(event: any) {
   this.getAllfeesPayList(event.pageIndex, event.pageSize);
 }
 
-feesPay(){
-  // this.feesId = this.route.snapshot.params[('feesId')];
- // this.payId = this.route.snapshot.params[('payId')];
-
-  this.feesPayService.feesPay(this.feesPays).subscribe( 
-    (data:any)=>{
-      this.feesPays.payId=data.payId
-      const Toast = Swal.mixin({
-        
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-      })
-      Toast.fire({
-        icon: 'success',
-        title: 'Fees Pay success !!'
-      }).then(e => {
-        this.feesPays = new FeesPay
-        this.getAllfeesPayList(0,8);
-       // this.router.navigate(['/admin/payfees']);
-      })
-    },
-    (err) => {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-      })
-      Toast.fire({
-        icon: 'error',
-        title: 'failed !!'
-      })
-    }
-  )
-}
-
-public getFeesById(feesId:number){
-  // this.feesId = this.route.snapshot.params[('feesId')];
-  this.feesService.findByFeesId(feesId).subscribe({
-    next:(data:any)=>{
-     this.fees = data
-     this.feesPays.fees =this.fees
-
-    }
-  })
-}
-
 public getFeesPayByPayId(payId:number){
   // this.payId = this.route.snapshot.params[('payId')];
   this.feesPayService.findByPayId(payId).subscribe({
     next:(data:any)=>{
      this.feesPays = data
+     this.payId=this.feesPays.payId
     }
   })
 }
@@ -128,10 +79,76 @@ public findByGivenDate(){
     this.feesService.findByDate(this.startDate,this.endDate,'Pending').subscribe(
       (data:any)=>{
         this.feeses=data;
+
         this.feesList-data.totalElements
       }
     )
   }
 }
+
+public updateFeesPay(){
+
+    // this.feesId = this.route.snapshot.params[('feesId')];
+    this.feesPayService.updateFeesPay(this.feesPays).subscribe( 
+      (data:any)=>{
+        this.feesPays=data
+        const Toast = Swal.mixin({
+          
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        })
+        Toast.fire({
+          icon: 'success',
+          title: 'Update Fees Pay success !!'
+        }).then(e => {
+          this.feesPays = new FeesPay
+          this.getAllfeesPayList(0,15);
+         // this.router.navigate(['/admin/payfees']);
+        })
+      },
+      (err) => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 500,
+          timerProgressBar: true,
+        })
+        Toast.fire({
+          icon: 'error',
+          title: 'failed !!'
+        })
+      }
+    )
+  }
+//   Swal.fire({
+//     title: 'Do you want to save the changes?',
+//     showDenyButton: true,
+//     showCancelButton: true,
+//     confirmButtonText: 'Save',
+//     denyButtonText: `Don't save`,
+//   }).then((result) => {
+//     /* Read more about isConfirmed, isDenied below */
+//     if (result.isConfirmed) {
+
+//       this.feesPayService.updateFeesPay(this.feesPays).subscribe({
+//         next:(res:any)=>{
+          
+//          this.feesPays=res
+//         }
+//         })
+//       Swal.fire('Saved!', '', 'success')
+//       //  this.router.navigate(['/admin/payfees'])
+//       this.feesPays=new FeesPay;
+//      this.getAllfeesPayList(0,8);
+//     } else if (result.isDenied) {
+//       this.getFeesPayByPayId(this.payId)
+//       Swal.fire('Changes are not saved', '', 'info')
+//     }
+//   })
+// }
 
 }
