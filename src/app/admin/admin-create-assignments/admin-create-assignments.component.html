@@ -2,7 +2,7 @@
     <div class="profile d-flex">
         <div class="assign-detail-heading">
             <h1 class="font-27 font-700 secondary mb-0">Create Assignment</h1>
-            <a routerLink="/admin/task" class="submit_buttons font-14 font-500  text-white d-inline-flex">Done </a>
+            <a  class="submit_buttons font-14 font-500  text-white d-inline-flex" (click)="submitAssignmentQuestions()">Done </a>
         </div>
         <div class="profile">
             <div class="d-flex align-items-center porfile_sec">
@@ -81,12 +81,12 @@
                     </div><!-- row -->
                 </form>
             </div><!-- col-md-12 -->
-            <div class="col-md-12">
+            <div class="col-md-12" >
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Assignment Questions</h3>
-                <div class="edit-task-area mb_20">
+                <div class="edit-task-area mb_20" *ngFor="let obj of assignmentQuestionsData.assignmentQuestion;let i=index">
                     <div class="question_ans my-0">
                         <div class="show-less-question">
-                            <h3 class="font-19 font-500 mb-0 secondary">Question - 1</h3>
+                            <h3 class="font-19 font-500 mb-0 secondary">Question - {{i+1}}</h3>
                             <div class="show_more" onclick="showQuestion()">
                                 <p class="mb-0 font-17 font-500 secondary d-flex align-items-center gap_5 pointer"><i
                                         class="fi fi-rr-add line-height-0"></i>Show More</p>
@@ -96,20 +96,19 @@
                                         class="fi fi-rr-minus-circle line-height-0"></i>Show Less</p>
                             </div>
                         </div> <!-- show-less-question -->
-                        <div id="hideQuestion" style="display: none;">
-                            <h4 class="font-17 font-400 write-que">How would you reverse the order of elements
-                                in an array in Java
-                                without
-                                using any built-in methods or additional data structures?</h4>
+                        <div id="hideQuestion" style="display: none;"  >
+                            
                             <div class="col-md-3 col-sm-6 col-xs-12">
-                                <div class="assinment_image">
-                                    <img src="assets/images/temp_img/modal.png" class="img-fluid">
+                                <div class="assinment_image" *ngFor="let image of obj.questionImages;let i =index">
+                                    <!-- <ng-container *ngIf=""></ng-container> -->
+                                 
+                                     <img [src]="'assets/images/temp_img/modal.png'" class="img-fluid">
                                 </div>
                                 <h3 class="font-15 font-500 assignment_sub_heading mt-1">Attachment Title Here
                                 </h3>
                             </div>
-
-                            <div class="assignment mb-0">
+                            <h4 class="font-17 font-400 write-que" [innerHTML]="obj.question"></h4>
+                            <!-- <div class="assignment mb-0">
                                 <h3 class="font-17 font-700 list_bottom1">Hints:-</h3>
                                 <ul class="font-17 list_bottom mb-0">
                                     <li>How would you reverse the order of elements in an array in Java without
@@ -125,7 +124,7 @@
                                         methods
                                         or additional data structures?</li>
                                 </ul>
-                            </div>
+                            </div> -->
                             <div class="edit-delete-que mt-5">
                                 <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color"
                                     data-bs-toggle="modal" data-bs-target="#delete-modal"><i
@@ -142,11 +141,11 @@
             <div class="col-md-12 mb_24">
                 <div class="edit-task-area">
                     <div class="question_ans mt-0">
-                        <h3 class="font-19 font-500 mb-0 secondary">Question - 2</h3>
+                        <h3 class="font-19 font-500 mb-0 secondary">Question -{{assignmentQuestionsData.assignmentQuestion.length +1}}</h3>
                     </div> <!-- question_ans -->
 
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngFor="let image of imagePreview;let i=index">
                             <div class="profile_change d-flex justify-content-center align-items-center mb-4 position-relative mx-auto">
 
                                 <div class="profile_edits">
@@ -155,18 +154,18 @@
                                     <i class="fi fi-rr-trash light font-24 line-height-0 hover-delete-icon" data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
                                   </div>
                                 </div>
-                  
-                                <input id="file" type="file" onchange="loadFile(event)" class="d-none">
-                                <img src="assets/images/temp_img/modal.png" class="profile_image" id="output">
+                                
+                                <input id="file" type="file" onchange="loadFile(event)"  class="d-none">
+                                <img [src]="image" class="profile_image" id="output" >
                               </div>
-                            <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">Attachment Title Here
+                            <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">{{imageName[i]}}
                             </h3>
                         </div>
 
                         <div class="col-lg-4 col-md-4">
                             <form class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
-                                <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
-                                <label for="fileupload" class="font-17 font-500 d-flex">
+                                <input type="file" name="image" (change)="addImageFile($event)" value="image" class="d-none" id="image">
+                                <label for="image" class="font-17 font-500 d-flex">
                                   <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                                   Add Media</label>
                               </form>
@@ -178,7 +177,7 @@
                         <h4 class="sub-heading font-17 font-500 secondary">Question, Hints and Instructions</h4>
                         <!-- <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
                             placeholder="Start Typing....."></textarea> -->
-                            <ckeditor  [editor]="Editor"> </ckeditor>
+                            <ckeditor  [editor]="Editor" name="question" [(ngModel)]="taskQuestion.question"> </ckeditor>
                     </div>
 
                     <div class="edit-delete-que mt-5">
@@ -195,7 +194,7 @@
             <div class="col-md-12 mb_24 text-center">
                 <div class="add-que">
                     <i class="fi fi-rr-plus-small warning font-36 line-height-0"></i>
-                    <h5 class="font-17 font-500 warning mb-0">Add Question</h5>
+                    <h5 class="font-17 font-500 warning mb-0" (click)="addTaskQuestion()">Add Question</h5>
                 </div>
             </div><!-- col-md-12 -->
 
@@ -206,19 +205,19 @@
             <div class="col-md-12">
                 <form
                     class="attachment_file2 d-inline-flex align-items-center  position-relative mb-2 add-attechment">
-                    <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
-                    <label for="fileupload" class="font-17 font-500 d-flex">
+                    <input type="file" name="attachment" value="attachment" (change)="addAttachmentFile($event)" class="d-none" id="attachment">
+                    <label for="attachment" class="font-17 font-500 d-flex">
                         <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                         Add Attachments</label>
                 </form><br>
-                <div class="add-que mb-2" style="padding: 16px 12px;">
+                <!-- <div class="add-que mb-2" style="padding: 16px 12px;" *ngI>
                     <i class="fi fi-rr-file-zipper warning font-24 line-height-0"></i>
-                    <h5 class="font-17 font-500 warning mb-0">Attechment.zip (36.2 mb)</h5>
+                    <h5 class="font-17 font-500 warning mb-0">{{attachmentInfo.name}} ({{attachmentInfo.size}} mb)</h5>
                 </div>
-                <br>
-                <div class="add-que border-0" style="padding: 16px 12px;">
+                <br> -->
+                <div class="add-que border-0" style="padding: 16px 12px;" *ngIf="attachmentInfo.name != ''">
                     <i class="fi fi-rr-file-zipper warning font-25 line-height-0"></i>
-                    <h5 class="font-17 font-500 warning mb-0">Attechment.zip (36.2 mb)</h5>
+                    <h5 class="font-17 font-500 warning mb-0">{{attachmentInfo.name}} ({{attachmentInfo.size}} mb)</h5>
                     <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i
                         class="fi fi-rr-trash line-height-0 font-24 ms-3 delete-icon-color"></i></span>
                 </div>
