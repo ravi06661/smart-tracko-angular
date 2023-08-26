@@ -44,4 +44,8 @@ export class FeesPayService {
   public findByPayId(payId:number){
     return this.http.get(`${this.feesUrl}/findByPayId?payId=${payId}`);
   }
+
+  public updateFeesPay(feesPay:FeesPay){
+    return this.http.put(`${this.feesUrl}/updateFeesPay`, feesPay);
+  }
 }
