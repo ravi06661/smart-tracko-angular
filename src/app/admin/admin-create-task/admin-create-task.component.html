@@ -30,7 +30,7 @@
     <div class="scroll_section">
         <div class="row mb-4">
             <div class="col-md-12">
-                <div class="top-edit-option">
+                <div class="top-edit-option pointer">
                     <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Task Details</h3>
                     <span class="d-flex align-items-center gap_5 font-17 font-500 secondary" id="edit_icon"><i
                             class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
@@ -146,7 +146,7 @@
                     </div> <!-- question_ans -->
 
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 pointer">
                             <div class="profile_change d-flex justify-content-center align-items-center mb-4 position-relative mx-auto">
 
                                 <div class="profile_edits">
@@ -163,13 +163,15 @@
                             </h3>
                         </div>
 
-                        <div class="col-lg-4 col-md-4">
-                            <form class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
-                                <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
-                                <label for="fileupload" class="font-17 font-500 d-flex">
-                                  <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
-                                  Add Media</label>
-                              </form>
+                        <div class="col-lg-4 col-md-4 ">
+                            <a >
+                                <form class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
+                                    <input type="file" name="fileupload" value="fileupload" class="d-none " id="fileupload" >
+                                    <label for="fileupload" class="font-17 font-500 d-flex pointer">
+                                      <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
+                                      Add Media</label>
+                                  </form>
+                            </a>
                         </div>
                     </div>
 
@@ -179,20 +181,20 @@
                     </div>
 
                     <div class="edit-delete-que mt-5">
-                        <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"
-                            data-bs-toggle="modal" data-bs-target="#discard-changes-modal pointer"> Discard
+                        <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"
+                            data-bs-toggle="modal" data-bs-target="#discard-changes-modal "> Discard
                             Changed</span>
-                        <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"
-                            data-bs-toggle="modal" data-bs-target="#save-changes-modal pointer">Save Changes</span>
+                        <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"
+                            data-bs-toggle="modal" data-bs-target="#save-changes-modal ">Save Changes</span>
                     </div>
                 </div><!-- edit-task-area -->
 
             </div><!-- col-md-12 -->
 
             <div class="col-md-12 mb_24 text-center">
-                <div class="add-que">
+                <div class="add-que pointer">
                     <i class="fi fi-rr-plus-small warning font-36 line-height-0"></i>
-                    <h5 class="font-17 font-500 warning mb-0">Add Question</h5>
+                    <h5 class="font-17 font-500 warning mb-0 ">Add Question</h5>
                 </div>
             </div><!-- col-md-12 -->
 
@@ -200,25 +202,15 @@
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Task Attechments</h3>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12 pointer ">
                 <form
                     class="attachment_file2 d-inline-flex align-items-center  position-relative mb-2 add-attechment">
                     <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
                     <label for="fileupload" class="font-17 font-500 d-flex">
                         <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                         Add Attachments</label>
-                </form><br>
-                <div class="add-que mb-2" style="padding: 16px 12px;">
-                    <i class="fi fi-rr-file-zipper warning font-24 line-height-0"></i>
-                    <h5 class="font-17 font-500 warning mb-0">Attechment.zip (36.2 mb)</h5>
-                </div>
-                <br>
-                <div class="add-que border-0" style="padding: 16px 12px;">
-                    <i class="fi fi-rr-file-zipper warning font-25 line-height-0"></i>
-                    <h5 class="font-17 font-500 warning mb-0">Attechment.zip (36.2 mb)</h5>
-                    <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i
-                        class="fi fi-rr-trash line-height-0 font-24 ms-3 delete-icon-color"></i></span>
-                </div>
+                </form>
+              
             </div><!-- col-md-12 -->
 
         </div>
@@ -272,14 +264,14 @@ aria-hidden="true">
                 <i class="fi fi-rr-cross close_icon"></i>
             </button>
 
-            <p class="secondary font-21 font-500 text-center">Are You Sure You Want To <br> Discard Changes?</p>
+            <p class="secondary font-21 font-500 text-center pointer">Are You Sure You Want To <br> Discard Changes?</p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                 <a routerLink="/admin/createtask">
-                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Discard
+                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color pointer">Discard
                         changes</button>
                 </a>
                 <a routerLink="/admin/createtask">
-                    <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+                    <button type="button" class="apply_modal_btn font-15 font-500 pointer" >No, Do not delete</button>
                 </a>
             </div>
 
@@ -300,14 +292,14 @@ aria-hidden="true">
                 <i class="fi fi-rr-cross close_icon"></i>
             </button>
 
-            <p class="secondary font-21 font-500 text-center">Are You Sure You Want To<br> Save Changes?</p>
+            <p class="secondary font-21 font-500 text-center pointer">Are You Sure You Want To<br> Save Changes?</p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                 <a routerLink="/admin/createtask">
                     <button type="button"
-                        class="cancel_modal_btn font-15 font-500 delete-icon-color">Cancel</button>
+                        class="cancel_modal_btn font-15 font-500 delete-icon-color pointer">Cancel</button>
                 </a>
                 <a routerLink="/admin/createtask">
-                    <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+                    <button type="button" class="apply_modal_btn font-15 font-500 pointer" >No, Do not delete</button>
                 </a>
             </div>
 

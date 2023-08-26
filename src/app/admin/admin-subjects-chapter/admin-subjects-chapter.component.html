@@ -114,7 +114,7 @@
                         <div class="test-que-edit-del">
                             <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"  data-bs-toggle="modal"
                             data-bs-target="#subject-edit_testques-modal"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
-                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"  ><i
                                     class="fi fi-rr-trash line-height-0"></i> Delete</span>
                         </div>
                     </div>
@@ -175,10 +175,10 @@
                 <i class="fi fi-rr-cross close_icon"></i>
             </button>
 
-            <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
+            <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Chapter</p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                 <a >
-                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" (click)="deleteChapter()">Yes,
                         delete</button>
                 </a>
                 <a >

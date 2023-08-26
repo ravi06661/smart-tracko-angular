@@ -48,7 +48,6 @@ export class QuestionsComponent {
     this.chapterId = this.activateRouter.snapshot.params[('id')];
     this.getAllQuestions();
     this.timer();
-
   }
   public timer() {
     const duration = 10// in seconds
@@ -117,7 +116,7 @@ export class QuestionsComponent {
     }
   }
 
-  isFullScreen = false;
+  isFullScreen = false; 
 
   @HostListener('window:keydown', ['$event'])
   onKeyPress(event: KeyboardEvent) {

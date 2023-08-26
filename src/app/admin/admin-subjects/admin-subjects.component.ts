@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { an } from '@fullcalendar/core/internal-common';
 import { log } from 'console';
 import { Chapter } from 'src/app/entity/chapter';
 import { Subject } from 'src/app/entity/subject';
@@ -12,57 +13,83 @@ import { TechnologyStackService } from 'src/app/service/technology-stack-service
   templateUrl: './admin-subjects.component.html',
   styleUrls: ['./admin-subjects.component.scss']
 })
-export class AdminSubjectsComponent implements OnInit{
- 
-  techImages:TechnologyStack[] = [];
-  chapter:Chapter[]=[]
-  subjects:SubjectResponse[] = [];
+export class AdminSubjectsComponent implements OnInit {
+
+  techImages: TechnologyStack[] = [];
+  chapter: Chapter[] = []
+  subjects: SubjectResponse[] = [];
   subjectData = {
-    imageId:'',
-    subjectName:''
+    imageId: '',
+    subjectName: ''
   };
+  message: string = ''
+  subject: Subject = new Subject();
+  subjectId: number = 0;
 
-  subject:Subject = new Subject();
-
-  constructor(private techService:TechnologyStackService,private subjectService:SubjectService){}
+  constructor(private techService: TechnologyStackService, private subjectService: SubjectService) { }
 
   ngOnInit(): void {
     this.techService.getAllTechnologyStack().subscribe({
-      next:(data)=>{
+      next: (data) => {
         this.techImages = data
       }
     });
 
+    this.getAllSubject();
+  }
+
+  public getAllSubject() {
     this.subjectService.getAllSubjects().subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         console.log(data);
         this.subjects = data;
       }
     })
   }
 
-  public saveSubject(){
+  public saveSubject() {
     this.subjectService.saveSubject(this.subjectData).subscribe({
-      next:(data)=>{
-        console.log(data);
+      next: (data: any) => {
+        this.message = 'Success.'
+        this.subjectData = {
+          imageId: '',
+          subjectName: ''
+        };
+        this.getAllSubject();
       }
     })
   }
 
-  public getSubjectById(id:number){
+  public getSubjectById(id: number) {
     this.subjectService.getSubjectById(id).subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.subject = data.subject
       }
     })
   }
 
-  public updateSubject(){
+  public updateSubject() {
     this.subjectService.updateSubject(this.subject).subscribe({
-      next:(data)=>{
-        alert('success');
+      next: (data: any) => {
+        this.message = "Success.";
+        this.subjects = this.subjects.map(item => (item.subjectId === data.subjectId ? data : item));
       }
     })
   }
- 
+
+  public reloadMessage() {
+    this.message = ''
+  }
+
+  setSubjectId(id: number) {
+    this.subjectId = id;
+  }
+  public deleteSubect() {
+    this.subjectService.deleteSubjectById(this.subjectId).subscribe(
+      (data: any) => {
+        this.getAllSubject();
+        this.subjectId = 0;
+      }
+    )
+  }
 }
