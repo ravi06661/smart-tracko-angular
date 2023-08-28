@@ -13,32 +13,100 @@ export class AssignmentServiceService {
 
   BASE_URL = this.utilityService.getBaseUrl();
   assignmentUrl = this.BASE_URL + '/assignment';
-  
+
   constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
 
 
-  public createAssignment(assignmentRequest:AssignmentRequest){
-    return this.http.post(`${this.assignmentUrl}/createAssignment`,assignmentRequest);
+  public createAssignment(assignmentRequest: AssignmentRequest) {
+    return this.http.post(`${this.assignmentUrl}/createAssignment`, assignmentRequest);
   }
 
-  public  getAssignmentById(assignmentId: number) {
+  public getAssignmentById(assignmentId: number) {
     return this.http.get(`${this.assignmentUrl}/getAssignment?assignmentId=${assignmentId}`);
   }
 
   public addAssignmentQuestions(assignmentQuestionsData: AssignmentQuestionRequest) {
-   
-    console.log(assignmentQuestionsData);
-    const formData = new FormData();
-   
-    assignmentQuestionsData.assignmentQuestion.forEach((question, questionIndex) => {
-      formData.append(`assignmentQuestion[${questionIndex}]`, JSON.stringify(question));
-      
-      question.questionImages.forEach((image, imageIndex) => {
-        formData.append(`assignmentQuestion[${questionIndex}].questionImages[${imageIndex}]`, image);
+
+    // console.log(assignmentQuestionsData);
+  //   const formData = new FormData();
+
+   //  formData.append('taskAttachment',assignmentQuestionsData.taskAttachment)
+  ///  formData.append('assignmentId',assignmentQuestionsData.assignmentId.toString())
+    // assignmentQuestionsData.assignmentQuestion.forEach((question, questionIndex) => {
+    //   formData.append(`assignmentQuestion[${questionIndex}]`, JSON.stringify(question));
+
+    //   question.questionImages.forEach((image, imageIndex) => {
+    //     formData.append(`assignmentQuestion[${questionIndex}].questionImages[${imageIndex}]`, image);
+    //   });
+    // });
+
+  //  formData.append('assignmentQuestionsData', JSON.stringify(assignmentQuestionsData));
+
+    // Append images
+    const assignmentQuestionData = new FormData();
+ //   assignmentQuestionData.append('assignmentQuestionData', JSON.stringify(assignmentQuestionsData));
+    
+    // Construct questionImages data
+   // const questionImagesData = new FormData();
+    assignmentQuestionsData.assignmentQuestion.forEach((taskQuestion, questionIndex) => {
+      taskQuestion.questionImages.forEach((image, imageIndex) => {
+        assignmentQuestionData.append(`questionImages[${questionIndex}][${imageIndex}]`, image);
       });
     });
+    //  Append taskAttachment and assignmentId as regular fields
+    // formData.append('taskAttachment', assignmentQuestionsData.taskAttachment);
+    // formData.append('assignmentId', assignmentQuestionsData.assignmentId.toString());
+
+    // Append assignmentQuestion as a JSON string
+   // formData.append('assignmentQuestion', JSON.stringify(assignmentQuestionsData.assignmentQuestion));
+
+    // Append questionImages
+    // assignmentQuestionsData.assignmentQuestion.forEach((question, questionIndex) => {
+    //     question.questionImages.forEach((image, imageIndex) => {
+    //         formData.append(`questionImages[${questionIndex}][${imageIndex}]`, image);
+    //     });
+    // });
+
+    // Loop through questionImages and append images
+// assignmentQuestionsData.assignmentQuestion.forEach((question, questionIndex) => {
+//   question.questionImages.forEach((image, imageIndex) => {
+//     console.log('image',image.name);
     
-    return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`,formData)
+//     formData.append(`questionImages[${questionIndex}][${imageIndex}]`, image, image.name);
+//   });
+// });
+    // const formData = new FormData();
+
+    // let v = assignmentQuestionsData.assignmentQuestion
+    // v.forEach((t) => {
+    //   const formData = new FormData();
+    //   let r = t.questionImages
+    //   r.forEach((e) => {
+    //     formData.append('image', e)
+    //   })
+    //   formData.append('question', JSON.stringify(v))
+    //   return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`, formData)
+    // })
+    //}
+    return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`, assignmentQuestionData)
+  //  return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`,null)
+    // const formData = new FormData();
+    // formData.append('assignmentQuestionRequest', JSON.stringify(assignmentQuestionsData));
+
+    // // Append the files to the FormData
+    // formData.append('taskAttachment', assignmentQuestionsData.taskAttachment);
+    // assignmentQuestionsData.assignmentQuestion.forEach((question, questionIndex) => {
+    //   formData.append(`assignmentQuestion[${questionIndex}].question`, question.question);
+    //   formData.append(`assignmentQuestion[${questionIndex}].videoUrl`, question.videoUrl);
+    //   question.questionImages.forEach((image, imageIndex) => {
+    //     formData.append(`assignmentQuestion[${questionIndex}].questionImages[${imageIndex}]`, image);
+    //   });
+    // });
+    // const headers = new HttpHeaders({
+    //   'Content-Type': 'multipart/form-data' // Set the correct Content-Type
+    // });
+    // Send the FormData to the backend
+    // return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`, formData,{ headers });
   }
 
   // public getAssignment(id: number) {
@@ -63,5 +131,5 @@ export class AssignmentServiceService {
   //   return this.http.post<any>(`${this.assignmentUrl}/createAssignment`, formData);
 
   // }
- 
+
 }
