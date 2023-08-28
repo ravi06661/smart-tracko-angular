@@ -13,7 +13,7 @@
            <!-- ASSIGNMENT ACCORDION  START-->
 <div class="AssignmentCard" id="head-show">
   <div class="Head">
-    <div class="TaskName text-light">Day 1</div>
+    <div class="TaskName text-light">Assignment Day {{1}}</div>
     <div class="Toggle">
       <i class="fi fi-rr-angle-small-down fs-4 lh-2 secondary" id="down-arrow" onclick="assignshow()"></i>
       <i class="fi fi-rr-angle-small-up fs-4 lh-2 secondary" id="up-arrow" onclick="assignhide()" style="display: none;"></i>
@@ -29,40 +29,20 @@
       <div class="ProgressW"></div>
     </div>
  <div id="taskcard_show" style="display: none;">
-<a routerLink="/student/assignmentdetails">
+<a routerLink="/student/assignmentdetails/{{task.questionId}}" *ngFor="let task of unLockAssignments.assignmentQuestion;let j=index">
   <div class="TaskCard">
-    <div class="TaskName">Task 1</div>
+    <div class="TaskName">Task {{j+1}}</div>
     <div class="Button">View</div>
   </div>
 </a>
-<a routerLink="/student/assignmentdetails">
-  <div class="TaskCard">
-    <div class="TaskName">Task 1</div>
-    <div class="Button">View</div>
-  </div>
-</a>
-<a routerLink="/student/assignmentdetails">
-  <div class="TaskCard">
-    <div class="TaskName">Task 1</div>
-    <div class="Button">View</div>
-  </div>
-</a>
-<a routerLink="/student/assignmentdetails">
-  <div class="TaskCard">
-    <div class="TaskName">Task 1</div>
-    <div class="Button">View</div>
-  </div>
-</a>
-<a routerLink="/student/assignmentdetails">
-  <div class="TaskCard">
-    <div class="TaskName">Task 1</div>
-    <div class="Button">View</div>
-  </div>
-</a>
-
  </div>
 </div>
 
+ <div class="TaskCard" *ngFor="let assignment of lockAssignments;let i=index">
+  <div class="font-15 font-400 text_gray">Assignment Day {{(i-1) + 3}}</div>
+  <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
+</div>
+<!--
 <div class="TaskCard">
   <div class="font-15 font-400 text_gray">Day 1</div>
   <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
@@ -86,11 +66,7 @@
 <div class="TaskCard">
   <div class="font-15 font-400 text_gray">Day 1</div>
   <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-</div>
-<div class="TaskCard">
-  <div class="font-15 font-400 text_gray">Day 1</div>
-  <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-</div>
+</div> -->
 <!-- ASSIGNMENT ACCORDION  END-->
 
  </div>

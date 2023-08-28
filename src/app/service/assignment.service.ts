@@ -9,8 +9,7 @@ import { retry } from 'rxjs';
   providedIn: 'root'
 })
 export class AssignmentServiceService {
-
-
+ 
   BASE_URL = this.utilityService.getBaseUrl();
   assignmentUrl = this.BASE_URL + '/assignment';
 
@@ -107,7 +106,18 @@ export class AssignmentServiceService {
     // });
     // Send the FormData to the backend
     // return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`, formData,{ headers });
+   console.log(assignmentQuestionsData);
+   return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`,assignmentQuestionsData)
   }
+
+  public getAllAssignments() {
+    return this.http.get(`${this.assignmentUrl}/getAllAssignments`);
+  }
+
+  public getAssignmentQuestionById(questionId: number) {
+    return this.http.get(`${this.assignmentUrl}/getAssignmentQueById?questionId=${questionId}`)
+  }
+
 
   // public getAssignment(id: number) {
   //   return this.http.get(`${this.assignmentUrl}/getAssignment/` + id)

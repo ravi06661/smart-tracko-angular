@@ -69,7 +69,7 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   }
 
   public addTaskQuestion() {
-    this.assignmentQuestionsData.assignmentQuestion.push(this.taskQuestion);
+    //this.assignmentQuestionsData.assignmentQuestion.push(this.taskQuestion);
     this.taskQuestion = new TaskQuestionRequest();
     this.imagePreview = [];
     this.imageName = [];
@@ -89,7 +89,7 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     .subscribe({
       next:(data:any)=>{
         console.log(data);
-        this.router.navigate(['/admin/task']);
+        //this.router.navigate(['/admin/task']);
       }
     })
   }
