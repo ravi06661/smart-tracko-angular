@@ -4,6 +4,7 @@ import { Subject } from "./subject";
 import { TaskQuestion } from "./task-question"
 
 export class Assignment {
+   public id:number = 0;
    public  title:string = '';
    public  taskAttachment:string = '';
    public  assignmentQuestion:TaskQuestion[] = [];
