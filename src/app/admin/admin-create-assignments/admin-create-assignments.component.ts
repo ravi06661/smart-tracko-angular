@@ -50,6 +50,7 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   public addImageFile(event: any) {
     console.log(event);
     this.taskQuestion.questionImages.push(event.target.files[0]);
+   
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
@@ -84,7 +85,8 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   }
 
   public submitAssignmentQuestions(){
-    this.assignmentService.addAssignmentQuestions(this.assignmentQuestionsData).subscribe({
+    this.assignmentService.addAssignmentQuestions(this.assignmentQuestionsData)
+    .subscribe({
       next:(data:any)=>{
         console.log(data);
         //this.router.navigate(['/admin/task']);

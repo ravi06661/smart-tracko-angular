@@ -76,7 +76,7 @@ const routes: Routes = [
     {path:'assignmentdetails/:id',component:AssignmentDetailsComponent,pathMatch:'full'},
     {path:'taskAndAssignment',component:TaskandassignmentsComponent,pathMatch:'full'},
     {path:'task',component:TaskComponent,pathMatch:'full'},
-    {path:'taskdetails',component:TaskDetailsComponent,pathMatch:'full'},
+    {path:'taskdetails/:id',component:TaskDetailsComponent,pathMatch:'full'},
     {path:'newsAndEvent',component:NewsandeventsComponent,pathMatch:'full'},
     {path:'newandseventsdescription/:id',component:NewsandEventsDescriptionComponent,pathMatch:'full'},
     {path:'attendance',component:AttendanceComponent,pathMatch:'full'},

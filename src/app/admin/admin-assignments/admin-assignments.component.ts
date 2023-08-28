@@ -49,9 +49,5 @@ export class AdminAssignmentsComponent implements OnInit{
       }
     })
   }
-
-  
-
-
 }
 

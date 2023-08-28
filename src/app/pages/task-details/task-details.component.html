@@ -9,50 +9,35 @@
   
   <div class="scroll_section">
       <div class="row mb-4">
-          <div class="col-md-12">
+
+          <div class="col-md-12" *ngFor="let obj of task.taskQuestion ;let i=index" >
               <div class="question_ans">
-                  <h3 class="font-17 font-600">Question - 1</h3>
-                  <h4 class="font-17 font-400">How would you reverse the order of elements in an array in Java without
-                    using any built-in methods or additional data structures?</h4>
+                  <h3 class="font-17 font-600">Question {{i+1}}</h3>
+                  <h4 class="font-17 font-400">{{obj.question}}</h4>
                 </div>
-                
                 <div class="row advertisement">
+
                   <div class="col-md-3 col-sm-6 col-xs-12">
                     <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
                    <div class="assinment_image video-img">
-                     <video src="assets/images/temp_img/pexels-max-fischer-5198159-3840x2160-50fps.mp4" autoplay controls
+                     <video [src]="imageUrl+obj.videoUrl" autoplay controls
                        height="" width="270"></video>
                    </div>
                   </div>
-                 <div class="col-md-3 col-sm-6 col-xs-12">
-                   <h3 class="font-15 font-700  assignment_sub_heading">Image 1</h3>
+                 <div class="col-md-3 col-sm-6 col-xs-12"  *ngFor="let images of obj.questionImages;let i=index">
+                   <h3 class="font-15 font-700  assignment_sub_heading">Image {{i+1}}</h3>
                    <div class="assinment_image">
-                     <img src="assets/images/temp_img/modal.png" class="img-fluid">
+                     <img [src]="imageUrl+images" class="img-fluid">
                    </div>
                  </div>
                
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <h3 class="font-15 font-700  assignment_sub_heading">Image 2</h3>
-                   <div class="assinment_image">
-                     <img src="assets/images/temp_img/modal.png" class="img-fluid">
-                   </div>
-                  </div>
+                 
                  </div>
   
-              <div class="assignment mb-0">
-                <h3 class="font-17 font-700 list_bottom1">Hints:-</h3>
-                <ul class="font-17 list_bottom mb-0">
-                  <li>How would you reverse the order of elements in an array in Java without using any built-in methods
-                    or additional data structures?</li>
-                  <li>How would you reverse the order of elements in an array in Java without using any built-in methods
-                    or additional data structures?</li>
-                  <li>How would you reverse the order of elements in an array in Java without using any built-in methods
-                    or additional data structures?</li>
-                </ul>
-              </div>
+  
   
               <form class="attachment_file1 d-inline-flex align-items-center  position-relative">
-                <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+                <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload"> 
                 <label for="fileupload" class="font-15 font-700 secondary text-white attachment_file_text">
                   <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
                   Attachments <span class="mx-0 ms-2 font-15 font-400 text-white">Assignment Files.zip</span></label>
@@ -80,13 +65,13 @@
             <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
             <div class="">
               <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                placeholder="Input Text Here"></textarea>
+                placeholder="Input Text Here" [ngModel]="taskSubmittion.taskDescription"></textarea>
             </div>
           </div>
 
           <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading</h4>
           <form class="select_file d-flex align-items-center  file position-relative">
-            <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+            <input type="file" name="submittionFileName" value="submittionFileName" class="d-none" id="submittionFileName" [(ngModel)]="taskSubmittion.submittionFileName">
             <label for="fileupload" class="font-15 font-400 secondary w-75">Select A File</label>
             <button type="button" class="submit_btn0 ms-auto">
               <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i><a type="btn" value=""
@@ -103,12 +88,10 @@
 
           </div>
 
-
           <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
             <button type="button" class="cancel_modal_btn">Save Draft</button>
             <button type="button" class="apply_modal_btn">Submit</button>
           </div>
-
         </div>
       </div>
     </div>
