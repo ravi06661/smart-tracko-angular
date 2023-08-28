@@ -73,7 +73,7 @@ const routes: Routes = [
     {path:'chapter/:id',component:ChapterComponent,pathMatch:'full'},
     {path:'chapterDetails/:id',component:SubjectdetailsComponent,pathMatch:'full'},
     {path:'mycourse',component:MycourseComponent,pathMatch:'full'},
-    {path:'assignmentdetails',component:AssignmentDetailsComponent,pathMatch:'full'},
+    {path:'assignmentdetails/:id',component:AssignmentDetailsComponent,pathMatch:'full'},
     {path:'taskAndAssignment',component:TaskandassignmentsComponent,pathMatch:'full'},
     {path:'task',component:TaskComponent,pathMatch:'full'},
     {path:'taskdetails',component:TaskDetailsComponent,pathMatch:'full'},
