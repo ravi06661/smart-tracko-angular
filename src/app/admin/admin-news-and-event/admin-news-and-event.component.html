@@ -1,8 +1,9 @@
+<!-- MIDDLE CONTENT START -->
 <div id="main" class="main main_news">
   <div class="profile d-flex">
     <div class="profile_top_heading d-flex gap_24">
       <h1 class="font-27 font-700 secondary mb-0">News & Events</h1>
-      <a routerLink="/admin/createnewsAndEvent">
+      <a  routerLink="/admin/createnewsAndEvent">
       <button class="top_profile_sec_btn font-14 font-500">Create New</button>
       </a>
   </div>
@@ -17,55 +18,23 @@
         <div class="row">
           <div class="col-md-3 bootstrap_cards">
               <div class="news text_dark">
-                
+                <div class="news-event-image">
                 <img src="assets/images/temp_img/news.png">
+                </div>
                 <div class="news_text position-relative">
+              <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" id="meat_dot"></i>
+              <div class="meat-dot-dropdown" style="display: none;">
+                <a href="admin_create_newsandevents.html" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
+                <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
+              </div>
                   <h3 class="font-12 font-400 small_text">3 Days Ago</h3>
                   <h4 class="font-19 font-500 small_text">Breaking News</h4>
                   <h5 class="font-14 font-500 small_text">News Is Broken</h5>
                 </div>
-                <div class="dropdown">
-                  <i
-                    class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"
-                    role="button"
-                    id="dropdownMenuLink"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  ></i>
-                  <ul
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuLink"
-                    style="min-width: 8rem"
-                  >
-                    <li>
-                      <a
-                        routerLink=""
-                        class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding"
-                        ><i class="fi fi-rr-document line-height-0"></i> View</a
-                      >
-                    </li>
-                    <li>
-                      <p
-                        class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding"
-                        data-bs-toggle="modal"
-                        data-bs-target="#course-edit-modal"
-                      >
-                        <i class="fi fi-rr-file-edit line-height-0"></i> Edit
-                      </p>
-                    </li>
-                    <li>
-                      <p
-                        class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding"
-                        data-bs-toggle="modal"
-                        data-bs-target="#delete-modal"
-                      >
-                        <i class="fi fi-rr-trash line-height-0"></i> Delete
-                      </p>
-                    </li>
-                  </ul>
-                </div>
               </div>
           </div>
+         
+     
         </div>
       </div>
     </div> 
@@ -77,3 +46,32 @@
 <!-- RIGHT SIDE START-->
 <app-right-side-bar></app-right-side-bar>
 <!-- RIGHT SIDE END -->
+
+<!-- DASHBOARD END -->
+
+      <!-- Modal Delete Modal Start -->
+      <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
+        <div class="modal-dialog position-relative leave_modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                        style="top: -23%;">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
+
+                    <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
+                    <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                        <a href="edit_taskandassignment.html">
+                            <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                                delete</button>
+                        </a>
+                        <a href="edit_taskandassignment.html">
+                            <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Delete Modal End -->
