@@ -25,7 +25,7 @@ export class AdminFeesPayComponent implements OnInit{
   feesId:number=0;
   payId:number=0;
   feesList = 0;
-  search = '';
+  fullName = '';
   endDate = '';
   startDate = '';
 
@@ -60,12 +60,13 @@ public getFeesPayByPayId(payId:number){
 
 public searchByName(){
 
-  if(this.search=='')
+  if(this.fullName=='')
   this.getAllfeesPayList(0,8);
 else{
-  this.feesService.searchByName(this.search,'Pending').subscribe(
+  this.feesPayService.searchByNameInFeesPayList(this.fullName).subscribe(
     (data:any)=>{
-      this.feeses=data;
+      // this.feeses=data;
+      this.feesPayes=data
       this.feesList=data.totalElements;
     }
   )
@@ -76,9 +77,9 @@ public findByGivenDate(){
   if(this.startDate=='' && this.endDate == ''){
     this.getAllfeesPayList(0,8);
   }else{
-    this.feesService.findByDate(this.startDate,this.endDate,'Pending').subscribe(
+    this.feesPayService.searchByMonthInFeesPayList(this.startDate,this.endDate).subscribe(
       (data:any)=>{
-        this.feeses=data;
+        this.feesPayes=data;
 
         this.feesList-data.totalElements
       }

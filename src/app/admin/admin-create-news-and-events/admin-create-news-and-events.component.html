@@ -17,18 +17,18 @@
 
             <div class="row mb-3">
                 <div class="col-md-8 col-lg-6">
-                    <label for="" class="mb_6 font-17 font-500 secondary">Category</label>
+                    <label for="" class="mb_6 font-17 font-500 secondary">title</label>
                     <div class="input_icon position-relative">
-                        <input type="text" id="" name="" class="form-control input_text" placeholder="Day1">
+                        <input type="text" id="title" name="title" class="form-control input_text" placeholder="Day1" [(ngModel)]="newRequest.title">
                     </div>
                 </div>
             </div>
 
             <div class="row mb-4">
                 <div class="col-md-8 col-lg-6">
-                    <label for="" class="mb_6 font-17 font-500 secondary">Heading</label>
+                    <label for="" class="mb_6 font-17 font-500 secondary">shortDescriptoin</label>
                     <div class="input_icon position-relative">
-                        <input type="text" id="" name="" class="form-control input_text" placeholder="2">
+                        <input type="text" id="shortDescriptoin" name="shortDescriptoin" class="form-control input_text" placeholder="2" [(ngModel)]="newRequest.shortDescriptoin">
                     </div>
                 </div>
             </div>
@@ -42,8 +42,9 @@
                                     data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
                             </div>
                         </div>
-
-                        <img src="assets/images/temp_img/modal.png" class="profile_image" id="output">
+                        <input id="image" name="file" type="file" onchange="loadFile(event)"  class="d-none">
+                        <img [src]="newRequest.file" class="profile_image" id="output" >
+                        
                     </div>
                     <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">Attachment Title Here
                     </h3>
@@ -52,8 +53,8 @@
                 <div class="col-md-3">
                     <form
                         class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
-                        <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload" onchange="loadFile(event)">
-                        <label for="fileupload" class="font-17 font-500 d-flex">
+                        <input type="file" name="image" (change)="addImage($event)" value="file" class="d-none" id="image" >
+                        <label for="image" class="font-17 font-500 d-flex">
                             <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                             Add Media</label>
                     </form>
@@ -62,15 +63,15 @@
 
             <div class="row mb_24">
                 <div class="col-md-8 col-lg-6">
-                    <label for="" class="mb_6 font-17 font-500 secondary">Job Description</label>
+                    <label for="" class="mb_6 font-17 font-500 secondary">Job BriefDescription</label>
                     <textarea class="form-control text_area" id="exampleFormControlTextarea1" row mb-3s="3"
-                        placeholder="Start Typing....."></textarea>
+                        placeholder="Start Typing....."name="briefDescription" [(ngModel)]="newRequest.briefDescription"></textarea>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <a routerLink="/admin/newsAndEvent" class="top_profile_sec_btn font-14 font-500">Publish
+                    <a  class="top_profile_sec_btn font-14 font-500" (click)="createNewsAndEvent()">Publish
                         Now</a>
                 </div>
             </div>

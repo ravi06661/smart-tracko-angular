@@ -1,5 +1,4 @@
-export class NewsAndEvent {
-
+export class NewsAndEventRequest {
     public  id:number=0;
 	public  shortDescriptoin:string='';
 	public  briefDescription:string='';
@@ -10,7 +9,5 @@ export class NewsAndEvent {
 	public  updatedDate:Date | undefined;
 	public  isActive:boolean | undefined;
 	public  dayAgo:number=0;
-	public file:string='';
-    
+    public file:string='';
 }
-    
