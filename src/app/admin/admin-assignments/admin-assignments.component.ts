@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
 import { Course } from 'src/app/entity/course';
 import { Subject } from 'src/app/entity/subject';
 import { AssignmentRequest } from 'src/app/payload/assignment-request';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
+import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
 @Component({
   selector: 'app-admin-assignments',
@@ -13,19 +15,23 @@ import { SubjectService } from 'src/app/service/subject.service';
   styleUrls: ['./admin-assignments.component.scss']
 })
 export class AdminAssignmentsComponent implements OnInit{
-
+  BASE_URL = this.utilityService.getBaseUrl();
+  IMG_URL = this.BASE_URL+'/file/getImageApi/images/'
   assignmentRequest:AssignmentRequest = new AssignmentRequest;
   courses:Course[] = [];
   subjects:Subject[] = [];
-
+  sumitedAssignments:AssignmentSubmission[] = []
+  submitedAssignmentObj : AssignmentSubmission = new AssignmentSubmission
 
   constructor(private courseService:CourseServiceService,
               private subjectService:SubjectService,
               private assignmentService:AssignmentServiceService,
-              private router:Router){}
+              private router:Router,
+              private utilityService:UtilityServiceService){}
 
   ngOnInit(): void {
     this.getAllCourses();
+    this.getAllSubmitedAssignments();
   }
 
   public getAllCourses(){
@@ -48,6 +54,21 @@ export class AdminAssignmentsComponent implements OnInit{
         this.router.navigate(['/admin/createassignments/'+data.id])
       }
     })
+  }
+
+  public getAllSubmitedAssignments(){
+    this.assignmentService.getAllSubmitedAssignments().subscribe({
+      next:(data:any)=>{
+       this.sumitedAssignments = data
+      }
+    })
+  }
+
+  public pageRanderWithObj(object:AssignmentSubmission){
+    this.router.navigate(['/admin/assignmentsubmission'],{
+      queryParams:{
+        data : JSON.stringify(object)
+    }}) 
   }
 }
 
