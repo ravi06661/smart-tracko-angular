@@ -9,12 +9,12 @@ import { Question } from '../entity/question';
 import { fr } from 'date-fns/locale';
 import { TaskQuestionRequest } from '../payload/task-question-request';
 import { an } from '@fullcalendar/core/internal-common';
+import { AssignmentSubmissionRequest } from '../payload/assignment-submission-request';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AssignmentServiceService {
-
-
 
   BASE_URL = this.utilityService.getBaseUrl();
   assignmentUrl = this.BASE_URL + '/assignment';
@@ -29,6 +29,7 @@ export class AssignmentServiceService {
   public getAssignmentById(assignmentId: number) {
     return this.http.get(`${this.assignmentUrl}/getAssignment?assignmentId=${assignmentId}`);
   }
+
   public addQuestionInTask(question: TaskQuestionRequest, assignmentId: number) {
     let formData = new FormData();
     formData.append('question', question.question)
@@ -51,6 +52,16 @@ export class AssignmentServiceService {
     formData.append('attachment', data.attachment)
     return this.http.post(`${this.assignmentUrl}/addAssignment`, formData)
   }
+
+
+  public  submitAssignment(assignmentSubmission: AssignmentSubmissionRequest,file:any) {
+    let formData = new FormData();
+    formData.append('assignmentSubmissionRequest',JSON.stringify(assignmentSubmission))
+    formData.append('file',file)
+    return this.http.post(`${this.assignmentUrl}/submitAssignment`,formData);
+  }
+
+
   public addAssignmentQuestions(assignmentQuestionsData: AssignmentQuestionRequest) {
 
     // console.log(assignmentQuestionsData);
@@ -137,14 +148,31 @@ export class AssignmentServiceService {
     return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`, assignmentQuestionsData)
   }
 
+  //This Method for Student Uses
   public getAllAssignments() {
     return this.http.get(`${this.assignmentUrl}/getAllAssignments`);
   }
 
-  public getAssignmentQuestionById(questionId: number) {
-    return this.http.get(`${this.assignmentUrl}/getAssignmentQueById?questionId=${questionId}`)
+  public getAssignmentQuestionById(questionId: number,assignmentId:number) {
+    return this.http.get(`${this.assignmentUrl}/getAssignmentQuesById?questionId=${questionId}&assignmentId=${assignmentId}`)
   }
 
+  public getSubmitedAssignmetByStudentId(studentId:number){
+    return this.http.get(`${this.assignmentUrl}/getSubmitedAssignmetByStudentId?studentId=${studentId}`);
+  }
+
+  //This Method for Admin Uses
+  public getAllSubmitedAssignments() {
+    return this.http.get(`${this.assignmentUrl}/getAllSubmitedAssginments`);
+  }
+
+  public updateSubmitAssignmentStatus(submissionId: number, status: string , review: string) {
+    const formData = new FormData();
+    formData.append('submissionId',submissionId.toString());
+    formData.append('status',status);
+    formData.append('review',review);
+    return this.http.put(`${this.assignmentUrl}/updateSubmitedAssignmentStatus`,formData);
+  }
 
   // public getAssignment(id: number) {
   //   return this.http.get(`${this.assignmentUrl}/getAssignment/` + id)
