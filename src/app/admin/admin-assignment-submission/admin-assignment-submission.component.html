@@ -3,8 +3,8 @@
 
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Submission</h1>
-            <button class="top_profile_sec_btn font-14 font-500" data-bs-toggle="modal"
-            data-bs-target="#exampleModal1">Create New</button>
+            <!-- <button class="top_profile_sec_btn font-14 font-500" data-bs-toggle="modal"
+            data-bs-target="#exampleModal1">Create New</button> -->
         </div>
 
        <app-profile-bar></app-profile-bar>
@@ -17,16 +17,16 @@
         <div class="row">
             <div class="col-md-12 d-flex align-items-center justify-content-between mb_24">
                 <div class="person-detail d-flex align-items-center gap_5">
-                    <img src="assets/images/temp_img/girlimg60.png" alt="" class="img-fluid">
-                    <h5 class="font-18 font-600 mb-0">Wade Warren <br>
-                        <p class="text_gray font-17 font-400 mb-0">Core Java</p>
+                    <img [src]="IMG_URL+submitedAssignment.student.profilePic" alt="" class="img-fluid imagestudent">
+                    <h5 class="font-18 font-600 mb-0">{{submitedAssignment.student.fullName}}<br>
+                        <p class="text_gray font-17 font-400 mb-0">{{submitedAssignment.student.applyForCourse}}</p>
                     </h5>
                 </div>
-                <div class="right-reject-btn">
+                <div class="right-reject-btn" *ngIf="submitedAssignment.status == 'Unreviewed' || submitedAssignment.status == 'Reviewing'">
                     <button class="top_profile_sec_btn font-15 font-500 reject-btn" data-bs-toggle="modal"
-                    data-bs-target="#submit_review_modal">Reject & Reassign</button>
+                    data-bs-target="#submit_review_modal" (click)="status = 'Rejected'">Reject</button>
                     <button class="top_profile_sec_btn font-15 font-500" data-bs-toggle="modal"
-                    data-bs-target="#submit_review_modal">Accept & Mark Complete</button>
+                    data-bs-target="#submit_review_modal" (click)="status = 'Accepted'">Accept & Mark Complete</button>
                 </div>
             </div>
 
@@ -37,28 +37,29 @@
             <div class="col-md-12 mb_24">
                 <div class="d-flex align-items-center gap_24">
                     <h3 class="report_title font-17 font-600 secondary position-relative">Report</h3>
-                    <p class="mb-0 font-17 font-400 text_gray">08:48 PM, 11/07/23</p>
+                    <p class="mb-0 font-17 font-400 text_gray">{{submitedAssignment.submissionDate | date:'short'}}</p>
                 </div>
                 <ul class="submission_report ps-0">
-                    <li>How would you reverse the order of elements in an array in Java without using any
+                    <li>{{submitedAssignment.description}}</li>
+                    <!-- <li>How would you reverse the order of elements in an array in Java without using any
                         built-in methods</li>
                     <li>How would you reverse the order of elements in an array in Java without using any
-                        built-in methods</li>
-                    <li>How would you reverse the order of elements in an array in Java without using any
-                        built-in methods</li>
+                        built-in methods</li> -->
                 </ul>
             </div>
 
             <div class="col-md-12">
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Attachments</h3>
-                <form class="attachment_file2 d-inline-flex align-items-center  position-relative">
-                    <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
-                    <label for="fileupload" class="font-15 font-700 secondary text-white attachment_file_text">
-                        <i
-                            class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
-                        Attachments <span class="mx-0 ms-2 font-15 font-400 text-white">Assignment
-                            Files.zip</span></label>
-                </form>
+                <br>
+                <form class="attachment_file1 d-inline-flex align-items-center position-relative">
+                    <!-- Instead of an input element, use an anchor (a) tag -->
+                    <a href="{{ATTACHMENT_URL+submitedAssignment.submitFile}}" download="Assignment Files.zip"
+                       class="font-15 font-700 secondary text-white attachment_file_text">
+                      <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
+                      Attachments
+                      <span class="mx-0 ms-2 font-15 font-400 text-white">{{'Download Submited File'}}</span>
+                    </a>
+                  </form>
 
             </div>
 
@@ -151,13 +152,13 @@
 
   <div>
     <h4 class="sub-heading font-17 font-500 secondary">Remark/Comment</h4>
-    <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6"
-      placeholder="Start Typing....."></textarea>
+    <textarea class="form-control text_area" id="exampleFormControlTextarea1" name="review" rows="6"
+      placeholder="Start Typing....." [(ngModel)]="review"></textarea>
   </div>
   <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
     <button type="button" class="cancel_modal_btn" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
     <a routerLink="/admin/assignmentsubmission">
-    <button type="button" class="apply_modal_btn">Submit</button>
+    <button type="button" class="apply_modal_btn" data-bs-dismiss="modal" aria-label="Close" (click)="updateSubmitAssignmentStatus(status)">Submit</button>
     </a>
   </div>
 
