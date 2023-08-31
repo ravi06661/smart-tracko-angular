@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { Task } from 'src/app/entity/task';
+import { LoginService } from 'src/app/service/login.service';
 import { TaskServiceService } from 'src/app/service/task-service.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
@@ -16,8 +17,8 @@ export class TaskDetailsComponent {
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   taskSubmittion: StudentTaskSubmittion = new StudentTaskSubmittion();
-  constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService) { }
-
+  message: string = ''
+  constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService, private loginService: LoginService) { }
 
   ngOnInit() {
     this.taskId = this.router.snapshot.params[('id')]
@@ -31,10 +32,23 @@ export class TaskDetailsComponent {
     )
   }
   public submitTask() {
-    this.taskService.submitTask(this.taskSubmittion).subscribe(
+   // this.taskSubmittion.studentId = this.loginService.getStudentId();
+    this.taskService.submitTask(this.taskSubmittion,this.taskId).subscribe(
       (data) => {
-       
+        this.taskSubmittion = new StudentTaskSubmittion
+        this.message = "Success.."
+        alert("success");
       }
     )
   }
+  public reaload() {
+    this.message = ''
+  }
+  public deleteFile() {
+    
+  }
+  public setImage(event:any){
+   this.taskSubmittion.submittionFileName=event.target.files[0];
+  }
 }
+
