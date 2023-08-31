@@ -219,138 +219,22 @@
                             </tr>
                         </thead>
                         <tbody class="bg-light">
-                            <tr>
+                            <tr *ngFor="let obj of sumitedAssignments">
                                 <td>
-                                   <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
-                                    <div class="person_image">
-                                        <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
-                                            class="img-fluid">
-                                    </div>
-                                    <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                   </a>
-                                </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
+                                    <a class="d-flex align-items-center gap_5" (click)="pageRanderWithObj(obj)">
                                      <div class="person_image">
-                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
+                                         <img [src]="IMG_URL+obj.student.profilePic" alt=""
                                              class="img-fluid">
                                      </div>
-                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
-                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                                     <h5 class="font-13 font-500 mb-0 text_dark">{{obj.student.fullName}}<br>
+                                         <p class="text_gray font-13 font-400 mb-0">{{obj.student.applyForCourse}}</p>
                                      </h5>
                                     </a>
                                  </td>
                                 <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
+                                <td>{{obj.submissionDate | date:'short'}}</td>
+                                <td [ngClass]="{'active_txt_blue':(obj.status=='Reviewing')||(obj.status=='Unreviewed'),'active_txt_orange':obj.status=='Rejected','active_txt_green':obj.status=='Accepted'}">{{obj.status}}</td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
-                                     <div class="person_image">
-                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
-                                             class="img-fluid">
-                                     </div>
-                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
-                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                     </h5>
-                                    </a>
-                                 </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
-                                     <div class="person_image">
-                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
-                                             class="img-fluid">
-                                     </div>
-                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
-                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                     </h5>
-                                    </a>
-                                 </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
-                                     <div class="person_image">
-                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
-                                             class="img-fluid">
-                                     </div>
-                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
-                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                     </h5>
-                                    </a>
-                                 </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
-                                     <div class="person_image">
-                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
-                                             class="img-fluid">
-                                     </div>
-                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
-                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                     </h5>
-                                    </a>
-                                 </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
-                                     <div class="person_image">
-                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
-                                             class="img-fluid">
-                                     </div>
-                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
-                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                     </h5>
-                                    </a>
-                                 </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_orange">Reassigned</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a routerLink="/admin/assignmentsubmission" class="d-flex align-items-center gap_5">
-                                     <div class="person_image">
-                                         <img src="assets/images/temp_img/Ellipse 2325.png" alt=""
-                                             class="img-fluid">
-                                     </div>
-                                     <h5 class="font-13 font-500 mb-0 text_dark">Wade Warren <br>
-                                         <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                     </h5>
-                                    </a>
-                                 </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_green">Accepted</td>
-                            </tr>
-
-
                         </tbody>
                     </table>
                 </div>

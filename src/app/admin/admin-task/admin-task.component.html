@@ -212,18 +212,18 @@
                             </tr>
                         </thead>
                         <tbody class="bg-light">
-                            <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
+                            <tr *ngFor="let obj of submitedTasksList">
+                                <td class="d-flex align-items-center" style="gap:5px;" (click)="pageRanderWithObject(obj)">
                                     <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                                    <h5 class="font-13 font-500 mb-0">{{obj.student.fullName}} <br>
+                                        <p class="text_gray font-13 font-400 mb-0">{{obj.student.applyForCourse}}</p>
                                     </h5>
                                 </td>
                                 <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
+                                <td>{{obj.submissionDate|date:'short'}}</td>
+                                <td class="active_txt_blue">{{obj.status}}</td>
                             </tr>
-                            <tr>
+                            <!-- <tr>
                                 <td class="d-flex align-items-center" style="gap:5px;">
                                     <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
                                     <h5 class="font-13 font-500 mb-0">Wade Warren <br>
@@ -301,7 +301,7 @@
                                 <td>Hello World! In Java</td>
                                 <td>08:48 PM, 11/07/23</td>
                                 <td class="active_txt_green">Accepted</td>
-                            </tr>
+                            </tr> -->
 
 
                         </tbody>

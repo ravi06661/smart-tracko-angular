@@ -13,7 +13,7 @@
           <div class="col-md-12" *ngFor="let obj of task.taskQuestion ;let i=index" >
               <div class="question_ans">
                   <h3 class="font-17 font-600">Question {{i+1}}</h3>
-                  <h4 class="font-17 font-400">{{obj.question}}</h4>
+                  <h4 class="font-17 font-400" [innerHTML]="obj.question"></h4>
                 </div>
                 <div class="row advertisement">
 
@@ -57,7 +57,7 @@
         <div class="modal-body">
           <div class="modal-header apply_title">
             <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Submit Assignment</h1>
-            <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close">
+            <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close" (click)="reaload()">
               <i class="fi fi-rr-cross close_icon"></i>
             </button>
           </div>
@@ -65,33 +65,33 @@
             <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
             <div class="">
               <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                placeholder="Input Text Here" [ngModel]="taskSubmittion.taskDescription"></textarea>
+                placeholder="Input Text Here" [(ngModel)]="taskSubmittion.taskDescription"></textarea>
             </div>
           </div>
 
           <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading</h4>
-          <form class="select_file d-flex align-items-center  file position-relative">
-            <input type="file" name="submittionFileName" value="submittionFileName" class="d-none" id="submittionFileName" [(ngModel)]="taskSubmittion.submittionFileName">
-            <label for="fileupload" class="font-15 font-400 secondary w-75">Select A File</label>
-            <button type="button" class="submit_btn0 ms-auto">
-              <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i><a type="btn" value=""
-                class=" font-15 font-400 text-white">Upload File</a>
+          <form class="select_file d-flex align-items-center file position-relative">
+            <input type="file" name="submittionFileName" value="file" class="d-none" id="file" (change)="setImage($event)" >
+            <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
+            <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">
+              <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i>Upload File
             </button>
           </form>
-
+          
           <div class="file_option">
             <div class=" d-flex file_name">
               <i class="fi fi-rr-paperclip-vertical secondary add_more"></i>
-              <i class="fi fi-rr-trash secondary delete"></i>
-              <h3 class="font-15 font-400 dark mx-1 mb-0">File_name.pdf</h3>
+              <i class="fi fi-rr-trash secondary delete pointer" (click)="deleteFile()"></i>
+              <h3 class="font-15 font-400 dark mx-1 mb-0">{{taskSubmittion.submittionFileName}}</h3>
             </div>
 
           </div>
 
           <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
             <button type="button" class="cancel_modal_btn">Save Draft</button>
-            <button type="button" class="apply_modal_btn">Submit</button>
+            <button type="button" class="apply_modal_btn" (click)="submitTask()">Submit</button>
           </div>
+          <h6 *ngIf="message!=null">{{message}}</h6>
         </div>
       </div>
     </div>
