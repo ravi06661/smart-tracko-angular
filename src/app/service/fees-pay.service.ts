@@ -48,4 +48,11 @@ export class FeesPayService {
   public updateFeesPay(feesPay:FeesPay){
     return this.http.put(`${this.feesUrl}/updateFeesPay`, feesPay);
   }
+  public searchByNameInFeesPayList(fullName :string){
+    return this.http.get(`${this.feesUrl}/searchByNameInFeesPayList?fullName=${fullName}`)
+  }
+
+  public searchByMonthInFeesPayList(startDate:string,endDate:string){
+    return this.http.get(`${this.feesUrl}/searchByMonthInFeesPayList?startDate=${startDate}&endDate=${endDate}`);
+  }
 }

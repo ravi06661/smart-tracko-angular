@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { UtilityServiceService } from './utility-service.service';
+import { NewsAndEventRequest } from '../payload/news-and-event-request';
+import { NewsAndEvent } from '../entity/news-and-event';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +39,17 @@ export class NewsEventServiceService  {
 
   public getByNewsById(id:number){
     return this.http.get(`${this.newsEventUrl}/getNewsEvents?id=${id}`);
+  }
+
+  public createNewsAndEvent(data:NewsAndEventRequest){
+    var formData = new FormData();
+    console.log(data);
+    
+    formData.append('shortDescriptoin', data.shortDescriptoin)
+    formData.append('briefDescription', data.briefDescription)
+    formData.append('title', data.title)
+    formData.append('file', data.file)
+    
+    return this.http.post<NewsAndEvent>(`${this.newsEventUrl}/createNewsEvents`, formData)
   }
 }

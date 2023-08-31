@@ -11,11 +11,13 @@ import { NewsEventServiceService } from 'src/app/service/news-event-service.serv
 export class AdminNewsAndEventComponent implements OnInit {
 
   BASE_URL=this.utilityService.getBaseUrl();
-  imageUrl=this.BASE_URL+'/File/getImageApi/newsEventImage/'
+  imageUrl=this.BASE_URL+'/file/getImageApi/newsEventImage/'
   newsAndEvents:NewsAndEvent[]=[];
+  newsAndEventss:NewsAndEvent=new NewsAndEvent();
   page=0;
   size=10;
   totalNewsAndEvents=0;
+  id=0;
   constructor (private newsEventService:NewsEventServiceService,private utilityService:UtilityServiceService)  {}
 
   ngOnInit(): void {
@@ -25,8 +27,9 @@ export class AdminNewsAndEventComponent implements OnInit {
   public getAllNewsAndEvents(page:number,size:number){
     this.newsEventService.getAllNewsAndEvents(page,size).subscribe({
       next:(data:any)=>{
-        this.newsAndEvents = data.content;
+        this.newsAndEvents = data.response;
         this.totalNewsAndEvents = data.totalElements;
+        this.newsAndEvents = this.getNewsAndEvent(data);
       }
     })
   }
@@ -65,5 +68,23 @@ export class AdminNewsAndEventComponent implements OnInit {
     this.page = event.pageIndex;
     this.size = event.pageSize;
     this.getAllNewsAndEvents(this.page,this.size);
+  }
+
+  public getNewsAndEvent(data: any): NewsAndEvent[] {
+    const news: NewsAndEvent[] = [];
+
+    for (const element of data.response) {
+      const count = this.getDaysDifference(element.createdDate);
+      element.dayAgo = count; // Assuming the NewsAndEvent interface has a property called 'daysDifference'
+      news.push(element);
+    }
+
+    return news;
+  }
+  public getDaysDifference(createdDate: any): number {
+    const currentDate = new Date();
+    const differenceInTime = currentDate.getTime() - new Date(createdDate).getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24); // Convert milliseconds to days
+    return Math.floor(differenceInDays); // Round down to the nearest integer
   }
 }

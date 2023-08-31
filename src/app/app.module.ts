@@ -85,6 +85,8 @@ import { AdminEditFeesComponent } from './admin/admin-edit-fees/admin-edit-fees.
 import { ReviewComponent } from './pages/review/review.component';
 import { ResultComponent } from './pages/result/result.component';
 import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-submission/admin-assignment-submission.component';
+import { AdminEditJobAlertComponent } from './admin/admin-edit-job-alert/admin-edit-job-alert.component';
+
 
 
 
@@ -154,6 +156,8 @@ import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-sub
     ReviewComponent,
     ResultComponent,
     AdminAssignmentSubmissionComponent,
+    AdminEditJobAlertComponent,
+  
    
        
  

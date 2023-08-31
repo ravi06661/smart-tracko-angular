@@ -4,6 +4,7 @@ import { JobAlert } from '../entity/job-alert';
 import { UtilityServiceService } from './utility-service.service';
 import { Observable } from 'rxjs';
 import { an } from '@fullcalendar/core/internal-common';
+import { JobAlertRequest } from '../payload/job-alert-request';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,7 @@ export class JobAlertService {
   constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
 
 
-  addJob(data: JobAlert) {
+  addJob(data: JobAlertRequest) {
 
     var formData = new FormData();
     formData.append('jobTitle', data.jobTitle)
@@ -24,7 +25,7 @@ export class JobAlertService {
     formData.append('type', data.type)
     formData.append('jobPackage', data.jobPackage)
     formData.append('companyName', data.companyName)
-    formData.append('technologyStackId', (data.technologyStack.id).toString())
+    formData.append('technologyStackId', (data.technologyStackId).toString())
     return this.http.post<JobAlert>(`${this.jobUrl}/createJobApi`, formData)
   }
   getInternShipJobs(page: number, size: number) {
@@ -39,15 +40,15 @@ export class JobAlertService {
   getAllJobsAndIntership(page: Number, size: number) {
     return this.http.get<JobAlert[]>(`${this.jobUrl}/getAllJobsAndIntershipApi?type=JOB&page=${page}&size=${size}`)
   }
-  activeJob(id: number) {
-    return this.http.put<JobAlert>(`${this.jobUrl}/activeJobApi?jobId=${id}`, null);
+  activeJob(jobId: number) {
+    return this.http.put<JobAlert>(`${this.jobUrl}/activeJobApi?jobId=${jobId}`, null);
   }
-  delete(id: number) {
-    return this.http.delete(`${this.jobUrl}/deleteJobApi?jobId=${id}`)
+  delete(jobId: number) {
+    return this.http.delete(`${this.jobUrl}/deleteJobApi?jobId=${jobId}`)
   }
 
-  getJob(id: number): Observable<any> {
-    return this.http.get<JobAlert>(`${this.jobUrl}/getJobApi?jobId=${id}`)
+  getJob(jobId: number): Observable<any> {
+    return this.http.get<JobAlert>(`${this.jobUrl}/getJobApi?jobId=${jobId}`)
   }
 
   searchJobs(data: any, role: string) {
@@ -60,5 +61,11 @@ export class JobAlertService {
       params = params.append("role", "admin")
     }
     return this.http.get<JobAlert[]>(`${this.jobUrl}/searchJobApi`, { params })
+  }
+
+  updateJobs(jobAlert:JobAlert){
+   
+    
+    return this.http.put(`${this.jobUrl}/updateAlertJobApi`,jobAlert);
   }
 }

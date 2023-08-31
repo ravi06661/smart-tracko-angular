@@ -61,6 +61,7 @@ import { AdminEditFeesComponent } from './admin/admin-edit-fees/admin-edit-fees.
 import { ResultComponent } from './pages/result/result.component';
 import { ReviewComponent } from './pages/review/review.component';
 import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-submission/admin-assignment-submission.component';
+import { AdminEditJobAlertComponent } from './admin/admin-edit-job-alert/admin-edit-job-alert.component';
 
 
 const routes: Routes = [
@@ -109,6 +110,7 @@ const routes: Routes = [
       {path:'feescompletedlist',component:AdminFeesCompletedListComponent,pathMatch:'full'},
       {path:'jobalert',component:AdminJobAlertComponent,pathMatch:'full'},
       {path:'createjob',component:AdminCreateNewJobComponent,pathMatch:'full'},
+      {path:'editjob/:jobId',component:AdminEditJobAlertComponent,pathMatch:'full'},
       {path:'newsAndEvent',component:AdminNewsAndEventComponent,pathMatch:'full'},
       {path:'createnewsAndEvent',component:AdminCreateNewsAndEventsComponent,pathMatch:'full'},
       {path:'announcements',component:AnnouncementsComponent,pathMatch:'full'},
