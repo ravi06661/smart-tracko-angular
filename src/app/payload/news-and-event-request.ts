@@ -9,5 +9,5 @@ export class NewsAndEventRequest {
 	public  updatedDate:Date | undefined;
 	public  isActive:boolean | undefined;
 	public  dayAgo:number=0;
-    public file:string='';
+    public fileName:string='';
 }
