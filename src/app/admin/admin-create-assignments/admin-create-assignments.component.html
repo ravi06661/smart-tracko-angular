@@ -84,6 +84,7 @@
             <div class="col-md-12" >
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Assignment Questions</h3>
                 <div class="edit-task-area mb_20" *ngFor="let obj of assignmentQuestionsData.assignmentQuestion;let i=index">
+                    {{obj.questionId}}
                     <div class="question_ans my-0">
                         <div class="show-less-question">
                             <h3 class="font-19 font-500 mb-0 secondary">Question - {{i+1}}</h3>
@@ -127,7 +128,7 @@
                             </div> -->
                             <div class="edit-delete-que mt-5">
                                 <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color"
-                                    data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                                    data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="setQuestionId(obj.questionId)"><i
                                         class="fi fi-rr-trash line-height-0"></i>
                                     Delete</span>
                                 <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"><i
@@ -141,7 +142,7 @@
             <div class="col-md-12 mb_24">
                 <div class="edit-task-area">
                     <div class="question_ans mt-0">
-                        <h3 class="font-19 font-500 mb-0 secondary">Question -{{assignmentQuestionsData.assignmentQuestion.length +1}}</h3>
+                        <h3 class="font-19 font-500 mb-0 secondary">Question -</h3>
                     </div> <!-- question_ans -->
 
                     <div class="row">
@@ -248,12 +249,12 @@
 
             <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                <a routerLink="/admin/createtask">
-                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                <a >
+                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" (click)="deleteAssignmentQuestion()">Yes,
                         delete</button>
                 </a>
-                <a routerLink="/admin/createtask">
-                    <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+                <a>
+                    <button type="button" class="apply_modal_btn font-15 font-500" >No, Do not delete</button>
                 </a>
             </div>
 

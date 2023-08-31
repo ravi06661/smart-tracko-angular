@@ -4,7 +4,10 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { an } from '@fullcalendar/core/internal-common';
 import { Course } from 'src/app/entity/course';
 import { Subject } from 'src/app/entity/subject';
+import { Task } from 'src/app/entity/task';
 import { TaskQuestion } from 'src/app/entity/task-question';
+import { AssignmentQuestionRequest } from 'src/app/payload/assignment-question-request';
+import { TaskQuestionRequest } from 'src/app/payload/task-question-request';
 import { TaskRequest } from 'src/app/payload/task-request';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
@@ -19,25 +22,38 @@ export class AdminCreateTaskComponent {
   task: TaskRequest = new TaskRequest()
   subjects: Subject[] = []
   courses: Course[] = []
-  taskId:number=0;
-  question:TaskQuestion = new TaskQuestion()
+  taskId: number = 0;
+  question: TaskQuestion = new TaskQuestion()
   public Editor = ClassicEditor;
-  constructor(private activateRouter:ActivatedRoute,private subjectService: SubjectService, private courseService: CourseServiceService, private taskService: TaskServiceService, private router: Router) { }
+
+
+  taskData: Task = new Task
+  taskQuestion: TaskQuestionRequest = new TaskQuestionRequest();
+  imagePreview: string[] = [];
+  imageName: string[] = [];
+  newImg = '';
+  attachmentInfo = {
+    name: '',
+    size: 0
+  };
+  questionId: number = 0;
+  constructor(private activateRouter: ActivatedRoute, private subjectService: SubjectService, private courseService: CourseServiceService, private taskService: TaskServiceService, private router: Router) { }
   ngOnInit() {
-    this.taskId =this.activateRouter.snapshot.params[('id')]
+    this.taskId = this.activateRouter.snapshot.params[('id')]
     this.getTask()
   }
 
- public getTask(){
-  this.taskService.getTaskById(this.taskId).subscribe(
-    (data:any)=>{
-       this.task = data;
-    }
-  )
- }
+  public getTask() {
+    this.taskService.getTaskById(this.taskId).subscribe(
+      (data: any) => {
+        this.task = data;
+        this.taskData.taskQuestion = data.taskQuestion;
+        console.log(data);
+      }
+    )
+  }
 
   public getCourses() {
-
     this.courseService.getAll().subscribe(
       (data: any) => {
         this.courses = data
@@ -49,6 +65,72 @@ export class AdminCreateTaskComponent {
   public getSubjects() {
     this.subjects = this.task.course.subjects
   }
-  submit() {
+
+  public deleteTaskQuestion() {
+    this.taskService.deleteTaskQuestion(this.taskId, this.questionId).subscribe(
+      (data) => {
+        alert('Success..')
+        this.getTask();
+      }
+    )
   }
+
+  setQuestionId(id: number) {
+    console.log(id);
+    this.questionId = id;
+  }
+
+  public addAttachmentFile(event: any) {
+    const data = event.target.files[0];
+    this.attachmentInfo.name = event.target.files[0].name
+    this.attachmentInfo.size = Math.floor(((event.target.files[0].size) / 1024) / 1024)
+    this.taskData.submitFile = event.target.files[0];
+  }
+
+  public addTaskQuestion() {
+    this.taskService.addQuestionInTask(this.taskQuestion, this.taskId).subscribe(
+      (data: any) => {
+        this.taskData.taskQuestion = data.taskQuestion
+      }, (errore) => {
+        alert('Error')
+        //this.assignmentQuestionsData.assignmentQuestion = errore.assignmentQuestion
+      }
+    )
+    this.taskQuestion = new TaskQuestionRequest();
+    this.imagePreview = [];
+    this.imageName = [];
+  }
+
+  public submitTask() {
+    this.taskData.taskId = this.taskId
+    this.taskService.addAssignment(this.taskData)
+      .subscribe({
+        next: (data: any) => {
+          alert('Success..')
+          this.router.navigate(['/admin/task']);
+        }
+      })
+  }
+
+  public addImageFile(event: any) {
+    console.log(event);
+    this.taskQuestion.questionImages.push(event.target.files[0]);
+
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.imagePreview.push(e.target.result);
+        this.imageName.push(selectedFile.name);
+      };
+
+      reader.readAsDataURL(selectedFile);
+    } else {
+      this.imagePreview.push('');
+      this.imageName.push('');
+    }
+  }
+
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Course } from 'src/app/entity/course';
+import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { Subject } from 'src/app/entity/subject';
 import { Task } from 'src/app/entity/task';
 import { TaskRequest } from 'src/app/payload/task-request';
@@ -17,9 +18,16 @@ export class AdminTaskComponent {
   task: TaskRequest = new TaskRequest()
   subjects: Subject[] = []
   courses: Course[] = []
-  constructor(private subjectService: SubjectService, private courseService: CourseServiceService, private taskService: TaskServiceService, private router: Router) { }
+  submitedTasksList:StudentTaskSubmittion[] = []
+
+
+  constructor(private subjectService: SubjectService, 
+              private courseService: CourseServiceService, 
+              private taskService: TaskServiceService, 
+              private router: Router) { }
   ngOnInit() {
     this.getCourses();
+    this.getAllSubmitedTasks()
   }
   public getCourses() {
 
@@ -41,5 +49,20 @@ export class AdminTaskComponent {
       }
     )
     // this.router.navigate(['/admin/createtask/'])
+  }
+
+  public getAllSubmitedTasks(){
+    this.taskService.getAllSubmitedTasks().subscribe({
+      next:(data:any)=>{
+        this.submitedTasksList = data;
+      }
+    })
+  }
+
+  public pageRanderWithObject(object:StudentTaskSubmittion){
+    this.router.navigate(['/admin/submission'],{
+      queryParams:{
+        data : JSON.stringify(object)
+    }})
   }
 }

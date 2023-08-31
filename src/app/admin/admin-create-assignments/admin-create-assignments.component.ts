@@ -15,23 +15,22 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   assignmentId = 0;
   public Editor = ClassicEditor;
   assignment: Assignment = new Assignment();
-  assignmentQuestionsData: AssignmentQuestionRequest =
-    new AssignmentQuestionRequest();
+  assignmentQuestionsData: AssignmentQuestionRequest = new AssignmentQuestionRequest();
   taskQuestion: TaskQuestionRequest = new TaskQuestionRequest();
   imagePreview: string[] = [];
   imageName: string[] = [];
   newImg = '';
   attachmentInfo = {
-    name : '',
-    size : 0
-  } ;
-
+    name: '',
+    size: 0
+  };
+  questionId: number = 0;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private assignmentService: AssignmentServiceService,
-    private router:Router
-  ) {}
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.assignmentId = this.activateRoute.snapshot.params['id'];
@@ -43,6 +42,7 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     this.assignmentService.getAssignmentById(this.assignmentId).subscribe({
       next: (data: any) => {
         this.assignment = data;
+        this.assignmentQuestionsData.assignmentQuestion = data.assignmentQuestion
       },
     });
   }
@@ -50,7 +50,7 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   public addImageFile(event: any) {
     console.log(event);
     this.taskQuestion.questionImages.push(event.target.files[0]);
-   
+
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
@@ -69,58 +69,58 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   }
 
   public addTaskQuestion() {
-    //this.assignmentQuestionsData.assignmentQuestion.push(this.taskQuestion);
+    this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(
+      (data: any) => {
+        this.assignmentQuestionsData.assignmentQuestion = data.assignmentQuestion
+      }, (errore) => {
+        // alert('hi')
+        this.assignmentQuestionsData.assignmentQuestion = errore.assignmentQuestion
+      }
+
+    )
+
     this.taskQuestion = new TaskQuestionRequest();
     this.imagePreview = [];
     this.imageName = [];
-    console.log(this.assignmentQuestionsData);
   }
 
 
-  public addAttachmentFile(event:any){
-    const data =  event.target.files[0];
+  public addAttachmentFile(event: any) {
+    const data = event.target.files[0];
     this.attachmentInfo.name = event.target.files[0].name
-    this.attachmentInfo.size = Math.floor(((event.target.files[0].size)/1024)/1024)
+    this.attachmentInfo.size = Math.floor(((event.target.files[0].size) / 1024) / 1024)
     this.assignmentQuestionsData.taskAttachment = event.target.files[0];
   }
 
-  public submitAssignmentQuestions(){
-    this.assignmentService.addAssignmentQuestions(this.assignmentQuestionsData)
-    .subscribe({
-      next:(data:any)=>{
-        console.log(data);
-        //this.router.navigate(['/admin/task']);
-      }
-    })
+  public submitAssignmentQuestions() {
+    let obj = {
+      ...this.assignment,
+      attachment: this.assignmentQuestionsData.taskAttachment
+    }
+    this.assignmentService.addAssignment(obj)
+      .subscribe({
+        next: (data: any) => {
+          this.router.navigate(['/admin/task']);
+        }
+      })
   }
-
-
-
-
-
-
-
-  imageUrll:any
+  imageUrll: any
   public showImage(file: any) {
-    return  'assets/images/temp_img/modal.png';
+    return 'assets/images/temp_img/modal.png';
   }
   public imageUrl(file: any): void {
-   // const selectedFile = file;
-    console.log('calling');
-    
-    // if (selectedFile) {
-    //     const reader = new FileReader();
+  }
 
-    //     reader.onload = (e: any) => {
-    //         this.imageUrll = e.target.result;
-    //         this.newImg = this.imageUrll; // Set newImg here
-    //     };
-
-    //     reader.readAsDataURL(selectedFile);
-    // } else {
-    //     this.imageUrll = ''; // Clear the URL if no image is selected
-    //     this.newImg = '';    // Clear newImg as well
-    // }
-}
-
+  public deleteAssignmentQuestion() {
+    this.assignmentService.deleteTaskQuestion(this.assignmentId, this.questionId).subscribe(
+      (data) => {
+        alert('Success..')
+        this.getAssignmentById();
+      }
+    )
+  }
+  setQuestionId(id: number) {
+    console.log(id);
+    this.questionId = id;
+  }
 }

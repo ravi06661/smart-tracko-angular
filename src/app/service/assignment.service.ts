@@ -5,12 +5,17 @@ import { UtilityServiceService } from './utility-service.service';
 import { Profile } from '../entity/profile';
 import { AssignmentRequest } from '../payload/assignment-request';
 import { retry } from 'rxjs';
+import { Question } from '../entity/question';
+import { fr } from 'date-fns/locale';
+import { TaskQuestionRequest } from '../payload/task-question-request';
+import { an } from '@fullcalendar/core/internal-common';
 import { AssignmentSubmissionRequest } from '../payload/assignment-submission-request';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AssignmentServiceService {
-  
+
   BASE_URL = this.utilityService.getBaseUrl();
   assignmentUrl = this.BASE_URL + '/assignment';
 
@@ -25,6 +30,30 @@ export class AssignmentServiceService {
     return this.http.get(`${this.assignmentUrl}/getAssignment?assignmentId=${assignmentId}`);
   }
 
+  public addQuestionInTask(question: TaskQuestionRequest, assignmentId: number) {
+    let formData = new FormData();
+    formData.append('question', question.question)
+    formData.append('videoUrl', question.videoUrl)
+    formData.append('assignmentId', assignmentId.toString())
+    question.questionImages.forEach((t) => {
+      formData.append('questionImages', t)
+    })
+    return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`, formData)
+  }
+  public deleteTaskQuestion(assignmentId: number, questionId: number) {
+    return this.http.delete(`${this.assignmentUrl}/deleteTaskQuestion?questionId=${questionId}&assignmentId=${assignmentId}`)
+  }
+  public addAssignment(data: any) {
+    let formData = new FormData();
+    formData.append('assignmentId', data.id)
+    // formData.append('course', JSON.stringify(data.course))
+    // formData.append('subject', data.subject)
+    // formData.append('title', data.title)
+    formData.append('attachment', data.attachment)
+    return this.http.post(`${this.assignmentUrl}/addAssignment`, formData)
+  }
+
+
   public  submitAssignment(assignmentSubmission: AssignmentSubmissionRequest,file:any) {
     let formData = new FormData();
     formData.append('assignmentSubmissionRequest',JSON.stringify(assignmentSubmission))
@@ -32,13 +61,14 @@ export class AssignmentServiceService {
     return this.http.post(`${this.assignmentUrl}/submitAssignment`,formData);
   }
 
+
   public addAssignmentQuestions(assignmentQuestionsData: AssignmentQuestionRequest) {
 
     // console.log(assignmentQuestionsData);
-  //   const formData = new FormData();
+    //   const formData = new FormData();
 
-   //  formData.append('taskAttachment',assignmentQuestionsData.taskAttachment)
-  ///  formData.append('assignmentId',assignmentQuestionsData.assignmentId.toString())
+    //  formData.append('taskAttachment',assignmentQuestionsData.taskAttachment)
+    ///  formData.append('assignmentId',assignmentQuestionsData.assignmentId.toString())
     // assignmentQuestionsData.assignmentQuestion.forEach((question, questionIndex) => {
     //   formData.append(`assignmentQuestion[${questionIndex}]`, JSON.stringify(question));
 
@@ -47,14 +77,14 @@ export class AssignmentServiceService {
     //   });
     // });
 
-  //  formData.append('assignmentQuestionsData', JSON.stringify(assignmentQuestionsData));
+    //  formData.append('assignmentQuestionsData', JSON.stringify(assignmentQuestionsData));
 
     // Append images
     const assignmentQuestionData = new FormData();
- //   assignmentQuestionData.append('assignmentQuestionData', JSON.stringify(assignmentQuestionsData));
-    
+    //   assignmentQuestionData.append('assignmentQuestionData', JSON.stringify(assignmentQuestionsData));
+
     // Construct questionImages data
-   // const questionImagesData = new FormData();
+    // const questionImagesData = new FormData();
     assignmentQuestionsData.assignmentQuestion.forEach((taskQuestion, questionIndex) => {
       taskQuestion.questionImages.forEach((image, imageIndex) => {
         assignmentQuestionData.append(`questionImages[${questionIndex}][${imageIndex}]`, image);
@@ -65,7 +95,7 @@ export class AssignmentServiceService {
     // formData.append('assignmentId', assignmentQuestionsData.assignmentId.toString());
 
     // Append assignmentQuestion as a JSON string
-   // formData.append('assignmentQuestion', JSON.stringify(assignmentQuestionsData.assignmentQuestion));
+    // formData.append('assignmentQuestion', JSON.stringify(assignmentQuestionsData.assignmentQuestion));
 
     // Append questionImages
     // assignmentQuestionsData.assignmentQuestion.forEach((question, questionIndex) => {
@@ -75,13 +105,13 @@ export class AssignmentServiceService {
     // });
 
     // Loop through questionImages and append images
-// assignmentQuestionsData.assignmentQuestion.forEach((question, questionIndex) => {
-//   question.questionImages.forEach((image, imageIndex) => {
-//     console.log('image',image.name);
-    
-//     formData.append(`questionImages[${questionIndex}][${imageIndex}]`, image, image.name);
-//   });
-// });
+    // assignmentQuestionsData.assignmentQuestion.forEach((question, questionIndex) => {
+    //   question.questionImages.forEach((image, imageIndex) => {
+    //     console.log('image',image.name);
+
+    //     formData.append(`questionImages[${questionIndex}][${imageIndex}]`, image, image.name);
+    //   });
+    // });
     // const formData = new FormData();
 
     // let v = assignmentQuestionsData.assignmentQuestion
@@ -96,7 +126,7 @@ export class AssignmentServiceService {
     // })
     //}
     return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`, assignmentQuestionData)
-  //  return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`,null)
+    //  return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`,null)
     // const formData = new FormData();
     // formData.append('assignmentQuestionRequest', JSON.stringify(assignmentQuestionsData));
 
@@ -114,8 +144,8 @@ export class AssignmentServiceService {
     // });
     // Send the FormData to the backend
     // return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`, formData,{ headers });
-   console.log(assignmentQuestionsData);
-   return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`,assignmentQuestionsData)
+    console.log(assignmentQuestionsData);
+    return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`, assignmentQuestionsData)
   }
 
   //This Method for Student Uses
