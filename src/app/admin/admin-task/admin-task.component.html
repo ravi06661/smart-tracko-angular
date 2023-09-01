@@ -19,36 +19,38 @@
                 <div class="assignment-stats">
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Stats</h3>
                     <div class="assignment-stats-area">
-                        <div class="chart-detail">
+                        <div class="assignment-chart">
+                            <div class="Present tool_tip" [style.width]="50+'%'">
+                              <span class="tooltiptext">
+                                <span class="tip-box" style="background: #8079FF;"></span>Submited {{50}}%
+                            </span>
+                            </div>
+                            <div class="Absent tool_tip_absent" [style.width]="50+'%'">
+                              <span class="tooltiptext_absent">
+                                <span class="tip-box" style="background: #49CF9F;"></span>Reviewed {{50}}%
+                            </span>
+                            </div>
+                            <div class="Leave tool_tip_leave" [style.width]="50+'%'">
+                              <span class="tooltiptext_leave">
+                                <span class="tip-box" style="background: #F6C453;"></span>Unreviewed {{50}}%
+                            </span>
+                            </div>
+                            <!-- <div class="our_due" [style.width]="presentWidth"></div> -->
+                          </div>
+                          <div class="chart-detail-bottom justify-content-center">
                             <div class="submitted-value">
-                                <p>Submitted</p>
-                                <h2 class="font-14 font-600 text_dark"> <span
-                                        class="purple-small-box"></span>120</h2>
+                              <p>Submited</p>
+                              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{50}}%</h2>
                             </div>
                             <div class="pending-value">
-                                <p>Pending</p>
-                                <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>30
-                                </h2>
+                              <p>Reviewed</p>
+                              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{50}}%</h2>
                             </div>
-                        </div>
-                        <div class="assignment-chart">
-                            <div class="submitted"></div>
-                            <div class="approve"></div>
-                            <div class="pending"></div>
-                            <div class="our_due"></div>
-                        </div>
-                        <div class="chart-detail-bottom">
                             <div class="approve-value">
-                                <p>Approved</p>
-                                <h2 class="font-14 font-600 text_dark"> <span
-                                        class="purple-small-box"></span>120</h2>
+                              <p>Unreviewed</p>
+                              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{50}}%</h2>
                             </div>
-                            <div class="over-due-value">
-                                <p>Over Due</p>
-                                <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>30
-                                </h2>
-                            </div>
-                        </div>
+                          </div>
                     </div>
                 </div>
                 <div class="attendance_dropdown d-flex justify-content-between align-items-center">
@@ -214,14 +216,14 @@
                         <tbody class="bg-light">
                             <tr *ngFor="let obj of submitedTasksList">
                                 <td class="d-flex align-items-center" style="gap:5px;" (click)="pageRanderWithObject(obj)">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">{{obj.student.fullName}} <br>
+                                    <img [src]="IMG_URL+obj.student.profilePic" alt="" class="img-fluid imagestudent">
+                                    <h5 class="font-13 font-500 mb-0 pointer">{{obj.student.fullName}} <br>
                                         <p class="text_gray font-13 font-400 mb-0">{{obj.student.applyForCourse}}</p>
                                     </h5>
                                 </td>
                                 <td>Hello World! In Java</td>
                                 <td>{{obj.submissionDate|date:'short'}}</td>
-                                <td class="active_txt_blue">{{obj.status}}</td>
+                                <td  [ngClass]="{'active_txt_green':obj.status == 'Accepted','active_txt_orange':obj.status=='Rejected','active_txt_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</td>
                             </tr>
                             <!-- <tr>
                                 <td class="d-flex align-items-center" style="gap:5px;">

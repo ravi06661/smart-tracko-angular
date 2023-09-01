@@ -84,7 +84,7 @@ export class AdminCreateTaskComponent {
     const data = event.target.files[0];
     this.attachmentInfo.name = event.target.files[0].name
     this.attachmentInfo.size = Math.floor(((event.target.files[0].size) / 1024) / 1024)
-    this.taskData.submitFile = event.target.files[0];
+    this.taskData.taskAttachment = event.target.files[0];
   }
 
   public addTaskQuestion() {
