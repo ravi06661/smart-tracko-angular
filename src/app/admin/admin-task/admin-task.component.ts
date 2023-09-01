@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Course } from 'src/app/entity/course';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { Subject } from 'src/app/entity/subject';
+import { SubmissionAssignmentTaskStatus } from 'src/app/entity/submission-assignment-task-status';
 import { Task } from 'src/app/entity/task';
 import { TaskRequest } from 'src/app/payload/task-request';
 import { CourseServiceService } from 'src/app/service/course-service.service';
@@ -22,7 +23,8 @@ export class AdminTaskComponent {
   subjects: Subject[] = []
   courses: Course[] = []
   submitedTasksList:StudentTaskSubmittion[] = []
-
+  taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
+  taskSubmissionStatus2: SubmissionAssignmentTaskStatus= new SubmissionAssignmentTaskStatus
 
   constructor(private subjectService: SubjectService, 
               private courseService: CourseServiceService, 
@@ -32,6 +34,7 @@ export class AdminTaskComponent {
   ngOnInit() {
     this.getCourses();
     this.getAllSubmitedTasks()
+    this.getAllSubmissionTaskStatus()
   }
   public getCourses() {
 
@@ -68,5 +71,21 @@ export class AdminTaskComponent {
       queryParams:{
         data : JSON.stringify(object)
     }})
+  }
+  public getAllSubmissionTaskStatus(){
+    this.taskService.getAllSubmissionTaskStatus().subscribe(
+      (data:any)=>{
+        this.taskSubmissionStatus = data
+       console.log(data);
+       
+      }
+    )
+  }
+  public getOverAllAssignmentTaskStatus(){
+    this.taskService.getOverAllAssignmentTaskStatus().subscribe(
+       (data:any)=>{
+        this.taskSubmissionStatus2 = data;
+       }
+    )
   }
 }

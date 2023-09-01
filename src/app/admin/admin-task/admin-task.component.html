@@ -97,44 +97,21 @@
                                 <th scope="col" class="font-15 font-600 secondary">Summited</th>
                                 <th scope="col" class="font-15 font-600 secondary">Reviewed</th>
                                 <th scope="col" class="font-15 font-600 secondary">Unreviewed</th>
-                                <th scope="col" class="font-15 font-600 secondary">Over Due</th>
+                                <!-- <th scope="col" class="font-15 font-600 secondary">Over Due</th> -->
                             </tr>
                         </thead>
                         <tbody class="bg-light">
-                            <tr>
+                            <tr *ngFor="let obj of taskSubmissionStatus ;let i=index">
                                 <td>
-                                    <h5 class="font-15 font-500 mb-0">Hello World!</h5>
-                                    <p class="text_gray font-13 font-400 mb-0">Core Java - Java</p>
+                                    <h5 class="font-15 font-500 mb-0">Task {{i+1}}</h5>
+                                    <p class="text_gray font-13 font-400 mb-0">{{obj.taskCount}}</p>
                                 </td>
                                 <td class="txt_color_blue">Active</td>
-                                <td class="txt_color_purple">214</td>
-                                <td class="txt_color_light_green">126</td>
-                                <td class="txt_color_yellow">72</td>
-                                <td class="txt_color_orange">16</td>
+                                <td class="txt_color_purple">{{obj.totalSubmitted}}</td>
+                                <td class="txt_color_light_green">{{obj.reveiwed}}</td>
+                                <td class="txt_color_yellow">{{obj.underReveiwed}}</td>
+                                <!-- <td class="txt_color_orange">16</td> -->
                             </tr>
-                            <tr>
-                                <td>
-                                    <h5 class="font-15 font-500 mb-0">Hello World!</h5>
-                                    <p class="text_gray font-13 font-400 mb-0">Core Java - Java</p>
-                                </td>
-                                <td class="txt_color_blue">Active</td>
-                                <td class="txt_color_purple">214</td>
-                                <td class="txt_color_light_green">126</td>
-                                <td class="txt_color_yellow">72</td>
-                                <td class="txt_color_orange">16</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5 class="font-15 font-500 mb-0">Hello World!</h5>
-                                    <p class="text_gray font-13 font-400 mb-0">Core Java - Java</p>
-                                </td>
-                                <td class="txt_color_blue">Active</td>
-                                <td class="txt_color_purple">214</td>
-                                <td class="txt_color_light_green">126</td>
-                                <td class="txt_color_yellow">72</td>
-                                <td class="txt_color_orange">16</td>
-                            </tr>
-                            
                         </tbody>
                     </table>
                 </div>
