@@ -56,7 +56,7 @@
                                           class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer"><i
                                               class="fi fi-rr-document line-height-0"></i> View</a></li>
                                         <li>  <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer" data-bs-toggle="modal"
-                                          data-bs-target="#subject-edit-modal" (click)="getSubjectById(subject.subjectId)"><i
+                                          data-bs-target="#subject-edit-modal" (click)="getSubjectById(subject.subjectId)" ><i
                                               class="fi fi-rr-file-edit line-height-0"></i> Edit</p></li>
                                         <li> <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding pointer"
                                           data-bs-toggle="modal" data-bs-target="#delete-modal"  (click)="setSubjectId(subject.subjectId)"><i
@@ -127,7 +127,7 @@
                 <form action="">
                     <div class="row">
                         <div class="col-md-12 mb_18">
-                            <div
+                            <!-- <div
                                 class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative">
                                 <input type="file" name="fileupload" value="fileupload" class="d-none"
                                     id="fileupload">
@@ -140,6 +140,12 @@
                                     <select class="form-select enabled_inp" aria-label="Default select example" style="background-color: #f2f2f2 !important;" name="technologyStack" [(ngModel)]="subject.technologyStack.id">
                                         <option [ngValue]="subject.technologyStack.id">{{subject.technologyStack.technologyName}}</option>
                                     </select>
+                            </div> -->
+                            <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{subject.technologyStack.technologyName}}</h6>
+                            <div class="all-course-images d-flex flex-wrap">
+                                <div class="add-course-img" *ngFor="let image of techImages">
+                                    <img [src]="techUrl+image.imageName"  alt="" (click)="subject.technologyStack.id= image.id" (click)="subject.technologyStack.technologyName = image.technologyName">
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12 mb_18">
@@ -181,7 +187,7 @@
 
                 <form action="">
                     <div class="row">
-                        <div class="col-md-12 mb_18">
+                        <!-- <div class="col-md-12 mb_18">
                             <div
                                 class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative">
                                 <input type="file" name="fileupload" value="fileupload" class="d-none"
@@ -190,12 +196,20 @@
                                     <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                                     Add Media</label>
                             </div>
-                        </div>
-                        <div class="col-md-12 mb_18">
+                        </div> -->
+                        <!-- <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Add Media</label>
                                 <select class="form-select enabled_inp" aria-label="Default select example" style="background-color: #f2f2f2 !important;" name="imageId" [(ngModel)]="subjectData.imageId">
                                     <option *ngFor="let image of techImages" [ngValue]="image.id">{{image.technologyName}}</option>
                                 </select>
+                        </div> -->
+                        <div class="col-md-12 mb_18">
+                            <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{imageName}}</h6>
+                                <div class="all-course-images d-flex flex-wrap">
+                                    <div class="add-course-img" *ngFor="let image of techImages">
+                                        <img [src]="techUrl+image.imageName"  alt="" (click)="subjectData.imageId = image.id" (click)="imageName = image.technologyName">
+                                    </div>
+                                </div>
                         </div>
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Subject Name</label>

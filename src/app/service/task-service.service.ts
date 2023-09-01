@@ -5,12 +5,14 @@ import { TaskRequest } from '../payload/task-request';
 import { StudentTaskSubmittion } from '../entity/student-task-submittion';
 import { TaskQuestionRequest } from '../payload/task-question-request';
 import { Task } from '../entity/task';
+import { s } from '@fullcalendar/core/internal-common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskServiceService {
- 
+  
+
   BASE_URL = this.utilityService.getBaseUrl();
   TASK_URL = this.BASE_URL + '/task';
 
@@ -27,7 +29,7 @@ export class TaskServiceService {
   }
   public submitTask(task: StudentTaskSubmittion,taskId:number) {
     let formData = new FormData();
-   // formData.append('studentId', task.studentId.toString())
+    formData.append('studentId', task.student.studentId.toString())
     formData.append('submittionFileName', task.submittionFileName)
     formData.append('taskDescription', task.taskDescription)
     formData.append('taskId',taskId.toString())
@@ -49,11 +51,24 @@ export class TaskServiceService {
   public addAssignment(taskData: Task) {
     let formData = new FormData();
     formData.append('taskId', taskData.taskId.toString())
-    formData.append('attachment', taskData.submitFile);
+    formData.append('attachment', taskData.taskAttachment);
     return this.http.post(`${this.TASK_URL}/addTaskAttachment`, formData);
   }
 
   public getAllSubmitedTasks() {
     return this.http.get(`${this.TASK_URL}/getAllSubmitedTask`);
   }
+
+  public getSubmitedTaskByStudent(studentId: number) {
+    return this.http.get(`${this.TASK_URL}/getSubmitedTaskForStudent?studentId=${studentId}`)
+  }
+
+  public updateSubmitedTaskStatus(submissionId: number, status: string, review: string) {
+    let formData = new FormData();
+    formData.append('submissionId',submissionId.toString());
+    formData.append('status',status);
+    formData.append('review',review);
+    return this.http.put(`${this.TASK_URL}/updateSubmitedAssignmentStatus`,formData);
+  }
+ 
 }

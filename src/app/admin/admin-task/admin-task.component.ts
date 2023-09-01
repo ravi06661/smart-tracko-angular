@@ -8,6 +8,7 @@ import { TaskRequest } from 'src/app/payload/task-request';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { TaskServiceService } from 'src/app/service/task-service.service';
+import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
 @Component({
   selector: 'app-admin-task',
@@ -15,6 +16,8 @@ import { TaskServiceService } from 'src/app/service/task-service.service';
   styleUrls: ['./admin-task.component.scss']
 })
 export class AdminTaskComponent {
+  BASE_URL = this.utilityService.getBaseUrl();
+  IMG_URL = this.BASE_URL+'/file/getImageApi/images/'
   task: TaskRequest = new TaskRequest()
   subjects: Subject[] = []
   courses: Course[] = []
@@ -24,7 +27,8 @@ export class AdminTaskComponent {
   constructor(private subjectService: SubjectService, 
               private courseService: CourseServiceService, 
               private taskService: TaskServiceService, 
-              private router: Router) { }
+              private router: Router,
+              private utilityService:UtilityServiceService) { }
   ngOnInit() {
     this.getCourses();
     this.getAllSubmitedTasks()

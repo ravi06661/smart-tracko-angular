@@ -208,7 +208,15 @@
 
                 <form action="">
                     <div class="row">
-                        <div class="col-md-12 mb_18">
+                        <!-- <div class="col-md-12 mb_18">
+                            <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{imageName}}</h6>
+                                <div class="all-course-images d-flex flex-wrap">
+                                    <div class="add-course-img" *ngFor="let image of techImages">
+                                        <img [src]="techUrl+image.imageName"  alt="" (click)="courseRequest.technologyStack= image.id" (click)="imageName = image.technologyName">
+                                    </div>
+                                </div>
+                        </div> -->
+                        <!-- <div class="col-md-12 mb_18">
                             <div
                                 class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative">
                                 <input type="file" name="fileupload" value="fileupload" class="d-none"
@@ -217,7 +225,7 @@
                                     <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                                     Add Media</label>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Chapter Name.</label>
                             <div class="input_icon position-relative">
