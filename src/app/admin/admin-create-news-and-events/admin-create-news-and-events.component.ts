@@ -32,7 +32,7 @@ export class AdminCreateNewsAndEventsComponent implements OnInit{
         })
         Toast.fire({
           icon: 'success',
-          title: 'Fees Add success !!'
+          title: 'News Add success !!'
         }).then(e => {
           this.newRequest = new NewsAndEventRequest
           this.router.navigate(['/admin/newsAndEvent']);
@@ -53,17 +53,46 @@ export class AdminCreateNewsAndEventsComponent implements OnInit{
       }
     )
   }
-  addImage(event:any){
-    this.newRequest.file=event.target.files[0];
-     console.log(this.newRequest.file);
-     console.log('hii');
+  // addImage(event:any){
+  //   this.newRequest.fileName=event.target.files[0];
+  //    console.log(this.newRequest.fileName);
+  //    console.log('hii');
      
 
-  }
+  // }
 
   
   addMedia(event: any) {
-     this.newRequest.file = event.target.files[0];
+     this.newRequest.fileName = event.target.files[0];
     
+   }
+
+  imageSrc: any = null;  // Initialize with null
+
+  loadFile(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.newRequest.fileName=e.target.result;
+        this.imageSrc = this.newRequest.fileName;
+      };
+      reader.readAsDataURL(file);
+    }
   }
+
+  addImage(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.newRequest.fileName=event.target.files[0];
+        this.imageSrc=this.newRequest.fileName
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+
+  
 }

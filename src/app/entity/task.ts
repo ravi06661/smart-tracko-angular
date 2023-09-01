@@ -6,7 +6,7 @@ export class Task {
 
     public taskId: number = 0;
     public taskName: string = ''
-    public submitFile!: File;
+    public taskAttachment:string = ''
     public attachmentStatus = ''
     public isActive: boolean = false;
     public course: Course = new Course

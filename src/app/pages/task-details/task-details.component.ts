@@ -12,10 +12,12 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   styleUrls: ['./task-details.component.scss']
 })
 export class TaskDetailsComponent {
+  BASE_URL = this.utilityService.getBaseUrl();
+  ATTACHMENT_URL = this.BASE_URL+'/file/download/taskAndAssignmentAttachment/'
+  imageUrl = this.BASE_URL+'/file/getImageApi/taskAndAssignmentImages/';
+
   taskId: number = 0;
   task = new Task
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   taskSubmittion: StudentTaskSubmittion = new StudentTaskSubmittion();
   message: string = ''
   constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService, private loginService: LoginService) { }
@@ -32,7 +34,7 @@ export class TaskDetailsComponent {
     )
   }
   public submitTask() {
-   // this.taskSubmittion.studentId = this.loginService.getStudentId();
+    this.taskSubmittion.student.studentId = this.loginService.getStudentId();
     this.taskService.submitTask(this.taskSubmittion,this.taskId).subscribe(
       (data) => {
         this.taskSubmittion = new StudentTaskSubmittion

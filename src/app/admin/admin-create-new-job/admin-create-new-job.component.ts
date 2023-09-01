@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { JobAlert } from 'src/app/entity/job-alert';
 import { TechnologyStack } from 'src/app/entity/technology-stack';
@@ -20,12 +21,46 @@ export class AdminCreateNewJobComponent implements OnInit{
   jobAlerts:JobAlert[]=[];
   technologyStack:TechnologyStack[]=[];
   imageName = ''
-  constructor(private jobAlertService: JobAlertService, private technologyStackService: TechnologyStackService, private router: Router,private utilityService:UtilityServiceService) { }
+  jobDetailsForm: FormGroup ;
+  constructor(private jobAlertService: JobAlertService, private technologyStackService: TechnologyStackService, private router: Router,private utilityService:UtilityServiceService, private formBuilder: FormBuilder) {
+    this.jobDetailsForm = this.formBuilder.group({
+      jobType: ['', Validators.required],
+      companyName: ['', Validators.required],
+      jobPackage: ['', Validators.required],
+      technicalSkills: ['', Validators.required],
+      experienceRequired: ['', Validators.required],
+      jobTitle: ['', Validators.required],
+      jobDescription: ['', Validators.required],
+    
+
+     
+
+    });
+   }
   ngOnInit(): void {
     this.getAllTechImages();
   }
+  isFieldInvalidForjobDetailsForm(fieldName: string): boolean {
+    const field = this.jobDetailsForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  public jobDetailsFormSubmition() {
+    Object.keys(this.jobDetailsForm.controls).forEach(key => {
+      const control = this.jobDetailsForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
 
   createJob(){
+    this.jobDetailsForm.markAllAsTouched();
+    if (this.jobDetailsForm.valid )
     this.jobAlertService.addJob(this.jobAlertRequest).subscribe(
       (data: any) => {
         if(this.jobAlertRequest.type=='JOB'){

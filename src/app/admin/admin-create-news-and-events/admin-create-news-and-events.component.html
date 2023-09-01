@@ -42,8 +42,8 @@
                                     data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
                             </div>
                         </div>
-                        <input id="image" name="file" type="file" onchange="loadFile(event)"  class="d-none">
-                        <img [src]="newRequest.file" class="profile_image" id="output" >
+                        <input id="fileName" name="image" type="file" (change)="loadFile($event)" class="d-none">
+                       <img [src]="imageSrc" class="profile_image" id="output">
                         
                     </div>
                     <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">Attachment Title Here
@@ -53,7 +53,7 @@
                 <div class="col-md-3">
                     <form
                         class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
-                        <input type="file" name="image" (change)="addImage($event)" value="file" class="d-none" id="image" >
+                        <input type="file" name="image" (change)="addImage($event)" value="fileName" class="d-none" id="image" >
                         <label for="image" class="font-17 font-500 d-flex">
                             <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                             Add Media</label>

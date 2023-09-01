@@ -48,7 +48,7 @@ export class NewsEventServiceService  {
     formData.append('shortDescriptoin', data.shortDescriptoin)
     formData.append('briefDescription', data.briefDescription)
     formData.append('title', data.title)
-    formData.append('file', data.file)
+    formData.append('fileName', data.fileName)
     
     return this.http.post<NewsAndEvent>(`${this.newsEventUrl}/createNewsEvents`, formData)
   }

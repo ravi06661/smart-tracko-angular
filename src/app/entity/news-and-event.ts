@@ -3,7 +3,7 @@ export class NewsAndEvent {
     public  id:number=0;
 	public  shortDescriptoin:string='';
 	public  briefDescription:string='';
-	public  image:string='';
+	public  image!:File;
 	public  title:string='';
 	public  isDeleted:boolean | undefined;
 	public  createdDate:Date | undefined;
