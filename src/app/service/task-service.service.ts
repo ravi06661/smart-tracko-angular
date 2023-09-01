@@ -11,6 +11,7 @@ import { Task } from '../entity/task';
 })
 export class TaskServiceService {
  
+
   BASE_URL = this.utilityService.getBaseUrl();
   TASK_URL = this.BASE_URL + '/task';
 
@@ -25,12 +26,12 @@ export class TaskServiceService {
   public getAllTask() {
     return this.http.get(`${this.TASK_URL}/getAllTask`);
   }
-  public submitTask(task: StudentTaskSubmittion,taskId:number) {
+  public submitTask(task: StudentTaskSubmittion, taskId: number) {
     let formData = new FormData();
-   // formData.append('studentId', task.studentId.toString())
+    // formData.append('studentId', task.studentId.toString())
     formData.append('submittionFileName', task.submittionFileName)
     formData.append('taskDescription', task.taskDescription)
-    formData.append('taskId',taskId.toString())
+    formData.append('taskId', taskId.toString())
     return this.http.post(`${this.TASK_URL}/studentTaskSubmittion`, formData)
   }
   public addQuestionInTask(taskQuestion: TaskQuestionRequest, taskId: number) {
@@ -56,4 +57,11 @@ export class TaskServiceService {
   public getAllSubmitedTasks() {
     return this.http.get(`${this.TASK_URL}/getAllSubmitedTask`);
   }
+  getAllSubmissionTaskStatus() {
+    return this.http.get(`${this.TASK_URL}/getAllSubmissionTaskStatus`)
+  }
+  public  getOverAllAssignmentTaskStatus() {
+     return this.http.get(`${this.TASK_URL}/getOverAllAssignmentTaskStatus`)
+  }
+
 }

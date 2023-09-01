@@ -67,7 +67,6 @@ export class AdminCreateAssignmentsComponent implements OnInit {
       this.imageName.push('');
     }
   }
-
   public addTaskQuestion() {
     this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(
       (data: any) => {
@@ -76,7 +75,6 @@ export class AdminCreateAssignmentsComponent implements OnInit {
         // alert('hi')
         this.assignmentQuestionsData.assignmentQuestion = errore.assignmentQuestion
       }
-
     )
 
     this.taskQuestion = new TaskQuestionRequest();

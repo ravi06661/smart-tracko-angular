@@ -12,4 +12,5 @@ export class Assignment {
    public  subject:Subject = new Subject ;
    public  isActive:boolean = true;
    public  createdDate:Date | undefined;
+   
 }

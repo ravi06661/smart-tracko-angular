@@ -1,4 +1,5 @@
 import { StudentDetails } from "./student-details"
+import { TaskQuestion } from "./task-question"
 
 export class AssignmentSubmission {
 
@@ -11,5 +12,6 @@ export class AssignmentSubmission {
     public submissionDate:any
     public status:string = ''
     public review:string = ''
+    public taskQuestion:TaskQuestion= new TaskQuestion
 
 }
