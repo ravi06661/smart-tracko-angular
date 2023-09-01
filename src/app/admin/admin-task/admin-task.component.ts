@@ -81,11 +81,5 @@ export class AdminTaskComponent {
       }
     )
   }
-  public getOverAllAssignmentTaskStatus(){
-    this.taskService.getOverAllAssignmentTaskStatus().subscribe(
-       (data:any)=>{
-        this.taskSubmissionStatus2 = data;
-       }
-    )
-  }
+  
 }

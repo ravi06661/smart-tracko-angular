@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot(this)"></i>
+                            <!-- <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" onclick="meat_dot(this)"></i>
                             <div class="meat-dot-dropdown" style="display: none;" >
                                 <a routerLink="/admin/subjectContent/{{obj.chapterId}}"
                                     class=" warning d-flex align-items-center gap_8"><i
@@ -54,7 +54,20 @@
                                 <p class="mb-0 delete-icon-color d-flex align-items-center gap_8"
                                     data-bs-toggle="modal" data-bs-target="#delete-modal"  (click)="chapterId = obj?.chapterId ?? 0"><i
                                         class="fi fi-rr-trash line-height-0 font-17"></i> Delete</p>
-                            </div>
+                            </div> -->
+                            <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></i>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 8rem;">
+                                        <li><a routerLink="/admin/subjectContent/{{obj.chapterId}}"
+                                          class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer"><i
+                                              class="fi fi-rr-document line-height-0"></i> View</a></li>
+                                        <li>  <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer" data-bs-toggle="modal"
+                                          data-bs-target="#chapter-edit-modal" (click)="getChapterById(obj.chapterId)" ><i
+                                              class="fi fi-rr-file-edit line-height-0"></i> Edit</p></li>
+                                        <li> <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding pointer"
+                                          data-bs-toggle="modal" data-bs-target="#delete-modal"  (click)="chapterId = obj?.chapterId ?? 0"><i
+                                              class="fi fi-rr-trash line-hei " ></i > Delete</p></li>
+                                      </ul>
 
                         </div><!-- subject_card_top -->
 
@@ -178,11 +191,11 @@
             <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Chapter</p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                 <a >
-                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" (click)="deleteChapter()">Yes,
+                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" data-bs-dismiss="modal" aria-label="Close" (click)="deleteChapter()">Yes,
                         delete</button>
                 </a>
                 <a >
-                    <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+                    <button type="button" class="apply_modal_btn font-15 font-500" data-bs-dismiss="modal" aria-label="Close">No, Do not delete</button>
                 </a>
             </div>
 
@@ -258,7 +271,7 @@
                 <div class="modal-body">
                     <div class="modal-header apply_title">
                         <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                            id="exampleModalLabel1">Edit Course</h1>
+                            id="exampleModalLabel1">Edit Chapter</h1>
                         <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reload()">
                             <i class="fi fi-rr-cross close_icon"></i>
                         </button>
@@ -266,7 +279,7 @@
 
                     <form action="">
                         <div class="row">
-                            <div class="col-md-12 mb_18">
+                            <!-- <div class="col-md-12 mb_18">
                                 <div
                                     class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative">
                                     <input type="file" name="fileupload" value="fileupload" class="d-none"
@@ -275,7 +288,7 @@
                                         <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                                         Add Media</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-md-12 mb_18">
                                 <label for="" class="mb_6 font-15 font-500 secondary">Chapter Name</label>
                                 <div class="input_icon position-relative">

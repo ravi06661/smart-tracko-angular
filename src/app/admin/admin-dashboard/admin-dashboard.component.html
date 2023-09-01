@@ -22,19 +22,19 @@
         <h3 class="admin-title font-17 font-600 secondary position-relative">Assignments</h3>
         <div class="assignment-area">
           <div class="assignment-chart">
-            <div class="Present tool_tip" [style.width]="50+'%'">
+            <div class="Present tool_tip" [style.width]="totalSubmitted+'%'">
               <span class="tooltiptext">
-                <span class="tip-box" style="background: #8079FF;"></span>Submited {{50}}%
+                <span class="tip-box" style="background: #8079FF;"></span>Submited {{totalSubmitted}}%
             </span>
             </div>
-            <div class="Absent tool_tip_absent" [style.width]="50+'%'">
+            <div class="Absent tool_tip_absent" [style.width]="reveiwed+'%'">
               <span class="tooltiptext_absent">
-                <span class="tip-box" style="background:  #49CF9F;"></span>Reviewed {{50}}%
+                <span class="tip-box" style="background:  #49CF9F;"></span>Reviewed {{reveiwed}}%
             </span>
             </div>
-            <div class="Leave tool_tip_leave" [style.width]="50+'%'">
+            <div class="Leave tool_tip_leave" [style.width]="unReveiwed+'%'">
               <span class="tooltiptext_leave">
-                <span class="tip-box" style="background: #F6C453;"></span>Unreviewed {{50}}%
+                <span class="tip-box" style="background: #F6C453;"></span>Unreviewed {{unReveiwed}}%
             </span>
             </div>
             <!-- <div class="our_due" [style.width]="presentWidth"></div> -->
@@ -42,15 +42,15 @@
           <div class="chart-detail-bottom justify-content-center">
             <div class="submitted-value">
               <p>Submited</p>
-              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{50}}%</h2>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{totalSubmitted}}%</h2>
             </div>
             <div class="pending-value">
               <p>Reviewed</p>
-              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{50}}%</h2>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{reveiwed}}%</h2>
             </div>
             <div class="approve-value">
               <p>Unreviewed</p>
-              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{50}}%</h2>
+              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{unReveiwed}}%</h2>
             </div>
           </div>
         </div>
