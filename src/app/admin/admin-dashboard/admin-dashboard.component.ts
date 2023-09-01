@@ -13,6 +13,9 @@ import { DonutChart } from 'src/app/charts/donut-chart';
 import { FeesPayService } from 'src/app/service/fees-pay.service';
 import { FeesPay } from 'src/app/entity/fees-pay';
 import { Fees } from 'src/app/entity/fees';
+import { SubmissionAssignmentTaskStatus } from 'src/app/entity/submission-assignment-task-status';
+import { TaskServiceService } from 'src/app/service/task-service.service';
+import { AssignmentServiceService } from 'src/app/service/assignment.service';
 
 export type ChartOptions = {
   series: any;
@@ -64,7 +67,20 @@ export class AdminDashboardComponent implements OnInit {
   collectedFees = 0;
   pendingFees = 0
 
-  constructor(private elementRef: ElementRef, private localst: LocationStrategy, private studentService: StudentService, private utilityService: UtilityServiceService, private feesService: FeesService,private feesPayService:FeesPayService) {
+  totalSubmitted = 0;
+  reveiwed = 0;
+  unReveiwed = 0;
+
+  taskSubmissionStatus2: SubmissionAssignmentTaskStatus= new SubmissionAssignmentTaskStatus
+
+  constructor(private elementRef: ElementRef, 
+    private localst: LocationStrategy, 
+    private studentService: StudentService, 
+    private utilityService: UtilityServiceService, 
+    private feesService: FeesService,
+    private feesPayService:FeesPayService,
+    private taskService: TaskServiceService, 
+    private assignmentService:AssignmentServiceService) {
 
     this.admissinonOptions = this.admissionBar.chartOptions
 
@@ -95,6 +111,7 @@ export class AdminDashboardComponent implements OnInit {
     //this.getAdmissionBarData()
     this.recentCollection(0,6);
     this.upcomingDues(0,6);
+    this.getOverAllAssignmentTaskStatus();
   }
 
   public preventBackButton() {
@@ -213,6 +230,17 @@ export class AdminDashboardComponent implements OnInit {
       }
     )
 
+  }
+
+  public getOverAllAssignmentTaskStatus(){
+    this.assignmentService.getOverAllAssignmentTaskStatus().subscribe(
+       (data:any)=>{
+        this.taskSubmissionStatus2 = data;
+        this.totalSubmitted = this.taskSubmissionStatus2.totalSubmitted
+        this.reveiwed = this.taskSubmissionStatus2.reveiwed
+        this.unReveiwed = this.taskSubmissionStatus2.unReveiwed
+       }
+    )
   }
 }
 

@@ -61,10 +61,7 @@ export class TaskServiceService {
   getAllSubmissionTaskStatus() {
     return this.http.get(`${this.TASK_URL}/getAllSubmissionTaskStatus`)
   }
-  public  getOverAllAssignmentTaskStatus() {
-     return this.http.get(`${this.TASK_URL}/getOverAllAssignmentTaskStatus`)
-  }
-
+  
   public getSubmitedTaskByStudent(studentId: number) {
     return this.http.get(`${this.TASK_URL}/getSubmitedTaskForStudent?studentId=${studentId}`)
   }

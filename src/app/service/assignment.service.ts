@@ -97,8 +97,13 @@ export class AssignmentServiceService {
     formData.append('review', review);
     return this.http.put(`${this.assignmentUrl}/updateSubmitedAssignmentStatus`, formData);
   }
+
   public getAllSubmissionAssignmentTaskStatus() {
     return this.http.get(`${this.assignmentUrl}/getAllSubmissionAssignmentTaskStatus`)
   }
+
+  public  getOverAllAssignmentTaskStatus() {
+    return this.http.get(`${this.assignmentUrl}/getOverAllAssignmentTaskStatus`)
+ }
 
 }
