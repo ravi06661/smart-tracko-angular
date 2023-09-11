@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Fees } from 'src/app/entity/fees';
 import { FeesPay } from 'src/app/entity/fees-pay';
@@ -25,27 +25,35 @@ export class AdminFeesPendingComponent implements OnInit{
   startDate='';
   endDate='';
   search='';
-  feesList=0
-constructor(private feesPayService:FeesPayService,private router:Router,private route: ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService ){}
+  feesList=0;
+  pendingListLength:number=0;
+constructor(private feesPayService:FeesPayService,private router:Router,private route: ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService,private el: ElementRef ){}
+
 ngOnInit(): void {
   this.getAllfeesPayList(0,8);
 }
+
+
 
 public getAllfeesPayList(page:Number,size:number){
   this.feesPayService.feesPendingList(page,size).subscribe(
     (data:any)=>{
       this.feeses=data.response;
       this.feesList=data.totalElements
+      this.pendingListLength=this.feeses.length
     }
   )
 }
 public onChangePage(event: any) {
   this.getAllfeesPayList(event.pageIndex, event.pageSize);
+  this.pendingListLength=this.feeses.length
 }
 
 feesPay(){
   // this.feesId = this.route.snapshot.params[('feesId')];
+ this.feesPays.feesPayAmount = Number(this.removeLeadingZeros(String(this.feesPays.feesPayAmount)));
   this.feesPayService.feesPay(this.feesPays).subscribe( 
+    
     (data:any)=>{
       this.feesPays.fees.feesId=data.feesId
       const Toast = Swal.mixin({
@@ -61,7 +69,7 @@ feesPay(){
         title: 'Fees Pay success !!'
       }).then(e => {
         this.feesPays = new FeesPay
-        this.getAllfeesPayList(0,15);
+        this.getAllfeesPayList(0,8);
        // this.router.navigate(['/admin/payfees']);
       })
     },
@@ -70,16 +78,25 @@ feesPay(){
         toast: true,
         position: 'top-end',
         showConfirmButton: false,
-        timer: 500,
+        timer: 1500,
         timerProgressBar: true,
       })
       Toast.fire({
         icon: 'error',
-        title: 'failed !!'
+        title: 'Pay Amount is greater than remainingfees !!'
       })
     }
   )
 }
+
+
+
+
+
+removeLeadingZeros(input: string): string {
+  return input.replace(/^0+/, '');
+}
+
 public getFeesById(feesId:number){
   // this.feesId = this.route.snapshot.params[('feesId')];
   this.feesService.findByFeesId(feesId).subscribe({
@@ -97,28 +114,32 @@ public getFeesById(feesId:number){
 
 public searchByName(){
 
-  if(this.search=='')
+  if(this.search==='')
   this.getAllfeesPayList(0,8);
 else{
   this.feesService.searchByName(this.search,'Pending').subscribe(
     (data:any)=>{
       this.feeses=data;
       this.feesList=data.totalElements;
+      this.pendingListLength=this.feeses.length
     }
   )
 }
 }
 
 public findByGivenDate(){
-  if(this.startDate=='' && this.endDate == ''){
+  if(this.startDate==='' && this.endDate === ''){
     this.getAllfeesPayList(0,8);
   }else{
     this.feesService.findByDate(this.startDate,this.endDate,'Pending').subscribe(
       (data:any)=>{
         this.feeses=data;
         this.feesList-data.totalElements
+        this.pendingListLength=this.feeses.length
       }
     )
   }
 }
+
+
 }
