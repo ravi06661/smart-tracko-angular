@@ -62,6 +62,7 @@ import { ResultComponent } from './pages/result/result.component';
 import { ReviewComponent } from './pages/review/review.component';
 import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-submission/admin-assignment-submission.component';
 import { AdminEditJobAlertComponent } from './admin/admin-edit-job-alert/admin-edit-job-alert.component';
+import { AdminEditNewsAndEventsComponent } from './admin/admin-edit-news-and-events/admin-edit-news-and-events.component';
 
 
 const routes: Routes = [
@@ -113,6 +114,8 @@ const routes: Routes = [
       {path:'editjob/:jobId',component:AdminEditJobAlertComponent,pathMatch:'full'},
       {path:'newsAndEvent',component:AdminNewsAndEventComponent,pathMatch:'full'},
       {path:'createnewsAndEvent',component:AdminCreateNewsAndEventsComponent,pathMatch:'full'},
+      {path:'editNewsAndEvent/:id',component:AdminEditNewsAndEventsComponent,pathMatch:'full'},
+
       {path:'announcements',component:AnnouncementsComponent,pathMatch:'full'},
       {path:'createannouncements',component:CreateAnnouncementsComponent,pathMatch:'full'},
       {path:'student',component:AdminstudentComponent,pathMatch:'full'},
@@ -124,7 +127,8 @@ const routes: Routes = [
       {path:'coursesbatches/:courseId',component:AdminCoursesBatchesComponent,pathMatch:'full'},
       {path:'studentprofile/:studentId',component:StudentProfileComponent,pathMatch:'full'},
       {path:'studentregistration',component:AdminStudentRegistrationComponent,pathMatch:'full'},
-      {path:'submission',component:AdminSubmissionComponent,pathMatch:'full'}
+      {path:'submission',component:AdminSubmissionComponent,pathMatch:'full'},
+     
       
     ]
   },
