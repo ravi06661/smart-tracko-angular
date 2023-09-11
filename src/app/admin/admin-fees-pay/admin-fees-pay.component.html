@@ -82,13 +82,15 @@
              
               </tbody>
             </table>
-            <mat-paginator *ngIf="feesList>=8"
+            <mat-paginator *ngIf="feesList>=8 && length!=0"
               [length]="feesList"
               [pageSize]="8"
               aria-label="Select page"
               (page)="onChangePage($event)">    
               </mat-paginator>
 </div>
+<h1  class="font-15 font-600 secondary position-relative" 
+*ngIf="length==0"><br>NO DATA AVAILABLE !!!</h1>
         </div>
 
       </div>

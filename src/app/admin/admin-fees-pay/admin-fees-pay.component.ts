@@ -28,6 +28,7 @@ export class AdminFeesPayComponent implements OnInit{
   fullName = '';
   endDate = '';
   startDate = '';
+  length:number=0;
 
   
 constructor(private feesPayService:FeesPayService,private router:Router,private route: ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService){}
@@ -41,11 +42,13 @@ public getAllfeesPayList(page:Number,size:number){
     (data:any)=>{
       this.feesPayes=data.response;
       this.feesList=data.totalElements
+      this.length=this.feesPayes.length;
     }
   )
 }
 public onChangePage(event: any) {
   this.getAllfeesPayList(event.pageIndex, event.pageSize);
+  this.length=this.feesPayes.length;
 }
 
 public getFeesPayByPayId(payId:number){
@@ -54,13 +57,14 @@ public getFeesPayByPayId(payId:number){
     next:(data:any)=>{
      this.feesPays = data
      this.payId=this.feesPays.payId
+     this.length=this.feesPayes.length;
     }
   })
 }
 
 public searchByName(){
 
-  if(this.fullName=='')
+  if(this.fullName==='')
   this.getAllfeesPayList(0,8);
 else{
   this.feesPayService.searchByNameInFeesPayList(this.fullName).subscribe(
@@ -68,13 +72,14 @@ else{
       // this.feeses=data;
       this.feesPayes=data
       this.feesList=data.totalElements;
+      this.length=this.feesPayes.length;
     }
   )
 }
 }
 
 public findByGivenDate(){
-  if(this.startDate=='' && this.endDate == ''){
+  if(this.startDate==='' && this.endDate === ''){
     this.getAllfeesPayList(0,8);
   }else{
     this.feesPayService.searchByMonthInFeesPayList(this.startDate,this.endDate).subscribe(
@@ -82,6 +87,7 @@ public findByGivenDate(){
         this.feesPayes=data;
 
         this.feesList-data.totalElements
+        this.length=this.feesPayes.length;
       }
     )
   }
@@ -106,7 +112,7 @@ public updateFeesPay(){
           title: 'Update Fees Pay success !!'
         }).then(e => {
           this.feesPays = new FeesPay
-          this.getAllfeesPayList(0,15);
+          this.getAllfeesPayList(0,8);
          // this.router.navigate(['/admin/payfees']);
         })
       },
