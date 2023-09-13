@@ -13,23 +13,19 @@
     <div class="scroll_dashboard">
         <div class="assignment-stats">
             <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Add Fees</h3>
-            <form [formGroup]="feesPayDetails" action="" class="mb_24">
+            <form action="" class="mb_24">
                 <div class="row">
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Name</label>
-                        <select class="form-select" aria-label="Default select example" id="fullName" name="fullName"  (change)="onStudentChange($event)"   formControlName="fullName">
+                        <select class="form-select" aria-label="Default select example" id="studentId" name="studentId"  (change)="onStudentChange($event)" >
                           <option selected="">Select Name</option>
                           <option [value]="students.studentId" *ngFor="let students of student">{{ students.fullName }} ({{ students.studentId }})  </option>
                         </select>
-                        <div *ngIf="isFieldInvalidForfeesPayDetailsForm('fullName')"
-                        class="text-danger">Full Name is required.</div>
                       </div>
                       
                       <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Roll No.</label>
-                        <input type="number" id="studentId" name="studentId" class="form-control input_text" [(ngModel)]="fees.student.studentId" placeholder="Roll no." formControlName="studentId" readonly>
-                        <div *ngIf="isFieldInvalidForfeesPayDetailsForm('studentId')"
-                        class="text-danger">Roll No is required.</div>
+                        <input type="text" id="studentId" name="studentId" class="form-control input_text" [(ngModel)]="fees.student.studentId" placeholder="Roll no." readonly>
                       </div>
                       
                       
@@ -37,55 +33,43 @@
                         <label for="email" class="mb_6 font-17 font-500 secondary">Email</label>
                         <div class="input_icon position-relative">
                             <input type="email" id="email" name="email" class="form-control input_text"
-                            [(ngModel)]="fees.student.email" placeholder="Enter Email" formControlName="email" readonly>
-                            <div *ngIf="isFieldInvalidForfeesPayDetailsForm('email')"
-                        class="text-danger">Email is required.</div>
+                            [(ngModel)]="fees.student.email" placeholder="Enter Email" readonly>
                         </div>
                     </div>
                     <div class="col-md-4 mb_20">
                         <label for="mobile" class="mb_6 font-17 font-500 secondary">Mobile No.</label>
                         <div class="input_icon position-relative">
                             <input type="text" id="mobile" name="mobile" class="form-control input_text"
-                            [(ngModel)]="fees.student.mobile"  placeholder="Enter Mobile No." formControlName="mobile" readonly>
-                            <div *ngIf="isFieldInvalidForfeesPayDetailsForm('mobile')"
-                        class="text-danger">Mobile No. is required.</div>
+                            [(ngModel)]="fees.student.mobile"  placeholder="Enter Mobile No." readonly>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
-                        <select class="form-select" aria-label="Default select example" id="courseId" name="courseId" (change)="onCourseChange($event)" formControlName="courseName">
-                            <option value="select" disabled selected></option>
+                        <select class="form-select" aria-label="Default select example" id="courseId" name="courseId" (change)="onCourseChange($event)">
+                            <option selected="">Select Course</option>
                             <option [value]="courses.courseId" *ngFor="let courses of course">{{courses.courseName}} </option>
                            
                         </select>
-                        <div *ngIf="isFieldInvalidForfeesPayDetailsForm('courseName')"
-                        class="text-danger">Course is required.</div>
                     </div>
                     <div class="col-md-4 mb_20">
                         <label for="" class="mb_6 font-17 font-500 secondary">Course Fees</label>
                         <div class="input_icon position-relative">
                             <input type="text" id="courseFees" name="courseFees" class="form-control input_text"
-                                placeholder="Enter Course Fees" [(ngModel)]="fees.course.courseFees" formControlName="courseFees" readonly>
-                                <div *ngIf="isFieldInvalidForfeesPayDetailsForm('courseFees')"
-                        class="text-danger">CourseFees is required.</div>
+                                placeholder="Enter Course Fees" [(ngModel)]="fees.course.courseFees" readonly>
                         </div>
                     </div>
                     <div class="col-md-4 mb_20">
-                        <label for="finalFees" class="mb_6 font-17 font-500 secondary">Final Fees</label>
+                        <label for="" class="mb_6 font-17 font-500 secondary">Final Fees</label>
                         <div class="input_icon position-relative">
-                          <input type="number" id="finalFees" name="finalFees" class="form-control input_text"
-                            placeholder="Enter Final Fees" [(ngModel)]="fees.finalFees" formControlName="finalFees" appRemoveLeadingZeros  >
-                            <div *ngIf="isFieldInvalidForfeesPayDetailsForm('finalFees')"
-                        class="text-danger">FinalFees is required.</div>
+                            <input type="text" id="finalFees" name="finalFees" class="form-control input_text"
+                                placeholder="Enter Finial Fees" [(ngModel)]="fees.finalFees">
                         </div>
-                      </div>
+                    </div>
                     <div class="col-md-4 mb_20">
                         <label for="" class="mb_6 font-17 font-500 secondary">Date</label>
                         <div class="input_icon position-relative">
                             <input type="date" id="date" name="date" class="form-control input_text" [(ngModel)]="fees.date"
-                                placeholder="Enter Mobile No." formControlName="date">
-                                <div *ngIf="isFieldInvalidForfeesPayDetailsForm('date')"
-                        class="text-danger">Date is required.</div>
+                                placeholder="Enter Mobile No.">
                         </div>
                     </div>
                 </div><!-- row -->

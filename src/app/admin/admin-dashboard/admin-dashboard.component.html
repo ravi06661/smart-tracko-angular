@@ -1,16 +1,16 @@
 <div id="main" class="main dashboard_page">
-  <div class="profile d-flex">
+  <div class="profile d-flex mb-4">
     <h1 class="font-27 font-700 secondary mb-0">Dashboard</h1>
    <app-profile-bar></app-profile-bar>
   </div>
 
   <div class="scroll_dashboard">
-    <div class="main-inner">
+    <div class="row mb_20">
 
-      <div class="admin-dash-attendance">
+      <div class="col-md-4 admin-dash-attendance">
         <h3 class="admin-title font-17 font-600 secondary position-relative">Attendance</h3>
         <div class="attendance-area position-relative">
-          <div id="chart" class="chartmargin">
+          <div id="chart" class="chartmargin d-flex justify-content-center">
             <apx-chart [colors]="attendanceOptions.colors" [series]="attendanceOptions.series" [chart]="attendanceOptions.chart"
               [labels]="attendanceOptions.labels" [responsive]="attendanceOptions.responsive" [legend]="attendanceOptions.legend"
               [stroke]="attendanceOptions.stroke"></apx-chart>
@@ -18,7 +18,7 @@
         </div>
       </div>
 
-      <div class="admin-dash-assignment">
+      <div class="col-md-4 admin-dash-assignment">
         <h3 class="admin-title font-17 font-600 secondary position-relative">Assignments</h3>
         <div class="assignment-area">
           <div class="assignment-chart">
@@ -39,7 +39,7 @@
             </div>
             <!-- <div class="our_due" [style.width]="presentWidth"></div> -->
           </div>
-          <div class="chart-detail-bottom justify-content-center">
+          <div class="chart-detail-bottom justify-content-between">
             <div class="submitted-value">
               <p>Submited</p>
               <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{totalSubmitted}}%</h2>
@@ -55,9 +55,9 @@
           </div>
         </div>
       </div>
-      <div class="admin-dash-fees">
+      <div class="col-md-4 admin-dash-fees">
         <h3 class="admin-title font-17 font-600 secondary position-relative">Fees</h3>
-        <div class="fees-area d-flex align-items-center">
+        <div class="fees-area d-flex align-items-center justify-content-center">
 
           <div id="chart">
             <apx-chart

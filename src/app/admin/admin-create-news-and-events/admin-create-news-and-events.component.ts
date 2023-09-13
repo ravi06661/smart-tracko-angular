@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NewsAndEventRequest } from 'src/app/payload/news-and-event-request';
 import { NewsEventServiceService } from 'src/app/service/news-event-service.service';
@@ -14,41 +13,13 @@ import Swal from 'sweetalert2';
 export class AdminCreateNewsAndEventsComponent implements OnInit{
 
    newRequest:NewsAndEventRequest=new NewsAndEventRequest();
-   newsAndEventFormRequest:FormGroup;
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
-  constructor (private newsEventService:NewsEventServiceService,private utilityService:UtilityServiceService,private router:Router,private formBuilder: FormBuilder)  {
-    this.newsAndEventFormRequest=this.formBuilder.group({
-      id: ['', Validators.required],
-        shortDescriptoin: ['', Validators.required],
-        briefDescription: ['', Validators.required],
-        title: ['', Validators.required],
-        image: ['', Validators.required],
-     
-    })
-  }
-  isFieldInvalidFornewsAdnEventForm(fieldName: string): boolean {
-    const field = this.newsAndEventFormRequest.get(fieldName);
-    return field ? field.invalid && field.touched : false;
-  }
+  constructor (private newsEventService:NewsEventServiceService,private utilityService:UtilityServiceService,private router:Router)  {}
 
-  public newsAdnEventFormSubmition() {
-    Object.keys(this.newsAndEventFormRequest.controls).forEach(key => {
-      const control = this.newsAndEventFormRequest.get(key);
-      if (control) {
-        control.markAsTouched();
-      }
-    });
-    const firstInvalidControl = document.querySelector('input.ng-invalid');
-    if (firstInvalidControl) {
-      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
 
   createNewsAndEvent(){
-    this.newsAndEventFormRequest.markAllAsTouched();
-    if (this.newsAndEventFormRequest.valid )
     this.newsEventService.createNewsAndEvent(this.newRequest).subscribe(
       (data:any)=>{
 

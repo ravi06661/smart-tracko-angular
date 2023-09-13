@@ -84,7 +84,7 @@
              
               </tbody>
             </table>
-            <mat-paginator *ngIf="feesList>=8 && pendingListLength!=0"
+            <mat-paginator *ngIf="feesList>=8"
               [length]="feesList"
               [pageSize]="8"
               aria-label="Select page"
@@ -94,8 +94,7 @@
 
          
         </div>
-        <h1  class="font-15 font-600 secondary position-relative" 
-        *ngIf="pendingListLength==0"><br>NO DATA AVAILABLE !!!</h1>
+
       </div>
     </div>
     <!-- DASHBOARD END -->
@@ -133,20 +132,12 @@
                               </div>
 
                               <div class="col-md-12 mb_18">
-                                <label for="" class="mb_6 font-15 font-500 secondary">Pay Amount</label>
-                                <div class="input_icon position-relative">
-                                  <input
-                                    type="number" 
-                                    id="feesPayAmount"
-                                    name="feesPayAmount"
-                                    class="form-control input_text"
-                                    placeholder="Enter Pay Amount"
-                                    [(ngModel)]="feesPays.feesPayAmount"
-                                    (input)="removeLeadingZeros('')">
-                                </div>
+                                  <label for="" class="mb_6 font-15 font-500 secondary">Pay Amount</label>
+                                  <div class="input_icon position-relative">
+                                      <input type="text" id="feesPayAmount" name="feesPayAmount" class="form-control input_text"
+                                          placeholder="Enter Pay Amount" [(ngModel)]="feesPays.feesPayAmount">
+                                  </div>
                               </div>
-                              
-                              
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Date</label>
                                   <div class="input_icon position-relative">

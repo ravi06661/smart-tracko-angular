@@ -1,5 +1,5 @@
 <div id="main" class="main dashboard_page">
-    <div class="profile d-flex">
+    <div class="profile d-flex mb-4">
 
       <div class="profile_top_heading d-flex gap_24">
         <h1 class="font-27 font-700 secondary mb-0">Fees</h1>
@@ -64,9 +64,7 @@
                 <th scope="col" class="font-15 font-600 secondary">Detail</th>
                 </tr>
               </thead>
-              
               <tbody *ngFor="let fees of feeses">
-                
                 <tr>
                   <td class="d-flex align-items-center pointer" style="gap:5px; border-bottom: 0;" routerLink="/admin/studentprofile/{{fees.student.studentId}}">
                     <div class="person_image">
@@ -84,21 +82,16 @@
                   <td class="warning font-500 pointer" data-bs-toggle="modal" data-bs-target="#stu-amount-detail-modal" (click)="newFees=fees">Detail
                   </td>
                 </tr>
-               
-              </tbody>
              
+              </tbody>
             </table>
-          
-            <mat-paginator *ngIf="feesList>=8 && length!=0 "
+            <mat-paginator *ngIf="feesList>=8"
               [length]="feesList"
               [pageSize]="8"
               aria-label="Select page"
               (page)="onChangePage($event)">    
               </mat-paginator>
-              
           </div>
-          <h1  class="font-15 font-600 secondary position-relative" 
-          *ngIf="length==0"><br>NO DATA AVAILABLE !!!</h1>
           
         </div>
 

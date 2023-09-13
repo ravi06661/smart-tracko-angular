@@ -1,5 +1,5 @@
 <div id="main" class="main job_alertpage">
-  <div class="profile d-flex">
+  <div class="profile d-flex mb-4">
     <div class="profile_top_heading d-flex gap_24">
       <h1 class="font-27 font-700 secondary mb-0">Job Alerts</h1>
       <a routerLink="/admin/createjob">
@@ -18,9 +18,10 @@
       <h3 class="Enrolled font-21 font-600 secondary" *ngIf="length==0">No Internships Found!!!!</h3>
       <div class="col-md-3 bootstrap_cards" *ngFor="let obj of internshipJobs">
           <div class="internship_container">
-            <div class="container_top d-flex align-items-center jobaleart_card">
+            <div class="container_top  jobaleart_card">
               
               <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" id="meat_dot" onclick="meat_dot(this)"></i>
+              
               <div class="meat-dot-dropdown" style="display: none;">
                 <a routerLink="/admin/editjob/{{obj.jobId}}" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
                 <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal"
@@ -29,15 +30,19 @@
                   data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="jobId=obj.jobId"><i
                       class="fi fi-rr-trash line-height-0"></i> Delete</p> -->
               </div>
+
+              <div class="d-flex align-items-center jobalert_card">
               <div class="job-image">
               <img
               [src]="imageUrl+obj.technologyStack.imageName">
               </div>
               <div class="internship_title">
-                <h3 class="font-17 font-500 title_1">Job Title : {{obj.jobTitle}}</h3>
+                <h3 class="font-17 font-600 title_1">Job Title : {{obj.jobTitle}}</h3>
                 <h4 class="font-14 font-400 sub_title1">CompanyName : {{obj.companyName}}</h4>
                 <h4 class="font-14 font-400 mb-0">Job Package up to :{{obj.jobPackage}} LPA</h4>
               </div>
+              </div>
+
             </div>
             <h4 class="Requirement_text font-13 font-400">Job jobDescription : {{obj.jobDescription}}</h4>
           </div>
@@ -53,22 +58,25 @@
       <h3 class="Enrolled font-21 font-600 secondary " *ngIf="joblength==0">No Jobs Found!!!!</h3>
       <div class="col-md-3 bootstrap_cards" *ngFor="let obj of jobs">
         <div class="internship_container">
-          <div class="container_top d-flex align-items-center jobaleart_card">
+          <div class="container_top d-flex align-items-center justify-content-between jobaleart_card">
             <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" id="meat_dot" onclick="meat_dot(this)"></i>
+
             <div class="meat-dot-dropdown" style="display: none;">
               <a routerLink="/admin/editjob/{{obj.jobId}}" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
               <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal"
               data-bs-target="#delete-modal" (click)="jobId=obj.jobId"><i class="fi fi-rr-trash line-height-0" ></i> Delete</p>
             </div>
-        
+            <div class="d-flex align-items-center jobalert_card">
             <div class="job-image">
               <img [src]="imageUrl+obj.technologyStack.imageName">
               </div>
             <div class="internship_title">
-              <h3 class="font-17 font-500 title_1">Job Title : {{obj.jobTitle}}</h3>
+              <h3 class="font-17 font-600 title_1">Job Title : {{obj.jobTitle}}</h3>
               <h4 class="font-14 font-400 sub_title1">CompanyName : {{obj.companyName}}</h4>
               <h4 class="font-14 font-400 mb-0">Job Package up to :{{obj.jobPackage}}LPA</h4>
             </div>
+            </div>
+
           </div>
           <h4 class="Requirement_text font-13 font-400">Job jobDescription : {{obj.jobDescription}}</h4>
         </div>

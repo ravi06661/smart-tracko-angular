@@ -52,15 +52,4 @@ export class NewsEventServiceService  {
     
     return this.http.post<NewsAndEvent>(`${this.newsEventUrl}/createNewsEvents`, formData)
   }
-
-  public updateNewsAndEvent(data:NewsAndEventRequest){
-    var formData = new FormData();
-    console.log(data);
-    formData.append('id', data.id.toString())
-    formData.append('shortDescriptoin', data.shortDescriptoin)
-    formData.append('briefDescription', data.briefDescription)
-    formData.append('title', data.title)
-    formData.append('file', data.file)
-    return this.http.put<NewsAndEvent>(`${this.newsEventUrl}/updateNewsEvents`, formData)
-  }
 }
