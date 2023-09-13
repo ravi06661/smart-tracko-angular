@@ -38,7 +38,7 @@ export class AdminstudentComponent implements OnInit{
   }
 
   public searchStudentByName(){
-    if(this.search===''){
+    if(this.search==''){
       this.getAllStudent(0,15);
     }else{
     this.stuentService.searchStudentByName(this.search).subscribe(

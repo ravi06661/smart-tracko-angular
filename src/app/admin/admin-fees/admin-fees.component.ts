@@ -23,7 +23,6 @@ export class AdminFeesComponent implements OnInit{
   search:string=''
   startDate:string=''
   endDate:string=''
-  length:number=0;
   constructor(private studentService:StudentService,private activateRoute:ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService ){}
   ngOnInit(): void {
    this.getAllStudentFeesList(0,8);
@@ -35,14 +34,12 @@ export class AdminFeesComponent implements OnInit{
         (data:any)=>{
           this.feeses=data.response;
           this.feesList=data.totalElements;
-          this.length=this.feeses.length;
         }
        )
   }
  
   public onChangePage(event: any) {
     this.getAllStudentFeesList(event.pageIndex, event.pageSize);
-    this.length=this.feeses.length;
   }
 
 
@@ -56,28 +53,25 @@ export class AdminFeesComponent implements OnInit{
 
   public searchByName(){
 
-    if(this.search==='')
+    if(this.search=='')
     this.getAllStudentFeesList(0,8);
   else{
     this.feesService.searchByName(this.search,'Pending').subscribe(
       (data:any)=>{
         this.feeses=data;
         this.feesList=data.totalElements;
-        this.length=this.feeses.length;
-
       }
     )
   }
   }
   public findByGivenDate(){
-    if(this.startDate==='' && this.endDate === ''){
+    if(this.startDate=='' && this.endDate == ''){
       this.getAllStudentFeesList(0,8);
     }else{
       this.feesService.findByDate(this.startDate,this.endDate,'Pending').subscribe(
         (data:any)=>{
           this.feeses=data;
           this.feesList-data.totalElements
-          this.length=this.feeses.length;
         }
       )
     }

@@ -18,11 +18,9 @@ export class AdminFeesCompletedListComponent implements OnInit{
   search:string=''
   startDate:string=''
   endDate:string=''
-  compeletedCount:number=0
-  
   constructor(private feesService:FeesService,private utilityService:UtilityServiceService ){}
   ngOnInit(): void {
-    this.getAllCompletedFeesList(0,8);
+    this.getAllCompletedFeesList(0,15);
   }
   
   public getAllCompletedFeesList(page:number,size:number){
@@ -30,39 +28,35 @@ export class AdminFeesCompletedListComponent implements OnInit{
       (data:any)=>{
         this.feeses=data.response
         this.feesList=data.totalElements;
-        this.compeletedCount=this.feeses.length;
       }
     )
   }
   public onChangePage(event: any) {
     this.getAllCompletedFeesList(event.pageIndex, event.pageSize);
-    this.compeletedCount=this.feeses.length;
   }
 
   public searchByName(){
 
-    if(this.search==='')
-    this.getAllCompletedFeesList(0,8);
+    if(this.search=='')
+    this.getAllCompletedFeesList(0,15);
   else{
     this.feesService.searchByName(this.search,'Completed').subscribe(
       (data:any)=>{
         this.feeses=data;
         this.feesList=data.totalElements;
-        this.compeletedCount=this.feeses.length;
       }
     )
   }
   }
   
   public findByGivenDate(){
-    if(this.startDate==='' && this.endDate ===''){
-      this.getAllCompletedFeesList(0,8);
+    if(this.startDate=='' && this.endDate == ''){
+      this.getAllCompletedFeesList(0,15);
     }else{
       this.feesService.findByDate(this.startDate,this.endDate,'Completed').subscribe(
         (data:any)=>{
           this.feeses=data;
           this.feesList-data.totalElements
-          this.compeletedCount=this.feeses.length;
         }
       )
     }

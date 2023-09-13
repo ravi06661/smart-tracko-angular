@@ -10,6 +10,4 @@ export class NewsAndEventRequest {
 	public  isActive:boolean | undefined;
 	public  dayAgo:number=0;
     public fileName:string='';
-    public file:string='';
-
 }

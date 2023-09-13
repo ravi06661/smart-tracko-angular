@@ -1,5 +1,5 @@
 <div id="main" class="main dashboard_page">
-    <div class="profile d-flex">
+    <div class="profile d-flex mb-4">
 
         <h1 class="font-27 font-700 secondary mb-0">New News & Events</h1>
 
@@ -12,16 +12,14 @@
 
     <div class="scroll_dashboard">
 
-      <form  [formGroup]="newsAndEventFormRequest">
+
         <div class="assignment-stats">
 
             <div class="row mb-3">
                 <div class="col-md-8 col-lg-6">
                     <label for="" class="mb_6 font-17 font-500 secondary">title</label>
                     <div class="input_icon position-relative">
-                        <input type="text" id="title" name="title" formControlName="title" class="form-control input_text" placeholder="Day1" [(ngModel)]="newRequest.title">
-                        <div *ngIf="isFieldInvalidFornewsAdnEventForm('title')"
-                        class="text-danger">Title is required.</div>
+                        <input type="text" id="title" name="title" class="form-control input_text" placeholder="Day1" [(ngModel)]="newRequest.title">
                     </div>
                 </div>
             </div>
@@ -30,9 +28,7 @@
                 <div class="col-md-8 col-lg-6">
                     <label for="" class="mb_6 font-17 font-500 secondary">shortDescriptoin</label>
                     <div class="input_icon position-relative">
-                        <input type="text" id="shortDescriptoin" name="shortDescriptoin" formControlName="shortDescriptoin" class="form-control input_text" placeholder="2" [(ngModel)]="newRequest.shortDescriptoin">
-                        <div *ngIf="isFieldInvalidFornewsAdnEventForm('shortDescriptoin')"
-                        class="text-danger">Full ComapanyName is required.</div>
+                        <input type="text" id="shortDescriptoin" name="shortDescriptoin" class="form-control input_text" placeholder="2" [(ngModel)]="newRequest.shortDescriptoin">
                     </div>
                 </div>
             </div>
@@ -46,9 +42,9 @@
                                     data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
                             </div>
                         </div>
-                        <input id="fileName" name="image" type="file"  (change)="loadFile($event)" class="d-none">
+                        <input id="fileName" name="image" type="file" (change)="loadFile($event)" class="d-none">
                        <img [src]="imageSrc" class="profile_image" id="output">
-                       
+                        
                     </div>
                     <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">Attachment Title Here
                     </h3>
@@ -69,9 +65,7 @@
                 <div class="col-md-8 col-lg-6">
                     <label for="" class="mb_6 font-17 font-500 secondary">Job BriefDescription</label>
                     <textarea class="form-control text_area" id="exampleFormControlTextarea1" row mb-3s="3"
-                        placeholder="Start Typing....."name="briefDescription" formControlName="briefDescription" [(ngModel)]="newRequest.briefDescription"></textarea>
-                        <div *ngIf="isFieldInvalidFornewsAdnEventForm('briefDescription')"
-                        class="text-danger">Full ComapanyName is required.</div>
+                        placeholder="Start Typing....."name="briefDescription" [(ngModel)]="newRequest.briefDescription"></textarea>
                 </div>
             </div>
 
@@ -83,7 +77,7 @@
             </div>
 
         </div><!-- row -->
-    </form>
+
     </div>
 
 

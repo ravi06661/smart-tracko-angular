@@ -7,14 +7,14 @@
   <!-- DASHBOARD START -->
 
   <div class="scroll_dashboard">
-    <div class="main-inner">
+    <div class="row  mb_20">
 
-      <div class="today_attendance">
+      <div class="col-md-6 today_attendance">
         <h3 class="admin-title font-17 font-600 secondary position-relative">Today’s Attendance</h3>
         <div class="attendance-area position-relative">
           <!--The content below is only a placeholder and can be replaced.-->
-          <div class="col-md-6">
-            <div id="chart" class="chartmargin">
+          <div class="col-md-12">
+            <div id="chart" class="chartmargin d-flex justify-content-center">
               <apx-chart [colors]="chartOptions.colors" [series]="chartOptions.series" [chart]="chartOptions.chart"
                 [labels]="chartOptions.labels" [responsive]="chartOptions.responsive" [legend]="chartOptions.legend"
                 [stroke]="chartOptions.stroke"></apx-chart>
@@ -24,7 +24,7 @@
 
       </div>
 
-      <div class="admin-attendance-chart">
+      <div class="col-md-6 admin-attendance-chart">
         <div class="d-flex justify-content-between align-items-center">
           <h3 class="admin-title font-17 font-600 secondary position-relative mb-0">Attendance</h3>
           <div class="dropdown">

@@ -10,7 +10,7 @@ export class UtilityServiceService {
 
 
 
- // private BASE_URL = 'http://cicoapi.dollopinfotech.com';
+  //private BASE_URL = 'http://cicoapi.dollopinfotech.com';
 
    private BASE_URL = 'http://localhost:8080';
   //private BASE_URL = 'http://192.168.1.30:8080';
