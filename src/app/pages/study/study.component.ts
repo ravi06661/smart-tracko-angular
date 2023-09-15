@@ -16,13 +16,19 @@ export class StudyComponent {
   subject: Subject = new Subject();
 
   constructor(private subjectService: SubjectService) { }
-  
+
   ngOnInit() {
     this.subjectService.getAllSubjects().subscribe({
       next: (data: any) => {
         this.subjects = data;
+        console.log(data);
+
       }
     })
   }
+  calculatePercentages(num1: number, num2: number) {
+    return num1 / num2 * 100;
+  }
+  
 }
 

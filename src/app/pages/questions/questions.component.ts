@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { timer } from 'rxjs/internal/observable/timer';
+import { Chapter } from 'src/app/entity/chapter';
 import { ChapterQuizeQuestion } from 'src/app/entity/chapter-quize-question';
 import { ChapterExamResultResponse } from 'src/app/payload/chapter-exam-result-response';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
@@ -33,6 +34,8 @@ export class QuestionsComponent {
   second: any
   timerSubscription: Subscription | undefined;
   chapterExamResultResponse = new ChapterExamResultResponse
+  subjectId: number = 0;
+  chapter = new Chapter;
   constructor(private utilityService: UtilityServiceService, private questionService: QuestionServiceService, private activateRouter: ActivatedRoute,
     private subjectService: SubjectService,
     private chapterService: ChapterServiceService,
@@ -48,6 +51,7 @@ export class QuestionsComponent {
     this.chapterId = this.activateRouter.snapshot.params[('id')];
     this.getAllQuestions();
     this.timer();
+    this.getChapeter();
   }
   public timer() {
     const duration = 10// in seconds
@@ -60,16 +64,19 @@ export class QuestionsComponent {
       }
     });
   }
+
   public submittion() {
     this.chapterExamResultResponse.chapterId = this.chapterId
     this.chapterExamResultResponse.studentId = this.loginService.getStudentId()
     this.chapterExamResultResponse.review = Object.fromEntries(this.questionClicked.entries());
+    this.chapterExamResultResponse.subjectId =this.subjectId
     this.examServiceService.addChapterExam(this.chapterExamResultResponse).subscribe(
       (data: any) => {
         this.router.navigate(['result/' + data.id])
       }
     )
   }
+
   public getAllQuestions() {
     if (this.chapterId) {
       this.questionService.getAllQuestionByChapterId(this.chapterId).subscribe(
@@ -82,7 +89,7 @@ export class QuestionsComponent {
     }
   }
 
-  public nextQuestion(id:number) {
+  public nextQuestion(id: number) {
     if (this.index == this.questions.length - 1) {
       this.nextButton = true;
     }
@@ -116,7 +123,7 @@ export class QuestionsComponent {
     }
   }
 
-  isFullScreen = false; 
+  isFullScreen = false;
 
   @HostListener('window:keydown', ['$event'])
   onKeyPress(event: KeyboardEvent) {
@@ -140,5 +147,12 @@ export class QuestionsComponent {
   public exite() {
     this.toggleFullScreen()
     this.router.navigate(['/student/chapterDetails/' + this.chapterId])
+  }
+  public getChapeter() {
+    this.chapterService.getChapterById(this.chapterId).subscribe(
+      (data:any) => {
+        this.subjectId = data.subject.subjectId;
+      }
+    )
   }
 }

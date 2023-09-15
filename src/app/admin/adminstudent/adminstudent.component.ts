@@ -23,8 +23,7 @@ export class AdminstudentComponent implements OnInit{
   ngOnInit(): void {
    this.getAllStudent(0,15);
   }
- 
-  
+                                                                 
   public getAllStudent(page: Number, size: number) {
     this.stuentService.getAllStudent(page,size).subscribe(
       (data: any) => {
