@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Course } from 'src/app/entity/course';
 import { Fees } from 'src/app/entity/fees';
@@ -20,24 +20,27 @@ export class AdminAddFeesComponent implements OnInit {
   course:Course[]=[]
   // autofillForm: FormGroup;
   fees:Fees=new Fees();
+  addFeesForm: FormGroup ;
 
-  constructor(private studentService: StudentService, private fb: FormBuilder,private feesService:FeesService,private router: Router,private courseService:CourseServiceService) {
-    // this.autofillForm = this.fb.group({
-    //   // // studentId: new FormControl(''),
-    //   // fullName: new FormControl(''),
-    //   // email: new FormControl(''),
-    //   // mobile: new FormControl(''),
-    //   // // other form controls...
-    //   // studentId: ['']
-    // });
-    // this.form = this.fb.group({
-    //   studentId: ['']
-    // });
+  constructor(private studentService: StudentService, private fb: FormBuilder,private feesService:FeesService,private router: Router,private courseService:CourseServiceService,private formBuilder: FormBuilder) {
+    this.addFeesForm = this.formBuilder.group({
+      studentId: ['', Validators.required],
+      rollNo: ['', Validators.required],
+      email: ['', Validators.required],
+      mobile: ['', Validators.required],
+      course: ['', Validators.required],
+      courseFees: ['', Validators.required],
+      finialFees: ['', Validators.required],
+      date: ['', Validators.required],
 
-    // this.form.get('studentId')?.valueChanges.subscribe(selectedStudentId => {
-    //   console.log(selectedStudentId);
-    // });
-  }
+    
+
+     
+
+    });
+   }
+ 
+  
 
   ngOnInit(): void {
 
@@ -52,25 +55,51 @@ export class AdminAddFeesComponent implements OnInit {
       }
     })
   }
+  isFieldInvalidForAddFeesDetailsForm(fieldName: string): boolean {
+    const field = this.addFeesForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  public feesDetailsFormSubmition() {
+    Object.keys(this.addFeesForm.controls).forEach(key => {
+      const control = this.addFeesForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
 
   // public getStudent(id: number) {
 
 
   // }
+
+ 
   onStudentChange(event: any) {
     const selectedStudentId = event.target.value;
-    this.studentService.getByStudentById(selectedStudentId).subscribe(
-      (data: any) => {
-        this.fees.student.studentId = data.studentId;
-        this.fees.student.email = data.email;
-        this.fees.student.mobile = data.mobile;
-        this.fees.student.fullName = data.fullName;
-
-
-
-      }
-    )
+  
+    if (selectedStudentId !== "") {
+      this.studentService.getByStudentById(selectedStudentId).subscribe(
+        (data: any) => {
+          this.fees.student.studentId = data.studentId;
+          this.fees.student.email = data.email;
+          this.fees.student.mobile = data.mobile;
+          this.fees.student.fullName = data.fullName;
+        }
+      );
+    } else {
+      // Clear the form fields when "Select Name" is chosen
+      this.fees.student.studentId = 0;
+      this.fees.student.email = '';
+      this.fees.student.mobile = '';
+      this.fees.student.fullName = '';
+    }
   }
+  
   onCourseChange(event:any){
 
     const selectedCourseId=event.target.value;
@@ -86,6 +115,8 @@ export class AdminAddFeesComponent implements OnInit {
   }
 
   addFees(){
+    this.addFeesForm.markAllAsTouched();
+    if (this.addFeesForm.valid )
     this.feesService.addStudentFees(this.fees).subscribe(
       (data: any) => {
 
@@ -119,6 +150,7 @@ export class AdminAddFeesComponent implements OnInit {
       }
     )
 }
+
 
 }
 

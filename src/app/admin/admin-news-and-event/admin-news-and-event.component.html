@@ -26,7 +26,7 @@
                   <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" id="meat_dot" onclick="meat_dot(this)"></i>
 
               <div class="meat-dot-dropdown" style="display: none;">
-                <a routerLink="/admin/createnewsAndEvent" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
+                <a routerLink="/admin/editnewsandevent/{{obj.id}}" class="mb-1 secondary d-flex align-items-center gap_5"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</a>
                 <p class="mb-0 delete-icon-color d-flex align-items-center gap_5" data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="id=obj.id"><i class="fi fi-rr-trash line-height-0"></i> Delete</p>
               </div>
                 

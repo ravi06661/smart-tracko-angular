@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NewsAndEventRequest } from 'src/app/payload/news-and-event-request';
 import { NewsEventServiceService } from 'src/app/service/news-event-service.service';
@@ -13,13 +14,44 @@ import Swal from 'sweetalert2';
 export class AdminCreateNewsAndEventsComponent implements OnInit{
 
    newRequest:NewsAndEventRequest=new NewsAndEventRequest();
+   newsAndEventForm: FormGroup ;
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
-  constructor (private newsEventService:NewsEventServiceService,private utilityService:UtilityServiceService,private router:Router)  {}
+  constructor (private newsEventService:NewsEventServiceService,private utilityService:UtilityServiceService,private router:Router,private formBuilder: FormBuilder)  {
+    this.newsAndEventForm = this.formBuilder.group({
+      title: ['', Validators.required],
+      shortDesc: ['', Validators.required],
+      briefDesc: ['', Validators.required],
+      attachment: ['', Validators.required],
+
+     
+
+    });
+  }
+
+  isFieldInvalidForNewsAndEventDetailsForm(fieldName: string): boolean {
+    const field = this.newsAndEventForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  public jobDetailsFormSubmition() {
+    Object.keys(this.newsAndEventForm.controls).forEach(key => {
+      const control = this.newsAndEventForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
 
 
   createNewsAndEvent(){
+    this.newsAndEventForm.markAllAsTouched();
+    if (this.newsAndEventForm.valid )
     this.newsEventService.createNewsAndEvent(this.newRequest).subscribe(
       (data:any)=>{
 
