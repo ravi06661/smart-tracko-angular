@@ -18,19 +18,19 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class AdminTaskComponent {
   BASE_URL = this.utilityService.getBaseUrl();
-  IMG_URL = this.BASE_URL+'/file/getImageApi/images/'
+  IMG_URL = this.BASE_URL + '/file/getImageApi/images/'
   task: TaskRequest = new TaskRequest()
   subjects: Subject[] = []
   courses: Course[] = []
-  submitedTasksList:StudentTaskSubmittion[] = []
+  submitedTasksList: StudentTaskSubmittion[] = []
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
-  taskSubmissionStatus2: SubmissionAssignmentTaskStatus= new SubmissionAssignmentTaskStatus
+  taskSubmissionStatus2: SubmissionAssignmentTaskStatus = new SubmissionAssignmentTaskStatus
 
-  constructor(private subjectService: SubjectService, 
-              private courseService: CourseServiceService, 
-              private taskService: TaskServiceService, 
-              private router: Router,
-              private utilityService:UtilityServiceService) { }
+  constructor(private subjectService: SubjectService,
+    private courseService: CourseServiceService,
+    private taskService: TaskServiceService,
+    private router: Router,
+    private utilityService: UtilityServiceService) { }
   ngOnInit() {
     this.getCourses();
     this.getAllSubmitedTasks()
@@ -58,28 +58,26 @@ export class AdminTaskComponent {
     // this.router.navigate(['/admin/createtask/'])
   }
 
-  public getAllSubmitedTasks(){
+  public getAllSubmitedTasks() {
     this.taskService.getAllSubmitedTasks().subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.submitedTasksList = data;
       }
     })
   }
 
-  public pageRanderWithObject(object:StudentTaskSubmittion){
-    this.router.navigate(['/admin/submission'],{
-      queryParams:{
-        data : JSON.stringify(object)
-    }})
+  public pageRanderWithObject(object: StudentTaskSubmittion) {
+    this.router.navigate(['/admin/submission'], {
+      queryParams: {
+        data: JSON.stringify(object)
+      }
+    })
   }
-  public getAllSubmissionTaskStatus(){
+  public getAllSubmissionTaskStatus() {
     this.taskService.getAllSubmissionTaskStatus().subscribe(
-      (data:any)=>{
+      (data: any) => {
         this.taskSubmissionStatus = data
-       console.log(data);
-       
       }
     )
   }
-  
 }

@@ -8,5 +8,6 @@ export class SubjectResponse {
     public technologyStack: TechnologyStack = new TechnologyStack;
     public isDeleted: boolean = false;
     public isActive: boolean = true;
-    public chapterCount: number | undefined
+    public chapterCount: number =0;
+    public chapterCompleted:number=0;
 }

@@ -12,7 +12,7 @@ export class ExamServiceService {
   EXAM_URL = this.BASE_URL + '/exam';
 
   constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
-
+  
   public addChapterExam(data: ChapterExamResultResponse) {
     return this.http.post(`${this.EXAM_URL}/addChapterExam`, data)
   }

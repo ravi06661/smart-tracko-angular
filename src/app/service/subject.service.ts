@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { UtilityServiceService } from './utility-service.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class SubjectService{
   Subject_url=this.BASE_URL+'/subject';
   Chapter_url=this.BASE_URL+'/chapter';
 
-  constructor(private utilityService:UtilityServiceService,private http:HttpClient) { }
+  constructor(private utilityService:UtilityServiceService,private http:HttpClient,private loginService:LoginService) { }
 
   public saveSubject(subject:any){
     return this.http.post(`${this.Subject_url}/addSubject?subjectName=${subject.subjectName}&imageId=${subject.imageId}`,{
@@ -21,7 +22,7 @@ export class SubjectService{
   }
 
   public getAllSubjects(){
-    return this.http.get(`${this.Subject_url}/getAllSubjects`);
+    return this.http.get(`${this.Subject_url}/getAllSubjects/${this.loginService.getStudentId()}`);
   }
 
   public getSubjectById(id: number) {

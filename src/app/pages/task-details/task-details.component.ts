@@ -13,8 +13,8 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class TaskDetailsComponent {
   BASE_URL = this.utilityService.getBaseUrl();
-  ATTACHMENT_URL = this.BASE_URL+'/file/download/taskAndAssignmentAttachment/'
-  imageUrl = this.BASE_URL+'/file/getImageApi/taskAndAssignmentImages/';
+  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
+  imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
 
   taskId: number = 0;
   task = new Task
@@ -33,9 +33,10 @@ export class TaskDetailsComponent {
       }
     )
   }
+
   public submitTask() {
     this.taskSubmittion.student.studentId = this.loginService.getStudentId();
-    this.taskService.submitTask(this.taskSubmittion,this.taskId).subscribe(
+    this.taskService.submitTask(this.taskSubmittion, this.taskId).subscribe(
       (data) => {
         this.taskSubmittion = new StudentTaskSubmittion
         this.message = "Success.."
@@ -47,10 +48,10 @@ export class TaskDetailsComponent {
     this.message = ''
   }
   public deleteFile() {
-    
+
   }
-  public setImage(event:any){
-   this.taskSubmittion.submittionFileName=event.target.files[0];
+  public setImage(event: any) {
+    this.taskSubmittion.submittionFileName = event.target.files[0];
   }
 }
 
