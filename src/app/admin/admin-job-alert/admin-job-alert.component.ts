@@ -135,7 +135,7 @@ export class AdminJobAlertComponent implements OnInit {
   }
 
   deleteJob(jobId:number){
-    alert(jobId)
+   
     this.jobAlertService.delete(jobId).subscribe(
       (data:any)=>{
         this.getAllJobs(0, 8);

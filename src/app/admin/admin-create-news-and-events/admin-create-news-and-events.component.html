@@ -12,14 +12,16 @@
 
     <div class="scroll_dashboard">
 
-
+             <form [formGroup]="newsAndEventForm">
         <div class="assignment-stats">
 
             <div class="row mb-3">
                 <div class="col-md-8 col-lg-6">
                     <label for="" class="mb_6 font-17 font-500 secondary">title</label>
                     <div class="input_icon position-relative">
-                        <input type="text" id="title" name="title" class="form-control input_text" placeholder="Day1" [(ngModel)]="newRequest.title">
+                        <input type="text" id="title" name="title" class="form-control input_text" formControlName="title" placeholder="Day1" [(ngModel)]="newRequest.title">
+                        <div *ngIf="isFieldInvalidForNewsAndEventDetailsForm('title')"
+                        class="text-danger">Title is required.</div>
                     </div>
                 </div>
             </div>
@@ -28,7 +30,9 @@
                 <div class="col-md-8 col-lg-6">
                     <label for="" class="mb_6 font-17 font-500 secondary">shortDescriptoin</label>
                     <div class="input_icon position-relative">
-                        <input type="text" id="shortDescriptoin" name="shortDescriptoin" class="form-control input_text" placeholder="2" [(ngModel)]="newRequest.shortDescriptoin">
+                        <input type="text" id="shortDescriptoin" name="shortDescriptoin" formControlName="shortDesc" class="form-control input_text" placeholder="2" [(ngModel)]="newRequest.shortDescriptoin">
+                        <div *ngIf="isFieldInvalidForNewsAndEventDetailsForm('shortDesc')"
+                        class="text-danger">ShortDescriptoin is required.</div>
                     </div>
                 </div>
             </div>
@@ -42,9 +46,9 @@
                                     data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
                             </div>
                         </div>
-                        <input id="fileName" name="image" type="file" (change)="loadFile($event)" class="d-none">
+                        <input id="fileName" name="image" type="file" (change)="loadFile($event)" class="d-none" >
                        <img [src]="imageSrc" class="profile_image" id="output">
-                        
+                       
                     </div>
                     <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">Attachment Title Here
                     </h3>
@@ -53,10 +57,11 @@
                 <div class="col-md-3">
                     <form
                         class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
-                        <input type="file" name="image" (change)="addImage($event)" value="fileName" class="d-none" id="image" >
+                        <input type="file" name="image" (change)="addImage($event)" value="fileName" class="d-none" id="image"  >
                         <label for="image" class="font-17 font-500 d-flex">
                             <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                             Add Media</label>
+                           
                     </form>
                 </div>
             </div>
@@ -64,8 +69,10 @@
             <div class="row mb_24">
                 <div class="col-md-8 col-lg-6">
                     <label for="" class="mb_6 font-17 font-500 secondary">Job BriefDescription</label>
-                    <textarea class="form-control text_area" id="exampleFormControlTextarea1" row mb-3s="3"
+                    <textarea class="form-control text_area" id="exampleFormControlTextarea1" row mb-3s="3" formControlName="briefDesc"
                         placeholder="Start Typing....."name="briefDescription" [(ngModel)]="newRequest.briefDescription"></textarea>
+                        <div *ngIf="isFieldInvalidForNewsAndEventDetailsForm('briefDesc')"
+                        class="text-danger">BriefDescription is required.</div>
                 </div>
             </div>
 
@@ -74,10 +81,11 @@
                     <a  class="top_profile_sec_btn font-14 font-500" (click)="createNewsAndEvent()">Publish
                         Now</a>
                 </div>
+                
             </div>
 
         </div><!-- row -->
-
+    </form>
     </div>
 
 
