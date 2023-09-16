@@ -25,7 +25,9 @@ export class AdminTaskComponent {
   submitedTasksList: StudentTaskSubmittion[] = []
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
   taskSubmissionStatus2: SubmissionAssignmentTaskStatus = new SubmissionAssignmentTaskStatus
-
+  totalSubmitted = 0;
+  reveiwed = 0;
+  unReveiwed = 0;
   constructor(private subjectService: SubjectService,
     private courseService: CourseServiceService,
     private taskService: TaskServiceService,
@@ -35,6 +37,7 @@ export class AdminTaskComponent {
     this.getCourses();
     this.getAllSubmitedTasks()
     this.getAllSubmissionTaskStatus()
+    this.getOverAllAssignmentTaskStatus()
   }
   public getCourses() {
 
@@ -78,6 +81,16 @@ export class AdminTaskComponent {
       (data: any) => {
         this.taskSubmissionStatus = data
       }
+    )
+  }
+  public getOverAllAssignmentTaskStatus(){
+    this.taskService.getOverAllAssignmentTaskStatus().subscribe(
+       (data:any)=>{
+        this.taskSubmissionStatus2 = data;
+        this.totalSubmitted = this.taskSubmissionStatus2.totalSubmitted
+        this.reveiwed = this.taskSubmissionStatus2.reveiwed
+        this.unReveiwed = this.taskSubmissionStatus2.unReveiwed
+       }
     )
   }
 }

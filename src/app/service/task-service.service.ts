@@ -61,17 +61,20 @@ export class TaskServiceService {
   getAllSubmissionTaskStatus() {
     return this.http.get(`${this.TASK_URL}/getAllSubmissionTaskStatus`)
   }
-  
+
   public getSubmitedTaskByStudent(studentId: number) {
     return this.http.get(`${this.TASK_URL}/getSubmitedTaskForStudent?studentId=${studentId}`)
   }
 
   public updateSubmitedTaskStatus(submissionId: number, status: string, review: string) {
     let formData = new FormData();
-    formData.append('submissionId',submissionId.toString());
-    formData.append('status',status);
-    formData.append('review',review);
-    return this.http.put(`${this.TASK_URL}/updateSubmitedAssignmentStatus`,formData);
+    formData.append('submissionId', submissionId.toString());
+    formData.append('status', status);
+    formData.append('review', review);
+    return this.http.put(`${this.TASK_URL}/updateSubmitedAssignmentStatus`, formData);
   }
 
+  public getOverAllAssignmentTaskStatus() {
+    return this.http.get(`${this.TASK_URL}/getOverAllTaskStatusforBarChart`)
+  }
 }

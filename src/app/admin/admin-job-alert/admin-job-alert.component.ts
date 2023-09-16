@@ -77,7 +77,6 @@ export class AdminJobAlertComponent implements OnInit {
   //   )
   // }
   public activeJob(id: number) {
-    console.log(id)
     this.jobAlertService.activeJob(id).subscribe(
       (data) => {
       }
