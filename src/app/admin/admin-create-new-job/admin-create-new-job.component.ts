@@ -31,6 +31,7 @@ export class AdminCreateNewJobComponent implements OnInit{
       experienceRequired: ['', Validators.required],
       jobTitle: ['', Validators.required],
       jobDescription: ['', Validators.required],
+      imageName: ['', Validators.required],
     
 
      
@@ -118,6 +119,15 @@ export class AdminCreateNewJobComponent implements OnInit{
       next:(data:any)=>{
         this.technologyStack = data
       }
+    });
+  
+  }
+ 
+  set(){
+    alert('hi')
+    this.jobDetailsForm.setValue({
+      imageName:this.imageName // Set the value for the 'jobType' field
+    
     });
   }
 }

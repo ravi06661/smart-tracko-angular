@@ -21,6 +21,7 @@
                         <select class="form-select" aria-label="Default select example" id="studentId" name="studentId"
                             formControlName="studentId" (change)="onStudentChange($event)">
                             <option value="" selected="">Select Name</option>
+                           
                             <option [value]="students.studentId" *ngFor="let students of student">{{ students.fullName
                                 }} ({{ students.studentId }}) </option>
                             
@@ -63,7 +64,7 @@
                         <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
                         <select class="form-select" aria-label="Default select example" id="courseId" name="courseId"
                             formControlName="course" (change)="onCourseChange($event)">
-                            <option selected="">Select Course</option>
+                            <option value="" selected="">Select Course</option>
                             <option [value]="courses.courseId" *ngFor="let courses of course">{{courses.courseName}}
                             </option>
                         </select>

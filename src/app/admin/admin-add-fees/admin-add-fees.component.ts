@@ -72,12 +72,6 @@ export class AdminAddFeesComponent implements OnInit {
       firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
-
-  // public getStudent(id: number) {
-
-
-  // }
-
  
   onStudentChange(event: any) {
     const selectedStudentId = event.target.value;
@@ -103,15 +97,17 @@ export class AdminAddFeesComponent implements OnInit {
   onCourseChange(event:any){
 
     const selectedCourseId=event.target.value;
+    if(selectedCourseId !==""){
     this.courseService.getCourseByCourseId(selectedCourseId).subscribe(
     (data:any)=>{
       this.fees.course.courseId=data.courseId;
       this.fees.course.courseFees=data.courseFees;
-     
-     
-
     }
-    )
+    );
+  }else{
+    this.fees.course.courseId=0;
+    this.fees.course.courseFees='';
+  }
   }
 
   addFees(){

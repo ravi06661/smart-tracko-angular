@@ -26,14 +26,14 @@
         <div class="sub_details d-flex flex-column" id="updown_btn" *ngFor="let obj of chapter">
           <H1 class="font-24 font-600 dark-black">{{obj.title}}</H1>
           <H3 class="font-17 font-600 dark-black">{{obj.subTitle}}</H3>
-          <h4 class="font-15 font-400 lh-26">{{obj.content}}</h4>
+          <h4 class="font-15 font-400 lh-26" [innerHTML]=obj.content></h4>
         </div>
 
         <h5 class="font-24 font-500 secondary mb_20">Ready to test yourself?</h5>
         <a routerLink="/questions/{{chapterId}}" type="button" class="back_button font-15 font-700">Take a test</a>
       </div>
     </div>
-    <a [routerLink]="'#updown_btn'" class="scroll_btn d-flex justify-content-center align-items-center">
+    <a [routerLink]="'#updown_btn'" class="scroll_btn d-flex just                                                                           ify-content-center align-items-center">
       <img src="assets/images/svg_img/uparrow.svg">
     </a>
   </div>

@@ -44,6 +44,8 @@
                                 <th scope="col" class="font-15 font-600 secondary">Joining on</th>
                                 <th scope="col" class="font-15 font-600 secondary">Email</th>
                                 <th scope="col" class="font-15 font-600 secondary">Phone Num</th>
+                                <th scope="col" class="font-15 font-600 secondary">Actions</th>
+
                             </tr>
                         </thead>
                         <tbody class="bg-light" *ngFor="let student of students">
@@ -58,68 +60,8 @@
                                 <td>{{student.joinDate}}</td>
                                 <td>{{student.email}}</td>
                                 <td>{{student.mobile}}</td>
+                                <img src="assets/images/svg_img/New folder/forward.png" style="width: 5%; height: 5%;" />
                             </tr>
-                            <!-- <tr>
-                                <td>
-                                   <a routerLink="/admin/studentprofile"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    Wade Warren                                         
-                                   </a>
-                                </td>
-                                <td>UI/UX Designer</td>
-                                <td>23 Jan, 2023</td>
-                                <td>placement@gmail.com</td>
-                                <td>9632548152</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <a routerLink="/admin/studentprofile"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    Wade Warren                                         
-                                   </a>
-                                </td>
-                                <td>UI/UX Designer</td>
-                                <td>23 Jan, 2023</td>
-                                <td>placement@gmail.com</td>
-                                <td>9632548152</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <a routerLink="/admin/studentprofile"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    Wade Warren                                         
-                                   </a>
-                                </td>
-                                <td>UI/UX Designer</td>
-                                <td>23 Jan, 2023</td>
-                                <td>placement@gmail.com</td>
-                                <td>9632548152</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <a routerLink="/admin/studentprofile"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    Wade Warren                                         
-                                   </a>
-                                </td>
-                                <td>UI/UX Designer</td>
-                                <td>23 Jan, 2023</td>
-                                <td>placement@gmail.com</td>
-                                <td>9632548152</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                   <a routerLink="/admin/studentprofile"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    Wade Warren                                         
-                                   </a>
-                                </td>
-                                <td>UI/UX Designer</td>
-                                <td>23 Jan, 2023</td>
-                                <td>placement@gmail.com</td>
-                                <td>9632548152</td>
-                            </tr> -->
-
                         </tbody>
                     </table>
                     <mat-paginator *ngIf="totalStudent>=15"
