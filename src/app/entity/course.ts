@@ -15,4 +15,5 @@ export class Course {
 	public  updatedDate:Date | undefined;
     public  isDeleted=false;
     public  technologyStack:TechnologyStack = new TechnologyStack;
+	public isStarterCourse:boolean=false;
 }

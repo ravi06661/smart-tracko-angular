@@ -178,6 +178,13 @@
                                         placeholder="Enter Course Description" [(ngModel)]="courseRequest.sortDescription"></textarea>
                                 </div>
                             </div>
+                            <div class="col-md-12 mb_18">
+                                <label for="" class="mb_6 font-15 font-500 secondary">If You Want To Make StarterCourse</label>
+                                <div class="input_icon position-relative">
+                                    <input type="radio" name = "isStarterCourse" value="true" [(ngModel)]="courseRequest.isStarterCourse"> Yes 
+                                    <input type="radio"  name = "isStarterCourse" value="false" [(ngModel)]="courseRequest.isStarterCourse"> No 
+                                </div>
+                            </div>
                             </div><!-- row -->
                         </form>
                         <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
@@ -272,6 +279,20 @@
                                         <div class="input_icon position-relative">
                                             <textarea type="number" id="" name="sortDescription" class="form-control input_text"
                                                 placeholder="Enter Course Description" [(ngModel)]="course.sortDescription"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb_18">
+                                        <label for="" class="mb_6 font-15 font-500 secondary">If You Want To Make StarterCourse</label>
+                                        <div class="input_icon position-relative">
+                                            <div class="input_icon position-relative">
+                                                <div class="input_icon position-relative">
+                                                    <input type="radio" id="isStarterCourseYes" name="isStarterCourse" [value]="true" [checked]="course.isStarterCourse === true" (change)="course.isStarterCourse = true"> Yes 
+                                                    <input type="radio" id="isStarterCourseNo" name="isStarterCourse" [value]="false" [checked]="course.isStarterCourse === false" (change)="course.isStarterCourse = false"> No 
+                                                  </div>
+                                                  
+                                              </div>
+                                              
+                                             
                                         </div>
                                     </div>
                                     </div><!-- row -->

@@ -150,4 +150,8 @@ public allStudent(){
   return this.http.get(`${this.studentUrl}/allStudent`);
 }
 
+public getAllStudentNotCompleteFees(){
+  return this.http.get(`${this.studentUrl}/allStudent`);
+}
+
 }
