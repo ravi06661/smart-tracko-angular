@@ -29,6 +29,11 @@ export class AdminAssignmentsComponent implements OnInit {
   submitedAssignments: AssignmentSubmission[] = []
   submitedAssignmentObj: AssignmentSubmission = new AssignmentSubmission
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
+  taskSubmissionStatus2: SubmissionAssignmentTaskStatus= new SubmissionAssignmentTaskStatus
+  
+  totalSubmitted = 0;
+  reveiwed = 0;
+  unReveiwed = 0;
 
   constructor(private courseService: CourseServiceService,
     private subjectService: SubjectService,
@@ -41,6 +46,7 @@ export class AdminAssignmentsComponent implements OnInit {
     this.getAllSubmitedAssignments();
     this.getAllAssignment();
     this.getAllSubmissionAssignmentStatus()
+    this.getOverAllAssignmentTaskStatus()
   }
 
   public getAllCourses() {
@@ -88,7 +94,6 @@ export class AdminAssignmentsComponent implements OnInit {
         this.allActiveAssignments.forEach((temp: any) => {
           temp.assignmentQuestion.forEach((t: any) => {
             this.assignmentQuestions.push(t)
-            console.log(t);
           })
         })
       }
@@ -97,9 +102,19 @@ export class AdminAssignmentsComponent implements OnInit {
   public getAllSubmissionAssignmentStatus() {
     this.assignmentService.getAllSubmissionAssignmentTaskStatus().subscribe(
       (data: any) => {
-        this.taskSubmissionStatus = data;
-        console.log(data);
+        this.taskSubmissionStatus = data;        
       }
+    )
+  }
+
+  public getOverAllAssignmentTaskStatus(){
+    this.assignmentService.getOverAllAssignmentTaskStatus().subscribe(
+       (data:any)=>{
+        this.taskSubmissionStatus2 = data;
+        this.totalSubmitted = this.taskSubmissionStatus2.totalSubmitted
+        this.reveiwed = this.taskSubmissionStatus2.reveiwed
+        this.unReveiwed = this.taskSubmissionStatus2.unReveiwed
+       }
     )
   }
 }

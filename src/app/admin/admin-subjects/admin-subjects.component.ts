@@ -16,8 +16,8 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class AdminSubjectsComponent implements OnInit {
   BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl= this.BASE_URL+'/file/getImageApi/images/'
-  techUrl =  this.BASE_URL+"/file/getImageApi/technologyStackImage/";
+  imageUrl = this.BASE_URL + '/file/getImageApi/images/'
+  techUrl = this.BASE_URL + "/file/getImageApi/technologyStackImage/";
   techImages: TechnologyStack[] = [];
   chapter: Chapter[] = []
   subjects: SubjectResponse[] = [];
@@ -31,8 +31,8 @@ export class AdminSubjectsComponent implements OnInit {
   imageName = ''
 
   constructor(private techService: TechnologyStackService,
-              private subjectService: SubjectService,
-              private utilityService:UtilityServiceService) { }
+    private subjectService: SubjectService,
+    private utilityService: UtilityServiceService) { }
 
   ngOnInit(): void {
     this.techService.getAllTechnologyStack().subscribe({
@@ -47,7 +47,6 @@ export class AdminSubjectsComponent implements OnInit {
   public getAllSubject() {
     this.subjectService.getAllSubjects().subscribe({
       next: (data: any) => {
-        console.log(data);
         this.subjects = data;
       }
     })
@@ -58,7 +57,7 @@ export class AdminSubjectsComponent implements OnInit {
       next: (data: any) => {
         this.message = 'Success.'
         this.subjectData = {
-          imageId:0,
+          imageId: 0,
           subjectName: ''
         };
         this.getAllSubject();

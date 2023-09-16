@@ -8,4 +8,5 @@ export class SubmissionAssignmentTaskStatus {
     public status: boolean | undefined
     public reveiwed: number = 0;
     public taskCount: number = 0;
+    public assignmentTitle:string=''
 }

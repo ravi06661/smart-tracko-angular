@@ -22,9 +22,11 @@ export class SubjectService{
   }
 
   public getAllSubjects(){
-    return this.http.get(`${this.Subject_url}/getAllSubjects/${this.loginService.getStudentId()}`);
+    return this.http.get(`${this.Subject_url}/getAllSubjects`);
   }
-
+  public getAllSubjectsWithChapterCompletedStatus(){
+    return this.http.get(`${this.Subject_url}/getAllSubjectsWithChapterCompletedStatus/${this.loginService.getStudentId()}`);
+  }
   public getSubjectById(id: number) {
     return this.http.get(`${this.Subject_url}/getSubjectById?subjectId=${id}`);
   }
