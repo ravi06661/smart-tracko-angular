@@ -103,7 +103,7 @@ export class AdminAssignmentsComponent implements OnInit {
     this.assignmentService.getAllSubmissionAssignmentTaskStatus().subscribe(
       (data: any) => {
         this.taskSubmissionStatus = data;        
-      }
+      } 
     )
   }
 
