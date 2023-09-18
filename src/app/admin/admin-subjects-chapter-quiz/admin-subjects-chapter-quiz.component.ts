@@ -86,4 +86,8 @@ export class AdminSubjectsChapterQuizComponent {
     this.getAllQuestions();
     this.message = ''
   }
+
+  public setChapterTestTimer(){
+
+  }
 }
