@@ -106,7 +106,7 @@ public updateFeesPay(){
           title: 'Update Fees Pay success !!'
         }).then(e => {
           this.feesPays = new FeesPay
-          this.getAllfeesPayList(0,15);
+          this.getAllfeesPayList(0,8);
          // this.router.navigate(['/admin/payfees']);
         })
       },
