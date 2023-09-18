@@ -60,7 +60,9 @@
                                 <td>{{student.joinDate}}</td>
                                 <td>{{student.email}}</td>
                                 <td>{{student.mobile}}</td>
-                                <img src="assets/images/svg_img/New folder/forward.png" style="width: 5%; height: 5%;" />
+                               <td (click)="newStudent=student">  <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer" data-bs-toggle="modal"
+                                    data-bs-target="#course-edit-modal" ><i
+                                        class="fi fi-rr-file-edit line-height-0" >Upgrade</i> </p></td>
                             </tr>
                         </tbody>
                     </table>
@@ -89,3 +91,75 @@
 
 </div>
 <!--DASHBOARD END -->
+<div class="modal fade" id="course-edit-modal" tabindex="-1" aria-labelledby="course-edit-modal" aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title">
+                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                        id="exampleModalLabel1">Edit Course</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
+                </div>
+
+                <form action="">
+                    <div class="row">
+                      
+
+                        <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Student Name</label>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="fullName" name="fullName" class="form-control input_text"
+                                    placeholder="Enter Full Name" [(ngModel)]="newStudent.fullName" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Current Course</label>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="applyForCourse" name="applyForCourse" class="form-control input_text"
+                                    placeholder="Enter Current Course " [(ngModel)]="newStudent.applyForCourse" readonly>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Course Duration (In Months)</label>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="duration" class="form-control input_text"
+                                    placeholder="Enter Course Duration">
+                            </div>
+                        </div> -->
+
+                       
+                    </div> <!-- all-subjects-list -->
+                    
+                    <h2 class="font-15 font-500 secondary">Courses</h2>
+                    
+                    <div class="all-subjects-list mb_18">
+                        <div class="col-md-12 mb_18" *ngFor="let course of courses">
+                            <div class="input_icon position-relative input_text checkbox_area">
+                                <div class="d-flex gap_5 align-items-center">
+                                    <img [src]="imageUrlTec+course.technologyStack.imageName" alt="" width="24" height="24">
+                                    <h2 class="font-15 font-500 mb-0 secondary">{{course.courseName}}</h2>
+                                </div>
+                                <input 
+                                type="radio"
+                                [checked]="check(course.courseId)"
+                                name="courses"
+                                class="choose-courses"
+                                (click)="selectCourse(course.courseId)"
+                              >
+                            </div>
+                        </div>
+                    </div>  
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                    aria-label="Close">Cancel</button>
+                
+                    <button type="button" class="apply_modal_btn font-15 font-500" (click)="upgradeCourseOfStudent(course.courseId)" data-bs-dismiss="modal" aria-label="Close">Update Course</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

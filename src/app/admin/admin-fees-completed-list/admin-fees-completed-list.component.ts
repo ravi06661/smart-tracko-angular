@@ -20,7 +20,7 @@ export class AdminFeesCompletedListComponent implements OnInit{
   endDate:string=''
   constructor(private feesService:FeesService,private utilityService:UtilityServiceService ){}
   ngOnInit(): void {
-    this.getAllCompletedFeesList(0,15);
+    this.getAllCompletedFeesList(0,8);
   }
   
   public getAllCompletedFeesList(page:number,size:number){
@@ -38,7 +38,7 @@ export class AdminFeesCompletedListComponent implements OnInit{
   public searchByName(){
 
     if(this.search=='')
-    this.getAllCompletedFeesList(0,15);
+    this.getAllCompletedFeesList(0,8);
   else{
     this.feesService.searchByName(this.search,'Completed').subscribe(
       (data:any)=>{
@@ -51,7 +51,7 @@ export class AdminFeesCompletedListComponent implements OnInit{
   
   public findByGivenDate(){
     if(this.startDate=='' && this.endDate == ''){
-      this.getAllCompletedFeesList(0,15);
+      this.getAllCompletedFeesList(0,8);
     }else{
       this.feesService.findByDate(this.startDate,this.endDate,'Completed').subscribe(
         (data:any)=>{

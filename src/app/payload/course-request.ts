@@ -1,4 +1,5 @@
 export class CourseRequest {
+	public courseIds:number[]=[]
 	public  courseName:string='';
 	public  courseFees:string='';
 	public  duration:string='';
