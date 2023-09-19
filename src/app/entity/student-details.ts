@@ -1,3 +1,5 @@
+import { Course } from "./course";
+
 export class StudentDetails {
 
 	public studentId: number = 0;
@@ -23,4 +25,5 @@ export class StudentDetails {
 	public currentCourse: string = '';
 	// public isCompleted:boolean | undefined;
 	// public isActive:boolean | undefined
+	public course:Course=new Course();
 }
