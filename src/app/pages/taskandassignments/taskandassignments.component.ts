@@ -15,54 +15,68 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 export class TaskandassignmentsComponent implements OnInit {
 
   BASE_URL = this.utilityService.getBaseUrl();
-  ATTACHMENT_URL = this.BASE_URL+'/file/download/taskAndAssignmentAttachment/'
-  assignments:Assignment [] = []
-  unLockAssignments:Assignment =  new Assignment
-  lockAssignments:Assignment [] = []
-  assignmentSubmissionsList:AssignmentSubmission[] = []
-  assignmentSubmissionObj:AssignmentSubmission = new AssignmentSubmission
-
-  constructor(private assignmentService:AssignmentServiceService,
-              private router:Router,
-              private loginService:LoginService,
-              private utilityService:UtilityServiceService){}
+  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
+  assignments: Assignment[] = []
+  unLockAssignments: Assignment[] = []
+  lockAssignments: Assignment[] = []
+  assignmentSubmissionsList: AssignmentSubmission[] = []
+  unLockAssignment: Assignment = new Assignment
+  assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
+  assignmentId: number = 0;
+  constructor(private assignmentService: AssignmentServiceService,
+    private router: Router,
+    private loginService: LoginService,
+    private utilityService: UtilityServiceService) { 
+      this.unLockAssignments.forEach(() => {
+        this.assignmentTaskVisibility.push(false);
+      });
+    }
 
   ngOnInit(): void {
-   this.getAllAssignments();
-   this.getSubmitedAssignment();
+    this.getAllAssignments();
+    this.getSubmitedAssignment();
   }
 
-  public getAllAssignments(){
-    this.assignmentService.getAllAssignments().subscribe({
-      next:(data:any)=>{
-        this.unLockAssignments = data[0];
-        this.assignments = data
-        this.lockAssignments = this.assignments.filter(e=> e.id != this.unLockAssignments.id)  
+  public getAllAssignments() {
+    this.assignmentService.getAllLockedAndUnlockedAssignment().subscribe(
+      (data: any) => {
+        this.unLockAssignments = data.unLockedAssignment;
+        console.log(this.unLockAssignments);
+        this.lockAssignments = data.lockedAssignment;
       }
-    })
+    )
   }
 
-  public pageRenderUsingRouterLink(path:string,questionId:number){
+  public pageRenderUsingRouterLink(path: string, questionId: number) {
     const dataParams = {
-      assignmentId: this.unLockAssignments.id,
+      assignmentId: this.assignmentId,
       questionId: questionId,
     };
-    this.router.navigate([path],{
+    this.router.navigate([path], {
       queryParams: dataParams
     });
   }
 
-
-  public getSubmitedAssignment(){
+  public getSubmitedAssignment() {
     this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId()).subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.assignmentSubmissionsList = data
       }
     })
   }
 
-  public changeTimeFormat(date:any){
+  public changeTimeFormat(date: any) {
     return moment(date, "YYYY-MM-dd HH:mm:ss").format("hh:mm A");
   }
 
+  public getAssignment(id: number) {
+    this.assignmentId = id;
+    this.unLockAssignment = this.unLockAssignments.find(assignment => assignment.id === id) as Assignment;
+  }
+  assignmentTaskVisibility: boolean[] = [];
+ 
+  toggleAssignment(index: number): void {
+    // Toggle the visibility of assignment tasks for the selected assignment
+    this.assignmentTaskVisibility[index] = !this.assignmentTaskVisibility[index];
+  }
 }

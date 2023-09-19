@@ -9,4 +9,5 @@ export class StudentTaskSubmittion {
     public review:string = ''
     public submissionDate:any
     public taskId : number = 0
+    
 }
