@@ -1,5 +1,6 @@
 import { DatePipe, LocationStrategy } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Observable, interval, map, switchMap } from 'rxjs';
 import { Assignment } from 'src/app/entity/assignment';
@@ -48,17 +49,25 @@ export class DashboardComponent implements OnInit {
   assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
   ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   taskSubmissionObj:StudentTaskSubmittion = new StudentTaskSubmittion
+  toDoAssignment:Assignment = new Assignment
+  unLockAssignments: Assignment[] = []
+  lockAssignments: Assignment[] = []
+  assignmentId: any;
   constructor(private service: AssignmentServiceService,
     private utilityService: UtilityServiceService,
     private loginService: LoginService,
     private localst: LocationStrategy, private studentService: StudentService,
-    private taskService: TaskServiceService, private assignmentService: AssignmentServiceService) { }
+    private taskService: TaskServiceService, private assignmentService: AssignmentServiceService,
+    private router:Router
+    ) { }
 
   ngOnInit(): void {
+   
     this.getAllTask();
     this.preventBackButton();
     this.getSubmitedTaskByStudent();
     this.getSubmitedAssignment();
+    this.getdoAssignment()
     //Timer API
     this.clock = interval(1000).pipe(
       switchMap(() => this.studentService.getCurrentTime()),
@@ -154,4 +163,25 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
+
+public getdoAssignment(){
+  this.assignmentService.getAllLockedAndUnlockedAssignment().subscribe(
+    (data: any) => {
+      this.unLockAssignments = data.unLockedAssignment;
+      this.toDoAssignment =this.unLockAssignments[this.unLockAssignments.length - 1];
+      this.assignmentId=this.unLockAssignments[this.unLockAssignments.length - 1].id
+      this.lockAssignments = data.lockedAssignment;
+
+    }
+  )
+}
+public pageRenderUsingRouterLink(path: string, questionId: number) {
+  const dataParams = {
+    assignmentId: this.assignmentId,
+    questionId: questionId,
+  };
+  this.router.navigate([path], {
+    queryParams: dataParams
+  });
+}
 }

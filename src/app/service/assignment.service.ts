@@ -16,6 +16,7 @@ import { AssignmentSubmissionRequest } from '../payload/assignment-submission-re
 })
 export class AssignmentServiceService {
 
+
   BASE_URL = this.utilityService.getBaseUrl();
   assignmentUrl = this.BASE_URL + '/assignment';
 
@@ -102,8 +103,15 @@ export class AssignmentServiceService {
     return this.http.get(`${this.assignmentUrl}/getAllSubmissionAssignmentTaskStatus`)
   }
 
-  public  getOverAllAssignmentTaskStatus() {
+  public getOverAllAssignmentTaskStatus() {
     return this.http.get(`${this.assignmentUrl}/getOverAllAssignmentTaskStatus`)
- }
+  }
+  public getAllLockedAndUnlockedAssignment() {
+    return this.http.get(`${this.assignmentUrl}/getAllLockedAndUnlockedAssignment`)
+  }
+
+   public isSubmitted(assignmentId: number, questionId: number) {
+    return this.http.get(`${this.assignmentUrl}/getAssignmentQuesSubmissionStatus?questionId=${questionId}&assignmentId=${assignmentId}`)
+  }
 
 }
