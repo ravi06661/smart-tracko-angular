@@ -94,66 +94,66 @@ export class AdminstudentComponent implements OnInit{
   public upgradeCourseOfStudent(courseId:number){
 
 
-  //   this.courseService.upgradeStudentCourse(this.newStudent.studentId,this.selectedCourse).subscribe( 
-  //     (data:any)=>{
-  //       this.newStudent=data
-  //       const Toast = Swal.mixin({
+    this.courseService.upgradeStudentCourse(this.newStudent.studentId,this.selectedCourse).subscribe( 
+      (data:any)=>{
+        this.newStudent=data
+        const Toast = Swal.mixin({
           
-  //         toast: true,
-  //         position: 'top-end',
-  //         showConfirmButton: false,
-  //         timer: 1500,
-  //         timerProgressBar: true,
-  //       })
-  //       Toast.fire({
-  //         icon: 'success',
-  //         title: 'Fees Pay success !!'
-  //       }).then(e => {
-  //         this.newStudent=new StudentDetails
-  //          this.getAllStudent(0,15)
-  //        // this.router.navigate(['/admin/payfees']);
-  //       })
-  //     },
-  //     (err) => {
-  //       const Toast = Swal.mixin({
-  //         toast: true,
-  //         position: 'top-end',
-  //         showConfirmButton: false,
-  //         timer: 500,
-  //         timerProgressBar: true,
-  //       })
-  //       Toast.fire({
-  //         icon: 'error',
-  //         title: 'failed !!'
-  //       })
-  //     }
-  //   )
-  // }
-    Swal.fire({
-      title: 'Do you want to save the changes?',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Save',
-      denyButtonText: `Don't save`,
-    }).then((result) => {
-     
-      if (result.isConfirmed) {
-
-        this.courseService.upgradeStudentCourse(this.newStudent.studentId,this.selectedCourse).subscribe({
-          next:(res:any)=>{
-            
-            this.newStudent=res
-          }
-          })
-        Swal.fire('Saved!', '', 'success')
-        this.newStudent=new StudentDetails
-        this.getAllStudent(0,15)
-      } else if (result.isDenied) {
-        
-        Swal.fire('Changes are not saved', '', 'info')
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        })
+        Toast.fire({
+          icon: 'success',
+          title: 'Updated  success !!'
+        }).then(e => {
+          this.newStudent=new StudentDetails
+           this.getAllStudent(0,15)
+         // this.router.navigate(['/admin/payfees']);
+        })
+      },
+      (err) => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 500,
+          timerProgressBar: true,
+        })
+        Toast.fire({
+          icon: 'error',
+          title: 'failed !!'
+        })
       }
-    })
+    )
   }
+  //   Swal.fire({
+  //     title: 'Do you want to save the changes?',
+  //     showDenyButton: true,
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Save',
+  //     denyButtonText: `Don't save`,
+  //   }).then((result) => {
+     
+  //     if (result.isConfirmed) {
+
+  //       this.courseService.upgradeStudentCourse(this.newStudent.studentId,this.selectedCourse).subscribe({
+  //         next:(res:any)=>{
+            
+  //           this.newStudent=res
+  //         }
+  //         })
+  //       Swal.fire('Saved!', '', 'success')
+  //       this.newStudent=new StudentDetails
+  //       this.getAllStudent(0,15)
+  //     } else if (result.isDenied) {
+        
+  //       Swal.fire('Changes are not saved', '', 'info')
+  //     }
+  //   })
+  // }
   public check(id:number){
     if(this.course.courseId == id)
       return true
