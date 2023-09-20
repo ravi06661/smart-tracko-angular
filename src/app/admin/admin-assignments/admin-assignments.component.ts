@@ -8,6 +8,7 @@ import { Subject } from 'src/app/entity/subject';
 import { SubmissionAssignmentTaskStatus } from 'src/app/entity/submission-assignment-task-status';
 import { TaskQuestion } from 'src/app/entity/task-question';
 import { AssignmentRequest } from 'src/app/payload/assignment-request';
+import { SubjectResponse } from 'src/app/payload/subject-response';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
@@ -24,6 +25,7 @@ export class AdminAssignmentsComponent implements OnInit {
   assignmentRequest: AssignmentRequest = new AssignmentRequest;
   courses: Course[] = [];
   subjects: Subject[] = [];
+  subjectes: SubjectResponse[] = [];
   allActiveAssignments: Assignment[] = []
   assignmentQuestions: TaskQuestion[] = []
   submitedAssignments: AssignmentSubmission[] = []
@@ -31,9 +33,12 @@ export class AdminAssignmentsComponent implements OnInit {
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
   taskSubmissionStatus2: SubmissionAssignmentTaskStatus= new SubmissionAssignmentTaskStatus
   
+  
   totalSubmitted = 0;
   reveiwed = 0;
   unReveiwed = 0;
+  courseId=0;
+
 
   constructor(private courseService: CourseServiceService,
     private subjectService: SubjectService,
@@ -47,12 +52,20 @@ export class AdminAssignmentsComponent implements OnInit {
     this.getAllAssignment();
     this.getAllSubmissionAssignmentStatus()
     this.getOverAllAssignmentTaskStatus()
+    this.getAllSubject()
   }
 
   public getAllCourses() {
     this.courseService.getAll().subscribe({
       next: (data: any) => {
         this.courses = data;
+      }
+    })
+  }
+  public getAllSubject() {
+    this.subjectService.getAllSubjects().subscribe({
+      next: (data: any) => {
+        this.subjectes = data;
       }
     })
   }
@@ -66,7 +79,7 @@ export class AdminAssignmentsComponent implements OnInit {
   public createAssingment() {
     this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
       next: (data: any) => {
-        this.router.navigate(['/admin/createassignments/' + data.id])
+        this.router.navigate(['/admin/assignments/' + data.id])
       }
     })
   }
@@ -117,5 +130,36 @@ export class AdminAssignmentsComponent implements OnInit {
        }
     )
   }
+     
+  courseFilter(event:any){
+    const selectedCourseId=event.target.value;
+    if(selectedCourseId !==""){
+    this.courseService.getCourseByCourseId(selectedCourseId).subscribe(
+    (data:any)=>{
+      this.assignmentRequest.courseId=data.courseId;
+     
+    }
+    );
+  }else{
+    this.assignmentRequest.courseId=0;
+  
+  }
+}
+
+  courseFilterByCourseId(){
+     
+    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(this.courseId).subscribe((
+      (data:any)=>{
+      //  this.taskSubmissionStatus=data
+        console.log("11111111111111111",data);
+        
+      }
+    ))
+  }
+  setCourseSubject(course:Course){
+   this.subjects=course.subjects
+    this.courseId =course.courseId
+  }
+
 }
 

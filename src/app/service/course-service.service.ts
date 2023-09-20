@@ -35,7 +35,7 @@ export class CourseServiceService {
     return this.http.put(`${this.courseUrl}/updateCourseApi`,course);
   }
   public getAll(){
-    return this.http.get(`${this.courseUrl}/findAllCourse`);
+    return this.http.get(`${this.courseUrl}/getAllCourseApi`);
   }
 
 public getAllUpgradeCourse(){
