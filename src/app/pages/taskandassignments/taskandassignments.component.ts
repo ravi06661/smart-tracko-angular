@@ -23,14 +23,16 @@ export class TaskandassignmentsComponent implements OnInit {
   unLockAssignment: Assignment = new Assignment
   assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
   assignmentId: number = 0;
+  assignmentTaskVisibility: boolean[] = [];
+
   constructor(private assignmentService: AssignmentServiceService,
     private router: Router,
     private loginService: LoginService,
-    private utilityService: UtilityServiceService) { 
-      this.unLockAssignments.forEach(() => {
-        this.assignmentTaskVisibility.push(false);
-      });
-    }
+    private utilityService: UtilityServiceService) {
+    this.unLockAssignments.forEach(() => {
+      this.assignmentTaskVisibility.push(false);
+    });
+  }
 
   ngOnInit(): void {
     this.getAllAssignments();
@@ -41,10 +43,22 @@ export class TaskandassignmentsComponent implements OnInit {
     this.assignmentService.getAllLockedAndUnlockedAssignment().subscribe(
       (data: any) => {
         this.unLockAssignments = data.unLockedAssignment;
-        console.log(this.unLockAssignments);
         this.lockAssignments = data.lockedAssignment;
+        this.temp();
       }
     )
+  }
+   // for counting total  completed assignment task
+  public temp() {
+    let count: number = 0;
+    this.unLockAssignments.forEach(element => {
+      element.assignmentQuestion.forEach(e => {
+        if (this.assignmentSubmissionsList.find(e1=> e1.taskId === e.questionId)) {
+          count += 1;
+        }
+      })
+      count = 0;
+    });
   }
 
   public pageRenderUsingRouterLink(path: string, questionId: number) {
@@ -61,6 +75,7 @@ export class TaskandassignmentsComponent implements OnInit {
     this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
         this.assignmentSubmissionsList = data
+        this.temp();
       }
     })
   }
@@ -73,10 +88,15 @@ export class TaskandassignmentsComponent implements OnInit {
     this.assignmentId = id;
     this.unLockAssignment = this.unLockAssignments.find(assignment => assignment.id === id) as Assignment;
   }
-  assignmentTaskVisibility: boolean[] = [];
- 
   toggleAssignment(index: number): void {
-    // Toggle the visibility of assignment tasks for the selected assignment
     this.assignmentTaskVisibility[index] = !this.assignmentTaskVisibility[index];
+  }
+
+  progressWidth: string = '';
+  calculatePercentages(num1: number, num2: number) {
+    let per = Math.floor(num1 / num2 * 100);
+    let obj = per * (6.25);
+    this.progressWidth = obj.toString() + '%'
+    return per
   }
 }

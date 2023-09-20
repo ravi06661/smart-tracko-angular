@@ -66,7 +66,7 @@
                   <h3 class="title font-17 font-500 secondary position-relative">Assignments</h3>
 
                   <!-- ASSIGNMENT ACCORDION  START-->
-                  <div class="AssignmentCard" id="head-show">
+                  <!-- <div class="AssignmentCard" id="head-show">
                     <div class="Head">
                       <div class="TaskName text-light">Day 1</div>
                       <div class="Toggle">
@@ -110,39 +110,39 @@
                       </div>
 
                     </div>
+                  </div> -->
+                  <div class="AssignmentCard mb-1" id="head-show" *ngFor="let obj of unLockAssignments; let i=index">
+                    <div class="Head">
+                      <div class="TaskName text-light">Assignment Day {{i+1}}</div>
+                      <div class="Toggle">
+                        <i class="fi fi-rr-angle-small-down fs-4 lh-2 secondary" id="down-arrow"   (click)="toggleAssignment(i)" (click)="getAssignment(obj.id)"></i>
+                        <i class="fi fi-rr-angle-small-up fs-4 lh-2 secondary" id="up-arrow" onclick="assignhide()"   style="display:none;" ></i>
+                      </div>
+                    </div>
+                    <div class="Bar">
+                      <div class="Progress">
+                        <div class="Deadline">8/{{obj.assignmentQuestion.length}}</div>
+                        <div class="Progress">50%</div>
+                      </div>
+                    </div>
+                    <div class="ProgressBar">
+                      <div class="ProgressW"></div>
+                    </div>
+                    <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
+                      <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.assignmentQuestion; let j=index">
+                        <div class="TaskCard">
+                          <div class="TaskName">Task {{j+1}}</div>
+                          <div class="Button">View</div>
+                        </div>
+                      </a>
+                    </div>
                   </div>
 
-                  <div class="TaskCard">
-                    <div class="font-15 font-400 text_gray">Day 1</div>
+                  <div class="TaskCard" *ngFor="let obj of lockAssignments;let i=index">
+                    <div class="font-15 font-400 text_gray">Day {{i+1}}</div>
                     <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
                   </div>
-                  <div class="TaskCard">
-                    <div class="font-15 font-400 text_gray">Day 1</div>
-                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                  </div>
-                  <div class="TaskCard">
-                    <div class="font-15 font-400 text_gray">Day 1</div>
-                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                  </div>
-                  <div class="TaskCard">
-                    <div class="font-15 font-400 text_gray">Day 1</div>
-                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                  </div>
-                  <div class="TaskCard">
-                    <div class="font-15 font-400 text_gray">Day 1</div>
-                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                  </div>
-                  <div class="TaskCard">
-                    <div class="font-15 font-400 text_gray">Day 1</div>
-                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                  </div>
-                  <div class="TaskCard">
-                    <div class="font-15 font-400 text_gray">Day 1</div>
-                    <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-                  </div>
-
                   <!-- ASSIGNMENT ACCORDION  END-->
-
                 </div>
 
                 <div class="col-md-6">
@@ -150,55 +150,16 @@
 
                   <div class="all_summary assignment-updates">
 
-                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1" *ngFor="let obj of assignmentSubmissionsList;let i=index" (click)="assignmentSubmissionObj = obj">
                       <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                            class="text_light_green ms-1 font-500">Completed</b></h3>
-                        <a routerLink="/admin/submission" class="font-13 font-400 warning ms-auto mb-0 task_modal">View</a>
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment  <b class="ms-1 font-500" [ngClass]="{'text_light_green':obj.status == 'Accepted','text_light_red':obj.status=='Rejected','text_light_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</b></h3>
+                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
                       </div>
                       <div class="d-flex align-items-center justify-content-between mb-1">
-                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                        <h3 class="font-13 font-400 mb-0">Task-{{i+1}}: Submission is {{obj.status}}.</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">{{obj.submissionDate | date:'shortTime'}}</h4>
                       </div>
-                    </div>
-
-                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                            class="text_light_red ms-1 font-500">Reassigned</b></h3>
-                            <a routerLink="/admin/submission" class="font-13 font-400 warning ms-auto mb-0 task_modal">View</a>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between mb-1">
-                        <h3 class="font-13 font-400 mb-0">Task-1: Submission did not meet the requirements.</h3>
-                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                      </div>
-                    </div>
-
-                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                            class="text_light_blue ms-1 font-500">Reviewing</b></h3>
-                            <a routerLink="/admin/submission" class="font-13 font-400 warning ms-auto mb-0 task_modal">View</a>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between mb-1">
-                        <h3 class="font-13 font-400 mb-0">Task-1: Submission is under review.</h3>
-                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                      </div>
-                    </div>
-
-                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                            class="text_light_green ms-1 font-500">Completed</b></h3>
-                            <a routerLink="/admin/submission" class="font-13 font-400 warning ms-auto mb-0 task_modal">View</a>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between mb-1">
-                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                      </div>
-                    </div>
-
-
+                     </div>   
                   </div>
                 </div>
 
@@ -216,46 +177,10 @@
 
                   <!-- TASK ACCORDION  START-->
                   <div class="left_task">
-                    <div class="TaskCard">
-                      <div class="TaskName">Task 1 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                          2023</span></div>
+                    <div class="TaskCard " *ngFor="let obj of taskSubmissionList;let i =index">
+                      <div class="TaskName">Task {{i+1}} <span class="font-15 font-400 text_gray">Summited on {{obj.submissionDate |  date:'mediumDate' }}</span></div>
                       <div class="Button warning">View Submission</div>
                     </div>
-                    <div class="TaskCard">
-                      <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                          2023</span></div>
-                      <div class="Button warning">View Submission</div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                          2023</span></div>
-                      <div class="Button warning">View Submission</div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                          2023</span></div>
-                      <div class="Button warning">View Submission</div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="TaskName">Task 2 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                          2023</span></div>
-                      <div class="Button warning">View Submission</div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="TaskName">Task 3 <span class="font-15 font-400 text_gray">Summited on 1 Jan,
-                          2023</span></div>
-                      <div class="Button warning">View Submission</div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="TaskName">Task 4 <span class="font-15 font-400 text_gray">Overdue by 6
-                          days</span></div>
-                      <div class="Button over_due_color">Over Due</div>
-                    </div>
-                    <div class="TaskCard">
-                      <div class="TaskName">Task 5</div>
-                      <div class="Button pending_color">Pending</div>
-                    </div>
-
                   </div>
                 </div>
                 <!-- col-md-6/// -->
@@ -264,77 +189,16 @@
                   <h3 class="title font-17 font-500 secondary position-relative">Submission History</h3>
                   <div class="all_summary assignment-updates">
 
-                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2" *ngFor="let obj of taskSubmissionList;let i = index" (click)="taskSubmissionObj = obj">
                       <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                            class="text_light_green ms-1 font-500">Completed</b></h3>
+                        <h3 class="font-14 font-500 mb-1 text-black">Task {{i+1}} <b class="ms-1 font-500" [ngClass]="{'text_light_green':obj.status == 'Accepted','text_light_red':obj.status=='Rejected','text_light_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</b></h3>
                         <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
                       </div>
                       <div class="d-flex align-items-center justify-content-between mb-1">
-                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
+                        <h3 class="font-13 font-400 mb-0">Submission is {{obj.status}}</h3>
+                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">{{obj.submissionDate | date:'shortTime'}}</h4>
                       </div>
                     </div>
-
-                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                            class="text_light_red ms-1 font-500">Reassigned</b></h3>
-                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between mb-1">
-                        <h3 class="font-13 font-400 mb-0">Task-1: Submission did not meet the requirements.</h3>
-                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                      </div>
-                    </div>
-
-                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                            class="text_light_blue ms-1 font-500">Reviewing</b></h3>
-                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between mb-1">
-                        <h3 class="font-13 font-400 mb-0">Task-1: Submission is under review.</h3>
-                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                      </div>
-                    </div>
-
-                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                            class="text_light_green ms-1 font-500">Completed</b></h3>
-                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between mb-1">
-                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                      </div>
-                    </div>
-
-                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                            class="text_light_green ms-1 font-500">Completed</b></h3>
-                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between mb-1">
-                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                      </div>
-                    </div>
-                    <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
-                      <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment Day 1 <b
-                            class="text_light_green ms-1 font-500">Completed</b></h3>
-                        <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                      </div>
-                      <div class="d-flex align-items-center justify-content-between mb-1">
-                        <h3 class="font-13 font-400 mb-0">Task-1: Submission Accepted.</h3>
-                        <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">10:00 AM</h4>
-                      </div>
-                    </div>
-
                   </div>
                 </div>
                 <!-- col-md-6/// -->
@@ -727,5 +591,69 @@
               </div>
           </div>
       </div>
-  </div>
+    </div>
+      <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog position-relative assignment_modal" style="width: 514px;">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 font-17 font-600 secondary modal_line position-relative mb-2" id="exampleModalLabel1">
+                  Submission Details</h1>
+                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -15%;">
+                  <i class="fi fi-rr-cross close_modal"></i>
+                </button>
+                <h3 class="font-15 font-500" [ngClass]="{'text_light_green':assignmentSubmissionObj.status == 'Accepted','text_light_red':assignmentSubmissionObj.status=='Rejected','text_light_blue':(assignmentSubmissionObj.status=='Unreviewed')||(assignmentSubmissionObj.status=='Reviewing')}">{{assignmentSubmissionObj.status}}</h3>
+              </div>
+              <div class="">
+                <div class="assignment">
+                  <div class="question_ans">
+                    <h3 class="font-17 font-500 secondary">Report</h3>
+                    <ol class="ps-3">
+                      <li class="font-17 font-400 text_dark">{{assignmentSubmissionObj.description}}</li>
+                      <!-- <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li> -->
+                    </ol>
+                  </div>           
+                <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file">
+                  <a href="{{ATTACHMENT_URL+assignmentSubmissionObj.submitFile}}" class="font-15 font-400 text_gray  attachment_file_text">
+                    <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
+                    Download Submited File</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog position-relative assignment_modal" style="width: 514px;">
+          <div class="modal-content">
+            <div class="modal-body">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5 font-17 font-600 secondary modal_line position-relative mb-2" id="exampleModalLabel1">
+                  Submission Details</h1>
+                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -15%;">
+                  <i class="fi fi-rr-cross close_modal"></i>
+                </button>
+                <h3 class="font-15 font-500" [ngClass]="{'text_light_green':taskSubmissionObj.status == 'Accepted','text_light_red':taskSubmissionObj.status=='Rejected','text_light_blue':(taskSubmissionObj.status=='Unreviewed')||(taskSubmissionObj.status=='Reviewing')}">{{taskSubmissionObj.status}}</h3>
+              </div>
+              <div class="">
+                <div class="assignment">
+                  <div class="question_ans">
+                    <h3 class="font-17 font-500 secondary">Report</h3>
+                    <ol class="ps-3">
+                      <li class="font-17 font-400 text_dark">{{taskSubmissionObj.taskDescription}}</li>
+                    </ol>
+                  </div>           
+                  <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file">
+                    <a href="{{ATTACHMENT_URL+taskSubmissionObj.submittionFileName}}" class="font-15 font-400 text_gray  attachment_file_text">
+                      <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
+                      Download Submited File</a>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
   <!-- Modal Delete Modal End -->

@@ -24,9 +24,12 @@ export class StudyComponent {
       }
     })
   }
+  progressWidth:string='';
   calculatePercentages(num1: number, num2: number) {
-    return    Math.floor(num1 / num2 * 100);
+   let per =  Math.floor(num1 / num2 * 100);
+   let obj=per*(6.25);
+   this.progressWidth = obj.toString()+'%'
+   return per
   }
-  
 }
 

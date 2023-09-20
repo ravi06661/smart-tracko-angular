@@ -15,18 +15,18 @@
             <div class="Head">
               <div class="TaskName text-light">Assignment Day {{i+1}}</div>
               <div class="Toggle">
-                <i class="fi fi-rr-angle-small-down fs-4 lh-2 secondary" id="down-arrow"  onclick="assignshow()" (click)="toggleAssignment(i)" (click)="getAssignment(obj.id)"></i>
+                <i class="fi fi-rr-angle-small-down fs-4 lh-2 secondary" id="down-arrow"   (click)="toggleAssignment(i)" (click)="getAssignment(obj.id)"></i>
                 <i class="fi fi-rr-angle-small-up fs-4 lh-2 secondary" id="up-arrow" onclick="assignhide()"   style="display:none;" ></i>
               </div>
             </div>
             <div class="Bar">
               <div class="Progress">
                 <div class="Deadline">8/{{obj.assignmentQuestion.length}}</div>
-                <div class="Progress">50%</div>
+                <div class="Progress">{{calculatePercentages(1,obj.assignmentQuestion.length)}}%</div>
               </div>
             </div>
             <div class="ProgressBar">
-              <div class="ProgressW"></div>
+              <div class="ProgressW" [style.width]="progressWidth"></div>
             </div>
             <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
               <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.assignmentQuestion; let j=index">
