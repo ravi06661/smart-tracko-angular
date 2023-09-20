@@ -1,15 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { ApexNonAxisChartSeries, ApexChart, ApexResponsive, ChartComponent } from 'ng-apexcharts';
 import { PieChart } from 'src/app/charts/pie-chart';
+import { Assignment } from 'src/app/entity/assignment';
+import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
 import { AttendanceLog } from 'src/app/entity/attendance-log';
 import { FeesPay } from 'src/app/entity/fees-pay';
 import { Leaves } from 'src/app/entity/leaves';
 import { StudentDetails } from 'src/app/entity/student-details';
+import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
+import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { FeesPayService } from 'src/app/service/fees-pay.service';
 import { LeaveService } from 'src/app/service/leave.service';
+import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
+import { TaskServiceService } from 'src/app/service/task-service.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import Swal from 'sweetalert2';
 
@@ -41,15 +47,26 @@ export class StudentProfileComponent implements OnInit{
   leaveMonth = 'Month';
   feesPay:FeesPay[]=[];
   pieChart:PieChart = new PieChart();
-
-  constructor(private utilityService:UtilityServiceService,private activateRoute:ActivatedRoute,
-    private studentService:StudentService,private leaveService:LeaveService,private feesPayService:FeesPayService){
+  assignmentSubmissionsList: AssignmentSubmission[] = []
+  assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
+  taskSubmissionList:StudentTaskSubmittion[]=[]
+  taskSubmissionObj:StudentTaskSubmittion = new StudentTaskSubmittion
+  unLockAssignments: Assignment[] = []
+  lockAssignments: Assignment[] = []
+  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
+  assignmentId: number = 0;
+  unLockAssignment: Assignment = new Assignment
+  constructor( private router: Router,private taskService: TaskServiceService,private assignmentService: AssignmentServiceService,private utilityService:UtilityServiceService,private activateRoute:ActivatedRoute,
+    private studentService:StudentService,private leaveService:LeaveService,private feesPayService:FeesPayService,private loginService:LoginService){
       this.chartOptions = this.pieChart.chartOptions;
     }
  
   ngOnInit(): void {
     this.studentId=this.activateRoute.snapshot.params[('studentId')];
     this.getStudentProfileData();
+    this.getSubmitedAssignment();
+    this.getSubmitedTaskByStudent();
+    this.getAllAssignments();
   }
 
   public getStudentProfileData(){
@@ -124,5 +141,48 @@ export class StudentProfileComponent implements OnInit{
         this.feesPay = data
       }
     })
+  }
+  public getSubmitedAssignment() {
+    this.assignmentService.getSubmitedAssignmetByStudentId(this.studentId).subscribe({
+      next: (data: any) => {
+        this.assignmentSubmissionsList = data
+        console.log(this.assignmentSubmissionsList);
+        
+      }
+    })
+  }
+  public getSubmitedTaskByStudent(){
+    this.taskService.getSubmitedTaskByStudent(this.studentId).subscribe({
+      next:(data:any)=>{
+        this.taskSubmissionList = data
+      }
+    })
+  }
+  public getAllAssignments() {
+    this.assignmentService.getAllLockedAndUnlockedAssignment().subscribe(
+      (data: any) => {
+        this.unLockAssignments = data.unLockedAssignment;
+        this.lockAssignments = data.lockedAssignment;
+      }
+    )
+  }
+  public getAssignment(id: number) {
+    this.assignmentId = id;
+    this.unLockAssignment = this.unLockAssignments.find(assignment => assignment.id === id) as Assignment;
+  }
+  assignmentTaskVisibility: boolean[] = [];
+ 
+  toggleAssignment(index: number): void {
+    // Toggle the visibility of assignment tasks for the selected assignment
+    this.assignmentTaskVisibility[index] = !this.assignmentTaskVisibility[index];
+  }
+  public pageRenderUsingRouterLink(path: string, questionId: number) {
+    const dataParams = {
+      assignmentId: this.assignmentId,
+      questionId: questionId,
+    };
+    this.router.navigate([path], {
+      queryParams: dataParams
+    });
   }
 }

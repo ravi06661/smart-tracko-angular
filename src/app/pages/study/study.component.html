@@ -37,8 +37,9 @@
                 <h5 class="mb-0">{{calculatePercentages(obj.chapterCompleted,obj.chapterCount) }} %</h5>
               </div>
               <div class="ProgressBar">
-                <div class="ProgressW"></div>
+                <div class="ProgressW" [style.width]="progressWidth"></div>
               </div>
+              
             </div> <!-- subject_card -->
           </a>         
         </div>
