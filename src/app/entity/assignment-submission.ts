@@ -9,7 +9,7 @@ export class AssignmentSubmission {
     public student:StudentDetails = new StudentDetails
     public description:string = ''
     public submitFile:string = ''
-    public submissionDate:any
+    public submissionDate!: Date 
     public status:string = ''
     public review:string = ''
     public taskQuestion:TaskQuestion= new TaskQuestion

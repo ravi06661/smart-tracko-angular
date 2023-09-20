@@ -48,17 +48,22 @@ export class TaskandassignmentsComponent implements OnInit {
       }
     )
   }
-   // for counting total  completed assignment task
+  //for counting total  completed assignment task
+  AssignMap = new Map<number, number>();
   public temp() {
     let count: number = 0;
     this.unLockAssignments.forEach(element => {
       element.assignmentQuestion.forEach(e => {
-        if (this.assignmentSubmissionsList.find(e1=> e1.taskId === e.questionId)) {
+        if (this.assignmentSubmissionsList.find(e1 => e1.taskId === e.questionId)) {
           count += 1;
         }
       })
+      this.AssignMap.set(element.id, count);
       count = 0;
     });
+  }
+  public getTotalCompletedAssignmentCount(id: number) {
+    return this.AssignMap.get(id);
   }
 
   public pageRenderUsingRouterLink(path: string, questionId: number) {
@@ -75,7 +80,6 @@ export class TaskandassignmentsComponent implements OnInit {
     this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
         this.assignmentSubmissionsList = data
-        this.temp();
       }
     })
   }
@@ -92,11 +96,21 @@ export class TaskandassignmentsComponent implements OnInit {
     this.assignmentTaskVisibility[index] = !this.assignmentTaskVisibility[index];
   }
 
-  progressWidth: string = '';
-  calculatePercentages(num1: number, num2: number) {
-    let per = Math.floor(num1 / num2 * 100);
-    let obj = per * (6.25);
-    this.progressWidth = obj.toString() + '%'
-    return per
+   progressWidth: string = '';
+  // calculatePercentages(num1: number, num2: number) {
+  //   let per = Math.floor(num1 / num2 * 100);
+  //   let obj = per * (7.05);
+  //   this.progressWidth = obj.toString() + 'px'
+  //   return per
+  // }
+  public calculatePercentages(num1: number, num2: number) {
+    const totalCompleted = this.getTotalCompletedAssignmentCount(num1);
+    let per
+    if (totalCompleted !== undefined) {
+         per = Math.floor(totalCompleted / num2 * 100);
+        let obj = per * 7.05;
+        this.progressWidth = obj.toString() + 'px';
+    }
+    return per;
   }
 }

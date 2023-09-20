@@ -25,8 +25,8 @@ export type ChartOptions = {
   chart: any;
   responsive: any;
   labels: any;
-  legend:any;
-  colors:any;
+  legend: any;
+  colors: any;
   stroke: any;
 };
 
@@ -35,48 +35,48 @@ export type ChartOptions = {
   templateUrl: './student-profile.component.html',
   styleUrls: ['./student-profile.component.scss']
 })
-export class StudentProfileComponent implements OnInit{
+export class StudentProfileComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions: Partial<ChartOptions>;
-  BASE_URL=this.utilityService.getBaseUrl();  
+  BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
-  studentId:number=0;
-  student:StudentDetails=new StudentDetails();
-  attendanceLog:AttendanceLog[] = [];
+  studentId: number = 0;
+  student: StudentDetails = new StudentDetails();
+  attendanceLog: AttendanceLog[] = [];
   leavesList: Leaves[] = [];
   leaveMonth = 'Month';
-  feesPay:FeesPay[]=[];
-  pieChart:PieChart = new PieChart();
+  feesPay: FeesPay[] = [];
+  pieChart: PieChart = new PieChart();
   assignmentSubmissionsList: AssignmentSubmission[] = []
   assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
-  taskSubmissionList:StudentTaskSubmittion[]=[]
-  taskSubmissionObj:StudentTaskSubmittion = new StudentTaskSubmittion
+  taskSubmissionList: StudentTaskSubmittion[] = []
+  taskSubmissionObj: StudentTaskSubmittion = new StudentTaskSubmittion
   unLockAssignments: Assignment[] = []
   lockAssignments: Assignment[] = []
   ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   assignmentId: number = 0;
   unLockAssignment: Assignment = new Assignment
-  constructor( private router: Router,private taskService: TaskServiceService,private assignmentService: AssignmentServiceService,private utilityService:UtilityServiceService,private activateRoute:ActivatedRoute,
-    private studentService:StudentService,private leaveService:LeaveService,private feesPayService:FeesPayService,private loginService:LoginService){
-      this.chartOptions = this.pieChart.chartOptions;
-    }
- 
+  constructor(private router: Router, private taskService: TaskServiceService, private assignmentService: AssignmentServiceService, private utilityService: UtilityServiceService, private activateRoute: ActivatedRoute,
+    private studentService: StudentService, private leaveService: LeaveService, private feesPayService: FeesPayService, private loginService: LoginService) {
+    this.chartOptions = this.pieChart.chartOptions;
+  }
+
   ngOnInit(): void {
-    this.studentId=this.activateRoute.snapshot.params[('studentId')];
+    this.studentId = this.activateRoute.snapshot.params[('studentId')];
     this.getStudentProfileData();
     this.getSubmitedAssignment();
     this.getSubmitedTaskByStudent();
     this.getAllAssignments();
   }
 
-  public getStudentProfileData(){
+  public getStudentProfileData() {
     this.studentService.getStudentProfileData(this.studentId).subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.student = data;
       }
     })
   }
-  public updateStudent(){
+  public updateStudent() {
     Swal.fire({
       title: 'Do you want to save the changes?',
       showDenyButton: true,
@@ -87,10 +87,10 @@ export class StudentProfileComponent implements OnInit{
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.studentService.updateStudent(this.student).subscribe({
-          next:(res:any)=>{
-           this.student=res
+          next: (res: any) => {
+            this.student = res
           }
-          })
+        })
         Swal.fire('Saved!', '', 'success')
       } else if (result.isDenied) {
         this.getStudentProfileData()
@@ -99,20 +99,20 @@ export class StudentProfileComponent implements OnInit{
     })
   }
 
-  public getStudentOverAllAttendancesAndLeaves(){
+  public getStudentOverAllAttendancesAndLeaves() {
     this.studentService.getStudentOverAllAttendancesAndLeave(this.studentId).subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.attendanceLog = data.attendanceList;
-        this.chartOptions.series=[data.presentsCount,0,data.leavesCount];
+        this.chartOptions.series = [data.presentsCount, 0, data.leavesCount];
       }
     })
   }
 
-  public changeTimeFormat(time:any){
+  public changeTimeFormat(time: any) {
     return moment(time, "HH:mm:ss").format("hh:mm:ss A");
   }
 
-  public timerFormate(seconds:number){
+  public timerFormate(seconds: number) {
     return new Date(seconds * 1000).toISOString().substr(11, 8);
   }
 
@@ -121,23 +121,23 @@ export class StudentProfileComponent implements OnInit{
     this.leaveService.getStudentLeaves(this.studentId).subscribe({
       next: (res: any) => {
         this.leavesList = res.leavesData.response;
-        
+
       }
     })
   }
 
   public getLeavesFilter(monthNo: number) {
     this.leaveMonth = moment(monthNo, "MM").format("MMMM");
-    this.leaveService.getLeavesFiterData(this.studentId,monthNo).subscribe({
+    this.leaveService.getLeavesFiterData(this.studentId, monthNo).subscribe({
       next: (res: any) => {
         this.leavesList = res.leavesData.response;
       }
     })
   }
 
-  public getAllTrasection(){
+  public getAllTrasection() {
     this.feesPayService.getAllTransection(this.studentId).subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.feesPay = data
       }
     })
@@ -147,13 +147,13 @@ export class StudentProfileComponent implements OnInit{
       next: (data: any) => {
         this.assignmentSubmissionsList = data
         console.log(this.assignmentSubmissionsList);
-        
+
       }
     })
   }
-  public getSubmitedTaskByStudent(){
+  public getSubmitedTaskByStudent() {
     this.taskService.getSubmitedTaskByStudent(this.studentId).subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.taskSubmissionList = data
       }
     })
@@ -163,6 +163,7 @@ export class StudentProfileComponent implements OnInit{
       (data: any) => {
         this.unLockAssignments = data.unLockedAssignment;
         this.lockAssignments = data.lockedAssignment;
+        this.temp();
       }
     )
   }
@@ -171,7 +172,7 @@ export class StudentProfileComponent implements OnInit{
     this.unLockAssignment = this.unLockAssignments.find(assignment => assignment.id === id) as Assignment;
   }
   assignmentTaskVisibility: boolean[] = [];
- 
+
   toggleAssignment(index: number): void {
     // Toggle the visibility of assignment tasks for the selected assignment
     this.assignmentTaskVisibility[index] = !this.assignmentTaskVisibility[index];
@@ -184,5 +185,42 @@ export class StudentProfileComponent implements OnInit{
     this.router.navigate([path], {
       queryParams: dataParams
     });
+  }
+
+  //for counting total  completed assignment task
+  AssignMap = new Map<number, number>();
+  AssignSubmittionDates = new Map<number, Date>();
+  public temp() {
+    let count: number = 0;
+    this.unLockAssignments.forEach(element => {
+      element.assignmentQuestion.forEach(e => {
+        if (this.assignmentSubmissionsList.find(e1 => e1.taskId === e.questionId)) {
+          count += 1;
+          let obj = this.assignmentSubmissionsList.find(e1 => e1.taskId === e.questionId) as AssignmentSubmission
+          this.AssignSubmittionDates.set(e.questionId, obj.submissionDate);
+        }
+      })
+      this.AssignMap.set(element.id, count);
+      count = 0;
+    });
+  }
+  public getTotalCompletedAssignmentCount(id: number) {
+    return this.AssignMap.get(id);
+  }
+  public getAssignmentSubmissionDate(taskId: number) {
+    return this.AssignSubmittionDates.get(taskId);
+  }
+
+  progressWidth: string = '';
+
+  public calculatePercentages(num1: number, num2: number) {
+    const totalCompleted = this.getTotalCompletedAssignmentCount(num1);
+    let per
+    if (totalCompleted !== undefined) {
+      per = Math.floor(totalCompleted / num2 * 100);
+      let obj = per * 7.29;
+      this.progressWidth = obj.toString() + 'px';
+    }
+    return per;
   }
 }
