@@ -21,8 +21,8 @@
             </div>
             <div class="Bar">
               <div class="Progress">
-                <div class="Deadline">8/{{obj.assignmentQuestion.length}}</div>
-                <div class="Progress">{{calculatePercentages(1,obj.assignmentQuestion.length)}}%</div>
+                <div class="Deadline">{{getTotalCompletedAssignmentCount(obj.id)}}/{{obj.assignmentQuestion.length}}</div>
+                <div class="Progress">{{calculatePercentages(obj.id,obj.assignmentQuestion.length)}}%</div>
               </div>
             </div>
             <div class="ProgressBar">

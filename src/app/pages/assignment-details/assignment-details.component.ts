@@ -72,7 +72,7 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   public isSubmitted() {
-    this.assignmentService.isSubmitted(this.assignmentId, this.questionId).subscribe(
+    this.assignmentService.isSubmitted(this.assignmentId, this.questionId,this.loginService.getStudentId()).subscribe(
       (data: any) => {
         this.isSubmittedis = data
         console.log(this.isSubmittedis);

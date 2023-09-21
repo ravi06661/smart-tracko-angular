@@ -121,18 +121,20 @@
                     </div>
                     <div class="Bar">
                       <div class="Progress">
-                        <div class="Deadline">8/{{obj.assignmentQuestion.length}}</div>
-                        <div class="Progress">50%</div>
+                        <div class="Deadline">{{getTotalCompletedAssignmentCount(obj.id)}}/{{obj.assignmentQuestion.length}}</div>
+                        <div class="Progress">{{calculatePercentages(obj.id,obj.assignmentQuestion.length)}}%</div>
                       </div>
                     </div>
                     <div class="ProgressBar">
-                      <div class="ProgressW"></div>
+                      <div class="ProgressW" [style.width]="progressWidth"></div>
                     </div>
+            
+
                     <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
                       <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.assignmentQuestion; let j=index">
                         <div class="TaskCard">
-                          <div class="TaskName">Task {{j+1}}</div>
-                          <div class="Button">View</div>
+                          <div class="TaskName">Task {{j+1 }} <span class="font-15 font-400 text_gray">Summited on {{getAssignmentSubmissionDate(task.questionId) | date:'mediumDate' }}</span></div>
+                          <div class="Button warning">View Submission</div>
                         </div>
                       </a>
                     </div>
