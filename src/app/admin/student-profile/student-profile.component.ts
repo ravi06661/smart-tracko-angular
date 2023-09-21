@@ -159,7 +159,7 @@ export class StudentProfileComponent implements OnInit {
     })
   }
   public getAllAssignments() {
-    this.assignmentService.getAllLockedAndUnlockedAssignment().subscribe(
+    this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId()).subscribe(
       (data: any) => {
         this.unLockAssignments = data.unLockedAssignment;
         this.lockAssignments = data.lockedAssignment;

@@ -79,7 +79,7 @@ export class AdminAssignmentsComponent implements OnInit {
   public createAssingment() {
     this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
       next: (data: any) => {
-        this.router.navigate(['/admin/assignments/' + data.id])
+        this.router.navigate(['/admin/createassignments/' + data.id])
       }
     })
   }
