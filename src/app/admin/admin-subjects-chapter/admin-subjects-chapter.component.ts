@@ -52,14 +52,16 @@ export class AdminSubjectsChapterComponent {
   }
   public addChapter() {
     this.chapterService.addChapter(this.subjectId, this.chapterUpdate.chapterName).subscribe(
-      (error) => {
-        this.message = 'Failed..'
+      {
+        next:(data) => {
+          this.message = 'Success..';
+          this.chapterUpdate = new Chapter();
+          this.chapter = data.chapters
+        },
+        error:(error) => {
+          this.message = 'Failed..'
+        }
       },
-      (data) => {
-        this.message = 'Success..';
-        this.chapterUpdate = new Chapter();
-        this.getAllSubjectChapter();
-      }
     )
   }
   public deleteChapter() {
