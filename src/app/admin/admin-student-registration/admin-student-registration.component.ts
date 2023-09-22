@@ -5,6 +5,8 @@ import { StudentDetails } from 'src/app/entity/student-details';
 import { StudentService } from 'src/app/service/student.service';
 import { FormBuilder } from '@angular/forms'
 import Swal from 'sweetalert2';
+import { CourseServiceService } from 'src/app/service/course-service.service';
+import { Course } from 'src/app/entity/course';
 @Component({
   selector: 'app-admin-student-registration',
   templateUrl: './admin-student-registration.component.html',
@@ -21,7 +23,9 @@ export class AdminStudentRegistrationComponent {
   form2ProgressBar = 'form_2_progessbar'
   form3ProgressBar = 'form_3_progessbar'
 
-  constructor(private studentService: StudentService, private router: Router, private formBuilder: FormBuilder) {
+  courses:Course[] = [];
+
+  constructor(private studentService: StudentService, private router: Router, private formBuilder: FormBuilder,private courseService:CourseServiceService) {
     this.personlaDetailsForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       dob: ['', Validators.required],
@@ -35,7 +39,7 @@ export class AdminStudentRegistrationComponent {
       mobile: ['', Validators.required],
     });
     this.inrollmentForm = this.formBuilder.group({
-      applyForCourse: ['', Validators.required],
+      course: ['', Validators.required],
       currentCourse: ['', Validators.required],
       joinDate: ['', Validators.required],
       college: ['', Validators.required],
@@ -49,7 +53,7 @@ export class AdminStudentRegistrationComponent {
   }
 
   ngOnInit() {
-
+    this.getStarterCourse();
   }
 
   isFieldInvalidForpersonlaDetailsForm(fieldName: string): boolean {
@@ -104,6 +108,8 @@ export class AdminStudentRegistrationComponent {
   }
 
   submit() {
+    console.log(this.registrationDetails);
+    
     if (this.personlaDetailsForm.valid && this.inrollmentForm.valid && this.addressForm.valid)
       this.studentService.registerStudent(this.registrationDetails).subscribe(
         (data: any) => {
@@ -162,5 +168,20 @@ export class AdminStudentRegistrationComponent {
       this.activeSection = 'inrollment';
       this.form3ProgressBar = 'form_2_progessbar'
     }
+  }
+
+  public getStarterCourse(){
+    this.courseService.getAllStarterCourse().subscribe({
+      next:(data:any)=>{
+        this.courses = data;
+      },
+      error:(err)=>{
+
+      }
+    })
+  }
+
+  public setCourse(event:any){
+    this.registrationDetails.course.courseId = event.target.value
   }
 }

@@ -79,10 +79,12 @@ export class AdminAddFeesComponent implements OnInit {
     if (selectedStudentId !== "") {
       this.studentService.getByStudentById(selectedStudentId).subscribe(
         (data: any) => {
+          console.log(data);
           this.fees.student.studentId = data.studentId;
           this.fees.student.email = data.email;
           this.fees.student.mobile = data.mobile;
           this.fees.student.fullName = data.fullName;
+          this.fees.course = data.course;
         }
       );
     } else {

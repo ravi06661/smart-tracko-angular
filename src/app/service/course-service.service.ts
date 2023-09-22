@@ -41,6 +41,11 @@ export class CourseServiceService {
 public getAllUpgradeCourse(){
   return this.http.get(`${this.courseUrl}/getAllCourseApi`);
 }
+
+public getAllStarterCourse(){
+  return this.http.get(`${this.courseUrl}/findAllCourse`);
+}
+
 public upgradeStudentCourse(studentId:number,courseId:number){
   // const formData = new FormData();
   //   formData.append('studentId', studentId.toString());
