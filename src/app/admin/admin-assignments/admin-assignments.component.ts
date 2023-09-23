@@ -33,8 +33,7 @@ export class AdminAssignmentsComponent implements OnInit {
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
   taskSubmissionStatus2: SubmissionAssignmentTaskStatus= new SubmissionAssignmentTaskStatus
   
-  courseLenght=0;
-  subjectLenght=0;
+  
   totalSubmitted = 0;
   reveiwed = 0;
   unReveiwed = 0;
@@ -80,9 +79,7 @@ export class AdminAssignmentsComponent implements OnInit {
   public createAssingment() {
     this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
       next: (data: any) => {
-
         this.router.navigate(['/admin/createassignments/' + data.id])
-
       }
     })
   }
@@ -91,7 +88,6 @@ export class AdminAssignmentsComponent implements OnInit {
     this.assignmentService.getAllSubmitedAssignments().subscribe({
       next: (data: any) => {
         this.submitedAssignments = data
-
       }
     })
   }
@@ -108,7 +104,6 @@ export class AdminAssignmentsComponent implements OnInit {
     this.assignmentService.getAllAssignments().subscribe((
       (data: any) => {
         this.allActiveAssignments = data
-        this.courseLenght=this.allActiveAssignments.length;
         this.allActiveAssignments.forEach((temp: any) => {
           temp.assignmentQuestion.forEach((t: any) => {
             this.assignmentQuestions.push(t)
@@ -120,8 +115,7 @@ export class AdminAssignmentsComponent implements OnInit {
   public getAllSubmissionAssignmentStatus() {
     this.assignmentService.getAllSubmissionAssignmentTaskStatus().subscribe(
       (data: any) => {
-        this.taskSubmissionStatus = data;   
-        this.courseLenght=this.allActiveAssignments.length;     
+        this.taskSubmissionStatus = data;        
       } 
     )
   }
@@ -133,7 +127,6 @@ export class AdminAssignmentsComponent implements OnInit {
         this.totalSubmitted = this.taskSubmissionStatus2.totalSubmitted
         this.reveiwed = this.taskSubmissionStatus2.reveiwed
         this.unReveiwed = this.taskSubmissionStatus2.unReveiwed
-        //= this.courseLenght=this.taskSubmissionStatus2.length
        }
     )
   }
@@ -153,26 +146,15 @@ export class AdminAssignmentsComponent implements OnInit {
   }
 }
 
-  courseFilterBySubject(subjectId:number){
-    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(this.courseId,subjectId).subscribe((
+  courseFilterByCourseId(){
+     
+    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(this.courseId).subscribe((
       (data:any)=>{
-        this.taskSubmissionStatus=data
-         this.courseLenght=this.taskSubmissionStatus.length;
-        console.log(data);
+      //  this.taskSubmissionStatus=data
+        console.log("11111111111111111",data);
         
       }
     ))
-  }
-  courseFilterByCourse(courseId:number){
-    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(this.courseId,0).subscribe((
-      (data:any)=>{
-        this.taskSubmissionStatus=data
-         this.courseLenght=this.taskSubmissionStatus.length
-        console.log(data);
-        
-      }
-    ))
-    
   }
   setCourseSubject(course:Course){
    this.subjects=course.subjects
