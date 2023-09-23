@@ -142,7 +142,7 @@ export class DashboardComponent implements OnInit {
   }
 
   public getAllTask() {
-    this.taskService.getAllTask().subscribe(
+    this.taskService.getAllTask(this.loginService.getStudentId()).subscribe(
       (data: any) => {
         this.tasks = data
       }
@@ -165,7 +165,7 @@ export class DashboardComponent implements OnInit {
   }
 
 public getdoAssignment(){
-  this.assignmentService.getAllLockedAndUnlockedAssignment().subscribe(
+  this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId()).subscribe(
     (data: any) => {
       this.unLockAssignments = data.unLockedAssignment;
       this.toDoAssignment =this.unLockAssignments[this.unLockAssignments.length - 1];

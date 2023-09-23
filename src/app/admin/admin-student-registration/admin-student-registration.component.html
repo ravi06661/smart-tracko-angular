@@ -196,12 +196,17 @@
                                 <div class="form-group">
                                     <label for="" class="mb_6 font-17 font-500 secondary">Apply for Course</label>
                                     <div class="input_icon position-relative">
-                                        <input type="text" id="applyForCourse" class="form-control input_text"
+                                        <!-- <input type="text" id="applyForCourse" class="form-control input_text"
                                             name="applyForCourse" formControlName="applyForCourse"
                                             [(ngModel)]="registrationDetails.applyForCourse"
-                                            placeholder="Apply for Course">
-                                        <div *ngIf=" isFieldInvalidForinrollmentForm('applyForCourse')"
-                                            class="text-danger"> Name is required.</div>
+                                            placeholder="Apply for Course"> -->
+                                            <select class="form-control input_text" aria-label="Default select example" id="course" name="course" formControlName="course" (change)="setCourse($event)">
+                                                <option value="" selected>Select Course</option>
+                                                <option *ngFor="let course of courses" [value]="course.courseId">{{ course.courseName }}</option>
+                                              </select>
+                                              
+                                        <div *ngIf=" isFieldInvalidForinrollmentForm('course')"
+                                            class="text-danger"> Course is required.</div>
                                     </div>
                                 </div>
                             </div>

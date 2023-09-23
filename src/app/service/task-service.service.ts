@@ -23,8 +23,8 @@ export class TaskServiceService {
   public getTaskById(id: number) {
     return this.http.get(`${this.TASK_URL}/getTaskById?taskId=${id}`)
   }
-  public getAllTask() {
-    return this.http.get(`${this.TASK_URL}/getAllTask`);
+  public getAllTask(studentId:number) {
+    return this.http.get(`${this.TASK_URL}/getAllTask?studentId=${studentId}`);
   }
   public submitTask(task: StudentTaskSubmittion, taskId: number) {
     let formData = new FormData();

@@ -3,6 +3,7 @@ import { Chapter } from 'src/app/entity/chapter';
 import { Subject } from 'src/app/entity/subject';
 import { TechnologyStack } from 'src/app/entity/technology-stack';
 import { SubjectResponse } from 'src/app/payload/subject-response';
+import { LoginService } from 'src/app/service/login.service';
 import { SubjectService } from 'src/app/service/subject.service';
 
 
@@ -15,7 +16,7 @@ export class StudyComponent {
   subjects: SubjectResponse[] = [];
   subject: Subject = new Subject();
 
-  constructor(private subjectService: SubjectService) { }
+  constructor(private subjectService: SubjectService,private loginService:LoginService) { }
 
   ngOnInit() {
     this.subjectService.getAllSubjectsWithChapterCompletedStatus().subscribe({

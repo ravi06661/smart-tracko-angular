@@ -25,6 +25,7 @@ export class SubjectService{
     return this.http.get(`${this.Subject_url}/getAllSubjects`);
   }
   public getAllSubjectsWithChapterCompletedStatus(){
+  
     return this.http.get(`${this.Subject_url}/getAllSubjectsWithChapterCompletedStatus/${this.loginService.getStudentId()}`);
   }
   public getSubjectById(id: number) {

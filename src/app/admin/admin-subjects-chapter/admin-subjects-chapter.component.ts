@@ -16,7 +16,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class AdminSubjectsChapterComponent {
   BASE_URL = this.utilityService.getBaseUrl();
-  techUrl = this.BASE_URL+"/file/getImageApi/technologyStackImage/";
+  techUrl = this.BASE_URL + "/file/getImageApi/technologyStackImage/";
   chapter: Chapter[] = []
   subjects: Subject[] = [];
   subjectId: number = 0;
@@ -27,10 +27,10 @@ export class AdminSubjectsChapterComponent {
   imageName = ''
   techImages: TechnologyStack[] = [];
 
-  constructor(private subjectService: SubjectService, 
-    private route: ActivatedRoute, 
+  constructor(private subjectService: SubjectService,
+    private route: ActivatedRoute,
     private chapterService: ChapterServiceService,
-    private utilityService:UtilityServiceService,
+    private utilityService: UtilityServiceService,
     private techService: TechnologyStackService) { }
 
   ngOnInit() {
@@ -52,18 +52,20 @@ export class AdminSubjectsChapterComponent {
   }
   public addChapter() {
     this.chapterService.addChapter(this.subjectId, this.chapterUpdate.chapterName).subscribe(
-      (error) => {
-        this.message = 'Failed..'
-      },
-      (data) => {
-        this.message = 'Success..';
-        this.chapterUpdate = new Chapter();
-        this.getAllSubjectChapter();
+      {
+        next: (data) => {
+          this.message = 'Success..'
+          this.chapterUpdate = new Chapter();
+          this.chapter = data.chapters
+        },
+        error: (error) => {
+          this.message = 'Failed..'
+        }
       }
     )
   }
   public deleteChapter() {
-     //alert(this.chapterId)
+    //alert(this.chapterId)
     this.chapterService.deleteChapter(this.chapterId, this.subjectId).subscribe(
       (data) => {
         this.chapterId = 0;
@@ -88,21 +90,21 @@ export class AdminSubjectsChapterComponent {
       (data) => {
         this.message = 'success';
         this.chapterUpdate = new Chapter();
-        this.chapterId=0;
+        this.chapterId = 0;
       },
       (error) => {
         this.message = 'Failed..'
       }
     )
   }
-  public getChapterById(id:number) {
-    this.chapterId=id;
+  public getChapterById(id: number) {
+    this.chapterId = id;
     this.chapterService.getChapterById(id).subscribe(
       (data) => {
         this.chapterUpdate = data;
       },
-      (error)=>{
-        this.message="error"
+      (error) => {
+        this.message = "error"
       }
     )
   }

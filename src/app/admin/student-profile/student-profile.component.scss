@@ -84,7 +84,7 @@
 
   .ProgressBar {
     height: 6px;
-    padding-right: 312.5px;
+    padding-right: 0px;
     background: #edf1fa;
     border-radius: 6px;
     justify-content: flex-start;
@@ -93,7 +93,6 @@
   }
 
   .ProgressW {
-    width: 312.5px;
     height: 6px;
     background: #4977cf;
     border-radius: 6px;

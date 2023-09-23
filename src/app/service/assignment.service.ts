@@ -106,12 +106,12 @@ export class AssignmentServiceService {
   public getOverAllAssignmentTaskStatus() {
     return this.http.get(`${this.assignmentUrl}/getOverAllAssignmentTaskStatus`)
   }
-  public getAllLockedAndUnlockedAssignment() {
-    return this.http.get(`${this.assignmentUrl}/getAllLockedAndUnlockedAssignment`)
+  public getAllLockedAndUnlockedAssignment(studentId:number) {
+    return this.http.get(`${this.assignmentUrl}/getAllLockedAndUnlockedAssignment?studentId=${studentId}`)
   }
 
-   public isSubmitted(assignmentId: number, questionId: number) {
-    return this.http.get(`${this.assignmentUrl}/getAssignmentQuesSubmissionStatus?questionId=${questionId}&assignmentId=${assignmentId}`)
+   public isSubmitted(assignmentId: number, questionId: number,studentId:number) {
+    return this.http.get(`${this.assignmentUrl}/getAssignmentQuesSubmissionStatus?questionId=${questionId}&assignmentId=${assignmentId}&studentId=${studentId}`)
   }
 
   public getAllSubmissionAssignmentTaskStatusByCourseIdFilter(courseId:number,subjectId:number){
