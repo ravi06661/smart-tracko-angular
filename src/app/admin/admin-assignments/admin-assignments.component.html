@@ -62,7 +62,7 @@
                                 Course
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"  *ngFor="let course of courses" (click)="setCourseSubject(course)" (click)=" courseFilterByCourse(course.courseId)" >{{course.courseName}}</a></li>
+                                <li><a class="dropdown-item"  *ngFor="let course of courses" (click)="setCourseSubject(course)" (click)="courseFilterByCourseId()" >{{course.courseName}}</a></li>
                             </ul>
                         </div>
                         <div class="dropdown">
@@ -71,7 +71,7 @@
                                 Subject
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" *ngFor="let subject of subjects" (click)="courseFilterBySubject(subject.subjectId)">{{subject.subjectName}}</a></li>
+                                <li><a class="dropdown-item" *ngFor="let subject of subjects" href="#">{{subject.subjectName}}</a></li>
                                 <!-- <li><a class="dropdown-item" href="#">February</a></li>
                                 <li><a class="dropdown-item" href="#">March</a></li> -->
                             </ul>
@@ -114,8 +114,6 @@
                                 <td class="txt_color_yellow">{{obj.unReveiwed}}</td>
                                 <!-- <td class="txt_color_orange">16</td> -->
                             </tr>
-                            <h1  class="font-15 font-600 secondary position-relative" 
-                            *ngIf="courseLenght==0"><br>NO DATA AVAILABLE !!!</h1>
                         </tbody>
                     </table>
                 </div>
@@ -132,8 +130,18 @@
                                 Course
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"  *ngFor="let course of courses" (click)="setCourseSubject(course)" (click)=" courseFilterByCourse(course.courseId)" >{{course.courseName}}</a></li>
-                              
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                                <li><a class="dropdown-item" href="#">April</a></li>
+                                <li><a class="dropdown-item" href="#">May</a></li>
+                                <li><a class="dropdown-item" href="#">June</a></li>
+                                <li><a class="dropdown-item" href="#">July</a></li>
+                                <li><a class="dropdown-item" href="#">August</a></li>
+                                <li><a class="dropdown-item" href="#">September</a></li>
+                                <li><a class="dropdown-item" href="#">October</a></li>
+                                <li><a class="dropdown-item" href="#">November </a></li>
+                                <li><a class="dropdown-item" href="#">December </a></li>
                             </ul>
                         </div>
                         <div class="dropdown">
@@ -142,8 +150,18 @@
                                 Subject
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" *ngFor="let subject of subjects" (click)="courseFilterBySubject(subject.subjectId)">{{subject.subjectName}}</a></li>
-                               
+                                <li><a class="dropdown-item" href="#">January</a></li>
+                                <li><a class="dropdown-item" href="#">February</a></li>
+                                <li><a class="dropdown-item" href="#">March</a></li>
+                                <li><a class="dropdown-item" href="#">April</a></li>
+                                <li><a class="dropdown-item" href="#">May</a></li>
+                                <li><a class="dropdown-item" href="#">June</a></li>
+                                <li><a class="dropdown-item" href="#">July</a></li>
+                                <li><a class="dropdown-item" href="#">August</a></li>
+                                <li><a class="dropdown-item" href="#">September</a></li>
+                                <li><a class="dropdown-item" href="#">October</a></li>
+                                <li><a class="dropdown-item" href="#">November </a></li>
+                                <li><a class="dropdown-item" href="#">December </a></li>
                             </ul>
                         </div>
                         <div class="dropdown">
