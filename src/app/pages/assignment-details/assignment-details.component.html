@@ -2,8 +2,9 @@
     <div class="profile d-flex">
       <div class="assign-detail-heading">
           <h1 class="font-27 font-700 secondary mb-0">Assignment - Day 1</h1>
-          <button type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal" data-bs-target="#submit_button" [disabled]="isSubmittedis">Submit</button>    
-      </div>
+          <button type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal" data-bs-target="#submit_button" [disabled]="isSubmittedis">Submit</button>   
+          <h6 *ngIf="isSubmittedis"  class="mt-1"> Ask Admin for re-submit </h6>
+        </div>
       <app-profile-bar></app-profile-bar>
     </div>
   

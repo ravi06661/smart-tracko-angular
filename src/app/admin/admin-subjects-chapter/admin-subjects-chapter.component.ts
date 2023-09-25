@@ -59,7 +59,7 @@ export class AdminSubjectsChapterComponent {
           this.chapter = data.chapters
         },
         error: (error) => {
-          this.message = 'Failed..'
+          this.message = 'Success..'
         }
       }
     )

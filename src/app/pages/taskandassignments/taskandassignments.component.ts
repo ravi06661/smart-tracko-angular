@@ -24,6 +24,7 @@ export class TaskandassignmentsComponent implements OnInit {
   assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
   assignmentId: number = 0;
   assignmentTaskVisibility: boolean[] = [];
+  assignmentCount:number=0;
 
   constructor(private assignmentService: AssignmentServiceService,
     private router: Router,
@@ -43,6 +44,7 @@ export class TaskandassignmentsComponent implements OnInit {
     this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId()).subscribe(
       (data: any) => {
         this.unLockAssignments = data.unLockedAssignment;
+        this.assignmentCount = this.unLockAssignments.length
         this.lockAssignments = data.lockedAssignment;
         this.temp();
       }
