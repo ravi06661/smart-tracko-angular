@@ -11,6 +11,7 @@ import { LoginService } from 'src/app/service/login.service';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-questions',
@@ -145,14 +146,52 @@ export class QuestionsComponent {
     this.isFullScreen = !this.isFullScreen;
   }
   public exite() {
-    this.toggleFullScreen()
-    this.router.navigate(['/student/chapterDetails/' + this.chapterId])
+   
   }
   public getChapeter() {
     this.chapterService.getChapterById(this.chapterId).subscribe(
       (data:any) => {
-        this.subjectId = data.subject.subjectId;
+        this.subjectId = data.chapter.subject.subjectId;
       }
     )
   }
+
+  public clickQuitButton(){
+    Swal.fire({
+      title: 'Are you sure ?',
+      text:'you want quit the test',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+       // this.toggleFullScreen()
+        //this.router.navigate(['/student/chapterDetails/' + this.chapterId])
+        this.timerSubscription?.unsubscribe();
+        this.submittion();
+      }
+    })
+  }
+
+  public clickSubmitButton(){
+    Swal.fire({
+      title: 'Are you sure ?',
+      text:'you want submit the test',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Yes',
+      denyButtonText: `No`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        // this.toggleFullScreen()
+        // this.router.navigate(['/student/chapterDetails/' + this.chapterId])
+        this.timerSubscription?.unsubscribe();
+        this.submittion();
+      }
+    })
+  }
+
 }
