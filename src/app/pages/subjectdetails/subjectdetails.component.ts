@@ -15,19 +15,22 @@ export class SubjectdetailsComponent {
   chapter: ChapterContent[] = []
   subjectId: number = 0;
   chapterContent: ChapterContent = new ChapterContent();
-  chapterName:string=''
+  chapterName:string='';
+  questionsInChapter = 0;
+
   constructor(private activateRouter:ActivatedRoute,private subjectService: SubjectService,private chapterService: ChapterServiceService){}
   ngOnInit(){
      this.chapterId=this.activateRouter.snapshot.params[('id')];
      this.getChapter();
   }
   public getChapter() {
-    this.chapterId = this.activateRouter.snapshot.params[('id')];
+    // this.chapterId = this.activateRouter.snapshot.params[('id')];
     this.chapterService.getChapterById(this.chapterId).subscribe(
       (data: any) => {
-        this.chapter = data.chapterContent;
-        this.chapterName = data.chapterName;
-        this.subjectId = data.subject.subjectId;
+        this.chapter = data.chapter.chapterContent;
+        this.chapterName = data.chapter.chapterName;
+        this.subjectId = data.chapter.subject.subjectId;
+        this.questionsInChapter = data.questionLength 
       }
     )
   }

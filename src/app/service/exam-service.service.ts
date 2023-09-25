@@ -14,6 +14,7 @@ export class ExamServiceService {
   constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
   
   public addChapterExam(data: ChapterExamResultResponse) {
+    console.log(data);  
     return this.http.post(`${this.EXAM_URL}/addChapterExam`, data)
   }
 
