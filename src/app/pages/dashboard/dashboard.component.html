@@ -119,6 +119,7 @@
 
             <div class="all_summary assignment-updates">
 
+            <div class="scroller-bar">
               <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1" *ngFor="let obj of assignmentSubmissionsList;let i=index" (click)="assignmentSubmissionObj = obj">
                 <div class="d-flex align-items-center justify-content-between">
                   <h3 class="font-14 font-500 mb-1 text-black">Assignment  <b class="ms-1 font-500" [ngClass]="{'text_light_green':obj.status == 'Accepted','text_light_red':obj.status=='Rejected','text_light_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</b></h3>
@@ -140,6 +141,7 @@
                   <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">{{obj.submissionDate | date:'shortTime'}}</h4>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </div>

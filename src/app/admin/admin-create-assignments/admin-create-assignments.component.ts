@@ -5,6 +5,7 @@ import { Assignment } from 'src/app/entity/assignment';
 import { AssignmentQuestionRequest } from 'src/app/payload/assignment-question-request';
 import { TaskQuestionRequest } from 'src/app/payload/task-question-request';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
+import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
 @Component({
   selector: 'app-admin-create-assignments',
@@ -14,6 +15,8 @@ import { AssignmentServiceService } from 'src/app/service/assignment.service';
 export class AdminCreateAssignmentsComponent implements OnInit {
   assignmentId = 0;
   public Editor = ClassicEditor;
+  BASE_URL = this.utilityService.getBaseUrl();
+  imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
   assignment: Assignment = new Assignment();
   assignmentQuestionsData: AssignmentQuestionRequest = new AssignmentQuestionRequest();
   taskQuestion: TaskQuestionRequest = new TaskQuestionRequest();
@@ -24,12 +27,14 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     name: '',
     size: 0
   };
+  expandedQuestions: boolean[] = [];
   questionId: number = 0;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private assignmentService: AssignmentServiceService,
     private router: Router
+    , private utilityService: UtilityServiceService
   ) { }
 
   ngOnInit(): void {
@@ -71,6 +76,7 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(
       (data: any) => {
         this.assignmentQuestionsData.assignmentQuestion = data.assignmentQuestion
+        this.assignmentQuestionsData.assignmentQuestion.forEach(() => this.expandedQuestions.push(false));
       }, (errore) => {
         // alert('hi')
         this.assignmentQuestionsData.assignmentQuestion = errore.assignmentQuestion
@@ -102,12 +108,12 @@ export class AdminCreateAssignmentsComponent implements OnInit {
         }
       })
   }
-  imageUrll: any
-  public showImage(file: any) {
-    return 'assets/images/temp_img/modal.png';
-  }
-  public imageUrl(file: any): void {
-  }
+  // imageUrll: any
+  // public showImage(file: any) {
+  //   return 'assets/images/temp_img/modal.png';
+  // }
+  // public imageUrl(file: any): void {
+  // }
 
   public deleteAssignmentQuestion() {
     this.assignmentService.deleteTaskQuestion(this.assignmentId, this.questionId).subscribe(
@@ -117,8 +123,12 @@ export class AdminCreateAssignmentsComponent implements OnInit {
       }
     )
   }
+
   setQuestionId(id: number) {
     console.log(id);
     this.questionId = id;
+  }
+  toggleQuestion(index: number) {
+    this.expandedQuestions[index] = !this.expandedQuestions[index];
   }
 }
