@@ -84,30 +84,39 @@
             <div class="col-md-12" >
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Assignment Questions</h3>
                 <div class="edit-task-area mb_20" *ngFor="let obj of taskData.taskQuestion;let i=index">
-                    {{obj.questionId}}
+
+
                     <div class="question_ans my-0">
                         <div class="show-less-question">
                             <h3 class="font-19 font-500 mb-0 secondary">Question - {{i+1}}</h3>
-                            <div class="show_more" onclick="showQuestion()">
+                            <div class="show_more" (click)="toggleQuestion(i)" [hidden]="expandedQuestions[i]">
                                 <p class="mb-0 font-17 font-500 secondary d-flex align-items-center gap_5 pointer"><i
                                         class="fi fi-rr-add line-height-0"></i>Show More</p>
                             </div>
-                            <div class="show_less" onclick="hideQuestion()" style="display: none;">
+                            <div class="show_less"  (click)="toggleQuestion(i)" [hidden]="!expandedQuestions[i]">
                                 <p class="mb-0 font-17 font-500 secondary d-flex align-items-center gap_5 pointer"><i
                                         class="fi fi-rr-minus-circle line-height-0"></i>Show Less</p>
                             </div>
-                        </div> <!-- show-less-question -->
-                        <div id="hideQuestion" style="display: none;"  >
-                            
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                <div class="assinment_image" *ngFor="let image of obj.questionImages;let i =index">
-                                    <!-- <ng-container *ngIf=""></ng-container> -->
-                                 
-                                     <img [src]="'assets/images/temp_img/modal.png'" class="img-fluid">
+                        </div>  <!-- show-less-question -->
+                        <div id="hideQuestion" id="hideQuestion" [hidden]="!expandedQuestions[i]">
+                            <div class="row">
+                                <input id="file" type="file" onchange="loadFile(event)"  class="d-none">
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
+                                   <div class="assinment_image video-img">
+                                     <video src="{{obj.videoUrl}}"  controls
+                                       height="" width="270" type="video/mp4"></video>
+                                   </div>
+                                  </div>
+                                <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let image of obj.questionImages;let i =index">
+                                    <div class="assinment_image" >
+                                    <img [src]="imageUrl+image" class="img-fluid">
+                                    </div>
+                                    <h3 class="font-15 font-500 assignment_sub_heading mt-1">Attachment Title Here
+                                    </h3>
                                 </div>
-                                <h3 class="font-15 font-500 assignment_sub_heading mt-1">Attachment Title Here
-                                </h3>
                             </div>
+                          
                             <h4 class="font-17 font-400 write-que" [innerHTML]="obj.question"></h4>
                             <!-- <div class="assignment mb-0">
                                 <h3 class="font-17 font-700 list_bottom1">Hints:-</h3>
@@ -163,6 +172,7 @@
                             </h3>
                         </div>
 
+
                         <div class="col-lg-4 col-md-4">
                             <form class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
                                 <input type="file" name="image" (change)="addImageFile($event)" value="image" class="d-none" id="image">
@@ -170,6 +180,13 @@
                                   <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                                   Add Media</label>
                               </form>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="" class="mb_6 font-17 font-500 secondary">Add Video-URL</label>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="videoUrl" name="videoUrl" class="form-control input_text gray-input-bg enabled_inp"
+                                    placeholder="VIDEO-URL"  [(ngModel)]="taskQuestion.videoUrl">
+                            </div>
                         </div>
                     </div>
 

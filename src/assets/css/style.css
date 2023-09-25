@@ -845,6 +845,7 @@ main .sidebar {
 .assinment_image {
   width: 100%;
   height: 161px;
+  padding: 10px;
 }
 
 .assinment_image img,
@@ -3923,3 +3924,11 @@ input.change-student-img {
   }
 }
 
+.dropdown-menu {
+  display: none;
+}
+
+/* Show the dropdown when hovering over the parent element */
+#hoverDropdown:hover .dropdown-menu {
+  display: block;
+}

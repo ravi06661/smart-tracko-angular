@@ -12,6 +12,7 @@ import { TaskRequest } from 'src/app/payload/task-request';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { TaskServiceService } from 'src/app/service/task-service.service';
+import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
 @Component({
   selector: 'app-admin-create-task',
@@ -37,7 +38,9 @@ export class AdminCreateTaskComponent {
     size: 0
   };
   questionId: number = 0;
-  constructor(private activateRouter: ActivatedRoute, private subjectService: SubjectService, private courseService: CourseServiceService, private taskService: TaskServiceService, private router: Router) { }
+  BASE_URL = this.utilityService.getBaseUrl();
+  imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
+  constructor(private activateRouter: ActivatedRoute, private subjectService: SubjectService, private courseService: CourseServiceService, private taskService: TaskServiceService, private router: Router, private utilityService: UtilityServiceService) { }
   ngOnInit() {
     this.taskId = this.activateRouter.snapshot.params[('id')]
     this.getTask()
@@ -48,7 +51,7 @@ export class AdminCreateTaskComponent {
       (data: any) => {
         this.task = data;
         this.taskData.taskQuestion = data.taskQuestion;
-        console.log(data);
+        this.taskData.taskQuestion.forEach(() => this.expandedQuestions.push(false));
       }
     )
   }
@@ -111,7 +114,6 @@ export class AdminCreateTaskComponent {
         }
       })
   }
-
   public addImageFile(event: any) {
     console.log(event);
     this.taskQuestion.questionImages.push(event.target.files[0]);
@@ -132,5 +134,8 @@ export class AdminCreateTaskComponent {
       this.imageName.push('');
     }
   }
-
+  expandedQuestions: boolean[] = [];
+  toggleQuestion(index: number) {
+    this.expandedQuestions[index] = !this.expandedQuestions[index];
+  }
 }
