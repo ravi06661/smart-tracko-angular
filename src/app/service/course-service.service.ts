@@ -53,4 +53,8 @@ public upgradeStudentCourse(studentId:number,courseId:number){
    
   return this.http.put(`${this.courseUrl}/studentUpgradeCourse?studentId=${studentId}&courseId=${courseId}`,null);
 }
+
+public  getCourseProgress(studentId:number){
+  return this.http.get(`${this.courseUrl}/getCourseProgress?studentId=${studentId}`);
+}
 }
