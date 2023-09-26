@@ -32,9 +32,9 @@ export class AdminSubjectsTopicTestComponent {
     this.chapterId = this.route.snapshot.params[('id')];
     this.chapterService.getChapterById(this.chapterId).subscribe(
       (data: any) => {
-        this.chapter = data.chapterContent;
-        this.chapterName = data.chapterName;
-        this.subjectId = data.subject.subjectId;
+        this.chapter = data.chapter.chapterContent;
+        this.chapterName = data.chapter.chapterName;
+        this.subjectId = data.chapter.subject.subjectId;
       }
     )
   }

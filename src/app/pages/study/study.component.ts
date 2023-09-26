@@ -33,11 +33,8 @@ export class StudyComponent {
     let per: any;
     if (num1 > 1 || num2 > 1) {
       per = Math.floor((num1 / num2) * 100);
-      let obj = per * 6.25;
-      this.progressWidth = obj.toString() + '%';
     } else {
       per = 0;
-      this.progressWidth = '0%';
     }
     return per;
   }
