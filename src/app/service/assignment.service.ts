@@ -114,7 +114,7 @@ export class AssignmentServiceService {
     return this.http.get(`${this.assignmentUrl}/getAssignmentQuesSubmissionStatus?questionId=${questionId}&assignmentId=${assignmentId}&studentId=${studentId}`)
   }
 
-  public getAllSubmissionAssignmentTaskStatusByCourseIdFilter(courseId:number){
-    return this.http.get(`${this.assignmentUrl}/getAllSubmissionAssignmentTaskStatusByCourseIdFilter?courseId=${courseId}`)
+  public getAllSubmissionAssignmentTaskStatusByCourseIdFilter(courseId:number,subjectId:number){
+    return this.http.get(`${this.assignmentUrl}/getAllSubmissionAssignmentTaskStatusByCourseIdFilter?courseId=${courseId}&subjectId=${subjectId}`)
   }
 }

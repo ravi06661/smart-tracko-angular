@@ -62,7 +62,7 @@
                                 Course
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"  *ngFor="let course of courses" (click)="setCourseSubject(course)" (click)="courseFilterByCourseId()" >{{course.courseName}}</a></li>
+                                <li><a class="dropdown-item"  *ngFor="let course of courses" (click)="courseFilterByCourseId(course)" >{{course.courseName}}</a></li>
                             </ul>
                         </div>
                         <div class="dropdown">
@@ -71,7 +71,7 @@
                                 Subject
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" *ngFor="let subject of subjects" href="#">{{subject.subjectName}}</a></li>
+                                <li><a class="dropdown-item" *ngFor="let subject of subjects"  (click)="setCourseSubject(subject)"> {{subject.subjectName}}</a></li>
                                 <!-- <li><a class="dropdown-item" href="#">February</a></li>
                                 <li><a class="dropdown-item" href="#">March</a></li> -->
                             </ul>
