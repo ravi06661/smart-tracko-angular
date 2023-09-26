@@ -31,13 +31,14 @@ export class AdminAssignmentsComponent implements OnInit {
   submitedAssignments: AssignmentSubmission[] = []
   submitedAssignmentObj: AssignmentSubmission = new AssignmentSubmission
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
-  taskSubmissionStatus2: SubmissionAssignmentTaskStatus= new SubmissionAssignmentTaskStatus
-  
-  
+  taskSubmissionStatus2: SubmissionAssignmentTaskStatus = new SubmissionAssignmentTaskStatus
+
+
   totalSubmitted = 0;
   reveiwed = 0;
   unReveiwed = 0;
-  courseId=0;
+  courseId = 0;
+  subjectId = 0;
 
 
   constructor(private courseService: CourseServiceService,
@@ -115,50 +116,47 @@ export class AdminAssignmentsComponent implements OnInit {
   public getAllSubmissionAssignmentStatus() {
     this.assignmentService.getAllSubmissionAssignmentTaskStatus().subscribe(
       (data: any) => {
-        this.taskSubmissionStatus = data;        
-      } 
+        this.taskSubmissionStatus = data;
+      }
     )
   }
 
-  public getOverAllAssignmentTaskStatus(){
+  public getOverAllAssignmentTaskStatus() {
     this.assignmentService.getOverAllAssignmentTaskStatus().subscribe(
-       (data:any)=>{
+      (data: any) => {
         this.taskSubmissionStatus2 = data;
         this.totalSubmitted = this.taskSubmissionStatus2.totalSubmitted
         this.reveiwed = this.taskSubmissionStatus2.reveiwed
         this.unReveiwed = this.taskSubmissionStatus2.unReveiwed
-       }
+      }
     )
   }
-     
-  courseFilter(event:any){
-    const selectedCourseId=event.target.value;
-    if(selectedCourseId !==""){
-    this.courseService.getCourseByCourseId(selectedCourseId).subscribe(
-    (data:any)=>{
-      this.assignmentRequest.courseId=data.courseId;
-     
-    }
-    );
-  }else{
-    this.assignmentRequest.courseId=0;
-  
-  }
-}
 
-  courseFilterByCourseId(){
-     
-    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(this.courseId).subscribe((
-      (data:any)=>{
-      //  this.taskSubmissionStatus=data
-        console.log("11111111111111111",data);
-        
+  courseFilter(event: any) {
+    const selectedCourseId = event.target.value;
+    if (selectedCourseId !== "") {
+      this.courseService.getCourseByCourseId(selectedCourseId).subscribe(
+        (data: any) => {
+          this.assignmentRequest.courseId = data.courseId;
+
+        }
+      );
+    } else {
+      this.assignmentRequest.courseId = 0;
+
+    }
+  }
+
+  courseFilterByCourseId(course: Course) {
+    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(course.courseId, this.subjectId).subscribe((
+      (data: any) => {
+        this.taskSubmissionStatus = data
       }
     ))
   }
-  setCourseSubject(course:Course){
-   this.subjects=course.subjects
-    this.courseId =course.courseId
+
+  setCourseSubject(subject: Subject) {
+    this.subjectId = subject.subjectId
   }
 
 }

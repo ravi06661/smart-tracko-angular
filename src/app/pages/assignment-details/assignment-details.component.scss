@@ -113,3 +113,27 @@
     font-weight: 500;
     word-wrap: break-word;
   }
+
+
+  .assignment_image {
+    transition: transform 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  .image-zoom {
+    max-width: 80%;
+  }
+  
+  .expanded {
+    transform: scale(1); /* Adjust the scale factor as needed */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 9999;
+    cursor: pointer;
+  }
+  

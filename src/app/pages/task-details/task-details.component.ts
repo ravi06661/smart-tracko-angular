@@ -53,5 +53,19 @@ export class TaskDetailsComponent {
   public setImage(event: any) {
     this.taskSubmittion.submittionFileName = event.target.files[0];
   }
+
+  
+  isImageExpanded = false;
+
+  toggleImageSize(event: Event) {
+    const image = event.target as HTMLImageElement;
+    this.isImageExpanded = !this.isImageExpanded;
+
+    if (this.isImageExpanded) {
+      image.classList.add('expanded');
+    } else {
+      image.classList.remove('expanded');
+    }
+  }
 }
 

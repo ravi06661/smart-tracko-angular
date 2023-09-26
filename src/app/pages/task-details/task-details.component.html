@@ -1,104 +1,102 @@
 <div id="main" class="main main_news">
-    <div class="profile d-flex">
-      <div class="assign-detail-heading">
-          <h1 class="font-27 font-700 secondary mb-0">Tasks</h1>
-          <button type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal" data-bs-target="#submit_button">Submit</button> 
-          <div class="font-27 font-700 secondary mb-4">
-            <form class="attachment_file1 d-inline-flex align-items-center position-relative ">
-              <!-- Instead of an input element, use an anchor (a) tag -->
-              <a href="{{ATTACHMENT_URL+task.taskAttachment}}" download="Assignment Files.zip"
-                 class="font-15 font-700 secondary text-white attachment_file_text">
-                <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
-                Attachments
-                <span class="mx-0 ms-2 font-15 font-400 text-white">Download Attachment</span>
-              </a>
-            </form>
-          </div>   
+  <div class="profile d-flex">
+    <div class="assign-detail-heading">
+      <h1 class="font-27 font-700 secondary mb-0">Tasks</h1>
+      <button type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal"
+        data-bs-target="#submit_button">Submit</button>
+      <div class="font-27 font-700 secondary mb-4">
+        <form class="attachment_file1 d-inline-flex align-items-center position-relative ">
+          <!-- Instead of an input element, use an anchor (a) tag -->
+          <a href="{{ATTACHMENT_URL+task.taskAttachment}}" download="Assignment Files.zip"
+            class="font-15 font-700 secondary text-white attachment_file_text">
+            <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
+            Attachments
+            <span class="mx-0 ms-2 font-15 font-400 text-white">Download Attachment</span>
+          </a>
+        </form>
       </div>
-      <app-profile-bar></app-profile-bar>
     </div>
-  
+    <app-profile-bar></app-profile-bar>
+  </div>
+
   <div class="scroll_section">
-      <div class="row mb-4">
+    <div class="row mb-4">
 
-          <div class="col-md-12" *ngFor="let obj of task.taskQuestion ;let i=index" >
-              <div class="question_ans">
-                  <h3 class="font-17 font-600">Question {{i+1}}</h3>
-                  <h4 class="font-17 font-400" [innerHTML]="obj.question"></h4>
-                </div>
-                <div class="row advertisement">
+      <div class="col-md-12" *ngFor="let obj of task.taskQuestion ;let i=index">
+        <div class="question_ans">
+          <h3 class="font-17 font-600">Question {{i+1}}</h3>
+          <h4 class="font-17 font-400" [innerHTML]="obj.question"></h4>
+        </div>
+        <div class="row advertisement">
 
-                  <div class="col-md-3 col-sm-6 col-xs-12">
-                    <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
-                   <div class="assinment_image video-img">
-                     <video src="{{obj.videoUrl}}"  controls
-                       height="" width="270" type="video/mp4"></video>
-                   </div>
-                  </div>
-                 <div class="col-md-3 col-sm-6 col-xs-12"  *ngFor="let images of obj.questionImages;let i=index">
-                   <h3 class="font-15 font-700  assignment_sub_heading">Image {{i+1}}</h3>
-                   <div class="assinment_image">
-                     <img [src]="imageUrl+images" class="img-fluid">
-                   </div>
-                 </div>
-               
-                 
-                 </div>
-  
-                
+          <div class="col-md-3 col-sm-6 col-xs-12">
+            <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
+            <div class="assinment_image video-img">
+              <video src="{{obj.videoUrl}}" controls height="" width="270" type="video/mp4"></video>
+            </div>
           </div>
-         
-         
+          
+          <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let images of obj.questionImages; let i=index">
+            <h3 class="font-15 font-700 assignment_sub_heading">Image {{i + 1}}</h3>
+            <div class="assignment_image">
+              <img [src]="imageUrl + images" class="img-fluid image-zoom" (click)="toggleImageSize($event)">
+            </div>
+          </div>
+        </div>
       </div>
-      
-  </div>    
+
+
+    </div>
+
+  </div>
 </div>
 <app-right-side-bar></app-right-side-bar>
 <!-- MIDDLE CONTENT END -->
 <!-- Modal submit button start -->
 <div class="modal fade" id="submit_button" tabindex="-1" aria-labelledby="submit_button" aria-hidden="true">
-    <div class="modal-dialog position-relative leave_modal">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="modal-header apply_title">
-            <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Submit Assignment</h1>
-            <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close" (click)="reaload()">
-              <i class="fi fi-rr-cross close_icon"></i>
-            </button>
-           
-          </div>
-          <div class="form_input">
-            <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
-            <div class="">
-              <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                placeholder="Input Text Here" [(ngModel)]="taskSubmittion.taskDescription"></textarea>
-            </div>
-          </div>
+  <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header apply_title">
+          <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Submit Assignment</h1>
+          <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close" (click)="reaload()">
+            <i class="fi fi-rr-cross close_icon"></i>
+          </button>
 
-          <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading</h4>
-          <form class="select_file d-flex align-items-center file position-relative">
-            <input type="file" name="submittionFileName" value="file" class="d-none" id="file" (change)="setImage($event)" >
-            <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
-            <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">
-              <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i>Upload File
-            </button>
-          </form>
-          
-          <div class="file_option">
-            <div class=" d-flex file_name">
-              <i class="fi fi-rr-paperclip-vertical secondary add_more"></i>
-              <i class="fi fi-rr-trash secondary delete pointer" (click)="deleteFile()"></i>
-              <h3 class="font-15 font-400 dark mx-1 mb-0">{{taskSubmittion.submittionFileName}}</h3>
-            </div>
-
-          </div>
-
-          <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-            <button type="button" class="cancel_modal_btn">Save Draft</button>
-            <button type="button" class="apply_modal_btn" (click)="submitTask()">Submit</button>
-          </div>
-          <h6 *ngIf="message!=null">{{message}}</h6>
         </div>
+        <div class="form_input">
+          <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
+          <div class="">
+            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+              placeholder="Input Text Here" [(ngModel)]="taskSubmittion.taskDescription"></textarea>
+          </div>
+        </div>
+
+        <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading</h4>
+        <form class="select_file d-flex align-items-center file position-relative">
+          <input type="file" name="submittionFileName" value="file" class="d-none" id="file"
+            (change)="setImage($event)">
+          <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
+          <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">
+            <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i>Upload File
+          </button>
+        </form>
+
+        <div class="file_option">
+          <div class=" d-flex file_name">
+            <i class="fi fi-rr-paperclip-vertical secondary add_more"></i>
+            <i class="fi fi-rr-trash secondary delete pointer" (click)="deleteFile()"></i>
+            <h3 class="font-15 font-400 dark mx-1 mb-0">{{taskSubmittion.submittionFileName}}</h3>
+          </div>
+
+        </div>
+
+        <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+          <button type="button" class="cancel_modal_btn">Save Draft</button>
+          <button type="button" class="apply_modal_btn" (click)="submitTask()">Submit</button>
+        </div>
+        <h6 *ngIf="message!=null">{{message}}</h6>
       </div>
     </div>
   </div>
+</div>

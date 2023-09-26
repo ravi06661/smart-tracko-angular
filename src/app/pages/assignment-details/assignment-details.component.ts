@@ -80,4 +80,17 @@ export class AssignmentDetailsComponent implements OnInit {
       }
     )
   }
+
+  isImageExpanded = false;
+
+  toggleImageSize(event: Event) {
+    const image = event.target as HTMLImageElement;
+    this.isImageExpanded = !this.isImageExpanded;
+
+    if (this.isImageExpanded) {
+      image.classList.add('expanded');
+    } else {
+      image.classList.remove('expanded');
+    }
+  }
 }
