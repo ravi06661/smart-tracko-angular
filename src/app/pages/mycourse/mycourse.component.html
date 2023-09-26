@@ -21,45 +21,39 @@
           </div>
           <div class="number d-flex align-items-center  mb-1">
             <h4 class="font-17 font-400 text-white mt-1">My Progress</h4>
-            <h6 class="mb-0 font-17 font-400 ms-auto pe-2 text-white">54%</h6>
+            <h6 class="mb-0 font-17 font-400 ms-auto pe-2 text-white">{{progress}}%</h6>
           </div>
-          <div class="progress exam_progress" role="progressbar" aria-label="Basic example" aria-valuenow="54"
+          <div class="progress exam_progress" role="progressbar" aria-label="Basic example" 
             aria-valuemin="0" aria-valuemax="100">
-            <div class="progress-bar" style="width:54%"></div>
+            <div class="progress-bar" [style.width.%]="progress"></div>
           </div>
 
           <div class="task_assignment fee_structure" id="fee-table" style="display: none;">
             <h3 class="my-2 font-17 font-500 light position-relative">Fee Structure</h3>
+            
             <div class="table_container">
               <table class="table mb-0">
                 <thead>
                   <tr class="table_heading">
-                    <th scope="col" class="font-15 font-600 secondary">EMI.no</th>
-                    <th scope="col" class="font-15 font-600 secondary">Due on</th>
+                    <th scope="col" class="font-15 font-600 secondary">EMI no.</th>
                     <th scope="col" class="font-15 font-600 secondary">Amount</th>
-                    <!-- <th scope="col"  class="font-19 font-600 secondary">Payment Method</th> -->
+                    <th scope="col" class="font-15 font-600 secondary">Due on</th>
                     <th scope="col" class="font-15 font-600 secondary">Status</th>
+                    <th scope="col" class="font-15 font-600 secondary">Actions</th>
                   </tr>
                 </thead>
                 <tbody class="bg-light">
-                  <tr>
-                    <td>1/6</td>
+                  <h3  class="font-21 font-600 secondary position-relative" *ngIf="feesPayLength == 0">
+                    NO Transaction Is AVAILABLE !!!
+                  </h3>
+                  <tr *ngFor="let fees of feesPay;let i=index">
+                    <td>{{i+1}}/{{feesPay.length}}</td>
+                    <td>{{fees.feesPayAmount}}</td>
                     <td>1 Jan, 2023</td>
-                    <td>10,000</td>
-                    <td>Paid on 1 Jan, 2023</td>
+                    <td>Paid on {{fees.payDate|date:'dd MMM , YYYY'}}</td>
+                    <td class="text_light_blue">View Details</td>
                   </tr>
-                  <tr>
-                    <td>2/6</td>
-                    <td>1 Jan, 2023</td>
-                    <td>10,000</td>
-                    <td>Over Due on 1 Apr, 2023</td>
-                  </tr>
-                  <tr>
-                    <td>3/6</td>
-                    <td>1 Jan, 2023</td>
-                    <td>10,000</td>
-                    <td>Due on 1 Jul, 2023</td>
-                  </tr>
+                 
                 </tbody>
               </table>
             </div>
