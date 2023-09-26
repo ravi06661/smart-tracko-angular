@@ -87,7 +87,7 @@ import { ResultComponent } from './pages/result/result.component';
 import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-submission/admin-assignment-submission.component';
 import { AdminEditJobAlertComponent } from './admin/admin-edit-job-alert/admin-edit-job-alert.component';
 import { AdminEditNewsAndEventsComponent } from './admin/admin-edit-news-and-events/admin-edit-news-and-events.component';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -187,7 +187,8 @@ import { AdminEditNewsAndEventsComponent } from './admin/admin-edit-news-and-eve
     NgApexchartsModule,
     FullCalendarModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule
 
   ],
   providers: [DatePipe,authInterceptorProvider],

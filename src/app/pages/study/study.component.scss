@@ -9,10 +9,15 @@
 
   .ProgressW {
     height: 6px;
-    background: #00C012;
+    background: #00C012 ;
     border-radius: 6px;
   }
-  
+  .progress {
+    height: 6px !important;
+  }
+  .mdc-linear-progress__bar-inner {
+    border-color: #00C012 !important;
+}
 
 .subject_card {
     background: #ffffff;
@@ -155,3 +160,11 @@
     width: 50% !important;
   }
 }
+
+.custom-progress-bar {
+  background-color: green;
+}
+
+
+
+
