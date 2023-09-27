@@ -54,6 +54,7 @@ export class AttendanceComponent implements OnInit {
   color: string = '';
   presentsMap = new Map<number, number>();
   leavesMap = new Map<number, number>();
+  absentMap = new Map<number, number>();
   attendanceChart:PresentAbsentLeaveBarChart = new PresentAbsentLeaveBarChart();
 
   constructor(private cdr: ChangeDetectorRef, private studentService: StudentService, private leaveService: LeaveService, private utilityService: UtilityServiceService, private loginService: LoginService) {
@@ -160,6 +161,8 @@ export class AttendanceComponent implements OnInit {
       (data: any) => {
         this.presentsMap = data.presents
         this.leavesMap = data.leaves;
+        this.absentMap = data.absents
+        this.setAbsentData();
         this.setPresentData();
         this.setLeavesData();
       }
@@ -184,6 +187,17 @@ export class AttendanceComponent implements OnInit {
       arr[entry[0] - 1] = entry[1];
     }
     this.attendanceOptions.series[2].data = arr;
+    
+  }
+
+  public setAbsentData() {
+    let arr: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const mapEntries: [number, number][] = Object.entries(this.absentMap).map(([key, value]) => [parseInt(key), value]);
+    const resultMap: Map<number, number> = new Map<number, number>(mapEntries);
+    for (const entry of resultMap.entries()) {
+      arr[entry[0] - 1] = entry[1];
+    }
+    this.attendanceOptions.series[1].data = arr;
     
   }
 }

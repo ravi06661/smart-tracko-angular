@@ -7,7 +7,7 @@
   <div class="scroll_section">
     <div class="task_assignment mt-0">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="unLockAssignments.length > 1 || lockAssignments.length > 1 ">
           <h3 class="title font-17 font-500 secondary position-relative">Assignments</h3>
 
            <!-- ASSIGNMENT ACCORDION  START-->
@@ -44,8 +44,13 @@
 </div>
 
  </div>
+ <div class="col-md-6" *ngIf="unLockAssignments.length ==0  && lockAssignments.length ==0 ">
+  <h3 class="font-21 font-600 secondary position-relative">
+    No Assignments found!!
+  </h3>
+ </div>
 
- <div class="col-md-6">
+ <div class="col-md-6" *ngIf="assignmentSubmissionsList.length > 0">
   <div class="assignment-updates-top">
    <h3 class="title font-17 font-500 secondary position-relative">Updates</h3>
    <div class="top-status-month d-flex gap-3">
@@ -93,6 +98,12 @@
        </div>
       </div>   
    </div>
+ </div>
+ <div class="col-md-6" *ngIf="assignmentSubmissionsList.length==0">
+  <h3 class="title font-17 font-500 secondary position-relative">Updates</h3>
+  <h3 class="font-21 font-600 secondary position-relative">
+    No task submission found!!
+  </h3>
  </div>
 
 </div>
