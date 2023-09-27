@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ChapterContent } from 'src/app/entity/chapter-content';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
+import { ExamServiceService } from 'src/app/service/exam-service.service';
+import { LoginService } from 'src/app/service/login.service';
 import { SubjectService } from 'src/app/service/subject.service';
 
 @Component({
@@ -17,11 +19,18 @@ export class SubjectdetailsComponent {
   chapterContent: ChapterContent = new ChapterContent();
   chapterName:string='';
   questionsInChapter = 0;
+  isCompleted = false;
+  resultId = 0;
 
-  constructor(private activateRouter:ActivatedRoute,private subjectService: SubjectService,private chapterService: ChapterServiceService){}
+  constructor(private activateRouter:ActivatedRoute,
+    private subjectService: SubjectService,
+    private chapterService: ChapterServiceService,
+    private examService:ExamServiceService,
+    private loginService:LoginService){}
   ngOnInit(){
      this.chapterId=this.activateRouter.snapshot.params[('id')];
      this.getChapter();
+     this.getChapterExamIsComplete();
   }
   public getChapter() {
     // this.chapterId = this.activateRouter.snapshot.params[('id')];
@@ -42,4 +51,20 @@ export class SubjectdetailsComponent {
       }
     )
   }
+
+  public getChapterExamIsComplete(){
+   this.examService.getChapterExamIsCompleted(this.chapterId,this.loginService.getStudentId()).subscribe({
+    next:(data:any)=>{
+      if(data != null){
+        this.chapterId = data.chapterExamComplete.chapterId;
+        this.isCompleted = true;
+        this.resultId = data.resultId;
+      }
+    },
+    error:(err)=>{
+
+    }
+   })
+  }
+
 }

@@ -88,19 +88,22 @@
       <div class="row">
         <div class="col-md-4">
           <h3 class="title font-17 font-600 secondary position-relative">Assignment ({{toDoAssignment.title}})</h3>
+          <div class="scroller-bar">
           <div class="all_summary">
             <!-- TASK ACCORDION  START-->
-              <div class="left-tasks"*ngFor="let task of toDoAssignment.assignmentQuestion;let j=index">
-                <div class="task_summary d-flex align-items-center justify-content-between">
-                  <h3 class="font-15 font-500 mb-0">task {{j+1}}</h3>
-                  <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
-                  (click)="pageRenderUsingRouterLink('/student/assignmentdetails',task.questionId)">View</h4>
-                </div>
-             </div>
+                <div class="left-tasks"*ngFor="let task of toDoAssignment.assignmentQuestion;let j=index">
+                  <div class="task_summary d-flex align-items-center justify-content-between">
+                    <h3 class="font-15 font-500 mb-0">task {{j+1}}</h3>
+                    <h4 class="font-13 font-500 warning ms-auto mb-0 task_modal" data-bs-toggle="modal"
+                    (click)="pageRenderUsingRouterLink('/student/assignmentdetails',task.questionId)">View</h4>
+                  </div>
+               </div>
+              </div>
           </div>
         </div>
         <div class="col-md-4">
           <h3 class="title font-17 font-600 secondary position-relative">Tasks</h3>
+          <div class="scroller-bar">
           <div class="all_summary">
             <!-- TASK ACCORDION  START-->
               <div class="left-tasks"  *ngFor="let obj of tasks;let i =index">
@@ -110,6 +113,7 @@
                   routerLink="/student/taskdetails/{{obj.taskId}}">View</h4>
                 </div>
              </div>
+            </div>
           </div>
         </div>
 

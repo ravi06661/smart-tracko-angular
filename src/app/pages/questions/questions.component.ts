@@ -37,6 +37,8 @@ export class QuestionsComponent {
   chapterExamResultResponse = new ChapterExamResultResponse
   subjectId: number = 0;
   chapter = new Chapter;
+  totalQuestion = 0;
+
   constructor(private utilityService: UtilityServiceService, private questionService: QuestionServiceService, private activateRouter: ActivatedRoute,
     private subjectService: SubjectService,
     private chapterService: ChapterServiceService,
@@ -83,8 +85,8 @@ export class QuestionsComponent {
       this.questionService.getAllQuestionByChapterId(this.chapterId).subscribe(
         (data) => {
           this.questions = data;
-          this.question = this.questions[0]
-          this.questionNotAnswered = this.questions.length
+          this.question = this.questions[0];
+          this.questionNotAnswered = this.questions.length;
         }
       )
     }

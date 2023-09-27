@@ -53,10 +53,19 @@ export class DashboardComponent implements OnInit {
   unLockAssignments: Assignment[] = []
   lockAssignments: Assignment[] = []
   assignmentId: any;
+
   totalTask:number=0;
   totalAssignment:number=0;
   totalTaskSubmitted:number=0;
   totalAssignmnetSubmitted:number=0;
+
+
+  toDoAssignmentLength = 0;
+  tasksLength = 0;
+
+
+
+
   constructor(private service: AssignmentServiceService,
     private utilityService: UtilityServiceService,
     private loginService: LoginService,
@@ -148,8 +157,11 @@ export class DashboardComponent implements OnInit {
   public getAllTask() {
     this.taskService.getAllTask(this.loginService.getStudentId()).subscribe(
       (data: any) => {
+
         this.tasks = data
         this.totalTask = this.tasks.length
+        this.tasksLength = this.tasks.length;
+
       }
     )
   }
@@ -178,6 +190,7 @@ public getdoAssignment(){
       this.toDoAssignment =this.unLockAssignments[this.unLockAssignments.length - 1];
       this.assignmentId=this.unLockAssignments[this.unLockAssignments.length - 1].id
       this.lockAssignments = data.lockedAssignment;
+      this.toDoAssignmentLength = this.toDoAssignment.assignmentQuestion.length
 
     }
   )

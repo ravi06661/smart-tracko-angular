@@ -23,4 +23,11 @@
     width: 30%;
     text-align: center;
   }
-
+  .scroller-bar{
+    overflow:scroll; 
+    overflow-x:hidden; 
+    height: 500px;
+}
+.scroller-bar::-webkit-scrollbar {
+    display: none;
+  }
