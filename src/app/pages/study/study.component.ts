@@ -31,11 +31,7 @@ export class StudyComponent {
   progressWidth: string = '';
   calculatePercentages(num1: number, num2: number) {
     let per: any;
-    if (num1 > 1 || num2 > 1) {
       per = Math.floor((num1 / num2) * 100);
-    } else {
-      per = 0;
-    }
     return per;
   }
 }
