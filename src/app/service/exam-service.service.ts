@@ -21,4 +21,12 @@ export class ExamServiceService {
   public getChapterExamResult(id: number) {
     return this.http.get(`${this.EXAM_URL}/getChapterExamResult?resultId=${id}`);
   }
+
+  public getExamResultByChpaterIdAndStudentId(chapterId:number,studentId:number){
+    return this.http.get(`${this.EXAM_URL}/getExamResultByChapterIdAndStudentId?chapterId=${chapterId}&studentId=${studentId}`);
+  }
+
+  public getChapterExamIsCompleted(chapterId:number,studentId:number){
+    return this.http.get(`${this.EXAM_URL}/checkExamCompleteOrNot?chapterId=${chapterId}&studentId=${studentId}`);
+  }
 }
