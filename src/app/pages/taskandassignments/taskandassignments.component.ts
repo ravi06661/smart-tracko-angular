@@ -24,7 +24,7 @@ export class TaskandassignmentsComponent implements OnInit {
   assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
   assignmentId: number = 0;
   assignmentTaskVisibility: boolean[] = [];
-  assignmentCount:number=0;
+  assignmentCount: number = 0;
 
   constructor(private assignmentService: AssignmentServiceService,
     private router: Router,
@@ -98,7 +98,7 @@ export class TaskandassignmentsComponent implements OnInit {
     this.assignmentTaskVisibility[index] = !this.assignmentTaskVisibility[index];
   }
 
-   progressWidth: string = '';
+  progressWidth: string = '';
   // calculatePercentages(num1: number, num2: number) {
   //   let per = Math.floor(num1 / num2 * 100);
   //   let obj = per * (7.05);
@@ -109,9 +109,9 @@ export class TaskandassignmentsComponent implements OnInit {
     const totalCompleted = this.getTotalCompletedAssignmentCount(num1);
     let per
     if (totalCompleted !== undefined) {
-         per = Math.floor(totalCompleted / num2 * 100);
-        let obj = per * 7.05;
-        this.progressWidth = obj.toString() + 'px';
+      per = Math.floor(totalCompleted / num2 * 100);
+      let obj = per * 7.05;
+      this.progressWidth = obj.toString() + 'px';
     }
     return per;
   }

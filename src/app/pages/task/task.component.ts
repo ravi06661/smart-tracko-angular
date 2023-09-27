@@ -22,8 +22,8 @@ export class TaskComponent {
               private utilityService:UtilityServiceService) { }
 
   ngOnInit() {
-   this.getAllTask();
-   this.getSubmitedTaskByStudent();
+  this.getAllTask();
+  this.getSubmitedTaskByStudent();
   }
 
   public getAllTask() {

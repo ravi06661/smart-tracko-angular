@@ -133,7 +133,8 @@
                     <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
                       <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.assignmentQuestion; let j=index">
                         <div class="TaskCard">
-                          <div class="TaskName">Task {{j+1 }} <span class="font-15 font-400 text_gray">Summited on {{getAssignmentSubmissionDate(task.questionId) | date:'mediumDate' }}</span></div>
+                          <div class="TaskName"  *ngIf="getAssignmentSubmissionDate(task.questionId)!=null">Task {{j+1 }}  <span class="font-15 font-400 text_gray">Summited on {{getAssignmentSubmissionDate(task.questionId) | date:'mediumDate' }}</span></div>
+                          <div class="TaskName" *ngIf="getAssignmentSubmissionDate(task.questionId)==null">Task {{j+1 }} <span class="font-15 font-400 text_gray" >Pending</span></div>
                           <div class="Button warning">View Submission</div>
                         </div>
                       </a>
