@@ -11,7 +11,8 @@
           <h3 class="title font-17 font-500 secondary position-relative">Assignments</h3>
 
            <!-- ASSIGNMENT ACCORDION  START-->
-           <div class="AssignmentCard mb-1" id="head-show" *ngFor="let obj of unLockAssignments; let i=index">
+        <!-- <div class="scroller-bar"> -->
+          <div class="AssignmentCard mb-1" id="head-show" *ngFor="let obj of unLockAssignments; let i=index">
             <div class="Head">
               <div class="TaskName text-light">Assignment Day {{i+1}}</div>
               <div class="Toggle">
@@ -38,17 +39,18 @@
             </div>
           </div>
           
- <div class="TaskCard" *ngFor="let assignment of lockAssignments;let i=index">
-  <div class="font-15 font-400 text_gray">Assignment Day {{(assignmentCount+1)+i}}</div>
-  <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
-</div>
+          <div class="TaskCard" *ngFor="let assignment of lockAssignments;let i=index">
+            <div class="font-15 font-400 text_gray">Assignment Day {{(assignmentCount+1)+i}}</div>
+            <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
+          </div>
 
- </div>
- <div class="col-md-6" *ngIf="unLockAssignments.length ==0  && lockAssignments.length ==0 ">
-  <h3 class="font-21 font-600 secondary position-relative">
-    No Assignments found!!
-  </h3>
- </div>
+          </div>
+          <div class="col-md-6" *ngIf="unLockAssignments.length ==0  && lockAssignments.length ==0 ">
+            <h3 class="font-21 font-600 secondary position-relative">
+              No Assignments found!!
+            </h3>
+          </div>
+        <!-- </div> -->
 
  <div class="col-md-6" *ngIf="assignmentSubmissionsList.length > 0">
   <div class="assignment-updates-top">
@@ -105,6 +107,8 @@
     No task submission found!!
   </h3>
  </div>
+
+
 
 </div>
 </div>

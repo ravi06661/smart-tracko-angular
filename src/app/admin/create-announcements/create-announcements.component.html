@@ -19,8 +19,8 @@
             <div class="col-md-8 col-lg-6 ">
                 <label for="" class="mb_6 font-17 font-500 secondary">Title</label>
                 <div class="input_icon position-relative">
-                    <input type="text" id="" name="" class="form-control input_text"
-                        placeholder="Day1">
+                    <input type="text" id="title" name="title" class="form-control input_text"
+                        placeholder="title" [(ngModel)]="announcementRequest.title">
                 </div>
             </div>
         </div>
@@ -29,25 +29,49 @@
             <div class="col-md-8 col-lg-6">
                 <label for="" class="mb_6 font-17 font-500 secondary">Message</label>
                 <textarea class="form-control text_area" id="exampleFormControlTextarea1" row mb-3s="3"
-                    placeholder="Start Typing....."></textarea>
+                    name="message" placeholder="Start Typing....." [(ngModel)]="announcementRequest.message"></textarea>
             </div>
         </div>
 
         <div class="row d-block mb_20">
             <div class="col-md-8 col-lg-6">
-                <label for="" class="mb_6 font-17 font-500 secondary">Sent To</label>
+                <label for="" class="mb_6 font-17 font-500 secondary">Sent To (Course)</label>
                
             </div>
-           <div class="col-md-6">
-            <select class="select_menu  input_text w-100" aria-label="Default select example">
-                <option value="1">All Course</option>
-                <option selected="">Core Java</option>
-                <option value="2">Mern Stack</option>
-              </select>
-           </div>
-        </div>
-
-        <div class="row mb_20">
+            <div class="col-md-6">
+                <!-- "Select All" Checkbox -->
+                <div class="input_icon position-relative input_text checkbox_area">
+                  <div class="d-flex gap_5 align-items-center">
+                    <h2 class="font-15 font-500 mb-0 secondary">Select All</h2>
+                  </div>
+                  <input
+                    type="checkbox"
+                    name="courseId"
+                    [(ngModel)]="selectAll"
+                    (ngModelChange)="selectAllChanged()"
+                    class="choose-subjects"
+                  >
+                </div>
+              
+                <!-- Course Checkboxes -->
+                <div *ngFor="let obj of courses" class="input_icon position-relative input_text checkbox_area">
+                  <div class="d-flex gap_5 align-items-center">
+                    <img [src]="imageUrl+obj.technologyStack.imageName" alt="" width="24" height="24">
+                    <h2 class="font-15 font-500 mb-0 secondary">{{ obj.courseName }}</h2>
+                  </div>
+                  <input
+                    type="checkbox"
+                    name="courseId"
+                    [checked]="checkCourse(obj.courseId)"
+                    [ngModel]="selectedCourseIds[obj.courseId]"
+                    (ngModelChange)="checkboxChanged(obj.courseId)"
+                    class="choose-subjects"
+                  >
+                </div>
+              </div>
+              
+     </div>
+        <!-- <div class="row mb_20">
             <div class="col-md-8 col-lg-6">
                 <div class="all-select-course">
                     <p class="mb-0 font-13 font-600 secondary">Core Java</p>
@@ -60,12 +84,12 @@
                     <p class="mb-0 font-13 font-600 secondary">Core Java</p>
                 </div>        
             </div>
-        </div>
+        </div> -->
         
         <div class="row mb-3">
             <div class="col-md-12">
-                <a routerLink="/admin/announcements" class="top_profile_sec_btn font-14 font-500">Publish Now</a>
-                <a routerLink="/admin/announcements" class="secondary font-14 font-500 ms-5">Discard</a>
+                <a class="top_profile_sec_btn font-14 font-500" (click)="publishAnnouncement()">Publish Now</a>
+                <a routerLink="/admin/announcements" class="secondary font-14 font-500 ms-5" (click)="clearObj()">Discard</a>
 
             </div>
         </div>

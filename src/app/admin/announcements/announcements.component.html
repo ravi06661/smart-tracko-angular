@@ -31,58 +31,14 @@
                             </tr>
                         </thead>
                         <tbody class="bg-light">
-                            <tr>
-                                <td> 08:48 PM, 11/07/23</td>
-                                <td>Wade Warren</td>
-                                <td>Hello World! In Java</td>
+                            <tr *ngFor="let obj of announcements">
+                                <td>{{obj.date | date:'medium'}}</td>
+                                <td>{{obj.title}}</td>
+                                <td>{{obj.message}}</td>
                                 <td>Core Java 
                                     <span class="secondary font-500 font-14">+4 more</span>
                                 </td>
-                                <td>78 of 214</td>
-                            </tr>
-                            <tr>
-                                <td> 08:48 PM, 11/07/23</td>
-                                <td>Wade Warren</td>
-                                <td>Hello World! In Java</td>
-                                <td>All Course
-                                </td>
-                                <td>78 of 214</td>
-                            </tr>
-                            <tr>
-                                <td> 08:48 PM, 11/07/23</td>
-                                <td>Wade Warren</td>
-                                <td>Hello World! In Java</td>
-                                <td>Core Java 
-                                </td>
-                                <td>78 of 214</td>
-                            </tr>
-                            <tr>
-                                <td> 08:48 PM, 11/07/23</td>
-                                <td>Wade Warren</td>
-                                <td>Hello World! In Java</td>
-                                <td>Core Java 
-                                    <span class="secondary font-500 font-14">+4 more</span>
-                                </td>
-                                <td>78 of 214</td>
-                            </tr>
-                            <tr>
-                                <td> 08:48 PM, 11/07/23</td>
-                                <td>Wade Warren</td>
-                                <td>Hello World! In Java</td>
-                                <td>Core Java 
-                                    <span class="secondary font-500 font-14">+4 more</span>
-                                </td>
-                                <td>78 of 214</td>
-                            </tr>
-                            <tr>
-                                <td> 08:48 PM, 11/07/23</td>
-                                <td>Wade Warren</td>
-                                <td>Hello World! In Java</td>
-                                <td>Core Java 
-                                    <span class="secondary font-500 font-14">+4 more</span>
-                                </td>
-                                <td>78 of 214</td>
-                            </tr>
+                                <td>{{obj.seenBy.seenBy}} of {{obj.seenBy.totalStudents}}</td>
                         </tbody>
                     </table>
                 </div>
