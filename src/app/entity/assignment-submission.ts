@@ -13,5 +13,6 @@ export class AssignmentSubmission {
     public status:string = ''
     public review:string = ''
     public taskQuestion:TaskQuestion= new TaskQuestion
+    public title:string=''
 
 }

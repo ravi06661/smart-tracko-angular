@@ -59,7 +59,7 @@ export class AdminSubjectsChapterComponent {
           this.chapter = data.chapters
         },
         error: (error) => {
-          this.message = 'Success..'
+          this.message = 'errore..'
         }
       }
     )
@@ -69,6 +69,7 @@ export class AdminSubjectsChapterComponent {
     this.chapterService.deleteChapter(this.chapterId, this.subjectId).subscribe(
       (data) => {
         this.chapterId = 0;
+        this.getAllSubjectChapter();
       },
       (error) => {
         this.message = 'Failed..'
