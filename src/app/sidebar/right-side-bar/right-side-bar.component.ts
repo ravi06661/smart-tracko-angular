@@ -1,3 +1,4 @@
+import { Announcement } from './../../entity/announcement';
 import { DatePipe, Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { parseDate } from 'igniteui-angular/lib/core/utils';
@@ -6,6 +7,7 @@ import { Observable, interval, map, min, switchMap } from 'rxjs';
 import { Attendance } from 'src/app/entity/attendance';
 import { Profile } from 'src/app/entity/profile';
 import { AdminServiceService } from 'src/app/service/admin-service.service';
+import { AnnouncementServiceService } from 'src/app/service/announcement-service.service';
 import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
@@ -20,7 +22,14 @@ export class RightSideBarComponent implements OnInit {
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   profileData: Profile = new Profile();
 
-  constructor(private studentService: StudentService, private utilityService: UtilityServiceService,private loginService:LoginService,private adminService:AdminServiceService) { }
+  announcements:Announcement [] = [];
+  unseenNotification = 0;
+
+  constructor(private studentService: StudentService, 
+    private utilityService: UtilityServiceService,
+    private loginService:LoginService,
+    private adminService:AdminServiceService,
+    private annoucementService:AnnouncementServiceService) { }
 
   ngOnInit(): void {
     if( this.loginService.getRole()=='STUDENT'){
@@ -28,5 +37,19 @@ export class RightSideBarComponent implements OnInit {
     }else  if( this.loginService.getRole()=='ADMIN'){
       this.profileData = this.adminService.getAdminProfileData()
     } 
+
+    this.getAnnouncementsForStudents();
+  }
+
+  public getAnnouncementsForStudents(){
+    this.annoucementService.getAnnouncementForStudent(this.loginService.getStudentId()).subscribe({
+      next:(data:any)=>{
+        this.announcements = data;
+        this.unseenNotification = this.announcements.length
+      },
+      error:(err:any)=>{
+
+      }
+    })
   }
 }

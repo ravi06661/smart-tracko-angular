@@ -113,3 +113,11 @@
     font-weight: 500;
     word-wrap: break-word;
   }
+  .scroller-bar{
+    overflow:scroll; 
+    overflow-x:hidden; 
+    height: 1000px;
+}
+.scroller-bar::-webkit-scrollbar {
+    display: none;
+  }
