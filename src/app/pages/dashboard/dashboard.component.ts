@@ -48,16 +48,16 @@ export class DashboardComponent implements OnInit {
   assignmentSubmissionsList: AssignmentSubmission[] = []
   assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
   ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
-  taskSubmissionObj:StudentTaskSubmittion = new StudentTaskSubmittion
-  toDoAssignment:Assignment = new Assignment
+  taskSubmissionObj: StudentTaskSubmittion = new StudentTaskSubmittion
+  toDoAssignment: Assignment = new Assignment
   unLockAssignments: Assignment[] = []
   lockAssignments: Assignment[] = []
   assignmentId: any;
 
-  totalTask:number=0;
-  totalAssignment:number=0;
-  totalTaskSubmitted:number=0;
-  totalAssignmnetSubmitted:number=0;
+  totalTask: number = 0;
+  totalAssignment: number = 0;
+  totalTaskSubmitted: number = 0;
+  totalAssignmnetSubmitted: number = 0;
 
 
   toDoAssignmentLength = 0;
@@ -71,11 +71,11 @@ export class DashboardComponent implements OnInit {
     private loginService: LoginService,
     private localst: LocationStrategy, private studentService: StudentService,
     private taskService: TaskServiceService, private assignmentService: AssignmentServiceService,
-    private router:Router
-    ) { }
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-   
+
     this.getAllTask();
     this.preventBackButton();
     this.getSubmitedTaskByStudent();
@@ -157,11 +157,9 @@ export class DashboardComponent implements OnInit {
   public getAllTask() {
     this.taskService.getAllTask(this.loginService.getStudentId()).subscribe(
       (data: any) => {
-
         this.tasks = data
         this.totalTask = this.tasks.length
         this.tasksLength = this.tasks.length;
-
       }
     )
   }
@@ -178,30 +176,48 @@ export class DashboardComponent implements OnInit {
     this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
         this.assignmentSubmissionsList = data
-        this.totalAssignmnetSubmitted  = this.assignmentSubmissionsList.length
+        this.totalAssignmnetSubmitted = this.assignmentSubmissionsList.length
       }
     })
   }
 
-public getdoAssignment(){
-  this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId()).subscribe(
-    (data: any) => {
-      this.unLockAssignments = data.unLockedAssignment;
-      this.toDoAssignment =this.unLockAssignments[this.unLockAssignments.length - 1];
-      this.assignmentId=this.unLockAssignments[this.unLockAssignments.length - 1].id
-      this.lockAssignments = data.lockedAssignment;
-      this.toDoAssignmentLength = this.toDoAssignment.assignmentQuestion.length
+  public getdoAssignment() {
+    this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId()).subscribe(
+      (data: any) => {
+        this.unLockAssignments = data.unLockedAssignment;
+        this.toDoAssignment = this.unLockAssignments[this.unLockAssignments.length - 1];
+        this.assignmentId = this.toDoAssignment.id
+        this.lockAssignments = data.lockedAssignment;
+        this.toDoAssignmentLength = this.toDoAssignment.assignmentQuestion.length
+      }
+    )
+  }
+  public pageRenderUsingRouterLink(path: string, questionId: number) {
+    const dataParams = {
+      assignmentId: this.assignmentId,
+      questionId: questionId,
+    };
+    this.router.navigate([path], {
+      queryParams: dataParams
+    });
+  }
 
+  submissionUpdates: string = "Assignment Updates";
+  submissionUpdates1: string = "Task Upates";
+  taskSubmissionIsActive: boolean = false;
+  AssignmentsSubmissionIsactive: boolean = true;
+  updates() {
+    if (this.submissionUpdates == "Assignment Updates") {
+      this.submissionUpdates1 = this.submissionUpdates
+      this.submissionUpdates = "Task Upates"
+      this.AssignmentsSubmissionIsactive = false;
+      this.taskSubmissionIsActive = true;
+    } else if (this.submissionUpdates == "Task Upates") {
+      this.submissionUpdates1 = this.submissionUpdates
+      this.submissionUpdates = "Assignment Updates"
+      this.AssignmentsSubmissionIsactive = true;
+      this.taskSubmissionIsActive = false;
     }
-  )
+  }
 }
-public pageRenderUsingRouterLink(path: string, questionId: number) {
-  const dataParams = {
-    assignmentId: this.assignmentId,
-    questionId: questionId,
-  };
-  this.router.navigate([path], {
-    queryParams: dataParams
-  });
-}
-}
+
