@@ -140,7 +140,14 @@
                 </div>
                 <div class="d-flex align-items-center justify-content-between mb-1">
                   <h3 class="font-13 font-400 mb-0">Task-{{i+1}}: Submission is {{obj.status}}.</h3>
-                  <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">{{obj.submissionDate | date:'short'}}</h4>
+                  <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">
+                    <ng-container *ngIf="dateFormatter(todayDate) === dateFormatter(obj.submissionDate); else otherDate">
+                      Today {{ obj.submissionDate | date:'shortTime' }}
+                    </ng-container>
+                    <ng-template #otherDate>
+                    {{ obj.submissionDate | date:' d MMM y h:mm a' }}
+                    </ng-template>
+                  </h4>
                 </div>
                </div>   
         </div>

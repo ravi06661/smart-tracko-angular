@@ -108,9 +108,7 @@ export class AdminStudentRegistrationComponent {
   }
 
   submit() {
-    console.log(this.registrationDetails);
-    
-    if (this.personlaDetailsForm.valid && this.inrollmentForm.valid && this.addressForm.valid)
+    if (this.personlaDetailsForm.valid && this.inrollmentForm.valid && this.addressForm.valid){
       this.studentService.registerStudent(this.registrationDetails).subscribe(
         (data: any) => {
 
@@ -143,6 +141,7 @@ export class AdminStudentRegistrationComponent {
           })
         }
       )
+    }
   }
 
   moveToNextSection(): void {

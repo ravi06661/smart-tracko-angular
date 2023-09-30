@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { Task } from 'src/app/entity/task';
@@ -20,7 +21,14 @@ export class TaskDetailsComponent {
   task = new Task
   taskSubmittion: StudentTaskSubmittion = new StudentTaskSubmittion();
   message: string = ''
-  constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService, private loginService: LoginService) { }
+  submissionForm: FormGroup;
+
+  constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService, private loginService: LoginService , private formBuilder: FormBuilder) {
+    this.submissionForm = this.formBuilder.group({
+      file: ['', Validators.required],
+      taskDescription: ['', Validators.required]
+    });
+   }
 
   ngOnInit() {
     this.taskId = this.router.snapshot.params[('id')]
@@ -35,6 +43,9 @@ export class TaskDetailsComponent {
   }
 
   public submitTask() {
+  if(this.submissionForm.invalid){
+     this.submissionFormFun()
+  }else{
     this.taskSubmittion.student.studentId = this.loginService.getStudentId();
     this.taskService.submitTask(this.taskSubmittion, this.taskId).subscribe(
       (data) => {
@@ -43,6 +54,7 @@ export class TaskDetailsComponent {
         alert("success");
       }
     )
+  }
   }
   public reaload() {
     this.message = ''
@@ -67,5 +79,33 @@ export class TaskDetailsComponent {
       image.classList.remove('expanded');
     }
   }
+  
+
+  public clearForm() {
+    this.submissionForm = this.formBuilder.group({
+      file: ['', Validators.required],
+      taskDescription: ['', Validators.required]
+    });
+  }
+  public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
+    const field = this.submissionForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  
+  public submissionFormFun() {
+    Object.keys(this.submissionForm.controls).forEach(key => {
+      const control = this.submissionForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+ 
 }
 
