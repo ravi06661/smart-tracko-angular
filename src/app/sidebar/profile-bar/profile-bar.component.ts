@@ -4,6 +4,7 @@ import { error, log } from 'console';
 import { Course } from 'src/app/entity/course';
 import { Profile } from 'src/app/entity/profile';
 import { AdminServiceService } from 'src/app/service/admin-service.service';
+import { AnnouncementServiceService } from 'src/app/service/announcement-service.service';
 import { LoginService } from 'src/app/service/login.service';
 import { QRServiceService } from 'src/app/service/qrservice.service';
 import { StudentService } from 'src/app/service/student.service';
@@ -19,7 +20,13 @@ export class ProfileBarComponent implements OnInit {
   profileData: Profile = new Profile();
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
-  constructor(private studentService: StudentService, private utilityService: UtilityServiceService,private loginService:LoginService,private adminService:AdminServiceService) {
+  totalNotifications = 0;
+
+  constructor(private studentService: StudentService, 
+    private utilityService: UtilityServiceService,
+    private loginService:LoginService,
+    private adminService:AdminServiceService,
+    private announcementService:AnnouncementServiceService) {
   }
   
   ngOnInit(): void {
@@ -29,7 +36,22 @@ export class ProfileBarComponent implements OnInit {
     }else  if( this.loginService.getRole()=='ADMIN'){
       this.profileData = this.adminService.getAdminProfileData()
     } 
+
+    this.getAllUnseenNotificationCount();
   }
+
+  public getAllUnseenNotificationCount(){
+    this.announcementService.countUnseenNotificationForStudent(this.loginService.getStudentId()).subscribe({
+      next:(data:any)=>{
+        this.totalNotifications = data
+      },
+      error:(err:any)=>{
+
+      }
+    })
+  }
+
+
 }
 
 

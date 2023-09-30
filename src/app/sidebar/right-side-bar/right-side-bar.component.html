@@ -16,15 +16,16 @@
 
 
     <div class="text1">
-      <h4 class="font-17 font-600 light">Updates</h4>
-      <h4 class="font-17 font-600 light">Clear All</h4>
+      <h4 class="font-17 font-600 light pointer">Updates</h4>
+      <h4 class="font-17 font-600 light pointer">Clear All</h4>
     </div>
-    <div class="nortification mb-3 position-relative" *ngFor="let obj of announcements">
+    <div class="nortification mb-3 position-relative" *ngFor="let obj of announcements;let i = index">
       <div class="nortifications-h">
         <h6 class="font-17 font-400 light notification_title">{{obj.title}}</h6>
-        <h6 class="font-14 font-400 light mb-0 notification_message ">{{obj.message}}</h6>
+        <a class="font-12 font-400 mb-0 msg-hover  pointer" (click)="seenMessage(i+1,obj.announcementId)">{{readMessage && messageNo == (i+1)?'hide':'read'}} message</a>
+        <h6 class="font-14 font-400 light mb-0 notification_message" *ngIf="readMessage && messageNo == (i+1)">{{obj.message}}</h6>
       </div>
-      <h5 class="font-11 font-400 light">2 Hours ago</h5>
+      <h5 class="font-11 font-400 light">{{updateTimeline(obj.date)}}</h5>
     </div>
   </div>
 </div>

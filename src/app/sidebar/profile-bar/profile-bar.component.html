@@ -19,7 +19,7 @@
         fill="#49BFCF" />
     </svg>
   </a>
-  <a class="text-dark">
-    <span class="badge rounded-pill badge-notification bg-danger">9</span>
+  <a class="text-dark" *ngIf="totalNotifications != 0">
+    <span class="badge rounded-pill badge-notification bg-primary">{{totalNotifications}}</span>
 </a>
 </div>

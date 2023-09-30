@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AnnouncementServiceService {
-  
+ 
   BASE_URL = this.utilityService.getBaseUrl();
   ANNOUNCEMENT_URL = this.BASE_URL+'/announcement';
 
@@ -25,4 +25,16 @@ export class AnnouncementServiceService {
   public getAnnouncementForStudent(studentId: any) {
     return this.http.get(`${this.ANNOUNCEMENT_URL}/getAnnouncementForStudent?studentId=${studentId}`);
   }
+
+  public seenMassageByStudent(announcementId: number, studentId: number) {
+    return this.http.post(`${this.ANNOUNCEMENT_URL}/seenAnnouncement?announcementId=${announcementId}&studentId=${studentId}`,{
+      responseType : 'any'
+    })
+  }
+
+  public countUnseenNotificationForStudent(studentId:number) {
+   return this.http.get(`${this.ANNOUNCEMENT_URL}/getNotificationCountForStudent?studentId=${studentId}`);
+  }
+  
+  
 }
