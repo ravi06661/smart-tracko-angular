@@ -245,23 +245,24 @@
               <i class="fi fi-rr-cross close_modal"></i>
             </button>
           </div>
-          <form #f="ngForm">
-            <div class="">
-              <select class="form-select" aria-label="Default select example" name="leaveTypeId"
+          <form [formGroup]="applyLeaveForm">
+            <div class="form-group">
+              <select class="form-select" formControlName="leaveTypeId" aria-label="Default select example" name="leaveTypeId"
                 [(ngModel)]="leaves.leaveType.leaveTypeId">
                 <option disabled>Select Leave Type</option>
                 <option *ngFor="let leaveType of leaveTypes" [ngValue]="leaveType.leaveTypeId">
                   {{ leaveType.leaveTypeName }}
                 </option>
               </select>
+              <div *ngIf="isFieldInvalidForApplyLeaveForm('leaveTypeId')" class="font-12 text-danger">Leave type is required.</div>
 
-              <ul class="nav nav-pills days_tabs" id="pills-tab" role="tablist">
+              <ul class="form-group nav nav-pills days_tabs" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link active p-0" id="pills-home-tab" data-bs-toggle="pill"
+                  <button class="nav-link active p-0" id="pills-home-tab" data-bs-toggle="pill"  
                     data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                    aria-selected="true">
+                    aria-selected="true" (click)="validFields('halfDayType')"  >
                     <div class="form-check d-inline-block position-relative account_option ms-auto apply_radio_box">
-                      <input class="d-none" type="radio" name="leaveDayType" id="inlineRadio1" value="Full Day"
+                      <input class="form-control d-none" formControlName="leaveDayType" type="radio" name="leaveDayType" id="inlineRadio1" value="Full Day"
                         [(ngModel)]="leaves.leaveDayType" />
                       <label class="form-check-label" for="inlineRadio1">
                         <div class="radio-box mb-0 day_box">
@@ -274,11 +275,11 @@
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link p-0" id="pills-profile-tab" data-bs-toggle="pill"
+                  <button class="nav-link p-0" id="pills-profile-tab" data-bs-toggle="pill" (click)="validFields('leaveEndDate')"
                     data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                     aria-selected="false">
                     <div class="form-check d-inline-block position-relative account_option ms-auto apply_radio_box">
-                      <input class="d-none" type="radio" name="leaveDayType" id="inlineRadio2" value="Half Day"
+                      <input class="form-control d-none" type="radio" formControlName="leaveDayType" name="leaveDayType" id="inlineRadio2" value="Half Day"
                         [(ngModel)]="leaves.leaveDayType" />
                       <label class="form-check-label" for="inlineRadio2">
                         <div class="radio-box mb-0 day_box">
@@ -290,9 +291,10 @@
                     </div>
                   </button>
                 </li>
+                <div *ngIf="isFieldInvalidForApplyLeaveForm('leaveDayType')" class="font-12 text-danger">Day type is required.</div>
               </ul>
 
-              <div class="tab-content" id="pills-tabContent">
+              <div class="form-group tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
                   tabindex="0"></div>
 
@@ -302,7 +304,7 @@
                     <div class="col-md-6">
                       <div
                         class="form-check d-inline-block left position-relative account_option ms-auto apply_radio_box">
-                        <input class="d-none" type="radio" name="halfDayType" id="inlineRadio3" value="First Half"
+                        <input class="form-control d-none" type="radio" formControlName="halfDayType" name="halfDayType" id="inlineRadio3" value="First Half"
                           [(ngModel)]="leaves.halfDayType" />
                         <label class="form-check-label" for="inlineRadio3">
                           <div class="radio-box mb-0">
@@ -315,7 +317,7 @@
                     </div>
                     <div class="col-md-6">
                       <div class="form-check d-inline-block position-relative account_option ms-auto apply_radio_box">
-                        <input class="d-none" type="radio" name="halfDayType" id="inlineRadio4" value="Second Half"
+                        <input class="form-control d-none" type="radio" formControlName="halfDayType" name="halfDayType" id="inlineRadio4" value="Second Half"
                           [(ngModel)]="leaves.halfDayType" />
                         <label class="form-check-label" for="inlineRadio4">
                           <div class="radio-box mb-0">
@@ -327,6 +329,7 @@
                       </div>
                     </div>
                   </div>
+                  <div *ngIf="isFieldInvalidForApplyLeaveForm('halfDayType')" class="font-12 text-danger">Half type is required.</div>
                 </div>
               </div>
             </div>
@@ -335,24 +338,27 @@
               <div class="form-row d-flex">
                 <div class="form-group col-md-6">
                   <div class="input_icon position-relative d-flex align-items-center">
-                    <input type="date" id="birthday" name="leaveDate" class="form-control input_text" placeholder="From"
+                    <input type="date" id="birthday" formControlName="leaveDate" name="leaveDate" class="form-control input_text" placeholder="From"
                       [(ngModel)]="leaves.leaveDate" />
                     <!-- <i class="fi fi-rr-calendar calender_2 lh-0"></i> -->
                   </div>
+                  <div *ngIf="isFieldInvalidForApplyLeaveForm('leaveDate')" class="font-12 text-danger">Start date is required.</div>
                 </div>
                 <div class="form-group col-md-6" *ngIf="leaves.leaveDayType == 'Full Day'">
                   <div class="input_icon position-relative d-flex align-items-center">
-                    <input type="date" id="birthday" name="leaveDate" class="form-control input_text" placeholder="To"
+                    <input type="date" id="birthday" formControlName="leaveEndDate" name="leaveEndDate" class="form-control input_text" placeholder="To"
                       [(ngModel)]="leaves.leaveEndDate" />
                     <!-- <i class="fi fi-rr-calendar calender_2 lh-0"></i> -->
                   </div>
+                  <div *ngIf="isFieldInvalidForApplyLeaveForm('leaveDate')" class="font-12 text-danger">End date is required.</div>
                 </div>
               </div>
             </div>
-            <div>
+            <div class="form-group">
               <h4 class="sub-heading font-17 font-500 secondary">Reason</h4>
-              <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+              <textarea class="form-control text_area" formControlName="leaveReason" id="exampleFormControlTextarea1" rows="3"
                 placeholder="Start Typing....." name="leaveReason" [(ngModel)]="leaves.leaveReason"></textarea>
+              <div *ngIf="isFieldInvalidForApplyLeaveForm('leaveReason')" class="font-12 text-danger">Reason is required.</div>
             </div>
             <br />
             <h5 class="text-center" *ngIf="message != ''" [style.color]="color">
