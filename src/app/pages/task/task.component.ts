@@ -4,6 +4,7 @@ import { Task } from 'src/app/entity/task';
 import { LoginService } from 'src/app/service/login.service';
 import { TaskServiceService } from 'src/app/service/task-service.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-task',
@@ -12,18 +13,20 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class TaskComponent {
   BASE_URL = this.utilityService.getBaseUrl();
-  ATTACHMENT_URL = this.BASE_URL+'/file/download/taskAndAssignmentAttachment/'
+  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   tasks: Task[] = []
-  taskSubmissionList:StudentTaskSubmittion[]=[]
-  taskSubmissionObj:StudentTaskSubmittion = new StudentTaskSubmittion
+  taskSubmissionList: StudentTaskSubmittion[] = []
+  taskSubmissionList2: StudentTaskSubmittion[] = []
+  taskSubmissionObj: StudentTaskSubmittion = new StudentTaskSubmittion
 
   constructor(private taskService: TaskServiceService,
-              private loginService:LoginService,
-              private utilityService:UtilityServiceService) { }
+    private loginService: LoginService,
+    private utilityService: UtilityServiceService,
+    private datePipe: DatePipe) { }
 
   ngOnInit() {
-  this.getAllTask();
-  this.getSubmitedTaskByStudent();
+    this.getAllTask();
+    this.getSubmitedTaskByStudent();
   }
 
   public getAllTask() {
@@ -34,11 +37,27 @@ export class TaskComponent {
     )
   }
 
-  public getSubmitedTaskByStudent(){
+  public getSubmitedTaskByStudent() {
     this.taskService.getSubmitedTaskByStudent(this.loginService.getStudentId()).subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.taskSubmissionList = data
+        this.taskSubmissionList2 = data
       }
     })
+  }
+
+  todayDate: Date = new Date()
+  public dateFormatter(date: Date) {
+    return this.datePipe.transform(date, 'dd MMM yyyy');
+  }
+
+  public getSubmissionTaskFilterByStatus(status: string) {
+    this.taskSubmissionList2 = this.taskSubmissionList
+    this.taskSubmissionList2 = this.taskSubmissionList2.filter(obj => {
+      if (obj.status == status) {
+        return obj
+      } else
+        return null;
+    });
   }
 }

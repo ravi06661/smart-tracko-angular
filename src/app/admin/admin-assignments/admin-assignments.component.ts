@@ -147,8 +147,10 @@ export class AdminAssignmentsComponent implements OnInit {
     }
   }
 
-  courseFilterByCourseIdAndSubjectId(course: Course) {
-    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(course.courseId, this.subjectId).subscribe((
+  course: Course = new Course
+  courseFilterByCourseIdAndSubjectId(course: Course, subjectId: number) {
+    this.course = course;
+    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(this.course.courseId, subjectId).subscribe((
       (data: any) => {
         this.taskSubmissionStatus = data
         this.subjects = course.subjects

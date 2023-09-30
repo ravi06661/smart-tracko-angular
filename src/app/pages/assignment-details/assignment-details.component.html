@@ -64,27 +64,54 @@
           <div class="modal-body">
             <div class="modal-header apply_title">
               <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Submit Assignment</h1>
-              <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close">
+              <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close" (click)="clearForm()">
                 <i class="fi fi-rr-cross close_icon"></i>
               </button>
             </div>
-            <div class="form_input">
-              <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
-              <div class="">
-                <textarea class="form-control text_area" name="description"
-                  [(ngModel)]="assignmentSubmission.description" id="exampleFormControlTextarea1" rows="3"
-                  placeholder="Input Text Here"></textarea>
-              </div>
-            </div>
 
-            <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading(.pdf file only)</h4>
-            <form class="select_file d-flex align-items-center file position-relative">
-              <input type="file" name="file" value="file" class="d-none" id="file" (change)="addSubmitFile($event)">
-              <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
-              <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">
-                <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i>Upload File
-              </button>
+            <form [formGroup]="submissionForm"> <!-- Bind the form group -->
+              <div class="form-group">
+                <div class="form_input">
+                  <h5 class="sub-heading font-17 font-500 secondary mb-1">Description</h5>
+                  <div class="">
+                    <textarea class="form-control text_area" name="description"
+                      id="exampleFormControlTextarea1" rows="3" placeholder="Input Text Here"
+                      formControlName="description"></textarea> <!-- Bind the form control -->
+                  </div>
+                  <div *ngIf="submissionForm.get('description')!.touched &&submissionForm.get('description')!.hasError('required')" class="text-danger">
+                    Description is required.
+                  </div>
+                  
+                </div>
+              </div>
             </form>
+            <form [formGroup]="submissionForm">
+            <div class="form-group">
+              <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading (.pdf file only)</h4>
+              <form [formGroup]="submissionForm" class="select_file d-flex align-items-center file position-relative">
+                <input type="file" name="file" id="file"   accept=".pdf, application/pdf"class="d-none" formControlName="file" (change)="addSubmitFile($event)">
+                <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
+                <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">
+                  <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i>Upload File
+                </button>  
+                
+              </form>
+              <div *ngIf=" isFieldInvalidForSubmissionForm('file')" class="text-danger">
+                file is required.</div>
+            </div>
+            </form>
+            
+
+            <!-- <div class="form-group">
+              <label for="" class="mb_6 font-17 font-500 secondary">Joining Date</label>
+              <div class="input_icon position-relative">
+                  <input type="date" id="joinDate" class="form-control input_text" name="joinDate"
+                      formControlName="joinDate" [(ngModel)]="registrationDetails.joinDate"
+                      placeholder="Enter Joining Date">
+                  <div *ngIf=" isFieldInvalidForinrollmentForm('joinDate')" class="text-danger">
+                      joinDate is required.</div>
+              </div> -->
+       
 
 
             <div class="file_option">
@@ -95,11 +122,9 @@
               </div>
 
             </div>
-
-
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
               <button type="button" class="cancel_modal_btn">Save Draft</button>
-              <button type="button" class="apply_modal_btn" data-bs-dismiss="modal" aria-label="Close"
+              <button type="button" class="apply_modal_btn"
                 (click)="submitAssignment()">Submit</button>
             </div>
 

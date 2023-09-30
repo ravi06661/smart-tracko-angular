@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
 import { TaskQuestion } from 'src/app/entity/task-question';
@@ -25,12 +26,18 @@ export class AssignmentDetailsComponent implements OnInit {
   file: any
   isSubmittedis: boolean = false
   assignmentSubmission: AssignmentSubmissionRequest = new AssignmentSubmissionRequest
-
+  submissionForm: FormGroup;
   constructor(private activateRoute: ActivatedRoute,
     private assignmentService: AssignmentServiceService,
     private utilityService: UtilityServiceService,
     private loginService: LoginService,
-    private router: Router) { }
+    private router: Router
+    , private formBuilder: FormBuilder) {
+    this.submissionForm = this.formBuilder.group({
+      file: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
 
@@ -54,14 +61,17 @@ export class AssignmentDetailsComponent implements OnInit {
 
   public addSubmitFile(event: any) {
     this.file = event.target.files[0]
-    console.log(this.file);
-
   }
 
   public submitAssignment() {
+    if (this.submissionForm.invalid) {
+      this.submissionFormFun()
+      return;
+    }
     this.assignmentSubmission.studentId = this.loginService.getStudentId();
     this.assignmentSubmission.assignmentId = this.assignmentId
     this.assignmentSubmission.taskId = this.questionId
+
     this.assignmentService.submitAssignment(this.assignmentSubmission, this.file).subscribe({
       next: (data) => {
         Swal.fire('Assignment Submit Successfully').then(e => {
@@ -69,14 +79,13 @@ export class AssignmentDetailsComponent implements OnInit {
         })
       }
     })
+
   }
 
   public isSubmitted() {
-    this.assignmentService.isSubmitted(this.assignmentId, this.questionId,this.loginService.getStudentId()).subscribe(
+    this.assignmentService.isSubmitted(this.assignmentId, this.questionId, this.loginService.getStudentId()).subscribe(
       (data: any) => {
         this.isSubmittedis = data
-        console.log(this.isSubmittedis);
-        
       }
     )
   }
@@ -93,4 +102,30 @@ export class AssignmentDetailsComponent implements OnInit {
       image.classList.remove('expanded');
     }
   }
+
+  public clearForm() {
+    this.submissionForm = this.formBuilder.group({
+      file: ['', Validators.required],
+      description: ['', Validators.required]
+    });
+  }
+  public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
+    const field = this.submissionForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  
+  public submissionFormFun() {
+    Object.keys(this.submissionForm.controls).forEach(key => {
+      const control = this.submissionForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
 }

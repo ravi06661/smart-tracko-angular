@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -20,13 +21,16 @@ export class TaskandassignmentsComponent implements OnInit {
   unLockAssignments: Assignment[] = []
   lockAssignments: Assignment[] = []
   assignmentSubmissionsList: AssignmentSubmission[] = []
+  assignmentSubmissionsList2: AssignmentSubmission[] = []
   unLockAssignment: Assignment = new Assignment
   assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
   assignmentId: number = 0;
   assignmentTaskVisibility: boolean[] = [];
   assignmentCount: number = 0;
-
-  constructor(private assignmentService: AssignmentServiceService,
+  todayDate:Date = new Date()
+  constructor(
+    private datePipe: DatePipe,
+    private assignmentService: AssignmentServiceService,
     private router: Router,
     private loginService: LoginService,
     private utilityService: UtilityServiceService) {
@@ -82,6 +86,7 @@ export class TaskandassignmentsComponent implements OnInit {
     this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
         this.assignmentSubmissionsList = data
+        this.assignmentSubmissionsList2 = data
       }
     })
   }
@@ -110,9 +115,21 @@ export class TaskandassignmentsComponent implements OnInit {
     let per
     if (totalCompleted !== undefined) {
       per = Math.floor(totalCompleted / num2 * 100);
-      let obj = per * 7.05;
-      this.progressWidth = obj.toString() + 'px';
     }
     return per;
+  }
+
+  public getSubmissionAssignmentFilterByStatus(status: string) {
+    this.assignmentSubmissionsList2 = this.assignmentSubmissionsList
+    this.assignmentSubmissionsList2 = this.assignmentSubmissionsList2.filter(obj => {
+      if (obj.status == status) {
+        return obj
+      } else
+        return null;
+    });
+  }
+
+  public dateFormatter(date:Date){
+    return this.datePipe.transform(date, 'dd MMM yyyy');
   }
 }

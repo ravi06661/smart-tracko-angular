@@ -24,10 +24,12 @@
               <div class="Progress">
                 <div class="Deadline">{{getTotalCompletedAssignmentCount(obj.id)}}/{{obj.assignmentQuestion.length}}</div>
                 <div class="Progress">{{calculatePercentages(obj.id,obj.assignmentQuestion.length)}}%</div>
+
               </div>
             </div>
-            <div class="ProgressBar">
-              <div class="ProgressW" [style.width]="progressWidth"></div>
+            <div class="progress">
+              <div class="progress-bar ProgressW bg-primary" role="progressbar" [style.width]="calculatePercentages(obj.id,obj.assignmentQuestion.length)+'%'" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+  
             </div>
             <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
               <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.assignmentQuestion; let j=index">
@@ -52,7 +54,7 @@
           </div>
         <!-- </div> -->
 
- <div class="col-md-6" *ngIf="assignmentSubmissionsList.length > 0">
+ <div class="col-md-6" >
   <div class="assignment-updates-top">
    <h3 class="title font-17 font-500 secondary position-relative">Updates</h3>
    <div class="top-status-month d-flex gap-3">
@@ -61,9 +63,10 @@
          Status
        </a>
        <ul class="dropdown-menu">
-         <li><a class="dropdown-item" href="#">Completed</a></li>
-         <li><a class="dropdown-item" href="#">Reassigned</a></li>
-         <li><a class="dropdown-item" href="#">Reviewing</a></li>              
+        <li><a class="dropdown-item" (click)="getSubmitedAssignment()">All</a></li>
+         <li><a class="dropdown-item" (click)="getSubmissionAssignmentFilterByStatus('Accepted')">Completed</a></li>
+         <li><a class="dropdown-item" (click)="getSubmissionAssignmentFilterByStatus('Rejected')">Rejected</a></li>
+         <li><a class="dropdown-item" (click)="getSubmissionAssignmentFilterByStatus('Reviewing')">Reviewing</a></li>              
        </ul>
      </div>
      <div class="dropdown">
@@ -89,24 +92,32 @@
   </div>
    <div class="all_summary assignment-updates">
 
-     <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1" *ngFor="let obj of assignmentSubmissionsList;let i=index" (click)="assignmentSubmissionObj = obj">
+     <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1" *ngFor="let obj of assignmentSubmissionsList2;let i=index" (click)="assignmentSubmissionObj = obj">
        <div class="d-flex align-items-center justify-content-between">
          <h3 class="font-14 font-500 mb-1 text-black">Assignment [{{obj.title}}] <b class="ms-1 font-500" [ngClass]="{'text_light_green':obj.status == 'Accepted','text_light_red':obj.status=='Rejected','text_light_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</b></h3>
          <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
        </div>
        <div class="d-flex align-items-center justify-content-between mb-1">
          <h3 class="font-13 font-400 mb-0">Task-{{i+1}}: Submission is {{obj.status}}.</h3>
-         <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">{{obj.submissionDate | date:'shortTime'}}</h4>
+         <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">
+          <ng-container *ngIf="dateFormatter(todayDate) === dateFormatter(obj.submissionDate); else otherDate">
+            Today {{ obj.submissionDate | date:'shortTime' }}
+          </ng-container>
+          <ng-template #otherDate>
+            {{ obj.submissionDate | date:' d MMM y h:mm a' }}
+          </ng-template>
+        </h4>
+        
        </div>
       </div>   
    </div>
  </div>
- <div class="col-md-6" *ngIf="assignmentSubmissionsList.length==0">
+ <!-- <div class="col-md-6" *ngIf="assignmentSubmissionsList.length==0">
   <h3 class="title font-17 font-500 secondary position-relative">Updates</h3>
   <h3 class="font-21 font-600 secondary position-relative">
     No task submission found!!
   </h3>
- </div>
+ </div> -->
 
 
 

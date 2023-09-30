@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { an } from '@fullcalendar/core/internal-common';
 import { log } from 'console';
 import { Chapter } from 'src/app/entity/chapter';
@@ -29,10 +30,16 @@ export class AdminSubjectsComponent implements OnInit {
   subject: Subject = new Subject();
   subjectId: number = 0;
   imageName = ''
-
+  submissionForm: FormGroup;
   constructor(private techService: TechnologyStackService,
     private subjectService: SubjectService,
-    private utilityService: UtilityServiceService) { }
+    private utilityService: UtilityServiceService
+    , private formBuilder: FormBuilder) {
+      this.submissionForm = this.formBuilder.group({
+        imageName: ['', Validators.required],
+        subjectName: ['', Validators.required]
+      });
+     }
 
   ngOnInit(): void {
     this.techService.getAllTechnologyStack().subscribe({
@@ -53,6 +60,10 @@ export class AdminSubjectsComponent implements OnInit {
   }
 
   public saveSubject() {
+   if(this.submissionForm.invalid){
+      this.submissionFormFun()
+      return;
+   }else{
     this.subjectService.saveSubject(this.subjectData).subscribe({
       next: (data: any) => {
         this.message = 'Success.'
@@ -63,6 +74,7 @@ export class AdminSubjectsComponent implements OnInit {
         this.getAllSubject();
       }
     })
+   }
   }
 
   public getSubjectById(id: number) {
@@ -97,4 +109,31 @@ export class AdminSubjectsComponent implements OnInit {
       }
     )
   }
+
+
+  public clearForm() {
+    this.submissionForm = this.formBuilder.group({
+      imageName: ['', Validators.required],
+      subjectName: ['', Validators.required]
+    });
+  }
+  public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
+    const field = this.submissionForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  
+  public submissionFormFun() {
+    Object.keys(this.submissionForm.controls).forEach(key => {
+      const control = this.submissionForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
 }

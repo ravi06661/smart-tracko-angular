@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
   toDoAssignmentLength = 0;
   tasksLength = 0;
 
-
+  todayDate: Date = new Date()
 
 
   constructor(private service: AssignmentServiceService,
@@ -71,7 +71,8 @@ export class DashboardComponent implements OnInit {
     private loginService: LoginService,
     private localst: LocationStrategy, private studentService: StudentService,
     private taskService: TaskServiceService, private assignmentService: AssignmentServiceService,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
@@ -219,5 +220,10 @@ export class DashboardComponent implements OnInit {
       this.taskSubmissionIsActive = false;
     }
   }
+
+  public dateFormatter(date:Date){
+    return this.datePipe.transform(date, 'dd MMM yyyy');
+  }
+
 }
 
