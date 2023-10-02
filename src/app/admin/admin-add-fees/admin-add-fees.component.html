@@ -62,21 +62,21 @@
                     </div>
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
-                        <select class="form-select" aria-label="Default select example" id="courseId" name="courseId"
+                        <!-- <select class="form-select" aria-label="Default select example" id="courseId" name="courseId"
                             formControlName="course" (change)="onCourseChange($event)">
                             <option value="" selected="">Select Course</option>
                             <option [value]="courses.courseId" *ngFor="let courses of course">{{courses.courseName}}
                             </option>
-                        </select>
-                        <!-- <div class="input_icon position-relative">
+                        </select> -->
+                        <div class="input_icon position-relative">
                             <input type="text" id="course" name="course" class="form-control input_text"
                                 [(ngModel)]="fees.course.courseName" placeholder="Enter Course"
-                                formControlName="course" readonly> -->
-                            <div *ngIf="isFieldInvalidForAddFeesDetailsForm('course')" class="text-danger">course is
-                                required.</div>
-                        <!-- </div> -->
-                        <!-- <div style="margin-top: -17px;"  *ngIf="isFieldInvalidForAddFeesDetailsForm('course')" class="text-danger">course is
-                            required.</div> -->
+                                formControlName="course" readonly>
+                            <!-- <div *ngIf="isFieldInvalidForAddFeesDetailsForm('course')" class="text-danger">course is
+                                required.</div> -->
+                        </div> 
+                         <div style="margin-top: -17px;"  *ngIf="isFieldInvalidForAddFeesDetailsForm('course')" class="text-danger">course is
+                            required.</div>
                     </div>
                     <div class="col-md-4 mb_20">
                         <label for="" class="mb_6 font-17 font-500 secondary">Course Fees</label>

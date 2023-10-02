@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { log } from 'console';
 import { Fees } from 'src/app/entity/fees';
@@ -28,9 +29,16 @@ export class AdminFeesPayComponent implements OnInit{
   fullName = '';
   endDate = '';
   startDate = '';
-
+  updatePaidFeesFrom:FormGroup
   
-constructor(private feesPayService:FeesPayService,private router:Router,private route: ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService){}
+constructor(private feesPayService:FeesPayService,private router:Router,private route: ActivatedRoute,private feesService:FeesService,private utilityService:UtilityServiceService,private formBuilder:FormBuilder){
+  this.updatePaidFeesFrom = this.formBuilder.group({
+    feesPayAmount: ['', Validators.required],
+    payDate: ['', Validators.required],
+    recieptNo: ['', Validators.required],
+    description: ['', Validators.required]
+  });
+}
 ngOnInit(): void {
   this.getAllfeesPayList(0,8);
   
@@ -87,8 +95,28 @@ public findByGivenDate(){
   }
 }
 
-public updateFeesPay(){
 
+isFieldInvalidForPaidFeesForm(fieldName: string): boolean {
+  const field = this.updatePaidFeesFrom.get(fieldName);
+  return field ? field.invalid && field.touched : false;
+}
+
+public paidFeesDetailsFormSubmition() {
+  Object.keys(this.updatePaidFeesFrom.controls).forEach(key => {
+    const control = this.updatePaidFeesFrom.get(key);
+    if (control) {
+      control.markAsTouched();
+    }
+  });
+  const firstInvalidControl = document.querySelector('input.ng-invalid');
+  if (firstInvalidControl) {
+    firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+public updateFeesPay(){
+  this.updatePaidFeesFrom.markAllAsTouched();
+  if (this.updatePaidFeesFrom.valid)
     // this.feesId = this.route.snapshot.params[('feesId')];
     this.feesPayService.updateFeesPay(this.feesPays).subscribe( 
       (data:any)=>{
@@ -107,7 +135,7 @@ public updateFeesPay(){
         }).then(e => {
           this.feesPays = new FeesPay
           this.getAllfeesPayList(0,8);
-         // this.router.navigate(['/admin/payfees']);
+          this.router.navigate(['/admin/payfees']);
         })
       },
       (err) => {

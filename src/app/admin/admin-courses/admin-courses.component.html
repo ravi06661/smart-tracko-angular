@@ -116,18 +116,19 @@
                         <div class="modal-header apply_title">
                             <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                                 id="exampleModalLabel1">Add Course</h1>
-                            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="fi fi-rr-cross close_icon"></i>
+                            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="clearCoruse()">
+                                <i  class="fi fi-rr-cross close_icon"></i>
                             </button>
                         </div>
-                        <form  >
+                        <form [formGroup]="addCourseForm" >
                             <div class="row">
                                 
                                 <div class="col-md-12 mb_18">
                                     <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{imageName}}</h6>
                                     <div class="all-course-images d-flex flex-wrap">
                                         <div class="add-course-img" *ngFor="let image of techImages">
-                                            <img [src]="imageUrl+image.imageName"  alt="" (click)="courseRequest.technologyStack= image.id" (click)="imageName = image.technologyName">
+                                            <img [src]="imageUrl+image.imageName"  alt="" (click)="courseRequest.technologyStack= image.id" (click)="imageName = image.technologyName" >
+                                           
                                         </div>
                                     </div>
                                 </div>
@@ -135,21 +136,27 @@
                                     <label for="" class="mb_6 font-15 font-500 secondary">Course Name</label>
                                     <div class="input_icon position-relative">
                                         <input type="text" id="" name="courseName" class="form-control input_text"
-                                            placeholder="Enter Course Name" [(ngModel)]="courseRequest.courseName">
+                                            placeholder="Enter Course Name" [(ngModel)]="courseRequest.courseName" formControlName="courseName">
+                                            <div *ngIf="isFieldInvalidForAddCourseDetailsForm('courseName')" class="text-danger">Course Name is
+                                                required.</div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb_18">
                                     <label for="" class="mb_6 font-15 font-500 secondary">Course Fees</label>
                                     <div class="input_icon position-relative">
                                         <input type="number" id="" name="courseFees" class="form-control input_text"
-                                            placeholder="Enter Course Fees" [(ngModel)]="courseRequest.courseFees">
+                                            placeholder="Enter Course Fees" [(ngModel)]="courseRequest.courseFees" formControlName="courseFees">
+                                            <div *ngIf="isFieldInvalidForAddCourseDetailsForm('courseFees')" class="text-danger">Course Fees is
+                                                required.</div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb_18">
                                     <label for="" class="mb_6 font-15 font-500 secondary">Course Duration (In Months)</label>
                                     <div class="input_icon position-relative">
                                         <input type="text" id="" name="duration" class="form-control input_text"
-                                            placeholder="Enter Course Duration" [(ngModel)]="courseRequest.duration">
+                                            placeholder="Enter Course Duration" [(ngModel)]="courseRequest.duration" formControlName="duration">
+                                            <div *ngIf="isFieldInvalidForAddCourseDetailsForm('duration')" class="text-danger">Duration is
+                                                required.</div>
                                     </div>
                                 </div>
                                 
@@ -164,25 +171,35 @@
                                           <input
                                             type="checkbox"
                                             name="subjectIds"
+                                            [id]="'subject'+subject.subjectId"
                                             [ngModel]="selectedSubjectIds[subject.subjectId]"
                                             (ngModelChange)="checkboxChanged(subject.subjectId)"
                                             class="choose-subjects"
-                                          >
+                                            [value]="subject.subjectId"
+                                            formControlName="subjectOption">
+                                            
                                         </div>
                                       </div>
+                                    
                              </div> <!-- all-subjects-list -->
+                               <div *ngIf="isFieldInvalidForAddCourseDetailsForm('subjectOption')" class="text-danger">Subject is
+                                        required.</div>
                              <div class="col-md-12 mb_18">
                                 <label for="" class="mb_6 font-15 font-500 secondary">Course Description</label>
                                 <div class="input_icon position-relative">
                                     <textarea type="number" id="" name="sortDescription" class="form-control input_text"
-                                        placeholder="Enter Course Description" [(ngModel)]="courseRequest.sortDescription"></textarea>
+                                        placeholder="Enter Course Description" [(ngModel)]="courseRequest.sortDescription" formControlName="sortDescription"></textarea>
+                                        <div *ngIf="isFieldInvalidForAddCourseDetailsForm('sortDescription')" class="text-danger">Sort Description is
+                                            required.</div>
                                 </div>
                             </div>
                             <div class="col-md-12 mb_18">
                                 <label for="" class="mb_6 font-15 font-500 secondary">If You Want To Make StarterCourse</label>
                                 <div class="input_icon position-relative">
-                                    <input type="radio" name = "isStarterCourse" value="true" [(ngModel)]="courseRequest.isStarterCourse"> Yes 
-                                    <input type="radio"  name = "isStarterCourse" value="false" [(ngModel)]="courseRequest.isStarterCourse"> No 
+                                    <input type="radio"  name = "isStarterCourse" value="true" [(ngModel)]="courseRequest.isStarterCourse" formControlName="isStarterCourse"> Yes 
+                                    <input type="radio"  name = "isStarterCourse" value="false" [(ngModel)]="courseRequest.isStarterCourse" formControlName="isStarterCourse"> No 
+                                    <div *ngIf="isFieldInvalidForAddCourseDetailsForm('isStarterCourse')" class="text-danger"> Starter Course is
+                                        required.</div>
                                 </div>
                             </div>
                             </div><!-- row -->
