@@ -51,18 +51,23 @@ export class AdminSubjectsChapterComponent {
     )
   }
   public addChapter() {
-    this.chapterService.addChapter(this.subjectId, this.chapterUpdate.chapterName).subscribe(
-      {
-        next: (data) => {
-          this.message = 'Success..'
-          this.chapterUpdate = new Chapter();
-          this.chapter = data.chapters
-        },
-        error: (error) => {
-          this.message = 'errore..'
+    if(this.chapterUpdate.chapterName==''){
+      this.message ="please enter subject name.."
+      return ;
+    }else{
+      this.chapterService.addChapter(this.subjectId, this.chapterUpdate.chapterName).subscribe(
+        {
+          next: (data) => {
+            this.message = 'Success..'
+            this.chapterUpdate = new Chapter();
+            this.chapter = data.chapters
+          },
+          error: (error) => {
+            this.message = error.error.message
+          }
         }
-      }
-    )
+      )
+    }
   }
   public deleteChapter() {
     //alert(this.chapterId)

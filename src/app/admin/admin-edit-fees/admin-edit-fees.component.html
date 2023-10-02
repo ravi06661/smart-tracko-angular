@@ -12,21 +12,25 @@
     <div class="scroll_dashboard">
         <div class="assignment-stats">
             <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Edit Fees</h3>
-            <form action="" class="mb_24">
+            <form [formGroup]="updateFeesForm" class="mb_24">
                 <div class="row">
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary"> Full Name</label>
                         <input type="text" id="fullName" name="fullName"  class="form-control input_text"  placeholder="Full Name" 
-                        [(ngModel)]="fees.student.fullName"
+                        [(ngModel)]="fees.student.fullName" formControlName="fullName"
                         readonly>
-                     
+                        <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('fullName')" class="text-danger">Name is
+                            required.</div>
                       </div>
                       
                       <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Email</label>
-                        <input type="email" id="email" name="eamil" class="form-control input_text"  placeholder="email"
-                        [(ngModel)]="fees.student.email"
+                        <input type="email" id="email" name="email" class="form-control input_text"  placeholder="email"
+                        [(ngModel)]="fees.student.email" formControlName="email"
                          readonly>
+                         <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('email')" class="text-danger">Email is
+                            required.</div>
+                      
                       </div>
                       
                       
@@ -35,8 +39,11 @@
                         <div class="input_icon position-relative">
                             <input type="text" id="mobile" name="mobile" class="form-control input_text"
                              placeholder="Enter Email"
-                             [(ngModel)]="fees.student.mobile"
+                             [(ngModel)]="fees.student.mobile" formControlName="mobile"
                               readonly>
+                              <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('mobile')" class="text-danger">Mobile No is
+                                required.</div>
+                          
                         </div>
                     </div>
                     <div class="col-md-4 mb_20">
@@ -45,29 +52,37 @@
                             <input type="text" id="courseName" name="courseName" class="form-control input_text"
 
                               placeholder="Enter courseName"
-                              [(ngModel)]="fees.course.courseName"
+                              [(ngModel)]="fees.course.courseName" formControlName="courseName"
                                readonly>
+                               <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('courseName')" class="text-danger">Course Name is
+                                required.</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Final Fees</label>
                         <div class="input_icon position-relative">
                             <input type="text" id="finalFees" name="finalFees" class="form-control input_text"
-                                placeholder="Enter Course Fees" [(ngModel)]="fees.finalFees">
+                                placeholder="Enter Course Fees" [(ngModel)]="fees.finalFees" formControlName="finalFees">
+                                <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('finalFees')" class="text-danger">Final Fees is
+                                    required.</div>
                         </div>
                     </div>
                     <div class="col-md-4 mb_20">
                         <label for="" class="mb_6 font-17 font-500 secondary">Paid Fees</label>
                         <div class="input_icon position-relative">
                             <input type="text" id="feesPaid" name="feesPaid" class="form-control input_text"
-                                placeholder="Enter Course Fees" [(ngModel)]="fees.feesPaid">
+                                placeholder="Enter Course Fees" [(ngModel)]="fees.feesPaid" formControlName="feesPaid">
+                                <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('feesPaid')" class="text-danger">Fees Paid is
+                                    required.</div>
                         </div>
                     </div>
                     <div class="col-md-4 mb_20">
                         <label for="" class="mb_6 font-17 font-500 secondary">Remainig Fees</label>
                         <div class="input_icon position-relative">
                             <input type="text" id="remainingFees" name="remainingFees" class="form-control input_text"
-                                placeholder="Enter Finial Fees" [(ngModel)]="fees.finalFees-fees.feesPaid" readonly>
+                                placeholder="Enter Finial Fees" [(ngModel)]="fees.finalFees-fees.feesPaid" formControlName="remainingFees" readonly>
+                                <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('remainingFees')" class="text-danger">RemainingFees is
+                                    required.</div>
                         </div>
                     </div>
                     

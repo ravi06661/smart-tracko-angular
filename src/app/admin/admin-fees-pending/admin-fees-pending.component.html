@@ -79,7 +79,9 @@
                 <td>{{fees.updatedDate}}</td>
                 <td class="warning font-500 pointer" data-bs-toggle="modal"
                 data-bs-target="#pay-modal" (click)="getFeesById(fees.feesId)">Pay Now</td>    
-                <td><a routerLink="/admin/editfees/{{fees.feesId}}"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span></td>             
+                <td><a routerLink="/admin/editfees/{{fees.feesId}}"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> 
+                  <!-- <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span> -->
+                </td>             
               </tr>
              
               </tbody>
@@ -124,35 +126,45 @@
                           </button>
                       </div>
 
-                      <form action="">
+                      <form [formGroup]="payFeesForm">
                           <div class="row">
 
                               <div class="col-md-12">
-                                  <p class="mb-1">Your Remaining Amount is: <span class="text-danger">{{fees.remainingFees}}/-</span> </p>
+                                  <p class="mb-1" *ngIf="feesPays.feesPayAmount!=null">Your Remaining Amount is: <span class="text-danger">{{fees.remainingFees-feesPays.feesPayAmount}}/-</span> </p>
+                                  <p class="mb-1" *ngIf="feesPays.feesPayAmount==null">Your Remaining Amount is: <span class="text-danger">{{fees.remainingFees}}/-</span> </p>
                               </div>
 
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Pay Amount</label>
                                   <div class="input_icon position-relative">
-                                      <input type="text" id="feesPayAmount" name="feesPayAmount" class="form-control input_text"
-                                          placeholder="Enter Pay Amount" [(ngModel)]="feesPays.feesPayAmount">
+                                      <input type="number" id="feesPayAmount" name="feesPayAmount" class="form-control input_text"
+                                          placeholder="Enter Pay Amount" [(ngModel)]="feesPays.feesPayAmount" formControlName="feesPayAmount">
+                                          <div *ngIf="isFieldInvalidForPayFeesForm('feesPayAmount')" class="text-danger">Amount is
+                                            required.</div>
+                                            <div *ngIf="fees.remainingFees<feesPays.feesPayAmount" class="text-danger">Amount Pay is Greater than Remaining Fees.</div>
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Date</label>
                                   <div class="input_icon position-relative">
-                                      <input type="date" id="payDate" name="payDate" class="form-control input_text" [(ngModel)]="feesPays.payDate">
+                                      <input type="date" id="payDate" name="payDate" class="form-control input_text" [(ngModel)]="feesPays.payDate" formControlName="payDate">
+                                      <div *ngIf="isFieldInvalidForPayFeesForm('payDate')" class="text-danger">Date is
+                                        required.</div>
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Reciept Number</label>
                                   <div class="input_icon position-relative">
-                                      <input type="text" id="recieptNo" name="recieptNo" class="form-control input_text" placeholder="Dollop14709979" [(ngModel)]="feesPays.recieptNo">
+                                      <input type="text" id="recieptNo" name="recieptNo" class="form-control input_text" placeholder="Dollop14709979" [(ngModel)]="feesPays.recieptNo" formControlName="recieptNo">
+                                      <div *ngIf="isFieldInvalidForPayFeesForm('recieptNo')" class="text-danger">Reciept No is
+                                        required.</div>
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Description Box</label>
-                                  <textarea name="description" class="form-control text_area" id="exampleFormControlTextarea1" rows="3" placeholder="Start Typing....." [(ngModel)]="feesPays.description"></textarea>
+                                  <textarea name="description" class="form-control text_area" id="exampleFormControlTextarea1" rows="3" placeholder="Start Typing....." [(ngModel)]="feesPays.description" formControlName="description"></textarea>
+                                  <div *ngIf="isFieldInvalidForPayFeesForm('description')" class="text-danger">Description is
+                                    required.</div>
                               </div>
 
 
@@ -162,7 +174,7 @@
                           <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                               aria-label="Close">Cancel</button>
                           
-                              <button type="button" class="apply_modal_btn font-15 font-500" (click)="feesPay()" data-bs-dismiss="modal" aria-label="Close">Submit</button>
+                              <button type="button" class="apply_modal_btn font-15 font-500"  (click)="feesPay()"  >Submit</button>
                           
                       </div>
 
@@ -173,7 +185,7 @@
       <!-- Modal Admin Pay Due Amount Modal End -->
 
   <!-- Modal Admin Delete Modal Start -->
-  <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal"
+  <!-- <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal"
     aria-hidden="true">
     <div class="modal-dialog position-relative leave_modal">
       <div class="modal-content">
@@ -198,5 +210,5 @@
 
           </div>
       </div>
-    </div>
+    </div> -->
     <!-- Modal Admin Delete Modal End -->

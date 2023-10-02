@@ -43,9 +43,7 @@
                   </tr>
                 </thead>
                 <tbody class="bg-light">
-                  <h3  class="font-21 font-600 secondary position-relative" *ngIf="feesPayLength == 0">
-                    NO Transaction Is AVAILABLE !!!
-                  </h3>
+                 
                   <tr *ngFor="let fees of feesPay;let i=index">
                     <td>{{i+1}}/{{feesPay.length}}</td>
                     <td>{{fees.feesPayAmount}}</td>
@@ -55,6 +53,9 @@
                   </tr>
                  
                 </tbody>
+                 <h3 class="bg-light"  *ngIf="feesPayLength == 0">
+                    No Transaction  Yet !!!
+                  </h3>
               </table>
             </div>
 

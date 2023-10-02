@@ -166,7 +166,7 @@
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
-                <form action="">
+                <form [formGroup]="createBatchFrom">
                     <div class="row">
                    
                         <!-- <div class="col-md-12 mb_18">
@@ -189,17 +189,24 @@
                                     type="radio"
                                     name="subjects"
                                     class="choose-subjects"
-                                    (click)="batchRequest.subjectId = subject.subjectId"
-                                    >
+                                    [id]="'subject' + subject.subjectId"
+                                    (click)="batchRequest.subjectId = subject.subjectId" 
+                                    [value]="subject.subjectId"
+                                    formControlName="selectedOption">
+                                   
                                 </div>
                             </div>
+                            <div *ngIf="isFieldInvalidForCreateBatchDetailsForm('selectedOption') " class="text-danger">Subject is
+                                required.</div>
                         </div>
                        
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Title</label>
                             <div class="input_icon position-relative">
                                 <input type="text" id="" name="batchName" class="form-control input_text"
-                                    placeholder="Enter Batch title" [(ngModel)]="batchRequest.batchName">
+                                    placeholder="Enter Batch title" [(ngModel)]="batchRequest.batchName" formControlName="batchName">
+                                    <div *ngIf="isFieldInvalidForCreateBatchDetailsForm('batchName')" class="text-danger">Batch Name is
+                                        required.</div>
                             </div>
                         </div>
 
@@ -207,7 +214,9 @@
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Date</label>
                             <div class="input_icon position-relative">
                                 <input type="date" id="" name="batchStartDate" class="form-control input_text"
-                                    placeholder="Enter Batch Start Date" [(ngModel)]="batchRequest.batchStartDate">
+                                    placeholder="Enter Batch Start Date" [(ngModel)]="batchRequest.batchStartDate"formControlName="batchStartDate">
+                                    <div *ngIf="isFieldInvalidForCreateBatchDetailsForm('batchStartDate')" class="text-danger">Batch Start Date is
+                                        required.</div>
                             </div>
                         </div>
 
@@ -215,14 +224,18 @@
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Time</label>
                             <div class="input_icon position-relative">
                                 <input type="time" id="" name="batchTiming" class="form-control input_text"
-                                    placeholder="Enter Batch Start Time" [(ngModel)]="batchRequest.batchTiming" >
+                                    placeholder="Enter Batch Start Time" [(ngModel)]="batchRequest.batchTiming" formControlName="batchTiming">
+                                    <div *ngIf="isFieldInvalidForCreateBatchDetailsForm('batchTiming')" class="text-danger">Batch Timing is
+                                        required.</div>
                             </div>
                         </div>
 
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Details</label>
                             <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Start Typing....." name="batchDetails" [(ngModel)]="batchRequest.batchDetails"></textarea>
+                                placeholder="Start Typing....." name="batchDetails" [(ngModel)]="batchRequest.batchDetails" formControlName="batchDetails"></textarea>
+                                <div *ngIf="isFieldInvalidForCreateBatchDetailsForm('batchDetails')" class="text-danger">Batch Details is
+                                    required.</div>
                         </div>
 
                     </div><!-- row -->

@@ -119,7 +119,7 @@
                           </button>
                       </div>
 
-                      <form action="">
+                      <form [formGroup]="updatePaidFeesFrom">
                       
                           <div class="row">
                                    
@@ -131,24 +131,32 @@
                                   <label for="" class="mb_6 font-15 font-500 secondary" >Pay Amount</label>
                                   <div class="input_icon position-relative">
                                       <input type="text" id="feesPayAmount" name="feesPayAmount" class="form-control input_text"
-                                          placeholder="Enter Pay Amount" [(ngModel)]="feesPays.feesPayAmount">
+                                          placeholder="Enter Pay Amount" [(ngModel)]="feesPays.feesPayAmount" formControlName="feesPayAmount">
+                                          <div  *ngIf="isFieldInvalidForPaidFeesForm('fullName')" class="text-danger">Name is
+                                            required.</div>
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Date</label>
                                   <div class="input_icon position-relative">
-                                      <input type="date" id="payDate" name="payDate" class="form-control input_text" [(ngModel)]="feesPays.payDate">
+                                      <input type="date" id="payDate" name="payDate" class="form-control input_text" [(ngModel)]="feesPays.payDate" formControlName="payDate">
+                                      <div  *ngIf="isFieldInvalidForPaidFeesForm('payDate')" class="text-danger">Date is
+                                        required.</div>
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Reciept Number</label>
                                   <div class="input_icon position-relative">
-                                      <input type="text" id="recieptNo" name="recieptNo" class="form-control input_text" placeholder="Dollop14709979" [(ngModel)]="feesPays.recieptNo">
+                                      <input type="text" id="recieptNo" name="recieptNo" class="form-control input_text" placeholder="Dollop14709979" [(ngModel)]="feesPays.recieptNo" formControlName="recieptNo">
+                                      <div  *ngIf="isFieldInvalidForPaidFeesForm('recieptNo')" class="text-danger">Reciept No is
+                                        required.</div>
                                   </div>
                               </div>
                               <div class="col-md-12 mb_18">
                                   <label for="" class="mb_6 font-15 font-500 secondary">Description Box</label>
-                                  <textarea class="form-control text_area" name="description" id="exampleFormControlTextarea1" rows="3" placeholder="Start Typing....." [(ngModel)]="feesPays.description"></textarea>
+                                  <textarea class="form-control text_area" name="description" id="exampleFormControlTextarea1" rows="3" placeholder="Start Typing....." [(ngModel)]="feesPays.description" formControlName="description"></textarea>
+                                  <div  *ngIf="isFieldInvalidForPaidFeesForm('description')" class="text-danger">Description is
+                                    required.</div>
                               </div>
 
 
@@ -158,7 +166,7 @@
                           <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                               aria-label="Close">Cancel</button>
                           <!-- <a href="admin_fees_pay_list.html"> -->
-                              <button type="button"   class="apply_modal_btn font-15 font-500" (click)="updateFeesPay()"   data-bs-dismiss="modal" aria-label="Close">Update</button>
+                              <button type="button"   class="apply_modal_btn font-15 font-500" (click)="updateFeesPay()">Update</button>
                           <!-- </a> -->
                       </div>
 
