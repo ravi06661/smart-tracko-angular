@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewsAndEventRequest } from 'src/app/payload/news-and-event-request';
 import { NewsEventServiceService } from 'src/app/service/news-event-service.service';
+import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
 @Component({
   selector: 'app-admin-edit-news-and-events',
@@ -10,10 +11,17 @@ import { NewsEventServiceService } from 'src/app/service/news-event-service.serv
 })
 export class AdminEditNewsAndEventsComponent implements OnInit{
   
-
+  IMG_URL = this.utlityService.getBaseUrl()+'/file/getImageApi/newsEventImage/'
   id:number=0;
   newsAndEventRequest:NewsAndEventRequest=new NewsAndEventRequest();
-constructor(private newsAndEventService:NewsEventServiceService,private activateRoute:ActivatedRoute,private router:Router){}
+  imageName:string = '';
+  imagePreview:string = '';
+
+constructor(private newsAndEventService:NewsEventServiceService,
+  private activateRoute:ActivatedRoute,
+  private router:Router,
+  private utlityService:UtilityServiceService){}
+
 ngOnInit(): void {
  this.id=this.activateRoute.snapshot.params[('id')];
  this.getNewsAndEventById();
@@ -31,6 +39,8 @@ getNewsAndEventById(){
   this.newsAndEventService.getByNewsById(this.id).subscribe(
     (data:any)=>{
       this.newsAndEventRequest=data;
+      this.newsAndEventRequest.fileName = data.image
+      this.imagePreview = this.IMG_URL+this.newsAndEventRequest.fileName
     }
   )
 }
@@ -40,29 +50,54 @@ addMedia(event: any) {
  
 }
 
-imageSrc: any = null;  // Initialize with null
+public addImage(event: any) {
+  this.newsAndEventRequest.fileName=event.target.files[0];
 
-loadFile(event: any) {
- const file = event.target.files[0];
- if (file) {
-   const reader = new FileReader();
-   reader.onload = (e: any) => {
-     this.newsAndEventRequest.fileName=e.target.result;
-     this.imageSrc = this.newsAndEventRequest.file;
-   };
-   reader.readAsDataURL(file);
- }
+  const selectedFile = event.target.files[0];
+  
+  if (selectedFile) {
+    const reader = new FileReader();
+
+    reader.onload = (e: any) => {
+      this.imagePreview = e.target.result;
+      this.imageName = selectedFile.name;
+    };
+
+    reader.readAsDataURL(selectedFile);
+  } else {
+    this.imagePreview = '';
+    this.imageName = '';
+  }
 }
 
-addImage(event: any) {
- const file = event.target.files[0];
- if (file) {
-   const reader = new FileReader();
-   reader.onload = (e: any) => {
-     this.newsAndEventRequest.file=event.target.files[0];
-     this.imageSrc=this.newsAndEventRequest.file
-   };
-   reader.readAsDataURL(file);
- }
+public removeImage(){
+  this.imagePreview = '';
+  this.imageName = '';
+  this.newsAndEventRequest.fileName = '';
 }
+
+
+// loadFile(event: any) {
+//  const file = event.target.files[0];
+//  if (file) {
+//    const reader = new FileReader();
+//    reader.onload = (e: any) => {
+//      this.newsAndEventRequest.fileName=e.target.result;
+//      this.imageSrc = this.newsAndEventRequest.file;
+//    };
+//    reader.readAsDataURL(file);
+//  }
+// }
+
+// addImage(event: any) {
+//  const file = event.target.files[0];
+//  if (file) {
+//    const reader = new FileReader();
+//    reader.onload = (e: any) => {
+//      this.newsAndEventRequest.file=event.target.files[0];
+//      this.imageSrc=this.newsAndEventRequest.file
+//    };
+//    reader.readAsDataURL(file);
+//  }
+// }
 }

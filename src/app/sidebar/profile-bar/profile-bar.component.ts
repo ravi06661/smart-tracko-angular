@@ -33,11 +33,10 @@ export class ProfileBarComponent implements OnInit {
   
     if( this.loginService.getRole()=='STUDENT'){
       this.profileData = this.studentService.getStudentHeaderProfileData();
+      this.getAllUnseenNotificationCount();
     }else  if( this.loginService.getRole()=='ADMIN'){
       this.profileData = this.adminService.getAdminProfileData()
     } 
-
-    this.getAllUnseenNotificationCount();
   }
 
   public getAllUnseenNotificationCount(){

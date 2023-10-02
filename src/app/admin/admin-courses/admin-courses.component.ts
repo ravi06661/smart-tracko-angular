@@ -31,6 +31,26 @@ export class AdminCoursesComponent implements OnInit {
   courseId:number = 0
   imageName = ''
   selectedSubjects:Subject[] = [];
+
+  // addCourseForm : FormGroup;
+
+  constructor(private courseService:CourseServiceService,
+    private techService:TechnologyStackService,
+    private subjectService:SubjectService,
+    private utilityService:UtilityServiceService,
+    private router:Router,
+    private formbuilder:FormBuilder){
+
+      // this.addCourseForm = this.formbuilder.group({
+      //   courseName : ['',Validators.required],
+      //   courseFees : ['',Validators.required],
+      //   duration : ['',Validators.required],
+      //   subjectIds : ['',Validators.required],
+      //   sortDescription : ['',Validators.required],
+      //   isStarterCourse : ['',Validators.required],
+      //   image : ['',Validators.required]
+      // })
+
   addCourseForm:FormGroup
   constructor(private courseService:CourseServiceService,private techService:TechnologyStackService,
     private subjectService:SubjectService,private utilityService:UtilityServiceService,private router:Router,private formBuilder:FormBuilder){
@@ -43,11 +63,6 @@ export class AdminCoursesComponent implements OnInit {
         sortDescription: ['', Validators.required],
         finialFees: ['', Validators.required],
         isStarterCourse: ['', Validators.required],
-  
-      
-  
-       
-  
       });
     }
 

@@ -32,7 +32,7 @@
 
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Roll No.</label>
-                        <input type="text" id="studentId" name="studentId" class="form-control input_text"
+                        <input type="number" id="studentId" name="studentId" class="form-control input_text"
                             [(ngModel)]="fees.student.studentId" placeholder="Roll no." formControlName="rollNo"
                             readonly>
                         <div *ngIf="isFieldInvalidForAddFeesDetailsForm('rollNo')" class="text-danger">Roll no is
@@ -72,16 +72,21 @@
                             <input type="text" id="course" name="course" class="form-control input_text"
                                 [(ngModel)]="fees.course.courseName" placeholder="Enter Course"
                                 formControlName="course" readonly>
+
+                        <!-- <div style="margin-top: -17px;"  *ngIf="isFieldInvalidForAddFeesDetailsForm('course')" class="text-danger">course is
+                            required.</div> -->
+
                             <!-- <div *ngIf="isFieldInvalidForAddFeesDetailsForm('course')" class="text-danger">course is
                                 required.</div> -->
                         </div> 
                          <div style="margin-top: -17px;"  *ngIf="isFieldInvalidForAddFeesDetailsForm('course')" class="text-danger">course is
                             required.</div>
+
                     </div>
                     <div class="col-md-4 mb_20">
                         <label for="" class="mb_6 font-17 font-500 secondary">Course Fees</label>
                         <div class="input_icon position-relative">
-                            <input type="text" id="courseFees" name="courseFees" formControlName="courseFees"
+                            <input type="number" id="courseFees" name="courseFees" formControlName="courseFees"
                                 class="form-control input_text" placeholder="Enter Course Fees"
                                 [(ngModel)]="fees.course.courseFees" readonly>
                             <div *ngIf="isFieldInvalidForAddFeesDetailsForm('courseFees')" class="text-danger">Course
@@ -91,10 +96,10 @@
                     <div class="col-md-4 mb_20">
                         <label for="" class="mb_6 font-17 font-500 secondary">Final Fees</label>
                         <div class="input_icon position-relative">
-                            <input type="text" id="finalFees" name="finalFees" formControlName="finialFees"
+                            <input type="number" id="finalFees" name="finalFees" formControlName="finalFees"
                                 class="form-control input_text" placeholder="Enter Finial Fees"
                                 [(ngModel)]="fees.finalFees">
-                            <div *ngIf="isFieldInvalidForAddFeesDetailsForm('finialFees')" class="text-danger">Finial
+                            <div *ngIf="isFieldInvalidForAddFeesDetailsForm('finalFees')" class="text-danger">Final
                                 Fees is required.</div>
                         </div>
                     </div>

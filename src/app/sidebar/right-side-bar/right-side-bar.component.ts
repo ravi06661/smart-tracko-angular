@@ -37,11 +37,10 @@ export class RightSideBarComponent implements OnInit {
   ngOnInit(): void {
     if( this.loginService.getRole()=='STUDENT'){
       this.profileData = this.studentService.getStudentHeaderProfileData();
+      this.getAnnouncementsForStudents();
     }else  if( this.loginService.getRole()=='ADMIN'){
       this.profileData = this.adminService.getAdminProfileData()
     } 
-
-    this.getAnnouncementsForStudents();
   }
 
   public getAnnouncementsForStudents(){

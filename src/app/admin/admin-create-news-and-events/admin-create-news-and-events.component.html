@@ -30,7 +30,7 @@
                 <div class="col-md-8 col-lg-6">
                     <label for="" class="mb_6 font-17 font-500 secondary">shortDescriptoin</label>
                     <div class="input_icon position-relative">
-                        <input type="text" id="shortDescriptoin" name="shortDescriptoin" formControlName="shortDesc" class="form-control input_text" placeholder="2" [(ngModel)]="newRequest.shortDescriptoin">
+                        <input type="text" id="shortDescriptoin" name="shortDescriptoin" formControlName="shortDesc" class="form-control input_text" placeholder="2" [(ngModel)]="newRequest.shortDescription">
                         <div *ngIf="isFieldInvalidForNewsAndEventDetailsForm('shortDesc')"
                         class="text-danger">ShortDescriptoin is required.</div>
                     </div>
@@ -38,31 +38,36 @@
             </div>
 
             <div class="row mb-4">
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="profile_change d-flex justify-content-center align-items-center position-relative mx-auto">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" *ngIf="imagePreview != ''" >
+                    <div class="profile_change d-flex justify-content-center align-items-center mb-4 position-relative mx-auto">
+
                         <div class="profile_edits">
-                            <div class="profile_buttons d-flex align-items-end">
-                                <i class="fi fi-rr-trash light font-24 line-height-0 hover-delete-icon"
-                                    data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
-                            </div>
+                          <div class="profile_buttons d-flex align-items-end">
+                            
+                            <i class="fi fi-rr-trash light font-24 line-height-0 hover-delete-icon" data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
+                          </div>
                         </div>
-                        <input id="fileName" name="image" type="file" (change)="loadFile($event)" class="d-none" >
-                       <img [src]="imageSrc" class="profile_image" id="output">
-                       
-                    </div>
-                    <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">Attachment Title Here
+                        
+                        <input id="file" type="file" onchange="loadFile(event)"  class="d-none">
+                        <img [src]="imagePreview" class="profile_image" id="output" >
+                      </div>
+                    <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">{{imageName}}
                     </h3>
                 </div>
 
                 <div class="col-md-3">
-                    <form
-                        class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
-                        <input type="file" name="image" (change)="addImage($event)" value="fileName" class="d-none" id="image"  >
+                    <form [formGroup]="newsAndEventForm">
+                        <div class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
+                        <input type="file" name="image" formControlName="image"  (change)="addImage($event)" value="fileName" class="form-control d-none" id="image"  >
                         <label for="image" class="font-17 font-500 d-flex">
                             <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                             Add Media</label>
-                           
+                        </div>
+                            <div *ngIf="isFieldInvalidForNewsAndEventDetailsForm('image')"
+                            class="text-danger">Image is required.</div>
+
                     </form>
+                   
                 </div>
             </div>
 
@@ -112,14 +117,14 @@
                             <i class="fi fi-rr-cross close_icon"></i>
                         </button>
     
-                        <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
+                        <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Image?</p>
                         <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                             <a routerLink="/admin/createnewsAndEvent">
-                                <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Yes,
+                                <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" data-bs-dismiss="modal" aria-label="Close" (click)="removeImage()">Yes,
                                     delete</button>
                             </a>
                             <a routerLink="/admin/createnewsAndEvent">
-                                <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
+                                <button type="button" class="apply_modal_btn font-15 font-500" data-bs-dismiss="modal" aria-label="Close">No, Do not delete</button>
                             </a>
                         </div>
     

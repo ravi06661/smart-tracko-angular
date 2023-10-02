@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { an } from '@fullcalendar/core/internal-common';
@@ -40,10 +41,48 @@ export class AdminCreateTaskComponent {
   questionId: number = 0;
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
-  constructor(private activateRouter: ActivatedRoute, private subjectService: SubjectService, private courseService: CourseServiceService, private taskService: TaskServiceService, private router: Router, private utilityService: UtilityServiceService) { }
+
+  secondTaskForm:FormGroup;
+
+  constructor(private activateRouter: ActivatedRoute, 
+    private subjectService: SubjectService, 
+    private courseService: CourseServiceService, 
+    private taskService: TaskServiceService, 
+    private router: Router, 
+    private utilityService: UtilityServiceService,
+    private formBuilder:FormBuilder) { 
+
+
+      this.secondTaskForm = this.formBuilder.group({
+        image : ['',Validators.required],
+        videoUrl : ['',Validators.required],
+        question : ['',Validators.required]
+      })
+
+    }
+
   ngOnInit() {
     this.taskId = this.activateRouter.snapshot.params[('id')]
     this.getTask()
+  }
+
+
+  isFieldInvalidForTaskForm(fieldName: string): boolean {
+    const field = this.secondTaskForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  public taskFormControl() {
+    Object.keys(this.secondTaskForm.controls).forEach(key => {
+      const control = this.secondTaskForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   public getTask() {
@@ -105,6 +144,10 @@ export class AdminCreateTaskComponent {
   }
 
   public submitTask() {
+    this.taskFormControl()
+    if(this.secondTaskForm.invalid){
+      return;
+    }
     this.taskData.taskId = this.taskId
     this.taskService.addAssignment(this.taskData)
       .subscribe({
@@ -137,5 +180,16 @@ export class AdminCreateTaskComponent {
   expandedQuestions: boolean[] = [];
   toggleQuestion(index: number) {
     this.expandedQuestions[index] = !this.expandedQuestions[index];
+  }
+
+
+  public deleteImage(index:number){
+    if (index >= 0 && index < this.taskQuestion.questionImages.length) {
+      this.taskQuestion.questionImages.splice(index, 1);
+      this.imagePreview.splice(index,1);
+      this.imageName.splice(index,1);
+    }
+    console.log(this.taskQuestion.questionImages);
+    
   }
 }

@@ -120,21 +120,25 @@
                                 <i  class="fi fi-rr-cross close_icon"></i>
                             </button>
                         </div>
+
                         <form [formGroup]="addCourseForm" >
+
                             <div class="row">
                                 
                                 <div class="col-md-12 mb_18">
                                     <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{imageName}}</h6>
                                     <div class="all-course-images d-flex flex-wrap">
                                         <div class="add-course-img" *ngFor="let image of techImages">
-                                            <img [src]="imageUrl+image.imageName"  alt="" (click)="courseRequest.technologyStack= image.id" (click)="imageName = image.technologyName" >
-                                           
+                                            <img [src]="imageUrl+image.imageName"   alt="" (click)="courseRequest.technologyStack= image.id" (click)="imageName = image.technologyName">
+                             
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb_18">
                                     <label for="" class="mb_6 font-15 font-500 secondary">Course Name</label>
                                     <div class="input_icon position-relative">
+
+
                                         <input type="text" id="" name="courseName" class="form-control input_text"
                                             placeholder="Enter Course Name" [(ngModel)]="courseRequest.courseName" formControlName="courseName">
                                             <div *ngIf="isFieldInvalidForAddCourseDetailsForm('courseName')" class="text-danger">Course Name is

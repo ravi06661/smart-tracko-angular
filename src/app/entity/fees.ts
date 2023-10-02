@@ -5,7 +5,7 @@ export class Fees {
 
     public 	 feesId:number=0;
     public student:StudentDetails=new StudentDetails;
-    public  finalFees:number=0;
+    public  finalFees!:number;
 	public  feesPaid:number=0;
     public course:Course=new Course;
 	public  remainingFees:number=0;
