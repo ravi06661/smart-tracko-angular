@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { log } from 'console';
 import * as moment from 'moment';
@@ -29,9 +30,23 @@ export class AdminCoursesBatchesComponent implements OnInit{
   batch:Batch = new Batch();
   imageName = '';
   imageUrl = this.utilityService.getBaseUrl()+"/file/getImageApi/technologyStackImage/";
+  createBatchFrom:FormGroup
 
   constructor(private activateRoute:ActivatedRoute,private courseService:CourseServiceService,
-    private batchService:BatchesService,private techService:TechnologyStackService,private utilityService:UtilityServiceService){}
+    private batchService:BatchesService,private techService:TechnologyStackService,private utilityService:UtilityServiceService,private formBuilder:FormBuilder){
+      this.createBatchFrom=this.formBuilder.group({
+        selectedOption: ['', Validators.required],
+        batchName: ['', Validators.required],
+        batchStartDate: ['', Validators.required],
+        batchTiming: ['', Validators.required],
+        batchDetails: ['', Validators.required],
+        
+      
+  
+       
+  
+      });
+    }
 
   ngOnInit(): void {
     this.courseId=this.activateRoute.snapshot.params[('courseId')];
@@ -39,6 +54,7 @@ export class AdminCoursesBatchesComponent implements OnInit{
     this.getAllTechImages()
   }
 
+  
   public getCourseByCourseId(){
     this.courseService.getCourseByCourseId(this.courseId).subscribe({
       next:(data:any)=>{
@@ -49,8 +65,28 @@ export class AdminCoursesBatchesComponent implements OnInit{
     })
   }
 
+  isFieldInvalidForCreateBatchDetailsForm(fieldName: string): boolean {
+    const field = this.createBatchFrom.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  public createBatchDetailsFormSubmition() {
+    Object.keys(this.createBatchFrom.controls).forEach(key => {
+      const control = this.createBatchFrom.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
   public createNewBatch(){
     this.batchRequest.courseId = this.courseId;
+    this.createBatchFrom.markAllAsTouched();
+    if (this.createBatchFrom.valid )
     this.batchService.createNewBatch(this.batchRequest).subscribe({
       next:(data:any)=>{
         if(data.success){
@@ -109,5 +145,7 @@ export class AdminCoursesBatchesComponent implements OnInit{
       return true
     return false;
   }
+
+  
  
 }

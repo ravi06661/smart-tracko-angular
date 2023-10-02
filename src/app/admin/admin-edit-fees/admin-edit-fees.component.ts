@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Action } from 'igniteui-angular';
 import { Fees } from 'src/app/entity/fees';
@@ -17,13 +18,45 @@ export class AdminEditFeesComponent implements OnInit{
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   feesId:number=0;
   fees:Fees=new Fees();
-  constructor(private feesService:FeesService,private utilityService:UtilityServiceService,private activateRoute:ActivatedRoute,private router:Router){}
+  updateFeesForm:FormGroup
+  constructor(private feesService:FeesService,private utilityService:UtilityServiceService,private activateRoute:ActivatedRoute,private router:Router,private formBuilder:FormBuilder){
+    this.updateFeesForm = this.formBuilder.group({
+      fullName: ['', Validators.required],
+      email: ['', Validators.required],
+      mobile: ['', Validators.required],
+      courseName: ['', Validators.required],
+      finalFees: ['', Validators.required],
+      feesPaid: ['', Validators.required],
+      remainingFees: ['', Validators.required],
+    })
+  }
   ngOnInit(): void {
     this.feesId=this.activateRoute.snapshot.params[('feesId')];
     this.getFeesById();
   }
+
+  isFieldInvalidForUpdateFeesDetailsForm(fieldName: string): boolean {
+    const field = this.updateFeesForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  public updateFeesDetailsFormSubmition() {
+    Object.keys(this.updateFeesForm.controls).forEach(key => {
+      const control = this.updateFeesForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+ 
   
   public updateFees(){
+    this.updateFeesForm.markAllAsTouched();
+    if (this.updateFeesForm.valid )
     Swal.fire({
       title: 'Do you want to save the changes?',
       showDenyButton: true,

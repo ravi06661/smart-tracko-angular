@@ -6,5 +6,5 @@ export class CourseRequest {
 	public  sortDescription:string='';
     public  subjectIds:number[]=[]
     public  technologyStack:number =0;
-	public isStarterCourse:number=0;
+	public isStarterCourse!:boolean;
 }

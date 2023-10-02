@@ -8,7 +8,8 @@ import { SubjectService } from 'src/app/service/subject.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { Subject } from 'src/app/entity/subject';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { F } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-admin-courses',
@@ -30,9 +31,24 @@ export class AdminCoursesComponent implements OnInit {
   courseId:number = 0
   imageName = ''
   selectedSubjects:Subject[] = [];
-
+  addCourseForm:FormGroup
   constructor(private courseService:CourseServiceService,private techService:TechnologyStackService,
-    private subjectService:SubjectService,private utilityService:UtilityServiceService,private router:Router){
+    private subjectService:SubjectService,private utilityService:UtilityServiceService,private router:Router,private formBuilder:FormBuilder){
+      this.addCourseForm=this.formBuilder.group({
+        imageName: ['', Validators.required],
+        courseName: ['', Validators.required],
+        courseFees: ['', Validators.required],
+        duration: ['', Validators.required],
+        subjectOption: ['', Validators.required],
+        sortDescription: ['', Validators.required],
+        finialFees: ['', Validators.required],
+        isStarterCourse: ['', Validators.required],
+  
+      
+  
+       
+  
+      });
     }
 
 
@@ -55,7 +71,29 @@ export class AdminCoursesComponent implements OnInit {
     }
   }
 
+
+  isFieldInvalidForAddCourseDetailsForm(fieldName: string): boolean {
+    const field = this.addCourseForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  public courseDetailsFormSubmition() {
+    Object.keys(this.addCourseForm.controls).forEach(key => {
+      const control = this.addCourseForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
   public saveCourse(){
+    this.addCourseForm.markAllAsTouched();
+    if (this.addCourseForm.valid )
+
     this.courseService.saveCourse(this.courseRequest).subscribe({
       next:(data:any)=>{
         this.message = data.message
@@ -139,6 +177,19 @@ export class AdminCoursesComponent implements OnInit {
      this.course.subjects.push(subject);
     else
      this.course.subjects.splice(index, 1);
+  }
+
+  clearCoruse(){
+    this.addCourseForm=this.formBuilder.group({
+      imageName: ['', Validators.required],
+      courseName: ['', Validators.required],
+      courseFees: ['', Validators.required],
+      duration: ['', Validators.required],
+      subjectOption: ['', Validators.required],
+      sortDescription: ['', Validators.required],
+      finialFees: ['', Validators.required],
+      isStarterCourse: ['', Validators.required],
+    })
   }
 
 }
