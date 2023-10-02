@@ -2,7 +2,7 @@ import { Course } from "./course";
 
 export class StudentDetails {
 
-	public studentId: number = 0;
+	public studentId!: number;
 	public userId: string = '';
 	public fullName: string = '';
 	public mobile: string = '';

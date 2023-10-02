@@ -31,10 +31,6 @@ export class AdminCreateNewJobComponent implements OnInit{
       experienceRequired: ['', Validators.required],
       jobTitle: ['', Validators.required],
       jobDescription: ['', Validators.required],
-      imageName: ['', Validators.required],
-    
-
-     
 
     });
    }
@@ -61,7 +57,9 @@ export class AdminCreateNewJobComponent implements OnInit{
 
   createJob(){
     this.jobDetailsForm.markAllAsTouched();
-    if (this.jobDetailsForm.valid )
+    console.log(this.jobAlertRequest);
+    
+    if (this.jobDetailsForm.valid && this.imageName != '')
     this.jobAlertService.addJob(this.jobAlertRequest).subscribe(
       (data: any) => {
         if(this.jobAlertRequest.type=='JOB'){
@@ -124,9 +122,8 @@ export class AdminCreateNewJobComponent implements OnInit{
   }
  
   set(){
-    alert('hi')
     this.jobDetailsForm.setValue({
-      imageName:this.imageName // Set the value for the 'jobType' field
+      //imageName:this.imageName // Set the value for the 'jobType' field
     
     });
   }

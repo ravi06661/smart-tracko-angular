@@ -1,6 +1,6 @@
 export class NewsAndEventRequest {
     public  id:number=0;
-	public  shortDescriptoin:string='';
+	public  shortDescription:string='';
 	public  briefDescription:string='';
 	public  image:string='';
 	public  title:string='';

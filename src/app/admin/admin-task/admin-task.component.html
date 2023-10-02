@@ -4,7 +4,7 @@
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Tasks</h1>
             <button class="top_profile_sec_btn font-14 font-500" data-bs-toggle="modal"
-                data-bs-target="#exampleModal1">Create New</button>
+                data-bs-target="#exampleModal1" (click)="clearTaskForm()">Create New</button>
         </div>
 
        <app-profile-bar></app-profile-bar>
@@ -313,40 +313,44 @@
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Task Details</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="clearTaskForm()">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
 
-                <form action="">
+                <form [formGroup]="firstTaskForm">
                     <div class="row">
                         <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Task Name</label>
                             <div class="input_icon position-relative">
-                                <input type="text" id="" name="taskName" class="form-control input_text" [(ngModel)]="task.taskName"
+                                <input type="text" id="" name="taskName" formControlName="taskName" class="form-control input_text" [(ngModel)]="task.taskName"
                                     placeholder="Task Name..">
                             </div>
+                            <div *ngIf="isFieldInvalidForTaskForm('taskName')" class="text-danger">Task name is required</div>
                         </div>
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
-                            <select class="form-select" aria-label="Default select example" name="course"  (change)="getSubjects()" [(ngModel)]="task.course">
+                            <select class="form-select" aria-label="Default select example" formControlName="course" name="course"  (change)="getSubjects()" [(ngModel)]="task.course">
                                 <option  [ngValue]="obj" *ngFor="let obj of courses">{{obj.courseName}}</option>
                               </select>
+                              <div style="margin-top: -17px;" *ngIf="isFieldInvalidForTaskForm('course')" class="text-danger">Course is required</div>
                         </div>
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">Subject</label>
-                            <select class="form-select" aria-label="Default select example" name="subject"  [(ngModel)]="task.subject">
+                            <select class="form-select" aria-label="Default select example" formControlName="subject" name="subject"  [(ngModel)]="task.subject">
                               <option [ngValue]="obj" *ngFor="let obj of subjects">{{obj.subjectName}}</option>
                             </select>
+                            <div style="margin-top: -17px;"  *ngIf="isFieldInvalidForTaskForm('subject')" class="text-danger">Subject is required</div>
                           </div>
                           
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">File Attachments in Submission</label>
-                            <select class="form-select" aria-label="Default select example"  name="taskAttachment" [(ngModel)]="task.attachmentStatus">
+                            <select class="form-select" aria-label="Default select example" formControlName="taskAttachment" name="taskAttachment" [(ngModel)]="task.attachmentStatus">
                                 <option value="Required">Required</option>
                                 <option value="Optional">Optional</option>
                                 <option value="Not Allowed">Not Allowed</option>
                               </select>
+                            <div style="margin-top: -17px;"*ngIf="isFieldInvalidForTaskForm('taskAttachment')" class="text-danger">TaskAttachment is required</div>
                         </div>
                        
                     </div><!-- row -->

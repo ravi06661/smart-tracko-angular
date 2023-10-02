@@ -8,7 +8,7 @@ import { SubjectService } from 'src/app/service/subject.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { Subject } from 'src/app/entity/subject';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-courses',
@@ -31,8 +31,25 @@ export class AdminCoursesComponent implements OnInit {
   imageName = ''
   selectedSubjects:Subject[] = [];
 
-  constructor(private courseService:CourseServiceService,private techService:TechnologyStackService,
-    private subjectService:SubjectService,private utilityService:UtilityServiceService,private router:Router){
+  // addCourseForm : FormGroup;
+
+  constructor(private courseService:CourseServiceService,
+    private techService:TechnologyStackService,
+    private subjectService:SubjectService,
+    private utilityService:UtilityServiceService,
+    private router:Router,
+    private formbuilder:FormBuilder){
+
+      // this.addCourseForm = this.formbuilder.group({
+      //   courseName : ['',Validators.required],
+      //   courseFees : ['',Validators.required],
+      //   duration : ['',Validators.required],
+      //   subjectIds : ['',Validators.required],
+      //   sortDescription : ['',Validators.required],
+      //   isStarterCourse : ['',Validators.required],
+      //   image : ['',Validators.required]
+      // })
+
     }
 
 

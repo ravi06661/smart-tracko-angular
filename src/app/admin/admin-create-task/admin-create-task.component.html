@@ -59,13 +59,13 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb_24">
+                        <!-- <div class="col-md-4 mb_24">
                             <label for="" class="mb_6 font-17 font-500 secondary">Duration</label>
                             <div class="input_icon position-relative">
                                 <input type="text" id="" name="" class="form-control input_text gray-input-bg enabled_inp"
                                     placeholder="Mern Stack" disabled="disabled">
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="col-md-4 mb_24">
                             <label for="" class="mb_6 font-17 font-500 secondary">File Attachments in
@@ -159,9 +159,8 @@
                             <div class="profile_change d-flex justify-content-center align-items-center mb-4 position-relative mx-auto">
 
                                 <div class="profile_edits">
-                                  <div class="profile_buttons d-flex align-items-end">
-                                    
-                                    <i class="fi fi-rr-trash light font-24 line-height-0 hover-delete-icon" data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
+                                  <div class="profile_buttons d-flex align-items-end"> 
+                                    <i class="fi fi-rr-trash light font-24 line-height-0 hover-delete-icon" (click)="deleteImage(i)"></i>
                                   </div>
                                 </div>
                                 
@@ -174,30 +173,39 @@
 
 
                         <div class="col-lg-4 col-md-4">
-                            <form class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
-                                <input type="file" name="image" (change)="addImageFile($event)" value="image" class="d-none" id="image">
+                            <form [formGroup]="secondTaskForm" >
+                                <div class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
+                                <input type="file" name="image" (change)="addImageFile($event)" value="image" formControlName="image" class="form-control d-none" id="image">
                                 <label for="image" class="font-17 font-500 d-flex">
                                   <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                                   Add Media</label>
-                              </form>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="" class="mb_6 font-17 font-500 secondary">Add Video-URL</label>
-                            <div class="input_icon position-relative">
-                                <input type="text" id="videoUrl" name="videoUrl" class="form-control input_text gray-input-bg enabled_inp"
-                                    placeholder="VIDEO-URL"  [(ngModel)]="taskQuestion.videoUrl">
-                            </div>
+                                </div>
+                                <div  *ngIf="isFieldInvalidForTaskForm('image')" class="text-danger">image is
+                                    required.</div>
+                            </form>
                         </div>
                     </div>
 
+                    <form [formGroup]="secondTaskForm">
+                    <div class="col-md-4 mt-5">
+                        <label for="" class="mb_6 font-17 font-500 secondary">Add Video-URL</label>
+                        <div class="input_icon position-relative">
+                            <input type="text" id="videoUrl" formControlName="videoUrl" name="videoUrl" class="form-control input_text gray-input-bg enabled_inp"
+                                placeholder="VIDEO-URL"  [(ngModel)]="taskQuestion.videoUrl">
+                        </div>
+                        <div  *ngIf="isFieldInvalidForTaskForm('videoUrl')" class="text-danger">Video url is
+                            required.</div>
+                    </div> 
 
                     <div class="que-hint">
                         <h4 class="sub-heading font-17 font-500 secondary">Question, Hints and Instructions</h4>
                         <!-- <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
                             placeholder="Start Typing....."></textarea> -->
-                            <ckeditor  [editor]="Editor" name="question" [(ngModel)]="taskQuestion.question"> </ckeditor>
+                            <ckeditor  [editor]="Editor" name="question" formControlName="question" [(ngModel)]="taskQuestion.question"> </ckeditor>
+                            <div  *ngIf="isFieldInvalidForTaskForm('question')" class="text-danger">Question is
+                                required.</div>
                     </div>
-
+                    </form>
                     <div class="edit-delete-que mt-5">
                         <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"
                             data-bs-toggle="modal" data-bs-target="#discard-changes-modal"> Discard

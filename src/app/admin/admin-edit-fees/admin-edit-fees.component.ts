@@ -24,6 +24,7 @@ export class AdminEditFeesComponent implements OnInit{
   }
   
   public updateFees(){
+    
     Swal.fire({
       title: 'Do you want to save the changes?',
       showDenyButton: true,
@@ -33,7 +34,7 @@ export class AdminEditFeesComponent implements OnInit{
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-
+        this.fees.remainingFees = this.fees.finalFees - this.fees.feesPaid;
         this.feesService.updateFeesDetalis(this.fees).subscribe({
           next:(res:any)=>{
             

@@ -33,6 +33,11 @@ export class AdminJobAlertComponent implements OnInit {
   length:number=0
   joblength:number=0
   jobId:number=0
+  
+  showFullMessage = false;
+  numberOfJob = 0;
+
+
   constructor(private jobAlertService: JobAlertService, private technologyStackService: TechnologyStackService, private router: Router,private utilityService:UtilityServiceService) { }
 
   ngOnInit() {
@@ -142,6 +147,13 @@ export class AdminJobAlertComponent implements OnInit {
         
       }
     )
+  }
+
+
+  toggleShowMore(num:number,jobId:number) {
+    this.jobId = jobId
+    this.numberOfJob = num;
+    this.showFullMessage = !this.showFullMessage;
   }
  
 }

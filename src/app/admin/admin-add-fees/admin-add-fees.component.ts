@@ -30,7 +30,7 @@ export class AdminAddFeesComponent implements OnInit {
       mobile: ['', Validators.required],
       course: ['', Validators.required],
       courseFees: ['', Validators.required],
-      finialFees: ['', Validators.required],
+      finalFees: ['', Validators.required],
       date: ['', Validators.required],
 
     

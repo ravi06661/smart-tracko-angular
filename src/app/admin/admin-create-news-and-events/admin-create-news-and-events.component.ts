@@ -15,18 +15,20 @@ export class AdminCreateNewsAndEventsComponent implements OnInit{
 
    newRequest:NewsAndEventRequest=new NewsAndEventRequest();
    newsAndEventForm: FormGroup ;
+
+   imagePreview: string = '';
+   imageName: string = '';
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
   }
+
   constructor (private newsEventService:NewsEventServiceService,private utilityService:UtilityServiceService,private router:Router,private formBuilder: FormBuilder)  {
     this.newsAndEventForm = this.formBuilder.group({
       title: ['', Validators.required],
       shortDesc: ['', Validators.required],
       briefDesc: ['', Validators.required],
-      attachment: ['', Validators.required],
-
-     
-
+      image: ['', Validators.required],
     });
   }
 
@@ -101,30 +103,55 @@ export class AdminCreateNewsAndEventsComponent implements OnInit{
 
   imageSrc: any = null;  // Initialize with null
 
-  loadFile(event: any) {
-    const file = event.target.files[0];
-    if (file) {
+  // loadFile(event: any) {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       this.newRequest.fileName=e.target.result;
+  //       this.imageSrc = this.newRequest.fileName;
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
+
+  // addImage(event: any) {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e: any) => {
+  //       this.newRequest.fileName=event.target.files[0];
+  //       this.imageSrc=this.newRequest.fileName
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
+
+  public addImage(event: any) {
+    this.newRequest.fileName=event.target.files[0];
+
+    const selectedFile = event.target.files[0];
+    
+    if (selectedFile) {
       const reader = new FileReader();
+
       reader.onload = (e: any) => {
-        this.newRequest.fileName=e.target.result;
-        this.imageSrc = this.newRequest.fileName;
+        this.imagePreview = e.target.result;
+        this.imageName = selectedFile.name;
       };
-      reader.readAsDataURL(file);
+
+      reader.readAsDataURL(selectedFile);
+    } else {
+      this.imagePreview = '';
+      this.imageName = '';
     }
   }
 
-  addImage(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.newRequest.fileName=event.target.files[0];
-        this.imageSrc=this.newRequest.fileName
-      };
-      reader.readAsDataURL(file);
-    }
+  public removeImage(){
+    this.imagePreview = '';
+    this.imageName = '';
+    this.newRequest.fileName = '';
   }
-
 
   
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Course } from 'src/app/entity/course';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
@@ -28,17 +29,50 @@ export class AdminTaskComponent {
   totalSubmitted = 0;
   reveiwed = 0;
   unReveiwed = 0;
+
+  firstTaskForm :FormGroup;
+
+
   constructor(private subjectService: SubjectService,
     private courseService: CourseServiceService,
     private taskService: TaskServiceService,
     private router: Router,
-    private utilityService: UtilityServiceService) { }
+    private utilityService: UtilityServiceService,
+    private formBuilder:FormBuilder) { 
+
+      this.firstTaskForm = this.formBuilder.group({
+        taskName : ['',Validators.required],
+        course : ['',Validators.required],
+        subject : ['',Validators.required],
+        taskAttachment : ['',Validators.required]
+      })
+    }
+
   ngOnInit() {
     this.getCourses();
     this.getAllSubmitedTasks()
     this.getAllSubmissionTaskStatus()
     this.getOverAllAssignmentTaskStatus()
   }
+
+  public isFieldInvalidForTaskForm(fieldName: string): boolean {
+    const field = this.firstTaskForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  public firstTaskFormControl() {
+    Object.keys(this.firstTaskForm.controls).forEach(key => {
+      const control = this.firstTaskForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
   public getCourses() {
 
     this.courseService.getAll().subscribe(
@@ -50,15 +84,18 @@ export class AdminTaskComponent {
   public getSubjects() {
     this.subjects = this.task.course.subjects
   }
-  submit() {
 
-    this.taskService.addTask(this.task).subscribe(
-      (data: any) => {
-        console.log(data);
-        this.router.navigate(['/admin/createtask/' + data.taskId])
-      }
-    )
-    // this.router.navigate(['/admin/createtask/'])
+  public submit() {
+    // this.firstTaskFormControl();
+    // if(this.firstTaskForm.valid){
+    //   this.taskService.addTask(this.task).subscribe(
+    //     (data: any) => {
+    //       console.log(data);
+    //       this.router.navigate(['/admin/createtask/' + data.taskId])
+    //     }
+    //   )
+    // }
+     this.router.navigate(['/admin/createtask/1056'])
   }
 
   public getAllSubmitedTasks() {
@@ -87,10 +124,25 @@ export class AdminTaskComponent {
     this.taskService.getOverAllAssignmentTaskStatus().subscribe(
        (data:any)=>{
         this.taskSubmissionStatus2 = data;
-        this.totalSubmitted = this.taskSubmissionStatus2.totalSubmitted
-        this.reveiwed = this.taskSubmissionStatus2.reveiwed
-        this.unReveiwed = this.taskSubmissionStatus2.unReveiwed
+        this.totalSubmitted =  this.calculatePercentage(this.submitedTasksList.length,this.taskSubmissionStatus.length) 
+        this.reveiwed = this.calculatePercentage(this.taskSubmissionStatus2.totalSubmitted,this.taskSubmissionStatus2.reveiwed) 
+        this.unReveiwed = this.calculatePercentage(this.taskSubmissionStatus2.totalSubmitted,this.taskSubmissionStatus2.unReveiwed) 
        }
     )
   }
+
+  public calculatePercentage(total:number,num:number){
+    return Math.floor(num/total*100);
+  }
+
+  public clearTaskForm(){
+    this.task = new TaskRequest();
+    this.firstTaskForm = this.formBuilder.group({
+      taskName : ['',Validators.required],
+      course : ['',Validators.required],
+      subject : ['',Validators.required],
+      taskAttachment : ['',Validators.required]
+    })
+  }
+
 }

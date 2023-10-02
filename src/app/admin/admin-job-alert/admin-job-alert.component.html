@@ -16,7 +16,7 @@
     <h3 class="Enrolled font-21 font-600 secondary position-relative">Internships</h3>
     <div class="row">
       <h3 class="Enrolled font-21 font-600 secondary" *ngIf="length==0">No Internships Found!!!!</h3>
-      <div class="col-md-3 bootstrap_cards" *ngFor="let obj of internshipJobs">
+      <div class="col-md-3 bootstrap_cards" *ngFor="let obj of internshipJobs;let i = index">
           <div class="internship_container">
             <div class="container_top  jobaleart_card">
               
@@ -44,7 +44,7 @@
               </div>
 
             </div>
-            <h4 class="Requirement_text font-13 font-400">Job jobDescription : {{obj.jobDescription}}</h4>
+            <h4 class="Requirement_text font-13 font-400">{{ showFullMessage && numberOfJob == (i+1) && jobId == obj.jobId ? obj.jobDescription : (obj.jobDescription | slice:0:50) }}<a class="read-color" (click)="toggleShowMore(i+1,obj.jobId)">{{ showFullMessage && numberOfJob == (i+1) && jobId == obj.jobId? '...read less' : ' read more...' }}</a></h4>
           </div>
 
       </div>
@@ -56,7 +56,7 @@
     <h3 class="Enrolled font-21 font-600 secondary position-relative">Jobs</h3>
     <div class="row">
       <h3 class="Enrolled font-21 font-600 secondary " *ngIf="joblength==0">No Jobs Found!!!!</h3>
-      <div class="col-md-3 bootstrap_cards" *ngFor="let obj of jobs">
+      <div class="col-md-3 bootstrap_cards" *ngFor="let obj of jobs;let i = index">
         <div class="internship_container">
           <div class="container_top d-flex align-items-center justify-content-between jobaleart_card">
             <i class="fi fi-ss-menu-dots-vertical meat-dot  text_gray" id="meat_dot" onclick="meat_dot(this)"></i>
@@ -78,7 +78,7 @@
             </div>
 
           </div>
-          <h4 class="Requirement_text font-13 font-400">Job jobDescription : {{obj.jobDescription}}</h4>
+          <h4 class="Requirement_text font-13 font-400">{{ showFullMessage && numberOfJob == (i+1) && jobId == obj.jobId ? obj.jobDescription : (obj.jobDescription | slice:0:50) }}<a class="read-color" (click)="toggleShowMore(i+1,obj.jobId)">{{ showFullMessage && numberOfJob == (i+1) && jobId == obj.jobId? '...read less' : ' read more...' }}</a></h4>
         </div>
     </div>
 

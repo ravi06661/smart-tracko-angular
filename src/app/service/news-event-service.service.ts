@@ -45,7 +45,7 @@ export class NewsEventServiceService  {
     var formData = new FormData();
     console.log(data);
     
-    formData.append('shortDescriptoin', data.shortDescriptoin)
+    formData.append('shortDescriptoin', data.shortDescription)
     formData.append('briefDescription', data.briefDescription)
     formData.append('title', data.title)
     formData.append('fileName', data.fileName)
@@ -54,10 +54,12 @@ export class NewsEventServiceService  {
   }
 
   public updateNewsAndEvent(data:NewsAndEventRequest){
+
+    
     var formData = new FormData();
     console.log(data);
-    
-    formData.append('shortDescriptoin', data.shortDescriptoin)
+    formData.append('id',data.id.toString())
+    formData.append('shortDescriptoin', data.shortDescription)
     formData.append('briefDescription', data.briefDescription)
     formData.append('title', data.title)
     formData.append('fileName', data.fileName)
