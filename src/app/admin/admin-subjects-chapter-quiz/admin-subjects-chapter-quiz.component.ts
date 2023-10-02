@@ -5,6 +5,7 @@ import { QuestionServiceService } from 'src/app/service/question-service.service
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MyUploadAdapter } from 'src/app/entity/my-upload-adapter';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-admin-subjects-chapter-quiz',
   templateUrl: './admin-subjects-chapter-quiz.component.html',
@@ -21,19 +22,34 @@ export class AdminSubjectsChapterQuizComponent {
   private editorInstance: any;
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
-  constructor(private questionService: QuestionServiceService, private route: ActivatedRoute, private router: Router, private utilityService: UtilityServiceService) {
+  submissionForm: FormGroup
+
+  constructor(private questionService: QuestionServiceService, private route: ActivatedRoute, private router: Router, private utilityService: UtilityServiceService, private formBuilder: FormBuilder) {
+    this.submissionForm = this.formBuilder.group({
+      correctOption: ['', Validators.required],
+      option4: ['', Validators.required],
+      option3: ['', Validators.required],
+      option2: ['', Validators.required],
+      option1: ['', Validators.required],
+      questionContent: ['', Validators.required],
+      file: ['', Validators.required]
+    });
   }
   ngOnInit() {
     this.id = this.route.snapshot.params[('id')];
     this.getAllQuestions();
   }
   public addQuestion() {
-    this.questionService.addQuestion(this.question, this.id).subscribe(
-      (data) => {
-        this.question = new ChapterQuizeQuestion();
-        this.message = 'success..';
-      }
-    )
+    if (this.submissionForm.invalid) {
+      this.submissionFormFun()
+    } else {
+      this.questionService.addQuestion(this.question, this.id).subscribe(
+        (data) => {
+          this.question = new ChapterQuizeQuestion();
+          this.message = 'success..';
+        }
+      )
+    }
   }
   handleImageInput(event: any) {
     this.question.questionImage = event.target.files[0];
@@ -50,7 +66,7 @@ export class AdminSubjectsChapterQuizComponent {
   }
   public deleteQuestion() {
     this.questionService.deleteQuestionById(this.questionId).subscribe(
-      (data) => {        
+      (data) => {
       }, (error) => {
         this.questionId = 0;
         this.getAllQuestions();
@@ -78,7 +94,7 @@ export class AdminSubjectsChapterQuizComponent {
       }
     )
   }
-  public cancel() {    
+  public cancel() {
     this.question = new ChapterQuizeQuestion();
   }
   reload() {
@@ -87,7 +103,34 @@ export class AdminSubjectsChapterQuizComponent {
     this.message = ''
   }
 
-  public setChapterTestTimer(){
+  public setChapterTestTimer() {
 
+  }
+  public clearFormSubmission() {
+    this.submissionForm = this.formBuilder.group({
+      correctOption: ['', Validators.required],
+      option4: ['', Validators.required],
+      option3: ['', Validators.required],
+      option2: ['', Validators.required],
+      option1: ['', Validators.required],
+      questionContent: ['', Validators.required],
+      file: ['', Validators.required]
+    });
+  }
+  public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
+    const field = this.submissionForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+  public submissionFormFun() {
+    Object.keys(this.submissionForm.controls).forEach(key => {
+      const control = this.submissionForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 }

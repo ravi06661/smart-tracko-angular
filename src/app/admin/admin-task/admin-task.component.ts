@@ -28,6 +28,7 @@ export class AdminTaskComponent {
   totalSubmitted = 0;
   reveiwed = 0;
   unReveiwed = 0;
+  message: string = ''
   constructor(private subjectService: SubjectService,
     private courseService: CourseServiceService,
     private taskService: TaskServiceService,
@@ -83,14 +84,35 @@ export class AdminTaskComponent {
       }
     )
   }
-  public getOverAllAssignmentTaskStatus(){
+  public getOverAllAssignmentTaskStatus() {
     this.taskService.getOverAllAssignmentTaskStatus().subscribe(
-       (data:any)=>{
+      (data: any) => {
         this.taskSubmissionStatus2 = data;
-        this.totalSubmitted = this.taskSubmissionStatus2.totalSubmitted
-        this.reveiwed = this.taskSubmissionStatus2.reveiwed
-        this.unReveiwed = this.taskSubmissionStatus2.unReveiwed
-       }
+        let count = 0;
+        let arr: number[] = [];
+        this.submitedTasksList.forEach(obj => {
+          if (!arr.find(id => id === obj.taskId)) {
+            arr.push(obj.taskId);
+            count += 1;
+          }
+        });
+       this.totalSubmitted =count;
+        this.totalSubmitted = this.calculatePercentages(this.totalSubmitted,this.taskSubmissionStatus.length)
+        this.reveiwed = this.calculatePercentages( this.taskSubmissionStatus2.reveiwed,this.totalSubmitted)
+        this.unReveiwed = this.calculatePercentages( this.taskSubmissionStatus2.unReveiwed,this.totalSubmitted)
+      }
     )
+  }
+
+  calculatePercentages(num1: number, num2: number) {
+    let per: any;
+   if(num1<0)
+   {num1=0
+   }
+   if(num2<0)
+   num2=0
+
+    per = Math.floor((num1 / num2) * 100);
+    return per;
   }
 }

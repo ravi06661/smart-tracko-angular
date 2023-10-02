@@ -4,13 +4,14 @@ import { ChapterContent } from 'src/app/entity/chapter-content';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-admin-subjects-topic-test',
   templateUrl: './admin-subjects-topic-test.component.html',
   styleUrls: ['./admin-subjects-topic-test.component.scss']
 })
 export class AdminSubjectsTopicTestComponent {
-  
+
   questionId: number = 0;
   chapter: ChapterContent[] = []
   chapterId: number = 0;
@@ -19,12 +20,18 @@ export class AdminSubjectsTopicTestComponent {
   erroreMessage: string = ''
   deleteContentId = 0;
   chapterName: string = ''
-  
+
   public Editor = ClassicEditor;
   static images: File[] = []
   private editorInstance: any;
-
-  constructor(private chapterService: ChapterServiceService, private route: ActivatedRoute, private questionService: QuestionServiceService) { }
+  submissionForm: FormGroup
+  constructor(private chapterService: ChapterServiceService, private route: ActivatedRoute, private questionService: QuestionServiceService, private formBuilder: FormBuilder) {
+    this.submissionForm = this.formBuilder.group({
+      content: ['', Validators.required],
+      subTitle: ['', Validators.required],
+      title: ['', Validators.required]
+    });
+  }
   ngOnInit() {
     this.getChapter();
   }
@@ -40,17 +47,22 @@ export class AdminSubjectsTopicTestComponent {
   }
   //add chapter content
   public submit() {
-    this.chapterService.addChapterContent(this.chapterContent, this.chapterId).subscribe(
-      (data) => {
-        this.erroreMessage = 'Success'
-        this.chapterContent = new ChapterContent();
-        this.editorInstance =''
-        this.getChapter();
-      },
-      (error) => {
-        this.erroreMessage = "error occure please submit again.."
-      }
-    )
+    if (this.submissionForm.invalid) {
+      this.submissionFormFun()
+      return;
+    } else {
+      this.chapterService.addChapterContent(this.chapterContent, this.chapterId).subscribe(
+        (data) => {
+          this.erroreMessage = 'Success'
+          this.chapterContent = new ChapterContent();
+          this.editorInstance = ''
+          this.getChapter();
+        },
+        (error) => {
+          this.erroreMessage = "error occure please submit again.."
+        }
+      )
+    }
   }
   public clearForm() {
     this.erroreMessage = ''
@@ -100,5 +112,30 @@ export class AdminSubjectsTopicTestComponent {
 
   onEditorReady(eventData: any) {
     this.editorInstance = eventData;
+  }
+
+  public clearFormSubmission() {
+    this.submissionForm = this.formBuilder.group({
+      content: ['', Validators.required],
+      subTitle: ['', Validators.required],
+      title: ['', Validators.required]
+
+    });
+  }
+  public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
+    const field = this.submissionForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+  public submissionFormFun() {
+    Object.keys(this.submissionForm.controls).forEach(key => {
+      const control = this.submissionForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 }

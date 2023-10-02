@@ -180,8 +180,8 @@
             <div class="modal-body">
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                        id="exampleModalLabel1">Add Course</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reloadMessage()" (click)="clearForm()">
+                        id="exampleModalLabel1">Add Subject</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reloadMessage()" (click)="clearFormSubmission()">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
@@ -204,23 +204,23 @@
                                     <option *ngFor="let image of techImages" [ngValue]="image.id">{{image.technologyName}}</option>
                                 </select>
                         </div> -->
-                        <form [formGroup]="submissionForm">
+                       
                             <div class="form-group">
                               <div class="col-md-12 mb_18">
                                 <h6 class="mb-4 font-15 font-500 secondary">Selected Image :- {{ imageName }}</h6>
                                 <div class="all-course-images d-flex flex-wrap">
-                                  <div class="add-course-img" *ngFor="let image of techImages">
-                                    <img [src]="techUrl + image.imageName" alt="" class="form-control" formControlName="imageName"
-                                         (click)="subjectData.imageId = image.id; imageName = image.technologyName">
+                                  <div class="add-course-img" *ngFor="let image of techImages" >
+                                    <img [src]="techUrl + image.imageName" alt="" class="form-control"
+                                         (click)="subjectData.imageId = image.id; imageName = image.technologyName" >
                                   </div>
                                 </div>
-                                <div *ngIf="isFieldInvalidForSubmissionForm('imageName')" class="text-danger">
+                                <div class="text-danger" *ngIf="imageName==''">
                                   Image Name is required.
                                 </div>
                               </div>
                             </div>
-                         
-            
+                        
+                            <form [formGroup]="subjectSubmissionForm">
                         <div class="form-group">
                             <div class="col-md-12 mb_18">
                                 <label for="" class="mb_6 font-15 font-500 secondary">Subject Name</label>
@@ -241,11 +241,11 @@
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                         aria-label="Close" (click)="reloadMessage() ">Cancel</button>
                     <a routerLink="/admin/subject">
-                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="saveSubject()">Save Subject</button>
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="saveSubject()" >Save Subject</button>
                     </a>
                   
                 </div>
-                <h6 *ngIf="message!==null">{{message}}</h6>
+                <h6 *ngIf="message!==null" style="color: red;">{{message}}</h6>
             </div>
         </div>
     </div>
