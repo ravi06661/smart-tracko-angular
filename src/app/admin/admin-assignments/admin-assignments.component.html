@@ -4,7 +4,7 @@
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Assignments</h1>
             <button class="top_profile_sec_btn font-14 font-500" data-bs-toggle="modal"
-                data-bs-target="#create_assignment_modal">Create New</button>
+                data-bs-target="#create_assignment_modal" (click)="clearFormSubmission()">Create New</button>
         </div>
 
         <app-profile-bar></app-profile-bar>
@@ -14,71 +14,80 @@
 
     <div class="scroll_dashboard">
 
-        <div class="row" >
+        <div class="row">
             <div class="col-md-6">
                 <div class="assignment-stats">
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Stats</h3>
                     <div class="assignment-stats-area">
                         <div class="assignment-chart">
                             <div class="Present tool_tip" [style.width]="totalSubmitted+'%'">
-                              <span class="tooltiptext">
-                                <span class="tip-box" style="background: #8079FF;"></span>Submited {{totalSubmitted}}%
-                            </span>
+                                <span class="tooltiptext">
+                                    <span class="tip-box" style="background: #8079FF;"></span>Submited
+                                    {{totalSubmitted}}%
+                                </span>
                             </div>
                             <div class="Absent tool_tip_absent" [style.width]="reveiwed+'%'">
-                              <span class="tooltiptext_absent">
-                                <span class="tip-box" style="background: #49CF9F;"></span>Reviewed {{reveiwed}}%
-                            </span>
+                                <span class="tooltiptext_absent">
+                                    <span class="tip-box" style="background: #49CF9F;"></span>Reviewed {{reveiwed}}%
+                                </span>
                             </div>
                             <div class="Leave tool_tip_leave" [style.width]="unReveiwed+'%'">
-                              <span class="tooltiptext_leave">
-                                <span class="tip-box" style="background: #F6C453;"></span>Unreviewed {{unReveiwed}}%
-                            </span>
+                                <span class="tooltiptext_leave">
+                                    <span class="tip-box" style="background: #F6C453;"></span>Unreviewed {{unReveiwed}}%
+                                </span>
                             </div>
                             <!-- <div class="our_due" [style.width]="presentWidth"></div> -->
-                          </div>
-                          <div class="chart-detail-bottom justify-content-center">
+                        </div>
+                        <div class="chart-detail-bottom justify-content-center">
                             <div class="submitted-value">
-                              <p>Submited</p>
-                              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{totalSubmitted}}%</h2>
+                                <p>Submited</p>
+                                <h2 class="font-14 font-600 text_dark"> <span
+                                        class="purple-small-box"></span>{{totalSubmitted}}%</h2>
                             </div>
                             <div class="pending-value">
-                              <p>Reviewed</p>
-                              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{reveiwed}}%</h2>
+                                <p>Reviewed</p>
+                                <h2 class="font-14 font-600 text_dark"> <span
+                                        class="purple-small-box"></span>{{reveiwed}}%</h2>
                             </div>
                             <div class="approve-value">
-                              <p>Unreviewed</p>
-                              <h2 class="font-14 font-600 text_dark"> <span class="purple-small-box"></span>{{unReveiwed}}%</h2>
+                                <p>Unreviewed</p>
+                                <h2 class="font-14 font-600 text_dark"> <span
+                                        class="purple-small-box"></span>{{unReveiwed}}%</h2>
                             </div>
-                          </div>
+                        </div>
                     </div>
                 </div>
                 <div class="attendance_dropdown d-flex justify-content-between align-items-center">
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Active Assignments</h3>
                     <div class="right-side-dropdown-btn d-flex">
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Course
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"  *ngFor="let course of courses"  (click)="courseFilterByCourseIdAndSubjectId(course,0)" >{{course.courseName}}</a></li>
+                                <li><a class="dropdown-item" *ngFor="let course of courses"
+                                        (click)="courseFilterByCourseIdAndSubjectId(course,0)">{{course.courseName}}</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Subject
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" *ngFor="let subject of subjects"  (click)="selectCourseSubject(subject)"  (click)="courseFilterByCourseIdAndSubjectId(course,subjectId)"> {{subject.subjectName}}</a></li>
+                                <li><a class="dropdown-item" *ngFor="let subject of subjects"
+                                        (click)="selectCourseSubject(subject)"
+                                        (click)="courseFilterByCourseIdAndSubjectId(course,subjectId)">
+                                        {{subject.subjectName}}</a></li>
                                 <!-- <li><a class="dropdown-item" href="#">February</a></li>
                                 <li><a class="dropdown-item" href="#">March</a></li> -->
                             </ul>
                         </div>
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Status
                             </a>
                             <ul class="dropdown-menu">
@@ -125,8 +134,8 @@
                     </h3>
                     <div class="right-side-dropdown-btn d-flex">
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Course
                             </a>
                             <ul class="dropdown-menu">
@@ -145,8 +154,8 @@
                             </ul>
                         </div>
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Subject
                             </a>
                             <ul class="dropdown-menu">
@@ -165,8 +174,8 @@
                             </ul>
                         </div>
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Status
                             </a>
                             <ul class="dropdown-menu">
@@ -200,18 +209,20 @@
                             <tr *ngFor="let obj of submitedAssignments">
                                 <td>
                                     <a class="d-flex align-items-center gap_5" (click)="pageRanderWithObj(obj)">
-                                     <div class="person_image">
-                                         <img [src]="IMG_URL+obj.student.profilePic" alt=""
-                                             class="img-fluid">
-                                     </div>
-                                     <h5 class="font-13 font-500 mb-0 text_dark">{{obj.student.fullName}}<br>
-                                         <p class="text_gray font-13 font-400 mb-0">{{obj.student.applyForCourse}}</p>
-                                     </h5>
+                                        <div class="person_image">
+                                            <img [src]="IMG_URL+obj.student.profilePic" alt="" class="img-fluid">
+                                        </div>
+                                        <h5 class="font-13 font-500 mb-0 text_dark">{{obj.student.fullName}}<br>
+                                            <p class="text_gray font-13 font-400 mb-0">{{obj.student.applyForCourse}}
+                                            </p>
+                                        </h5>
                                     </a>
-                                 </td>
+                                </td>
                                 <td>Hello World! In Java</td>
                                 <td>{{obj.submissionDate | date:'short'}}</td>
-                                <td [ngClass]="{'active_txt_blue':(obj.status=='Reviewing')||(obj.status=='Unreviewed'),'active_txt_orange':obj.status=='Rejected','active_txt_green':obj.status=='Accepted'}">{{obj.status}}</td>
+                                <td
+                                    [ngClass]="{'active_txt_blue':(obj.status=='Reviewing')||(obj.status=='Unreviewed'),'active_txt_orange':obj.status=='Rejected','active_txt_green':obj.status=='Accepted'}">
+                                    {{obj.status}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -244,40 +255,65 @@
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Assignment Details</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="clearFormSubmission()">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
 
-                <form action="">
+                <form [formGroup]="submissionForm">
                     <div class="row">
-                        <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Assignment
-                                Title</label>
-                            <div class="input_icon position-relative">
-                                <input type="text" id="title" name="title" class="form-control input_text"
-                                    placeholder="Enter Assingnment Title" [(ngModel)]="assignmentRequest.title">
-                            </div>
-                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12 mb_18">
+                                <label for="" class="mb_6 font-15 font-500 secondary">Assignment
+                                    Title</label>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="title" name="title" class="form-control input_text"
+                                        placeholder="Enter Assingnment Title" [(ngModel)]="assignmentRequest.title"
+                                        formControlName="title">
 
-                        <div class="col-md-4 mb_24">
-                            <div class="input_icon position-relative">
-                            <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
-                            <select class="form-select" name="courseId" [(ngModel)]="assignmentRequest.courseId" aria-label="Default select example" (change)="getSubject(assignmentRequest.courseId)">
-                                <option selected="" [value]="course.courseId"  *ngFor="let course of courses">{{course.courseName}}</option>
-                              </select>
+                                </div>
+                             
                             </div>
+                            <div *ngIf=" isFieldInvalidForSubmissionForm('title')" class="text-danger">
+                                title is required.</div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-4 mb_24">
+                                <div class="input_icon position-relative">
+                                    <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
+                                    <select class="form-select form-control " name="courseId"
+                                        [(ngModel)]="assignmentRequest.courseId" aria-label="Default select example"
+                                        (change)="getSubject(assignmentRequest.courseId)" formControlName="courseId">
+                                        <option selected="" [value]="course.courseId" *ngFor="let course of courses">
+                                            {{course.courseName}}</option>
+                                    </select>
 
-                        <div class="col-md-4 mb_24">
-                            <div class="input_icon position-relative">
-                            <label for="" class="mb_6 font-17 font-500 secondary">Subject</label>
-                            <select class="form-select" name="subjectId" [(ngModel)]="assignmentRequest.subjectId" aria-label="Default select example">
-                                <option selected="" [value]="subject.subjectId" *ngFor="let subject of subjects" >{{subject.subjectName}}</option>
-                              </select>
+                                </div>
+                              
+
                             </div>
+                            <div *ngIf=" isFieldInvalidForSubmissionForm('courseId')" class="text-danger">
+                                course is required.</div>
                         </div>
+                        <div class="form-group">
+                            <div class="col-md-4 mb_24">
+                                <div class="input_icon position-relative">
+                                    <label for="" class="mb_6 font-17 font-500 secondary">Subject</label>
+                                    <select class="form-select   form-control" name="subjectId"
+                                        [(ngModel)]="assignmentRequest.subjectId" aria-label="Default select example"
+                                        formControlName="subjectId">
+                                        <option selected="" [value]="subject.subjectId"
+                                            *ngFor="let subject of subjects">{{subject.subjectName}}</option>
+                                    </select>
 
+                                </div>
+                               
+
+                            </div>
+                            <div *ngIf=" isFieldInvalidForSubmissionForm('subjectId')" class="text-danger">
+                                subject is required.</div>
+                        </div>
                         <!-- <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Duration</label>
                             <div class="input_icon position-relative">
@@ -288,9 +324,8 @@
 
                     </div><!-- row -->
                 </form>
-
-                <a
-                    class="apply_modal_buttons d-flex justify-content-center align-items-center mt-2">
+                  <h6 *ngIf="message!=''" style="color: red;">{{message}}</h6>
+                <a class="apply_modal_buttons d-flex justify-content-center align-items-center mt-2">
                     <button type="button" class="apply_modal_btn" (click)="createAssingment()">Create</button>
                 </a>
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { an } from '@fullcalendar/core/internal-common';
 import { log } from 'console';
 import { Chapter } from 'src/app/entity/chapter';
@@ -9,6 +10,7 @@ import { SubjectResponse } from 'src/app/payload/subject-response';
 import { SubjectService } from 'src/app/service/subject.service';
 import { TechnologyStackService } from 'src/app/service/technology-stack-service.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-subjects',
@@ -30,16 +32,20 @@ export class AdminSubjectsComponent implements OnInit {
   subject: Subject = new Subject();
   subjectId: number = 0;
   imageName = ''
-  submissionForm: FormGroup;
+  subjectSubmissionForm: FormGroup;
+
+  closeSubmiteButton: boolean = false
   constructor(private techService: TechnologyStackService,
     private subjectService: SubjectService,
     private utilityService: UtilityServiceService
-    , private formBuilder: FormBuilder) {
-      this.submissionForm = this.formBuilder.group({
-        imageName: ['', Validators.required],
-        subjectName: ['', Validators.required]
-      });
-     }
+    , private formBuilder: FormBuilder,
+    private router: Router) {
+    this.subjectSubmissionForm = this.formBuilder.group({
+      subjectName: ['', Validators.required]
+    });
+
+
+  }
 
   ngOnInit(): void {
     this.techService.getAllTechnologyStack().subscribe({
@@ -60,21 +66,30 @@ export class AdminSubjectsComponent implements OnInit {
   }
 
   public saveSubject() {
-   if(this.submissionForm.invalid){
+    if (this.subjectSubmissionForm.invalid && this.imageName == '') {
       this.submissionFormFun()
       return;
-   }else{
-    this.subjectService.saveSubject(this.subjectData).subscribe({
-      next: (data: any) => {
-        this.message = 'Success.'
-        this.subjectData = {
-          imageId: 0,
-          subjectName: ''
-        };
-        this.getAllSubject();
-      }
-    })
-   }
+    } else {
+      this.subjectService.saveSubject(this.subjectData).subscribe(
+        {
+          next: (data: any) => {
+            this.clearFormSubmission()
+            this.subjectData = {
+              imageId: 0,
+              subjectName: ''
+            };
+            this.closeSubmiteButton = true
+            Swal.fire('Subject Added Successfully').then(e => {
+              this.router.navigate(['/admin/subject'])
+            })
+            this.getAllSubject()
+          },
+          error: (error) => {
+            this.message = error.error.message
+          }
+        }
+      )
+    }
   }
 
   public getSubjectById(id: number) {
@@ -110,22 +125,18 @@ export class AdminSubjectsComponent implements OnInit {
     )
   }
 
-
-  public clearForm() {
-    this.submissionForm = this.formBuilder.group({
-      imageName: ['', Validators.required],
+  public clearFormSubmission() {
+    this.subjectSubmissionForm = this.formBuilder.group({
       subjectName: ['', Validators.required]
     });
   }
   public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
-    const field = this.submissionForm.get(fieldName);
+    const field = this.subjectSubmissionForm.get(fieldName);
     return field ? field.invalid && field.touched : false;
   }
-
-  
   public submissionFormFun() {
-    Object.keys(this.submissionForm.controls).forEach(key => {
-      const control = this.submissionForm.get(key);
+    Object.keys(this.subjectSubmissionForm.controls).forEach(key => {
+      const control = this.subjectSubmissionForm.get(key);
       if (control) {
         control.markAsTouched();
       }

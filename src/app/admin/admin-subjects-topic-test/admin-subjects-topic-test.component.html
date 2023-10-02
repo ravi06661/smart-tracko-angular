@@ -106,29 +106,38 @@
                     </button>
                 </div>
 
-                <form action="">
-                    <div class="row">
-                       
-                        <div class="col-md-12 mb_18">
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="title" class="form-control input_text" placeholder="Title" [(ngModel)]="chapterContent.title">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="subTitle" class="form-control input_text" placeholder="Sub-Title"   [(ngModel)]="chapterContent.subTitle">
-                            </div>
-                        </div>
-                        <div class="col-md-12 mb_18">
-                            <label for="" class="mb_6 font-15 font-500 secondary">Enter Content Here..</label>
-                            <!-- <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="6" name="content" placeholder="Start Typing....."  [(ngModel)]="chapterContent.content" ></textarea> -->
-                            <ckeditor [editor]="Editor" (ready)="onEditorReady($event)" name="content" [(ngModel)]="chapterContent.content">
-                            </ckeditor>
-                           
-                        </div>
-                    <h6 *ngIf="erroreMessage!=null">{{erroreMessage}}</h6>
-                    </div><!-- row -->
-                </form>
+                <div class="row">
+                    <form [formGroup]="submissionForm">
+                     <div class="form-group">
+                         <div class="col-md-12 mb_18">
+                             <div class="input_icon position-relative">
+                                 <input type="text" id="" name="title" class="form-control input_text" placeholder="Title" [(ngModel)]="chapterContent.title" formControlName="title" >
+                             </div>
+                             <div *ngIf=" isFieldInvalidForSubmissionForm('title')" class="text-danger">
+                                 subjectName is required.</div>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                     <div class="col-md-12">
+                         <div class="input_icon position-relative">
+                             <input type="text" id="" name="subTitle" class="form-control input_text" placeholder="Sub-Title"   [(ngModel)]="chapterContent.subTitle" formControlName="subTitle">
+                         </div>
+                         <div *ngIf=" isFieldInvalidForSubmissionForm('subTitle')" class="text-danger">
+                             subTitle is required.</div>
+                     </div>
+                     </div>
+                     <div class="form-group">
+                     <div class="col-md-12 mb_18">
+                         <label for="" class="mb_6 font-15 font-500 secondary">Enter Content Here..</label>
+                         <ckeditor [editor]="Editor" (ready)="onEditorReady($event)" name="content" [(ngModel)]="chapterContent.content" formControlName="content">
+                         </ckeditor>
+                         <div *ngIf=" isFieldInvalidForSubmissionForm('content')" class="text-danger">
+                             content is required.</div>
+                     </div>
+                 </div>
+                 </form>
+                 <h6 *ngIf="erroreMessage!=null">{{erroreMessage}}</h6>
+                 </div><!-- row -->
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                         aria-label="Close" (click)="clearForm()">Cancel</button>
@@ -156,29 +165,41 @@
                             </button>
                         </div>
 
-                        <form action="">
-                            <form action="">
+                        
                                 <div class="row">
-                                   
-                                    <div class="col-md-12 mb_18">
-                                        <div class="input_icon position-relative">
-                                            <input type="text" id="" name="title" class="form-control input_text" placeholder="Title" [(ngModel)]="chapterContent.title">
+                                   <form [formGroup]="submissionForm">
+                                    <div class="form-group">
+                                        <div class="col-md-12 mb_18">
+                                            <div class="input_icon position-relative">
+                                                <input type="text" id="" name="title" class="form-control input_text" placeholder="Title" [(ngModel)]="chapterContent.title" formControlName="title" >
+                                            </div>
+                                            <div *ngIf=" isFieldInvalidForSubmissionForm('title')" class="text-danger">
+                                                subjectName is required.</div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
                                     <div class="col-md-12">
                                         <div class="input_icon position-relative">
-                                            <input type="text" id="" name="subTitle" class="form-control input_text" placeholder="Sub-Title"   [(ngModel)]="chapterContent.subTitle">
+                                            <input type="text" id="" name="subTitle" class="form-control input_text" placeholder="Sub-Title"   [(ngModel)]="chapterContent.subTitle" formControlName="subTitle">
                                         </div>
+                                        <div *ngIf=" isFieldInvalidForSubmissionForm('subTitle')" class="text-danger">
+                                            subTitle is required.</div>
                                     </div>
+                                    </div>
+                                    <div class="form-group">
                                     <div class="col-md-12 mb_18">
                                         <label for="" class="mb_6 font-15 font-500 secondary">Enter Content Here..</label>
-                                        <ckeditor [editor]="Editor" (ready)="onEditorReady($event)" name="content" [(ngModel)]="chapterContent.content">
+                                        <ckeditor [editor]="Editor" (ready)="onEditorReady($event)" name="content" [(ngModel)]="chapterContent.content" formControlName="content">
                                         </ckeditor>
+                                        <div *ngIf=" isFieldInvalidForSubmissionForm('content')" class="text-danger">
+                                            content is required.</div>
                                     </div>
+                                </div>
+                                </form>
                                 <h6 *ngIf="erroreMessage!=null">{{erroreMessage}}</h6>
                                 </div><!-- row -->
-                            </form>
-                        </form>
+                           
+                      
                         <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                             <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                                 aria-label="Close" (click)="cancelContent()">Cancel</button>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { isThisQuarter } from 'date-fns';
 import { Assignment } from 'src/app/entity/assignment';
@@ -32,7 +33,7 @@ export class AdminAssignmentsComponent implements OnInit {
   submitedAssignmentObj: AssignmentSubmission = new AssignmentSubmission
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
   taskSubmissionStatus2: SubmissionAssignmentTaskStatus = new SubmissionAssignmentTaskStatus
-
+  message:string=''
 
   totalSubmitted = 0;
   reveiwed = 0;
@@ -40,12 +41,19 @@ export class AdminAssignmentsComponent implements OnInit {
   courseId = 0;
   subjectId = 0;
 
-
+  submissionForm: FormGroup
   constructor(private courseService: CourseServiceService,
     private subjectService: SubjectService,
     private assignmentService: AssignmentServiceService,
     private router: Router,
-    private utilityService: UtilityServiceService) { }
+    private utilityService: UtilityServiceService,
+    private formBuilder: FormBuilder) {
+    this.submissionForm = this.formBuilder.group({
+      subjectId: ['', Validators.required],
+      courseId: ['', Validators.required],
+      title: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.getAllCourses();
@@ -78,11 +86,20 @@ export class AdminAssignmentsComponent implements OnInit {
   }
 
   public createAssingment() {
+   if(this.submissionForm.invalid){
+    this.submissionFormFun()
+    return;
+   }else{
     this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
       next: (data: any) => {
         this.router.navigate(['/admin/createassignments/' + data.id])
-      }
-    })
+      },
+      error: (error) => {
+         this.message = error.error.message
+       }
+    }
+    )
+   }
   }
 
   public getAllSubmitedAssignments() {
@@ -159,6 +176,31 @@ export class AdminAssignmentsComponent implements OnInit {
   }
   selectCourseSubject(subject: Subject) {
     this.subjectId = subject.subjectId
+  }
+
+  public clearFormSubmission() {
+    this.submissionForm = this.formBuilder.group({
+      subjectId: ['', Validators.required],
+      courseId: ['', Validators.required],
+      title: ['', Validators.required],
+    });
+  }
+
+  public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
+    const field = this.submissionForm.get(fieldName);  
+    return field ? field.invalid && field.touched : false;
+  }
+  public submissionFormFun() {
+    Object.keys(this.submissionForm.controls).forEach(key => {
+      const control = this.submissionForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 }
 
