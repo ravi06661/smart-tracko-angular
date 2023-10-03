@@ -32,28 +32,15 @@ export class AdminCoursesComponent implements OnInit {
   imageName = ''
   selectedSubjects:Subject[] = [];
 
-  // addCourseForm : FormGroup;
+  addCourseForm : FormGroup;
+  
 
   constructor(private courseService:CourseServiceService,
     private techService:TechnologyStackService,
     private subjectService:SubjectService,
     private utilityService:UtilityServiceService,
     private router:Router,
-    private formbuilder:FormBuilder){
-
-      // this.addCourseForm = this.formbuilder.group({
-      //   courseName : ['',Validators.required],
-      //   courseFees : ['',Validators.required],
-      //   duration : ['',Validators.required],
-      //   subjectIds : ['',Validators.required],
-      //   sortDescription : ['',Validators.required],
-      //   isStarterCourse : ['',Validators.required],
-      //   image : ['',Validators.required]
-      // })
-
-  addCourseForm:FormGroup
-  constructor(private courseService:CourseServiceService,private techService:TechnologyStackService,
-    private subjectService:SubjectService,private utilityService:UtilityServiceService,private router:Router,private formBuilder:FormBuilder){
+   private formBuilder:FormBuilder){
       this.addCourseForm=this.formBuilder.group({
         imageName: ['', Validators.required],
         courseName: ['', Validators.required],

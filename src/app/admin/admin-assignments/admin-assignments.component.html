@@ -271,15 +271,14 @@
                                     <input type="text" id="title" name="title" class="form-control input_text"
                                         placeholder="Enter Assingnment Title" [(ngModel)]="assignmentRequest.title"
                                         formControlName="title">
-
                                 </div>
-                             
+                                <div *ngIf=" isFieldInvalidForSubmissionForm('title')" class="text-danger">
+                                    title is required.</div>
                             </div>
-                            <div *ngIf=" isFieldInvalidForSubmissionForm('title')" class="text-danger">
-                                title is required.</div>
+                          
                         </div>
                         <div class="form-group">
-                            <div class="col-md-4 mb_24">
+                            <div class="col-md-12 mb_24">
                                 <div class="input_icon position-relative">
                                     <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
                                     <select class="form-select form-control " name="courseId"
@@ -288,16 +287,16 @@
                                         <option selected="" [value]="course.courseId" *ngFor="let course of courses">
                                             {{course.courseName}}</option>
                                     </select>
-
+                                    <div style="margin-top: -17px;" *ngIf=" isFieldInvalidForSubmissionForm('courseId')" class="text-danger">
+                                        course is required.</div>
                                 </div>
                               
 
                             </div>
-                            <div *ngIf=" isFieldInvalidForSubmissionForm('courseId')" class="text-danger">
-                                course is required.</div>
+                            
                         </div>
                         <div class="form-group">
-                            <div class="col-md-4 mb_24">
+                            <div class="col-md-12 mb_24">
                                 <div class="input_icon position-relative">
                                     <label for="" class="mb_6 font-17 font-500 secondary">Subject</label>
                                     <select class="form-select   form-control" name="subjectId"
@@ -306,13 +305,13 @@
                                         <option selected="" [value]="subject.subjectId"
                                             *ngFor="let subject of subjects">{{subject.subjectName}}</option>
                                     </select>
-
+                                    <div style="margin-top: -17px;" *ngIf=" isFieldInvalidForSubmissionForm('subjectId')" class="text-danger">
+                                        subject is required.</div>
                                 </div>
                                
 
                             </div>
-                            <div *ngIf=" isFieldInvalidForSubmissionForm('subjectId')" class="text-danger">
-                                subject is required.</div>
+                            
                         </div>
                         <!-- <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Duration</label>

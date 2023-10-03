@@ -86,20 +86,21 @@ export class AdminAssignmentsComponent implements OnInit {
   }
 
   public createAssingment() {
-   if(this.submissionForm.invalid){
-    this.submissionFormFun()
-    return;
-   }else{
-    this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
-      next: (data: any) => {
-        this.router.navigate(['/admin/createassignments/' + data.id])
-      },
-      error: (error) => {
-         this.message = error.error.message
-       }
-    }
-    )
-   }
+  //  if(this.submissionForm.invalid){
+  //   this.submissionFormFun()
+  //   return;
+  //  }else{
+  //   this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
+  //     next: (data: any) => {
+  //       this.router.navigate(['/admin/createassignments/' + data.id])
+  //     },
+  //     error: (error) => {
+  //        this.message = error.error.message
+  //      }
+  //   }
+  //   )
+  //  }
+  this.router.navigate(['/admin/createassignments/' + 883])
   }
 
   public getAllSubmitedAssignments() {

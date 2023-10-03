@@ -17,6 +17,11 @@ export class JobalertComponent {
   jobs: JobAlert[] = []
   totalInternJobs: number = 0
   totalJobs: number = 0
+
+  jobId:number=0
+  showFullMessage = false;
+  numberOfJob = 0;
+
   constructor(private jobAlertService: JobAlertService,private utilityService:UtilityServiceService) { }
   ngOnInit() { 
     this.getAllJobs(0, 8);
@@ -46,5 +51,11 @@ export class JobalertComponent {
 
   public pageChange1(event: any) {
     this.getAllInternJobs(event.pageIndex, event.pageSize);
+  }
+
+  toggleShowMore(num:number,jobId:number) {
+    this.jobId = jobId
+    this.numberOfJob = num;
+    this.showFullMessage = !this.showFullMessage;
   }
 }

@@ -86,16 +86,16 @@ export class AdminTaskComponent {
   }
 
   public submit() {
-    // this.firstTaskFormControl();
-    // if(this.firstTaskForm.valid){
-    //   this.taskService.addTask(this.task).subscribe(
-    //     (data: any) => {
-    //       console.log(data);
-    //       this.router.navigate(['/admin/createtask/' + data.taskId])
-    //     }
-    //   )
-    // }
-     this.router.navigate(['/admin/createtask/1056'])
+    this.firstTaskFormControl();
+    if(this.firstTaskForm.valid){
+      this.taskService.addTask(this.task).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.router.navigate(['/admin/createtask/' + data.taskId])
+        }
+      )
+    }
+    //  this.router.navigate(['/admin/createtask/1056'])
   }
 
   public getAllSubmitedTasks() {
@@ -144,21 +144,21 @@ export class AdminTaskComponent {
       taskAttachment : ['',Validators.required]
     })
   }
-        let count = 0;
-        let arr: number[] = [];
-        this.submitedTasksList.forEach(obj => {
-          if (!arr.find(id => id === obj.taskId)) {
-            arr.push(obj.taskId);
-            count += 1;
-          }
-        });
-       this.totalSubmitted =count;
-        this.totalSubmitted = this.calculatePercentages(this.totalSubmitted,this.taskSubmissionStatus.length)
-        this.reveiwed = this.calculatePercentages( this.taskSubmissionStatus2.reveiwed,this.totalSubmitted)
-        this.unReveiwed = this.calculatePercentages( this.taskSubmissionStatus2.unReveiwed,this.totalSubmitted)
-      }
-    )
-  }
+  //       let count = 0;
+  //       let arr: number[] = [];
+  //       this.submitedTasksList.forEach(obj => {
+  //         if (!arr.find(id => id === obj.taskId)) {
+  //           arr.push(obj.taskId);
+  //           count += 1;
+  //         }
+  //       });
+  //      this.totalSubmitted =count;
+  //       this.totalSubmitted = this.calculatePercentages(this.totalSubmitted,this.taskSubmissionStatus.length)
+  //       this.reveiwed = this.calculatePercentages( this.taskSubmissionStatus2.reveiwed,this.totalSubmitted)
+  //       this.unReveiwed = this.calculatePercentages( this.taskSubmissionStatus2.unReveiwed,this.totalSubmitted)
+  //     }
+  //   )
+  // }
 
   calculatePercentages(num1: number, num2: number) {
     let per: any;

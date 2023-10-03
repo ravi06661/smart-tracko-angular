@@ -22,7 +22,7 @@ export class NewsandEventsDescriptionComponent implements OnInit {
    
   
 
-  constructor (private activatedRoute: ActivatedRoute,private newsAndEventService:NewsEventServiceService,private utilityService:UtilityServiceService) {}
+  constructor (private activatedRoute: ActivatedRoute,private newsAndEventService:NewsEventServiceService,public utilityService:UtilityServiceService) {}
 
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.params[('id')]

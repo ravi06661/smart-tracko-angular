@@ -139,7 +139,7 @@
                                 <div class="profile_edits">
                                   <div class="profile_buttons d-flex align-items-end">
                                     
-                                    <i class="fi fi-rr-trash light font-24 line-height-0 hover-delete-icon" data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
+                                    <i class="fi fi-rr-trash light font-24 line-height-0 hover-delete-icon" (click)="deleteImage(i)"></i>
                                   </div>
                                 </div>
                                 
@@ -158,15 +158,16 @@
                                   Add Media</label>
                               </form>
                               
+                        </div>  
+                    </div>
+                    <br>
+                    <form [formGroup]="assignmentForm">
+                    <div class="col-md-4">
+                        <label for="" class="mb_6 font-17 font-500 secondary">Add Video-URL</label>
+                        <div class="input_icon position-relative">
+                            <input type="text" id="videoUrl" name="videoUrl" class="form-control input_text gray-input-bg enabled_inp"
+                                placeholder="VIDEO-URL"  [(ngModel)]="taskQuestion.videoUrl">
                         </div>
-                        <div class="col-md-4">
-                            <label for="" class="mb_6 font-17 font-500 secondary">Add Video-URL</label>
-                            <div class="input_icon position-relative">
-                                <input type="text" id="videoUrl" name="videoUrl" class="form-control input_text gray-input-bg enabled_inp"
-                                    placeholder="VIDEO-URL"  [(ngModel)]="taskQuestion.videoUrl">
-                            </div>
-                        </div>
-                       
                     </div>
 
 
@@ -174,16 +175,18 @@
                         <h4 class="sub-heading font-17 font-500 secondary">Question, Hints and Instructions</h4>
                         <!-- <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
                             placeholder="Start Typing....."></textarea> -->
-                            <ckeditor  [editor]="Editor" name="question" [(ngModel)]="taskQuestion.question"> </ckeditor>
+                            <ckeditor  [editor]="Editor" name="question" formControlName="question" [(ngModel)]="taskQuestion.question"> </ckeditor>
+                            <div  *ngIf="isFieldInvalidForAssignmentForm('question')" class="text-danger">Question is
+                                required.</div>
                     </div>
-
-                    <div class="edit-delete-que mt-5">
+                    </form>
+                    <!-- <div class="edit-delete-que mt-5">
                         <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"
                             data-bs-toggle="modal" data-bs-target="#discard-changes-modal"> Discard
                             Changed</span>
                         <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"
                             data-bs-toggle="modal" data-bs-target="#save-changes-modal">Save Changes</span>
-                    </div>
+                    </div> -->
                 </div><!-- edit-task-area -->
 
             </div><!-- col-md-12 -->
