@@ -188,8 +188,6 @@ export class AdminCreateTaskComponent {
       this.taskQuestion.questionImages.splice(index, 1);
       this.imagePreview.splice(index,1);
       this.imageName.splice(index,1);
-    }
-    console.log(this.taskQuestion.questionImages);
-    
+    }    
   }
 }

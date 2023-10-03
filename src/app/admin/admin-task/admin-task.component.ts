@@ -86,22 +86,23 @@ export class AdminTaskComponent {
   }
 
   public submit() {
-    // this.firstTaskFormControl();
-    // if(this.firstTaskForm.valid){
-    //   this.taskService.addTask(this.task).subscribe(
-    //     (data: any) => {
-    //       console.log(data);
-    //       this.router.navigate(['/admin/createtask/' + data.taskId])
-    //     }
-    //   )
-    // }
-     this.router.navigate(['/admin/createtask/1056'])
+    this.firstTaskFormControl();
+    if(this.firstTaskForm.valid){
+      this.taskService.addTask(this.task).subscribe(
+        (data: any) => {
+          console.log(data);
+          this.router.navigate(['/admin/createtask/' + data.taskId])
+        }
+      )
+    }
+    //  this.router.navigate(['/admin/createtask/1056'])
   }
 
   public getAllSubmitedTasks() {
     this.taskService.getAllSubmitedTasks().subscribe({
       next: (data: any) => {
         this.submitedTasksList = data;
+        this.getOverAllAssignmentTaskStatus()
       }
     })
   }
@@ -117,19 +118,20 @@ export class AdminTaskComponent {
     this.taskService.getAllSubmissionTaskStatus().subscribe(
       (data: any) => {
         this.taskSubmissionStatus = data
+        this.getOverAllAssignmentTaskStatus()
       }
     )
   }
-  public getOverAllAssignmentTaskStatus() {
-    this.taskService.getOverAllAssignmentTaskStatus().subscribe(
-      (data: any) => {
-        this.taskSubmissionStatus2 = data;
-        this.totalSubmitted =  this.calculatePercentage(this.submitedTasksList.length,this.taskSubmissionStatus.length) 
-        this.reveiwed = this.calculatePercentage(this.taskSubmissionStatus2.totalSubmitted,this.taskSubmissionStatus2.reveiwed) 
-        this.unReveiwed = this.calculatePercentage(this.taskSubmissionStatus2.totalSubmitted,this.taskSubmissionStatus2.unReveiwed) 
-       }
-    )
-  }
+  // public getOverAllAssignmentTaskStatus() {
+  //   this.taskService.getOverAllAssignmentTaskStatus().subscribe(
+  //     (data: any) => {
+  //       this.taskSubmissionStatus2 = data;
+  //       this.totalSubmitted =  this.calculatePercentage(this.submitedTasksList.length,this.taskSubmissionStatus.length) 
+  //       this.reveiwed = this.calculatePercentage(this.taskSubmissionStatus2.totalSubmitted,this.taskSubmissionStatus2.reveiwed) 
+  //       this.unReveiwed = this.calculatePercentage(this.taskSubmissionStatus2.totalSubmitted,this.taskSubmissionStatus2.unReveiwed) 
+  //      }
+  //   )
+  // }
 
   public calculatePercentage(total:number,num:number){
     return Math.floor(num/total*100);
@@ -144,6 +146,11 @@ export class AdminTaskComponent {
       taskAttachment : ['',Validators.required]
     })
   }
+ 
+  public getOverAllAssignmentTaskStatus() {
+    this.taskService.getOverAllAssignmentTaskStatus().subscribe(
+      (data: any) => {
+        this.taskSubmissionStatus2 = data;
         let count = 0;
         let arr: number[] = [];
         this.submitedTasksList.forEach(obj => {
@@ -159,7 +166,6 @@ export class AdminTaskComponent {
       }
     )
   }
-
   calculatePercentages(num1: number, num2: number) {
     let per: any;
    if(num1<0)

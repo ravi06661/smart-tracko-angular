@@ -33,6 +33,7 @@ export class AssignmentDetailsComponent implements OnInit {
     private loginService: LoginService,
     private router: Router
     , private formBuilder: FormBuilder) {
+      this.isSubmitted()
     this.submissionForm = this.formBuilder.group({
       file: ['', Validators.required],
       description: ['', Validators.required]
@@ -85,7 +86,7 @@ export class AssignmentDetailsComponent implements OnInit {
   public isSubmitted() {
     this.assignmentService.isSubmitted(this.assignmentId, this.questionId, this.loginService.getStudentId()).subscribe(
       (data: any) => {
-        this.isSubmittedis = data
+        this.isSubmittedis=data;
       }
     )
   }

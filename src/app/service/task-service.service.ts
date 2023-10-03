@@ -11,6 +11,7 @@ import { s } from '@fullcalendar/core/internal-common';
   providedIn: 'root'
 })
 export class TaskServiceService {
+ 
 
   BASE_URL = this.utilityService.getBaseUrl();
   TASK_URL = this.BASE_URL + '/task';
@@ -77,4 +78,8 @@ export class TaskServiceService {
   public getOverAllAssignmentTaskStatus() {
     return this.http.get(`${this.TASK_URL}/getOverAllTaskStatusforBarChart`)
   }
+
+  public  isSubmitted(taskId: number, arg1: any) {
+  return this.http.get(`${this.TASK_URL}/isTaskSubmitted`)
+  } 
 }

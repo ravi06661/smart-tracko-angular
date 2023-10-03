@@ -73,7 +73,7 @@
           <p class="font-15 font-500 text-light mb-0">Tasks submitted</p>
         </div>
         <div class="task-area text-center ">
-          <h1 class="font-38 font-700 mb-0 text-light">{{totalTaskSubmitted}}</h1>
+          <h1 class="font-38 font-700 mb-0 text-light">{{toDoAssignmentLength}}</h1>
           <p class="font-15 font-500 text-light mb-0">To do Assignment</p>
         </div>
         <div class="task-area text-center">
@@ -122,8 +122,8 @@
           <div class=" d-flex   gap-3">
             <div class="dropdown">
               <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{submissionUpdates}}
-              </a>
+                {{submissionUpdates}}
+                </a>
               <ul class="dropdown-menu">
                 <!-- <li><a class="dropdown-item" href="#">Assignment Updates</a></li> -->
                 <li><a class="dropdown-item" (click)="updates()">{{submissionUpdates1}}</a></li>

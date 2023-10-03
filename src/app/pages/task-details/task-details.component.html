@@ -3,11 +3,11 @@
     <div class="assign-detail-heading">
       <h1 class="font-27 font-700 secondary mb-0">Tasks</h1>
       <button type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal"
-        data-bs-target="#submit_button">Submit</button>
-      <div class="font-27 font-700 secondary mb-4">
+        data-bs-target="#submit_button" > Submit</button>
+      <div class="font-27 font-700 secondary mb-4" *ngIf="task.taskAttachment!=null ">
         <form class="attachment_file1 d-inline-flex align-items-center position-relative ">
           <!-- Instead of an input element, use an anchor (a) tag -->
-          <a href="{{ATTACHMENT_URL+task.taskAttachment}}" download="Assignment Files.zip"
+          <a href="{{ATTACHMENT_URL+task.taskAttachment}}" download="Assignment Files.zip" 
             class="font-15 font-700 secondary text-white attachment_file_text">
             <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
             Attachments
@@ -29,19 +29,21 @@
         </div>
         <div class="row advertisement">
 
-          <div class="col-md-3 col-sm-6 col-xs-12">
+          <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="obj.videoUrl!=null">
             <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
             <div class="assinment_image video-img">
               <video src="{{obj.videoUrl}}" controls height="" width="270" type="video/mp4"></video>
             </div>
           </div>
           
-          <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let images of obj.questionImages; let i=index">
+         <div  class="col-md-3 col-sm-6 col-xs-12" *ngIf=" obj.questionImages.length!=0">
+          <div   *ngFor="let images of obj.questionImages; let i=index">
             <h3 class="font-15 font-700 assignment_sub_heading">Image {{i + 1}}</h3>
             <div class="assignment_image">
               <img [src]="imageUrl + images" class="img-fluid image-zoom" (click)="toggleImageSize($event)">
             </div>
           </div>
+         </div>
         </div>
       </div>
 
@@ -108,46 +110,30 @@
 
 
 
-
-
-        <div class="form-group">
-          <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading (.pdf file only)</h4>
+        <div class="form-group" *ngIf="task.attachmentStatus=='Required' ">
+          <h4 class="sub-heading font-17 font-500 secondary mb-1">.pdf file only</h4>
           <form [formGroup]="submissionForm" class="select_file d-flex align-items-center file position-relative">
             <input type="file" name="file" id="file"   accept=".pdf, application/pdf"class="d-none" formControlName="file" (change)="setImage($event)">
             <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
             <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">
               <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i>Upload File
             </button>  
-            
           </form>
           <div *ngIf=" isFieldInvalidForSubmissionForm('file')" class="text-danger">
             file is required.</div>
         </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
+        <div class="" *ngIf="task.attachmentStatus=='Optional'">
+          <h4 class="sub-heading font-17 font-500 secondary mb-1">optional</h4>
+          <h4 class="sub-heading font-17 font-500 secondary mb-1">.pdf file only</h4>
+          <form class="select_file d-flex align-items-center file position-relative">
+            <input type="file" name="file" id="file"   accept=".pdf, application/pdf"class="d-none"  (change)="setImage($event)">
+            <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
+            <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">
+              <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i>Upload File
+            </button>  
+          </form>
+        </div>
 
         <div class="file_option">
           <div class=" d-flex file_name">

@@ -23,12 +23,12 @@ export class TaskDetailsComponent {
   message: string = ''
   submissionForm: FormGroup;
 
-  constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService, private loginService: LoginService , private formBuilder: FormBuilder) {
+  constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService, private loginService: LoginService, private formBuilder: FormBuilder) {
     this.submissionForm = this.formBuilder.group({
       file: ['', Validators.required],
       taskDescription: ['', Validators.required]
     });
-   }
+  }
 
   ngOnInit() {
     this.taskId = this.router.snapshot.params[('id')]
@@ -43,18 +43,35 @@ export class TaskDetailsComponent {
   }
 
   public submitTask() {
-  if(this.submissionForm.invalid){
-     this.submissionFormFun()
-  }else{
-    this.taskSubmittion.student.studentId = this.loginService.getStudentId();
-    this.taskService.submitTask(this.taskSubmittion, this.taskId).subscribe(
-      (data) => {
-        this.taskSubmittion = new StudentTaskSubmittion
-        this.message = "Success.."
-        alert("success");
+
+    if (this.task.attachmentStatus == "Optional" || this.task.attachmentStatus == "Not Allowed") {
+      const taskDescriptionValue = this.submissionForm.get('taskDescription')!.value;
+      if (taskDescriptionValue == '') {
+        this.submissionFormFun()
+        return
       }
-    )
-  }
+      this.taskSubmittion.student.studentId = this.loginService.getStudentId();
+      this.taskService.submitTask(this.taskSubmittion, this.taskId).subscribe(
+        (data) => {
+          this.taskSubmittion = new StudentTaskSubmittion
+          this.message = "Success.."
+        }
+      )
+    } else {
+      if (this.submissionForm.invalid) {
+        this.submissionFormFun()
+      } else {
+        this.taskSubmittion.student.studentId = this.loginService.getStudentId();
+        this.taskService.submitTask(this.taskSubmittion, this.taskId).subscribe(
+          (data) => {
+            this.taskSubmittion = new StudentTaskSubmittion
+            this.message = "Success.."
+          }
+        )
+      }
+    }
+
+
   }
   public reaload() {
     this.message = ''
@@ -66,7 +83,7 @@ export class TaskDetailsComponent {
     this.taskSubmittion.submittionFileName = event.target.files[0];
   }
 
-  
+
   isImageExpanded = false;
 
   toggleImageSize(event: Event) {
@@ -79,7 +96,7 @@ export class TaskDetailsComponent {
       image.classList.remove('expanded');
     }
   }
-  
+
 
   public clearForm() {
     this.submissionForm = this.formBuilder.group({
@@ -92,7 +109,7 @@ export class TaskDetailsComponent {
     return field ? field.invalid && field.touched : false;
   }
 
-  
+
   public submissionFormFun() {
     Object.keys(this.submissionForm.controls).forEach(key => {
       const control = this.submissionForm.get(key);
@@ -106,6 +123,12 @@ export class TaskDetailsComponent {
     }
   }
 
- 
+  public isSubmitted() {
+    this.taskService.isSubmitted(this.task.taskId, this.loginService.getStudentId()).subscribe(
+      (data: any) => {
+        return data;
+      }
+    )
+  }
 }
 
