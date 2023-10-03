@@ -25,7 +25,7 @@
         <a class="font-12 font-400 mb-0 msg-hover  pointer" (click)="seenMessage(i+1,obj.announcementId)">{{readMessage && messageNo == (i+1)?'hide':'read'}} message</a>
         <h6 class="font-14 font-400 light mb-0 notification_message" *ngIf="readMessage && messageNo == (i+1)">{{obj.message}}</h6>
       </div>
-      <h5 class="font-11 font-400 light">{{updateTimeline(obj.date)}}</h5>
+      <h5 class="font-11 font-400 light">{{utilityService.updateTimeline(obj.date)}}</h5>
     </div>
   </div>
 </div>

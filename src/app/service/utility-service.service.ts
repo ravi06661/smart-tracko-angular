@@ -23,4 +23,24 @@ export class UtilityServiceService {
   public getTimeUrl() { 
     return this.TIME_URL;
   }
+
+  public updateTimeline(date:any) {
+    // Calculate the time difference and update the timestamp
+    const now = new Date();
+    const messageDate = new Date(date); // Replace with the actual message date
+    const timeDiff = now.getTime() - messageDate.getTime();
+
+    // Calculate hours and minutes
+    const hours = Math.floor(timeDiff / 3600000);
+    const minutes = Math.floor((timeDiff % 3600000) / 60000);
+    const day = Math.floor(hours/24)
+
+    if (hours > 0 && hours < 24) {
+      return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+    } else if(day > 0){
+      return `${day} ${day === 1 ? 'day' : 'days'} ago`
+    } else {
+      return `${minutes} ${minutes === 1 ? 'minute'  : 'minutes'} ago`;
+    }
+  }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { group } from 'console';
 import { Assignment } from 'src/app/entity/assignment';
 import { AssignmentQuestionRequest } from 'src/app/payload/assignment-question-request';
 import { TaskQuestionRequest } from 'src/app/payload/task-question-request';
@@ -29,18 +31,44 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   };
   expandedQuestions: boolean[] = [];
   questionId: number = 0;
+  assignmentForm:FormGroup;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private assignmentService: AssignmentServiceService,
-    private router: Router
-    , private utilityService: UtilityServiceService
-  ) { }
+    private router: Router,
+    private utilityService: UtilityServiceService,
+    private formBuilder:FormBuilder
+  ) {
+
+    this.assignmentForm = this.formBuilder.group({
+      question : ['',Validators.required]
+    })
+
+   }
 
   ngOnInit(): void {
     this.assignmentId = this.activateRoute.snapshot.params['id'];
     this.assignmentQuestionsData.assignmentId = this.assignmentId;
     this.getAssignmentById();
+  }
+
+  isFieldInvalidForAssignmentForm(fieldName: string): boolean {
+    const field = this.assignmentForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  public taskFormControl() {
+    Object.keys(this.assignmentForm.controls).forEach(key => {
+      const control = this.assignmentForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
   }
 
   public getAssignmentById() {
@@ -72,6 +100,7 @@ export class AdminCreateAssignmentsComponent implements OnInit {
       this.imageName.push('');
     }
   }
+  
   public addTaskQuestion() {
     this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(
       (data: any) => {
@@ -97,6 +126,11 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   }
 
   public submitAssignmentQuestions() {
+    this.taskFormControl();
+    if(this.assignmentForm.invalid){
+      return;
+    }
+
     let obj = {
       ...this.assignment,
       attachment: this.assignmentQuestionsData.taskAttachment
@@ -128,7 +162,18 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     console.log(id);
     this.questionId = id;
   }
+
   toggleQuestion(index: number) {
     this.expandedQuestions[index] = !this.expandedQuestions[index];
+  }
+
+  public deleteImage(index:number){
+    if (index >= 0 && index < this.taskQuestion.questionImages.length) {
+      this.taskQuestion.questionImages.splice(index, 1);
+      this.imagePreview.splice(index,1);
+      this.imageName.splice(index,1);
+    }
+    console.log(this.taskQuestion.questionImages);
+    
   }
 }
