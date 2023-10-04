@@ -52,10 +52,9 @@ export class MycourseComponent implements OnInit {
     })
   }
   public getAllBatches(){
-    this.batchService.getAllBatch().subscribe({
+    this.batchService.getAllBatch(this.loginService.getStudentId()).subscribe({
       next:(data:any)=>{
         this.batches = data
-        console.log(this.batches);
         this.length=this.batches.length
         
       }
