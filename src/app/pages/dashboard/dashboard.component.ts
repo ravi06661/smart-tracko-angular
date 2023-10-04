@@ -207,6 +207,7 @@ export class DashboardComponent implements OnInit {
   submissionUpdates1: string = "Task Upates";
   taskSubmissionIsActive: boolean = false;
   AssignmentsSubmissionIsactive: boolean = true;
+
   updates() {
     if (this.submissionUpdates == "Assignment Updates") {
       this.submissionUpdates1 = this.submissionUpdates
@@ -224,6 +225,5 @@ export class DashboardComponent implements OnInit {
   public dateFormatter(date:Date){
     return this.datePipe.transform(date, 'dd MMM yyyy');
   }
-
 }
 

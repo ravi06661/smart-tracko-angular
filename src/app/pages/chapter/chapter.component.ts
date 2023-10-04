@@ -23,14 +23,16 @@ export class ChapterComponent {
     private utilityService:UtilityServiceService){}
   ngOnInit(){
      this.subjectId=this.activateRouter.snapshot.params[('id')];
-     this.getAllSubjectChapter();
      this.getSubjectById(this.subjectId);
+     this.getAllSubjectChapter();
   }
   
   public getAllSubjectChapter() {
     this.subjectService.getAllSubjectChapters(this.subjectId).subscribe(
       (data: any) => {
         this.chapter = data;
+        console.log('chapters',this.chapter);
+        
       }
     )
   }
@@ -38,6 +40,7 @@ export class ChapterComponent {
     this.subjectService.getSubjectById(id).subscribe({
       next:(data:any)=>{
         this.subject = data.subject
+        console.log('subject',this.subject);
       }
     })
   }

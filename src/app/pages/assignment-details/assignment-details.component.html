@@ -4,7 +4,6 @@
       <h1 class="font-27 font-700 secondary mb-0">Assignment - Day 1</h1>
       <button type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal"
         data-bs-target="#submit_button" [disabled]="isSubmittedis">Submit</button>
-      <h6 *ngIf="isSubmittedis" class="mt-1"> Ask Admin for re-submit </h6>
     </div>
     <app-profile-bar></app-profile-bar>
   </div>
@@ -20,20 +19,25 @@
         <div class="assignment">
 
           <div class="row advertisement">
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="assignmentQues.videoUrl!=null">
               <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
               <div class="assinment_image video-img">
                 <video src="{{assignmentQues.videoUrl}}" autoplay controls height="" width="270"></video>
               </div>
             </div>
-
-            <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let img of assignmentQues.questionImages;let i=index">
+            <div class="col-md-3 col-sm-6 col-xs-12"*ngIf=" assignmentQues.questionImages.length!=0" >
+            <div *ngFor="let img of assignmentQues.questionImages;let i=index">
               <h3 class="font-15 font-700  assignment_sub_heading">Image {{i+1}}</h3>
               <div class="assinment_image">
                 <img [src]="IMG_URL+img" class="img-fluid image-zoom" (click)="toggleImageSize($event)">
               </div>
             </div>
+          </div>
 
+
+
+
+            
             <!-- <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let images of obj.questionImages; let i=index">
                   <h3 class="font-15 font-700 assignment_sub_heading">Image {{i + 1}}</h3>
                   <div class="assignment_image">

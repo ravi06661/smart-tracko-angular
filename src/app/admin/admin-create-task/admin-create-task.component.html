@@ -224,11 +224,11 @@
                 </div>
             </div><!-- col-md-12 -->
 
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="task.attachmentStatus!='Not Allowed'">
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Assignment Attechments</h3>
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="task.attachmentStatus!='Not Allowed'">
                 <form
                     class="attachment_file2 d-inline-flex align-items-center  position-relative mb-2 add-attechment">
                     <input type="file" name="attachment" value="attachment" (change)="addAttachmentFile($event)" class="d-none" id="attachment">
