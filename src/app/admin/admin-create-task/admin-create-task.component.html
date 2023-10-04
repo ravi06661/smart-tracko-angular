@@ -175,13 +175,13 @@
                         <div class="col-lg-4 col-md-4">
                             <form [formGroup]="secondTaskForm" >
                                 <div class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
-                                <input type="file" name="image" (change)="addImageFile($event)" value="image" formControlName="image" class="form-control d-none" id="image">
+                                <input type="file" name="image" (change)="addImageFile($event)" value="image" class="form-control d-none" id="image">
                                 <label for="image" class="font-17 font-500 d-flex">
                                   <i class="fi fi-rr-plus-small warning font-24 line-height-0"></i>
                                   Add Media</label>
                                 </div>
-                                <div  *ngIf="isFieldInvalidForTaskForm('image')" class="text-danger">image is
-                                    required.</div>
+                                <!-- <div  *ngIf="isFieldInvalidForTaskForm('image')" class="text-danger">image is
+                                    required.</div> -->
                             </form>
                         </div>
                     </div>
@@ -190,11 +190,11 @@
                     <div class="col-md-4 mt-5">
                         <label for="" class="mb_6 font-17 font-500 secondary">Add Video-URL</label>
                         <div class="input_icon position-relative">
-                            <input type="text" id="videoUrl" formControlName="videoUrl" name="videoUrl" class="form-control input_text gray-input-bg enabled_inp"
+                            <input type="text" id="videoUrl"  name="videoUrl" class="form-control input_text gray-input-bg enabled_inp"
                                 placeholder="VIDEO-URL"  [(ngModel)]="taskQuestion.videoUrl">
                         </div>
-                        <div  *ngIf="isFieldInvalidForTaskForm('videoUrl')" class="text-danger">Video url is
-                            required.</div>
+                        <!-- <div  *ngIf="isFieldInvalidForTaskForm('videoUrl')" class="text-danger">Video url is
+                            required.</div> -->
                     </div> 
 
                     <div class="que-hint">
@@ -206,13 +206,13 @@
                                 required.</div>
                     </div>
                     </form>
-                    <div class="edit-delete-que mt-5">
+                    <!-- <div class="edit-delete-que mt-5">
                         <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"
                             data-bs-toggle="modal" data-bs-target="#discard-changes-modal"> Discard
                             Changed</span>
                         <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"
                             data-bs-toggle="modal" data-bs-target="#save-changes-modal">Save Changes</span>
-                    </div>
+                    </div> -->
                 </div><!-- edit-task-area -->
 
             </div><!-- col-md-12 -->

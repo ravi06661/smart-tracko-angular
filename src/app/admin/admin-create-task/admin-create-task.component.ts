@@ -54,8 +54,8 @@ export class AdminCreateTaskComponent {
 
 
       this.secondTaskForm = this.formBuilder.group({
-        image : ['',Validators.required],
-        videoUrl : ['',Validators.required],
+        // image : ['',Validators.required],
+        // videoUrl : ['',Validators.required],
         question : ['',Validators.required]
       })
 

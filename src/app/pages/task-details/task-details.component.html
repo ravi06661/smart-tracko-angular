@@ -7,7 +7,9 @@
       <div class="font-27 font-700 secondary mb-4" *ngIf="task.taskAttachment!=null ">
         <form class="attachment_file1 d-inline-flex align-items-center position-relative ">
           <!-- Instead of an input element, use an anchor (a) tag -->
-          <a href="{{ATTACHMENT_URL+task.taskAttachment}}" download="Assignment Files.zip" 
+
+          <a href="{{ATTACHMENT_URL+task.taskAttachment}}" download="{{task.taskName}}"
+
             class="font-15 font-700 secondary text-white attachment_file_text">
             <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
             Attachments

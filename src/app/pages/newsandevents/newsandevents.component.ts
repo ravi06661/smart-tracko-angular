@@ -23,7 +23,7 @@ export class NewsandeventsComponent implements OnInit {
   currentDate: string | null | undefined;
   createdDate: any;
   dayAgoForChild:number=0;
-  constructor(private newsAndEventService: NewsEventServiceService, private utilityService: UtilityServiceService, private datePipe: DatePipe) { }
+  constructor(private newsAndEventService: NewsEventServiceService, public utilityService: UtilityServiceService, private datePipe: DatePipe) { }
 
 
   ngOnInit(): void {

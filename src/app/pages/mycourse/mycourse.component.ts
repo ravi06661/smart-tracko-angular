@@ -27,6 +27,11 @@ export class MycourseComponent implements OnInit {
   feesPayLength:number=0;
   coruseProgress:number=0;
   progress:number=0;
+
+  startDate: any;
+  endDate: any;
+  courseName: any;
+  
   constructor(private couserService:CourseServiceService,private utilityService:UtilityServiceService,private batchService:BatchesService,private feesPayService: FeesPayService,private activateRoute:ActivatedRoute,private loginService:LoginService) {}
 
   ngOnInit(): void {
@@ -47,10 +52,9 @@ export class MycourseComponent implements OnInit {
     })
   }
   public getAllBatches(){
-    this.batchService.getAllBatch().subscribe({
+    this.batchService.getAllBatch(this.loginService.getStudentId()).subscribe({
       next:(data:any)=>{
         this.batches = data
-        console.log(this.batches);
         this.length=this.batches.length
         
       }
@@ -69,7 +73,10 @@ export class MycourseComponent implements OnInit {
     
     this.couserService.getCourseProgress(this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
-       this.progress=data
+       this.progress=Math.floor(data.percentage)
+       this.startDate = data.joinDate;
+       this.endDate = data.endDate;
+       this.courseName = data.courseName;
       }
     })
   }

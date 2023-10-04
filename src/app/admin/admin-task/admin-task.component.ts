@@ -166,6 +166,8 @@ export class AdminTaskComponent {
       }
     )
   }
+
+
   calculatePercentages(num1: number, num2: number) {
     let per: any;
    if(num1<0)
