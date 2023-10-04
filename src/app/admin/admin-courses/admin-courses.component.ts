@@ -92,8 +92,8 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   public saveCourse() {
-    this.addCourseForm.markAllAsTouched();
-    if (this.addCourseForm.valid)
+     this.addCourseForm.markAllAsTouched();
+     if (this.addCourseForm.valid)
 
       this.courseService.saveCourse(this.courseRequest).subscribe({
         next: (data: any) => {
