@@ -16,8 +16,8 @@ export class BatchesService {
     return this.http.post(`${this.batchUrl}/createBatch`,batch);
   }
 
-  public getAllBatch(){
-    return this.http.get(`${this.batchUrl}/getAllBatches`);
+  public getAllBatch(studentId:number){
+    return this.http.get(`${this.batchUrl}/getAllBatches?studentId=${studentId}`);
   }
 
   getBatchById(id: number) {
