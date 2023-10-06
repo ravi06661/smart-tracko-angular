@@ -75,9 +75,9 @@ export class AdminTaskComponent {
 
   public getCourses() {
 
-    this.courseService.getAll().subscribe(
+    this.courseService.getAllCourses(0,100).subscribe(
       (data: any) => {
-        this.courses = data
+        this.courses = data.response
       }
     )
   }

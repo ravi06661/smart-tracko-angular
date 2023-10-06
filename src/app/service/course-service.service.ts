@@ -34,23 +34,13 @@ export class CourseServiceService {
   public updatCourse(course: Course) {
     return this.http.put(`${this.courseUrl}/updateCourseApi`,course);
   }
-  public getAll(){
-    return this.http.get(`${this.courseUrl}/getAllCourseApi`);
-  }
 
-public getAllUpgradeCourse(){
-  return this.http.get(`${this.courseUrl}/getAllCourseApi`);
+public getAllCourse(isStarter:boolean){
+  return this.http.get(`${this.courseUrl}/getAllCourseApi?isStarter=${isStarter}`);
 }
 
-public getAllStarterCourse(){
-  return this.http.get(`${this.courseUrl}/findAllCourse`);
-}
 
-public upgradeStudentCourse(studentId:number,courseId:number){
-  // const formData = new FormData();
-  //   formData.append('studentId', studentId.toString());
-  //   formData.append('courseId', courseId.toString());
-   
+public upgradeStudentCourse(studentId:number,courseId:number){   
   return this.http.put(`${this.courseUrl}/studentUpgradeCourse?studentId=${studentId}&courseId=${courseId}`,null);
 }
 
