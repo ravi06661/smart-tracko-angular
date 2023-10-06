@@ -24,7 +24,7 @@ export class AdminStudentRegistrationComponent {
   form3ProgressBar = 'form_3_progessbar'
 
   courses:Course[] = [];
-
+  isStarter:boolean | undefined;
   constructor(private studentService: StudentService, private router: Router, private formBuilder: FormBuilder,private courseService:CourseServiceService) {
     this.personlaDetailsForm = this.formBuilder.group({
       fullName: ['', Validators.required],
@@ -170,7 +170,8 @@ export class AdminStudentRegistrationComponent {
   }
 
   public getStarterCourse(){
-    this.courseService.getAllStarterCourse().subscribe({
+
+    this.courseService.getAllCourse(true).subscribe({
       next:(data:any)=>{
         this.courses = data;
       },

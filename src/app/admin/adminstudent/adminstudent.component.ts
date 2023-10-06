@@ -73,10 +73,10 @@ export class AdminstudentComponent implements OnInit{
   }}
 
   public getAllCourse(){
-    this.courseService.getAllUpgradeCourse().subscribe(
+    this.courseService.getAllCourse(false).subscribe(
       (
         (data:any)=>{
-          this.courses=data          
+          this.courses=data       
        
           
         }

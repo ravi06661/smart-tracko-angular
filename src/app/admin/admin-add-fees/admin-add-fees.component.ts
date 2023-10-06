@@ -49,9 +49,9 @@ export class AdminAddFeesComponent implements OnInit {
         this.student = data
       }
     })
-    this.courseService.getAll().subscribe({
+    this.courseService.getAllCourses(0,100).subscribe({
       next: (data: any) => {
-        this.course = data
+        this.course = data.response
       }
     })
   }
