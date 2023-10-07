@@ -38,19 +38,18 @@ export class SubjectdetailsComponent {
       (data: any) => {
         this.chapter = data.chapter.chapterContent;
         this.chapterName = data.chapter.chapterName;
-        this.subjectId = data.chapter.subject.subjectId; 
+        this.subjectId = data.chapter.subject.subjectId;
         this.questionsInChapter = data.questionLength
       }
     )
   }
   public getChapterContent(contentId: number) {
-    this.chapterService.getChapterContent(this.chapterId, contentId).subscribe(
+    this.chapterService.getChapterContent(this.chapterId).subscribe(
       (data) => {
         this.chapterContent = data;
       }
     )
   }
-
   public getChapterExamIsComplete() {
     this.examService.getChapterExamIsCompleted(this.chapterId, this.loginService.getStudentId()).subscribe({
       next: (data: any) => {

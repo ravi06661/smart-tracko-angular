@@ -51,16 +51,16 @@ export class AdminSubjectsChapterComponent {
     )
   }
   public addChapter() {
-    if(this.chapterUpdate.chapterName==''){
-      this.message ="please enter subject name.."
-      return ;
-    }else{
+    if (this.chapterUpdate.chapterName == '') {
+      this.message = "please enter subject name.."
+      return;
+    } else {
       this.chapterService.addChapter(this.subjectId, this.chapterUpdate.chapterName).subscribe(
         {
           next: (data) => {
             this.message = 'Success..'
             this.chapterUpdate = new Chapter();
-            this.chapter = data.chapters
+            this.getAllSubjectChapter();
           },
           error: (error) => {
             this.message = error.error.message
@@ -70,14 +70,15 @@ export class AdminSubjectsChapterComponent {
     }
   }
   public deleteChapter() {
-    //alert(this.chapterId)
-    this.chapterService.deleteChapter(this.chapterId, this.subjectId).subscribe(
-      (data) => {
-        this.chapterId = 0;
-        this.getAllSubjectChapter();
-      },
-      (error) => {
-        this.message = 'Failed..'
+    this.chapterService.deleteChapter(this.chapterId).subscribe(
+      {
+        next: (data) => {
+          this.chapterId = 0;
+          this.getAllSubjectChapter();
+        },
+        error: (error) => {
+          this.message = 'Failed..'
+        }
       }
     )
   }
@@ -88,29 +89,34 @@ export class AdminSubjectsChapterComponent {
   public reload() {
     this.message = ''
     this.chapterUpdate = new Chapter();
-    this.getAllSubjectChapter();
+    //  this.getAllSubjectChapter();
   }
 
   public updateChapter() {
-    this.chapterService.updateChapter(this.chapterId, this.subjectId, this.chapterUpdate.chapterName).subscribe(
-      (data) => {
-        this.message = 'success';
-        this.chapterUpdate = new Chapter();
-        this.chapterId = 0;
-      },
-      (error) => {
-        this.message = 'Failed..'
+    this.chapterService.updateChapter(this.chapterId,this.chapterUpdate.chapterName).subscribe(
+      {
+        next: (data) => {
+          this.message = 'success';
+          this.chapterUpdate = new Chapter();
+          this.chapterId = 0;
+          this.getAllSubjectChapter();
+        },
+        error: (error) => {
+          this.message = error.error.message;
+        }
       }
     )
   }
   public getChapterById(id: number) {
     this.chapterId = id;
     this.chapterService.getChapterById(id).subscribe(
-      (data) => {
-        this.chapterUpdate = data;
-      },
-      (error) => {
-        this.message = "error"
+      {
+        next: (data: any) => {
+          this.chapterUpdate = data.chapter;
+        },
+        error: (error) => {
+          this.message = error.error.message
+        }
       }
     )
   }

@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { Subject } from 'src/app/entity/subject';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { F } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-admin-courses',
@@ -35,7 +34,7 @@ export class AdminCoursesComponent implements OnInit {
   totalCourses = 0;
   course: Course = new Course();
   courseId: number = 0
-  imageName = ''
+  imageName:string | undefined
   selectedSubjects: Subject[] = [];
 
   addCourseForm: FormGroup;
@@ -198,5 +197,23 @@ export class AdminCoursesComponent implements OnInit {
     })
   }
  
+
+  openModal() {
+    const modal = document.getElementById('course-add-modal');
+    if (modal) {
+        modal.classList.add('show');
+        modal.style.display = 'block';
+    }
+}
+
+// Function to close the modal
+ closeModal() {
+    const modal = document.getElementById('course-add-modal');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.style.display = 'none';
+    }
+}
+
 
 }

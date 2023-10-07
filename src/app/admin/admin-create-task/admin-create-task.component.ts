@@ -116,7 +116,6 @@ export class AdminCreateTaskComponent {
   }
 
   setQuestionId(id: number) {
-    console.log(id);
     this.questionId = id;
   }
 
@@ -133,7 +132,6 @@ export class AdminCreateTaskComponent {
         this.taskData.taskQuestion = data.taskQuestion
       }, (errore) => {
         alert('Error')
-        //this.assignmentQuestionsData.assignmentQuestion = errore.assignmentQuestion
       }
     )
     this.taskQuestion = new TaskQuestionRequest();
