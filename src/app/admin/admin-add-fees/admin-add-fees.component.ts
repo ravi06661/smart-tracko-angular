@@ -31,12 +31,7 @@ export class AdminAddFeesComponent implements OnInit {
       course: ['', Validators.required],
       courseFees: ['', Validators.required],
       finalFees: ['', Validators.required],
-      date: ['', Validators.required],
-
-    
-
-     
-
+      date: ['', Validators.required]
     });
    }
  

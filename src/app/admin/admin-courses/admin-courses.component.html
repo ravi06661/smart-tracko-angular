@@ -4,7 +4,7 @@
                 <div class="profile_top_heading d-flex gap_24">
                     <h1 class="font-27 font-700 secondary mb-0">Courses</h1>
                     <button class="top_profile_sec_btn font-14 font-500 lh-1" data-bs-toggle="modal"
-                        data-bs-target="#course-add-modal" (click)=" getAllSubjects()" (click)="getAllTechImages()">Create New</button>
+                        data-bs-target="#course-add-modal" (click)=" getAllSubjects()" (click)="getAllTechImages()" (click)="clearValidationForm()">Create New</button>
                 </div>
 
                 <app-profile-bar></app-profile-bar>
@@ -116,7 +116,7 @@
                         <div class="modal-header apply_title">
                             <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                                 id="exampleModalLabel1">Add Course</h1>
-                            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="clearCoruse()">
+                            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="clearValidationForm()">
                                 <i  class="fi fi-rr-cross close_icon"></i>
                             </button>
                         </div>
@@ -129,10 +129,10 @@
                                     <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{imageName}}</h6>
                                     <div class="all-course-images d-flex flex-wrap">
                                         <div class="add-course-img" *ngFor="let image of techImages">
-                                            <img [src]="imageUrl+image.imageName"   alt="" (click)="courseRequest.technologyStack= image.id" (click)="imageName = image.technologyName">
-                             
+                                            <img [ngClass]="imageName == image.technologyName ?'techImage-border':''" [src]="imageUrl+image.imageName"   alt="" (click)="courseRequest.technologyStack= image.id" (click)="imageName = image.technologyName">
                                         </div>
                                     </div>
+                                    <div *ngIf="imageName == ''" class="text-danger">image is required.</div>
                                 </div>
                                 <div class="col-md-12 mb_18">
                                     <label for="" class="mb_6 font-15 font-500 secondary">Course Name</label>
@@ -157,7 +157,7 @@
                                 <div class="col-md-12 mb_18">
                                     <label for="" class="mb_6 font-15 font-500 secondary">Course Duration (In Months)</label>
                                     <div class="input_icon position-relative">
-                                        <input type="text" id="" name="duration" class="form-control input_text"
+                                        <input type="number" id="" name="duration" class="form-control input_text"
                                             placeholder="Enter Course Duration" [(ngModel)]="courseRequest.duration" formControlName="duration">
                                             <div *ngIf="isFieldInvalidForAddCourseDetailsForm('duration')" class="text-danger">Duration is
                                                 required.</div>
@@ -180,13 +180,13 @@
                                             (ngModelChange)="checkboxChanged(subject.subjectId)"
                                             class="choose-subjects"
                                             [value]="subject.subjectId"
-                                            formControlName="subjectOption">
+                                            formControlName="subjectIds">
                                             
                                         </div>
                                       </div>
                                     
                              </div> <!-- all-subjects-list -->
-                               <div *ngIf="isFieldInvalidForAddCourseDetailsForm('subjectOption')" class="text-danger">Subject is
+                               <div *ngIf="isFieldInvalidForAddCourseDetailsForm('subjectIds')" class="text-danger">Subject is
                                         required.</div>
                              <div class="col-md-12 mb_18">
                                 <label for="" class="mb_6 font-15 font-500 secondary">Course Description</label>
@@ -206,12 +206,14 @@
                                         required.</div>
                                 </div>
                             </div>
+
                             </div><!-- row -->
                         </form>
+                        <div [ngClass]="messageClass">{{message}}</div>
                         <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                             <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                                 aria-label="Close">Cancel</button>
-                            <a routerLink="/admin/course">
+                            <a >
                                 <button type="button" class="apply_modal_btn font-15 font-500" (click)="saveCourse()">Save Course</button>
                             </a>
                         </div>
@@ -250,7 +252,7 @@
                                             <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{course.technologyStack.technologyName}}</h6>
                                             <div class="all-course-images d-flex flex-wrap">
                                                 <div class="add-course-img" *ngFor="let image of techImages">
-                                                    <img [src]="imageUrl+image.imageName"  alt="" (click)="course.technologyStack = image" (click)="imageName = image.technologyName">
+                                                    <img [ngClass]="course.technologyStack.technologyName == image.technologyName ?'techImage-border':''" [src]="imageUrl+image.imageName"  alt="" (click)="course.technologyStack = image" (click)="imageName = image.technologyName">
                                                 </div>
                                             </div>
                                         </div>
@@ -272,7 +274,7 @@
                                         <div class="col-md-12 mb_18">
                                             <label for="" class="mb_6 font-15 font-500 secondary">Course Duration (In Months)</label>
                                             <div class="input_icon position-relative">
-                                                <input type="text" id="" name="duration" class="form-control input_text"
+                                                <input type="number" id="" name="duration" class="form-control input_text"
                                                     placeholder="Enter Course Duration" [(ngModel)]="course.duration">
                                             </div>
                                         </div>
@@ -307,8 +309,8 @@
                                         <div class="input_icon position-relative">
                                             <div class="input_icon position-relative">
                                                 <div class="input_icon position-relative">
-                                                    <input type="radio" id="isStarterCourseYes" name="isStarterCourse" [value]="true" [checked]="course.isStarterCourse " (change)="course.isStarterCourse = true"> Yes 
-                                                    <input type="radio" id="isStarterCourseNo" name="isStarterCourse" [value]="false" [checked]="course.isStarterCourse " (change)="course.isStarterCourse = false"> No 
+                                                    <input type="radio" id="isStarterCourseYes" name="isStarterCourse" [value]="true" [checked]="course.isStarterCourse" (change)="course.isStarterCourse = true"> Yes 
+                                                    <input type="radio" id="isStarterCourseNo" name="isStarterCourse" [value]="false" [checked]="!course.isStarterCourse" (change)="course.isStarterCourse = false"> No 
                                                   </div>
                                                   
                                               </div>
@@ -318,6 +320,7 @@
                                     </div>
                                     </div><!-- row -->
                                 </form>
+                                <div [ngClass]="messageClass">{{message}}</div>
                                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
                                         aria-label="Close">Cancel</button>
