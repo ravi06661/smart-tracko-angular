@@ -65,9 +65,9 @@ export class AdminAssignmentsComponent implements OnInit {
   }
 
   public getAllCourses() {
-    this.courseService.getAll().subscribe({
+    this.courseService.getAllCourses(0,100).subscribe({
       next: (data: any) => {
-        this.courses = data;
+        this.courses = data.response;
       }
     })
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { log } from 'console';
+import { log, error } from 'console';
 import * as moment from 'moment';
 import { Batch } from 'src/app/entity/batch';
 import { Course } from 'src/app/entity/course';
@@ -32,6 +32,9 @@ export class AdminCoursesBatchesComponent implements OnInit{
   imageUrl = this.utilityService.getBaseUrl()+"/file/getImageApi/technologyStackImage/";
   createBatchFrom:FormGroup
 
+  message = '';
+  messageClass = ''
+
   constructor(private activateRoute:ActivatedRoute,private courseService:CourseServiceService,
     private batchService:BatchesService,private techService:TechnologyStackService,private utilityService:UtilityServiceService,private formBuilder:FormBuilder){
       this.createBatchFrom=this.formBuilder.group({
@@ -40,11 +43,6 @@ export class AdminCoursesBatchesComponent implements OnInit{
         batchStartDate: ['', Validators.required],
         batchTiming: ['', Validators.required],
         batchDetails: ['', Validators.required],
-        
-      
-  
-       
-  
       });
     }
 
@@ -89,11 +87,15 @@ export class AdminCoursesBatchesComponent implements OnInit{
     if (this.createBatchFrom.valid )
     this.batchService.createNewBatch(this.batchRequest).subscribe({
       next:(data:any)=>{
-        if(data.success){
-          alert('success')
+
           this.batchRequest = new BatchRequest()
           this.getCourseByCourseId();
-        }
+          this.message = data.message;
+          this.messageClass = 'text-success';
+      },
+      error:(err:any)=>{
+        this.message = err.error.message;
+        this.messageClass = 'text-danger';
       }
     })
   }
@@ -128,10 +130,15 @@ export class AdminCoursesBatchesComponent implements OnInit{
   public updateBatch(){
     this.batchService.updateBatch(this.batch).subscribe({
       next:(data:any)=>{
-        if(data.success){
           this.batch = new Batch();
           this.getCourseByCourseId();
-        }
+          this.message = data.message;
+          this.messageClass = 'text-success'
+          this.clearValidationForm();
+      },
+      error:(err:any)=>{
+        this.message = err.error.message;
+        this.messageClass = 'text-danger';
       }
     })
   }
@@ -144,6 +151,16 @@ export class AdminCoursesBatchesComponent implements OnInit{
     if(this.batch.subject.subjectId == id)
       return true
     return false;
+  }
+
+  public clearValidationForm(){
+    this.createBatchFrom=this.formBuilder.group({
+      selectedOption: ['', Validators.required],
+      batchName: ['', Validators.required],
+      batchStartDate: ['', Validators.required],
+      batchTiming: ['', Validators.required],
+      batchDetails: ['', Validators.required],
+    });
   }
 
   

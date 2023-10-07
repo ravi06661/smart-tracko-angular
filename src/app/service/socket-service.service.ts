@@ -6,6 +6,8 @@ import { LoginService } from './login.service';
 import { QRServiceService } from './qrservice.service';
 import { UtilityServiceService } from './utility-service.service';
 import * as Stomp from "stompjs";
+import { StudentService } from './student.service';
+import { log } from 'console';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,12 @@ export class SocketServiceService {
   token:any
   BASE_URL = this.utilityService.getBaseUrl();
   SOCKET_URL = this.BASE_URL+'/socket';
-  constructor(public qrService:QRServiceService,private loginService:LoginService,private router:Router,private utilityService:UtilityServiceService,private deviceService: DeviceDetectorService){}
+  constructor(public qrService:QRServiceService,
+    private loginService:LoginService,
+    private router:Router,
+    private utilityService:UtilityServiceService,
+    private deviceService: DeviceDetectorService,
+    private studentService:StudentService){}
 
   
     connect(){
@@ -42,7 +49,7 @@ export class SocketServiceService {
           }
         });
          return;
-        }
+      }
         that.loginService.setToken(token.body);
         that.updateLoginStatus(token.body);
         that.router.navigate(['/student']);

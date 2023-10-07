@@ -78,7 +78,7 @@
                 <td>{{fees.remainingFees}}</td>
                 <td>{{fees.updatedDate}}</td>
                 <td class="warning font-500 pointer" data-bs-toggle="modal"
-                data-bs-target="#pay-modal" (click)="getFeesById(fees.feesId)">Pay Now</td>    
+                data-bs-target="#pay-modal" (click)="getFeesById(fees.feesId)" (click)="clearFessPayForm()">Pay Now</td>    
                 <td><a routerLink="/admin/editfees/{{fees.feesId}}"><i class="fi fi-rr-file-edit line-height-0 warning fs-5 me-2"></i></a> 
                   <!-- <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i class="fi fi-rr-trash line-height-0 delete-icon-color fs-5 ms-1"></i></span> -->
                 </td>             
@@ -130,8 +130,7 @@
                           <div class="row">
 
                               <div class="col-md-12">
-                                  <p class="mb-1" *ngIf="feesPays.feesPayAmount!=null">Your Remaining Amount is: <span class="text-danger">{{fees.remainingFees-feesPays.feesPayAmount}}/-</span> </p>
-                                  <p class="mb-1" *ngIf="feesPays.feesPayAmount==null">Your Remaining Amount is: <span class="text-danger">{{fees.remainingFees}}/-</span> </p>
+                                  <p class="mb-1" >Your Remaining Amount is: <span [ngClass]="fees.remainingFees-feesPays.feesPayAmount == 0 ? 'text-success':'text-danger'">{{feesPays.feesPayAmount!=null ?fees.remainingFees-feesPays.feesPayAmount:fees.remainingFees}}/-</span> </p>
                               </div>
 
                               <div class="col-md-12 mb_18">
