@@ -145,7 +145,7 @@
                             <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{subject.technologyStack.technologyName}}</h6>
                             <div class="all-course-images d-flex flex-wrap">
                                 <div class="add-course-img" *ngFor="let image of techImages">
-                                    <img [src]="techUrl+image.imageName"  alt="" (click)="subject.technologyStack.id= image.id" (click)="subject.technologyStack.technologyName = image.technologyName">
+                                    <img  [ngClass]="subject.technologyStack.technologyName == image.technologyName ?'techImage-border':''" [src]="techUrl+image.imageName"  alt="" (click)="subject.technologyStack.id= image.id" (click)="subject.technologyStack.technologyName = image.technologyName">
                                 </div>
                             </div>
                         </div>
@@ -205,12 +205,12 @@
                                 </select>
                         </div> -->
                        
-                            <div class="form-group">
+                          
                               <div class="col-md-12 mb_18">
                                 <h6 class="mb-4 font-15 font-500 secondary">Selected Image :- {{ imageName }}</h6>
                                 <div class="all-course-images d-flex flex-wrap">
                                   <div class="add-course-img" *ngFor="let image of techImages" >
-                                    <img [src]="techUrl + image.imageName" alt="" class="form-control"
+                                    <img   [ngClass]="imageName == image.technologyName ?'techImage-border':''" [src]="techUrl + image.imageName" alt=""
                                          (click)="subjectData.imageId = image.id; imageName = image.technologyName" >
                                   </div>
                                 </div>
@@ -218,7 +218,7 @@
                                   Image Name is required.
                                 </div>
                               </div>
-                            </div>
+                           
                         
                             <form [formGroup]="subjectSubmissionForm">
                         <div class="form-group">

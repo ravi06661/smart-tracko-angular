@@ -2,8 +2,8 @@
   <div class="profile d-flex">
     <div class="assign-detail-heading">
       <h1 class="font-27 font-700 secondary mb-0">Assignment - Day 1</h1>
-      <button type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal"
-        data-bs-target="#submit_button" [disabled]="isSubmittedis">Submit</button>
+      <button  *ngIf="isSubmitted()!" type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal"
+        data-bs-target="#submit_button" >Submit</button>
     </div>
     <app-profile-bar></app-profile-bar>
   </div>
@@ -126,7 +126,7 @@
               </div>
 
             </div>
-            <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+            <div    *ngIf="isSubmitted()!" class="apply_modal_buttons d-flex justify-content-between align-items-center">
               <button type="button" class="cancel_modal_btn">Save Draft</button>
               <button type="button" class="apply_modal_btn"
                 (click)="submitAssignment()">Submit</button>

@@ -48,12 +48,12 @@ export class AdminSubjectsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.message = ''
     this.techService.getAllTechnologyStack().subscribe({
       next: (data) => {
         this.techImages = data
       }
     });
-
     this.getAllSubject();
   }
 
@@ -105,6 +105,9 @@ export class AdminSubjectsComponent implements OnInit {
       next: (data: any) => {
         this.message = "Success.";
         this.subjects = this.subjects.map(item => (item.subjectId === data.subjectId ? data : item));
+      },
+      error:(err)=>{
+        this.message = err.error.message
       }
     })
   }

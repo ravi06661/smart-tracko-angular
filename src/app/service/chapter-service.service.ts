@@ -30,22 +30,19 @@ export class ChapterServiceService {
   }
   public updateChapterContent(chapterId: number, data: ChapterContent) {
     let formData = new FormData();
-    formData.append('chapterId', chapterId.toString());
     formData.append('title', data.title);
     formData.append('subTitle', data.subTitle);
     formData.append('content', data.content);
     formData.append('contentId', data.id.toString())
     return this.http.put(`${this.CHAPTER_URL}/updateChapterContent`, formData);
   }
-  public getChapterContent(chapterId: number, contentId: number): Observable<ChapterContent> {
+  public getChapterContent(contentId: number): Observable<ChapterContent> {
     let params = new HttpParams();
-    params = params.append('chapterId', chapterId)
     params = params.append('chapterContentId', contentId)
     return this.http.get<ChapterContent>(`${this.CHAPTER_URL}/getChapterContent`, { params })
   }
-  public deleteContent(chapterId: number, contentId: number) {
+  public deleteContent(contentId: number) {
     let formData = new FormData();
-    formData.append('chapterId', chapterId.toString());
     formData.append('contentId', contentId.toString());
     return this.http.put(`${this.CHAPTER_URL}/deleteChapterContent`, formData);
   }
@@ -56,17 +53,15 @@ export class ChapterServiceService {
     return this.http.post<Subject>(`${this.CHAPTER_URL}/addChapter`, formData);
   }
   
-  public deleteChapter(chapterId: number, subjectId: number) {
+  public deleteChapter(chapterId: number) {
     let formData = new FormData();
     formData.append('chapterId', chapterId.toString());
-    formData.append('subjectId', subjectId.toString());
     return this.http.put(`${this.CHAPTER_URL}/deleteChapter`, formData);
   }
-  public updateChapter(chapterId: number, subjectId: number, chapterName: string) {
+  public updateChapter(chapterId: number, chapterName: string) {
   
     let formData = new FormData();
     formData.append('chapterId', chapterId.toString());
-    formData.append('subjectId', subjectId.toString());
     formData.append('chapterName', chapterName);
     return this.http.put(`${this.CHAPTER_URL}/updateChapter`, formData);
   }

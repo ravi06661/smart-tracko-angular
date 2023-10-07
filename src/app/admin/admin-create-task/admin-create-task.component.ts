@@ -96,11 +96,9 @@ export class AdminCreateTaskComponent {
   }
 
   public getCourses() {
-    this.courseService.getAll().subscribe(
+    this.courseService.getAllCourses(0,100).subscribe(
       (data: any) => {
         this.courses = data
-
-        console.log(data);
       }
     )
   }
@@ -118,7 +116,6 @@ export class AdminCreateTaskComponent {
   }
 
   setQuestionId(id: number) {
-    console.log(id);
     this.questionId = id;
   }
 
@@ -135,7 +132,6 @@ export class AdminCreateTaskComponent {
         this.taskData.taskQuestion = data.taskQuestion
       }, (errore) => {
         alert('Error')
-        //this.assignmentQuestionsData.assignmentQuestion = errore.assignmentQuestion
       }
     )
     this.taskQuestion = new TaskQuestionRequest();

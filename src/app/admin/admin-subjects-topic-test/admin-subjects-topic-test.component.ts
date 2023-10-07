@@ -41,7 +41,6 @@ export class AdminSubjectsTopicTestComponent {
       (data: any) => {
         this.chapter = data.chapter.chapterContent;
         this.chapterName = data.chapter.chapterName;
-        this.subjectId = data.chapter.subject.subjectId;
       }
     )
   }
@@ -85,15 +84,14 @@ export class AdminSubjectsTopicTestComponent {
     this.chapterContent = new ChapterContent();
   }
   public getChapterContent(contentId: number) {
-    this.chapterService.getChapterContent(this.chapterId, contentId).subscribe(
+    this.chapterService.getChapterContent(this.chapterId).subscribe(
       (data) => {
         this.chapterContent = data;
-        console.log(data);
       }
     )
   }
   public deleteContent() {
-    this.chapterService.deleteContent(this.chapterId, this.deleteContentId).subscribe(
+    this.chapterService.deleteContent(this.chapterId).subscribe(
       (data) => {
         this.reload();
         this.chapterId = 0;
