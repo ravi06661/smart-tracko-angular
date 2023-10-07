@@ -1,3 +1,5 @@
+import { MessageSeenBy } from './../../entity/message-seen-by';
+import { error } from 'console';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { CourseRequest } from './../../payload/course-request';
 import { Component, OnInit } from '@angular/core';
@@ -22,7 +24,11 @@ export class AdminCoursesComponent implements OnInit {
   courseRequest: CourseRequest = new CourseRequest();
   selectedSubjectIds: number[] = [];
   techImages: TechnologyStack[] = [];
+
+
   message = '';
+  messageClass = '';
+
   courses: Course[] = [];
   totalBatches = 0;
   totalSubjects = 0;
@@ -41,13 +47,11 @@ export class AdminCoursesComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder) {
     this.addCourseForm = this.formBuilder.group({
-      imageName: ['', Validators.required],
       courseName: ['', Validators.required],
       courseFees: ['', Validators.required],
       duration: ['', Validators.required],
-      subjectOption: ['', Validators.required],
+      subjectIds: ['', Validators.required],
       sortDescription: ['', Validators.required],
-      finialFees: ['', Validators.required],
       isStarterCourse: ['', Validators.required],
     });
   }
@@ -61,8 +65,6 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   checkboxChanged(subjectId: number) {
-    console.log(this.selectedSubjectIds);
-
     const index = this.courseRequest.subjectIds.indexOf(subjectId);
 
     if (index === -1) {
@@ -93,19 +95,21 @@ export class AdminCoursesComponent implements OnInit {
 
   public saveCourse() {
      this.addCourseForm.markAllAsTouched();
-     if (this.addCourseForm.valid)
+     if (this.addCourseForm.invalid && this.imageName == '')
+      return;
 
       this.courseService.saveCourse(this.courseRequest).subscribe({
         next: (data: any) => {
           this.message = data.message
-          if (this.message == 'SUCCESS') {
             this.getAllCourses();
             this.courseRequest = new CourseRequest();
-            this.message = 'Course Add Successfully'
-          } else {
-            this.message = 'Something Went Wrong'
-          }
-
+            this.message = data.message
+            this.messageClass = 'text-success'
+            this.clearValidationForm();
+        },
+        error:(err:any) => {
+          this.message = err.error.message
+          this.messageClass = 'text-danger'
         }
       })
   }
@@ -149,9 +153,14 @@ export class AdminCoursesComponent implements OnInit {
   public updateCourse() {
     this.courseService.updatCourse(this.course).subscribe({
       next: (data: any) => {
-        alert('success');
         this.course = new Course()
-        this.getAllCourses()
+        this.getAllCourses();
+        this.message = data.message;
+        this.messageClass = 'text-success';
+      },
+      error:(err:any)=>{
+        this.message = err.error.message;
+        this.messageClass = 'text-danger';
       }
     })
   }
@@ -171,26 +180,23 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   public addAndRemoveSubjectsFromCourse(subject: any) {
-    console.log(this.course.subjects);
-
     let index = this.course.subjects.findIndex(e => e.subjectId == subject.subjectId);
     if (index === -1)
       this.course.subjects.push(subject);
     else
       this.course.subjects.splice(index, 1);
   }
-
-  clearCoruse() {
+  public clearValidationForm(){
+    this.imageName = '';
     this.addCourseForm = this.formBuilder.group({
-      imageName: ['', Validators.required],
       courseName: ['', Validators.required],
       courseFees: ['', Validators.required],
       duration: ['', Validators.required],
-      subjectOption: ['', Validators.required],
+      subjectIds: ['', Validators.required],
       sortDescription: ['', Validators.required],
-      finialFees: ['', Validators.required],
       isStarterCourse: ['', Validators.required],
     })
   }
+ 
 
 }

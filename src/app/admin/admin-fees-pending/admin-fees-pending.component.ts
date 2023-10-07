@@ -149,5 +149,14 @@ public findByGivenDate(){
   }
 }
 
+public clearFessPayForm(){
+  this.feesPays = new FeesPay();
+  this.payFeesForm = this.formBuilder.group({
+    feesPayAmount: ['', Validators.required],
+    payDate: ['', Validators.required],
+    recieptNo: ['', Validators.required],
+    description: ['', Validators.required]
+  });
+}
 
 }
