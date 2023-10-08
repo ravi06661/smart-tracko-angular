@@ -31,8 +31,6 @@ export class ChapterComponent {
     this.subjectService.getAllSubjectChapters(this.subjectId).subscribe(
       (data: any) => {
         this.chapter = data;
-        console.log('chapters',this.chapter);
-        
       }
     )
   }
@@ -40,7 +38,6 @@ export class ChapterComponent {
     this.subjectService.getSubjectById(id).subscribe({
       next:(data:any)=>{
         this.subject = data.subject
-        console.log('subject',this.subject);
       }
     })
   }
