@@ -26,7 +26,7 @@ export class AdminSubjectsChapterComponent {
   chapterUpdate: Chapter = new Chapter();
   imageName = ''
   techImages: TechnologyStack[] = [];
-
+  subject:Subject = new Subject
   constructor(private subjectService: SubjectService,
     private route: ActivatedRoute,
     private chapterService: ChapterServiceService,
@@ -35,14 +35,23 @@ export class AdminSubjectsChapterComponent {
 
   ngOnInit() {
     this.subjectId = this.route.snapshot.params[('id')];
+    this.getSubjectById(this.subjectId)
     this.getAllSubjectChapter();
     this.techService.getAllTechnologyStack().subscribe({
       next: (data) => {
         this.techImages = data
       }
     });
+    
   }
 
+  public getSubjectById(subjectId:number){
+    this.subjectService.getSubjectById(subjectId).subscribe({
+      next:(data:any)=>{
+        this.subject = data.subject
+      }
+    })
+  }
   public getAllSubjectChapter() {
     this.subjectService.getAllSubjectChapters(this.subjectId).subscribe(
       (data: any) => {
