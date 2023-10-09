@@ -13,13 +13,12 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   styleUrls: ['./study.component.scss'],
 })
 export class StudyComponent {
-  BASE_URL=this.utilityService.getBaseUrl();
-  imageUrl=this.BASE_URL+'/file/getImageApi/technologyStackImage/';
+  BASE_URL = this.utilityService.getBaseUrl();
+  imageUrl = this.BASE_URL + '/file/getImageApi/technologyStackImage/';
   subjects: SubjectResponse[] = [];
   subject: Subject = new Subject();
 
-  constructor(private subjectService: SubjectService,private loginService:LoginService,private utilityService:UtilityServiceService) { }
-
+  constructor(private subjectService: SubjectService, private loginService: LoginService, private utilityService: UtilityServiceService) { }
 
   ngOnInit() {
     this.subjectService.getAllSubjectsWithChapterCompletedStatus().subscribe({
@@ -28,10 +27,14 @@ export class StudyComponent {
       },
     });
   }
+  
   progressWidth: string = '';
   calculatePercentages(num1: number, num2: number) {
     let per: any;
-      per = Math.floor((num1 / num2) * 100);
+    per = Math.floor((num1 / num2) * 100);
+    if (num1 == 0) {
+      per = 0
+    }
     return per;
   }
 }
