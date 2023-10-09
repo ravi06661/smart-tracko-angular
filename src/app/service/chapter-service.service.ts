@@ -28,7 +28,7 @@ export class ChapterServiceService {
     formData.append('content', data.content);
     return this.http.post(`${this.CHAPTER_URL}/addChapterContent`, formData);
   }
-  public updateChapterContent(chapterId: number, data: ChapterContent) {
+  public updateChapterContent(data: ChapterContent) {
     let formData = new FormData();
     formData.append('title', data.title);
     formData.append('subTitle', data.subTitle);

@@ -38,9 +38,14 @@ export class AdminSubjectsTopicTestComponent {
   public getChapter() {
     this.chapterId = this.route.snapshot.params[('id')];
     this.chapterService.getChapterById(this.chapterId).subscribe(
-      (data: any) => {
-        this.chapter = data.chapter.chapterContent;
-        this.chapterName = data.chapter.chapterName;
+      {
+        next:(data: any) => {
+          this.chapter = data.chapter.chapterContent;
+          this.chapterName = data.chapter.chapterName;
+        },
+        error:(er)=>{ 
+          this.erroreMessage = er.error.message
+        }
       }
     )
   }
@@ -51,14 +56,16 @@ export class AdminSubjectsTopicTestComponent {
       return;
     } else {
       this.chapterService.addChapterContent(this.chapterContent, this.chapterId).subscribe(
-        (data) => {
-          this.erroreMessage = 'Success'
-          this.chapterContent = new ChapterContent();
-          this.editorInstance = ''
-          this.getChapter();
-        },
-        (error) => {
-          this.erroreMessage = "error occure please submit again.."
+        {
+          next: (data) => {
+            this.erroreMessage = 'Success'
+            this.chapterContent = new ChapterContent();
+            this.editorInstance = ''
+            this.getChapter();
+          },
+          error: (error) => {
+            this.erroreMessage = "error occure please submit again.."
+          }
         }
       )
     }
@@ -69,13 +76,15 @@ export class AdminSubjectsTopicTestComponent {
   }
 
   public updateContent() {
-    this.chapterService.updateChapterContent(this.chapterId, this.chapterContent).subscribe(
-      (data) => {
-        this.chapterContent = new ChapterContent;
-        this.erroreMessage = " Success.."
-      },
-      (error) => {
-        this.erroreMessage = "error occure please submit again.."
+    this.chapterService.updateChapterContent(this.chapterContent).subscribe(
+      {
+        next: (data: any) => {
+          this.erroreMessage = " Success.."
+          this.chapterContent = data
+        },
+        error: (error) => {
+          this.erroreMessage = error.error.message
+        }
       }
     )
   }
@@ -84,17 +93,17 @@ export class AdminSubjectsTopicTestComponent {
     this.chapterContent = new ChapterContent();
   }
   public getChapterContent(contentId: number) {
-    this.chapterService.getChapterContent(this.chapterId).subscribe(
+    this.chapterService.getChapterContent(contentId).subscribe(
       (data) => {
         this.chapterContent = data;
       }
     )
   }
   public deleteContent() {
-    this.chapterService.deleteContent(this.chapterId).subscribe(
+    this.chapterService.deleteContent(this.deleteContentId).subscribe(
       (data) => {
         this.reload();
-        this.chapterId = 0;
+        this.deleteContentId = 0;
       }
     )
   }
@@ -103,7 +112,7 @@ export class AdminSubjectsTopicTestComponent {
   }
 
   public reload() {
-    this.ngOnInit();
+    this.getChapter()
     this.chapterContent = new ChapterContent();
     this.erroreMessage = ''
   }

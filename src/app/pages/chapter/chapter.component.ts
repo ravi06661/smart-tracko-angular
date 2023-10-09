@@ -24,20 +24,13 @@ export class ChapterComponent {
   ngOnInit(){
      this.subjectId=this.activateRouter.snapshot.params[('id')];
      this.getSubjectById(this.subjectId);
-     this.getAllSubjectChapter();
   }
   
-  public getAllSubjectChapter() {
-    this.subjectService.getAllSubjectChapters(this.subjectId).subscribe(
-      (data: any) => {
-        this.chapter = data;
-      }
-    )
-  }
   public getSubjectById(id:number){
     this.subjectService.getSubjectById(id).subscribe({
       next:(data:any)=>{
         this.subject = data.subject
+        this.chapter =this.subject.chapters
       }
     })
   }

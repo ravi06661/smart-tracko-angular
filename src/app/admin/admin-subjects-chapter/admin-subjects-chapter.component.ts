@@ -36,7 +36,6 @@ export class AdminSubjectsChapterComponent {
   ngOnInit() {
     this.subjectId = this.route.snapshot.params[('id')];
     this.getSubjectById(this.subjectId)
-    this.getAllSubjectChapter();
     this.techService.getAllTechnologyStack().subscribe({
       next: (data) => {
         this.techImages = data
@@ -49,16 +48,20 @@ export class AdminSubjectsChapterComponent {
     this.subjectService.getSubjectById(subjectId).subscribe({
       next:(data:any)=>{
         this.subject = data.subject
+        this.chapter =this.subject.chapters
       }
     })
   }
-  public getAllSubjectChapter() {
-    this.subjectService.getAllSubjectChapters(this.subjectId).subscribe(
-      (data: any) => {
-        this.chapter = data;
-      }
-    )
-  }
+
+  // public getAllSubjectChapter() {
+  //   this.subjectService.getAllSubjectChapters(this.subjectId).subscribe(
+  //     (data: any) => {
+  //       this.chapter = data;
+  //     }
+  //   )
+  // }
+
+  
   public addChapter() {
     if (this.chapterUpdate.chapterName == '') {
       this.message = "please enter subject name.."
@@ -69,7 +72,7 @@ export class AdminSubjectsChapterComponent {
           next: (data) => {
             this.message = 'Success..'
             this.chapterUpdate = new Chapter();
-            this.getAllSubjectChapter();
+            this.getSubjectById(this.subjectId)
           },
           error: (error) => {
             this.message = error.error.message
@@ -83,7 +86,7 @@ export class AdminSubjectsChapterComponent {
       {
         next: (data) => {
           this.chapterId = 0;
-          this.getAllSubjectChapter();
+          this.getSubjectById(this.subjectId)
         },
         error: (error) => {
           this.message = 'Failed..'
@@ -98,7 +101,7 @@ export class AdminSubjectsChapterComponent {
   public reload() {
     this.message = ''
     this.chapterUpdate = new Chapter();
-    //  this.getAllSubjectChapter();
+    this.getSubjectById(this.subjectId)
   }
 
   public updateChapter() {
@@ -108,7 +111,7 @@ export class AdminSubjectsChapterComponent {
           this.message = 'success';
           this.chapterUpdate = new Chapter();
           this.chapterId = 0;
-          this.getAllSubjectChapter();
+         this.getSubjectById(this.subjectId)
         },
         error: (error) => {
           this.message = error.error.message;
