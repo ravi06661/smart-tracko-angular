@@ -102,7 +102,6 @@ export class AdminAssignmentsComponent implements OnInit {
       }
       )
     }
-    //this.router.navigate(['/admin/createassignments/' + 883])
   }
 
   public getAllSubmitedAssignments() {

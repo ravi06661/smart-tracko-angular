@@ -136,7 +136,7 @@
             </h3>
             <div class="leave_apply d-flex align-items-center">
               <button type="button" class="leave_btn font-17 font-500" data-bs-toggle="modal"
-                data-bs-target="#exampleModal1" (click)="clearData()">
+                data-bs-target="#exampleModal1" (click)="clearData()" (click)="getLeaveType()">
                 Apply for Leave
               </button>
               <div class="dropdown">
@@ -249,7 +249,7 @@
             <div class="form-group">
               <select class="form-select" formControlName="leaveTypeId" aria-label="Default select example" name="leaveTypeId"
                 [(ngModel)]="leaves.leaveType.leaveTypeId">
-                <option disabled>Select Leave Type</option>
+                <option value = "">Select Leave Type</option>
                 <option *ngFor="let leaveType of leaveTypes" [ngValue]="leaveType.leaveTypeId">
                   {{ leaveType.leaveTypeName }}
                 </option>
