@@ -13,7 +13,6 @@ import { SubjectService } from 'src/app/service/subject.service';
 })
 export class SubjectdetailsComponent {
   chapterId: number = 0;
-  questionId: number = 0;
   chapter: ChapterContent[] = []
   subjectId: number = 0;
   chapterContent: ChapterContent = new ChapterContent();
@@ -26,14 +25,17 @@ export class SubjectdetailsComponent {
     private subjectService: SubjectService,
     private chapterService: ChapterServiceService,
     private examService: ExamServiceService,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private acitvateRoute: ActivatedRoute) { }
   ngOnInit() {
-    this.chapterId = this.activateRouter.snapshot.params[('id')];
+    this.acitvateRoute.queryParams.subscribe(params => {
+      this.chapterId = params['chapterId'];
+      this.subjectId = params['subjectId'];
+    });
     this.getChapter();
     this.getChapterExamIsComplete();
   }
   public getChapter() {
-    // this.chapterId = this.activateRouter.snapshot.params[('id')];
     this.chapterService.getChapterById(this.chapterId).subscribe(
       (data: any) => {
         this.chapter = data.chapter.chapterContent;
@@ -60,7 +62,6 @@ export class SubjectdetailsComponent {
         }
       },
       error: (err) => {
-
       }
     })
   }
