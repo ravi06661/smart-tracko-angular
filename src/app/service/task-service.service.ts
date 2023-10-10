@@ -45,8 +45,8 @@ export class TaskServiceService {
     })
     return this.http.post(`${this.TASK_URL}/addQuestionInTask`, formData)
   }
-  public deleteTaskQuestion(taskId: number, questionId: number) {
-    return this.http.delete(`${this.TASK_URL}/deleteTaskQuestion?questionId=${questionId}&taskId=${taskId}`)
+  public deleteTaskQuestion(questionId: number) {
+    return this.http.delete(`${this.TASK_URL}/deleteTaskQuestion?questionId=${questionId}`)
   }
   public addAssignment(taskData: Task) {
     let formData = new FormData();

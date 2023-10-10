@@ -24,7 +24,7 @@ export class AssignmentDetailsComponent implements OnInit {
   assignmentQues: TaskQuestion = new TaskQuestion;
   attachment = '';
   file: any
-  isSubmittedis: boolean = false
+  isSubmittedQuestion: boolean = false
   assignmentSubmission: AssignmentSubmissionRequest = new AssignmentSubmissionRequest
   submissionForm: FormGroup;
   constructor(private activateRoute: ActivatedRoute,
@@ -41,21 +41,19 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.activateRoute.queryParams.subscribe(params => {
       this.questionId = params['questionId'];
       this.assignmentId = params['assignmentId'];
     });
     this.getAssignmentQuestionById();
-    this.isSubmitted()
   }
 
   public getAssignmentQuestionById() {
+    this.isSubmitted()
     this.assignmentService.getAssignmentQuestionById(this.questionId, this.assignmentId).subscribe({
       next: (data: any) => {
         this.assignmentQues = data.question
         this.attachment = data.attachment
-        this.isSubmitted()
       }
     })
   }
@@ -80,22 +78,18 @@ export class AssignmentDetailsComponent implements OnInit {
         })
       }
     })
-
   }
 
   public isSubmitted() {
     this.assignmentService.isSubmitted(this.assignmentId, this.questionId, this.loginService.getStudentId()).subscribe(
-      (data: any) => {
-        return data;
+      (data: any) => {   
+        if(data){
+          this.isSubmittedQuestion = false;
+        }else
+        this.isSubmittedQuestion = true;
       }
     )
   }
-
-
-
-
-
-
 
   isImageExpanded = false;
 
@@ -121,7 +115,6 @@ export class AssignmentDetailsComponent implements OnInit {
     return field ? field.invalid && field.touched : false;
   }
 
-  
   public submissionFormFun() {
     Object.keys(this.submissionForm.controls).forEach(key => {
       const control = this.submissionForm.get(key);
@@ -134,5 +127,4 @@ export class AssignmentDetailsComponent implements OnInit {
       firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
-
 }

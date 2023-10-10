@@ -41,19 +41,15 @@ export class AssignmentServiceService {
     })
     return this.http.post(`${this.assignmentUrl}/addQuestionInAssignment`, formData)
   }
-  public deleteTaskQuestion(assignmentId: number, questionId: number) {
-    return this.http.delete(`${this.assignmentUrl}/deleteTaskQuestion?questionId=${questionId}&assignmentId=${assignmentId}`)
+  public deleteTaskQuestion(questionId: number) {
+    return this.http.delete(`${this.assignmentUrl}/deleteTaskQuestion?questionId=${questionId}`)
   }
   public addAssignment(data: any) {
     let formData = new FormData();
     formData.append('assignmentId', data.id)
-    // formData.append('course', JSON.stringify(data.course))
-    // formData.append('subject', data.subject)
-    // formData.append('title', data.title)
     formData.append('attachment', data.attachment)
     return this.http.post(`${this.assignmentUrl}/addAssignment`, formData)
   }
-
 
   public submitAssignment(assignmentSubmission: AssignmentSubmissionRequest, file: any) {
     let formData = new FormData();
