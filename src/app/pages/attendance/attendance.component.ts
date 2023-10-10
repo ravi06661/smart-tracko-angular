@@ -83,7 +83,7 @@ export class AttendanceComponent implements OnInit {
     this.attendanceMonth = 'Month';
     this.leaveMonth = 'Month';
     this.getAttendanceHistoy();
-    this.getLeaveType();
+    // this.getLeaveType();
     this.getStudentLeaves();
     this.getStudentPresentsAbsentsAndLeavesYearWise();
   }
