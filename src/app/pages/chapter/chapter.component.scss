@@ -1,11 +1,10 @@
-
 .subject_card {
-    background: #ffffff;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
-    border-radius: 5px;
-    padding: 20px;
-    gap: 20px;
-    margin-bottom: 24px;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+  padding: 20px;
+  gap: 20px;
+  margin-bottom: 24px;
 }
 
 .scroll_sec {
@@ -20,7 +19,6 @@
   display: none;
 }
 
-
 .subject_card {
   background: #ffffff;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
@@ -28,6 +26,7 @@
   padding: 20px;
   gap: 20px;
   margin-bottom: 24px;
+  border: 0.329px solid #ddd;
 }
 
 .subject_card_top {
@@ -89,7 +88,7 @@
   margin-right: 20px;
 }
 
-.image-size{
+.image-size {
   width: 55px;
   height: 55px;
 }
