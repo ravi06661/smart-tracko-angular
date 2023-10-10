@@ -13,8 +13,10 @@
           <div class="d-flex java">
             <img [src]="imageUrl+courseImg" class="obj-fit-none">
             <div class="ms-2">
-              <h2 class="font-27 font-600 text-white java mb-1">{{courseName}}</h2>
-              <!-- <h2 class="font-16 font-00 text-white java mb-1">Batch No- 5</h2> -->
+
+              <h2 class="font-27 font-600 text-white java mb-1 java_title">{{courseName}}</h2>
+              <h2 class="font-16 font-00 text-white java mb-1">Batch No- 5</h2>
+
               <h3 class="font-14 font-400 text-white">From - {{startDate|date:'mediumDate'}} To {{endDate|date:'mediumDate'}}</h3>
             </div>
             <h2 class="ms-auto font-17 font-600 text-light">Fee Structure</h2>
@@ -66,7 +68,7 @@
 
       <div class="task_assignment">
         <div class="row mx-0">
-          <div class="col-md-6">
+          <div class="col-md-6 mb-4">
             <h3 class="title font-21 font-600 secondary position-relative">Upcoming Batches </h3>
             <h3  class="font-21 font-600 secondary position-relative"*ngIf="length==0">NO UPCOMING BATCHES!!! </h3>
 
@@ -78,7 +80,7 @@
                     <img style="height:66px;width: 84.4px; border-radius: 50px;" class="imageSize"
                     [src]="imageUrl+batch.subject.technologyStack.imageName">
                     <div class="ms-2">
-                      <h2 class="font-21 font-600 text-black java">{{batch.batchName}}</h2>
+                      <h2 class="font-21 font-600 text-black java ">{{batch.batchName}}</h2>
                      
 
                       <h2 class="font-16 font-00 text-black java">Duration 90 Days</h2>
@@ -93,7 +95,7 @@
             </div>
            </div>
 
-          <div class="col-md-6">
+          <div class="col-md-6 mb-4">
             <h3 class="title font-21 font-600 secondary position-relative">Other Courses</h3>
             <h3  class="font-21 font-600 secondary position-relative" *ngIf="courses.length == 0">
               NO COURSES AVAILABLE !!!
@@ -105,8 +107,8 @@
                     <img style="height:66px;width: 84.4px; border-radius: 50px;" class="imageSize"
                       [src]="imageUrl+course.technologyStack.imageName">
                     <div class="ms-2">
-                      <h2 class="font-21 font-600 text-black java">{{course.courseName}}</h2>
-                      <h2 class="font-16 font-00 text-black java">Duration {{course.duration}}</h2>
+                      <h2 class="font-21 font-600 text-black java java_heading">{{course.courseName}}</h2>
+                      <h2 class="font-16 font-500 text-black java java_heading">Duration {{course.duration}}</h2>
                       <h3 class="font-14 font-400 text-black mb-0">{{course.sortDescription}}</h3>
                     </div>
                   </div>

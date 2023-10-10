@@ -967,9 +967,9 @@ video {
   color: var(--bs-table-striped-color);
 }
 
-/* .table_heading {
-  background: rgba(255, 255, 255, 0.80);
-} */
+.table_heading {
+  background: rgba(255, 255, 255, 0.80);;
+}
 
 td {
   font-size: 15px;
@@ -1993,6 +1993,7 @@ ul.dropdown-menu.drop {
   gap: 20px;
 }
 
+
 .task-area {
   width: calc(50% - 10px);
   background-color: #49BFCF;
@@ -2765,6 +2766,7 @@ a {
   background: #fff;
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.08);
   margin-bottom: 20px;
+  margin: 3px;
 }
 
 .subject_card {
@@ -2832,6 +2834,7 @@ a {
   right: 84px;
   bottom: 30px;
   margin-right: 20px;
+  justify-content: center;
 }
 
 .subdetails_page {
@@ -3018,7 +3021,7 @@ table tr td {
   display: block !important;
 }
 
-.main-inner {
+.main_inner {
   min-height: 200px;
   margin-bottom: 20px;
 }
@@ -3936,6 +3939,48 @@ input.change-student-img {
   display: block;
 }
 
+
+/* CSS HERE 10/10/2023 */
+.calender_img {
+  background: #53c2d2;
+  border-radius: 6px;
+}
+
+.right_task_area {
+  gap: 20px;
+  padding: 0 12px 0px 0px !important;
+}
+.main_inner{
+  justify-content: space-between;
+}
+.main_inner .col-md-5{
+  width: 47%;
+  padding: 20px;
+}
+
+a:hover {
+  color: #115e68 !important;
+}
+.breadcrumb {
+  background-color: transparent !important;
+}
+.dropdown-item:active {
+  color: #fff !important;
+  text-decoration: none;
+  background-color: #5ed8e8 !important;
+  cursor: pointer;
+}
+.dropdown-item {
+  cursor: pointer;
+}
+.attendance_calender{
+  padding: 20px;
+}
+/* MEDIA QUERY */
+@media (min-width:993px) and (max-width: 1200px) { 
+  .calendar-hadding h3{
+    font-size: 20px;
+
 /* ADD CSS 09/10/2023 */
 .main_inner{
   justify-content: space-between !important;
@@ -3948,6 +3993,7 @@ input.change-student-img {
 @media (min-width:993px) and (max-width: 1200px) { 
   .calendar-hadding h3{
     font-size: 21px;
+
   }
   .punch_btn h4{
       font-size: calc(1rem + .3vw);
@@ -3955,6 +4001,27 @@ input.change-student-img {
   .punch_btn h4{
     font-size: 1.2rem;
   }
+  .main_inner .col-md-5 {
+    width: 45%;
+}
+.calendar-hadding{
+  padding-left: 0 !important;
+}
+.main_inner .col-md-5 {
+  padding: 10px;
+}
+.timestamicon h3{
+  font-size: 14px;
+}
+.attendance_calender {
+  padding: 10px;
+}
+}
+@media (min-width:1199px) and (max-width: 1300px) { 
+  .calendar-hadding h3{
+    font-size: 21px;
+  }
+
 }
 @media (min-width:767px) and (max-width: 992px) { 
   .main_inner .col-md-3{
@@ -3962,10 +4029,18 @@ input.change-student-img {
       width: 36%;
   }
   .main_inner .col-md-5 {
+
+    width: 58%;
+    margin-right: 12px;
+}
+.calendar-hadding h3{
+  font-size: 20px;
+
     width: 60%;
 }
 .calendar-hadding h3{
   font-size: 17px;
+
 }
 .punch_btn h4{
     font-size: calc(1rem + .3vw);
@@ -3974,9 +4049,108 @@ input.change-student-img {
   font-size: 1.2rem;
 }
 .main_inner .right_task_area {
-  width: 100% !important;
+
+  width: 99% !important;
+  margin-left: 10px;
 }
 .task-area h1{
   font-size: 28px !important;
 }
+
+.calendar-hadding{
+  padding-left: 0 !important;
 }
+.timestamicon h3{
+  font-size: 14px;
+}
+.main_inner .col-md-5 {
+  padding: 10px;
+}
+.table-calendar tr{
+  font-size: 14px;
+}
+.bootstrap_cards {
+  flex: 0 0 auto !important;
+  width: 50% !important;
+}
+.java_heading {
+  font-size:12px !important;
+}
+.Enroll_btn {
+  font-size: 11px;
+}
+.java h3{
+  font-size: 12px;
+}
+.title {
+  font-size: 20px;
+}
+.java_title{
+  font-size: 20px;
+}
+.profile h1{
+  font-size: 26px;
+}
+.attendance_calender {
+  padding: 10px;
+}
+.attendance .col-md-6{
+  width: 100%;
+}
+.attendance_chart .col-md-6{
+  width: 50%;
+}
+}
+
+@media (max-width:767px){
+  .main_inner .col-md-5 {
+    width: 100%;
+    padding: 20px;
+}
+.calender_img .col-md-6{
+  width: 50%;
+}
+.bootstrap_cards{
+  flex: 0 0 auto !important;
+  width: 50% !important;
+}
+.bootstrap_cards {
+  flex: 0 0 auto !important;
+  width: 100% !important;
+}
+.profile h1{
+  font-size: 22px;
+}
+.calendar-hadding h3 {
+  font-size: 20px;
+}
+.java_title{
+  font-size: 20px;
+}
+.punch_btn{
+  margin-left: 0 !important;
+}
+.java_heading {
+  font-size:14px !important;
+}
+.Enroll_btn {
+  font-size: 11px;
+}
+.java h3{
+  font-size: 12px;
+}
+.title {
+  font-size: 20px;
+}
+.attendance_calender {
+  padding: 10px;
+}
+.attendance .col-md-6{
+  width: 100%;
+}
+.attendance_chart .col-md-6{
+  width: 50%;
+}
+}
+}
+

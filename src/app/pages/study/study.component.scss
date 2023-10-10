@@ -70,6 +70,7 @@
   padding: 20px;
   gap: 20px;
   margin-bottom: 24px;
+  border: 0.329px solid #DDD;
 }
 
 .subject_card_top {
@@ -147,19 +148,14 @@
 
 /*SUBJECT SECTION CSS END */
 
-@media (max-width: 1400px) {
+@media  (min-width: 993px) and (max-width: 1400px) {
   .bootstrap_cards {
     flex: 0 0 auto !important;
     width: 33% !important;
   }
 }
 
-@media (max-width: 1200px) {
-  .bootstrap_cards {
-    flex: 0 0 auto !important;
-    width: 50% !important;
-  }
-}
+
 
 .custom-progress-bar {
   background-color: green;
