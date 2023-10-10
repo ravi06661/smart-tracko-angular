@@ -9,8 +9,8 @@
 
     <a routerLink="/student/study" [ngClass]="check == 'study' ? 'active' : 'box-hover'"
       (click)="getValueById(lsdv1.value)"><input #lsdv1 type="hidden" value="study" /><img
-        src="assets/images/svg_img/New folder/Neutral-Study.svg" class="material-icons"><span class="icon-text">Study
-        Material</span></a>
+        src="assets/images/svg_img/New folder/Neutral-Study.svg" class="material-icons"><span 
+        [ngClass]="check == 'study' ? 'icon-text dashboard' : 'icon-text'">Study Material</span></a>
 
     <a routerLink="/student/mycourse" [ngClass]="check == 'mycourse' ? 'active' : 'box-hover'"
       (click)="getValueById(lsdv2.value)"><input #lsdv2 type="hidden" value="mycourse" /><img
@@ -28,7 +28,7 @@
           check == 'task' ? 'icon-text dashboard' : 'icon-text'
         ">Tasks</span>
     </a>
-    <a routerLink="/student/taskAndAssignment" [ngClass]="check == 'result' ? 'active' : 'box-hover'"
+    <a  [ngClass]="check == 'result' ? 'active' : 'box-hover'"
       (click)="getValueById(lsdv5.value)"><input #lsdv5 type="hidden" value="result" /><img
         src="assets/images/svg_img/New folder/Neutral-Statistics.svg" class="material-icons" id="icon4" /><span
         [ngClass]="check == 'result' ? 'icon-text dashboard' : 'icon-text'">Results & Statistics</span></a>

@@ -31,6 +31,7 @@ export class MycourseComponent implements OnInit {
   startDate: any;
   endDate: any;
   courseName: any;
+  courseImg  = '';
   
   constructor(private couserService:CourseServiceService,private utilityService:UtilityServiceService,private batchService:BatchesService,private feesPayService: FeesPayService,private activateRoute:ActivatedRoute,private loginService:LoginService) {}
 
@@ -77,6 +78,7 @@ export class MycourseComponent implements OnInit {
        this.startDate = data.joinDate;
        this.endDate = data.endDate;
        this.courseName = data.courseName;
+       this.courseImg = data.image;
       }
     })
   }
