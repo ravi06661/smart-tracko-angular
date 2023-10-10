@@ -33,7 +33,8 @@ export class AdminAssignmentsComponent implements OnInit {
   submitedAssignmentObj: AssignmentSubmission = new AssignmentSubmission
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
   taskSubmissionStatus2: SubmissionAssignmentTaskStatus = new SubmissionAssignmentTaskStatus
-  message:string=''
+  message: string = ''
+  course: Course = new Course
 
   totalSubmitted = 0;
   reveiwed = 0;
@@ -65,7 +66,7 @@ export class AdminAssignmentsComponent implements OnInit {
   }
 
   public getAllCourses() {
-    this.courseService.getAllCourses(0,100).subscribe({
+    this.courseService.getAllCourses(0, 100).subscribe({
       next: (data: any) => {
         this.courses = data.response;
       }
@@ -86,21 +87,21 @@ export class AdminAssignmentsComponent implements OnInit {
   }
 
   public createAssingment() {
-  //  if(this.submissionForm.invalid){
-  //   this.submissionFormFun()
-  //   return;
-  //  }else{
-  //   this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
-  //     next: (data: any) => {
-  //       this.router.navigate(['/admin/createassignments/' + data.id])
-  //     },
-  //     error: (error) => {
-  //        this.message = error.error.message
-  //      }
-  //   }
-  //   )
-  //  }
-  this.router.navigate(['/admin/createassignments/' + 883])
+         this.messageClear()
+    if (this.submissionForm.invalid) {
+      this.submissionFormFun()
+      return;
+    } else {
+      this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
+        next: (data: any) => {
+          this.router.navigate(['/admin/createassignments/' + data.id])
+        },
+        error: (error) => {
+          this.message = error.error.message
+        }
+      }
+      )
+    }
   }
 
   public getAllSubmitedAssignments() {
@@ -165,7 +166,6 @@ export class AdminAssignmentsComponent implements OnInit {
     }
   }
 
-  course: Course = new Course
   courseFilterByCourseIdAndSubjectId(course: Course, subjectId: number) {
     this.course = course;
     this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(this.course.courseId, subjectId).subscribe((
@@ -185,10 +185,11 @@ export class AdminAssignmentsComponent implements OnInit {
       courseId: ['', Validators.required],
       title: ['', Validators.required],
     });
+    this.messageClear()
   }
 
   public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
-    const field = this.submissionForm.get(fieldName);  
+    const field = this.submissionForm.get(fieldName);
     return field ? field.invalid && field.touched : false;
   }
   public submissionFormFun() {
@@ -202,6 +203,10 @@ export class AdminAssignmentsComponent implements OnInit {
     if (firstInvalidControl) {
       firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  }
+
+  public messageClear() {
+    this.message = ''
   }
 }
 

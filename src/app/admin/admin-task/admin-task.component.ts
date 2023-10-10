@@ -30,7 +30,7 @@ export class AdminTaskComponent {
   reveiwed = 0;
   unReveiwed = 0;
 
-  firstTaskForm :FormGroup;
+  firstTaskForm: FormGroup;
   message: string = ''
 
   constructor(private subjectService: SubjectService,
@@ -38,15 +38,15 @@ export class AdminTaskComponent {
     private taskService: TaskServiceService,
     private router: Router,
     private utilityService: UtilityServiceService,
-    private formBuilder:FormBuilder) { 
+    private formBuilder: FormBuilder) {
 
-      this.firstTaskForm = this.formBuilder.group({
-        taskName : ['',Validators.required],
-        course : ['',Validators.required],
-        subject : ['',Validators.required],
-        taskAttachment : ['',Validators.required]
-      })
-    }
+    this.firstTaskForm = this.formBuilder.group({
+      taskName: ['', Validators.required],
+      course: ['', Validators.required],
+      subject: ['', Validators.required],
+      taskAttachment: ['', Validators.required]
+    })
+  }
 
   ngOnInit() {
     this.getCourses();
@@ -75,7 +75,7 @@ export class AdminTaskComponent {
 
   public getCourses() {
 
-    this.courseService.getAllCourses(0,100).subscribe(
+    this.courseService.getAllCourses(0, 100).subscribe(
       (data: any) => {
         this.courses = data.response
       }
@@ -87,7 +87,7 @@ export class AdminTaskComponent {
 
   public submit() {
     this.firstTaskFormControl();
-    if(this.firstTaskForm.valid){
+    if (this.firstTaskForm.valid) {
       this.taskService.addTask(this.task).subscribe(
         (data: any) => {
           console.log(data);
@@ -133,20 +133,20 @@ export class AdminTaskComponent {
   //   )
   // }
 
-  public calculatePercentage(total:number,num:number){
-    return Math.floor(num/total*100);
+  public calculatePercentage(total: number, num: number) {
+    return Math.floor(num / total * 100);
   }
 
-  public clearTaskForm(){
+  public clearTaskForm() {
     this.task = new TaskRequest();
     this.firstTaskForm = this.formBuilder.group({
-      taskName : ['',Validators.required],
-      course : ['',Validators.required],
-      subject : ['',Validators.required],
-      taskAttachment : ['',Validators.required]
+      taskName: ['', Validators.required],
+      course: ['', Validators.required],
+      subject: ['', Validators.required],
+      taskAttachment: ['', Validators.required]
     })
   }
- 
+
   public getOverAllAssignmentTaskStatus() {
     this.taskService.getOverAllAssignmentTaskStatus().subscribe(
       (data: any) => {
@@ -159,10 +159,10 @@ export class AdminTaskComponent {
             count += 1;
           }
         });
-       this.totalSubmitted =count;
-        this.totalSubmitted = this.calculatePercentages(this.totalSubmitted,this.taskSubmissionStatus.length)
-        this.reveiwed = this.calculatePercentages( this.taskSubmissionStatus2.reveiwed,this.totalSubmitted)
-        this.unReveiwed = this.calculatePercentages( this.taskSubmissionStatus2.unReveiwed,this.totalSubmitted)
+        this.totalSubmitted = count;
+        this.totalSubmitted = this.calculatePercentages(this.totalSubmitted, this.taskSubmissionStatus.length)
+        this.reveiwed = this.calculatePercentages(this.taskSubmissionStatus2.reveiwed, this.totalSubmitted)
+        this.unReveiwed = this.calculatePercentages(this.taskSubmissionStatus2.unReveiwed, this.totalSubmitted)
       }
     )
   }
@@ -170,13 +170,11 @@ export class AdminTaskComponent {
 
   calculatePercentages(num1: number, num2: number) {
     let per: any;
-   if(num1<0)
-   {num1=0
-   }
-   if(num2<0)
-   num2=0
-
     per = Math.floor((num1 / num2) * 100);
+    if (num2 < 0) {
+      num2 = 0
+      per = 0;
+    }
     return per;
   }
 }

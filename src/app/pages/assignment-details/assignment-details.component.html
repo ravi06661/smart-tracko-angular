@@ -2,7 +2,7 @@
   <div class="profile d-flex mb-4">
     <div class="assign-detail-heading">
       <h1 class="font-27 font-700 secondary mb-0">Assignment - Day 1</h1>
-      <button  *ngIf="isSubmitted()!" type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal"
+      <button  *ngIf="isSubmittedQuestion!" type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal"
         data-bs-target="#submit_button" >Submit</button>
     </div>
     <app-profile-bar></app-profile-bar>
@@ -15,9 +15,7 @@
           <h3 class="font-17 font-600">Question - 1</h3>
           <h4 class="font-17 font-400" [innerHTML]="assignmentQues.question"></h4>
         </div>
-
         <div class="assignment">
-
           <div class="row advertisement">
             <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="assignmentQues.videoUrl!=null">
               <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
@@ -33,10 +31,6 @@
               </div>
             </div>
           </div>
-
-
-
-
             
             <!-- <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let images of obj.questionImages; let i=index">
                   <h3 class="font-15 font-700 assignment_sub_heading">Image {{i + 1}}</h3>
@@ -126,9 +120,9 @@
               </div>
 
             </div>
-            <div    *ngIf="isSubmitted()!" class="apply_modal_buttons d-flex justify-content-between align-items-center">
+            <div    class="apply_modal_buttons d-flex justify-content-between align-items-center">
               <button type="button" class="cancel_modal_btn">Save Draft</button>
-              <button type="button" class="apply_modal_btn"
+              <button  *ngIf="isSubmittedQuestion!" type="button" class="apply_modal_btn"
                 (click)="submitAssignment()">Submit</button>
             </div>
 

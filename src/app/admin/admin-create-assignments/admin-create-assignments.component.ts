@@ -31,21 +31,21 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   };
   expandedQuestions: boolean[] = [];
   questionId: number = 0;
-  assignmentForm:FormGroup;
+  assignmentForm: FormGroup;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private assignmentService: AssignmentServiceService,
     private router: Router,
     private utilityService: UtilityServiceService,
-    private formBuilder:FormBuilder
+    private formBuilder: FormBuilder
   ) {
 
     this.assignmentForm = this.formBuilder.group({
-      question : ['',Validators.required]
+      question: ['', Validators.required]
     })
 
-   }
+  }
 
   ngOnInit(): void {
     this.assignmentId = this.activateRoute.snapshot.params['id'];
@@ -81,43 +81,38 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   }
 
   public addImageFile(event: any) {
-    console.log(event);
     this.taskQuestion.questionImages.push(event.target.files[0]);
-
     const selectedFile = event.target.files[0];
 
     if (selectedFile) {
       const reader = new FileReader();
-
       reader.onload = (e: any) => {
         this.imagePreview.push(e.target.result);
         this.imageName.push(selectedFile.name);
       };
-
       reader.readAsDataURL(selectedFile);
     } else {
       this.imagePreview.push('');
       this.imageName.push('');
     }
   }
-  
+
   public addTaskQuestion() {
     this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(
       (data: any) => {
         this.assignmentQuestionsData.assignmentQuestion = data.assignmentQuestion
         this.assignmentQuestionsData.assignmentQuestion.forEach(() => this.expandedQuestions.push(false));
+        this.assignmentForm = this.formBuilder.group({
+          question: ['', Validators.required]
+        })
       }, (errore) => {
-        // alert('hi')
         this.assignmentQuestionsData.assignmentQuestion = errore.assignmentQuestion
       }
     )
-
     this.taskQuestion = new TaskQuestionRequest();
     this.imagePreview = [];
     this.imageName = [];
   }
-
-
   public addAttachmentFile(event: any) {
     const data = event.target.files[0];
     this.attachmentInfo.name = event.target.files[0].name
@@ -126,21 +121,22 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   }
 
   public submitAssignmentQuestions() {
-    this.taskFormControl();
-    if(this.assignmentForm.invalid){
-      return;
-    }
 
-    let obj = {
-      ...this.assignment,
-      attachment: this.assignmentQuestionsData.taskAttachment
+    if (this.assignmentQuestionsData.assignmentQuestion.length === 0 && this.assignmentForm.invalid) {
+      this.taskFormControl();
+      return;
+    } else {
+      let obj = {
+        ...this.assignment,
+        attachment: this.assignmentQuestionsData.taskAttachment
+      }
+      this.assignmentService.addAssignment(obj)
+        .subscribe({
+          next: (data: any) => {
+            this.router.navigate(['/admin/assignments']);
+          }
+        })
     }
-    this.assignmentService.addAssignment(obj)
-      .subscribe({
-        next: (data: any) => {
-          this.router.navigate(['/admin/assignments']);
-        }
-      })
   }
   // imageUrll: any
   // public showImage(file: any) {
@@ -150,7 +146,7 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   // }
 
   public deleteAssignmentQuestion() {
-    this.assignmentService.deleteTaskQuestion(this.assignmentId, this.questionId).subscribe(
+    this.assignmentService.deleteTaskQuestion(this.questionId).subscribe(
       (data) => {
         alert('Success..')
         this.getAssignmentById();
@@ -159,7 +155,6 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   }
 
   setQuestionId(id: number) {
-    console.log(id);
     this.questionId = id;
   }
 
@@ -167,13 +162,11 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     this.expandedQuestions[index] = !this.expandedQuestions[index];
   }
 
-  public deleteImage(index:number){
+  public deleteImage(index: number) {
     if (index >= 0 && index < this.taskQuestion.questionImages.length) {
       this.taskQuestion.questionImages.splice(index, 1);
-      this.imagePreview.splice(index,1);
-      this.imageName.splice(index,1);
+      this.imagePreview.splice(index, 1);
+      this.imageName.splice(index, 1);
     }
-    console.log(this.taskQuestion.questionImages);
-    
   }
 }

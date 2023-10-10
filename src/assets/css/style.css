@@ -1989,6 +1989,10 @@ ul.dropdown-menu.drop {
   border-radius: 6px;
 }
 
+.right_task_area {
+  gap: 20px;
+}
+
 
 .task-area {
   width: calc(50% - 10px);
@@ -2061,12 +2065,13 @@ ul.dropdown-menu.drop {
   margin-bottom: 20px;
 }
 
-.calender-img {
+.calender_img {
   background: #53c2d2;
   border-radius: 6px;
+  padding: 0px 11px 0px 0px !important;
 }
 
-.calender-img img {
+.calender_img img {
   width: 100%;
   height: -webkit-fill-available;
   object-fit: contain;
@@ -2331,7 +2336,9 @@ ul.dropdown-menu.drop {
 .light-info {
   color: #49bfcf;
 }
-
+.bg-info {
+  background-color: #49bfcf;
+}
 .dark-black {
   color: #141719;
 }
@@ -3932,6 +3939,7 @@ input.change-student-img {
   display: block;
 }
 
+
 /* CSS HERE 10/10/2023 */
 .calender_img {
   background: #53c2d2;
@@ -3972,6 +3980,20 @@ a:hover {
 @media (min-width:993px) and (max-width: 1200px) { 
   .calendar-hadding h3{
     font-size: 20px;
+
+/* ADD CSS 09/10/2023 */
+.main_inner{
+  justify-content: space-between !important;
+}
+.main_inner .col-md-5{
+  width:48%;
+}
+
+/* MEDIA QUERY */
+@media (min-width:993px) and (max-width: 1200px) { 
+  .calendar-hadding h3{
+    font-size: 21px;
+
   }
   .punch_btn h4{
       font-size: calc(1rem + .3vw);
@@ -3999,6 +4021,7 @@ a:hover {
   .calendar-hadding h3{
     font-size: 21px;
   }
+
 }
 @media (min-width:767px) and (max-width: 992px) { 
   .main_inner .col-md-3{
@@ -4006,11 +4029,18 @@ a:hover {
       width: 36%;
   }
   .main_inner .col-md-5 {
+
     width: 58%;
     margin-right: 12px;
 }
 .calendar-hadding h3{
   font-size: 20px;
+
+    width: 60%;
+}
+.calendar-hadding h3{
+  font-size: 17px;
+
 }
 .punch_btn h4{
     font-size: calc(1rem + .3vw);
@@ -4019,12 +4049,14 @@ a:hover {
   font-size: 1.2rem;
 }
 .main_inner .right_task_area {
+
   width: 99% !important;
   margin-left: 10px;
 }
 .task-area h1{
   font-size: 28px !important;
 }
+
 .calendar-hadding{
   padding-left: 0 !important;
 }
@@ -4120,3 +4152,5 @@ a:hover {
   width: 50%;
 }
 }
+}
+

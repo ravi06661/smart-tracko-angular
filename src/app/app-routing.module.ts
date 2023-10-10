@@ -74,7 +74,7 @@ const routes: Routes = [
     {path:'checkInCheckOut',component:CheckincheckoutComponent,pathMatch:'full'},
     {path:'study',component:StudyComponent,pathMatch:'full'},
     {path:'chapter/:id',component:ChapterComponent,pathMatch:'full'},
-    {path:'chapterDetails/:id',component:SubjectdetailsComponent,pathMatch:'full'},
+    {path:'chapterDetails',component:SubjectdetailsComponent,pathMatch:'full'},
     {path:'mycourse',component:MycourseComponent,pathMatch:'full'},
     {path:'assignmentdetails',component:AssignmentDetailsComponent,pathMatch:'full'},
     {path:'taskAndAssignment',component:TaskandassignmentsComponent,pathMatch:'full'},

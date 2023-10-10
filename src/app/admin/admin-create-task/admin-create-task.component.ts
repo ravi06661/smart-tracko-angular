@@ -107,7 +107,7 @@ export class AdminCreateTaskComponent {
   }
 
   public deleteTaskQuestion() {
-    this.taskService.deleteTaskQuestion(this.taskId, this.questionId).subscribe(
+    this.taskService.deleteTaskQuestion(this.questionId).subscribe(
       (data) => {
         alert('Success..')
         this.getTask();
