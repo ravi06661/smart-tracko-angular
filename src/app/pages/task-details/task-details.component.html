@@ -2,7 +2,7 @@
   <div class="profile d-flex mb-4">
     <div class="assign-detail-heading">
       <h1 class="font-27 font-700 secondary mb-0">Tasks</h1>
-      <button  *ngIf="isSubmitted()" type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal"
+      <button  *ngIf="isSubmittedTask!" type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal"
         data-bs-target="#submit_button"  > Submit</button>
       <div class="font-27 font-700 secondary mb-4" *ngIf="task.taskAttachment!=null ">
         <form class="attachment_file1 d-inline-flex align-items-center position-relative ">

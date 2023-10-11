@@ -121,11 +121,11 @@
   }
   
   .image-zoom {
-    max-width: 100%;
+    max-width: 80%;
   }
   
   .expanded {
-    transform: scale(2); /* Adjust the scale factor as needed */
+    transform: scale(1); /* Adjust the scale factor as needed */
     position: fixed;
     top: 0;
     left: 0;

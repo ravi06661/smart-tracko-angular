@@ -127,8 +127,8 @@ const routes: Routes = [
       {path:'coursesbatches/:courseId',component:AdminCoursesBatchesComponent,pathMatch:'full'},
       {path:'studentprofile/:studentId',component:StudentProfileComponent,pathMatch:'full'},
       {path:'studentregistration',component:AdminStudentRegistrationComponent,pathMatch:'full'},
-      {path:'submission',component:AdminSubmissionComponent,pathMatch:'full'}
-      
+      {path:'submission',component:AdminSubmissionComponent,pathMatch:'full'},
+      {path:'editetask',component:AdminEditTaskComponent}
     ]
   },
   {path:'**',component:NotFoundComponent,pathMatch:'full'},

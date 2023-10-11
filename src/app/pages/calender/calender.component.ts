@@ -34,6 +34,8 @@ export class CalenderComponent {
   Present: number[] = [];
   Absent: number[] = [];
   Leaves: number[] = [];
+  EarlyCheckOut:number[]=[]
+  Mispunch:number[]=[]
   status:boolean=true;
   donutChart:DonutChart = new DonutChart();
 
@@ -45,6 +47,8 @@ export class CalenderComponent {
     this.Present = [];
     this.Absent = [];
     this.Leaves = [];
+    this.EarlyCheckOut=[]
+    this.Mispunch=[]
     this.chartOptions = this.donutChart.chartOptions
   }
 
@@ -122,6 +126,12 @@ export class CalenderComponent {
           if (this.Leaves.includes(Number(date)) && year === this.currentYear && month === this.currentMonth) {
             cell.className = "date-picker leaves";
           }
+          if (this.Mispunch.includes(Number(date)) && year === this.currentYear && month === this.currentMonth) {
+            cell.className = "date-picker Mispunch";
+          }
+          if (this.EarlyCheckOut.includes(Number(date)) && year === this.currentYear && month === this.currentMonth) {
+            cell.className = "date-picker EarlyCheckOut";
+          }
           row.appendChild(cell);
           date++;
         }
@@ -140,16 +150,25 @@ export class CalenderComponent {
     this.Present = []
     this.Absent = []
     this.Leaves = []
+    this.EarlyCheckOut=[]
+    this.Mispunch=[]
     this.studentService.getCalenderData(this.loginService.getStudentId(), month, year).subscribe({
       next: (data: any) => {
+        console.log(data);
+        
         if (data.status == false) {
           this.Present = []
           this.Absent = []
           this.Leaves = []
+          this.EarlyCheckOut=[]
+          this.Mispunch=[]
+
         }
         this.Present = data.StudentCalenderData.present;
         this.Absent = data.StudentCalenderData.absent;
         this.Leaves = data.StudentCalenderData.leaves;
+        this.EarlyCheckOut =data.StudentCalenderData.earlyCheckOut;
+        this.Mispunch =data.StudentCalenderData.mispunch;
         this.getChartData();
         this.showCalendar(this.currentMonth, this.currentYear);
       },
@@ -160,7 +179,7 @@ export class CalenderComponent {
   }
 
   public getChartData() {
-    this.chartOptions.series = [ this.Present.length,this.Absent.length, this.Leaves.length]
+    this.chartOptions.series = [ this.Present.length,this.Absent.length, this.Leaves.length,this.Mispunch.length,this.EarlyCheckOut.length]
   }
 
 

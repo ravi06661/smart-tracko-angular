@@ -103,6 +103,7 @@ export class DashboardComponent implements OnInit {
     this.studentService.getTodayAttendance(this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
         this.attendance = data.Attendance;
+        if(this.attendance){
         if (this.attendance.checkInTime != null) {
           this.formattedCheckInTime = this.changeTimeFormat(this.attendance.checkInTime);
         }
@@ -122,7 +123,7 @@ export class DashboardComponent implements OnInit {
           this.timer = duration.asSeconds();
           this.startTimer();
         }
-      },
+      }},
     });
   }
 
@@ -187,6 +188,9 @@ export class DashboardComponent implements OnInit {
       (data: any) => {
         this.unLockAssignments = data.unLockedAssignment;
         this.toDoAssignment = this.unLockAssignments[this.unLockAssignments.length - 1];
+        if(this.toDoAssignment==null){
+          this.toDoAssignment =  new Assignment
+        }
         this.assignmentId = this.toDoAssignment.id
         this.lockAssignments = data.lockedAssignment;
         this.toDoAssignmentLength = this.toDoAssignment.assignmentQuestion.length

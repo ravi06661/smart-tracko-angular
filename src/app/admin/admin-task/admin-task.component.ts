@@ -133,9 +133,12 @@ export class AdminTaskComponent {
   //   )
   // }
 
-  public calculatePercentage(total: number, num: number) {
-    return Math.floor(num / total * 100);
-  }
+  // public calculatePercentage(total: number, num: number) {
+  //   if(num!==0)
+  //   return Math.floor(num / total * 100);
+  //    else
+  //    return 0;
+  // }
 
   public clearTaskForm() {
     this.task = new TaskRequest();
@@ -169,12 +172,9 @@ export class AdminTaskComponent {
 
 
   calculatePercentages(num1: number, num2: number) {
-    let per: any;
-    per = Math.floor((num1 / num2) * 100);
-    if (num2 < 0) {
-      num2 = 0
-      per = 0;
-    }
-    return per;
+    if(num2!==0)
+    return Math.floor((num1 / num2) * 100);
+   else
+   return 0;
   }
 }
