@@ -108,6 +108,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .date-picker.leaves span::before{
   background: #F8961E;
 }
+
+.date-picker.EarlyCheckOut span::before{
+  background: #10e317;
+}
+
+.date-picker.Mispunch span::before{
+  background: #88048f;
+}
+
 .date-picker.selected {
   font-weight: bold;
 }
