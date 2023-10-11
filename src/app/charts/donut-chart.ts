@@ -1,6 +1,6 @@
 export class DonutChart {
     chartOptions = {
-        series: [75, 20, 5],
+        series: [75, 20, 5,6,34],
         chart: {
           width: 320,
           type: "donut",
@@ -8,9 +8,9 @@ export class DonutChart {
             show: false // Hide the default toolbar
           }
         },
-        colors: ["#5754E5", "#FF4A11", "#F8961E"],
+        colors: ["#5754E5", "#FF4A11", "#F8961E", "#88048f", "#10e317"],
   
-        labels: ["Present", "Absent", "Leaves"],
+        labels: ["Present", "Absent", "Leaves","Mispunch","EarlyCheckOut"],
         legend: {
           position: "bottom", // Show the legend at the bottom
   

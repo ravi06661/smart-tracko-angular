@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { an } from '@fullcalendar/core/internal-common';
+import { log } from 'console';
 import { Course } from 'src/app/entity/course';
 import { Subject } from 'src/app/entity/subject';
 import { Task } from 'src/app/entity/task';
@@ -42,24 +43,20 @@ export class AdminCreateTaskComponent {
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
 
-  secondTaskForm:FormGroup;
-
-  constructor(private activateRouter: ActivatedRoute, 
-    private subjectService: SubjectService, 
-    private courseService: CourseServiceService, 
-    private taskService: TaskServiceService, 
-    private router: Router, 
+  secondTaskForm: FormGroup;
+  constructor(private activateRouter: ActivatedRoute,
+    private subjectService: SubjectService,
+    private courseService: CourseServiceService,
+    private taskService: TaskServiceService,
+    private router: Router,
     private utilityService: UtilityServiceService,
-    private formBuilder:FormBuilder) { 
+    private formBuilder: FormBuilder) {
 
 
-      this.secondTaskForm = this.formBuilder.group({
-        // image : ['',Validators.required],
-        // videoUrl : ['',Validators.required],
-        question : ['',Validators.required]
-      })
-
-    }
+    this.secondTaskForm = this.formBuilder.group({
+      question: ['', Validators.required]
+    })
+  }
 
   ngOnInit() {
     this.taskId = this.activateRouter.snapshot.params[('id')]
@@ -67,12 +64,12 @@ export class AdminCreateTaskComponent {
   }
 
 
-  isFieldInvalidForTaskForm(fieldName: string): boolean {
+  isFieldInvalidForSecondTaskForm(fieldName: string): boolean {
     const field = this.secondTaskForm.get(fieldName);
     return field ? field.invalid && field.touched : false;
   }
 
-  public taskFormControl() {
+  public secondFormControl() {
     Object.keys(this.secondTaskForm.controls).forEach(key => {
       const control = this.secondTaskForm.get(key);
       if (control) {
@@ -96,7 +93,7 @@ export class AdminCreateTaskComponent {
   }
 
   public getCourses() {
-    this.courseService.getAllCourses(0,100).subscribe(
+    this.courseService.getAllCourses(0, 100).subscribe(
       (data: any) => {
         this.courses = data.response
       }
@@ -127,31 +124,43 @@ export class AdminCreateTaskComponent {
   }
 
   public addTaskQuestion() {
-    this.taskService.addQuestionInTask(this.taskQuestion, this.taskId).subscribe(
-      (data: any) => {
-        this.taskData.taskQuestion = data.taskQuestion
-      }, (errore) => {
-        alert('Error')
-      }
-    )
-    this.taskQuestion = new TaskQuestionRequest();
-    this.imagePreview = [];
-    this.imageName = [];
+    if (this.secondTaskForm.invalid) {
+      this.secondFormControl()
+      return;
+    } else {
+      this.taskService.addQuestionInTask(this.taskQuestion, this.taskId).subscribe(
+        {
+          next: (data: any) => {
+            this.taskData.taskQuestion = data.taskQuestion
+            this.secondTaskForm = this.formBuilder.group({
+              question: ['', Validators.required]
+            })
+          },
+          error: (errore) => {6
+            alert('Error')
+          }
+        }
+      )
+      this.taskQuestion = new TaskQuestionRequest();
+      this.imagePreview = [];
+      this.imageName = [];
+    }
   }
 
   public submitTask() {
-    this.taskFormControl()
-    if(this.secondTaskForm.invalid){
+    if (this.taskData.taskQuestion.length !== 0) {
+      this.taskData.taskId = this.taskId
+      this.taskService.addAssignment(this.taskData)
+        .subscribe({
+          next: (data: any) => {
+            alert('Success..')
+            this.router.navigate(['/admin/task']);
+          }
+        })
+    } else {
       return;
     }
-    this.taskData.taskId = this.taskId
-    this.taskService.addAssignment(this.taskData)
-      .subscribe({
-        next: (data: any) => {
-          alert('Success..')
-          this.router.navigate(['/admin/task']);
-        }
-      })
+
   }
   public addImageFile(event: any) {
     console.log(event);
@@ -179,11 +188,11 @@ export class AdminCreateTaskComponent {
   }
 
 
-  public deleteImage(index:number){
+  public deleteImage(index: number) {
     if (index >= 0 && index < this.taskQuestion.questionImages.length) {
       this.taskQuestion.questionImages.splice(index, 1);
-      this.imagePreview.splice(index,1);
-      this.imageName.splice(index,1);
-    }    
+      this.imagePreview.splice(index, 1);
+      this.imageName.splice(index, 1);
+    }
   }
 }

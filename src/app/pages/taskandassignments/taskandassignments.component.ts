@@ -51,6 +51,8 @@ export class TaskandassignmentsComponent implements OnInit {
         this.assignmentCount = this.unLockAssignments.length
         this.lockAssignments = data.lockedAssignment;
         this.temp();
+        console.log(this.unLockAssignment);
+        
       }
     )
   }

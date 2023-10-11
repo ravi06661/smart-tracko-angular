@@ -53,6 +53,8 @@ export class AttendanceComponent implements OnInit {
   presentsMap = new Map<number, number>();
   leavesMap = new Map<number, number>();
   absentMap = new Map<number, number>();
+  mispunchMap = new Map<number, number>();
+  earlyCheckOutMap = new Map<number, number>();
   attendanceChart: PresentAbsentLeaveBarChart =
     new PresentAbsentLeaveBarChart();
 
@@ -113,6 +115,7 @@ export class AttendanceComponent implements OnInit {
     this.studentService.getAttendanceHistory().subscribe({
       next: (data: any) => {
         this.attendances = data.response.attendance;
+        if(this.attendance)
         this.totalAttendance = this.attendances.length;
         this.formattingTimeAndDate();
       },
@@ -128,25 +131,28 @@ export class AttendanceComponent implements OnInit {
   }
 
   public formattingTimeAndDate() {
-    for (let i = 0; i <= this.attendances.length; i++) {
-      this.attendances[i].checkInTime = moment(
-        this.attendances[i].checkInTime,
-        'HH:mm:ss'
-      ).format('hh:mm:ss A');
-      this.attendances[i].checkOutTime = moment(
-        this.attendances[i].checkOutTime,
-        'HH:mm:ss'
-      ).format('hh:mm:ss A');
-      this.attendances[i].checkInDate = moment(
-        this.attendances[i].checkInDate
-      ).format('DD MMM YYYY');
-      this.attendances[i].workingHour = new Date(
-        this.attendances[i].workingHour * 1000
-      )
-        .toISOString()
-        .substr(11, 8);
+    if (this.attendances.length !== 0) {
+      for (let i = 0; i < this.attendances.length; i++) { // Change <= to < here
+        this.attendances[i].checkInTime = moment(
+          this.attendances[i].checkInTime,
+          'HH:mm:ss'
+        ).format('hh:mm:ss A');
+        this.attendances[i].checkOutTime = moment(
+          this.attendances[i].checkOutTime,
+          'HH:mm:ss'
+        ).format('hh:mm:ss A');
+        this.attendances[i].checkInDate = moment(
+          this.attendances[i].checkInDate
+        ).format('DD MMM YYYY');
+        this.attendances[i].workingHour = new Date(
+          this.attendances[i].workingHour * 1000
+        )
+          .toISOString()
+          .substr(11, 8);
+      }
     }
   }
+  
 
   public addStudentLeave() {
     if (this.applyLeaveForm.invalid) {
@@ -230,12 +236,19 @@ export class AttendanceComponent implements OnInit {
         this.loginService.getStudentId()
       )
       .subscribe((data: any) => {
+        console.log(data);
+        
         this.presentsMap = data.presents;
         this.leavesMap = data.leaves;
         this.absentMap = data.absents;
+        this.mispunchMap = data.mispunchs
+        this.earlyCheckOutMap = data.earlyCheckOut
         this.setAbsentData();
         this.setPresentData();
         this.setLeavesData();
+        this.setEarlyCheckOutData();
+        this.setMishPunchData();
+
       });
   }
   public setPresentData() {
@@ -259,7 +272,7 @@ export class AttendanceComponent implements OnInit {
     for (const entry of resultMap.entries()) {
       arr[entry[0] - 1] = entry[1];
     }
-    this.attendanceOptions.series[2].data = arr;
+    this.attendanceOptions.series[2].data = arr;  /////
   }
 
   public setAbsentData() {
@@ -272,6 +285,31 @@ export class AttendanceComponent implements OnInit {
       arr[entry[0] - 1] = entry[1];
     }
     this.attendanceOptions.series[1].data = arr;
+  }
+  public setMishPunchData() {
+    let arr: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const mapEntries: [number, number][] = Object.entries(this.mispunchMap).map(
+      ([key, value]) => [parseInt(key), value]
+    );
+    const resultMap: Map<number, number> = new Map<number, number>(mapEntries);
+    for (const entry of resultMap.entries()) {
+      arr[entry[0] - 1] = entry[1];
+    }
+    this.attendanceOptions.series[3].data = arr;
+  }
+  public setEarlyCheckOutData() {
+    console.log(this.earlyCheckOutMap);
+    
+    
+    let arr: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const mapEntries: [number, number][] = Object.entries(this.earlyCheckOutMap).map(
+      ([key, value]) => [parseInt(key), value]
+    );
+    const resultMap: Map<number, number> = new Map<number, number>(mapEntries);
+    for (const entry of resultMap.entries()) {
+      arr[entry[0] - 1] = entry[1];
+    }
+    this.attendanceOptions.series[4].data = arr;
   }
 
   validFields(field: string) {

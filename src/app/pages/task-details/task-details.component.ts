@@ -22,16 +22,18 @@ export class TaskDetailsComponent {
   taskSubmittion: StudentTaskSubmittion = new StudentTaskSubmittion();
   message: string = ''
   submissionForm: FormGroup;
+  isSubmittedTask: boolean | undefined;
 
   constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService, private loginService: LoginService, private formBuilder: FormBuilder) {
     this.submissionForm = this.formBuilder.group({
       file: ['', Validators.required],
       taskDescription: ['', Validators.required]
     });
+    this.taskId = this.router.snapshot.params[('id')]
   }
 
   ngOnInit() {
-    this.taskId = this.router.snapshot.params[('id')]
+    this.isSubmitted()
     this.getTask();
   }
   public getTask() {
@@ -126,7 +128,7 @@ export class TaskDetailsComponent {
   public isSubmitted() {
     this.taskService.isSubmitted(this.task.taskId, this.loginService.getStudentId()).subscribe(
       (data: any) => {
-        return data;
+        this.isSubmittedTask = true;
       }
     )
   }

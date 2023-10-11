@@ -118,8 +118,10 @@
                                     data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="setQuestionId(obj.questionId)"><i
                                         class="fi fi-rr-trash line-height-0"></i>
                                     Delete</span>
+                               <a routerLink="/admin/editetask">
                                 <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"><i
-                                        class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
+                                    class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
+                               </a>
                             </div>
                         </div>
 
@@ -194,7 +196,7 @@
             <div class="col-md-12 mb_24 text-center">
                 <div class="add-que">
                     <i class="fi fi-rr-plus-small warning font-36 line-height-0"></i>
-                    <h5 class="font-17 font-500 warning mb-0" (click)="addTaskQuestion()">Add Question</h5>
+                    <h5 class="font-17 font-500 warning mb-0" (click)="addAssignmentQuestion()">Add Question</h5>
                 </div>
             </div><!-- col-md-12 -->
 
