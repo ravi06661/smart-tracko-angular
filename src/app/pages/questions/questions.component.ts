@@ -51,10 +51,13 @@ export class QuestionsComponent {
 
   ngOnInit() {
 
-    this.chapterId = this.activateRouter.snapshot.params[('id')];
+    this.activateRouter.queryParams.subscribe(params => {
+      this.chapterId = params['chapterId'];
+      this.subjectId = params['subjectId'];
+    });
     this.getAllQuestions();
     this.timer();
-    this.getChapeter();
+    //this.getChapeter();
   }
   public timer() {
     const duration = 10// in seconds
@@ -147,16 +150,14 @@ export class QuestionsComponent {
     }
     this.isFullScreen = !this.isFullScreen;
   }
-  public exite() {
-   
-  }
-  public getChapeter() {
-    this.chapterService.getChapterById(this.chapterId).subscribe(
-      (data:any) => {
-        this.subjectId = data.chapter.subject.subjectId;
-      }
-    )
-  }
+
+  // public getChapeter() {
+  //   this.chapterService.getChapterById(this.chapterId).subscribe(
+  //     (data:any) => {
+  //       this.subjectId = data.chapter.subject.subjectId;
+  //     }
+  //   )
+  // }
 
   public clickQuitButton(){
     Swal.fire({

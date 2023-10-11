@@ -91,7 +91,7 @@ const routes: Routes = [
 
   {path:'result/:id',component:ResultComponent,pathMatch:'full'},
   {path:'review/:id',component:ReviewComponent,pathMatch:'full'},
-  {path:'questions/:id',component:QuestionsComponent,pathMatch:'full'},
+  {path:'questions',component:QuestionsComponent,pathMatch:'full'},
   {
     path:'admin',component:AdminPanelComponent,canActivate:[AdminGuardGuard],children:[
       {path:'',component:AdminDashboardComponent,pathMatch:'full'},
