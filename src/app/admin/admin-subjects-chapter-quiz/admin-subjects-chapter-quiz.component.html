@@ -221,6 +221,7 @@
                                 <h4 class="sub-heading font-17 font-500 text_gray">Correct Option </h4>
                                 <select class="form-select" aria-label="Default select example" id="correctOption"
                                     name="correctOption" [(ngModel)]="question.correctOption" formControlName="correctOption">
+                                    <option value = "">Select Correct Option</option>
                                     <option [value]="question.option1">{{question.option1}}</option>
                                     <option [value]="question.option2">{{question.option2}}</option>
                                     <option [value]="question.option3">{{question.option3}}</option>
@@ -313,6 +314,7 @@
                                 <!-- <input type="text" id="" name="correctOption" class="form-control input_text" placeholder=""  [(ngModel)]="question.correctOption"> -->
                                 <select class="form-select" aria-label="Default select example" id="correctOption"
                                     name="correctOption" [(ngModel)]="question.correctOption">
+                                    <option value = "">Select Correct Option</option>
                                     <option [value]="question.option1">{{question.option1}}</option>
                                     <option [value]="question.option2">{{question.option2}}</option>
                                     <option [value]="question.option3">{{question.option3}}</option>

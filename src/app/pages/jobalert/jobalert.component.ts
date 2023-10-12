@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild ,HostListener} from '@angular/core';
 import { Router } from '@angular/router';
 import { JobAlert } from 'src/app/entity/job-alert';
 import { JobAlertService } from 'src/app/service/job-alert.service';
@@ -58,4 +58,6 @@ export class JobalertComponent {
     this.numberOfJob = num;
     this.showFullMessage = !this.showFullMessage;
   }
+
+ 
 }

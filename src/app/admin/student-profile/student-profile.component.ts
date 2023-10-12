@@ -103,7 +103,7 @@ export class StudentProfileComponent implements OnInit {
     this.studentService.getStudentOverAllAttendancesAndLeave(this.studentId).subscribe({
       next: (data: any) => {
         this.attendanceLog = data.attendanceList;
-        this.chartOptions.series = [data.presentsCount, 0, data.leavesCount];
+        // this.chartOptions.series = [data.presentsCount, 0, data.leavesCount];
       }
     })
   }
