@@ -8,16 +8,16 @@
             class="back_button font-15 font-500 d-flex justify-content-center align-items-center"><i
               class="fi fi-rr-arrow-left lh-0"></i>Back</a>
           <h5 class="font-24 font-700 light-black mb-0">Review Answers</h5>
-          <h6 class="font-19 font-600 light-black mb-0">Your Score - 26/35</h6>
+          <h6 class="font-19 font-600 light-black mb-0">Your Score - {{chapterExamResult.scoreGet}}/{{chapterExamResult.totalQuestion}}</h6>
         </div>
         <div class="review_section">
-          <div class="questions_answer review_questions" *ngFor="let obj of chapterExamResult.chapter.questions ;let i=index">
+          <div class="questions_answer review_questions" *ngFor="let obj of chapterExamResult.chapter.exam.questions ;let i=index">
             <div>
               <div class="review_questions d-flex justify-content-between">
                 <h3 class="font-17 font-700 light-black">Question - {{i+1}}</h3>
-                <h4 class="font-17 font-700 light-red "  *ngIf="obj.correctOption !== review.get(obj.questionId)  && review.get(obj.questionId)!='' " >In-Correct</h4>
+                <h4 class="font-17 font-700 light-red "  *ngIf="obj.correctOption !== review.get(obj.questionId)  && review.get(obj.questionId)!=null" >In-Correct</h4>
                 <h4 class="font-17 font-700 light-green "  *ngIf="obj.correctOption === review.get(obj.questionId)" >Correct</h4>
-                <h4 class="font-17 font-700 light-info"  *ngIf=" review.get(obj.questionId)==''" >Did-Not Answer</h4>
+                <h4 class="font-17 font-700 light-info"  *ngIf=" review.get(obj.questionId)==null" >Did-Not Answer</h4>
               </div>
               <h5 class="font-19 font-400 txt-dark " [innerHTML]="obj.questionContent"></h5>
             </div>

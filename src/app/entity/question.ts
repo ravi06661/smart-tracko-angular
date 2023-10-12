@@ -1,6 +1,6 @@
 export class Question {
-    public questionId:number | undefined
-    public correctOption:string | undefined
-    public isDeleted:boolean | undefined
-    public isActive:boolean | undefined
+    public questionId:number=0
+    public correctOption:string =''
+    public isDeleted:boolean =false
+    public isActive:boolean =false
 }
