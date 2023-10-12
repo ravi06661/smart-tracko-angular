@@ -125,10 +125,9 @@
                         <div class="Progress">{{calculatePercentages(obj.id,obj.assignmentQuestion.length)}}%</div>
                       </div>
                     </div>
-                    <div class="ProgressBar">
-                      <div class="ProgressW" [style.width]="progressWidth"></div>
+                    <div class="progress">
+                      <div class="progress-bar ProgressW bg-primary" role="progressbar" [style.width]="calculatePercentages(obj.id,obj.assignmentQuestion.length)+'%'" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-            
 
                     <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
                       <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.assignmentQuestion; let j=index">

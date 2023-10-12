@@ -92,12 +92,6 @@
     display: inline-flex;
   }
 
-  .ProgressW {
-    height: 6px;
-    background: #4977cf;
-    border-radius: 6px;
-  }
-
   .TaskCard {
     align-self: stretch;
     height: 46px;
@@ -131,3 +125,14 @@
     padding: 0;
   }
   
+
+  .ProgressW {
+    height: 6px;
+
+    background: #4977cf;
+    border-radius: 6px;
+  }
+
+  .progress {
+    height: 6px !important;
+  }

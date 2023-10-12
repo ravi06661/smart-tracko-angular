@@ -153,9 +153,7 @@ export class CalenderComponent {
     this.EarlyCheckOut=[]
     this.Mispunch=[]
     this.studentService.getCalenderData(this.loginService.getStudentId(), month, year).subscribe({
-      next: (data: any) => {
-        console.log(data);
-        
+      next: (data: any) => {   
         if (data.status == false) {
           this.Present = []
           this.Absent = []
