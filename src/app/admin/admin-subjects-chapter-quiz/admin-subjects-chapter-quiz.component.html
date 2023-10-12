@@ -63,7 +63,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="subject-test-ques-ans ">
+                    <div class="subject-test-ques-ans "*ngIf="obj.questionImage!=null">
                         <img [src]="imageUrl+obj.questionImage" style="width: 200px ;height: 200px">
                     </div>
                     <div class="subject-test-ques-ans"
@@ -156,16 +156,15 @@
                             </div>
                         </div>
                        
-                        <div class="form-group">
+                    
                             <div class="col-md-12 mb_18">
                                 <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
                                 <div class="input_icon position-relative">
                                     <input type="file" (change)="handleImageInput($event)" value="file"  name="file" formControlName="file">
                                 </div>
-                                <div *ngIf=" isFieldInvalidForSubmissionForm('file')" class="text-danger">
-                                    image is required.</div>
+                             
                             </div>
-                        </div>
+                       
                         <div class="form-group">
                             <div class="col-md-12 mb_18">
                                 <h4 class="sub-heading font-17 font-500 text_gray">Option-1</h4>

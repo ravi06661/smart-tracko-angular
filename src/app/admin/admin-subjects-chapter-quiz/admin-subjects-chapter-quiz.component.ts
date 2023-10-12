@@ -31,8 +31,7 @@ export class AdminSubjectsChapterQuizComponent {
       option3: ['', Validators.required],
       option2: ['', Validators.required],
       option1: ['', Validators.required],
-      questionContent: ['', Validators.required],
-      file: ['', Validators.required]
+      questionContent: ['', Validators.required]
     });
   }
   ngOnInit() {
@@ -75,14 +74,16 @@ export class AdminSubjectsChapterQuizComponent {
   }
 
   public updateQuestion() {
-    this.questionService.updateQuestionById(this.question, this.id).subscribe(
-      (data) => {
-
-        this.message = 'success..';
-        this.question = new ChapterQuizeQuestion();
-        this.getAllQuestions();
-      }, (error) => {
-        this.message = 'error..';
+    this.questionService.updateQuestionById(this.question).subscribe(
+      {
+        next: (data) => {
+          this.message = 'success..';
+          this.question = new ChapterQuizeQuestion();
+          this.getAllQuestions();
+        },
+        error: (error) => {
+          this.message = 'error..';
+        }
       }
     )
   }
@@ -113,8 +114,7 @@ export class AdminSubjectsChapterQuizComponent {
       option3: ['', Validators.required],
       option2: ['', Validators.required],
       option1: ['', Validators.required],
-      questionContent: ['', Validators.required],
-      file: ['', Validators.required]
+      questionContent: ['', Validators.required]
     });
   }
   public isFieldInvalidForSubmissionForm(fieldName: string): boolean {

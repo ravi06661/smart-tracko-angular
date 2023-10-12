@@ -20,9 +20,8 @@ export class QuestionServiceService {
   public getQuestionById(questionId: number): Observable<ChapterQuizeQuestion> {
     return this.http.get<ChapterQuizeQuestion>(`${this.QUESTION_URL}/getQuestionById?questionId=${questionId}`);
   }
-  public updateQuestionById(question: ChapterQuizeQuestion,chapterId:number) {
+  public updateQuestionById(question: ChapterQuizeQuestion) {
     let formData = new FormData();
-    formData.append('chapterId', chapterId.toString())
     formData.append('questionContent', question.questionContent);
     formData.append('correctOption', question.correctOption)
     formData.append('option1', question.option1)

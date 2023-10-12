@@ -9,8 +9,6 @@ import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { ViewEncapsulation } from '@angular/core';
 import { LoginService } from 'src/app/service/login.service';
-import { en } from '@fullcalendar/core/internal-common';
-import { arrayBuffer } from 'stream/consumers';
 import { PresentAbsentLeaveBarChart } from 'src/app/charts/present-absent-leave-bar-chart';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -60,6 +58,8 @@ export class AttendanceComponent implements OnInit {
 
   applyLeaveForm: FormGroup;
   isLoading: boolean = false;
+  minStart: any
+  minEnd: any
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -69,7 +69,12 @@ export class AttendanceComponent implements OnInit {
     private utilityService: UtilityServiceService,
     private loginService: LoginService,
     private elementRef: ElementRef
+
   ) {
+
+    let today = new Date
+    today.setDate(today.getDate() + 1)
+    this.minStart = today.toISOString().slice(0, 10);
     this.presentsMap = new Map();
     this.attendanceOptions = this.attendanceChart.attendanceOptions;
 
@@ -117,8 +122,8 @@ export class AttendanceComponent implements OnInit {
     this.studentService.getAttendanceHistory().subscribe({
       next: (data: any) => {
         this.attendances = data.response.attendance;
-        if(this.attendance)
-        this.totalAttendance = this.attendances.length;
+        if (this.attendance)
+          this.totalAttendance = this.attendances.length;
         this.formattingTimeAndDate();
       },
     });
@@ -154,10 +159,9 @@ export class AttendanceComponent implements OnInit {
       }
     }
   }
-  
 
   public addStudentLeave() {
-    if (this.applyLeaveForm.invalid) {
+    if (  this.applyLeaveForm.invalid ) {
       this.checkApplyLeaveForm();
       console.log(this.applyLeaveForm.invalid);
       return;
@@ -239,8 +243,6 @@ export class AttendanceComponent implements OnInit {
         this.loginService.getStudentId()
       )
       .subscribe((data: any) => {
-        console.log(data);
-        
         this.presentsMap = data.presents;
         this.leavesMap = data.leaves;
         this.absentMap = data.absents;
@@ -301,9 +303,6 @@ export class AttendanceComponent implements OnInit {
     this.attendanceOptions.series[3].data = arr;
   }
   public setEarlyCheckOutData() {
-    console.log(this.earlyCheckOutMap);
-    
-    
     let arr: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const mapEntries: [number, number][] = Object.entries(this.earlyCheckOutMap).map(
       ([key, value]) => [parseInt(key), value]
@@ -319,7 +318,6 @@ export class AttendanceComponent implements OnInit {
     let obj = this.applyLeaveForm.get(field);
     obj!.markAsTouched();
     obj!.updateValueAndValidity();
-    console.log(this.isFieldInvalidForApplyLeaveForm(field));
   }
 
   @HostListener('document:scroll')
@@ -334,5 +332,9 @@ export class AttendanceComponent implements OnInit {
 
   }
 
+  public setDate() {
+    this.minEnd = this.leaves.leaveDate
+  }
 
+}
 

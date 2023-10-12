@@ -121,7 +121,6 @@ export class StudentProfileComponent implements OnInit {
     this.leaveService.getStudentLeaves(this.studentId).subscribe({
       next: (res: any) => {
         this.leavesList = res.leavesData.response;
-
       }
     })
   }
@@ -146,8 +145,6 @@ export class StudentProfileComponent implements OnInit {
     this.assignmentService.getSubmitedAssignmetByStudentId(this.studentId).subscribe({
       next: (data: any) => {
         this.assignmentSubmissionsList = data
-        console.log(this.assignmentSubmissionsList);
-
       }
     })
   }
@@ -213,14 +210,25 @@ export class StudentProfileComponent implements OnInit {
 
   progressWidth: string = '';
 
+  // public calculatePercentages(num1: number, num2: number) {
+  //   const totalCompleted = this.getTotalCompletedAssignmentCount(num1);
+  //   let per
+  //   if (totalCompleted !== undefined) {
+  //     per = Math.floor(totalCompleted / num2 * 100);
+  //     let obj = per * 7.29;
+  //     this.progressWidth = obj.toString() + 'px';
+  //   }
+  //   if(num2==0)
+  //   this.progressWidth =  '0px';
+  //   return per;
+  // }
   public calculatePercentages(num1: number, num2: number) {
-    const totalCompleted = this.getTotalCompletedAssignmentCount(num1);
+    let totalCompleted = this.getTotalCompletedAssignmentCount(num1);
     let per
-    if (totalCompleted !== undefined) {
-      per = Math.floor(totalCompleted / num2 * 100);
-      let obj = per * 7.29;
-      this.progressWidth = obj.toString() + 'px';
-    }
+      per = Math.floor( totalCompleted! / num2 * 100);
+      if(num2==0){
+        per=0
+      }
     return per;
   }
 }

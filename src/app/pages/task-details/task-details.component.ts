@@ -22,8 +22,8 @@ export class TaskDetailsComponent {
   taskSubmittion: StudentTaskSubmittion = new StudentTaskSubmittion();
   message: string = ''
   submissionForm: FormGroup;
-  isSubmittedTask: boolean | undefined;
-
+  isSubmittedTask: boolean =false
+  taskAttachment:boolean =false
   constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService, private loginService: LoginService, private formBuilder: FormBuilder) {
     this.submissionForm = this.formBuilder.group({
       file: ['', Validators.required],
@@ -40,6 +40,8 @@ export class TaskDetailsComponent {
     this.taskService.getTaskById(this.taskId).subscribe(
       (data: any) => {
         this.task = data;
+       if(data.attachment)
+        this.taskAttachment = true 
       }
     )
   }
@@ -128,7 +130,10 @@ export class TaskDetailsComponent {
   public isSubmitted() {
     this.taskService.isSubmitted(this.task.taskId, this.loginService.getStudentId()).subscribe(
       (data: any) => {
-        this.isSubmittedTask = true;
+       if(data==true)
+        this.isSubmittedTask = false
+        else
+        this.isSubmittedTask = true
       }
     )
   }
