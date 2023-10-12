@@ -116,12 +116,10 @@ export class TaskandassignmentsComponent implements OnInit {
   public calculatePercentages(num1: number, num2: number) {
     let totalCompleted = this.getTotalCompletedAssignmentCount(num1);
     let per
-
       per = Math.floor( totalCompleted! / num2 * 100);
       if(num2==0){
         per=0
       }
-    
     return per;
   }
 

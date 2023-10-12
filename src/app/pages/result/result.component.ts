@@ -22,7 +22,7 @@ export class ResultComponent implements OnInit {
       }
     })
   }
-  
+
   isFullScreen = true;
   toggleFullScreen() {
     if (document.exitFullscreen) {

@@ -8,7 +8,7 @@
   <div class="scroll_section">
     <div class="row attendance">
       <div class="col-lg-6 col-md-6  mb-0 mb-md-3 mb-0 mb-md-3 mb-4">
-        <div class="calender-img  attendance_calender" style="width:100%; min-height: 390px;">
+        <div class="calender-img  attendance_calender" style="width:100%; min-height: 390px; background-color: #49BFCF;">
           <app-calender></app-calender>
         </div>
       </div>
@@ -338,7 +338,7 @@
               <div class="form-row d-flex">
                 <div class="form-group col-md-6">
                   <div class="input_icon position-relative d-flex align-items-center">
-                    <input type="date" id="birthday" formControlName="leaveDate" name="leaveDate" class="form-control input_text" placeholder="From"
+                    <input type="date" [min]="minStart"  (change)="setDate()"  id="birthday" formControlName="leaveDate" name="leaveDate" class="form-control input_text" placeholder="From"
                       [(ngModel)]="leaves.leaveDate" />
                     <!-- <i class="fi fi-rr-calendar calender_2 lh-0"></i> -->
                   </div>
@@ -346,7 +346,7 @@
                 </div>
                 <div class="form-group col-md-6" *ngIf="leaves.leaveDayType == 'Full Day'">
                   <div class="input_icon position-relative d-flex align-items-center">
-                    <input type="date" id="birthday" formControlName="leaveEndDate" name="leaveEndDate" class="form-control input_text" placeholder="To"
+                    <input type="date"  [min]="minEnd" id="birthday" formControlName="leaveEndDate" name="leaveEndDate" class="form-control input_text" placeholder="To"
                       [(ngModel)]="leaves.leaveEndDate" />
                     <!-- <i class="fi fi-rr-calendar calender_2 lh-0"></i> -->
                   </div>

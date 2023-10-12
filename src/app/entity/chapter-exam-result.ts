@@ -8,4 +8,6 @@ export class ChapterExamResult {
   public chapter= new Chapter;
   public student= new StudentDetails;
   public review= new Map<number, string>();
+  public scoreGet:number =0;
+  public totalQuestion:number=0;
 }

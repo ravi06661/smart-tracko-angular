@@ -55,12 +55,12 @@ export class QuestionsComponent {
       this.chapterId = params['chapterId'];
       this.subjectId = params['subjectId'];
     });
-    this.getAllQuestions();
-    this.timer();
-    //this.getChapeter();
+   //this.getAllQuestions();
+   this.getChapeter(); 
   }
+
   public timer() {
-    const duration = 10// in seconds
+    const duration = 60*(this.chapter.exam.score!)// in seconds
     this.timerSubscription = timer(0, 1000).subscribe((elapsedTime) => {
       this.second = duration - elapsedTime;
       this.remainingTime = new Date(this.second * 1000).toISOString().substr(11, 8);
@@ -83,17 +83,17 @@ export class QuestionsComponent {
     )
   }
 
-  public getAllQuestions() {
-    if (this.chapterId) {
-      this.questionService.getAllQuestionByChapterId(this.chapterId).subscribe(
-        (data) => {
-          this.questions = data;
-          this.question = this.questions[0];
-          this.questionNotAnswered = this.questions.length;
-        }
-      )
-    }
-  }
+  // public getAllQuestions() {
+  //   if (this.chapterId) {
+  //     this.questionService.getAllQuestionByChapterId(this.chapterId).subscribe(
+  //       (data) => {
+  //         this.questions = data;
+  //         this.question = this.questions[0];
+  //         this.questionNotAnswered = this.questions.length;
+  //       }
+  //     )
+  //   }
+  // }
 
   public nextQuestion(id: number) {
     if (this.index == this.questions.length - 1) {
@@ -163,13 +163,17 @@ onKeyPress(event: KeyboardEvent) {
     this.isFullScreen = !this.isFullScreen;
   }
 
-  // public getChapeter() {
-  //   this.chapterService.getChapterById(this.chapterId).subscribe(
-  //     (data:any) => {
-  //       this.subjectId = data.chapter.subject.subjectId;
-  //     }
-  //   )
-  // }
+  public getChapeter() {
+    this.chapterService.getChapterById(this.chapterId).subscribe(
+      (data:any) => {
+        this.questions = data.chapter.exam.questions;
+        this.question = this.questions[0];
+        this.questionNotAnswered = this.questions.length;
+        this.chapter = data.chapter;
+        this.timer();
+      }
+    )
+  }
 
   public clickQuitButton(){
     Swal.fire({
@@ -207,6 +211,6 @@ onKeyPress(event: KeyboardEvent) {
         this.submittion();
       }
     })
-  }
+   }
 
 }

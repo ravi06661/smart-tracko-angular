@@ -72,14 +72,16 @@ export class StudentService {
 
       let id = this.loginService.getStudentId();
       this.http.get(`${this.studentUrl}/getStudentData/${id}`).subscribe(
-        (data: any) => {
-          this.profileData.name = data.studentName;
-          this.profileData.profilePic = data.profilePic;
-          this.profileData.course = data.course;
-          this.profileData.studentId = data.id
-          console.log(this.profileData)
-        }, (error) => {
-          console.log(error);
+        {
+          next: (data: any) => {
+            this.profileData.name = data.studentName;
+            this.profileData.profilePic = data.profilePic;
+            this.profileData.course = data.course;
+            this.profileData.studentId = data.id
+          },
+          error: (error) => {
+            
+          }
         }
       )
       return this.profileData
@@ -110,7 +112,7 @@ export class StudentService {
   }
 
   public searchStudentByName(fullName: string) {
-   
+
 
     return this.http.get<StudentDetails[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
   }
@@ -144,16 +146,16 @@ export class StudentService {
   }
   public getStudentPresentsAbsentsAndLeavesYearWise(year: number, studentId: number) {
     return this.http.get(`${this.studentUrl}/getStudentPresentsAbsentsAndLeavesYearWise?year=${year}&studentId=${studentId}`);
-}
+  }
 
 
-public allStudent(){
-  return this.http.get(`${this.studentUrl}/allStudent`);
-}
+  public allStudent() {
+    return this.http.get(`${this.studentUrl}/allStudent`);
+  }
 
-public getAllStudentNotCompleteFees(){
-  return this.http.get(`${this.studentUrl}/allStudent`);
-}
+  public getAllStudentNotCompleteFees() {
+    return this.http.get(`${this.studentUrl}/allStudent`);
+  }
 
 public getTodayAllAttendanceTypeForAdmin(){
   return this.http.get(`${this.studentUrl}/todayAttendanceCountsForAdmin`);
