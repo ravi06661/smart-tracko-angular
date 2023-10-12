@@ -50,18 +50,21 @@ export class AdminAttendanceComponent {
   totalAbsent: number = 0;
   totalPresent: number = 0;
   totaOnleaves: number = 0;
+  totalEarlyCheckOut: number = 0;
 
-  attendaceChart:DonutChart = new DonutChart();
+  attendanceChart:DonutChart = new DonutChart();
 
   constructor(private studentService: StudentService, private utilityService: UtilityServiceService) {
-    this.chartOptions = this.attendaceChart.chartOptions
+    this.chartOptions = this.attendanceChart.chartOptions
+    this.attendanceChart.chartOptions.colors = ['#49cf9f','#f0845d','#8079ff',"#88048f"]
+    this.attendanceChart.chartOptions.labels = ["Present", "Absent", "Leaves", "EarlyCheckOut"]
   }
 
 
   ngOnInit(): void {
    // this.loadStudents();
     this.getTotalStudentTodayLeavesRequest();
-
+    this.getTodayAttendanceForAdmin();
     this.getAbsents();
     this.getActiveLeaves();
     this.currentMonth = moment(new Date().getMonth()+1, "MM").format("MMMM");
@@ -71,12 +74,7 @@ export class AdminAttendanceComponent {
   public getAbsents() {
     this.studentService.getTodayStudentAbsentData().subscribe(
       (data: any) => {
-        
         this.absentData = data.totalAbsent;
-        this.totalAbsent = this.absentData.length;
-        this.totalPresent = data.totalPresent
-        this.presentAbsentAndEarlyCheckoutLength = this.absentData.length
-        this.getChartData();
       }
     )
   }
@@ -156,6 +154,18 @@ export class AdminAttendanceComponent {
 
   public changeTimeFormat(time:any){
     return moment(time, "HH:mm:ss").format("hh:mm A");
+  }
+
+  public getTodayAttendanceForAdmin(){
+    this.studentService.getTodayAllAttendanceTypeForAdmin().subscribe({
+      next:(data:any)=>{
+        this.totalPresent = data.present;
+        this.totaOnleaves = data.leaves;
+        this.totalAbsent = data.absent;
+        this.totalEarlyCheckOut = data.earlyCheckOut;
+        this.getChartData();
+      }
+    })
   }
   
 }

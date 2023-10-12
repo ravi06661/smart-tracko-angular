@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild ,HostListener } from '@angular/core';
 import * as moment from 'moment';
 import { ChartComponent } from 'ng-apexcharts';
 import { Attendance } from 'src/app/entity/attendance';
@@ -56,9 +56,10 @@ export class AttendanceComponent implements OnInit {
   attendanceChart: PresentAbsentLeaveBarChart =
     new PresentAbsentLeaveBarChart();
 
+  minStart:any
+  minEnd:any
+
   applyLeaveForm: FormGroup;
-  minStart: any
-  minEnd: any
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -66,8 +67,7 @@ export class AttendanceComponent implements OnInit {
     private studentService: StudentService,
     private leaveService: LeaveService,
     private utilityService: UtilityServiceService,
-    private loginService: LoginService,
-
+    private loginService: LoginService
   ) {
 
     let today = new Date
@@ -161,6 +161,7 @@ export class AttendanceComponent implements OnInit {
   public addStudentLeave() {
     if (  this.applyLeaveForm.invalid ) {
       this.checkApplyLeaveForm();
+      console.log(this.applyLeaveForm.invalid);
       return;
     }
     this.leaveService.addLeave(this.leaves).subscribe({
@@ -243,7 +244,7 @@ export class AttendanceComponent implements OnInit {
         this.presentsMap = data.presents;
         this.leavesMap = data.leaves;
         this.absentMap = data.absents;
-        this.mispunchMap = data.mispunchs
+        this.mispunchMap = data.mispunch
         this.earlyCheckOutMap = data.earlyCheckOut
         this.setAbsentData();
         this.setPresentData();
@@ -320,5 +321,4 @@ export class AttendanceComponent implements OnInit {
   public setDate() {
     this.minEnd = this.leaves.leaveDate
   }
-
 }

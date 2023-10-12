@@ -20,7 +20,7 @@
                         <label for="" class="mb_6 font-17 font-500 secondary">Name</label>
                         <select class="form-select" aria-label="Default select example" id="studentId" name="studentId"
                             formControlName="studentId" (change)="onStudentChange($event)">
-                            <option value="" selected="">Select Name</option>
+                            <option value = "">Select Student Name</option>
                            
                             <option [value]="students.studentId" *ngFor="let students of student">{{ students.fullName
                                 }} ({{ students.studentId }}) </option>

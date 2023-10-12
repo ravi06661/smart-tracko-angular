@@ -132,11 +132,23 @@ export class QuestionsComponent {
   isFullScreen = false;
 
   @HostListener('window:keydown', ['$event'])
-  onKeyPress(event: KeyboardEvent) {
-    if (event.key.startsWith('F')) {
-      this.submittion();
-    }
+onKeyPress(event: KeyboardEvent) {
+  // Check for the keys you want to handle, including the Windows (Super) key
+  if (
+    event.key.startsWith('F') || // Function keys
+    event.key == 'Escape' || // Esc
+    event.key == 'Tab' || // Tab
+    event.key == 'CapsLock' || // Caps Lock
+    event.key == 'Shift' || // Shift
+    event.key == 'Control' || // Ctrl
+    event.key == 'Alt' || // Alt
+    event.key == 'Insert' || // Insert
+    event.key == 'Delete' || // Delete
+    event.key == 'Meta' // Windows (Super) key
+  ) {
+    this.submittion(); // Call your submission function
   }
+}
   toggleFullScreen() {
     const element = document.documentElement;
     if (!this.isFullScreen) {
