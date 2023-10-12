@@ -60,6 +60,8 @@ export class AdminDashboardComponent implements OnInit {
   totaOnleaves = 0;
   totalAbsent = 0;
   totalPresent = 0;
+  totalEarlyCheckOut = 0;
+
   feesPays:FeesPay[]=[];
   feeses:Fees[]=[];
   
@@ -92,8 +94,8 @@ export class AdminDashboardComponent implements OnInit {
     this.feesPieOptions.colors = ['#49cf9f','#4daaf8','#f6c453']
 
     this.attendanceOptions = this.attendanceChart.chartOptions
-    this.attendanceChart.chartOptions.colors = ['#49cf9f','#f0845d','#8079ff']
-    this.attendanceChart.chartOptions.labels = ["Present", "Absent", "Leaves"]
+    this.attendanceChart.chartOptions.colors = ['#49cf9f','#f0845d','#8079ff',"#88048f"]
+    this.attendanceChart.chartOptions.labels = ["Present", "Absent", "Leaves", "EarlyCheckOut"]
 
     this.years = this.generateYearsArray(2000, new Date().getFullYear());
     this.admissionYear = new Date().getFullYear();
@@ -105,13 +107,11 @@ export class AdminDashboardComponent implements OnInit {
     this.getNewRegistrationStudents();
     this.getAdmissinonDataByWiseForYear(this.admissionYear);
     this.getFeesCollectionMonthAndYearWise(this.feesYear);
-    this.getAbsents();
-    this.getActiveLeaves();
     this.getAllFeesCollections();
-    //this.getAdmissionBarData()
     this.recentCollection(0,6);
     this.upcomingDues(0,6);
     this.getOverAllAssignmentTaskStatus();
+    this.getTodayAttendanceForAdmin();
   }
 
   public preventBackButton() {
@@ -184,23 +184,16 @@ export class AdminDashboardComponent implements OnInit {
     this.attendanceOptions.series = [ this.totalPresent,this.totalAbsent, this.totaOnleaves]
   }
 
-  public getAbsents() {
-    this.studentService.getTodayStudentAbsentData().subscribe(
-      (data: any) => {
-        this.totalAbsent = data.totalAbsent.length;
-        this.totalPresent = data.totalPresent
+  public getTodayAttendanceForAdmin(){
+    this.studentService.getTodayAllAttendanceTypeForAdmin().subscribe({
+      next:(data:any)=>{
+        this.totalPresent = data.present;
+        this.totaOnleaves = data.leaves;
+        this.totalAbsent = data.absent;
+        this.totalEarlyCheckOut = data.earlyCheckOut;
         this.getChartData();
       }
-    )
-  }
-
-  public getActiveLeaves() {
-    this.studentService.getStudentAtiveLeaves().subscribe(
-      (data: any) => {
-        this.totaOnleaves = data.length;
-        this.getChartData();
-      }
-    )
+    })
   }
 
 

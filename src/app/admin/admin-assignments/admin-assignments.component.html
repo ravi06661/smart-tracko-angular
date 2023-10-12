@@ -284,6 +284,7 @@
                                     <select class="form-select form-control " name="courseId"
                                         [(ngModel)]="assignmentRequest.courseId" aria-label="Default select example"
                                         (change)="getSubject(assignmentRequest.courseId)" formControlName="courseId">
+                                        <option value = "">Select Course</option>
                                         <option selected="" [value]="course.courseId" *ngFor="let course of courses">
                                             {{course.courseName}}</option>
                                     </select>
@@ -302,6 +303,7 @@
                                     <select class="form-select   form-control" name="subjectId"
                                         [(ngModel)]="assignmentRequest.subjectId" aria-label="Default select example"
                                         formControlName="subjectId">
+                                        <option value = "">Select Subject</option>
                                         <option selected="" [value]="subject.subjectId"
                                             *ngFor="let subject of subjects">{{subject.subjectName}}</option>
                                     </select>

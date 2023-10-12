@@ -49,8 +49,9 @@ export class StudentService {
   }
   getAttendanceHistory() {
     let currentDate = this.datepipe.transform(new Date(), "yyyy-MM-dd");
-    let joiningDate = this.datepipe.transform("2022-08-01", "yyyy-MM-dd");
-    return this.http.get(`${this.studentUrl}/getStudentCheckInCheckOutHistory?startDate=${joiningDate}&endDate=${currentDate}&limit=0&offset=30`)
+    let date = new Date();
+    let startDate = this.datepipe.transform(date.setDate(date.getDate()-30), "yyyy-MM-dd");
+    return this.http.get(`${this.studentUrl}/getStudentCheckInCheckOutHistory?startDate=${startDate}&endDate=${currentDate}&limit=30&offset=0`)
   }
 
   public getAttendanceFilterData(monthNo: number) {
@@ -155,5 +156,9 @@ export class StudentService {
   public getAllStudentNotCompleteFees() {
     return this.http.get(`${this.studentUrl}/allStudent`);
   }
+
+public getTodayAllAttendanceTypeForAdmin(){
+  return this.http.get(`${this.studentUrl}/todayAttendanceCountsForAdmin`);
+}
 
 }
