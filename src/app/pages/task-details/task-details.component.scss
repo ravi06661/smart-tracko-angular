@@ -121,7 +121,8 @@
   }
   
   .image-zoom {
-    max-width: 80%;
+    height: 160px;
+    aspect-ratio: 5/2;
   }
   
   .expanded {
