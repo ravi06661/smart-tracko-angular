@@ -97,14 +97,17 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     }
   }
 
-  public addTaskQuestion() {
+  public addAssignmentQuestion() {
     this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(
       (data: any) => {
+      
         this.assignmentQuestionsData.assignmentQuestion = data.assignmentQuestion
         this.assignmentQuestionsData.assignmentQuestion.forEach(() => this.expandedQuestions.push(false));
         this.assignmentForm = this.formBuilder.group({
           question: ['', Validators.required]
         })
+        console.log(this.assignmentQuestionsData.assignmentQuestion);
+        
       }, (errore) => {
         this.assignmentQuestionsData.assignmentQuestion = errore.assignmentQuestion
       }
@@ -138,12 +141,6 @@ export class AdminCreateAssignmentsComponent implements OnInit {
         })
     }
   }
-  // imageUrll: any
-  // public showImage(file: any) {
-  //   return 'assets/images/temp_img/modal.png';
-  // }
-  // public imageUrl(file: any): void {
-  // }
 
   public deleteAssignmentQuestion() {
     this.assignmentService.deleteTaskQuestion(this.questionId).subscribe(

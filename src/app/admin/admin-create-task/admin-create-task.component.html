@@ -182,7 +182,7 @@
                         <!-- <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
                             placeholder="Start Typing....."></textarea> -->
                             <ckeditor  [editor]="Editor" name="question" formControlName="question" [(ngModel)]="taskQuestion.question"> </ckeditor>
-                            <div  *ngIf="isFieldInvalidForTaskForm('question')" class="text-danger">Question is
+                            <div  *ngIf="isFieldInvalidForSecondTaskForm('question')" class="text-danger">Question is
                                 required.</div>
                     </div>
                     </form>
@@ -204,11 +204,11 @@
                 </div>
             </div><!-- col-md-12 -->
 
-            <div class="col-md-12" *ngIf="task.attachmentStatus!='Not Allowed'">
+            <div class="col-md-12">
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Assignment Attechments</h3>
             </div>
 
-            <div class="col-md-12" *ngIf="task.attachmentStatus!='Not Allowed'">
+            <div class="col-md-12">
                 <form
                     class="attachment_file2 d-inline-flex align-items-center  position-relative mb-2 add-attechment">
                     <input type="file" name="attachment" value="attachment" (change)="addAttachmentFile($event)" class="d-none" id="attachment">

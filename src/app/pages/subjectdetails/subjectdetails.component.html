@@ -28,9 +28,9 @@
           <H3 class="font-17 font-600 dark-black">{{obj.subTitle}}</H3>
           <h4 class="font-15 font-400 lh-26" [innerHTML]=obj.content></h4>
         </div>
-
-        <h5 class="font-24 font-500 secondary mb_20" *ngIf="(questionsInChapter != 0) && !isCompleted">Ready to test yourself?</h5>
-        <a routerLink="/questions/{{chapterId}}" type="button" class="back_button font-15 font-700" *ngIf="(questionsInChapter != 0) && !isCompleted">Take a test</a>
+        <br>
+        <h5 class="font-24 font-500 secondary mb_20" *ngIf="(questionsInChapter != 0) && !isCompleted"  >Ready to test yourself?</h5>
+        <a (click)="pageRenderUsingRouterLink('/questions', chapterId)" type="button" class="back_button font-15 font-700" *ngIf="(questionsInChapter != 0) && !isCompleted">Take a test</a>
         <!-- <h5 class="font-24 font-500 secondary mb_20" *ngIf="questionsInChapter != 0">Ready to test yourself?</h5> -->
         <a  type="button" routerLink="/result/{{resultId}}" class="back_button font-15 font-700" *ngIf="(questionsInChapter != 0) && isCompleted">View Result</a>
       </div>

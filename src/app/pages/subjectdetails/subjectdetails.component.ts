@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChapterContent } from 'src/app/entity/chapter-content';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { ExamServiceService } from 'src/app/service/exam-service.service';
@@ -21,12 +21,13 @@ export class SubjectdetailsComponent {
   isCompleted = false;
   resultId = 0;
 
-  constructor(private activateRouter: ActivatedRoute,
+  constructor(
     private subjectService: SubjectService,
     private chapterService: ChapterServiceService,
     private examService: ExamServiceService,
     private loginService: LoginService,
-    private acitvateRoute: ActivatedRoute) { }
+    private acitvateRoute: ActivatedRoute,
+    private router:Router) { }
   ngOnInit() {
     this.acitvateRoute.queryParams.subscribe(params => {
       this.chapterId = params['chapterId'];
@@ -40,7 +41,6 @@ export class SubjectdetailsComponent {
       (data: any) => {
         this.chapter = data.chapter.chapterContent;
         this.chapterName = data.chapter.chapterName;
-        this.subjectId = data.chapter.subject.subjectId;
         this.questionsInChapter = data.questionLength
       }
     )
@@ -52,6 +52,17 @@ export class SubjectdetailsComponent {
       }
     )
   }
+
+  public pageRenderUsingRouterLink(path: string, chapterId: number) {
+    const dataParams = {
+      subjectId: this.subjectId,
+      chapterId: chapterId,
+    };
+    this.router.navigate([path], {
+      queryParams: dataParams
+    });
+  }
+
   public getChapterExamIsComplete() {
     this.examService.getChapterExamIsCompleted(this.chapterId, this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
