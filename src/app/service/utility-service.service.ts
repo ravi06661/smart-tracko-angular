@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { decode, encode } from 'base64-arraybuffer';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,12 @@ export class UtilityServiceService {
   public getBaseUrl() {
     return this.BASE_URL;
   }
- 
-  public getTimeUrl() { 
+
+  public getTimeUrl() {
     return this.TIME_URL;
   }
 
-  public updateTimeline(date:any) {
+  public updateTimeline(date: any) {
     // Calculate the time difference and update the timestamp
     const now = new Date();
     const messageDate = new Date(date); // Replace with the actual message date
@@ -32,14 +33,24 @@ export class UtilityServiceService {
     // Calculate hours and minutes
     const hours = Math.floor(timeDiff / 3600000);
     const minutes = Math.floor((timeDiff % 3600000) / 60000);
-    const day = Math.floor(hours/24)
+    const day = Math.floor(hours / 24)
 
     if (hours > 0 && hours < 24) {
       return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
-    } else if(day > 0){
+    } else if (day > 0) {
       return `${day} ${day === 1 ? 'day' : 'days'} ago`
     } else {
-      return `${minutes} ${minutes === 1 ? 'minute'  : 'minutes'} ago`;
+      return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
     }
   }
+
+  // decodeFromBase64(encodedString: string): ArrayBuffer {
+  //   return decode(encodedString);
+  // }
+
+  // encodeToBase64(data: ArrayBuffer): string {
+  //   return encode(data);
+  // }
 }
+
+

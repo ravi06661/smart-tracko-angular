@@ -158,6 +158,7 @@ onKeyPress(event: KeyboardEvent) {
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
+        
       }
     }
     this.isFullScreen = !this.isFullScreen;
@@ -166,13 +167,17 @@ onKeyPress(event: KeyboardEvent) {
   public getChapeter() {
     this.chapterService.getChapterById(this.chapterId).subscribe(
       (data:any) => {
-        this.questions = data.chapter.exam.questions;
+        this.questions = this.shuffleList(data.chapter.exam.questions);
         this.question = this.questions[0];
         this.questionNotAnswered = this.questions.length;
         this.chapter = data.chapter;
         this.timer();
       }
     )
+  }
+  
+  public shuffleList<T>(list: T[]): T[] {
+    return [...list].sort(() => Math.random() - 0.5);
   }
 
   public clickQuitButton(){
@@ -212,5 +217,4 @@ onKeyPress(event: KeyboardEvent) {
       }
     })
    }
-
 }
