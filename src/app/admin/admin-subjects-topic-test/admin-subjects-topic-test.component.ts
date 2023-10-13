@@ -25,7 +25,7 @@ export class AdminSubjectsTopicTestComponent {
   static images: File[] = []
   private editorInstance: any;
   submissionForm: FormGroup
-  constructor(private chapterService: ChapterServiceService, private route: ActivatedRoute, private questionService: QuestionServiceService, private formBuilder: FormBuilder) {
+  constructor(private chapterService: ChapterServiceService, private route: ActivatedRoute, private questionService: QuestionServiceService, private formBuilder: FormBuilder,private activateRouter:ActivatedRoute) {
     this.submissionForm = this.formBuilder.group({
       content: ['', Validators.required],
       subTitle: ['', Validators.required],
@@ -33,10 +33,14 @@ export class AdminSubjectsTopicTestComponent {
     });
   }
   ngOnInit() {
+
+    this.activateRouter.queryParams.subscribe(params => {
+      this.chapterId = params['chapterId'];
+      this.subjectId = params['subjectId'];
+    });
     this.getChapter();
   }
   public getChapter() {
-    this.chapterId = this.route.snapshot.params[('id')];
     this.chapterService.getChapterById(this.chapterId).subscribe(
       {
         next:(data: any) => {

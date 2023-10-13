@@ -22,8 +22,8 @@ export class TaskDetailsComponent {
   taskSubmittion: StudentTaskSubmittion = new StudentTaskSubmittion();
   message: string = ''
   submissionForm: FormGroup;
-  isSubmittedTask: boolean =false
-  taskAttachment:boolean =false
+  isSubmittedTask: boolean = false
+  taskAttachment: boolean = false
   constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService, private loginService: LoginService, private formBuilder: FormBuilder) {
     this.submissionForm = this.formBuilder.group({
       file: ['', Validators.required],
@@ -33,15 +33,16 @@ export class TaskDetailsComponent {
   }
 
   ngOnInit() {
-    this.isSubmitted()
     this.getTask();
+
   }
   public getTask() {
     this.taskService.getTaskById(this.taskId).subscribe(
       (data: any) => {
         this.task = data;
-       if(data.attachment)
-        this.taskAttachment = true 
+        if (data.attachment)
+          this.taskAttachment = true
+        this.isSubmitted()
       }
     )
   }
@@ -67,9 +68,14 @@ export class TaskDetailsComponent {
       } else {
         this.taskSubmittion.student.studentId = this.loginService.getStudentId();
         this.taskService.submitTask(this.taskSubmittion, this.taskId).subscribe(
-          (data) => {
-            this.taskSubmittion = new StudentTaskSubmittion
-            this.message = "Success.."
+          {
+            next:(data) => {
+              this.taskSubmittion = new StudentTaskSubmittion
+              this.message = "Success.."
+            },
+            error:(er)=>{
+               this.message =er.error.message
+            }
           }
         )
       }
@@ -130,10 +136,10 @@ export class TaskDetailsComponent {
   public isSubmitted() {
     this.taskService.isSubmitted(this.task.taskId, this.loginService.getStudentId()).subscribe(
       (data: any) => {
-       if(data==true)
-        this.isSubmittedTask = false
-        else
-        this.isSubmittedTask = true
+        // if (data == true)
+        //   this.isSubmittedTask = false
+        // else
+          this.isSubmittedTask = data
       }
     )
   }

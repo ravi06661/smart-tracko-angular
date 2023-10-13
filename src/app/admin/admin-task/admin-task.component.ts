@@ -90,12 +90,10 @@ export class AdminTaskComponent {
     if (this.firstTaskForm.valid) {
       this.taskService.addTask(this.task).subscribe(
         (data: any) => {
-          console.log(data);
           this.router.navigate(['/admin/createtask/' + data.taskId])
         }
       )
     }
-    //  this.router.navigate(['/admin/createtask/1056'])
   }
 
   public getAllSubmitedTasks() {

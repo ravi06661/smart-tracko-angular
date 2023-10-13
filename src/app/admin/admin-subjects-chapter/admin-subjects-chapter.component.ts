@@ -26,12 +26,13 @@ export class AdminSubjectsChapterComponent {
   chapterUpdate: Chapter = new Chapter();
   imageName = ''
   techImages: TechnologyStack[] = [];
-  subject:Subject = new Subject
+  subject: Subject = new Subject
   constructor(private subjectService: SubjectService,
     private route: ActivatedRoute,
     private chapterService: ChapterServiceService,
     private utilityService: UtilityServiceService,
-    private techService: TechnologyStackService) { }
+    private techService: TechnologyStackService,
+    private router: Router) { }
 
   ngOnInit() {
     this.subjectId = this.route.snapshot.params[('id')];
@@ -41,14 +42,14 @@ export class AdminSubjectsChapterComponent {
         this.techImages = data
       }
     });
-    
+
   }
 
-  public getSubjectById(subjectId:number){
+  public getSubjectById(subjectId: number) {
     this.subjectService.getSubjectById(subjectId).subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.subject = data.subject
-        this.chapter =this.subject.chapters
+        this.chapter = this.subject.chapters
       }
     })
   }
@@ -61,7 +62,7 @@ export class AdminSubjectsChapterComponent {
   //   )
   // }
 
-  
+
   public addChapter() {
     if (this.chapterUpdate.chapterName == '') {
       this.message = "please enter subject name.."
@@ -105,13 +106,13 @@ export class AdminSubjectsChapterComponent {
   }
 
   public updateChapter() {
-    this.chapterService.updateChapter(this.chapterId,this.chapterUpdate.chapterName).subscribe(
+    this.chapterService.updateChapter(this.chapterId, this.chapterUpdate.chapterName).subscribe(
       {
         next: (data) => {
           this.message = 'success';
           this.chapterUpdate = new Chapter();
           this.chapterId = 0;
-         this.getSubjectById(this.subjectId)
+          this.getSubjectById(this.subjectId)
         },
         error: (error) => {
           this.message = error.error.message;
@@ -132,4 +133,15 @@ export class AdminSubjectsChapterComponent {
       }
     )
   }
+
+  public pageRenderUsingRouterLink(path: string, chapterId: number) {
+    const dataParams = {
+      subjectId: this.subjectId,
+      chapterId: chapterId,
+    };
+    this.router.navigate([path], {
+      queryParams: dataParams
+    });
+  }
+
 }

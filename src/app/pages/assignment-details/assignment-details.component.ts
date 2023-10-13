@@ -49,11 +49,12 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   public getAssignmentQuestionById() {
-    this.isSubmitted()
+   
     this.assignmentService.getAssignmentQuestionById(this.questionId, this.assignmentId).subscribe({
       next: (data: any) => {
         this.assignmentQues = data.question
         this.attachment = data.attachment
+        this.isSubmitted()
       }
     })
   }
@@ -83,7 +84,7 @@ export class AssignmentDetailsComponent implements OnInit {
   public isSubmitted() {
     this.assignmentService.isSubmitted(this.assignmentId, this.questionId, this.loginService.getStudentId()).subscribe(
       (data: any) => {   
-        if(data){
+        if(data==true){
           this.isSubmittedQuestion = false;
         }else
         this.isSubmittedQuestion = true;

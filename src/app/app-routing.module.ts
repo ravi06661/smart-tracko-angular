@@ -120,7 +120,7 @@ const routes: Routes = [
       {path:'createannouncements',component:CreateAnnouncementsComponent,pathMatch:'full'},
       {path:'student',component:AdminstudentComponent,pathMatch:'full'},
       {path:'subject',component:AdminSubjectsComponent,pathMatch:'full'},
-      {path:'subjectContent/:id',component:AdminSubjectsTopicTestComponent,pathMatch:'full'},
+      {path:'subjectContent',component:AdminSubjectsTopicTestComponent,pathMatch:'full'},
       {path:'subjectchapter/:id',component:AdminSubjectsChapterComponent,pathMatch:'full'},
       {path:'chapterquiz/:id',component:AdminSubjectsChapterQuizComponent,pathMatch:'full'},
       {path:'course',component:AdminCoursesComponent,pathMatch:'full'},
