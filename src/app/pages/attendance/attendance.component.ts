@@ -159,11 +159,13 @@ export class AttendanceComponent implements OnInit {
   }
 
   public addStudentLeave() {
-    if (  this.applyLeaveForm.invalid ) {
-      this.checkApplyLeaveForm();
-      console.log(this.applyLeaveForm.invalid);
-      return;
-    }
+    // if (  this.applyLeaveForm.invalid ) {
+    //   this.checkApplyLeaveForm();
+    //   console.log(this.applyLeaveForm.invalid);
+    //   return;
+    // }
+    console.log(this.leaves);
+    
     this.leaveService.addLeave(this.leaves).subscribe({
       next: (res: any) => {
         if (res.message == 'SUCCESS') {
@@ -244,8 +246,8 @@ export class AttendanceComponent implements OnInit {
         this.presentsMap = data.presents;
         this.leavesMap = data.leaves;
         this.absentMap = data.absents;
-        this.mispunchMap = data.mispunch
-        this.earlyCheckOutMap = data.earlyCheckOut
+        this.mispunchMap = data.mispunchs
+        this.earlyCheckOutMap = data.earlyCheckOuts
         this.setAbsentData();
         this.setPresentData();
         this.setLeavesData();

@@ -6,7 +6,7 @@
   </div>
 
   <div class="scroll_section">
-    <div class="row mb-4">
+    <!-- <div class="row mb-4">
       <div class="col-md-12">
         <div class="top-content">
           <div class="row">
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="task_assignment">
       <h3 class="title font-21 font-600 secondary position-relative">News</h3>
       <mat-paginator *ngIf="totalNewsAndEvent>8"
@@ -44,7 +44,7 @@
               <img class="imageSize" [src]="imageUrl+newsAndEvent.image">
               <div class="news_text dark">
                 <h3 class="font-11 font-400 small_text">{{utilityService.updateTimeline(newsAndEvent.createdDate)}}</h3>
-                <h4 class="font-21 font-600 small_text">{{newsAndEvent.title}}</h4>
+                <h4 class="font-17 font-500 small_text">{{newsAndEvent.title}}</h4>
                 <h5 class="font-14 font-500 small_text">{{newsAndEvent.shortDescriptoin}}</h5>
               </div>
             </div>

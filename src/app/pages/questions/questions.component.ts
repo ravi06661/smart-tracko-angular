@@ -72,15 +72,15 @@ export class QuestionsComponent {
   }
 
   public submittion() {
-    this.chapterExamResultResponse.chapterId = this.chapterId
-    this.chapterExamResultResponse.studentId = this.loginService.getStudentId()
-    this.chapterExamResultResponse.review = Object.fromEntries(this.questionClicked.entries());
-    this.chapterExamResultResponse.subjectId =this.subjectId
-    this.examServiceService.addChapterExam(this.chapterExamResultResponse).subscribe(
-      (data: any) => {
-        this.router.navigate(['result/' + data.id])
-      }
-    )
+    // this.chapterExamResultResponse.chapterId = this.chapterId
+    // this.chapterExamResultResponse.studentId = this.loginService.getStudentId()
+    // this.chapterExamResultResponse.review = Object.fromEntries(this.questionClicked.entries());
+    // this.chapterExamResultResponse.subjectId =this.subjectId
+    // this.examServiceService.addChapterExam(this.chapterExamResultResponse).subscribe(
+    //   (data: any) => {
+    //     this.router.navigate(['result/' + data.id])
+    //   }
+    // )
   }
 
   // public getAllQuestions() {
