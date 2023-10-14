@@ -63,7 +63,7 @@ export class QuestionsComponent {
   }
 
   public timer() {
-    const duration = 60*(this.chapter.exam.score!)// in seconds
+    const duration = 60*(this.chapter.exam.examTimer!)// in seconds
     this.timerSubscription = timer(0, 1000).subscribe((elapsedTime) => {
       this.second = duration - elapsedTime;
       this.remainingTime = new Date(this.second * 1000).toISOString().substr(11, 8);
