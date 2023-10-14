@@ -3,18 +3,18 @@
     <div class="container">
         <div class="col-md-10 question_page m-auto">
             <div class="Questions_quiz d-flex justify-content-between align-items-center ">
-                <h4 class="font-17 font-700 light-black mb-0 d-flex align-items-center"  (click)="clickQuitButton()"><i
+                <h4 class="font-17 font-700 light-black mb-0 d-flex align-items-center pointer"  (click)="clickQuitButton()"><i
                         class="fi fi-sr-arrow-left mx-2 ms-0 lh-0" ></i>Quit</h4>
                 <div class="text-center">
                     <h6 class="font-17 font-500 light-black mb-0">Time Left:{{remainingTime}} </h6>
-                    <h5 class="font-19 font-700 light-info mb-0">Question - 1</h5>
+                    <h5 class="font-19 font-700 light-info mb-0">Question - {{questionNumber}}</h5>
                 </div>
-                <h4 class="font-17 font-700 light-black mb-0 d-flex align-items-center"  (click)="clickSubmitButton()" >Submit&nbsp;&nbsp;<i
+                <h4 class="font-17 font-700 light-black mb-0 d-flex align-items-center pointer"  (click)="clickSubmitButton()" >Submit&nbsp;&nbsp;<i
                     class="fi fi-sr-arrow-right mx-2 ms-0 lh-0" ></i></h4>
             </div>
             <div class="progressbar">
-                  <span class="prosesss complete" ></span> 
-                  <span [ngClass]="'prosesss '" *ngFor="let obj of questions"></span>
+                  <span [ngClass]="manageQuestionProgressBar(obj.questionId)?'prosesss complete':'prosesss'" *ngFor="let obj of questions"></span> 
+                  <!-- <span [ngClass]="'prosesss '" ></span> -->
             </div>
             <div class="question_section">
                 <div class="d-flex justify-content-center align-items-center" *ngIf="question.questionImage!=null">

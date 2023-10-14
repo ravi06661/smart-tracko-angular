@@ -8,7 +8,7 @@
             class="back_button font-15 font-500 d-flex justify-content-center align-items-center"><i
               class="fi fi-rr-arrow-left lh-0"></i>Back</a>
           <h5 class="font-24 font-700 light-black mb-0">Review Answers</h5>
-          <h6 class="font-19 font-600 light-black mb-0">Your Score - {{chapterExamResult.scoreGet}}/{{chapterExamResult.totalQuestion}}</h6>
+          <h6 class="font-19 font-600 light-black mb-0">Your Score : {{chapterExamResult.scoreGet}}/{{chapterExamResult.totalQuestion}}</h6>
         </div>
         <div class="review_section">
           <div class="questions_answer review_questions" *ngFor="let obj of chapterExamResult.chapter.exam.questions ;let i=index">

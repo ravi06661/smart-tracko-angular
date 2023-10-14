@@ -38,6 +38,9 @@ export class QuestionsComponent {
   subjectId: number = 0;
   chapter = new Chapter;
   totalQuestion = 0;
+  questionNumber = 1;
+
+  unrelatedActivityDetected = false;
 
   constructor(private utilityService: UtilityServiceService, private questionService: QuestionServiceService, private activateRouter: ActivatedRoute,
     private subjectService: SubjectService,
@@ -72,15 +75,15 @@ export class QuestionsComponent {
   }
 
   public submittion() {
-    // this.chapterExamResultResponse.chapterId = this.chapterId
-    // this.chapterExamResultResponse.studentId = this.loginService.getStudentId()
-    // this.chapterExamResultResponse.review = Object.fromEntries(this.questionClicked.entries());
-    // this.chapterExamResultResponse.subjectId =this.subjectId
-    // this.examServiceService.addChapterExam(this.chapterExamResultResponse).subscribe(
-    //   (data: any) => {
-    //     this.router.navigate(['result/' + data.id])
-    //   }
-    // )
+    this.chapterExamResultResponse.chapterId = this.chapterId
+    this.chapterExamResultResponse.studentId = this.loginService.getStudentId()
+    this.chapterExamResultResponse.review = Object.fromEntries(this.questionClicked.entries());
+    this.chapterExamResultResponse.subjectId =this.subjectId
+    this.examServiceService.addChapterExam(this.chapterExamResultResponse).subscribe(
+      (data: any) => {
+        this.router.navigate(['result/' + data.id])
+      }
+    )
   }
 
   // public getAllQuestions() {
@@ -104,6 +107,7 @@ export class QuestionsComponent {
       this.nextButton = false
       this.previousButton = false;
       this.question = this.questions[++this.index]
+      this.questionNumber++;
     }
   }
 
@@ -115,7 +119,9 @@ export class QuestionsComponent {
       this.previousButton = false;
       this.nextButton = false
       this.question = this.questions[--this.index]
+      this.questionNumber--;
     }
+    
   }
 
   questionClick(option: string, index: number) {
@@ -127,6 +133,9 @@ export class QuestionsComponent {
     } else {
       this.questionClicked.set(index, option);
     }
+
+    console.log(this.questionClicked);
+    
   }
 
   isFullScreen = false;
@@ -149,20 +158,40 @@ onKeyPress(event: KeyboardEvent) {
     this.submittion(); // Call your submission function
   }
 }
+
+@HostListener('mousemove', ['$event'])
+  onMouseMove() {
+    if (this.unrelatedActivityDetected) {
+      // Automatically submit the test if unrelated activity persists
+      alert("submit");
+    } else {
+      // Show a warning if unrelated activity is detected
+      this.showWarning();
+      this.unrelatedActivityDetected = true
+    }
+  }
+  public showWarning(){
+    alert("warning");
+  }
+
   toggleFullScreen() {
     const element = document.documentElement;
     if (!this.isFullScreen) {
       if (element.requestFullscreen) {
         element.requestFullscreen();
+        console.log("if");
+        
       }
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
+        console.log('else');
         
       }
     }
     this.isFullScreen = !this.isFullScreen;
   }
+
 
   public getChapeter() {
     this.chapterService.getChapterById(this.chapterId).subscribe(
@@ -216,5 +245,15 @@ onKeyPress(event: KeyboardEvent) {
         this.submittion();
       }
     })
+   }
+
+   public manageQuestionProgressBar(questionId:number){
+    if (this.questionClicked.has(questionId)) {
+      // Value is present in the map
+      return true;
+    } else {
+      // Value is not present in the map
+     return false;
+    }
    }
 }
