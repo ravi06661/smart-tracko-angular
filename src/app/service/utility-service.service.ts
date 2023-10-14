@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { decode, encode } from 'base64-arraybuffer';
 
 @Injectable({
   providedIn: 'root'
