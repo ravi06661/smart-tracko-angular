@@ -44,10 +44,10 @@
           <h3 class="font-17 font-600 dark-black">{{obj.subTitle}}</h3>
           <h4 class="font-15 font-400 lh-26"  [innerHTML]="obj.content"></h4>
         </div>
-        <a  routerLink="/admin/chapterquiz/{{chapterId}}" type="button" class="back_button font-17 font-700 text-capitalize">Chapter quiz</a>
+        <a  (click)="pageRenderUsingRouterLink('/admin/chapterquiz',chapterId)" type="button" class="back_button font-17 font-700 text-capitalize">Chapter quiz</a>
       </div>
     </div>
-
+   
   
   <!-- RESULT END -->
 
