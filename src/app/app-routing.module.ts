@@ -122,7 +122,7 @@ const routes: Routes = [
       {path:'subject',component:AdminSubjectsComponent,pathMatch:'full'},
       {path:'subjectContent',component:AdminSubjectsTopicTestComponent,pathMatch:'full'},
       {path:'subjectchapter/:id',component:AdminSubjectsChapterComponent,pathMatch:'full'},
-      {path:'chapterquiz/:id',component:AdminSubjectsChapterQuizComponent,pathMatch:'full'},
+      {path:'chapterquiz',component:AdminSubjectsChapterQuizComponent,pathMatch:'full'},
       {path:'course',component:AdminCoursesComponent,pathMatch:'full'},
       {path:'coursesbatches/:courseId',component:AdminCoursesBatchesComponent,pathMatch:'full'},
       {path:'studentprofile/:studentId',component:StudentProfileComponent,pathMatch:'full'},

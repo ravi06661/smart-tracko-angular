@@ -3,9 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ChapterQuizeQuestion } from 'src/app/entity/chapter-quize-question';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { MyUploadAdapter } from 'src/app/entity/my-upload-adapter';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 @Component({
   selector: 'app-admin-subjects-chapter-quiz',
   templateUrl: './admin-subjects-chapter-quiz.component.html',
@@ -23,8 +23,8 @@ export class AdminSubjectsChapterQuizComponent {
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   submissionForm: FormGroup
-
-  constructor(private questionService: QuestionServiceService, private route: ActivatedRoute, private router: Router, private utilityService: UtilityServiceService, private formBuilder: FormBuilder) {
+ subjectId:number=0;
+  constructor(private activateRouter:ActivatedRoute,private questionService: QuestionServiceService, private route: ActivatedRoute, private router: Router, private utilityService: UtilityServiceService, private formBuilder: FormBuilder, private chapterService: ChapterServiceService) {
     this.submissionForm = this.formBuilder.group({
       correctOption: ['', Validators.required],
       option4: ['', Validators.required],
@@ -35,7 +35,11 @@ export class AdminSubjectsChapterQuizComponent {
     });
   }
   ngOnInit() {
-    this.id = this.route.snapshot.params[('id')];
+    //this.id = this.route.snapshot.params[('id')];
+    this.activateRouter.queryParams.subscribe(params => {
+      this.id = params['chapterId'];
+      this.subjectId = params['subjectId'];
+    });
     this.getAllQuestions();
   }
   public addQuestion() {
@@ -43,9 +47,15 @@ export class AdminSubjectsChapterQuizComponent {
       this.submissionFormFun()
     } else {
       this.questionService.addQuestion(this.question, this.id).subscribe(
-        (data) => {
-          this.question = new ChapterQuizeQuestion();
-          this.message = 'success..';
+        {
+          next: (data) => {
+            this.question = new ChapterQuizeQuestion();
+            this.message = 'success..';
+            this.getAllQuestions()
+          },
+          error: (er) => {
+
+          }
         }
       )
     }
@@ -55,20 +65,27 @@ export class AdminSubjectsChapterQuizComponent {
   }
 
   public getAllQuestions() {
-    if (this.id) {
-      this.questionService.getAllQuestionByChapterId(this.id).subscribe(
-        (data) => {
-          this.questions = data;
+    this.chapterService.getChapterById(this.id).subscribe(
+      {
+        next: (data: any) => {
+          this.questions = data.chapter.exam.questions;
+        },
+        error: (er) => {
+
         }
-      )
-    }
+      }
+    )
   }
   public deleteQuestion() {
     this.questionService.deleteQuestionById(this.questionId).subscribe(
-      (data) => {
-      }, (error) => {
-        this.questionId = 0;
-        this.getAllQuestions();
+      {
+        next: (data) => {
+          this.questionId = 0;
+          this.getAllQuestions();
+        },
+        error: (error) => {
+          alert("Error!!")
+        }
       }
     )
   }
@@ -104,9 +121,6 @@ export class AdminSubjectsChapterQuizComponent {
     this.message = ''
   }
 
-  public setChapterTestTimer() {
-
-  }
   public clearFormSubmission() {
     this.submissionForm = this.formBuilder.group({
       correctOption: ['', Validators.required],
@@ -132,5 +146,15 @@ export class AdminSubjectsChapterQuizComponent {
     if (firstInvalidControl) {
       firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  }
+
+  public pageRenderUsingRouterLink(path: string) {
+    const dataParams = {
+      subjectId: this.subjectId,
+      chapterId: this.id,
+    };
+    this.router.navigate([path], {
+      queryParams: dataParams
+    });
   }
 }

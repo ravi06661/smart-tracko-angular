@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChapterContent } from 'src/app/entity/chapter-content';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
@@ -25,7 +25,7 @@ export class AdminSubjectsTopicTestComponent {
   static images: File[] = []
   private editorInstance: any;
   submissionForm: FormGroup
-  constructor(private chapterService: ChapterServiceService, private route: ActivatedRoute, private questionService: QuestionServiceService, private formBuilder: FormBuilder,private activateRouter:ActivatedRoute) {
+  constructor(private router:Router,private chapterService: ChapterServiceService, private route: ActivatedRoute, private questionService: QuestionServiceService, private formBuilder: FormBuilder,private activateRouter:ActivatedRoute) {
     this.submissionForm = this.formBuilder.group({
       content: ['', Validators.required],
       subTitle: ['', Validators.required],
@@ -148,5 +148,15 @@ export class AdminSubjectsTopicTestComponent {
     if (firstInvalidControl) {
       firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+  }
+
+  public pageRenderUsingRouterLink(path: string, chapterId: number) {
+    const dataParams = {
+      subjectId: this.subjectId,
+      chapterId: chapterId,
+    };
+    this.router.navigate([path], {
+      queryParams: dataParams
+    });
   }
 }

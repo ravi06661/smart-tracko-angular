@@ -136,10 +136,10 @@ export class TaskDetailsComponent {
   public isSubmitted() {
     this.taskService.isSubmitted(this.task.taskId, this.loginService.getStudentId()).subscribe(
       (data: any) => {
-        // if (data == true)
-        //   this.isSubmittedTask = false
-        // else
-          this.isSubmittedTask = data
+        if (data == true)
+          this.isSubmittedTask = false
+        else
+          this.isSubmittedTask = true
       }
     )
   }
