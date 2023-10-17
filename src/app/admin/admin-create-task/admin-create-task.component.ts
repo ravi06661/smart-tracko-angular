@@ -136,7 +136,7 @@ export class AdminCreateTaskComponent {
               question: ['', Validators.required]
             })
           },
-          error: (errore) => {6
+          error: (errore) => {
             alert('Error')
           }
         }
