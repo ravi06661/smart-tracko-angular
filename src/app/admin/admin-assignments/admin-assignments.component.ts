@@ -87,7 +87,7 @@ export class AdminAssignmentsComponent implements OnInit {
   }
 
   public createAssingment() {
-         this.messageClear()
+    this.messageClear()
     if (this.submissionForm.invalid) {
       this.submissionFormFun()
       return;

@@ -209,26 +209,10 @@ export class StudentProfileComponent implements OnInit {
   }
 
   progressWidth: string = '';
-
-  // public calculatePercentages(num1: number, num2: number) {
-  //   const totalCompleted = this.getTotalCompletedAssignmentCount(num1);
-  //   let per
-  //   if (totalCompleted !== undefined) {
-  //     per = Math.floor(totalCompleted / num2 * 100);
-  //     let obj = per * 7.29;
-  //     this.progressWidth = obj.toString() + 'px';
-  //   }
-  //   if(num2==0)
-  //   this.progressWidth =  '0px';
-  //   return per;
-  // }
-  public calculatePercentages(num1: number, num2: number) {
-    let totalCompleted = this.getTotalCompletedAssignmentCount(num1);
-    let per
-      per = Math.floor( totalCompleted! / num2 * 100);
-      if(num2==0){
-        per=0
-      }
-    return per;
+  calculatePercentages(num1: number, num2: number) {
+    if(num2!==0)
+    return Math.floor((num1 / num2) * 100);
+   else
+   return 0;
   }
 }

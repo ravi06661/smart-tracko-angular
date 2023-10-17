@@ -9,31 +9,31 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   templateUrl: './admin-assignment-submission.component.html',
   styleUrls: ['./admin-assignment-submission.component.scss']
 })
-export class AdminAssignmentSubmissionComponent implements OnInit{
+export class AdminAssignmentSubmissionComponent implements OnInit {
   BASE_URL = this.utilityService.getBaseUrl();
-  IMG_URL = this.BASE_URL+'/file/getImageApi/images/'
-  ATTACHMENT_URL = this.BASE_URL+'/file/download/taskAndAssignmentAttachment/'
-  submitedAssignment:AssignmentSubmission = new AssignmentSubmission
+  IMG_URL = this.BASE_URL + '/file/getImageApi/images/'
+  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
+  submitedAssignment: AssignmentSubmission = new AssignmentSubmission
   review = '';
   status = 'Unreviewed';
-  constructor(private activateRoute:ActivatedRoute,
-              private utilityService:UtilityServiceService,
-              private assignmentService:AssignmentServiceService){}
+  constructor(private activateRoute: ActivatedRoute,
+    private utilityService: UtilityServiceService,
+    private assignmentService: AssignmentServiceService) { }
 
   ngOnInit(): void {
     this.activateRoute.queryParams.subscribe(params => {
-     const object = params['data'];
-     this.submitedAssignment = JSON.parse(object);
+      const object = params['data'];
+      this.submitedAssignment = JSON.parse(object);
     });
 
-    if(this.submitedAssignment.status == this.status){
+    if (this.submitedAssignment.status == this.status) {
       this.updateSubmitAssignmentStatus('Reviewing');
     }
   }
 
-  public updateSubmitAssignmentStatus(status:string){
-    this.assignmentService.updateSubmitAssignmentStatus(this.submitedAssignment.submissionId,status,this.review).subscribe({
-      next:(data:any)=>{
+  public updateSubmitAssignmentStatus(status: string) {
+    this.assignmentService.updateSubmitAssignmentStatus(this.submitedAssignment.submissionId, status, this.review).subscribe({
+      next: (data: any) => {
         this.submitedAssignment = data
       }
     })

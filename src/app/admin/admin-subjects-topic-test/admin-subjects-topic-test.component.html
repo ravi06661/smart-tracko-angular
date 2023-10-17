@@ -21,7 +21,7 @@
             <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light" routerLink="/admin/subject">Subjects</a>
             </li>
             <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light" routerLink="/admin/subjectchapter/{{subjectId}}">Chapters</a></li>
-            <li class="breadcrumb-item  light-black" aria-current="page">{{chapterName}}</li>
+            <li class="breadcrumb-item  light-black" aria-current="page">{{chapter.chapterName}}</li>
           </ol>
         </nav>
         <a routerLink="/admin/subjectchapter/{{subjectId}}" type="button"
@@ -29,7 +29,7 @@
             class="fi fi-rr-arrow-left lh-0"></i>Back</a>
       </div>
       <div class="scroll_sec sub_detail-scroll">
-        <div class="sub_details d-flex flex-column" id="updown_btn" *ngFor="let obj of chapter">
+        <div class="sub_details d-flex flex-column" id="updown_btn" *ngFor="let obj of chapter.chapterContent">
             <div class="top-test-question">
                 <h1 class="font-24 font-600 dark-black">{{obj.title}} </h1>
                 <div class="test-que-edit-del">
@@ -101,7 +101,7 @@
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add Content</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" >
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"  (click)="reload()" (click)="clearFormSubmission()">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
