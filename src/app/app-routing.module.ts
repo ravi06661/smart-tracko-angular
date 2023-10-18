@@ -63,6 +63,9 @@ import { ReviewComponent } from './pages/review/review.component';
 import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-submission/admin-assignment-submission.component';
 import { AdminEditJobAlertComponent } from './admin/admin-edit-job-alert/admin-edit-job-alert.component';
 import { AdminEditNewsAndEventsComponent } from './admin/admin-edit-news-and-events/admin-edit-news-and-events.component';
+import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
+import { AdminDiscussionForumComponent } from './admin/admin-discussion-forum/admin-discussion-forum.component';
+import { AdminChapterResultComponent } from './admin/admin-chapter-result/admin-chapter-result.component';
 
 
 
@@ -83,6 +86,8 @@ const routes: Routes = [
     {path:'newsAndEvent',component:NewsandeventsComponent,pathMatch:'full'},
     {path:'newandseventsdescription/:id',component:NewsandEventsDescriptionComponent,pathMatch:'full'},
     {path:'attendance',component:AttendanceComponent,pathMatch:'full'},
+    {path:'discussion',component:DiscussionForumComponent,pathMatch:'full'},
+
     {path:'jobalert',component:JobalertComponent,pathMatch:'full'},
     {path:'jobdescription/:id',component:JobDescriptionComponent,pathMatch:'full'},
     {path:'internshipsdescription/:id',component:InternshipsDescriptionComponent,pathMatch:'full'},
@@ -128,7 +133,11 @@ const routes: Routes = [
       {path:'studentprofile/:studentId',component:StudentProfileComponent,pathMatch:'full'},
       {path:'studentregistration',component:AdminStudentRegistrationComponent,pathMatch:'full'},
       {path:'submission',component:AdminSubmissionComponent,pathMatch:'full'},
-      {path:'editetask',component:AdminEditTaskComponent}
+      {path:'editetask',component:AdminEditTaskComponent},
+      {path:'admindiscussion',component:AdminDiscussionForumComponent,pathMatch:'full'},
+      {path:'result',component:AdminChapterResultComponent,pathMatch:'full'},
+
+
     ]
   },
   {path:'**',component:NotFoundComponent,pathMatch:'full'},

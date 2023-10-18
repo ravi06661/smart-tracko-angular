@@ -55,18 +55,18 @@ export class AdminAddFeesComponent implements OnInit {
     return field ? field.invalid && field.touched : false;
   }
 
-  public feesDetailsFormSubmition() {
-    Object.keys(this.addFeesForm.controls).forEach(key => {
-      const control = this.addFeesForm.get(key);
-      if (control) {
-        control.markAsTouched();
-      }
-    });
-    const firstInvalidControl = document.querySelector('input.ng-invalid');
-    if (firstInvalidControl) {
-      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
+  // public feesDetailsFormSubmition() {
+  //   Object.keys(this.addFeesForm.controls).forEach(key => {
+  //     const control = this.addFeesForm.get(key);
+  //     if (control) {
+  //       control.markAsTouched();
+  //     }
+  //   });
+  //   const firstInvalidControl = document.querySelector('input.ng-invalid');
+  //   if (firstInvalidControl) {
+  //     firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  //   }
+  // }
  
   onStudentChange(event: any) {
     const selectedStudentId = event.target.value;
@@ -88,6 +88,10 @@ export class AdminAddFeesComponent implements OnInit {
       this.fees.student.email = '';
       this.fees.student.mobile = '';
       this.fees.student.fullName = '';
+      this.fees.course.courseName='';
+      this.fees.course.courseFees='';
+    
+
     }
   }
   
