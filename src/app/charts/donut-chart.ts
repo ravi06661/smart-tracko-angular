@@ -1,6 +1,6 @@
 export class DonutChart {
     chartOptions = {
-        series: [75, 20, 5,6,34],
+        series: [75, 20, 5,6],
         chart: {
           width: 320,
           type: "donut",

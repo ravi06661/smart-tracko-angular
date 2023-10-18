@@ -72,12 +72,24 @@
                 [ngClass]="check == 'attendance' ? 'icon-text dashboard' : 'icon-text'"
                 >Attendance</span></a>
 
+
+                <a
+                routerLink="/admin/admindiscussion"
+                [ngClass]="check == 'admindiscussion' ? 'active' : 'box-hover'"
+                (click)="getValueById(lsdv6.value)"
+              >
+                <input #lsdv6 type="hidden" value="admindiscussion" />
+              <img src="assets/images/svg_img/New folder/discussion.svg"
+                  class="material-icons" id="icon7"><span
+                  [ngClass]="check == 'admindiscussion' ? 'icon-text dashboard' : 'icon-text'"
+                  >Discussion Forum</span></a>
+
                 <a  routerLink="/admin/fees"
                 [ngClass]="check == 'fees' ? 'active' : 'box-hover'"
-                (click)="getValueById(lsdv6.value)">
-                <input #lsdv6 type="hidden" value="fees" />
+                (click)="getValueById(lsdv7.value)">
+                <input #lsdv7 type="hidden" value="fees" />
                 <img src="assets/images/svg_img/New folder/Neutral-Fees.svg"
-                  class="material-icons dashboard" id="icon7"><span
+                  class="material-icons dashboard" id="icon8"><span
                   [ngClass]="check == 'fees' ? 'icon-text dashboard' : 'icon-text'"
                   >Fees</span></a>
 
@@ -85,54 +97,54 @@
                 
                 <a routerLink="/admin/jobalert"
                 [ngClass]="check == 'jobalert' ? 'active' : 'box-hover'"
-                (click)="getValueById(lsdv7.value)">
-                <input #lsdv7 type="hidden" value="jobalert" />
+                (click)="getValueById(lsdv8.value)">
+                <input #lsdv8 type="hidden" value="jobalert" />
               <img src="assets/images/svg_img/New folder/Neutral-Jobs.svg"
-                  class="material-icons" id="icon8"><span
+                  class="material-icons" id="icon9"><span
                   [ngClass]="check == 'jobalert' ? 'icon-text dashboard' : 'icon-text'"
                   >Job Alert</span></a>
 
             <a
                 routerLink="/admin/newsAndEvent"
                 [ngClass]="check == 'newAndEvent' ? 'active' : 'box-hover'"
-                (click)="getValueById(lsdv8.value)"
+                (click)="getValueById(lsdv9.value)"
               >
-                <input #lsdv8 type="hidden" value="newAndEvent" />
+                <input #lsdv9 type="hidden" value="newAndEvent" />
               <img src="assets/images/svg_img/New folder/Neutral-News.svg"
-                  class="material-icons" id="icon9"><span
+                  class="material-icons" id="icon10"><span
                   [ngClass]="check == 'newAndEvent' ? 'icon-text dashboard' : 'icon-text'"
                   >News & Events</span></a>
 
                   <a
                   routerLink="/admin/announcements"
                   [ngClass]="check == 'announcements' ? 'active' : 'box-hover'"
-                  (click)="getValueById(lsdv9.value)"
+                  (click)="getValueById(lsdv10.value)"
                 >
-                  <input #lsdv9 type="hidden" value="announcements" />
+                  <input #lsdv10 type="hidden" value="announcements" />
                 <img src="assets/images/svg_img/New folder/Neutral-Announcement.svg"
-                    class="material-icons" id="icon10"><span
+                    class="material-icons" id="icon11"><span
                     [ngClass]="check == 'announcements' ? 'icon-text dashboard' : 'icon-text'"
                     >Announcements</span></a>
 
                     <a
                     routerLink="/admin/student"
                     [ngClass]="check == 'student' ? 'active' : 'box-hover'"
-                    (click)="getValueById(lsdv10.value)"
+                    (click)="getValueById(lsdv11.value)"
                   >
-                    <input #lsdv10 type="hidden" value="student" />
+                    <input #lsdv11 type="hidden" value="student" />
                   <img src="assets/images/svg_img/New folder/Neutral-User.svg"
-                      class="material-icons" id="icon11"><span
+                      class="material-icons" id="icon12"><span
                       [ngClass]="check == 'student' ? 'icon-text dashboard' : 'icon-text'"
                       >Student</span></a>
 
 
                       <a
                     [ngClass]="check == 'logout' ? 'active' : 'box-hover'"
-                    (click)="getValueById(lsdv11.value)" (click)="logout()"
+                    (click)="getValueById(lsdv12.value)" (click)="logout()"
                   >
-                    <input #lsdv11 type="hidden" value="logout" />
+                    <input #lsdv12 type="hidden" value="logout" />
                   <img src="assets/images/svg_img/New folder/Neutral-Settings.svg"
-                      class="material-icons" id="icon12"><span
+                      class="material-icons" id="icon13"><span
                       [ngClass]="check == 'logout' ? 'icon-text dashboard' : 'icon-text'"
                       >Logout</span></a>
 

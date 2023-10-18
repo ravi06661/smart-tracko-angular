@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild ,HostListener } from '@angular/core';
 import * as moment from 'moment';
 import { ChartComponent } from 'ng-apexcharts';
 import { Attendance } from 'src/app/entity/attendance';
@@ -56,9 +56,10 @@ export class AttendanceComponent implements OnInit {
   attendanceChart: PresentAbsentLeaveBarChart =
     new PresentAbsentLeaveBarChart();
 
+  minStart:any
+  minEnd:any
+
   applyLeaveForm: FormGroup;
-  minStart: any
-  minEnd: any
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -66,8 +67,7 @@ export class AttendanceComponent implements OnInit {
     private studentService: StudentService,
     private leaveService: LeaveService,
     private utilityService: UtilityServiceService,
-    private loginService: LoginService,
-
+    private loginService: LoginService
   ) {
 
     let today = new Date
@@ -159,10 +159,13 @@ export class AttendanceComponent implements OnInit {
   }
 
   public addStudentLeave() {
-    if (  this.applyLeaveForm.invalid ) {
-      this.checkApplyLeaveForm();
-      return;
-    }
+    // if (  this.applyLeaveForm.invalid ) {
+    //   this.checkApplyLeaveForm();
+    //   console.log(this.applyLeaveForm.invalid);
+    //   return;
+    // }
+    console.log(this.leaves);
+    
     this.leaveService.addLeave(this.leaves).subscribe({
       next: (res: any) => {
         if (res.message == 'SUCCESS') {
@@ -244,7 +247,7 @@ export class AttendanceComponent implements OnInit {
         this.leavesMap = data.leaves;
         this.absentMap = data.absents;
         this.mispunchMap = data.mispunchs
-        this.earlyCheckOutMap = data.earlyCheckOut
+        this.earlyCheckOutMap = data.earlyCheckOuts
         this.setAbsentData();
         this.setPresentData();
         this.setLeavesData();
@@ -320,5 +323,4 @@ export class AttendanceComponent implements OnInit {
   public setDate() {
     this.minEnd = this.leaves.leaveDate
   }
-
 }

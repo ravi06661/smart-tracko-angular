@@ -32,7 +32,7 @@
 
     <div class="task_assignment">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 mb-4">
           <div class="attendance_dropdown d-flex justify-content-between align-items-center">
             <h3 class="title1 font-21 font-600 secondary position-relative">
               Attendance
@@ -129,7 +129,7 @@
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 mb-4">
           <div class="attendance_dropdown d-flex justify-content-between align-items-center">
             <h3 class="title1 font-21 font-600 secondary position-relative">
               Leaves
@@ -196,14 +196,14 @@
               </h3>
               <div class="all_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2"
                 *ngFor="let leave of leavesList">
-                <div class="leaves d-flex align-items-center position-relative" (click)="leaveModal(leave)">
+                <div class="leaves d-flex align-items-center position-relative mb-2" (click)="leaveModal(leave)">
                   <div class="leaves_dec">
-                    <h2 class="font-17 font-600 text-black mb-0" *ngIf="leave.leaveType.leaveTypeId == 2">
-                      CL {{ leave.leaveDuration }} Days
+                    <h2 class="font-17 font-600 text-black mb-0">
+                     {{leave.leaveType.leaveTypeName}} {{ leave.leaveDuration }} Days
                     </h2>
-                    <h2 class="font-17 font-600 text-black mb-0" *ngIf="leave.leaveType.leaveTypeId == 1">
+                    <!-- <h2 class="font-17 font-600 text-black mb-0" *ngIf="leave.leaveType.leaveTypeId == 3">
                       ML {{ leave.leaveDuration }} Days
-                    </h2>
+                    </h2> -->
                     <h2 class="font-14 font-600 text-black java mb-0">
                       {{ leave.leaveDate | date : "dd/MM/YYYY" }}-{{
                       leave.leaveEndDate | date : "dd/MM/YYYY"
@@ -260,7 +260,7 @@
                 <li class="nav-item" role="presentation">
                   <button class="nav-link active p-0" id="pills-home-tab" data-bs-toggle="pill"  
                     data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                    aria-selected="true" (click)="validFields('halfDayType')"  >
+                    aria-selected="true"  >
                     <div class="form-check d-inline-block position-relative account_option ms-auto apply_radio_box">
                       <input class="form-control d-none" formControlName="leaveDayType" type="radio" name="leaveDayType" id="inlineRadio1" value="Full Day"
                         [(ngModel)]="leaves.leaveDayType" />
@@ -275,7 +275,7 @@
                   </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <button class="nav-link p-0" id="pills-profile-tab" data-bs-toggle="pill" (click)="validFields('leaveEndDate')"
+                  <button class="nav-link p-0" id="pills-profile-tab" data-bs-toggle="pill"
                     data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
                     aria-selected="false">
                     <div class="form-check d-inline-block position-relative account_option ms-auto apply_radio_box">
@@ -301,7 +301,7 @@
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
                   tabindex="0">
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-4">
                       <div
                         class="form-check d-inline-block left position-relative account_option ms-auto apply_radio_box">
                         <input class="form-control d-none" type="radio" formControlName="halfDayType" name="halfDayType" id="inlineRadio3" value="First Half"
@@ -315,9 +315,9 @@
                         </label>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 mb-4">
                       <div class="form-check d-inline-block position-relative account_option ms-auto apply_radio_box">
-                        <input class="form-control d-none" type="radio" formControlName="halfDayType" name="halfDayType" id="inlineRadio4" value="Second Half"
+                        <input class="form-control d-none" type="radio" formControlName="halfDayType"  name="halfDayType" id="inlineRadio4" value="Second Half"
                           [(ngModel)]="leaves.halfDayType" />
                         <label class="form-check-label" for="inlineRadio4">
                           <div class="radio-box mb-0">
@@ -336,7 +336,7 @@
             <div class="apply_radio_box">
               <h4 class="sub-heading font-17 font-500 secondary">Duration</h4>
               <div class="form-row d-flex">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 mb-4">
                   <div class="input_icon position-relative d-flex align-items-center">
                     <input type="date" [min]="minStart"  (change)="setDate()"  id="birthday" formControlName="leaveDate" name="leaveDate" class="form-control input_text" placeholder="From"
                       [(ngModel)]="leaves.leaveDate" />
@@ -344,13 +344,13 @@
                   </div>
                   <div *ngIf="isFieldInvalidForApplyLeaveForm('leaveDate')" class="font-12 text-danger">Start date is required.</div>
                 </div>
-                <div class="form-group col-md-6" *ngIf="leaves.leaveDayType == 'Full Day'">
+                <div class="form-group col-md-6 mb-4" *ngIf="leaves.leaveDayType == 'Full Day'">
                   <div class="input_icon position-relative d-flex align-items-center">
-                    <input type="date"  [min]="minEnd" id="birthday" formControlName="leaveEndDate" name="leaveEndDate" class="form-control input_text" placeholder="To"
+                    <input type="date"  [min]="minEnd" id="" formControlName="leaveEndDate" name="leaveEndDate" class="form-control input_text" placeholder="To"
                       [(ngModel)]="leaves.leaveEndDate" />
                     <!-- <i class="fi fi-rr-calendar calender_2 lh-0"></i> -->
                   </div>
-                  <div *ngIf="isFieldInvalidForApplyLeaveForm('leaveDate')" class="font-12 text-danger">End date is required.</div>
+                  <div *ngIf="isFieldInvalidForApplyLeaveForm('leaveEndDate')" class="font-12 text-danger">End date is required.</div>
                 </div>
               </div>
             </div>
@@ -442,9 +442,9 @@
             </div>
           </div>
 
-          <form class="attachment_file2 d-flex align-items-center position-relative">
+          <form class="attachment_file2 d-flex align-items-center position-relative w-75">
             <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload" />
-            <label for="fileupload" class="font-15 font-700 secondary text-white attachment_file_text">
+            <label for="fileupload" class="font-15 font-700 secondary text-white attachment_file_text mb-0">
               <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
               Attachments
               <span class="mx-0 ms-2 font-15 font-400 text-white">Assignment Files.zip</span></label>
@@ -486,11 +486,8 @@
           </div>
           <div class="leave_heading">
             <h3 class="input_heading font-17 font-500 secondary">Leave Type</h3>
-            <h4 class="input_heading font-17 font-600" *ngIf="leavesModal.leaveType.leaveTypeId == 2">
-              Casual Leave
-            </h4>
-            <h4 class="input_heading font-17 font-600" *ngIf="leavesModal.leaveType.leaveTypeId == 1">
-              Medical Leave
+            <h4 class="input_heading font-17 font-600" >
+              {{leavesModal.leaveType.leaveTypeName}}
             </h4>
           </div>
           <div class="leave_heading">

@@ -36,13 +36,19 @@
       (click)="getValueById(lsdv6.value)"><input #lsdv6 type="hidden" value="attendance" /><img
         src="assets/images/svg_img/New folder/Neutral-Calender.svg" class="material-icons" id="icon5" /><span
         [ngClass]="check == 'attendance' ? 'icon-text dashboard' : 'icon-text'">Attendance</span></a>
+
+        <a routerLink="/student/discussion" [ngClass]="check == 'discussion' ? 'active' : 'box-hover'"
+      (click)="getValueById(lsdv7.value)"><input #lsdv7 type="hidden" value="discussion" /><img
+        src="assets/images/svg_img/New folder/discussion.svg" class="material-icons" id="icon6" /><span
+        [ngClass]="check == 'discussion' ? 'icon-text dashboard' : 'icon-text'">Discussion Forum</span></a>
+
     <a routerLink="/student/jobalert" [ngClass]="check == 'jobalert' ? 'active' : 'box-hover'"
-      (click)="getValueById(lsdv7.value)"><input #lsdv7 type="hidden" value="jobalert" /><img
-        src="assets/images/svg_img/New folder/Neutral-Jobs.svg" class="material-icons" id="icon6" /><span
+      (click)="getValueById(lsdv8.value)"><input #lsdv8 type="hidden" value="jobalert" /><img
+        src="assets/images/svg_img/New folder/Neutral-Jobs.svg" class="material-icons" id="icon7" /><span
         [ngClass]="check == 'jobalert' ? 'icon-text dashboard' : 'icon-text'">Job Alert</span></a>
     <a routerLink="/student/newsAndEvent" [ngClass]="check == 'newsAndEvent' ? 'active' : 'box-hover'"
-      (click)="getValueById(lsdv8.value)"><input #lsdv8 type="hidden" value="newsAndEvent" /><img
-        src="assets/images/svg_img/New folder/Neutral-News.svg" class="material-icons" id="icon7" /><span [ngClass]="
+      (click)="getValueById(lsdv9.value)"><input #lsdv9 type="hidden" value="newsAndEvent" /><img
+        src="assets/images/svg_img/New folder/Neutral-News.svg" class="material-icons" id="icon8" /><span [ngClass]="
           check == 'newsAndEvent' ? 'icon-text dashboard' : 'icon-text'
         ">News & Events</span></a>
 

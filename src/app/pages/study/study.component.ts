@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { Chapter } from 'src/app/entity/chapter';
 import { Subject } from 'src/app/entity/subject';
 import { TechnologyStack } from 'src/app/entity/technology-stack';
@@ -17,8 +18,8 @@ export class StudyComponent {
   imageUrl = this.BASE_URL + '/file/getImageApi/technologyStackImage/';
   subjects: SubjectResponse[] = [];
   subject: Subject = new Subject();
-
-  constructor(private subjectService: SubjectService, private loginService: LoginService, private utilityService: UtilityServiceService) { }
+  incodedId: number = 0;
+  constructor(private subjectService: SubjectService, private loginService: LoginService, private utilityService: UtilityServiceService,private router :Router) { }
 
   ngOnInit() {
     this.subjectService.getAllSubjectsWithChapterCompletedStatus().subscribe({
@@ -27,7 +28,7 @@ export class StudyComponent {
       },
     });
   }
-  
+
   progressWidth: string = '';
   calculatePercentages(num1: number, num2: number) {
     let per: any;
@@ -37,4 +38,16 @@ export class StudyComponent {
     }
     return per;
   }
+  // Encoding an ID
+  //   let originalData = new ArrayBuffer(this.subject.subjectId);
+  //let encodedString = encodingService.encodeToBase64(originalData);
+
+  // Decoding the encoded data
+  //const decodedData = decodingService.decodeFromBase64(encodedString);
+
+  // public navigate(id: number) {
+  //   let originalData = new ArrayBuffer(id);
+  //   let encodedString = this.utilityService.encodeToBase64(originalData);
+  //   this.router.navigate(['/student/chapter/'+encodedString])
+  // }
 }

@@ -59,7 +59,7 @@
                                 <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></i>
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 8rem;">
-                                    <li><a routerLink="/admin/subjectContent/{{obj.chapterId}}"
+                                    <li><a (click)="pageRenderUsingRouterLink('/admin/subjectContent', obj.chapterId)"
                                       class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer"><i
                                           class="fi fi-rr-document line-height-0"></i> View</a></li>
                                     <li>  <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer" data-bs-toggle="modal"

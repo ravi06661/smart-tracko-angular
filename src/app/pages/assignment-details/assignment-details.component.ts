@@ -18,7 +18,7 @@ export class AssignmentDetailsComponent implements OnInit {
 
   BASE_URL = this.utilityService.getBaseUrl();
   IMG_URL = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/'
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentImages/'
+  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   questionId = 0;
   assignmentId = 0;
   assignmentQues: TaskQuestion = new TaskQuestion;
@@ -49,11 +49,12 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   public getAssignmentQuestionById() {
-    this.isSubmitted()
+   
     this.assignmentService.getAssignmentQuestionById(this.questionId, this.assignmentId).subscribe({
       next: (data: any) => {
         this.assignmentQues = data.question
         this.attachment = data.attachment
+        this.isSubmitted()
       }
     })
   }
@@ -83,7 +84,7 @@ export class AssignmentDetailsComponent implements OnInit {
   public isSubmitted() {
     this.assignmentService.isSubmitted(this.assignmentId, this.questionId, this.loginService.getStudentId()).subscribe(
       (data: any) => {   
-        if(data){
+        if(data==true){
           this.isSubmittedQuestion = false;
         }else
         this.isSubmittedQuestion = true;

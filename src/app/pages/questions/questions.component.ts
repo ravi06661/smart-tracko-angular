@@ -38,6 +38,9 @@ export class QuestionsComponent {
   subjectId: number = 0;
   chapter = new Chapter;
   totalQuestion = 0;
+  questionNumber = 1;
+
+  unrelatedActivityDetected = false;
 
   constructor(private utilityService: UtilityServiceService, private questionService: QuestionServiceService, private activateRouter: ActivatedRoute,
     private subjectService: SubjectService,
@@ -60,7 +63,7 @@ export class QuestionsComponent {
   }
 
   public timer() {
-    const duration = 60*(this.chapter.exam.score!)// in seconds
+    const duration = 60*(this.chapter.exam.examTimer!)// in seconds
     this.timerSubscription = timer(0, 1000).subscribe((elapsedTime) => {
       this.second = duration - elapsedTime;
       this.remainingTime = new Date(this.second * 1000).toISOString().substr(11, 8);
@@ -104,6 +107,7 @@ export class QuestionsComponent {
       this.nextButton = false
       this.previousButton = false;
       this.question = this.questions[++this.index]
+      this.questionNumber++;
     }
   }
 
@@ -115,7 +119,9 @@ export class QuestionsComponent {
       this.previousButton = false;
       this.nextButton = false
       this.question = this.questions[--this.index]
+      this.questionNumber--;
     }
+    
   }
 
   questionClick(option: string, index: number) {
@@ -127,40 +133,80 @@ export class QuestionsComponent {
     } else {
       this.questionClicked.set(index, option);
     }
+
+    console.log(this.questionClicked);
+    
   }
 
   isFullScreen = false;
 
   @HostListener('window:keydown', ['$event'])
-  onKeyPress(event: KeyboardEvent) {
-    if (event.key.startsWith('F')) {
-      this.submittion();
+onKeyPress(event: KeyboardEvent) {
+  // Check for the keys you want to handle, including the Windows (Super) key
+  if (
+    event.key.startsWith('F') || // Function keys
+    event.key == 'Escape' || // Esc
+    event.key == 'Tab' || // Tab
+    event.key == 'CapsLock' || // Caps Lock
+    event.key == 'Shift' || // Shift
+    event.key == 'Control' || // Ctrl
+    event.key == 'Alt' || // Alt
+    event.key == 'Insert' || // Insert
+    event.key == 'Delete' || // Delete
+    event.key == 'Meta' // Windows (Super) key
+  ) {
+    this.submittion(); // Call your submission function
+  }
+}
+
+@HostListener('mousemove', ['$event'])
+  onMouseMove() {
+    if (this.unrelatedActivityDetected) {
+      // Automatically submit the test if unrelated activity persists
+      alert("submit");
+    } else {
+      // Show a warning if unrelated activity is detected
+      this.showWarning();
+      this.unrelatedActivityDetected = true
     }
   }
+  public showWarning(){
+    alert("warning");
+  }
+
   toggleFullScreen() {
     const element = document.documentElement;
     if (!this.isFullScreen) {
       if (element.requestFullscreen) {
         element.requestFullscreen();
+        console.log("if");
+        
       }
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen();
+        console.log('else');
+        
       }
     }
     this.isFullScreen = !this.isFullScreen;
   }
 
+
   public getChapeter() {
     this.chapterService.getChapterById(this.chapterId).subscribe(
       (data:any) => {
-        this.questions = data.chapter.exam.questions;
+        this.questions = this.shuffleList(data.chapter.exam.questions);
         this.question = this.questions[0];
         this.questionNotAnswered = this.questions.length;
         this.chapter = data.chapter;
         this.timer();
       }
     )
+  }
+  
+  public shuffleList<T>(list: T[]): T[] {
+    return [...list].sort(() => Math.random() - 0.5);
   }
 
   public clickQuitButton(){
@@ -201,4 +247,13 @@ export class QuestionsComponent {
     })
    }
 
+   public manageQuestionProgressBar(questionId:number){
+    if (this.questionClicked.has(questionId)) {
+      // Value is present in the map
+      return true;
+    } else {
+      // Value is not present in the map
+     return false;
+    }
+   }
 }

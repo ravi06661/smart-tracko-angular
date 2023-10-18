@@ -15,7 +15,7 @@
     <div class="scroll_dashboard">
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 mb-4">
                 <div class="assignment-stats">
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Stats</h3>
                     <div class="assignment-stats-area">
@@ -116,7 +116,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 mb-4">
                 <div class="attendance_dropdown d-flex justify-content-between align-items-center">
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Submissions (Recent)</h3>
                    <div class="right-side-dropdown-btn d-flex">
@@ -331,6 +331,7 @@
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
                             <select class="form-select" aria-label="Default select example" formControlName="course" name="course"  (change)="getSubjects()" [(ngModel)]="task.course">
+                                <option value = "">Select Course</option>
                                 <option  [ngValue]="obj" *ngFor="let obj of courses">{{obj.courseName}}</option>
                               </select>
                               <div style="margin-top: -17px;" *ngIf="isFieldInvalidForTaskForm('course')" class="text-danger">Course is required</div>
@@ -338,6 +339,7 @@
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">Subject</label>
                             <select class="form-select" aria-label="Default select example" formControlName="subject" name="subject"  [(ngModel)]="task.subject">
+                                <option value = "">Select Subject</option>
                               <option [ngValue]="obj" *ngFor="let obj of subjects">{{obj.subjectName}}</option>
                             </select>
                             <div style="margin-top: -17px;"  *ngIf="isFieldInvalidForTaskForm('subject')" class="text-danger">Subject is required</div>
@@ -346,6 +348,7 @@
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">File Attachments in Submission</label>
                             <select class="form-select" aria-label="Default select example" formControlName="taskAttachment" name="taskAttachment" [(ngModel)]="task.attachmentStatus">
+                                <option value = "">Select File Type</option>
                                 <option value="Required">Required</option>
                                 <option value="Optional">Optional</option>
                                 <option value="Not Allowed">Not Allowed</option>

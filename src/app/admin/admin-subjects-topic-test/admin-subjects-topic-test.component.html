@@ -5,6 +5,8 @@
             <h1 class="font-27 font-700 secondary mb-0">Core Java</h1>
             <button class="top_profile_sec_btn font-14 font-500 lh-1" data-bs-toggle="modal"
                 data-bs-target="#chapter-add-content-modal">Create New</button>
+
+                <button class="top_profile_sec_btn font-14 font-500 lh-1"  routerLink="/admin/result">RESULT</button>
         </div>
 
         <app-profile-bar></app-profile-bar>
@@ -12,7 +14,7 @@
     </div>
 
 <!-- RESULT START -->
-<div class="d-flex mt_24">
+<div class="d-flex mt_24 justify-content-center">
     <div class="main_page">
       <div class="dashboard_title d-flex justify-content-between align-items-center">
         <nav aria-label="breadcrumb" class="font-17 font-600 light-black mb-0 lh-36">
@@ -21,15 +23,15 @@
             <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light" routerLink="/admin/subject">Subjects</a>
             </li>
             <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light" routerLink="/admin/subjectchapter/{{subjectId}}">Chapters</a></li>
-            <li class="breadcrumb-item  light-black" aria-current="page">{{chapterName}}</li>
+            <li class="breadcrumb-item  light-black" aria-current="page">{{chapter.chapterName}}</li>
           </ol>
         </nav>
         <a routerLink="/admin/subjectchapter/{{subjectId}}" type="button"
-          class="back_button font-15 font-500 d-flex justify-content-center align-items-center lh-0"><i
+          class="back_button font-15 font-500 d-flex justify-content-center align-items-center lh-0 mt-0"><i
             class="fi fi-rr-arrow-left lh-0"></i>Back</a>
       </div>
       <div class="scroll_sec sub_detail-scroll">
-        <div class="sub_details d-flex flex-column" id="updown_btn" *ngFor="let obj of chapter">
+        <div class="sub_details d-flex flex-column" id="updown_btn" *ngFor="let obj of chapter.chapterContent">
             <div class="top-test-question">
                 <h1 class="font-24 font-600 dark-black">{{obj.title}} </h1>
                 <div class="test-que-edit-del">
@@ -44,10 +46,10 @@
           <h3 class="font-17 font-600 dark-black">{{obj.subTitle}}</h3>
           <h4 class="font-15 font-400 lh-26"  [innerHTML]="obj.content"></h4>
         </div>
-        <a  routerLink="/admin/chapterquiz/{{chapterId}}" type="button" class="back_button font-17 font-700 text-capitalize">Chapter quiz</a>
+        <a  (click)="pageRenderUsingRouterLink('/admin/chapterquiz',chapterId)" type="button" class="back_button font-17 font-700 text-capitalize">Chapter quiz</a>
       </div>
     </div>
-
+   
   
   <!-- RESULT END -->
 
@@ -95,13 +97,13 @@
 
 <!-- Modal Admin Chapter Add Content Modal Start -->
 <div class="modal fade" id="chapter-add-content-modal" tabindex="-1" aria-labelledby="chapter-add-content-modal" aria-hidden="true">
-    <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-dialog position-relative leave_modal  subject_modal">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add Content</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" >
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"  (click)="reload()" (click)="clearFormSubmission()">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
@@ -154,7 +156,7 @@
 
         <!-- Modal Admin Chapter Edit Content Modal Start -->
         <div class="modal fade" id="chapter-edit-content-modal" tabindex="-1" aria-labelledby="chapter-edit-content-modal" aria-hidden="true">
-            <div class="modal-dialog position-relative leave_modal">
+            <div class="modal-dialog position-relative leave_modal subject_modal">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="modal-header apply_title">

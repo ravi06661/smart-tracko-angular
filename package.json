@@ -29,6 +29,7 @@
     "@fullcalendar/interaction": "^6.1.8",
     "angular-calendar": "^0.31.0",
     "apexcharts": "^3.41.0",
+    "base64-arraybuffer": "^1.0.2",
     "chart.js": "^4.3.2",
     "date-fns": "^2.29.3",
     "demo-utils": "^0.5.3",

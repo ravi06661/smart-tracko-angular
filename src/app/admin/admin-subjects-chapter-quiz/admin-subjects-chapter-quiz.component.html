@@ -36,10 +36,11 @@
     <div class="scroll_sec mt-0">
         <div class="d-flex align-items-center justify-content-between">
             <h3 class="admin-title font-17 font-600 secondary position-relative">Chapter Test</h3>
-            <a routerLink="/admin/subjectContent/{{id}}" type="button"
+            <a (click)="pageRenderUsingRouterLink('/admin/subjectContent')" type="button"
                 class="back_button font-15 font-500 d-flex justify-content-center align-items-center lh-0"><i
                     class="fi fi-rr-arrow-left lh-0"></i>Back</a>
         </div>
+        
         <div class="row mt-3">
             <div class="hh">
                 <div class="col-md-12" *ngFor="let obj of questions let a =index">
@@ -72,15 +73,15 @@
                     </div>
                     <div class="subject-test-ques-ans"
                         [ngClass]="obj.correctOption==obj.option2?'alert alert-success':''">
-                        <p>A. {{obj.option2}}</p>
+                        <p>B. {{obj.option2}}</p>
                     </div>
                     <div class="subject-test-ques-ans"
                         [ngClass]="obj.correctOption==obj.option3?'alert alert-success':''">
-                        <p>A. {{obj.option3}}</p>
+                        <p>C. {{obj.option3}}</p>
                     </div>
                     <div class="subject-test-ques-ans"
                         [ngClass]="obj.correctOption==obj.option4?'alert alert-success':''">
-                        <p>A. {{obj.option4}}</p>
+                        <p>D. {{obj.option4}}</p>
                     </div>
 
                 </div>
@@ -102,7 +103,7 @@
 
 <!-- Modal Delete Modal Start -->
 <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
-    <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-dialog position-relative leave_modal ">
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -23%;"
@@ -113,7 +114,7 @@
                 <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?
                 </p>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                    <a routerLink="/admin/chapterquiz/{{id}}">
+                    <a (click)="pageRenderUsingRouterLink('/admin/chapterquiz')">
                         <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color"
                             data-bs-dismiss="modal" aria-label="Close" (click)="deleteQuestion()">Yes,
                             delete</button>
@@ -132,7 +133,7 @@
 <!-- Modal Admin Subject Test Add Question Modal Start -->
 <div class="modal fade" id="subject-testques-modal" tabindex="-1" aria-labelledby="subject-testques-modal"
     aria-hidden="true">
-    <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-dialog position-relative leave_modal subject_modal">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="modal-header apply_title">
@@ -220,6 +221,7 @@
                                 <h4 class="sub-heading font-17 font-500 text_gray">Correct Option </h4>
                                 <select class="form-select" aria-label="Default select example" id="correctOption"
                                     name="correctOption" [(ngModel)]="question.correctOption" formControlName="correctOption">
+                                    <option value = "">Select Correct Option</option>
                                     <option [value]="question.option1">{{question.option1}}</option>
                                     <option [value]="question.option2">{{question.option2}}</option>
                                     <option [value]="question.option3">{{question.option3}}</option>
@@ -252,7 +254,7 @@
 <!-- Modal Admin Subject Test Edit Question Modal Start -->
 <div class="modal fade" id="subject-edit_testques-modal" tabindex="-1" aria-labelledby="subject-edit_testques-modal"
     aria-hidden="true">
-    <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-dialog position-relative leave_modal subject_modal">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="modal-header apply_title">
@@ -312,6 +314,7 @@
                                 <!-- <input type="text" id="" name="correctOption" class="form-control input_text" placeholder=""  [(ngModel)]="question.correctOption"> -->
                                 <select class="form-select" aria-label="Default select example" id="correctOption"
                                     name="correctOption" [(ngModel)]="question.correctOption">
+                                    <option value = "">Select Correct Option</option>
                                     <option [value]="question.option1">{{question.option1}}</option>
                                     <option [value]="question.option2">{{question.option2}}</option>
                                     <option [value]="question.option3">{{question.option3}}</option>

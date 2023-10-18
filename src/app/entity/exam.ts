@@ -8,4 +8,5 @@ export class Exam {
     public isDeleted: boolean | undefined
     public isActive: boolean | undefined
     public questions:ChapterQuizeQuestion[]=[]
+    public examTimer:number =0;
 }

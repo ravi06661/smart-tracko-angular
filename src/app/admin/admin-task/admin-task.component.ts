@@ -90,12 +90,10 @@ export class AdminTaskComponent {
     if (this.firstTaskForm.valid) {
       this.taskService.addTask(this.task).subscribe(
         (data: any) => {
-          console.log(data);
           this.router.navigate(['/admin/createtask/' + data.taskId])
         }
       )
     }
-    //  this.router.navigate(['/admin/createtask/1056'])
   }
 
   public getAllSubmitedTasks() {
@@ -122,24 +120,6 @@ export class AdminTaskComponent {
       }
     )
   }
-  // public getOverAllAssignmentTaskStatus() {
-  //   this.taskService.getOverAllAssignmentTaskStatus().subscribe(
-  //     (data: any) => {
-  //       this.taskSubmissionStatus2 = data;
-  //       this.totalSubmitted =  this.calculatePercentage(this.submitedTasksList.length,this.taskSubmissionStatus.length) 
-  //       this.reveiwed = this.calculatePercentage(this.taskSubmissionStatus2.totalSubmitted,this.taskSubmissionStatus2.reveiwed) 
-  //       this.unReveiwed = this.calculatePercentage(this.taskSubmissionStatus2.totalSubmitted,this.taskSubmissionStatus2.unReveiwed) 
-  //      }
-  //   )
-  // }
-
-  // public calculatePercentage(total: number, num: number) {
-  //   if(num!==0)
-  //   return Math.floor(num / total * 100);
-  //    else
-  //    return 0;
-  // }
-
   public clearTaskForm() {
     this.task = new TaskRequest();
     this.firstTaskForm = this.formBuilder.group({
@@ -172,9 +152,9 @@ export class AdminTaskComponent {
 
 
   calculatePercentages(num1: number, num2: number) {
-    if(num2!==0)
-    return Math.floor((num1 / num2) * 100);
-   else
-   return 0;
+    if (num2 !== 0)
+      return Math.floor((num1 / num2) * 100);
+    else
+      return 0;
   }
 }
