@@ -32,6 +32,7 @@ export class StudyComponent {
   calculatePercentages(num1: number, num2: number) {
     let per: any;
       per = Math.floor((num1 / num2) * 100);
+      
     return per;
   }
 }

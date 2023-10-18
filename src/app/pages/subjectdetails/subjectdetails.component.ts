@@ -27,9 +27,20 @@ export class SubjectdetailsComponent {
     private chapterService: ChapterServiceService,
     private examService: ExamServiceService,
     private loginService: LoginService) { }
+
+
   ngOnInit() {
-    this.chapterId = this.activateRouter.snapshot.params[('id')];
-    this.getChapter();
+
+    //  this.chapterId = this.activateRouter.snapshot.params[('id')];
+    this.activateRouter.queryParams.subscribe(params => {
+      this.chapterId = params['chapterId'];
+      this.subjectId = params['subjectId'];
+      console.log(this.subjectId);
+      console.log(this.chapterId);
+  console.log('Route Parameters:', params);
+    });
+
+    //this.getChapter();
     this.getChapterExamIsComplete();
   }
   public getChapter() {
@@ -38,7 +49,7 @@ export class SubjectdetailsComponent {
       (data: any) => {
         this.chapter = data.chapter.chapterContent;
         this.chapterName = data.chapter.chapterName;
-        this.subjectId = data.chapter.subject.subjectId; 
+        this.subjectId = data.chapter.subject.subjectId;
         this.questionsInChapter = data.questionLength
       }
     )

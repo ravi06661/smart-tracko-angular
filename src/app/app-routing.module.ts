@@ -64,8 +64,6 @@ import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-sub
 import { AdminEditJobAlertComponent } from './admin/admin-edit-job-alert/admin-edit-job-alert.component';
 import { AdminEditNewsAndEventsComponent } from './admin/admin-edit-news-and-events/admin-edit-news-and-events.component';
 
-
-
 const routes: Routes = [
   {path:'',component:LoginQRComponent,pathMatch:'full'},
   {path:'login',component:AdminLoginComponent,pathMatch:'full'},
@@ -74,7 +72,7 @@ const routes: Routes = [
     {path:'checkInCheckOut',component:CheckincheckoutComponent,pathMatch:'full'},
     {path:'study',component:StudyComponent,pathMatch:'full'},
     {path:'chapter/:id',component:ChapterComponent,pathMatch:'full'},
-    {path:'chapterDetails/:id',component:SubjectdetailsComponent,pathMatch:'full'},
+    {path:'chapterDetails/:chapterId/:subjectId',component:SubjectdetailsComponent,pathMatch:'full'},
     {path:'mycourse',component:MycourseComponent,pathMatch:'full'},
     {path:'assignmentdetails',component:AssignmentDetailsComponent,pathMatch:'full'},
     {path:'taskAndAssignment',component:TaskandassignmentsComponent,pathMatch:'full'},

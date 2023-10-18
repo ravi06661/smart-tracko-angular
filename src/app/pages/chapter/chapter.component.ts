@@ -5,7 +5,6 @@ import { Subject } from 'src/app/entity/subject';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
-
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',
@@ -31,8 +30,6 @@ export class ChapterComponent {
     this.subjectService.getAllSubjectChapters(this.subjectId).subscribe(
       (data: any) => {
         this.chapter = data;
-        console.log('chapters',this.chapter);
-        
       }
     )
   }
@@ -40,7 +37,6 @@ export class ChapterComponent {
     this.subjectService.getSubjectById(id).subscribe({
       next:(data:any)=>{
         this.subject = data.subject
-        console.log('subject',this.subject);
       }
     })
   }

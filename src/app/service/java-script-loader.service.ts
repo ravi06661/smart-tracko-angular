@@ -21,10 +21,10 @@ export class JavaScriptLoaderService {
     this.renderer.appendChild(document.body, script);
   }
 
-  ScriptLoader(path:string): void {
+  ScriptLoader(path: string): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.loadScript('/assets/js/'+path); // Update the path as needed
+        this.loadScript('/assets/js/' + path); // Update the path as needed
       }
     });
   }
