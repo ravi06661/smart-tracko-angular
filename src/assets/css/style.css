@@ -494,9 +494,11 @@ input.choose-subjects {
   padding-bottom: 24px;
   white-space: nowrap;
   transition-duration: 0.3s;
+
   /* display: flex; */
   flex-direction: column;
   justify-content: space-between;
+
 }
 
 .sidebar a {
@@ -4335,9 +4337,9 @@ box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.08);
   margin: 0 30px;
 }
 }
-@media (min-width:1199px) and (max-width: 1300px) { 
+@media (min-width:1199px) and (max-width: 1400px) { 
   .calendar-hadding h3{
-    font-size: 21px;
+    font-size: 23px;
   }
 }
 
