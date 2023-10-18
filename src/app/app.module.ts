@@ -88,6 +88,9 @@ import { AdminAssignmentSubmissionComponent } from './admin/admin-assignment-sub
 import { AdminEditJobAlertComponent } from './admin/admin-edit-job-alert/admin-edit-job-alert.component';
 import { AdminEditNewsAndEventsComponent } from './admin/admin-edit-news-and-events/admin-edit-news-and-events.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
+import { AdminDiscussionForumComponent } from './admin/admin-discussion-forum/admin-discussion-forum.component';
+import { AdminChapterResultComponent } from './admin/admin-chapter-result/admin-chapter-result.component';
 
 
 
@@ -159,6 +162,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     AdminAssignmentSubmissionComponent,
     AdminEditJobAlertComponent,
     AdminEditNewsAndEventsComponent,
+    DiscussionForumComponent,
+    AdminDiscussionForumComponent,
+    AdminChapterResultComponent,
   
    
        
