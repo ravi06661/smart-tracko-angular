@@ -161,7 +161,7 @@
     <div class="modal-dialog position-relative leave_modal">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="modal-header apply_title">
+                <div class="modal-header apply_title p-0">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add New Batch</h1>
                     <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
@@ -170,15 +170,6 @@
                 </div>
                 <form [formGroup]="createBatchFrom">
                     <div class="row">
-                   
-                        <!-- <div class="col-md-12 mb_18">
-                            <h6 class="mb-4 font-15 font-500 secondary">Selected Image :- {{imageName}}</h6>
-                            <div class="all-course-images d-flex flex-wrap">
-                                <div class="add-course-img" *ngFor="let image of techImages">
-                                    <img [src]="imageUrl+image.imageName" alt="" (click)="batchRequest.technologyStack = image.id" (click)=" imageName = image.technologyName ">
-                                </div>
-                            </div>
-                        </div> -->
                         <h2 class="font-15 font-500 secondary">Subjects</h2>
                         <div class="all-subjects-list mb_18">
                             <div class="col-md-12 mb_18" *ngFor="let subject of course.subjects">
