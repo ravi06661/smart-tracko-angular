@@ -58,7 +58,7 @@
                 <div class="text mx-1">
 
                   <h3 class="font-17 font-600 black mb-0">{{obj.studentName}}</h3>
-                  <p class="font-13 font-400 light mb-0"> {{obj.createdDate | date}}<span class="mx-0 ms-1">1 hr ago</span></p>
+                  <p class="font-13 font-400 light2 mb-0"> {{obj.createdDate | date}}<span class="mx-0 ms-1">1 hr ago</span></p>
 
                 </div>
                 <div class="dropdown d-flex justify-content-center align-items-center ms-auto" type="button"
@@ -71,10 +71,9 @@
                   </ul>
                 </div>
               </div>
-              <h4 class="post_subtitle primary font-17 font-400 lh-21">{{obj.content}} </h4>
-=
+              <h4 class="post_subtitle text_small font-17 font-400 lh-21">{{obj.content}} </h4>
               <div class="d-flex justify-content-center align-items-center mb-1">
-                <!-- <img [src]="FILE_URL+obj.file"> -->
+                <img *ngIf="obj.file!=null" [src]="FILE_URL+obj.file" class="post_img">
               </div>
               <ul class=" social_icon d-flex align-items-center justify-content-around position-relative mb-0" >
                 <div class="d-flex align-items-center p-1 like">
@@ -105,7 +104,7 @@
                         </div>
                         <div class="text mx-1">
                           <h3 class="font-15 font-500 black mb-0">User Name</h3>
-                          <p class="font-11 font-400 light2 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
                           </p>
                         </div>
                        
@@ -120,7 +119,7 @@
                         </div>
                         <div class="text mx-1">
                           <h3 class="font-15 font-500 black mb-0">User Name</h3>
-                          <p class="font-11 font-400 light2 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
                           </p>
                         </div>
                        
@@ -140,7 +139,7 @@
                 </div>
                 <div class="text mx-1">
                   <h3 class="font-17 font-600 black mb-0">Rahil Kothari</h3>
-                  <p class="font-13 font-400 light2 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span></p>
+                  <p class="font-13 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span></p>
                 </div>
                 <div class="dropdown d-flex justify-content-center align-items-center ms-auto" type="button"
                   data-bs-toggle="dropdown" aria-expanded="false">
@@ -156,7 +155,7 @@
                 owner today prance along on top of the garden fence, annoy the neighbor's dog and make it bark pee
                 in the shoe. </h4>
               <div class="d-flex justify-content-center align-items-center mb-1">
-                <img src="assets/images/temp_img/post.png">
+                <img src="assets/images/temp_img/post.png" class="post_img">
               </div>
               <ul class="social_icon d-flex align-items-center justify-content-around position-relative mb-0">
                 <div class="d-flex align-items-center p-1 like">
@@ -187,7 +186,7 @@
                         </div>
                         <div class="text mx-1">
                           <h3 class="font-15 font-500 black mb-0">User Name</h3>
-                          <p class="font-11 font-400 light2 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
                           </p>
                         </div>
                        
@@ -202,7 +201,7 @@
                         </div>
                         <div class="text mx-1">
                           <h3 class="font-15 font-500 black mb-0">User Name</h3>
-                          <p class="font-11 font-400 light2 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
                           </p>
                         </div>
                       
@@ -221,7 +220,7 @@
                 </div>
                 <div class="text mx-1">
                   <h3 class="font-17 font-600 black mb-0">Rahil Kothari</h3>
-                  <p class="font-13 font-400 light2 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span></p>
+                  <p class="font-13 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span></p>
                 </div>
                 <div class="dropdown d-flex justify-content-center align-items-center ms-auto" type="button"
                   data-bs-toggle="dropdown" aria-expanded="false">
@@ -237,7 +236,7 @@
                 owner today prance along on top of the garden fence, annoy the neighbor's dog and make it bark pee
                 in the shoe. </h4>
               <div class="d-flex justify-content-center align-items-center mb-1">
-                <img src="assets/images/temp_img/post.png">
+                <img src="assets/images/temp_img/post.png"  class="post_img">
               </div>
               <ul class="social_icon d-flex align-items-center justify-content-around position-relative mb-0">
                 <div class="d-flex align-items-center p-1 like">
@@ -268,7 +267,7 @@
                         </div>
                         <div class="text mx-1">
                           <h3 class="font-15 font-500 black mb-0">User Name</h3>
-                          <p class="font-11 font-400 light2 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
                           </p>
                         </div>
                        
@@ -283,7 +282,7 @@
                         </div>
                         <div class="text mx-1">
                           <h3 class="font-15 font-500 black mb-0">User Name</h3>
-                          <p class="font-11 font-400 light2 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
                           </p>
                         </div>
                        

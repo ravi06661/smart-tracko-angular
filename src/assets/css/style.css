@@ -4525,10 +4525,41 @@ box-shadow: 1px 2px 8px 0px rgba(0, 0, 0, 0.08);
 }
 }
 @media (min-width:767px) and (max-width:1023px){
-.sidebar_scroll{
+/* .sidebar_scroll{
   overflow: scroll;
   height: 85vh;
+} */
+
+#style-3::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
 }
+
+#style-3::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+#style-3::-webkit-scrollbar-thumb
+{
+	background-color: #797979;
+}
+.scrollbar
+{
+	
+	float: left;
+	height:85vh;
+	overflow-y: scroll;
+	margin-bottom: 25px;
+}
+
+.force-overflow
+{
+	min-height: 450px;
+}
+
 }
 
 @media (max-width:767px){
