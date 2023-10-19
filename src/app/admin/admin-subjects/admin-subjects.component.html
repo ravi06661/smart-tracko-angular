@@ -29,26 +29,7 @@
                             </div>
                         </div>
 
-              <!-- <div class="meat-dot-dropdown" style="display: none;" >
-                            <a routerLink="/admin/subjectchapter/{{subject.subjectId}}"
-
-                                class=" warning d-flex align-items-center gap_8 pointer"><i
-                                    class="fi fi-rr-document line-height-0 font-16" ></i> View</a>
-                            <p class="mb-0 warning d-flex align-items-center gap_8 pointer" data-bs-toggle="modal"
-                                data-bs-target="#subject-edit-modal" (click)="getSubjectById(subject.subjectId)"><i
-                                    class="fi fi-rr-file-edit line-height-0 font-15" ></i> Edit</p>
-                            <p class="mb-0 delete-icon-color d-flex align-items-center gap_8 pointer"
-                                data-bs-toggle="modal" data-bs-target="#delete-modal"><i
-
-                                    class="fi fi-rr-trash line-height-0 font-17"></i> Delete</p>
-
-                        </div> 
-                        
-
-                        </div>  -->
-                        <!-- <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></i>
-                                    class="fi fi-rr-trash line-height-0 font-17" data-bs-dismiss="modal" aria-label="Close"></i> Delete</p>
-                        </div> -->
+             
                         <div class="dropdown" id="hoverDropdown">
                         <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></i>
 
@@ -117,7 +98,7 @@
     <div class="modal-dialog position-relative leave_modal">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="modal-header apply_title">
+                <div class="modal-header apply_title p-0">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Edit Course</h1>
                     <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reloadMessage()">
@@ -178,7 +159,7 @@
     <div class="modal-dialog position-relative leave_modal">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="modal-header apply_title">
+                <div class="modal-header apply_title p-0">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add Subject</h1>
                     <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reloadMessage()" (click)="clearFormSubmission()">
