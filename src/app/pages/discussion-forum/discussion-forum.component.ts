@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ThirdPartyDraggable } from '@fullcalendar/interaction';
-import { isThisHour } from 'date-fns';
 import { StudentDetails } from 'src/app/entity/student-details';
 import { CommentResponse } from 'src/app/payload/comment-response';
 import { DiscussionFormResponse } from 'src/app/payload/discussion-form-response';
@@ -8,11 +6,6 @@ import { DiscussionFormServiceService } from 'src/app/service/discussion-form-se
 import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
-import * as Stomp from 'stompjs';
-import { MessageService } from 'src/app/entity/message-service';
-import { WebsocketServiceService } from 'src/app/service/websocket-service.service';
-import { MessageDto } from 'src/app/entity/message-dto';
-import * as SockJS from 'sockjs-client';
 
 
 
@@ -31,8 +24,7 @@ export class DiscussionForumComponent implements OnInit {
   comment: string = ''
   commentResponse: CommentResponse = new CommentResponse
   discussionFormResponse: DiscussionFormResponse = new DiscussionFormResponse
-  constructor(private discussionFormSerice: DiscussionFormServiceService, private loginService: LoginService, private utilityService: UtilityServiceService, private studentService: StudentService, private websocketService: WebsocketServiceService,
-    private messageService: MessageService) { }
+  constructor(private discussionFormSerice: DiscussionFormServiceService, private loginService: LoginService, private utilityService: UtilityServiceService, private studentService: StudentService) { }
 
   ngOnInit(): void {
     this.getAllForms()
@@ -106,57 +98,6 @@ export class DiscussionForumComponent implements OnInit {
  
   public createDiscussionForm(){
      
-  }
-
-
-  username: string='';
-  text: string='';
-
-  received: MessageDto[] = [];
-  sent: MessageDto[] = [];
-
-  wsClient: any;
-  connected: boolean=false;
-  connect() {
-    const ws = new SockJS(this.websocketService.url);
-    this.wsClient = Stomp.over(ws);
-    const that = this;
-    this.received = [];
-
-    this.wsClient.connect({}, function () {
-      console.log('Connected!');
-      that.connected = true;
-      that.wsClient.subscribe(that.websocketService.topicMessage, (message: { body: any }) => {
-        // tslint:disable-next-line:triple-equals
-        if (that.username != JSON.parse(message.body).name) {
-          that.received.push(JSON.parse(message.body));
-       //   that.messageService.add({ severity: 'info', summary: 'New message from ' + JSON.parse(message.body).name, detail: JSON.parse(message.body).text });
-        }
-      });
-    });
-  }
-
-  disconnect() {
-    if (this.connected) {
-      this.connected = false;
-      this.sent = [];
-      this.received = [];
-      this.username = '';
-      this.text = '';
-      console.log('Disconnected!');
-      this.wsClient.disconnect();
-    }
-  }
-
-  sendMessage() {
-    const message: MessageDto = {
-      name: this.username,
-      text: this.text,
-      time: new Date()
-    };
-    this.sent.push(message);
-    this.wsClient.send(this.websocketService.topicChat, {}, JSON.stringify(message));
-    this.text = '';
   }
 
 }
