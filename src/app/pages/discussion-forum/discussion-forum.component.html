@@ -70,10 +70,11 @@
                   </ul>
                 </div>
               </div>
-              <h4 class="post_subtitle text_small 
- font-17 font-400 lh-21">{{obj.content}} </h4>
+              <h4 class="post_subtitle text_small font-17 font-400 lh-21">{{obj.content}} </h4>
               <div class="d-flex justify-content-center align-items-center mb-1">
-                <img   *ngIf="obj.file!=null" [src]="FILE_URL+obj.file">
+                <img *ngIf="obj.file!=null" [src]="FILE_URL+obj.file" class="post_img">
+
+        
               </div>
               <ul class=" social_icon d-flex align-items-center justify-content-around position-relative mb-0" >
                 <div class="d-flex align-items-center p-1 like">
@@ -103,20 +104,202 @@
                           <img class="profilePic" [src]="IMAGE_URL+comment.studentProfilePic">
                         </div>
                         <div class="text mx-1">
+
                           <h3 class="font-15 font-500 black mb-0">{{comment.studentName}}</h3>
                           <p class="font-11 font-400 light22 mb-0">{{date(comment.createdDate)}} <span class="mx-0 ms-1"></span>
+
                           </p>
                         </div>
                        
                       </div>
+
+                      <h3 class="font-15 font-400 text_small">Decide to want nothing to do with my owner today
+                        prance along on top of the garden fence.</h3>
+                    </div>
+                    <div class="comment_section">
+                      <div class="d-flex align-items-center mb-1">
+                        <div class="mx-1 ms-0">
+                          <img src="assets/images/temp_img/commenticon.png">
+                        </div>
+                        <div class="text mx-1">
+                          <h3 class="font-15 font-500 black mb-0">User Name</h3>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          </p>
+                        </div>
+                       
+                      </div>
+                      <h3 class="font-15 font-400 text_small">Decide to want nothing to do with my owner today
+                        prance along on top of the garden fence.</h3>
+                    </div>
+                  </div>
+                
+              <!-- end -->
+            </div>
+
+            <div class="post_details">
+              <div class="post_discription d-flex align-items-center">
+                <div class="">
+                  <img src="assets/images/temp_img/unsplash_RGKdWJOUFH0.png">
+                </div>
+                <div class="text mx-1">
+                  <h3 class="font-17 font-600 black mb-0">Rahil Kothari</h3>
+                  <p class="font-13 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span></p>
+                </div>
+                <div class="dropdown d-flex justify-content-center align-items-center ms-auto" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fi fi-rr-menu-dots info2 font-20 lh-0"></i>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
+              </div>
+              <h4 class="post_subtitle text_small font-17 font-400 lh-21">Decide to want nothing to do with my
+                owner today prance along on top of the garden fence, annoy the neighbor's dog and make it bark pee
+                in the shoe. </h4>
+              <div class="d-flex justify-content-center align-items-center mb-1">
+                <img src="assets/images/temp_img/post.png" class="post_img">
+              </div>
+              <ul class="social_icon d-flex align-items-center justify-content-around position-relative mb-0">
+                <div class="d-flex align-items-center p-1 like">
+                  <i class="social_text fi fi-rr-social-network lh-0"></i>
+                  <h3 class="social_text font-13 font-500 mb-0 mx-0 ms-1">Like</h3>
+                </div>
+                <div class="d-flex align-items-center p-1 comment_box2" onclick="comment2()">
+                  <img src="assets/images/svg_img/Comment.svg">
+                  <h3 class="gray font-13 font-500 mb-0 mx-0 ms-1">Submit Answer</h3>
+                </div>
+              </ul>
+              <!-- comment tabs in timeline -->
+              
+                  <div class="comment_details comment_post2" id="comment2">
+                    <div class="forum_post d-flex justify-content-between align-items-center">
+                      <img src="assets/images/temp_img/massage_icon.png">
+                      <form class="form-inline text_input my-2 my-lg-0">
+                        <input class="form_control font-14 font-400 mx-0" type="search"
+                          placeholder="Write your answer...">
+                      </form>
+                      <i
+                        class="send_option  fi fi-rr-paper-plane-top white d-flex align-items-center justify-content-center"></i>
+                    </div>
+                    <div class="comment_section">
+                      <div class="d-flex align-items-center mb-1">
+                        <div class="mx-1 ms-0">
+                          <img src="assets/images/temp_img/commenticon.png">
+                        </div>
+                        <div class="text mx-1">
+                          <h3 class="font-15 font-500 black mb-0">User Name</h3>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          </p>
+                        </div>
+                       
+                      </div>
+                      <h3 class="font-15 font-400 text_small">Decide to want nothing to do with my owner today
+                        prance along on top of the garden fence.</h3>
+                    </div>
+                    <div class="comment_section">
+                      <div class="d-flex align-items-center mb-1">
+                        <div class="mx-1 ms-0">
+                          <img src="assets/images/temp_img/commenticon.png">
+                        </div>
+                        <div class="text mx-1">
+                          <h3 class="font-15 font-500 black mb-0">User Name</h3>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          </p>
+                        </div>
+                      
+                      </div>
+                      <h3 class="font-15 font-400 text_small">Decide to want nothing to do with my owner today
+                        prance along on top of the garden fence.</h3>
+
                       <h3 class="font-15 font-400 text_small">{{comment.content}}</h3>
+
                     </div>
                    
                   </div>
               <!-- end -->
             </div>
-           
-                
+
+            <div class="post_details">
+              <div class="post_discription d-flex align-items-center">
+                <div class="">
+                  <img src="assets/images/temp_img/unsplash_RGKdWJOUFH0.png">
+                </div>
+                <div class="text mx-1">
+                  <h3 class="font-17 font-600 black mb-0">Rahil Kothari</h3>
+                  <p class="font-13 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span></p>
+                </div>
+                <div class="dropdown d-flex justify-content-center align-items-center ms-auto" type="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fi fi-rr-menu-dots info2 font-20 lh-0"></i>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
+              </div>
+              <h4 class="post_subtitle text_small font-17 font-400 lh-21">Decide to want nothing to do with my
+                owner today prance along on top of the garden fence, annoy the neighbor's dog and make it bark pee
+                in the shoe. </h4>
+              <div class="d-flex justify-content-center align-items-center mb-1">
+                <img src="assets/images/temp_img/post.png"  class="post_img">
+              </div>
+              <ul class="social_icon d-flex align-items-center justify-content-around position-relative mb-0">
+                <div class="d-flex align-items-center p-1 like">
+                  <i class="social_text fi fi-rr-social-network lh-0"></i>
+                  <h3 class="social_text font-13 font-500 mb-0 mx-0 ms-1">Like</h3>
+                </div>
+                <div class="d-flex align-items-center p-1  comment_box3" onclick="comment3()">
+                  <img src="assets/images/svg_img/Comment.svg">
+                  <h3 class="gray font-13 font-500 mb-0 mx-0 ms-1">Submit Answer</h3>
+                </div>
+              </ul>
+              <!-- comment tabs in timeline -->
+              
+                  <div class="comment_details comment_post3" id="comment3">
+                    <div class="forum_post d-flex justify-content-between align-items-center">
+                      <img src="assets/images/temp_img/massage_icon.png">
+                      <form class="form-inline text_input my-2 my-lg-0">
+                        <input class="form_control font-14 font-400 mx-0" type="search"
+                          placeholder="Write your answer...">
+                      </form>
+                      <i
+                        class="send_option  fi fi-rr-paper-plane-top white d-flex align-items-center justify-content-center"></i>
+                    </div>
+                    <div class="comment_section">
+                      <div class="d-flex align-items-center mb-1">
+                        <div class="mx-1 ms-0">
+                          <img src="assets/images/temp_img/commenticon.png">
+                        </div>
+                        <div class="text mx-1">
+                          <h3 class="font-15 font-500 black mb-0">User Name</h3>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          </p>
+                        </div>
+                       
+                      </div>
+                      <h3 class="font-15 font-400 text_small">Decide to want nothing to do with my owner today
+                        prance along on top of the garden fence.</h3>
+                    </div>
+                    <div class="comment_section">
+                      <div class="d-flex align-items-center mb-1">
+                        <div class="mx-1 ms-0">
+                          <img src="assets/images/temp_img/commenticon.png">
+                        </div>
+                        <div class="text mx-1">
+                          <h3 class="font-15 font-500 black mb-0">User Name</h3>
+                          <p class="font-11 font-400 light22 mb-0">20-04-2023 <span class="mx-0 ms-1">1 hr ago</span>
+                          </p>
+                        </div>
+                       
+                      </div>
+                      <h3 class="font-15 font-400 text_small">Decide to want nothing to do with my owner today
+                        prance along on top of the garden fence.</h3>
+                    </div>
+                  </div>
+
                
 
             </div>
