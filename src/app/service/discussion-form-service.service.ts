@@ -43,4 +43,9 @@ export class DiscussionFormServiceService {
     data.append('discussionFormId', discussionFormId.toString())
     return this.http.post(`${this.URL}/addOrRemoveLike`, data)
   }
+
+  public removeComment( discussionFormId: number,commentsId:number) {
+   
+    return this.http.delete(`${this.URL}/removeComment?discussionFormId=${discussionFormId}&commentsId=${commentsId}`)
+  }
 }

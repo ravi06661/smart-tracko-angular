@@ -6,6 +6,7 @@ export class DiscussionFormResponse {
     public id: number = 0;
     public createdDate: Date | undefined;
     public content: string = '';
+    public studentId:number=0;
     public studentName: string = '';
     public studentProfilePic: string = '';
     public file:string=''
