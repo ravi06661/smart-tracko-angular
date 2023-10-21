@@ -6,7 +6,10 @@ import { DiscussionFormServiceService } from 'src/app/service/discussion-form-se
 import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { Subscription } from "rxjs";
 
+import { Discussionformsocketresponse } from 'src/app/payload/discussionformsocketresponse';
+import { ChatServiceService } from 'src/app/service/chat-service-service.service';
 
 
 @Component({
@@ -24,11 +27,12 @@ export class DiscussionForumComponent implements OnInit {
   comment: string = ''
   commentResponse: CommentResponse = new CommentResponse
   discussionFormResponse: DiscussionFormResponse = new DiscussionFormResponse
-  constructor(private discussionFormSerice: DiscussionFormServiceService, private loginService: LoginService, private utilityService: UtilityServiceService, private studentService: StudentService) { }
+  constructor(private discussionFormSerice: DiscussionFormServiceService, private loginService: LoginService, private utilityService: UtilityServiceService, private studentService: StudentService, private chatService: ChatServiceService) { }
 
   ngOnInit(): void {
     this.getAllForms()
     this.getStudent();
+    this.connect();
   }
 
   public getAllForms() {
@@ -79,8 +83,6 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   public createComment(id: number) {
-    console.log(this.comment);
-
     this.discussionFormSerice.creatCommnet(this.loginService.getStudentId(), id, this.comment).subscribe(
       {
         next: (data: any) => {
@@ -88,16 +90,42 @@ export class DiscussionForumComponent implements OnInit {
           this.commentResponse = data
           form.comments.push(this.commentResponse)
           this.comment = ''
+          let res = new Discussionformsocketresponse
+          res.type = 'commentResponse';
+          res.CommentResponse = data;
+          this.sendMessage(res)
         },
         error: (er) => {
           alert('error')
         }
       }
     )
+
   }
- 
-  public createDiscussionForm(){
-     
+
+  public createDiscussionForm() {
+
+  }
+  connected!: boolean;
+
+  subscription!: Subscription;
+
+  connect() {
+    this.connected = true;
+    this.chatService.connect();
+    this.subscription = this.chatService.messages.subscribe((msg) => {
+      console.log("recieved" + msg);
+    });
+  }
+  
+  disconnect() {
+    this.chatService.disconnect();
+    this.subscription.unsubscribe();
+    this.connected = false;
+  }
+
+  sendMessage(res: Discussionformsocketresponse) {
+    this.chatService.messages.next(res);
   }
 
 }
