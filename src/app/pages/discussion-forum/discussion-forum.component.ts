@@ -7,10 +7,11 @@ import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { Subscription } from "rxjs";
-
-import { Discussionformsocketresponse } from 'src/app/payload/discussionformsocketresponse';
 import { ChatServiceService } from 'src/app/service/chat-service-service.service';
-
+import { LikeResponse } from 'src/app/payload/like-response';
+import { CommentResponseForm } from 'src/app/payload/comment-response-form';
+import { LikeResponseForm } from 'src/app/payload/like-response-form';
+import { DiscussionResponseForm } from 'src/app/payload/discussion-response-form';
 
 @Component({
   selector: 'app-discussion-forum',
@@ -26,8 +27,17 @@ export class DiscussionForumComponent implements OnInit {
   student: StudentDetails = new StudentDetails
   comment: string = ''
   commentResponse: CommentResponse = new CommentResponse
+  likeResponse = new LikeResponse
   discussionFormResponse: DiscussionFormResponse = new DiscussionFormResponse
-  constructor(private discussionFormSerice: DiscussionFormServiceService, private loginService: LoginService, private utilityService: UtilityServiceService, private studentService: StudentService, private chatService: ChatServiceService) { }
+  discussionForm = new DiscussionFormResponse
+  commnetVisibility: boolean[] = []
+
+  constructor(private discussionFormSerice: DiscussionFormServiceService,
+    private loginService: LoginService,
+    private utilityService: UtilityServiceService,
+    private studentService: StudentService,
+    private chatService: ChatServiceService
+  ) { }
 
   ngOnInit(): void {
     this.getAllForms()
@@ -39,7 +49,15 @@ export class DiscussionForumComponent implements OnInit {
     this.discussionFormSerice.getAllDiscussionForm().subscribe(
       {
         next: (data: any) => {
-          this.discussionFormList = data
+          if (data !== null) {
+            this.discussionFormList = data.filter((obj: any) => {
+              if (obj.likes.length == 0) {
+                obj.likes = []
+                return obj;
+              } else
+                return obj;
+            }) as DiscussionFormResponse[]
+          }
         },
         error: (er) => {
           alert('error')
@@ -57,8 +75,12 @@ export class DiscussionForumComponent implements OnInit {
       {
         next: (data: any) => {
           let form = this.discussionFormList.find(obj => obj.id === discussionFormId) as DiscussionFormResponse
-          this.discussionFormResponse = data
-          form.likes = this.discussionFormResponse.likes
+          form.likes = data.likes
+          let res = new LikeResponseForm
+          res.type = 'likeResponse';
+          res.likes = data.likes
+          res.discussionFormId = discussionFormId
+          this.sendMessage(res)
         },
         error: (er) => {
           alert('hi')
@@ -90,9 +112,14 @@ export class DiscussionForumComponent implements OnInit {
           this.commentResponse = data
           form.comments.push(this.commentResponse)
           this.comment = ''
-          let res = new Discussionformsocketresponse
+          let res = new CommentResponseForm
           res.type = 'commentResponse';
-          res.CommentResponse = data;
+          res.id = data.id
+          res.content = data.content
+          res.createdDate = (data.createdDate).toString()
+          res.studentName = data.studentName
+          res.studentProfilePic = data.studentProfilePic
+          res.discussionFormId = id
           this.sendMessage(res)
         },
         error: (er) => {
@@ -104,28 +131,81 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   public createDiscussionForm() {
-
+    this.discussionFormSerice.createDiscussionForm(this.student.studentId, this.discussionForm.content, this.discussionForm.file).subscribe(
+      {
+        next: (data: any) => {
+          this.discussionFormList.push(data);
+          let obj = new DiscussionResponseForm
+          obj.type = "createDiscussionForm";
+          obj.file = data.file
+          obj.studentId = this.student.studentId;
+          obj.studentProfilePic = this.student.profilePic
+          obj.createdDate = new Date
+          obj.content = data.content
+          obj.studentName = this.student.fullName
+          obj.id = data.id
+          this.discussionForm = new DiscussionFormResponse
+          this.sendMessage(obj);
+        },
+        error: (er) => {
+        }
+      }
+    )
   }
-  connected!: boolean;
 
   subscription!: Subscription;
 
   connect() {
-    this.connected = true;
-    this.chatService.connect();
+    this.chatService.connectForDiscussionForm();
     this.subscription = this.chatService.messages.subscribe((msg) => {
-      console.log("recieved" + msg);
+
+      if (msg.type == 'commentResponse') {
+        let form = this.discussionFormList.find(obj => obj.id === msg.discussionFormId) as DiscussionFormResponse
+        this.commentResponse = msg
+        form.comments.push(this.commentResponse)
+      }
+
+      if (msg.type == 'likeResponse') {
+        let form = this.discussionFormList.find(obj => obj.id === msg.discussionFormId) as DiscussionFormResponse
+        form.likes = msg.likes
+      }
+
+      if (msg.type == 'createDiscussionForm') {
+        let obj = new DiscussionFormResponse
+        obj = msg;
+        obj.likes = []
+        this.discussionFormList.push(obj)
+      }
     });
   }
-  
+
   disconnect() {
     this.chatService.disconnect();
     this.subscription.unsubscribe();
-    this.connected = false;
   }
 
-  sendMessage(res: Discussionformsocketresponse) {
+  sendMessage(res: any) {
     this.chatService.messages.next(res);
   }
 
+  public fileEvent(event: any) {
+    this.discussionForm.file = event.target.files[0];
+  }
+
+  toggleComment(index: number): void {
+    this.commnetVisibility[index] = !this.commnetVisibility[index];
+  }
+
+  public chekLike(obj: any) {
+    if (obj !== null) {
+      let result = obj.likes.find((object: any) => object.studentName == this.student.fullName)
+      if (result) {
+        return "assets/images/temp_img/like_filled.png"
+      } else {
+        return "assets/images/temp_img/like_blank.png"
+      }
+    } else {
+      return ""
+    }
+  }
 }

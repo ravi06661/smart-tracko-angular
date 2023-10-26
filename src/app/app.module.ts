@@ -91,6 +91,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { DiscussionForumComponent } from './pages/discussion-forum/discussion-forum.component';
 import { AdminDiscussionForumComponent } from './admin/admin-discussion-forum/admin-discussion-forum.component';
 import { AdminChapterResultComponent } from './admin/admin-chapter-result/admin-chapter-result.component';
+import { EmogiComponent } from './pages/emogi/emogi.component';
 
 
 
@@ -165,6 +166,7 @@ import { AdminChapterResultComponent } from './admin/admin-chapter-result/admin-
     DiscussionForumComponent,
     AdminDiscussionForumComponent,
     AdminChapterResultComponent,
+    EmogiComponent,
   
    
        

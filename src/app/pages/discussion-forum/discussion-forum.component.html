@@ -17,9 +17,9 @@
               <img class="profilePic2" [src]="IMAGE_URL+student.profilePic">
   
               <form class="form-inline text_input my-2 my-lg-0">
-                <input class="form_control font-14 font-400 mx-0" type="search" placeholder="Write a post...">
+                <input class="form_control font-14 font-400 mx-0" type="search" placeholder="Write a post..." name="content" [(ngModel)]="discussionForm.content"/>
               </form>
-             <span class="reply_svg d-flex align-items-center justify-content-center  button">
+             <span class="reply_svg d-flex align-items-center justify-content-center  button" (click)="createDiscussionForm()">
               <img src="assets/images/svg_img/reply.svg">
             </span>
             </div>
@@ -30,7 +30,7 @@
               <button class="select_options">
                 <form class="d-flex align-items-center  mb-1 position-relative">
                   <input type="file" name="imageupload" value="fileupload" class="d-none" accept="image/*"
-                    id="imageupload">
+                    id="imageupload" (change)="fileEvent($event)">
                   <label for="imageupload"
                     class="image_upload font-13 font-700 d-flex justify-content-center align-items-center"><i
                       class="fi fi-rr-file lh-0"></i>Gallery</label>
@@ -38,7 +38,7 @@
               </button>
               <button class="select_options">
                 <form class="d-flex align-items-center  mb-1 position-relative">
-                  <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+                  <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload" (change)="fileEvent($event)">
                   <label for="fileupload"
                     class="file_upload font-13 font-700 d-flex justify-content-center align-items-center"><i
                       class="fi fi-rr-file lh-0"></i>File</label>
@@ -57,7 +57,7 @@
                 <div class="text mx-1">
 
                   <h3 class="font-17 font-600 black mb-0">{{obj.studentName}}</h3>
-                  <p class="font-13 font-400 light2 mb-0"> {{obj.createdDate | date}}<span class="mx-0 ms-1">1 hr ago</span></p>
+                  <p class="font-13 font-400 light2 mb-0"> {{obj.createdDate | date}}<span class="mx-0 ms-1"></span>{{date(obj.createdDate)}}</p>
 
                 </div>
                 <div class="dropdown d-flex justify-content-center align-items-center ms-auto" type="button"
@@ -72,23 +72,22 @@
               </div>
               <h4 class="post_subtitle text_small font-17 font-400 lh-21">{{obj.content}} </h4>
               <div class="d-flex justify-content-center align-items-center mb-1">
-                <img *ngIf="obj.file!=null" [src]="FILE_URL+obj.file" class="post_img">
-
-        
+                <img *ngIf="obj.file!==null && obj.file!=='' && obj.file !== undefined " [src]="FILE_URL+obj.file" class="post_img">
               </div>
               <ul class=" social_icon d-flex align-items-center justify-content-around position-relative mb-0" >
                 <div class="d-flex align-items-center p-1 like">
-                  <i class="social_text fi fi-rr-social-network lh-0"></i>
-                  <h3 class="social_text font-13 font-500 mb-0 mx-0 ms-1" (click)="like(obj.id)" >{{obj.likes.length}} Like</h3>
+      
+                  <img [src]="chekLike(obj)"  (click)="like(obj.id)">
+                  <h3 class="social_text font-13 font-500 mb-0 mx-0 ms-1" >{{obj.likes.length}} Like</h3>
                 </div>
-                <div class="d-flex align-items-center p-1 comment_box" onclick="myfun1()">
+                <div class="d-flex align-items-center p-1 comment_box" onclick="myfun1()" (click)="toggleComment(i)">
                   <img src="assets/images/svg_img/Comment.svg">
                   <h3 class="gray font-13 font-500 mb-0 mx-0 ms-1">Submit Answer</h3>
                 </div>
               </ul>
               <!-- comment tabs in timeline -->
-              
-                  <div class="comment_details  comment_post" id="fee-table">
+              <!-- id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'" -->
+                  <div class="comment_details comment_post"  [style.display]="commnetVisibility[i] ? 'block' : 'none'"  id="fee-table_{{i}}">
                     <div class="forum_post d-flex justify-content-between align-items-center">
                       <img class="profilePic" [src]="IMAGE_URL+student.profilePic">
                       <form class="form-inline text_input my-2 my-lg-0">
@@ -106,13 +105,13 @@
                         <div class="text mx-1">
 
                           <h3 class="font-15 font-500 black mb-0">{{comment.studentName}}</h3>
-                          <p class="font-11 font-400 light22 mb-0">{{date(comment.createdDate)}} <span class="mx-0 ms-1"></span>
+                          <p class="font-11 font-400 light22 mb-0">{{comment.createdDate | date}} <span class="mx-0 ms-1">{{date(comment.createdDate)}}</span>
 
                           </p>
                         </div>
                        
                       </div>
-
+                      <h3 class="font-15 font-400 text_small">{{comment.content}}</h3>
                      
                   </div>
                 
