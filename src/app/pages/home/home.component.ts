@@ -11,19 +11,16 @@ import { SocketServiceService } from 'src/app/service/socket-service.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private socketService:SocketServiceService,private qrService:QRServiceService,private router:Router,private loginService:LoginService){}
+  constructor(private socketService: SocketServiceService, private qrService: QRServiceService, private router: Router, private loginService: LoginService) { }
   ngOnInit(): void {
     this.socketService.connect();
     this.qrService.isWebLoggedIn().subscribe({
-      next:(data:any)=>{
-        if(data.loginDevice == null){
-          this.loginService.logout();  
+      next: (data: any) => {
+        if (data.loginDevice == null) {
+          this.loginService.logout();
           this.router.navigate(['']);
         }
       }
     })
   }
-
-  
-  
 }

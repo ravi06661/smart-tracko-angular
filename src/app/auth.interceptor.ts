@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if(request.url != 'http://worldtimeapi.org/api/ip'){
       let authReq = request;
-    //console.log('inside interceptor')
+    //consolex.log('inside interceptor')
     //add the jwt token(localstorage) request
     const token = this.studentService.getToken();
     
