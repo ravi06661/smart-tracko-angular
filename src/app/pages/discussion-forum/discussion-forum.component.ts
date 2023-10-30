@@ -76,11 +76,7 @@ export class DiscussionForumComponent implements OnInit {
         next: (data: any) => {
           let form = this.discussionFormList.find(obj => obj.id === discussionFormId) as DiscussionFormResponse
           form.likes = data.likes
-          let res = new LikeResponseForm
-          res.type = 'likeResponse';
-          res.likes = data.likes
-          res.discussionFormId = discussionFormId
-          this.sendMessage(res)
+          this.sendMessage(new LikeResponseForm(discussionFormId, 'likeResponse', data.likes))
         },
         error: (er) => {
           alert('hi')
@@ -112,15 +108,7 @@ export class DiscussionForumComponent implements OnInit {
           this.commentResponse = data
           form.comments.push(this.commentResponse)
           this.comment = ''
-          let res = new CommentResponseForm
-          res.type = 'commentResponse';
-          res.id = data.id
-          res.content = data.content
-          res.createdDate = (data.createdDate).toString()
-          res.studentName = data.studentName
-          res.studentProfilePic = data.studentProfilePic
-          res.discussionFormId = id
-          this.sendMessage(res)
+          this.sendMessage(new CommentResponseForm(id, data.studentProfilePic, data.studentName, data.content, (data.createdDate).toString(), data.id, 'commentResponse'))
         },
         error: (er) => {
           alert('error')
@@ -135,19 +123,12 @@ export class DiscussionForumComponent implements OnInit {
       {
         next: (data: any) => {
           this.discussionFormList.push(data);
-          let obj = new DiscussionResponseForm
-          obj.type = "createDiscussionForm";
-          obj.file = data.file
-          obj.studentId = this.student.studentId;
-          obj.studentProfilePic = this.student.profilePic
-          obj.createdDate = new Date
-          obj.content = data.content
-          obj.studentName = this.student.fullName
-          obj.id = data.id
+          let obj = new DiscussionResponseForm(data.studentProfilePic, data.studentName, data.content, (data.createdDate).toString(), data.id, 'createDiscussionForm', data.file, this.student.studentId);
           this.discussionForm = new DiscussionFormResponse
           this.sendMessage(obj);
         },
         error: (er) => {
+          alert('error')
         }
       }
     )
@@ -159,22 +140,27 @@ export class DiscussionForumComponent implements OnInit {
     this.chatService.connectForDiscussionForm();
     this.subscription = this.chatService.messages.subscribe((msg) => {
 
-      if (msg.type == 'commentResponse') {
-        let form = this.discussionFormList.find(obj => obj.id === msg.discussionFormId) as DiscussionFormResponse
-        this.commentResponse = msg
-        form.comments.push(this.commentResponse)
-      }
+      switch (msg.type) {
+        case 'commentResponse':
+          let form = this.discussionFormList.find(obj => obj.id === msg.discussionFormId) as DiscussionFormResponse
+          this.commentResponse = msg
+          form.comments.push(this.commentResponse)
+          break;
 
-      if (msg.type == 'likeResponse') {
-        let form = this.discussionFormList.find(obj => obj.id === msg.discussionFormId) as DiscussionFormResponse
-        form.likes = msg.likes
-      }
+        case 'likeResponse':
+          let form1 = this.discussionFormList.find(obj => obj.id === msg.discussionFormId) as DiscussionFormResponse
+          form1.likes = msg.likes
+          break;
 
-      if (msg.type == 'createDiscussionForm') {
-        let obj = new DiscussionFormResponse
-        obj = msg;
-        obj.likes = []
-        this.discussionFormList.push(obj)
+        case 'createDiscussionForm':
+          let obj = new DiscussionFormResponse
+          obj = msg;
+          obj.likes = []
+          this.discussionFormList.push(obj)
+          break;
+          
+        default:
+          break;
       }
     });
   }

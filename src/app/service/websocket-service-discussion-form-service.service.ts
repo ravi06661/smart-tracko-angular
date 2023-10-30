@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { uniqueDates } from 'igniteui-angular/lib/core/utils';
 import * as Rj from 'rxjs';
 @Injectable({
   providedIn: 'root'
