@@ -13,4 +13,18 @@ export class DiscussionResponseForm {
     public courseName: string = ''
     public likes: LikeResponse[] = [];
     public comments: CommentResponse[] = [];
+
+    public constructor(studentProfilePic: string, studentName: string, content: string, createdDate: any, id: number, type: string, file: string, studentId: number) {
+        this.type = type
+        this.id = id
+        this.createdDate = createdDate
+        this.content = content
+        this.studentName = studentName
+        this.studentProfilePic = studentProfilePic
+        this.likes = []
+        this.comments = []
+        this.file = file
+        this.studentId = studentId
+
+    }
 }
