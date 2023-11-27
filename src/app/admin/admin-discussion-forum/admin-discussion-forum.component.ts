@@ -11,11 +11,11 @@ import Swal from 'sweetalert2';
   templateUrl: './admin-discussion-forum.component.html',
   styleUrls: ['./admin-discussion-forum.component.scss']
 })
-export class AdminDiscussionForumComponent implements OnInit{
+export class AdminDiscussionForumComponent implements OnInit {
 
-  discussionFormResponse:DiscussionFormResponse[]=[];
-  commentResonse:CommentResponse[]=[];
-  newDiscussion:DiscussionFormResponse=new DiscussionFormResponse
+  discussionFormResponse: DiscussionFormResponse[] = [];
+  commentResonse: CommentResponse[] = [];
+  newDiscussion: DiscussionFormResponse = new DiscussionFormResponse
   student: StudentDetails = new StudentDetails
   BASE_URL = this.utilityService.getBaseUrl();
   IMAGE_URL = this.BASE_URL + '/file/getImageApi/images/';
@@ -25,18 +25,16 @@ export class AdminDiscussionForumComponent implements OnInit{
     this.getAllDiscussion();
   }
 
-  constructor(private discussionFormSerice:DiscussionFormServiceService,public utilityService: UtilityServiceService){}
+  constructor(private discussionFormSerice: DiscussionFormServiceService, public utilityService: UtilityServiceService) { }
 
-  public getAllDiscussion(){
-    this.discussionFormSerice.getAllDiscussionForm().subscribe((
-    (data:any)=>{
-       this.discussionFormResponse=data
-      
-       
-    } 
+  public getAllDiscussion() {
+    this.discussionFormSerice.getAllDiscussionForm(0).subscribe((
+      (data: any) => {
+        this.discussionFormResponse = data
+      }
     ))
   }
-  
+
 
   public getDaysDifference(createdDate: any): number {
     const currentDate = new Date();
@@ -45,8 +43,8 @@ export class AdminDiscussionForumComponent implements OnInit{
     return Math.floor(differenceInDays); // Round down to the nearest integer
   }
 
-  public removeComments(discussionFormId: number,commentsId:number) {
-    
+  public removeComments(discussionFormId: number, commentsId: number) {
+
     // Swal.fire({
     //   title: 'Are you sure?',
     //   text: "You won't be able to revert this!",
@@ -71,13 +69,13 @@ export class AdminDiscussionForumComponent implements OnInit{
     // })
 
     Swal.fire('Comment Is Deleted Successfully!')
-   this.discussionFormSerice.removeComment(discussionFormId,commentsId).subscribe({
-         next:(data:any)=>{
-          this.newDiscussion.comments=data.comments
-         }
-        })
-       
+    this.discussionFormSerice.removeComment(discussionFormId, commentsId).subscribe({
+      next: (data: any) => {
+        this.newDiscussion.comments = data.comments
+      }
+    })
+
   }
-   
+
 
 }

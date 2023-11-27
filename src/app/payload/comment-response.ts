@@ -4,4 +4,5 @@ export class CommentResponse {
     public content: string = '';
     public studentName: string = '';
     public studentProfilePic: string = '';
+    public discussionFormId:number=0;
 }

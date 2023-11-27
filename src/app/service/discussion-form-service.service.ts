@@ -20,12 +20,12 @@ export class DiscussionFormServiceService {
     return this.http.post(`${this.URL}/createDiscussionForm`, data)
   }
 
-  public getDiscussionFormById(id: number) {
+  public getDiscussionFormById(id:number) {
     return this.http.get(`${this.URL}/getDiscussionFormById?id=${id}`);
   }
 
-  public getAllDiscussionForm() {
-    return this.http.get(`${this.URL}/getAllDiscussionForm`);
+  public getAllDiscussionForm(id:number) {
+    return this.http.get(`${this.URL}/getAllDiscussionForm?studentId=${id}`);
   }
 
   public creatCommnet(studentId: number, discussionFormId: number, content: string) {

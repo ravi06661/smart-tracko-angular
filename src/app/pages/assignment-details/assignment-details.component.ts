@@ -33,7 +33,7 @@ export class AssignmentDetailsComponent implements OnInit {
     private loginService: LoginService,
     private router: Router
     , private formBuilder: FormBuilder) {
-      this.isSubmitted()
+    this.isSubmitted()
     this.submissionForm = this.formBuilder.group({
       file: ['', Validators.required],
       description: ['', Validators.required]
@@ -49,7 +49,7 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   public getAssignmentQuestionById() {
-   
+
     this.assignmentService.getAssignmentQuestionById(this.questionId, this.assignmentId).subscribe({
       next: (data: any) => {
         this.assignmentQues = data.question
@@ -83,11 +83,11 @@ export class AssignmentDetailsComponent implements OnInit {
 
   public isSubmitted() {
     this.assignmentService.isSubmitted(this.assignmentId, this.questionId, this.loginService.getStudentId()).subscribe(
-      (data: any) => {   
-        if(data==true){
+      (data: any) => {
+        if (data == true) {
           this.isSubmittedQuestion = false;
-        }else
-        this.isSubmittedQuestion = true;
+        } else
+          this.isSubmittedQuestion = true;
       }
     )
   }
