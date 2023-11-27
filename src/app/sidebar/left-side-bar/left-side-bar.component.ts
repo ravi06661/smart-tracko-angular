@@ -54,7 +54,7 @@ export class LeftSideBarComponent implements OnInit {
         this.qrService.webLogout().subscribe({
           next:(data)=>{
             localStorage.clear();
-          //  this.router.navigate(['']);
+            this.router.navigate(['']);
           }
         });;
       }

@@ -7,13 +7,11 @@ export class UtilityServiceService {
 
   constructor() { }
 
-
-
-
   //private BASE_URL = 'http://cicoapi.dollopinfotech.com';
 
   private BASE_URL = 'http://localhost:8080';
-  //private BASE_URL = 'http://192.168.1.30:8080';
+   //private BASE_URL = 'http://192.168.1.131:8080';
+  //private BASE_URL = 'http://192.168.1.300:08080';
   private readonly TIME_URL = 'http://worldtimeapi.org/api/ip';
 
   public getBaseUrl() {

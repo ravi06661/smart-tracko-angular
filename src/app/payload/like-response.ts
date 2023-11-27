@@ -3,4 +3,5 @@ export class LikeResponse {
     public createdDate: Date | undefined;
     public studentName: string = '';
     public studentProfilePic: string = '';
+    public isLike!:boolean
 }

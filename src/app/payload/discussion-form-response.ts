@@ -10,7 +10,7 @@ export class DiscussionFormResponse {
     public studentName: string = '';
     public studentProfilePic: string = '';
     public file:string=''
-    public courseName:string=''
     public likes: LikeResponse[] = [];
     public comments: CommentResponse[] = [];
+    public  isLike!:Boolean
 }

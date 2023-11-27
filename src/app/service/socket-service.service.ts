@@ -1,66 +1,82 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import * as SockJS from 'sockjs-client';
 import { LoginService } from './login.service';
 import { QRServiceService } from './qrservice.service';
 import { UtilityServiceService } from './utility-service.service';
+import * as Stomp from "stompjs";
 import { StudentService } from './student.service';
-import { ChatServiceService } from './chat-service-service.service';
-import { Subscription } from 'rxjs';
+import { log } from 'console';
+
 @Injectable({
   providedIn: 'root'
 })
 export class SocketServiceService {
 
-  qrKey: any;
+  qrKey:any;
   stompClient: any = null;
   connection = false
-  token: any
+  token:any
   BASE_URL = this.utilityService.getBaseUrl();
-  SOCKET_URL = this.BASE_URL + '/socket';
-  constructor(public qrService: QRServiceService,
-    private loginService: LoginService,
-    private router: Router,
-    private utilityService: UtilityServiceService,
+  SOCKET_URL = this.BASE_URL+'/socket';
+  constructor(public qrService:QRServiceService,
+    private loginService:LoginService,
+    private router:Router,
+    private utilityService:UtilityServiceService,
     private deviceService: DeviceDetectorService,
-    private studentService: StudentService,
-    private chatService: ChatServiceService) { }
+    private studentService:StudentService){}
 
-  subscription!: Subscription;
-  public connect() {
-    this.qrKey = localStorage.getItem('key');
-    this.connection = true;
-    this.chatService.connectForQr(this.qrKey);
-    this.subscription = this.chatService.messages1.subscribe((msg) => {
-      console.log("body", msg);
-      if (msg == 'LOGOUT') {
-        this.qrService.webLogout().subscribe({
-          next: (data) => {
+  
+    connect(){
+      this.qrKey = localStorage.getItem('key');
+      var socket = new SockJS(this.SOCKET_URL);
+    this.stompClient = Stomp.over(socket);
+
+    let that = this;
+    this.stompClient.connect({}, function(frame:any){
+      that.connection = true;
+      
+      that.stompClient.subscribe('/queue/messages-'+ that.qrKey,
+      function(token:any){
+        console.log("socket****"+token.body);
+        if(token.body=='LOGOUT'){
+         that.qrService.webLogout().subscribe({
+          next:(data)=>{
             localStorage.clear();
-            this.router.navigate(['']);
-            this.chatService.disconnect();
+            that.router.navigate(['']);
+            that.stompClient.disconnect();
           }
-
         });
-        return;
+         return;
       }
-      if (msg != undefined || msg != null) {
-        this.loginService.setToken(msg);
-        this.updateLoginStatus(msg);
-        this.router.navigate(['/student']);
-      }
-    })
+        that.loginService.setToken(token.body);
+        that.updateLoginStatus(token.body);
+        that.router.navigate(['/student']);
+      });
+    });
   }
-
-
-
-  public updateLoginStatus(token: string) {
+  
+  public updateLoginStatus(token:string){
     const deviceInfo = this.deviceService.getDeviceInfo();
-    this.qrService.updateLoginStatus(deviceInfo, token).subscribe({
-      next: (data) => {
+    this.qrService.updateLoginStatus(deviceInfo,token).subscribe({
+      next:(data)=>{
         //console.log("update s"+data);
       }
     })
   }
 
+    // mobileAuthentication(token:string){
+    //   const deviceInfo = this.deviceService.getDeviceInfo();
+    //   this.qrService.qrLogin(token,deviceInfo).subscribe(data => {
+        
+    //   });
+    // }
+  
+    disconnect(){
+      if(this.stompClient !=null){
+        this.stompClient.disconnect();
+      }
+    }
+  
 }
