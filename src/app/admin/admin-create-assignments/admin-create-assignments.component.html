@@ -165,10 +165,11 @@
                     <br>
                     <form [formGroup]="assignmentForm">
                     <div class="col-md-4">
-                        <label for="" class="mb_6 font-17 font-500 secondary">Add Video-URL</label>
+                        <label  class="mb_6 font-17 font-500 secondary">Add Video-URL</label>
                         <div class="input_icon position-relative">
-                            <input type="text" id="videoUrl" name="videoUrl" class="form-control input_text gray-input-bg enabled_inp"
+                            <input type="text" name="videoUrl" class="form-control input_text gray-input-bg enabled_inp"
                                 placeholder="VIDEO-URL"  [(ngModel)]="taskQuestion.videoUrl">
+                                {{taskQuestion.videoUrl}}
                         </div>
                     </div>
 
@@ -180,6 +181,7 @@
                             <ckeditor  [editor]="Editor" name="question" formControlName="question" [(ngModel)]="taskQuestion.question"> </ckeditor>
                             <div  *ngIf="isFieldInvalidForAssignmentForm('question')" class="text-danger">Question is
                                 required.</div>
+                                {{taskQuestion.question}}
                     </div>
                     </form>
                     <!-- <div class="edit-delete-que mt-5">
