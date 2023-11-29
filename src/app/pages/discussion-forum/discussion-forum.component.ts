@@ -170,7 +170,10 @@ export class DiscussionForumComponent implements OnInit {
       switch (message.type) {
         case 'commentResponse':
           let form = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
-          form.comments.unshift(message)
+          // form.comments.unshift(message)
+          if (form && !form.comments.find(c => c.id === message.id)) {
+            form.comments.unshift(message);
+          }
           break;
         case 'likeResponse':
           let form1 = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
@@ -180,7 +183,9 @@ export class DiscussionForumComponent implements OnInit {
           }
           break;
         case 'createDiscussionForm':
-          this.discussionFormList.unshift(message)
+          if (!this.discussionFormList.find(e => e.id === message.id)) {
+            this.discussionFormList.unshift(message);
+          }
           break;
         default:
           break;
