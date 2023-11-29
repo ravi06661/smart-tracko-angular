@@ -163,63 +163,30 @@ export class DiscussionForumComponent implements OnInit {
     this.commnetVisibility[index] = !this.commnetVisibility[index];
   }
 
-
-  stompClient: any;
-  connection = false
-  SOCKET_URL = this.BASE_URL + '/socket';
-  wsClient: any;
-  connected!: boolean;
-
   connect() {
-    const socket = new SockJS(this.SOCKET_URL);
-    this.wsClient = Stomp.over(socket);
 
-    const that = this;
-    this.wsClient.connect({}, () => {
-      console.log('Connected!');
-      that.connected = true;
-      that.wsClient.subscribe('/queue/messages', (message: { body: any }) => {
-
-        let obj = JSON.parse(message.body);
-        switch (obj.type) {
-          case 'commentResponse':
-            let comres = JSON.parse(message.body);
-            let form = this.discussionFormList.find(obj => obj.id === comres.discussionFormId) as DiscussionFormResponse
-            form.comments.unshift(comres)
-            break;
-          case 'likeResponse':
-            let likeres = JSON.parse(message.body);
-            let form1 = this.discussionFormList.find(obj => obj.id === likeres.discussionFormId) as DiscussionFormResponse
-            form1.likes = likeres.likes
-
-            if (this.loginService.getStudentId() == likeres.studentId) {
-              form1.isLike = likeres.isLike
-            }
-            break;
-          case 'createDiscussionForm':
-            let res = JSON.parse(message.body);
-            let obj = new DiscussionFormResponse
-            obj = res;
-            obj.likes = []
-            this.discussionFormList.unshift(obj)
-            break;
-          default:
-            break;
-        }
-      });
+    this.webSocketService.getMessages().subscribe((message) => {
+      switch (message.type) {
+        case 'commentResponse':
+          let form = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
+          form.comments.unshift(message)
+          break;
+        case 'likeResponse':
+          let form1 = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
+          form1.likes = message.likes
+          if (this.loginService.getStudentId() == message.studentId) {
+            form1.isLike = message.isLike
+          }
+          break;
+        case 'createDiscussionForm':
+          this.discussionFormList.unshift(message)
+          break;
+        default:
+          break;
+      }
     });
   }
-
-  disconnect() {
-    if (this.connected) {
-      this.connected = false;
-      console.log('Disconnected!');
-      this.wsClient.disconnect();
-    }
+  public sendMessage(data: any) {
+    this.webSocketService.sendMessage(data);
   }
-
-  sendMessage(message: any) {
-    this.wsClient.send('/api/socket', {}, JSON.stringify(message));
-  }
-
 }

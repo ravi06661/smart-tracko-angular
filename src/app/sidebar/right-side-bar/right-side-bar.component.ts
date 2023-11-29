@@ -13,6 +13,7 @@ import { AnnouncementServiceService } from 'src/app/service/announcement-service
 import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket-service-discussion-form-service.service';
 import *  as Stomp from "stompjs"
 @Component({
   selector: 'app-right-side-bar',
@@ -34,7 +35,7 @@ export class RightSideBarComponent implements OnInit {
     public utilityService: UtilityServiceService,
     private loginService: LoginService,
     private adminService: AdminServiceService,
-    private annoucementService: AnnouncementServiceService) { }
+    private annoucementService: AnnouncementServiceService, private websocketService: WebsocketServiceDiscussionFormService) { }
 
   ngOnInit(): void {
     if (this.loginService.getRole() == 'STUDENT') {
@@ -65,48 +66,29 @@ export class RightSideBarComponent implements OnInit {
       next: (data: any) => {
       },
       error: (err: any) => {
-
       }
     })
   }
-
-  stompClient: any;
-  connection = false
-  wsClient: any;
-  connected!: boolean;
-  SOCKET_URL = this.utilityService.getBaseUrl() + '/socket'
-
-  connect() {
-    const socket = new SockJS(this.SOCKET_URL);
-    this.wsClient = Stomp.over(socket);
-    const that = this;
-    this.wsClient.connect({}, () => {
-      console.log('Connected!');
-      that.connected = true;
-      that.wsClient.subscribe('/queue/messages', (message: { body: any }) => {
-        let obj = JSON.parse(message.body)
-        if (obj.type == 'announcement') {
-          let newObject = new Announcement(obj.title, obj.message, obj.date);
-          this.getStudentCouse(obj.allCourse)
+  public connect() {
+    this.websocketService.getMessages().subscribe((message) => {
+      if (message.type == 'announcement') {
+        let newObject = new Announcement(message.title, message.message, message.date);
+        this.getStudentCourse(message.allCourse).then(() => {
           if (this.Coursestatus) {
+            this.Coursestatus = false;
             this.announcements.unshift(newObject);
-          }
-        }
-      });
-    });
-  }
-  public getStudentCouse(course: number[]) {
-    let courseId!: number
-    this.studentService.getByStudentById(this.loginService.getStudentId()).subscribe(
-      (data: any) => {
-        courseId = data.course.courseId;
-        course.forEach((e: any) => {
-          if (e == courseId) {
-            alert('set true')
-            this.Coursestatus = true;
           }
         });
       }
-    )
+    });
   }
+
+  public async getStudentCourse(course: number[]): Promise<void> {
+    let courseId = 0;
+    const data: any = await this.studentService.getByStudentById(this.loginService.getStudentId()).toPromise();
+    courseId = data.course.courseId;
+    this.Coursestatus = course.includes(courseId);
+  }
+
+
 }

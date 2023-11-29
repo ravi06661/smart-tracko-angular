@@ -10,6 +10,7 @@ import * as SockJS from 'sockjs-client';
 import *  as Stomp from "stompjs";
 import { id } from 'date-fns/locale';
 import { disconnect } from 'process';
+import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket-service-discussion-form-service.service';
 @Component({
   selector: 'app-create-announcements',
   templateUrl: './create-announcements.component.html',
@@ -28,7 +29,8 @@ export class CreateAnnouncementsComponent implements OnInit {
   constructor(private courseService: CourseServiceService,
     private utilityService: UtilityServiceService,
     private announcementService: AnnouncementServiceService,
-    private router: Router) { }
+    private router: Router,
+    private websocketService: WebsocketServiceDiscussionFormService) { }
 
   ngOnInit(): void {
     this.getAllCourses();
@@ -46,7 +48,7 @@ export class CreateAnnouncementsComponent implements OnInit {
   public publishAnnouncement() {
     this.announcementService.publishAnnouncement(this.announcementRequest).subscribe({
       next: (data: any) => {
-        let courses: number[]=[]
+        let courses: number[] = []
         data.course.forEach((e: any) => {
           courses.push(e.courseId);
         });
@@ -69,34 +71,14 @@ export class CreateAnnouncementsComponent implements OnInit {
     })
   }
 
-  stompClient: any;
-  connection = false
-  wsClient: any;
-  connected!: boolean;
-
   connect() {
-    const socket = new SockJS(this.SOCKET_URL);
-    this.wsClient = Stomp.over(socket);
-    const that = this;
-    this.wsClient.connect({}, () => {
-      console.log('Connected!');
-      that.connected = true;
-      that.wsClient.subscribe('/queue/messages', (message: { body: any }) => {
-        let obj = JSON.parse(message.body)
-      });
+    this.websocketService.getMessages().subscribe((message) => {
+
     });
   }
 
-  // disconnect() {
-  //   if (this.connected) {
-  //     this.connected = false;
-  //     console.log('Disconnected!');
-  //     this.wsClient.disconnect();
-  //   }
-  // }
-
   public sendMessage(message: any) {
-    this.wsClient.send('/api/socket', {}, JSON.stringify(message));
+    this.websocketService.sendMessage(message);
   }
 
   public clearObj() {
