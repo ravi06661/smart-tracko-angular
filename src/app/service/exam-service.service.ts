@@ -29,4 +29,7 @@ export class ExamServiceService {
   public getChapterExamIsCompleted(chapterId:number,studentId:number){
     return this.http.get(`${this.EXAM_URL}/checkExamCompleteOrNot?chapterId=${chapterId}&studentId=${studentId}`);
   }
+  public getAllChapterExamResultByChaterId(chapterId:number){
+    return this.http.get(`${this.EXAM_URL}/getALLChapterExamResultesByChapterIdApi?chapterId=${chapterId}`);
+  }
 }
