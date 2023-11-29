@@ -35,7 +35,6 @@ export class AdminDiscussionForumComponent implements OnInit {
     ))
   }
 
-
   public getDaysDifference(createdDate: any): number {
     const currentDate = new Date();
     const differenceInTime = currentDate.getTime() - new Date(createdDate).getTime();

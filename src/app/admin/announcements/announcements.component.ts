@@ -9,23 +9,19 @@ import { AnnouncementServiceService } from 'src/app/service/announcement-service
 })
 export class AnnouncementsComponent implements OnInit {
 
-  announcements:Announcement[] = [];
-
-  constructor(private announcementService:AnnouncementServiceService){}
-
+  public announcements: Announcement[] = [];
+  constructor(private announcementService: AnnouncementServiceService) { }
   ngOnInit(): void {
-    this.getAllPublishedAnnouncement(0,10);
+    this.getAllPublishedAnnouncement(0, 10);
   }
-
-  public getAllPublishedAnnouncement(page:number,size:number){
-    this.announcementService.getAllPublishedAnnouncement(page,size).subscribe({
-      next:(data:any)=>{
+  public getAllPublishedAnnouncement(page: number, size: number) {
+    this.announcementService.getAllPublishedAnnouncement(page, size).subscribe({
+      next: (data: any) => {
         this.announcements = data.response;
       },
-      error:(err:any)=>{
+      error: (err: any) => {
         alert('hello')
       }
     })
   }
-
 }

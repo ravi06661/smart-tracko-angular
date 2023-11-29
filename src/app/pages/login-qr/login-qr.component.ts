@@ -8,6 +8,7 @@ import * as Stomp from "stompjs";
 import * as SockJS from "sockjs-client";
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket-service-discussion-form-service.service';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class LoginQRComponent implements OnInit {
   BASE_URL = this.utilityService.getBaseUrl();
   SOCKET_URL = this.BASE_URL + '/socket';
   userAgent: any
-  constructor(public qrService: QRServiceService, private loginService: LoginService, private router: Router, private utilityService: UtilityServiceService, private deviceService: DeviceDetectorService) { }
+  constructor(public qrService: QRServiceService, private loginService: LoginService, private router: Router, private utilityService: UtilityServiceService, private deviceService: DeviceDetectorService,private webSocketService:WebsocketServiceDiscussionFormService) { }
 
 
 
@@ -73,6 +74,7 @@ export class LoginQRComponent implements OnInit {
           that.loginService.setToken(token.body);
           that.updateLoginStatus(token.body);
           that.router.navigate(['/student']);
+         
         });
     });
   }

@@ -14,6 +14,7 @@ import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
 import { TaskServiceService } from 'src/app/service/task-service.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket-service-discussion-form-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -73,7 +74,8 @@ export class DashboardComponent implements OnInit {
     private taskService: TaskServiceService, private assignmentService: AssignmentServiceService,
     private router: Router,
     private datePipe: DatePipe
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
 
@@ -103,27 +105,28 @@ export class DashboardComponent implements OnInit {
     this.studentService.getTodayAttendance(this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
         this.attendance = data.Attendance;
-        if(this.attendance){
-        if (this.attendance.checkInTime != null) {
-          this.formattedCheckInTime = this.changeTimeFormat(this.attendance.checkInTime);
-        }
-        if (this.attendance.checkOutTime != null) {
-          this.formattedCheckOutTime = this.changeTimeFormat(this.attendance.checkOutTime);
-        }
+        if (this.attendance) {
+          if (this.attendance.checkInTime != null) {
+            this.formattedCheckInTime = this.changeTimeFormat(this.attendance.checkInTime);
+          }
+          if (this.attendance.checkOutTime != null) {
+            this.formattedCheckOutTime = this.changeTimeFormat(this.attendance.checkOutTime);
+          }
 
-        const checkInTime: moment.Moment = moment(this.attendance.checkInTime, 'HH:mm:ss');
-        if (this.attendance.checkOutTime != null) {
-          const checkOutTime: moment.Moment = moment(this.attendance.checkOutTime, 'HH:mm:ss');
-          const duration: moment.Duration = moment.duration(checkOutTime.diff(checkInTime));
-          this.timer = duration.asSeconds();
-          this.totalHrs = new Date(this.timer * 1000).toISOString().substr(11, 8);
-        } else {
-          const currentTime: moment.Moment = moment(new Date(), 'HH:mm:ss');
-          const duration: moment.Duration = moment.duration(currentTime.diff(checkInTime));
-          this.timer = duration.asSeconds();
-          this.startTimer();
+          const checkInTime: moment.Moment = moment(this.attendance.checkInTime, 'HH:mm:ss');
+          if (this.attendance.checkOutTime != null) {
+            const checkOutTime: moment.Moment = moment(this.attendance.checkOutTime, 'HH:mm:ss');
+            const duration: moment.Duration = moment.duration(checkOutTime.diff(checkInTime));
+            this.timer = duration.asSeconds();
+            this.totalHrs = new Date(this.timer * 1000).toISOString().substr(11, 8);
+          } else {
+            const currentTime: moment.Moment = moment(new Date(), 'HH:mm:ss');
+            const duration: moment.Duration = moment.duration(currentTime.diff(checkInTime));
+            this.timer = duration.asSeconds();
+            this.startTimer();
+          }
         }
-      }},
+      },
     });
   }
 
@@ -188,8 +191,8 @@ export class DashboardComponent implements OnInit {
       (data: any) => {
         this.unLockAssignments = data.unLockedAssignment;
         this.toDoAssignment = this.unLockAssignments[this.unLockAssignments.length - 1];
-        if(this.toDoAssignment==null){
-          this.toDoAssignment =  new Assignment
+        if (this.toDoAssignment == null) {
+          this.toDoAssignment = new Assignment
         }
         this.assignmentId = this.toDoAssignment.id
         this.lockAssignments = data.lockedAssignment;
@@ -226,7 +229,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  public dateFormatter(date:Date){
+  public dateFormatter(date: Date) {
     return this.datePipe.transform(date, 'dd MMM yyyy');
   }
 }

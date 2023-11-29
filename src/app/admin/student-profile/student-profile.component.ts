@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { ApexNonAxisChartSeries, ApexChart, ApexResponsive, ChartComponent } from 'ng-apexcharts';
 import { PieChart } from 'src/app/charts/pie-chart';
+import { Announcement } from 'src/app/entity/announcement';
 import { Assignment } from 'src/app/entity/assignment';
 import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
 import { AttendanceLog } from 'src/app/entity/attendance-log';
@@ -17,6 +18,7 @@ import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
 import { TaskServiceService } from 'src/app/service/task-service.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket-service-discussion-form-service.service';
 import Swal from 'sweetalert2';
 
 
@@ -56,8 +58,8 @@ export class StudentProfileComponent implements OnInit {
   ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   assignmentId: number = 0;
   unLockAssignment: Assignment = new Assignment
-  constructor(private router: Router, private taskService: TaskServiceService, private assignmentService: AssignmentServiceService, private utilityService: UtilityServiceService, private activateRoute: ActivatedRoute,
-    private studentService: StudentService, private leaveService: LeaveService, private feesPayService: FeesPayService, private loginService: LoginService) {
+  constructor(private router: Router, private taskService: TaskServiceService, private assignmentService: AssignmentServiceService, private utilityService: UtilityServiceService, private activateRoute: ActivatedRoute, private webSoketService: WebsocketServiceDiscussionFormService
+    , private studentService: StudentService, private leaveService: LeaveService, private feesPayService: FeesPayService, private loginService: LoginService) {
     this.chartOptions = this.pieChart.chartOptions;
   }
 
@@ -210,9 +212,10 @@ export class StudentProfileComponent implements OnInit {
 
   progressWidth: string = '';
   calculatePercentages(num1: number, num2: number) {
-    if(num2!==0)
-    return Math.floor((num1 / num2) * 100);
-   else
-   return 0;
+    if (num2 !== 0)
+      return Math.floor((num1 / num2) * 100);
+    else
+      return 0;
   }
+
 }
