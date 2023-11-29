@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { timer } from 'rxjs/internal/observable/timer';
+import { Subscription, timer } from 'rxjs';
+
 import { Chapter } from 'src/app/entity/chapter';
 import { ChapterQuizeQuestion } from 'src/app/entity/chapter-quize-question';
 import { ChapterExamResultResponse } from 'src/app/payload/chapter-exam-result-response';
@@ -54,7 +54,7 @@ export class QuestionsComponent {
 
   ngOnInit() {
 
-    this.activateRouter.queryParams.subscribe(params => {
+    this.activateRouter.queryParams.subscribe((params:any) => {
       this.chapterId = params['chapterId'];
       this.subjectId = params['subjectId'];
     });
@@ -64,7 +64,7 @@ export class QuestionsComponent {
 
   public timer() {
     const duration = 60*(this.chapter.exam.examTimer!)// in seconds
-    this.timerSubscription = timer(0, 1000).subscribe((elapsedTime) => {
+    this.timerSubscription = timer(0, 1000).subscribe((elapsedTime:any) => {
       this.second = duration - elapsedTime;
       this.remainingTime = new Date(this.second * 1000).toISOString().substr(11, 8);
       if (elapsedTime >= duration) {
@@ -163,7 +163,7 @@ onKeyPress(event: KeyboardEvent) {
   onMouseMove() {
     if (this.unrelatedActivityDetected) {
       // Automatically submit the test if unrelated activity persists
-      alert("submit");
+     // alert("submit");
     } else {
       // Show a warning if unrelated activity is detected
       this.showWarning();
@@ -171,26 +171,48 @@ onKeyPress(event: KeyboardEvent) {
     }
   }
   public showWarning(){
-    alert("warning");
+  //  alert("Please Don't Change the Window otherwise it will autosubmit");
   }
+
+  // toggleFullScreen() {
+  //   const element = document.documentElement;
+  //   if (!this.isFullScreen) {
+  //     if (element.requestFullscreen) {
+  //       element.requestFullscreen();
+  //       console.log("if");
+        
+  //     }
+  //   } else {
+  //     if (document.exitFullscreen) {
+  //       document.exitFullscreen();
+  //       console.log('else');
+        
+  //     }
+  //   }
+  //   this.isFullScreen = !this.isFullScreen;
+  // }
 
   toggleFullScreen() {
     const element = document.documentElement;
+  
     if (!this.isFullScreen) {
+      // Enter fullscreen mode
       if (element.requestFullscreen) {
         element.requestFullscreen();
-        console.log("if");
-        
+        console.log("Entered fullscreen mode");
       }
     } else {
+      // Exit fullscreen mode
       if (document.exitFullscreen) {
         document.exitFullscreen();
-        console.log('else');
-        
+        console.log('Exited fullscreen mode');
       }
     }
+  
+    // Toggle the fullscreen state
     this.isFullScreen = !this.isFullScreen;
   }
+  
 
 
   public getChapeter() {

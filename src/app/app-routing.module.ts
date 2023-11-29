@@ -135,7 +135,7 @@ const routes: Routes = [
       {path:'submission',component:AdminSubmissionComponent,pathMatch:'full'},
       {path:'editetask',component:AdminEditTaskComponent},
       {path:'admindiscussion',component:AdminDiscussionForumComponent,pathMatch:'full'},
-      {path:'result',component:AdminChapterResultComponent,pathMatch:'full'},
+      {path:'result/:chapterId',component:AdminChapterResultComponent,pathMatch:'full'},
 
 
     ]

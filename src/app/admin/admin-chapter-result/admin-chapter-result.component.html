@@ -34,85 +34,22 @@
 
                                 </tr>
                             </thead>
-                            <tbody class="bg-light2">
-                                <tr>
+                            <tbody class="bg-light2" >
+                                <tr *ngFor="let obj of chapterExamResult">
                                     <td>
-                                       <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                        <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                        Wade Warren                                         
+                                       <a routerLink="/admin/studentprofile/{{obj.student.studentId}}"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
+                                        <img [src]="imageUrl+obj.student.profilePic"  alt="" class="img-fluid imagestudent">
+                                    {{obj.student.fullName}}                                     
                                        </a>
                                     </td>
-                                    <td>50</td>
-                                    <td>36</td>
-                                    <td>6</td>
-                                    <td>8</td>
-                                    <td>72%</td>
+                                    <td>{{obj.totalQuestion}}</td>
+                                    <td>{{obj.correcteQuestions}}</td>
+                                    <td>{{obj.notSelectedQuestions}}</td>
+                                    <td>{{obj.wrongQuestions}}</td>
+                                    <td>{{obj.scoreGet}}</td>
+                                    
                                 </tr>
-                                <tr>
-                                    <td>
-                                       <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                        <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                        Wade Warren                                         
-                                       </a>
-                                    </td>
-                                    <td>50</td>
-                                    <td>36</td>
-                                    <td>6</td>
-                                    <td>8</td>
-                                    <td>72%</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                        <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                        Wade Warren                                         
-                                       </a>
-                                    </td>
-                                    <td>50</td>
-                                    <td>36</td>
-                                    <td>6</td>
-                                    <td>8</td>
-                                    <td>72%</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                        <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                        Wade Warren                                         
-                                       </a>
-                                    </td>
-                                    <td>50</td>
-                                    <td>36</td>
-                                    <td>6</td>
-                                    <td>8</td>
-                                    <td>72%</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                        <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                        Wade Warren                                         
-                                       </a>
-                                    </td>
-                                    <td>50</td>
-                                    <td>36</td>
-                                    <td>6</td>
-                                    <td>8</td>
-                                    <td>72%</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                       <a href="student_profile.html"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                        <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                        Wade Warren                                         
-                                       </a>
-                                    </td>
-                                    <td>50</td>
-                                    <td>36</td>
-                                    <td>6</td>
-                                    <td>8</td>
-                                    <td>72%</td>
-                                </tr>
+                                
 
                             </tbody>
                         </table>
