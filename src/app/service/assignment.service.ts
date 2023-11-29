@@ -32,6 +32,8 @@ export class AssignmentServiceService {
   }
 
   public addQuestionInTask(question: TaskQuestionRequest, assignmentId: number) {
+    console.log(question);
+    
     let formData = new FormData();
     formData.append('question', question.question)
     formData.append('videoUrl', question.videoUrl)

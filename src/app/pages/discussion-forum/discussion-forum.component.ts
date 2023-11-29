@@ -63,7 +63,7 @@ export class DiscussionForumComponent implements OnInit {
           }
         },
         error: (er) => {
-          alert('error')
+          alert('something went wrong...')
         }
       }
     )
@@ -110,6 +110,7 @@ export class DiscussionForumComponent implements OnInit {
           //  let form = this.discussionFormList.find(obj => obj.id === id) as DiscussionFormResponse
           // this.commentResponse = data
           //  form.comments.push(this.commentResponse)
+
           this.comment = ''
           this.sendMessage(new CommentResponseForm(id, data.studentProfilePic, data.studentName, data.content, (data.createdDate).toString(), data.id, 'commentResponse'))
         },
@@ -128,7 +129,7 @@ export class DiscussionForumComponent implements OnInit {
       this.discussionFormSerice.createDiscussionForm(this.student.studentId, this.discussionForm.content, this.discussionForm.file).subscribe(
         {
           next: (data: any) => {
-            this.discussionFormList.push(data);
+            //  this.discussionFormList.push(data);
             let obj = new DiscussionResponseForm(data.studentProfilePic, data.studentName, data.content, (data.createdDate).toString(), data.id, 'createDiscussionForm', data.file, this.student.studentId);
             this.discussionForm = new DiscussionFormResponse()
             this.sendMessage(obj);
@@ -186,6 +187,7 @@ export class DiscussionForumComponent implements OnInit {
       }
     });
   }
+
   public sendMessage(data: any) {
     this.webSocketService.sendMessage(data);
   }

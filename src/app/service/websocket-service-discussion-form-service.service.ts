@@ -20,15 +20,16 @@ export class WebsocketServiceDiscussionFormService {
     const socket = new SockJS('http://localhost:8080/socket');
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, (frame: any) => {
-      console.log('WebSocket connected');
       this.stompClient.subscribe('/queue/messages', (message: any) => {
         const parsedMessage = JSON.parse(message.body);
+        console.log = () => { };
         this.messagesSubject.next(parsedMessage);
       });
     });
   }
 
   public getMessages(): Observable<any> {
+    console.log = () => { };
     return this.messagesObservable;
   }
   public sendMessage(message: any): void {
