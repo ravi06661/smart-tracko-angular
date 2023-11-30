@@ -26,3 +26,15 @@
     border:solid 2px red;
 
 }
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.typing-animation {
+    font-size: 24px;
+    color: #333;
+}
