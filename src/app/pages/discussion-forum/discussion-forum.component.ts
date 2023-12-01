@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { StudentDetails } from 'src/app/entity/student-details';
 import { CommentResponse } from 'src/app/payload/comment-response';
 import { DiscussionFormResponse } from 'src/app/payload/discussion-form-response';
@@ -6,19 +6,13 @@ import { DiscussionFormServiceService } from 'src/app/service/discussion-form-se
 import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
-import { Subscription } from "rxjs";
-import { ChatServiceService } from 'src/app/service/chat-service-service.service';
 import { LikeResponse } from 'src/app/payload/like-response';
 import { DiscussionResponseForm } from 'src/app/payload/discussion-response-form';
-import * as Stomp from "stompjs";
-import * as SockJS from 'sockjs-client';
 import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket-service-discussion-form-service.service';
 import { CommentResponseForm } from 'src/app/payload/comment-response-form';
 import { LikeResponseForm } from 'src/app/payload/like-response-form';
 import { Typing } from 'src/app/entity/typing';
-import { C } from '@fullcalendar/core/internal-common';
-import { ThirdPartyDraggable } from '@fullcalendar/interaction';
-import { MessageSeenBy } from 'src/app/entity/message-seen-by';
+
 @Component({
   selector: 'app-discussion-forum',
   templateUrl: './discussion-forum.component.html',
@@ -39,7 +33,6 @@ export class DiscussionForumComponent implements OnInit {
   commnetVisibility: boolean[] = []
   message!: string;
   typing: Typing[] = []
-
   constructor(private discussionFormSerice: DiscussionFormServiceService,
     private loginService: LoginService,
     private utilityService: UtilityServiceService,
@@ -158,7 +151,7 @@ export class DiscussionForumComponent implements OnInit {
 
   connect() {
     this.webSocketService.getMessages().subscribe((message) => {
-      
+
       switch (message.type) {
         case 'commentResponse':
           let form = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
@@ -201,7 +194,7 @@ export class DiscussionForumComponent implements OnInit {
     this.sendMessage(obj);
   }
 
-  private timeOut: number = 10000; // 10 seconds
+  private timeOut: number = 5000; // 10 seconds
 
   public pushTypingMessage(
     message: any): void {
@@ -216,22 +209,33 @@ export class DiscussionForumComponent implements OnInit {
       if (!obj) {
         if (this.student.studentId !== message.id)
           this.typing.push(message);
+
         setTimeout(() => {
-          this.remove(message);
+          this.removeTypingUser(message);
         }, this.timeOut);
       }
     }
   }
 
-  public remove(message: any): void {
-    const index: number = this.typing.indexOf(message);
+  public removeTypingUser(message: any) {
+    const index = this.typing.findIndex(obj => obj.id === message.id);
     if (index !== -1) {
-      this.typing.splice(index, 1);
+      this.typing.splice(index, 1)[0] as Typing;
     }
   }
 
-  public removeTypingUser(message: any) {
-    this.typing = this.typing.filter(obj => obj.id !== message.id) as Typing[]
-  }
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log('changes1');
+
+  //   if (changes['typing'] && changes['typing'].currentValue) {
+  //     this.updateLimitedTyping();
+  //     console.log('changes1');
+
+  //   }
+  // }
+  // limitedTyping: Typing[] = []
+  // private updateLimitedTyping(): void {
+  //   this.limitedTyping = this.typing.slice(0, 7);
+  // }
 }
 
