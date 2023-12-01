@@ -35,4 +35,5 @@ export class WebsocketServiceDiscussionFormService {
   public sendMessage(message: any): void {
     this.stompClient.send('/api/socket', {}, JSON.stringify(message));
   }
+  
 }

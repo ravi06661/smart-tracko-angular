@@ -111,9 +111,16 @@
                     (click)="createComment(obj.id)"></i>
                   <br>
                 </div>
-                <div style="display: flex; flex-direction: row;">
-                  <h6 *ngFor="let obj of typing" style="margin-right: 10px; font-size: smaller;">{{obj.name}} </h6>
-                  <h6 *ngIf="typing.length>0"  style="font-size: smaller;">is typing....</h6>
+                <div style="display: flex; flex-direction: row; margin-left: 40px; margin-top: 0px; padding-top: 0px;" >
+                  <h6 *ngFor="let obj of typing;let i = index " style="font-size: smaller; color: green;">{{obj.name.split(' ')[0]}} <span *ngIf="typing.length>1  && typing.length-1!==i">,</span> </h6>
+                  <h6 *ngIf="typing.length>0"  > <pre style="font-size: smaller; color: green;"> is typing</pre></h6>
+                  <!-- <h6 *ngIf="typing.length>0"  > <pre style="font-size: smaller; color: green; "*ngIf="typing.length>7"> {{typing.length-(i+1)}} more+</pre></h6> -->
+                  <div class="typing " style="margin-top:8px ;margin-left: 5px;" *ngIf="typing.length>0 " >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
                 </div>
                 <div class="comment_section" *ngFor=" let comment of obj.comments">
                   <div class="d-flex align-items-center mb-1">
