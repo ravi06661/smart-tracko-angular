@@ -50,7 +50,7 @@ export class DiscussionForumComponent implements OnInit {
     this.discussionFormSerice.getAllDiscussionForm(this.loginService.getStudentId()).subscribe(
       {
         next: (data: any) => {
-          this.discussionFormList = data
+          this.discussionFormList = data.response
         },
         error: (er) => {
           alert('something went wrong...')
@@ -88,6 +88,8 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   public createComment(id: number) {
+    if(this.comment==='' || this.comment ===' ')
+       return
     this.discussionFormSerice.creatCommnet(this.loginService.getStudentId(), id, this.comment).subscribe(
       {
         next: (data: any) => {
@@ -100,7 +102,7 @@ export class DiscussionForumComponent implements OnInit {
 
         },
         error: (er) => {
-          alert('something went wrong...')
+          alert('Already commented...')
         }
       }
     )
@@ -151,7 +153,6 @@ export class DiscussionForumComponent implements OnInit {
 
   connect() {
     this.webSocketService.getMessages().subscribe((message) => {
-
       switch (message.type) {
         case 'commentResponse':
           let form = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
@@ -194,8 +195,8 @@ export class DiscussionForumComponent implements OnInit {
     this.sendMessage(obj);
   }
 
-  private timeOut: number = 5000; // 10 seconds
-
+  private timeOut: number = 5000; // 5 seconds
+  
   public pushTypingMessage(
     message: any): void {
     if (message.status === 'typed') {
@@ -209,7 +210,6 @@ export class DiscussionForumComponent implements OnInit {
       if (!obj) {
         if (this.student.studentId !== message.id)
           this.typing.push(message);
-
         setTimeout(() => {
           this.removeTypingUser(message);
         }, this.timeOut);

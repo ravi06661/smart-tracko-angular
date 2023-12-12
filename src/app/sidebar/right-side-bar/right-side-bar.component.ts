@@ -69,6 +69,7 @@ export class RightSideBarComponent implements OnInit {
       }
     })
   }
+  
   public connect() {
     this.websocketService.getMessages().subscribe((message) => {
       if (message.type == 'announcement') {
@@ -78,7 +79,7 @@ export class RightSideBarComponent implements OnInit {
             this.Coursestatus = false;
             this.announcements.unshift(newObject);
           }
-        });
+        });                                                     
       }
     });
   }

@@ -12,7 +12,7 @@ export class WebsocketServiceDiscussionFormService {
   private messagesSubject: Subject<any> = new Subject<any>();
   private messagesObservable: Observable<any>;
   SOCKET_URL = this.utilityService.getBaseUrl() + "/socket"
-
+ 
   constructor(private utilityService: UtilityServiceService) {
     this.connect();
     this.messagesObservable = this.messagesSubject.asObservable().pipe(share());
