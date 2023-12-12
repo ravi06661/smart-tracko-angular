@@ -50,7 +50,7 @@ export class DiscussionForumComponent implements OnInit {
     this.discussionFormSerice.getAllDiscussionForm(this.loginService.getStudentId()).subscribe(
       {
         next: (data: any) => {
-          this.discussionFormList = data
+          this.discussionFormList = data.response
         },
         error: (er) => {
           alert('something went wrong...')
