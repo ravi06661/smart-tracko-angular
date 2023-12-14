@@ -194,7 +194,7 @@ export class DiscussionForumComponent implements OnInit {
     this.sendMessage(obj);
   }
 
-  private timeOut: number = 5000; // 10 seconds
+  private timeOut: number = 5000; // 5 sseconds
 
   public pushTypingMessage(
     message: any): void {
