@@ -50,7 +50,7 @@ export class DiscussionForumComponent implements OnInit {
     this.discussionFormSerice.getAllDiscussionForm(this.loginService.getStudentId()).subscribe(
       {
         next: (data: any) => {
-          this.discussionFormList = data
+          this.discussionFormList = data.response
         },
         error: (er) => {
           alert('something went wrong...')
@@ -194,7 +194,7 @@ export class DiscussionForumComponent implements OnInit {
     this.sendMessage(obj);
   }
 
-  private timeOut: number = 5000; // 10 seconds
+  private timeOut: number = 5000; // 5 sseconds
 
   public pushTypingMessage(
     message: any): void {
