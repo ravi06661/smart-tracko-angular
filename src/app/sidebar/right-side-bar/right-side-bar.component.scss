@@ -25,4 +25,12 @@
     z-index: 999;
 }
   
-  
+.scroller-bar{
+    overflow:scroll; 
+    overflow-x:hidden; 
+    height: 100%;
+}
+.scroller-bar::-webkit-scrollbar {
+    display: none;
+  }
+  @import '~@fortawesome/fontawesome-free/css/all.css';

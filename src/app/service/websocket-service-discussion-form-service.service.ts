@@ -28,7 +28,6 @@ export class WebsocketServiceDiscussionFormService {
         this.messagesSubject.next(parsedMessage);
       });
     });
-
     // Reconnect logic
     socket.onclose = (event: CloseEvent) => {
       this.connect();

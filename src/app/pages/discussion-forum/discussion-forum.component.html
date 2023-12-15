@@ -11,10 +11,10 @@
           <h2 class="font-17 font-600 text_small mb-0">Discussion Forum</h2>
 
         </div>
-        <div class="scroll_section">
+        <div class="scroll_section " >
           <div class="timeline_massages" id="updown_btn">
             <div class="timeline_post d-flex justify-content-between align-items-center">
-              <img class="profilePic2" [src]="IMAGE_URL+student.profilePic">
+              <img class="profilePic" [src]="IMAGE_URL+student.profilePic">
 
               <form class="form-inline text_input my-2 my-lg-0">
                 <input
@@ -34,7 +34,7 @@
               </button>
               <button class="select_options">
                 <form class="d-flex align-items-center  mb-1 position-relative">
-                  <input type="file" name="imageupload" value="fileupload" class="d-none" accept="image/*"
+                  <input type="file"  name="imageupload" value="fileupload" class="d-none"  accept="audio/mp3, video/mp4, image/*"
                     id="imageupload" (change)="fileEvent($event)">
                   <label for="imageupload"
                     class="image_upload font-13 font-700 d-flex justify-content-center align-items-center"><i
@@ -43,7 +43,7 @@
               </button>
               <button class="select_options">
                 <form class="d-flex align-items-center  mb-1 position-relative">
-                  <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload"
+                  <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload" accept="audio/mp3, video/mp4, image/*"
                     (change)="fileEvent($event)">
                   <label for="fileupload"
                     class="file_upload font-13 font-700 d-flex justify-content-center align-items-center"><i
@@ -79,8 +79,10 @@
               </div>
               <h4 class="post_subtitle text_small font-17 font-400 lh-21">{{obj.content}} </h4>
               <div class="d-flex justify-content-center align-items-center mb-1">
-                <img *ngIf="obj.file!==null && obj.file!=='' && obj.file !== undefined " [src]="FILE_URL+obj.file"
-                  class="post_img">
+                <video *ngIf="obj.audioFile !== null && obj.audioFile !== '' && obj.audioFile !== undefined" [src]="FILE_URL + obj.audioFile" class="post_img" controls></video>
+
+
+                <img *ngIf="obj.file!==null && obj.file!=='' && obj.file !== undefined " [src]="FILE_URL+obj.file"  (click)="toggleImageSize($event)" class="post_img">
               </div>
               <ul class=" social_icon d-flex align-items-center justify-content-around position-relative mb-0">
                 <div class="d-flex align-items-center p-1 like">

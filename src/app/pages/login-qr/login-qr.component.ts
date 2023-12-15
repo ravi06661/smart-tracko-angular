@@ -45,7 +45,6 @@ export class LoginQRComponent implements OnInit {
       }
     });
     this.connect();
-    // }
   }
 
 
@@ -53,11 +52,8 @@ export class LoginQRComponent implements OnInit {
     var socket = new SockJS(this.SOCKET_URL);
     this.stompClient = Stomp.over(socket);
     let that = this;
-    console.log('connecting1');
     this.stompClient.connect({}, function (frame: any) {
       that.connection = true;
-     console.log('connecting2');
-  
       that.stompClient.subscribe('/queue/messages-' + that.qrKey,
         function (token: any) {
           console.log(token.body);

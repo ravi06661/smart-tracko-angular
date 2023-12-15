@@ -12,11 +12,12 @@ export class DiscussionFormServiceService {
 
   constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
 
-  public createDiscussionForm(studentId: number, content: string, file: string) {
+  public createDiscussionForm(studentId: number, content: string, file: string,audioFile:string) {
     let data = new FormData
     data.append('content', content)
     data.append('studentId', studentId.toString())
     data.append('file', file)
+    data.append('audioFile',audioFile)
     return this.http.post(`${this.URL}/createDiscussionForm`, data)
   }
 

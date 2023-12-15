@@ -13,8 +13,9 @@ export class DiscussionResponseForm {
     public courseName: string = ''
     public likes: LikeResponse[] = [];
     public comments: CommentResponse[] = [];
+    public audioFile!:string
 
-    public constructor(studentProfilePic: string, studentName: string, content: string, createdDate: any, id: number, type: string, file: string, studentId: number) {
+    public constructor(studentProfilePic: string, studentName: string, content: string, createdDate: any, id: number, type: string, file: string, studentId: number,audioFile:string) {
         this.type = type
         this.id = id
         this.createdDate = createdDate
@@ -25,6 +26,7 @@ export class DiscussionResponseForm {
         this.comments = []
         this.file = file
         this.studentId = studentId
+        this.audioFile = audioFile
 
     }
 }

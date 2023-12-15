@@ -212,10 +212,11 @@ export class StudentProfileComponent implements OnInit {
 
   progressWidth: string = '';
   calculatePercentages(num1: number, num2: number) {
-    if (num2 !== 0)
-      return Math.floor((num1 / num2) * 100);
-    else
+
+    if (num2 == 0)
       return 0;
+    else
+      return Math.floor((num1 / num2) * 100);
   }
 
 }

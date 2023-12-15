@@ -60,6 +60,8 @@ export class ProfileBarComponent implements OnInit {
             this.totalNotifications += 1
           }
         });
+      }else if(message.type=='reloadAnnouncement'){
+        this.getAllUnseenNotificationCount()
       }
     });
   }
