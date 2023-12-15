@@ -88,8 +88,8 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   public createComment(id: number) {
-    if(this.comment==='' || this.comment ===' ')
-       return
+    if (this.comment === '' || this.comment === ' ')
+      return
     this.discussionFormSerice.creatCommnet(this.loginService.getStudentId(), id, this.comment).subscribe(
       {
         next: (data: any) => {
@@ -113,11 +113,11 @@ export class DiscussionForumComponent implements OnInit {
     if (this.isTrue) {
       this.message = ''
       this.isTrue = false
-      this.discussionFormSerice.createDiscussionForm(this.student.studentId, this.discussionForm.content, this.discussionForm.file).subscribe(
+      this.discussionFormSerice.createDiscussionForm(this.student.studentId, this.discussionForm.content, this.discussionForm.file, this.discussionForm.audioFile).subscribe(
         {
           next: (data: any) => {
             //  this.discussionFormList.push(data);
-            let obj = new DiscussionResponseForm(data.studentProfilePic, data.studentName, data.content, (data.createdDate).toString(), data.id, 'createDiscussionForm', data.file, this.student.studentId);
+            let obj = new DiscussionResponseForm(data.studentProfilePic, data.studentName, data.content, (data.createdDate).toString(), data.id, 'createDiscussionForm', data.file, this.student.studentId, data.audioFile);
             this.discussionForm = new DiscussionFormResponse()
             this.sendMessage(obj);
           },
@@ -143,7 +143,15 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   public fileEvent(event: any) {
-    this.discussionForm.file = event.target.files[0];
+
+    let file: File = event.target.files[0];
+    if (file.type.startsWith('audio') || file.type.startsWith('video')) {
+      this.discussionForm.audioFile = event.target.files[0];
+      event.target.value = '';
+    } else if (file.type.startsWith('image')) {
+      this.discussionForm.file = event.target.files[0];
+      event.target.value = '';
+    }
   }
 
   toggleComment(index: number): void {
@@ -196,7 +204,7 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   private timeOut: number = 5000; // 5 seconds
-  
+
   public pushTypingMessage(
     message: any): void {
     if (message.status === 'typed') {
@@ -237,5 +245,17 @@ export class DiscussionForumComponent implements OnInit {
   // private updateLimitedTyping(): void {
   //   this.limitedTyping = this.typing.slice(0, 7);
   // }
+  isImageExpanded = false;
+
+  toggleImageSize(event: Event) {
+    const image = event.target as HTMLImageElement;
+    this.isImageExpanded = !this.isImageExpanded;
+
+    if (this.isImageExpanded) {
+      image.classList.add('expanded');
+    } else {
+      image.classList.remove('expanded');
+    }
+  }
 }
 

@@ -13,4 +13,5 @@ export class DiscussionFormResponse {
     public likes: LikeResponse[] = [];
     public comments: CommentResponse[] = [];
     public  isLike!:Boolean
+    public audioFile!:string
 }

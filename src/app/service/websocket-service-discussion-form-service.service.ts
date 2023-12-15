@@ -12,7 +12,7 @@ export class WebsocketServiceDiscussionFormService {
   private messagesSubject: Subject<any> = new Subject<any>();
   private messagesObservable: Observable<any>;
   SOCKET_URL = this.utilityService.getBaseUrl() + "/socket"
- 
+
   constructor(private utilityService: UtilityServiceService) {
     this.connect();
     this.messagesObservable = this.messagesSubject.asObservable().pipe(share());
@@ -27,6 +27,12 @@ export class WebsocketServiceDiscussionFormService {
         this.messagesSubject.next(parsedMessage);
       });
     });
+
+    //  RECONNECTING 
+    socket.onclose = (event:CloseEvent) => {
+      this.connect();
+    };
+
   }
 
   public getMessages(): Observable<any> {
@@ -35,5 +41,5 @@ export class WebsocketServiceDiscussionFormService {
   public sendMessage(message: any): void {
     this.stompClient.send('/api/socket', {}, JSON.stringify(message));
   }
-  
+
 }

@@ -1,12 +1,5 @@
 import { Announcement } from './../../entity/announcement';
-import { DatePipe, Time } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { log } from 'console';
-import { parseDate } from 'igniteui-angular/lib/core/utils';
-import * as moment from 'moment';
-import { Observable, interval, map, min, switchMap } from 'rxjs';
-import * as SockJS from 'sockjs-client';
-import { Attendance } from 'src/app/entity/attendance';
 import { Profile } from 'src/app/entity/profile';
 import { AdminServiceService } from 'src/app/service/admin-service.service';
 import { AnnouncementServiceService } from 'src/app/service/announcement-service.service';
@@ -14,7 +7,7 @@ import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket-service-discussion-form-service.service';
-import *  as Stomp from "stompjs"
+
 @Component({
   selector: 'app-right-side-bar',
   templateUrl: './right-side-bar.component.html',
@@ -30,7 +23,9 @@ export class RightSideBarComponent implements OnInit {
   Coursestatus: Boolean = false
   announcements: Announcement[] = [];
   unseenNotification = 0;
-
+  announcementsVisibility: boolean[] = [false]
+  isDataReloading: Boolean = false
+  messages: boolean = false
   constructor(private studentService: StudentService,
     public utilityService: UtilityServiceService,
     private loginService: LoginService,
@@ -48,10 +43,20 @@ export class RightSideBarComponent implements OnInit {
   }
 
   public getAnnouncementsForStudents() {
+
+    this.isDataReloading = true
     this.annoucementService.getAnnouncementForStudent(this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
-        this.announcements = data;
-        this.unseenNotification = this.announcements.length
+    setTimeout(() => {
+      this.announcements = data;
+      this.unseenNotification = this.announcements.length
+      this.isDataReloading = false
+      if (this.announcements.length == 0) {
+        this.messages = true
+      } else {
+        this.messages = false
+      }
+    }, 300);
       },
       error: (err: any) => {
 
@@ -61,15 +66,29 @@ export class RightSideBarComponent implements OnInit {
 
   public seenMessage(msgNo: number, announcementId: number) {
     this.messageNo = msgNo;
+    let index = 0;
+    if (this.announcementsVisibility[msgNo]) {
+      this.announcementsVisibility[msgNo] = false
+    } else {
+      this.announcementsVisibility[msgNo] = true
+      this.announcementsVisibility.forEach(obj => {
+        if (index !== msgNo) {
+          this.announcementsVisibility[index] = false
+        }
+        index++;
+      })
+    }
+
     this.readMessage = !this.readMessage;
     this.annoucementService.seenMassageByStudent(announcementId, this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
+        this.websocketService.sendMessage({ type: 'reloadAnnouncement' })
       },
       error: (err: any) => {
       }
     })
   }
-  
+
   public connect() {
     this.websocketService.getMessages().subscribe((message) => {
       if (message.type == 'announcement') {
@@ -79,7 +98,7 @@ export class RightSideBarComponent implements OnInit {
             this.Coursestatus = false;
             this.announcements.unshift(newObject);
           }
-        });                                                     
+        });
       }
     });
   }
@@ -91,5 +110,7 @@ export class RightSideBarComponent implements OnInit {
     this.Coursestatus = course.includes(courseId);
   }
 
-
+  clearMessage() {
+    this.announcements = []
+  }
 }
