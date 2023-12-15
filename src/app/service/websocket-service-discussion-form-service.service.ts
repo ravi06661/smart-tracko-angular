@@ -17,6 +17,7 @@ export class WebsocketServiceDiscussionFormService {
     this.connect();
     this.messagesObservable = this.messagesSubject.asObservable().pipe(share());
   }
+
   public connect(): void {
     const socket = new SockJS(this.SOCKET_URL);
     this.stompClient = Stomp.over(socket);
@@ -27,13 +28,12 @@ export class WebsocketServiceDiscussionFormService {
         this.messagesSubject.next(parsedMessage);
       });
     });
-
-    //  RECONNECTING 
-    socket.onclose = (event:CloseEvent) => {
+    // Reconnect logic
+    socket.onclose = (event: CloseEvent) => {
       this.connect();
     };
-
   }
+
 
   public getMessages(): Observable<any> {
     return this.messagesObservable;

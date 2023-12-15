@@ -205,6 +205,7 @@ export class DiscussionForumComponent implements OnInit {
 
   private timeOut: number = 5000; // 5 seconds
 
+
   public pushTypingMessage(
     message: any): void {
     if (message.status === 'typed') {
