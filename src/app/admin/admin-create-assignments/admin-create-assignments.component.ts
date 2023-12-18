@@ -96,6 +96,7 @@ export class AdminCreateAssignmentsComponent implements OnInit {
       this.imageName.push('');
     }
   }
+    url:string='';
 
   public addAssignmentQuestion() {
     this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(

@@ -5,5 +5,6 @@ export class TaskQuestionRequest {
     public question: string = ''
     public videoUrl: string = ''
     public questionImages:File[]=[]
+    public url:string=''
 }
 //public questionImages = new Map<string,File>
