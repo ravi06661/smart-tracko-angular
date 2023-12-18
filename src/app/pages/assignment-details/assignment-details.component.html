@@ -19,8 +19,16 @@
           <div class="row advertisement">
             <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="assignmentQues.videoUrl!=null">
               <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
+              {{assignmentQues.videoUrl}}
               <div class="assinment_image video-img">
-                <video src="{{assignmentQues.videoUrl}}" autoplay controls height="" width="270"></video>
+                <!-- <video width="640" height="360" controls>
+                  <source [src]="assignmentQues.videoUrl" type="video/mp4">
+
+                  
+              </video> -->
+              <iframe [src]="assignmentQues.videoUrl | safe" frameborder="0" allowfullscreen></iframe>
+
+                <!-- <iframe src="{{assignmentQues.videoUrl}}" autoplay controls height="" width="270"></iframe> -->
               </div>
             </div>
             <div class="col-md-3 col-sm-6 col-xs-12" *ngIf=" assignmentQues.questionImages.length!=0">

@@ -92,6 +92,7 @@ import { DiscussionForumComponent } from './pages/discussion-forum/discussion-fo
 import { AdminDiscussionForumComponent } from './admin/admin-discussion-forum/admin-discussion-forum.component';
 import { AdminChapterResultComponent } from './admin/admin-chapter-result/admin-chapter-result.component';
 import { EmogiComponent } from './pages/emogi/emogi.component';
+import { SafePipe } from './utils/pipe/safe.pipe';
 
 
 
@@ -167,6 +168,7 @@ import { EmogiComponent } from './pages/emogi/emogi.component';
     AdminDiscussionForumComponent,
     AdminChapterResultComponent,
     EmogiComponent,
+    SafePipe,
   
    
        
