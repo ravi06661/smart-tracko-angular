@@ -47,16 +47,16 @@ export class RightSideBarComponent implements OnInit {
     this.isDataReloading = true
     this.annoucementService.getAnnouncementForStudent(this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
-    setTimeout(() => {
-      this.announcements = data;
-      this.unseenNotification = this.announcements.length
-      this.isDataReloading = false
-      if (this.announcements.length == 0) {
-        this.messages = true
-      } else {
-        this.messages = false
-      }
-    }, 300);
+        setTimeout(() => {
+          this.announcements = data;
+          this.unseenNotification = this.announcements.length
+          this.isDataReloading = false
+          if (this.announcements.length == 0) {
+            this.messages = true
+          } else {
+            this.messages = false
+          }
+        }, 300);
       },
       error: (err: any) => {
 
@@ -95,6 +95,7 @@ export class RightSideBarComponent implements OnInit {
         let newObject = new Announcement(message.title, message.message, message.date);
         this.getStudentCourse(message.allCourse).then(() => {
           if (this.Coursestatus) {
+            this.messages = false
             this.Coursestatus = false;
             this.announcements.unshift(newObject);
           }

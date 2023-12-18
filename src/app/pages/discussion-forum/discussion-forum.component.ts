@@ -33,6 +33,10 @@ export class DiscussionForumComponent implements OnInit {
   commnetVisibility: boolean[] = []
   message!: string;
   typing: Typing[] = []
+  isMessageSend: Boolean = false;
+  isMessagLoading: boolean = false
+
+
   constructor(private discussionFormSerice: DiscussionFormServiceService,
     private loginService: LoginService,
     private utilityService: UtilityServiceService,
@@ -47,10 +51,12 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   public getAllForms() {
+    this.isMessagLoading = true;
     this.discussionFormSerice.getAllDiscussionForm(this.loginService.getStudentId()).subscribe(
       {
         next: (data: any) => {
           this.discussionFormList = data.response
+          this.isMessagLoading = false
         },
         error: (er) => {
           alert('something went wrong...')
@@ -108,18 +114,21 @@ export class DiscussionForumComponent implements OnInit {
     )
 
   }
+
   isTrue: boolean = false
   public createDiscussionForm() {
     if (this.isTrue) {
       this.message = ''
       this.isTrue = false
+      this.isMessageSend = true
       this.discussionFormSerice.createDiscussionForm(this.student.studentId, this.discussionForm.content, this.discussionForm.file, this.discussionForm.audioFile).subscribe(
         {
           next: (data: any) => {
-            //  this.discussionFormList.push(data);
+            // this.discussionFormList.push(data);
             let obj = new DiscussionResponseForm(data.studentProfilePic, data.studentName, data.content, (data.createdDate).toString(), data.id, 'createDiscussionForm', data.file, this.student.studentId, data.audioFile);
             this.discussionForm = new DiscussionFormResponse()
             this.sendMessage(obj);
+            this.isMessageSend = false
           },
           error: (er) => {
             alert('something went wrong...')
@@ -176,6 +185,7 @@ export class DiscussionForumComponent implements OnInit {
           }
           break;
         case 'createDiscussionForm':
+          this.isMessageSend = false
           if (!this.discussionFormList.find(e => e.id === message.id)) {
             this.discussionFormList.unshift(message);
           }
