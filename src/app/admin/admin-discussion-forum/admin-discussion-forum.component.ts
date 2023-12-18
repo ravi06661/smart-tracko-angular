@@ -30,7 +30,7 @@ export class AdminDiscussionForumComponent implements OnInit {
   public getAllDiscussion() {
     this.discussionFormSerice.getAllDiscussionForm(0).subscribe((
       (data: any) => {
-        this.discussionFormResponse = data
+        this.discussionFormResponse = data.response
       }
     ))
   }

@@ -11,7 +11,7 @@
           <h2 class="font-17 font-600 text_small mb-0">Discussion Forum</h2>
 
         </div>
-        <div class="scroll_section " >
+        <div class="scroll_section ">
           <div class="timeline_massages" id="updown_btn">
             <div class="timeline_post d-flex justify-content-between align-items-center">
               <img class="profilePic" [src]="IMAGE_URL+student.profilePic">
@@ -24,9 +24,15 @@
                 <!-- <h6 style="color: red;">{{  message}}</h6> -->
               </form>
               <span class="reply_svg d-flex align-items-center justify-content-center  button"
-                (click)="createDiscussionForm()">
-                <img src="assets/images/svg_img/reply.svg">
+                (click)="createDiscussionForm()" *ngIf="isMessageSend==false">
+               <a > <img src="assets/images/svg_img/reply.svg"></a>
               </span>
+              <span class="reply_svg d-flex align-items-center justify-content-center  button" *ngIf="isMessageSend">
+                <h6 style="color: white;"> <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+                  <span class="sr-only">Loading...</span>
+                </h6>
+              </span>
+
             </div>
             <div class="post_btn d-flex align-items-center">
               <button class="Camera font-13 font-700 d-flex justify-content-center align-items-center">
@@ -34,8 +40,8 @@
               </button>
               <button class="select_options">
                 <form class="d-flex align-items-center  mb-1 position-relative">
-                  <input type="file"  name="imageupload" value="fileupload" class="d-none"  accept="audio/mp3, video/mp4, image/*"
-                    id="imageupload" (change)="fileEvent($event)">
+                  <input type="file" name="imageupload" value="fileupload" class="d-none"
+                    accept="audio/mp3, video/mp4, image/*" id="imageupload" (change)="fileEvent($event)">
                   <label for="imageupload"
                     class="image_upload font-13 font-700 d-flex justify-content-center align-items-center"><i
                       class="fi fi-rr-file lh-0"></i>Gallery</label>
@@ -43,8 +49,8 @@
               </button>
               <button class="select_options">
                 <form class="d-flex align-items-center  mb-1 position-relative">
-                  <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload" accept="audio/mp3, video/mp4, image/*"
-                    (change)="fileEvent($event)">
+                  <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload"
+                    accept="audio/mp3, video/mp4, image/*" (change)="fileEvent($event)">
                   <label for="fileupload"
                     class="file_upload font-13 font-700 d-flex justify-content-center align-items-center"><i
                       class="fi fi-rr-file lh-0"></i>File</label>
@@ -79,10 +85,12 @@
               </div>
               <h4 class="post_subtitle text_small font-17 font-400 lh-21">{{obj.content}} </h4>
               <div class="d-flex justify-content-center align-items-center mb-1">
-                <video *ngIf="obj.audioFile !== null && obj.audioFile !== '' && obj.audioFile !== undefined" [src]="FILE_URL + obj.audioFile" class="post_img" controls></video>
+                <video *ngIf="obj.audioFile !== null && obj.audioFile !== '' && obj.audioFile !== undefined"
+                  [src]="FILE_URL + obj.audioFile" class="post_img" controls></video>
 
 
-                <img *ngIf="obj.file!==null && obj.file!=='' && obj.file !== undefined " [src]="FILE_URL+obj.file"  (click)="toggleImageSize($event)" class="post_img">
+                <img *ngIf="obj.file!==null && obj.file!=='' && obj.file !== undefined " [src]="FILE_URL+obj.file"
+                  (click)="toggleImageSize($event)" class="post_img">
               </div>
               <ul class=" social_icon d-flex align-items-center justify-content-around position-relative mb-0">
                 <div class="d-flex align-items-center p-1 like">
@@ -113,11 +121,14 @@
                     (click)="createComment(obj.id)"></i>
                   <br>
                 </div>
-                <div style="display: flex; flex-direction: row; margin-left: 40px; margin-top: 0px; padding-top: 0px;" >
-                  <h6 *ngFor="let obj of typing;let i = index " style="font-size: smaller; color: green;">{{obj.name.split(' ')[0]}} <span *ngIf="typing.length>1  && typing.length-1!==i">,</span> </h6>
-                  <h6 *ngIf="typing.length>0"  > <pre style="font-size: smaller; color: green;"> is typing</pre></h6>
+                <div style="display: flex; flex-direction: row; margin-left: 40px; margin-top: 0px; padding-top: 0px;">
+                  <h6 *ngFor="let obj of typing;let i = index " style="font-size: smaller; color: green;">
+                    {{obj.name.split(' ')[0]}} <span *ngIf="typing.length>1  && typing.length-1!==i">,</span> </h6>
+                  <h6 *ngIf="typing.length>0">
+                    <pre style="font-size: smaller; color: green;"> is typing</pre>
+                  </h6>
                   <!-- <h6 *ngIf="typing.length>0"  > <pre style="font-size: smaller; color: green; "*ngIf="typing.length>7"> {{typing.length-(i+1)}} more+</pre></h6> -->
-                  <div class="typing " style="margin-top:8px ;margin-left: 5px;" *ngIf="typing.length>0 " >
+                  <div class="typing " style="margin-top:8px ;margin-left: 5px;" *ngIf="typing.length>0 ">
                     <span></span>
                     <span></span>
                     <span></span>
