@@ -77,7 +77,7 @@ feesPay(){
   
   this.feesPayService.feesPay(this.feesPays).subscribe( 
     (data:any)=>{
-      this.feesPays.fees.feesId=data.feesId
+      this.feesPays.feesPay.feesId=data.feesId
       const Toast = Swal.mixin({
         
         toast: true,
@@ -117,7 +117,7 @@ public getFeesById(feesId:number){
      this.fees = data
      console.log(this.fees);
      
-     this.feesPays.fees =this.fees
+     this.feesPays.feesPay =this.fees
     }
   })
 }

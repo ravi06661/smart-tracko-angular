@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { Subject } from 'src/app/entity/subject';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Coursereponse } from 'src/app/payload/coursereponse';
 
 @Component({
   selector: 'app-admin-courses',
@@ -24,18 +25,23 @@ export class AdminCoursesComponent implements OnInit {
   selectedSubjectIds: number[] = [];
   techImages: TechnologyStack[] = [];
 
+  courseResponse: Coursereponse[] = []
+  courseResponse1 = new Coursereponse()
+  // courseRequest:CourseRequest =  new CourseRequest()
 
   message = '';
   messageClass = '';
 
-  courses: Course[] = [];
+  //courses: Course[] = [];
   totalBatches = 0;
   totalSubjects = 0;
   totalCourses = 0;
   course: Course = new Course();
   courseId: number = 0
-  imageName:string | undefined
-  selectedSubjects: Subject[] = [];
+  imageName: string | undefined
+  //selectedSubjects: Subject[] = [];
+
+  courseresponseobj: Coursereponse = new Coursereponse()
 
   addCourseForm: FormGroup;
 
@@ -93,31 +99,31 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   public saveCourse() {
-     this.addCourseForm.markAllAsTouched();
-     if (this.addCourseForm.invalid && this.imageName == '')
+    this.addCourseForm.markAllAsTouched();
+    if (this.addCourseForm.invalid && this.imageName == '')
       return;
 
-      this.courseService.saveCourse(this.courseRequest).subscribe({
-        next: (data: any) => {
-          this.message = data.message
-            this.getAllCourses();
-            this.courseRequest = new CourseRequest();
-            this.message = data.message
-            this.messageClass = 'text-success'
-            this.clearValidationForm();
-        },
-        error:(err:any) => {
-          this.message = err.error.message
-          this.messageClass = 'text-danger'
-        }
-      })
+    this.courseService.saveCourse(this.courseRequest).subscribe({
+      next: (data: any) => {
+        this.message = data.message
+        this.getAllCourses();
+        this.courseRequest = new CourseRequest();
+        this.message = data.message
+        this.messageClass = 'text-success'
+        this.clearValidationForm();
+      },
+      error: (err: any) => {
+        this.message = err.error.message
+        this.messageClass = 'text-danger'
+      }
+    })
   }
 
   public getAllCourses() {
     this.courseService.getAllCourses(0, 10).subscribe({
       next: (data: any) => {
-        this.courses = data.response;
-        this.totalCourses = this.courses.length
+        this.courseResponse = data.response;
+        this.totalCourses = this.courseResponse.length
       }
     });
   }
@@ -141,23 +147,21 @@ export class AdminCoursesComponent implements OnInit {
   public getCourseById(id: number) {
     this.courseService.getCourseByCourseId(id).subscribe({
       next: (data: any) => {
-        this.course = data
-        this.selectedSubjects = this.course.subjects
-        this.totalBatches = this.course.batches.length
-        this.totalSubjects = this.course.subjects.length
+        this.courseResponse1 = data
       }
     })
+
   }
 
   public updateCourse() {
-    this.courseService.updatCourse(this.course).subscribe({
+    this.courseService.updatCourse(this.courseResponse1).subscribe({
       next: (data: any) => {
-        this.course = new Course()
+        this.courseResponse1 = new Coursereponse()
         this.getAllCourses();
         this.message = data.message;
         this.messageClass = 'text-success';
       },
-      error:(err:any)=>{
+      error: (err: any) => {
         this.message = err.error.message;
         this.messageClass = 'text-danger';
       }
@@ -173,10 +177,11 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   public checkSubjectInCourse(id: number) {
-    if (this.course.subjects.find(e => e.subjectId == id))
+    if (this.courseResponse1.subjectResponse.find(e => e.subjectId == id))
       return true
     return false;
   }
+
 
   public addAndRemoveSubjectsFromCourse(subject: any) {
     let index = this.course.subjects.findIndex(e => e.subjectId == subject.subjectId);
@@ -185,7 +190,8 @@ export class AdminCoursesComponent implements OnInit {
     else
       this.course.subjects.splice(index, 1);
   }
-  public clearValidationForm(){
+
+  public clearValidationForm() {
     this.imageName = '';
     this.addCourseForm = this.formBuilder.group({
       courseName: ['', Validators.required],
@@ -196,24 +202,24 @@ export class AdminCoursesComponent implements OnInit {
       isStarterCourse: ['', Validators.required],
     })
   }
- 
+
 
   openModal() {
     const modal = document.getElementById('course-add-modal');
     if (modal) {
-        modal.classList.add('show');
-        modal.style.display = 'block';
+      modal.classList.add('show');
+      modal.style.display = 'block';
     }
-}
+  }
 
-// Function to close the modal
- closeModal() {
+  // Function to close the modal
+  closeModal() {
     const modal = document.getElementById('course-add-modal');
     if (modal) {
-        modal.classList.remove('show');
-        modal.style.display = 'none';
+      modal.classList.remove('show');
+      modal.style.display = 'none';
     }
-}
+  }
 
 
 }

@@ -6,6 +6,9 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
+import { Question } from 'src/app/entity/question';
+import { QuestionResponse } from 'src/app/payload/question-response';
+import { timeStamp } from 'console';
 @Component({
   selector: 'app-admin-subjects-chapter-quiz',
   templateUrl: './admin-subjects-chapter-quiz.component.html',
@@ -23,8 +26,8 @@ export class AdminSubjectsChapterQuizComponent {
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   submissionForm: FormGroup
- subjectId:number=0;
-  constructor(private activateRouter:ActivatedRoute,private questionService: QuestionServiceService, private route: ActivatedRoute, private router: Router, private utilityService: UtilityServiceService, private formBuilder: FormBuilder, private chapterService: ChapterServiceService) {
+  subjectId: number = 0;
+  constructor(private activateRouter: ActivatedRoute, private questionService: QuestionServiceService, private route: ActivatedRoute, private router: Router, private utilityService: UtilityServiceService, private formBuilder: FormBuilder, private chapterService: ChapterServiceService) {
     this.submissionForm = this.formBuilder.group({
       correctOption: ['', Validators.required],
       option4: ['', Validators.required],
@@ -49,9 +52,9 @@ export class AdminSubjectsChapterQuizComponent {
       this.questionService.addQuestion(this.question, this.id).subscribe(
         {
           next: (data) => {
+            this.questions.push(data)
             this.question = new ChapterQuizeQuestion();
             this.message = 'success..';
-            this.getAllQuestions()
           },
           error: (er) => {
 
@@ -65,10 +68,10 @@ export class AdminSubjectsChapterQuizComponent {
   }
 
   public getAllQuestions() {
-    this.chapterService.getChapterById(this.id).subscribe(
+    this.chapterService.getChapterExamQuestions(this.id).subscribe(
       {
         next: (data: any) => {
-          this.questions = data.chapter.exam.questions;
+          this.questions = data.questions;
         },
         error: (er) => {
 
@@ -93,10 +96,12 @@ export class AdminSubjectsChapterQuizComponent {
   public updateQuestion() {
     this.questionService.updateQuestionById(this.question).subscribe(
       {
-        next: (data) => {
+        next: (data: any) => {
           this.message = 'success..';
           this.question = new ChapterQuizeQuestion();
-          this.getAllQuestions();
+         let qr =  this.questions.findIndex(obj => obj.questionId === data.questionId)
+              this.questions[qr] = data
+          //  this.getAllQuestions();
         },
         error: (error) => {
           this.message = 'error..';
@@ -156,5 +161,9 @@ export class AdminSubjectsChapterQuizComponent {
     this.router.navigate([path], {
       queryParams: dataParams
     });
+  }
+
+  public setQuestion(id: number) {
+    this.question = this.questions.find(obj => obj.questionId === id) as QuestionResponse
   }
 }

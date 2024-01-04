@@ -75,21 +75,23 @@ export class AdminAddFeesComponent implements OnInit {
       this.studentService.getByStudentById(selectedStudentId).subscribe(
         (data: any) => {
           console.log(data);
-          this.fees.student.studentId = data.studentId;
-          this.fees.student.email = data.email;
-          this.fees.student.mobile = data.mobile;
-          this.fees.student.fullName = data.fullName;
-          this.fees.course = data.course;
+          this.fees.studentId = data.studentId;
+          this.fees.email = data.email;
+          this.fees.mobile = data.mobile;
+          this.fees.fullName = data.fullName;
+           this.fees.courseName = data.course.courseName;
+          this.fees.courseId = data.course.courseId;
+          this.fees.courseFees = data.course.courseFees;
         }
       );
     } else {
       // Clear the form fields when "Select Name" is chosen
-      this.fees.student.studentId = 0;
-      this.fees.student.email = '';
-      this.fees.student.mobile = '';
-      this.fees.student.fullName = '';
-      this.fees.course.courseName='';
-      this.fees.course.courseFees='';
+      this.fees.studentId = 0;
+      this.fees.email = '';
+      this.fees.mobile = '';
+      this.fees.fullName = '';
+      this.fees.courseName='';
+      this.fees.courseFees='';
     
 
     }
@@ -101,13 +103,13 @@ export class AdminAddFeesComponent implements OnInit {
     if(selectedCourseId !==""){
     this.courseService.getCourseByCourseId(selectedCourseId).subscribe(
     (data:any)=>{
-      this.fees.course.courseId=data.courseId;
-      this.fees.course.courseFees=data.courseFees;
+      this.fees.courseId=data.courseId;
+      this.fees.courseFees=data.courseFees;
     }
     );
   }else{
-    this.fees.course.courseId=0;
-    this.fees.course.courseFees='';
+    this.fees.courseId=0;
+    this.fees.courseFees='';
   }
   }
 

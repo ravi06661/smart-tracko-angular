@@ -19,9 +19,13 @@ export class StudyComponent {
   subjects: SubjectResponse[] = [];
   subject: Subject = new Subject();
   incodedId: number = 0;
-  constructor(private subjectService: SubjectService, private loginService: LoginService, private utilityService: UtilityServiceService,private router :Router) { }
+  constructor(private subjectService: SubjectService, private loginService: LoginService, private utilityService: UtilityServiceService, private router: Router) { }
 
   ngOnInit() {
+    this.getAllSubject()
+  }
+
+  public getAllSubject() {
     this.subjectService.getAllSubjectsWithChapterCompletedStatus().subscribe({
       next: (data: any) => {
         this.subjects = data;

@@ -23,7 +23,7 @@
             class="fi fi-rr-arrow-left lh-0"></i>Back</a>
       </div>
       <div class="scroll_sec sub_detail-scroll">
-        <div class="sub_details d-flex flex-column" id="updown_btn" *ngFor="let obj of chapter">
+        <div class="sub_details d-flex flex-column" id="updown_btn" *ngFor="let obj of chapterContentResponse">
           <H1 class="font-24 font-600 dark-black">{{obj.title}}</H1>
           <H3 class="font-17 font-600 dark-black">{{obj.subTitle}}</H3>
           <h4 class="font-15 font-400 lh-26" [innerHTML]=obj.content></h4>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { log } from 'console';
 import { ChapterExamResult } from 'src/app/entity/chapter-exam-result';
+import { ChapterExamResultResponse } from 'src/app/payload/chapter-exam-result-response';
 import { ChatServiceService } from 'src/app/service/chat-service-service.service';
 import { ExamServiceService } from 'src/app/service/exam-service.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
@@ -13,7 +14,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class AdminChapterResultComponent implements OnInit{
      
-  chapterExamResult:ChapterExamResult[]=[];
+  chapterExamResult:any
   chapterId:number=0;
 
   BASE_URL = this.utilityService.getBaseUrl();
@@ -29,7 +30,7 @@ export class AdminChapterResultComponent implements OnInit{
     this.examService.getAllChapterExamResultByChaterId(this.chapterId).subscribe((data:any)=>{
       console.log(data);
       
-        this.chapterExamResult=data.examResult
+        this.chapterExamResult=data.result
 
     })
          

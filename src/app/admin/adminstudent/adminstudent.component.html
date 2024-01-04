@@ -62,7 +62,7 @@
                                 <td>{{student.mobile}}</td>
                                <td (click)="newStudent=student">  <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer" data-bs-toggle="modal"
                                     data-bs-target="#course-edit-modal" ><i
-                                        class="fi fi-rr-file-edit line-height-0" >Upgrade</i> </p></td>
+                                        class="fi fi-rr-file-edit line-height-0"  (click)="setCourse(student.courseResponse)">Upgrade</i> </p></td>
                             </tr>
                         </tbody>
                     </table>
@@ -135,7 +135,7 @@
                     <h2 class="font-15 font-500 secondary">Courses</h2>
                     
                     <div class="all-subjects-list mb_18">
-                        <div class="col-md-12 mb_18" *ngFor="let course of courses">
+                        <div class="col-md-12 mb_18" *ngFor="let course of courseResponse">
                             <div class="input_icon position-relative input_text checkbox_area">
                                 <div class="d-flex gap_5 align-items-center">
                                     <img [src]="imageUrlTec+course.technologyStack.imageName" alt="" width="24" height="24">

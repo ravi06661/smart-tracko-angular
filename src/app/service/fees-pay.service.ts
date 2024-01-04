@@ -20,7 +20,7 @@ export class FeesPayService {
     let params = new FormData()
  console.log(feesPay);
  
-    params.append("feesId", feesPay.fees.feesId.toString())
+    params.append("feesId", feesPay.feesPay.feesId.toString())
     params.append("feesPayAmount", feesPay.feesPayAmount.toString())
     params.append("payDate", feesPay.payDate.toString())
     params.append("recieptNo", feesPay.recieptNo.toString());

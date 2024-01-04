@@ -205,9 +205,9 @@
             </thead>
             <tbody class="bg-light" *ngFor="let fees of feeses">
               <tr>
-                <td class="d-flex align-items-center pointer" style="gap:5px; border-bottom: 0;" routerLink="/admin/studentprofile/{{fees.student.studentId}}"><img
-                  [src]="imageUrl+fees.student.profilePic" alt="" class="img-fluid imagestudent">{{fees.student.fullName}}</td>
-                <td>{{fees.course.courseName}}</td>
+                <td class="d-flex align-items-center pointer" style="gap:5px; border-bottom: 0;" routerLink="/admin/studentprofile/{{fees.studentId}}"><img
+                  [src]="imageUrl+fees.profilePic" alt="" class="img-fluid imagestudent">{{fees.fullName}}</td>
+                <td>{{fees.courseName}}</td>
                 <td>{{fees.date}}</td>
                 <td>{{fees.remainingFees}}</td>
                 <td>Pending</td>
@@ -231,9 +231,9 @@
             </thead>
             <tbody class="bg-light" *ngFor="let feesPay of feesPays">
               <tr>
-                <td class="d-flex align-items-center pointer" style="gap:5px; border-bottom: 0;" routerLink="/admin/studentprofile/{{feesPay.fees.student.studentId}}"><img
-                  [src]="imageUrl+feesPay.fees.student.profilePic" alt="" class="img-fluid imagestudent">{{feesPay.fees.student.fullName}}</td>
-                <td>{{feesPay.fees.course.courseName}}</td>
+                <td class="d-flex align-items-center pointer" style="gap:5px; border-bottom: 0;" routerLink="/admin/studentprofile/{{feesPay.feesPay.studentId}}"><img
+                  [src]="imageUrl+feesPay.feesPay.profilePic" alt="" class="img-fluid imagestudent">{{feesPay.feesPay.fullName}}</td>
+                <td>{{feesPay.feesPay.courseName}}</td>
                 <td>{{feesPay.payDate}}</td>
                 <td>{{feesPay.feesPayAmount}}</td>
                 <td>Pending</td>

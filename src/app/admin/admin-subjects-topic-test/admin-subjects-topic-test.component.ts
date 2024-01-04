@@ -6,6 +6,7 @@ import { QuestionServiceService } from 'src/app/service/question-service.service
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Chapter } from 'src/app/entity/chapter';
+import { ChapterContentResponse } from 'src/app/payload/chapter-content-response';
 @Component({
   selector: 'app-admin-subjects-topic-test',
   templateUrl: './admin-subjects-topic-test.component.html',
@@ -20,12 +21,14 @@ export class AdminSubjectsTopicTestComponent {
   chapterContent: ChapterContent = new ChapterContent();
   erroreMessage: string = ''
   deleteContentId = 0;
-  //chapterName: string = ''
-  chapter: Chapter = new Chapter
+  chapterName: string = ''
+  //chapter: Chapter = new Chapter
   public Editor = ClassicEditor;
   static images: File[] = []
   private editorInstance: any;
   submissionForm: FormGroup
+  chapteContentResponse: ChapterContentResponse[] = []
+  // chapterContent:ChapterContentResponse = new  ChapterContentResponse
   constructor(private router: Router, private chapterService: ChapterServiceService, private route: ActivatedRoute, private questionService: QuestionServiceService, private formBuilder: FormBuilder, private activateRouter: ActivatedRoute) {
     this.submissionForm = this.formBuilder.group({
       content: ['', Validators.required],
@@ -42,11 +45,16 @@ export class AdminSubjectsTopicTestComponent {
   }
 
   public getChapter() {
-    this.erroreMessage =''
-    this.chapterService.getChapterById(this.chapterId).subscribe(
+    this.erroreMessage = ''
+    this.chapterService.getChapterContentWithChapterIdForAdmin(this.chapterId).subscribe(
       {
         next: (data: any) => {
-          this.chapter = data.chapter
+          this.chapteContentResponse = data.chapterContent
+          if(data.chapterName){
+            this.chapterName = data.chapterName
+          }else{
+            this.chapterName = this.chapteContentResponse[0].chapterName
+          }
         },
         error: (er) => {
           this.erroreMessage = er.error.message
@@ -62,11 +70,11 @@ export class AdminSubjectsTopicTestComponent {
     } else {
       this.chapterService.addChapterContent(this.chapterContent, this.chapterId).subscribe(
         {
-          next: (data) => {
+          next: (data:any) => {
             this.erroreMessage = 'Success'
             this.chapterContent = new ChapterContent();
+            this.chapteContentResponse.push(data.chapterContent)
             this.editorInstance = ''
-            this.getChapter();
           },
           error: (error) => {
             this.erroreMessage = "error occure please submit again.."
@@ -87,7 +95,6 @@ export class AdminSubjectsTopicTestComponent {
         next: (data: any) => {
           this.erroreMessage = " Success.."
           this.chapterContent = data
-          this.getChapter()
         },
         error: (error) => {
           this.erroreMessage = error.error.message
@@ -100,22 +107,19 @@ export class AdminSubjectsTopicTestComponent {
     this.chapterContent = new ChapterContent();
   }
   public getChapterContent(contentId: number) {
-    this.chapterService.getChapterContent(contentId).subscribe(
-      (data) => {
-        this.chapterContent = data;
-      }
-    )
+    this.chapterContent = this.chapteContentResponse.find(obj => obj.id === contentId) as ChapterContent
   }
+
   public deleteContent() {
     this.chapterService.deleteContent(this.deleteContentId).subscribe(
       {
-        next:(data) => {
-           this.getChapter()
-           this.deleteContentId = 0;
-         },
-         error:(er)=>{
-
-         }
+        next: (data) => {
+          let index = this.chapteContentResponse.findIndex(obj => obj.id === this.deleteContentId)
+          this.chapteContentResponse.splice(index, 1);
+          this.deleteContentId = 0;
+        },
+        error: (er) => {
+        }
       }
     )
   }
@@ -125,7 +129,7 @@ export class AdminSubjectsTopicTestComponent {
   }
 
   public reload() {
-    this.getChapter()
+    //this.getChapter()
     this.chapterContent = new ChapterContent();
     this.erroreMessage = ''
   }

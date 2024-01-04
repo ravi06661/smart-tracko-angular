@@ -18,7 +18,7 @@
                     <h3 class="font-21 font-600 secondary position-relative" *ngIf="  totalCourses == 0">
                         NO COURSES AVAILABLE
                       </h3>
-                    <div class="col-md-3 bootstrap_cards" *ngFor="let course of courses">
+                    <div class="col-md-3 bootstrap_cards" *ngFor="let course of courseResponse">
                         <div class="admin-subject_card">
                             <div class="admin-subject_card_top">
                                 <div class="admin-subject_name_card">
@@ -28,7 +28,7 @@
                                         </div>
                                         <div class="subject-details">
                                             <h3 class="subject_heading txt-dark mb-0">{{course.courseName}}</h3>
-                                            <p class="chapter-cout mb-0">{{course.batches.length}} Batches {{course.subjects.length}} Subjects</p>
+                                            <p class="chapter-cout mb-0">{{course.batchesCount}} Batches {{course.subjectCount}} Subjects</p>
                                         </div>
                                     </div>
                                 </div>
@@ -238,7 +238,7 @@
                                 </div>
         
                                 <form action="">
-                                    <div class="row">
+                                    <div class="row  " *ngIf="courseResponse1">
                                         <!-- <div class="col-md-12 mb_18">
                                             <div class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative" style="height: 120px;">
                                                 <input type="file" name="fileupload" value="fileupload" class="d-none"
@@ -248,11 +248,11 @@
                                                     Add Media</label>
                                             </div>
                                         </div> -->
-                                        <div class="col-md-12 mb_18">
-                                            <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{course.technologyStack.technologyName}}</h6>
+                                        <div class="col-md-12 mb_18" *ngIf="courseResponse1.technologyStack">
+                                            <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{courseResponse1.technologyStack.technologyName}}</h6>
                                             <div class="all-course-images d-flex flex-wrap">
                                                 <div class="add-course-img" *ngFor="let image of techImages">
-                                                    <img [ngClass]="course.technologyStack.technologyName == image.technologyName ?'techImage-border':''" [src]="imageUrl+image.imageName"  alt="" (click)="course.technologyStack = image" (click)="imageName = image.technologyName">
+                                                    <img [ngClass]="courseResponse1.technologyStack.imageName == image.technologyName ?'techImage-border':''" [src]="imageUrl+image.imageName"  alt="" (click)="courseResponse1.technologyStack = image" (click)="imageName = image.technologyName">
                                                 </div>
                                             </div>
                                         </div>
@@ -261,21 +261,21 @@
                                             <label for="" class="mb_6 font-15 font-500 secondary">Course Name</label>
                                             <div class="input_icon position-relative">
                                                 <input type="text" id="" name="courseName" class="form-control input_text"
-                                                    placeholder="Enter Course Name" [(ngModel)]="course.courseName">
+                                                    placeholder="Enter Course Name" [(ngModel)]="courseResponse1.courseName">
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb_18">
                                             <label for="" class="mb_6 font-15 font-500 secondary">Course Fees</label>
                                             <div class="input_icon position-relative">
                                                 <input type="number" id="" name="courseFees" class="form-control input_text"
-                                                    placeholder="Enter Course Fees" [(ngModel)]="course.courseFees">
+                                                    placeholder="Enter Course Fees" [(ngModel)]="courseResponse1.courseFees">
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb_18">
                                             <label for="" class="mb_6 font-15 font-500 secondary">Course Duration (In Months)</label>
                                             <div class="input_icon position-relative">
                                                 <input type="number" id="" name="duration" class="form-control input_text"
-                                                    placeholder="Enter Course Duration" [(ngModel)]="course.duration">
+                                                    placeholder="Enter Course Duration" [(ngModel)]="courseResponse1.duration">
                                             </div>
                                         </div>
         
@@ -301,7 +301,7 @@
                                         <label for="" class="mb_6 font-15 font-500 secondary">Course Description</label>
                                         <div class="input_icon position-relative">
                                             <textarea type="number" id="" name="sortDescription" class="form-control input_text"
-                                                placeholder="Enter Course Description" [(ngModel)]="course.sortDescription"></textarea>
+                                                placeholder="Enter Course Description" [(ngModel)]="courseResponse1.sortDescription"></textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-12 mb_18">
@@ -309,8 +309,8 @@
                                         <div class="input_icon position-relative">
                                             <div class="input_icon position-relative">
                                                 <div class="input_icon position-relative">
-                                                    <input type="radio" id="isStarterCourseYes" name="isStarterCourse" [value]="true" [checked]="course.isStarterCourse" (change)="course.isStarterCourse = true"> Yes 
-                                                    <input type="radio" id="isStarterCourseNo" name="isStarterCourse" [value]="false" [checked]="!course.isStarterCourse" (change)="course.isStarterCourse = false"> No 
+                                                    <input type="radio" id="isStarterCourseYes" name="isStarterCourse" [value]="true" [checked]="courseResponse1.isStarterCourse" (change)="courseResponse1.isStarterCourse = true"> Yes 
+                                                    <input type="radio" id="isStarterCourseNo" name="isStarterCourse" [value]="false" [checked]="!courseResponse1.isStarterCourse" (change)="courseResponse1.isStarterCourse = false"> No 
                                                   </div>
                                                   
                                               </div>

@@ -9,17 +9,27 @@ import { Subject } from '../entity/subject';
   providedIn: 'root'
 })
 export class ChapterServiceService {
+
+
   BASE_URL = this.utilityService.getBaseUrl();
   CHAPTER_URL = this.BASE_URL + '/chapter';
 
   constructor(private utilityService: UtilityServiceService, private http: HttpClient) { }
 
-  public getAllChapter(id: number) {
-    return this.http.get(`${this.CHAPTER_URL}/getAllChapters?subjectId=${id}`)
-  }
+  // public getAllChapter(id: number) {
+  //   return this.http.get(`${this.CHAPTER_URL}/getAllChapters?subjectId=${id}`)
+  // }
   public getChapterById(id: number): Observable<Chapter> {
     return this.http.get<Chapter>(`${this.CHAPTER_URL}/getChapterById?chapterId=${id}`)
   }
+  public getChapterExamQuestions(id: number) {
+    return this.http.get<Chapter>(`${this.CHAPTER_URL}/getChapterExamQuestions?chapterId=${id}`)
+  }
+
+  public getChapterContentWithChapterIdForAdmin(chapterId: number) {
+    return this.http.get<any>(`${this.CHAPTER_URL}/getChapterContentWithChapterIdForAdmin?chapterId=${chapterId}`)
+  }
+
   public addChapterContent(data: ChapterContent, chapterId: number) {
     let formData = new FormData();
     formData.append('chapterId', chapterId.toString());
@@ -52,14 +62,14 @@ export class ChapterServiceService {
     formData.append('chapterName', chapterName)
     return this.http.post<Subject>(`${this.CHAPTER_URL}/addChapter`, formData);
   }
-  
+
   public deleteChapter(chapterId: number) {
     let formData = new FormData();
     formData.append('chapterId', chapterId.toString());
     return this.http.put(`${this.CHAPTER_URL}/deleteChapter`, formData);
   }
   public updateChapter(chapterId: number, chapterName: string) {
-  
+
     let formData = new FormData();
     formData.append('chapterId', chapterId.toString());
     formData.append('chapterName', chapterName);

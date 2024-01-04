@@ -23,7 +23,7 @@
             <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light" routerLink="/admin/subject">Subjects</a>
             </li>
             <li class="breadcrumb-item" aria-current="page"><a href="" class="font-17 font-500 gray-light" routerLink="/admin/subjectchapter/{{subjectId}}">Chapters</a></li>
-            <li class="breadcrumb-item  light-black" aria-current="page">{{chapter.chapterName}}</li>
+            <li class="breadcrumb-item  light-black" aria-current="page">{{chapterName }}</li>
           </ol>
         </nav>
         <a routerLink="/admin/subjectchapter/{{subjectId}}" type="button"
@@ -31,7 +31,7 @@
             class="fi fi-rr-arrow-left lh-0"></i>Back</a>
       </div>
       <div class="scroll_sec sub_detail-scroll">
-        <div class="sub_details d-flex flex-column" id="updown_btn" *ngFor="let obj of chapter.chapterContent">
+        <div class="sub_details d-flex flex-column" id="updown_btn" *ngFor="let obj of chapteContentResponse">
             <div class="top-test-question">
                 <h1 class="font-24 font-600 dark-black">{{obj.title}} </h1>
                 <div class="test-que-edit-del">

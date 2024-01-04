@@ -11,7 +11,7 @@
           <h6 class="font-19 font-600 light-black mb-0">Your Score : {{chapterExamResult.scoreGet}}/{{chapterExamResult.totalQuestion}}</h6>
         </div>
         <div class="review_section">
-          <div class="questions_answer review_questions" *ngFor="let obj of chapterExamResult.chapter.exam.questions ;let i=index">
+          <div class="questions_answer review_questions" *ngFor="let obj of  questionResponse ;let i=index">
             <div>
               <div class="review_questions d-flex justify-content-between">
                 <h3 class="font-17 font-700 light-black">Question - {{i+1}}</h3>

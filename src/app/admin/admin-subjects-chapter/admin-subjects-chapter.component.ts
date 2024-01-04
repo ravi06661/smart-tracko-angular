@@ -4,6 +4,7 @@ import { error } from 'console';
 import { Chapter } from 'src/app/entity/chapter';
 import { Subject } from 'src/app/entity/subject';
 import { TechnologyStack } from 'src/app/entity/technology-stack';
+import { ChapterResponse } from 'src/app/payload/chapter-response';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { TechnologyStackService } from 'src/app/service/technology-stack-service.service';
@@ -26,7 +27,8 @@ export class AdminSubjectsChapterComponent {
   chapterUpdate: Chapter = new Chapter();
   imageName = ''
   techImages: TechnologyStack[] = [];
-  subject: Subject = new Subject
+  //subject: Subject = new Subject
+  chapterResponse: ChapterResponse[] = []
   constructor(private subjectService: SubjectService,
     private route: ActivatedRoute,
     private chapterService: ChapterServiceService,
@@ -46,10 +48,11 @@ export class AdminSubjectsChapterComponent {
   }
 
   public getSubjectById(subjectId: number) {
-    this.subjectService.getSubjectById(subjectId).subscribe({
+    this.subjectService.getAllChapterWithSubjectId(subjectId).subscribe({
       next: (data: any) => {
-        this.subject = data.subject
-        this.chapter = this.subject.chapters
+        //  this.subject = data.subject
+        //this.chapter = this.subject.chapters
+        this.chapterResponse = data.chapters
       }
     })
   }
@@ -70,10 +73,11 @@ export class AdminSubjectsChapterComponent {
     } else {
       this.chapterService.addChapter(this.subjectId, this.chapterUpdate.chapterName).subscribe(
         {
-          next: (data) => {
+          next: (data: any) => {
             this.message = 'Success..'
             this.chapterUpdate = new Chapter();
-            this.getSubjectById(this.subjectId)
+            this.chapterResponse.push(data.chapter)
+            //this.getSubjectById(this.subjectId)
           },
           error: (error) => {
             this.message = error.error.message
@@ -87,7 +91,8 @@ export class AdminSubjectsChapterComponent {
       {
         next: (data) => {
           this.chapterId = 0;
-          this.getSubjectById(this.subjectId)
+          let index = this.chapterResponse.findIndex(obj => obj.chapterId === this.chapterId)
+          this.chapterResponse.splice(index, 1)
         },
         error: (error) => {
           this.message = 'Failed..'
@@ -102,7 +107,7 @@ export class AdminSubjectsChapterComponent {
   public reload() {
     this.message = ''
     this.chapterUpdate = new Chapter();
-    this.getSubjectById(this.subjectId)
+   // this.getSubjectById(this.subjectId)
   }
 
   public updateChapter() {
@@ -110,9 +115,12 @@ export class AdminSubjectsChapterComponent {
       {
         next: (data) => {
           this.message = 'success';
-          this.chapterUpdate = new Chapter();
+         
           this.chapterId = 0;
-          this.getSubjectById(this.subjectId)
+          let ch = this.chapterResponse.find(obj => obj.chapterId === this.chapterId) as ChapterResponse
+          ch.chapterName = this.chapterUpdate.chapterName;
+          this.chapterId = this.chapterUpdate.chapterId
+          this.chapterUpdate = new Chapter();
         },
         error: (error) => {
           this.message = error.error.message;

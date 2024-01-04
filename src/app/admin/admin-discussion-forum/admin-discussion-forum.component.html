@@ -76,7 +76,7 @@
                   </div>
                   <div class="text mx-1">
                     <h3 class="font-15 font-600 black mb-1" >{{obj.studentName}}</h3>
-                    <p class="font-13 font-400 light2 mb-0">{{obj.createdDate}} <span class="mx-0 ms-1">{{utilityService.updateTimeline(obj.createdDate)}}</span></p>
+                    <p class="font-13 font-400 light2 mb-0">{{obj.createdDate |date: 'mediumTime'}} <span class="mx-0 ms-1">{{utilityService.updateTimeline(obj.createdDate)}}</span></p>
                   </div>
                   <h5 class="remove_icon d-flex align-items-center font-14 font-600 lh-0 delete ms-auto"><i  class="fi fi-rr-trash ms-0 mx-1 lh-0 iconarrow" (click)="removeComments(newDiscussion.id,obj.id)"></i>Remove</h5>
                 </div>
