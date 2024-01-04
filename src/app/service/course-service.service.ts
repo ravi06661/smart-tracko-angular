@@ -7,19 +7,23 @@ import { Course } from '../entity/course';
   providedIn: 'root'
 })
 export class CourseServiceService {
-  
- 
-  BASE_URL=this.utilityService.getBaseUrl();
-  courseUrl=this.BASE_URL+'/course';
 
-  constructor(private http: HttpClient,private utilityService:UtilityServiceService) { }
 
-  public getAllCourses(page:number,size:number){
+
+  BASE_URL = this.utilityService.getBaseUrl();
+  courseUrl = this.BASE_URL + '/course';
+
+  constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
+
+  public getAllCourses(page: number, size: number) {
     return this.http.get(`${this.courseUrl}/findAllCourseApi?page=${page}&size=${size}`);
   }
+  public getAllNonStarterCourses() {
+    return this.http.get(`${this.courseUrl}/getAllNonStarterCourses`);
+  }
 
-  public saveCourse(course:CourseRequest){
-    return this.http.post(`${this.courseUrl}/addCourseApi`,course);
+  public saveCourse(course: CourseRequest) {
+    return this.http.post(`${this.courseUrl}/addCourseApi`, course);
   }
 
   public getCourseByCourseId(courseId: number) {
@@ -28,23 +32,23 @@ export class CourseServiceService {
 
 
   public deleteCourse(id: number) {
-    return this.http.put(`${this.courseUrl}/deleteCourseByIdApi?courseId=${id}`,{});
-  }
-   
-  public updatCourse(course: Course) {
-    return this.http.put(`${this.courseUrl}/updateCourseApi`,course);
+    return this.http.put(`${this.courseUrl}/deleteCourseByIdApi?courseId=${id}`, {});
   }
 
-public getAllCourse(isStarter:boolean){
-  return this.http.get(`${this.courseUrl}/getAllCourseApi?isStarter=${isStarter}`);
-}
+  public updatCourse(course: any) {
+    return this.http.put(`${this.courseUrl}/updateCourseApi`, course);
+  }
+
+  public getAllCourse(isStarter: boolean) {
+    return this.http.get(`${this.courseUrl}/getAllCourseApi?isStarter=${isStarter}`);
+  }
 
 
-public upgradeStudentCourse(studentId:number,courseId:number){   
-  return this.http.put(`${this.courseUrl}/studentUpgradeCourse?studentId=${studentId}&courseId=${courseId}`,null);
-}
+  public upgradeStudentCourse(studentId: number, courseId: number) {
+    return this.http.put(`${this.courseUrl}/studentUpgradeCourse?studentId=${studentId}&courseId=${courseId}`, null);
+  }
 
-public  getCourseProgress(studentId:number){
-  return this.http.get(`${this.courseUrl}/getCourseProgress?studentId=${studentId}`);
-}
+  public getCourseProgress(studentId: number) {
+    return this.http.get(`${this.courseUrl}/getCourseProgress?studentId=${studentId}`);
+  }
 }

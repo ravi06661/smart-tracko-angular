@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chapter } from 'src/app/entity/chapter';
 import { Subject } from 'src/app/entity/subject';
+import { ChapterResponse } from 'src/app/payload/chapter-response';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
@@ -22,16 +23,16 @@ export class ChapterComponent {
     private chapterService: ChapterServiceService,
     private utilityService: UtilityServiceService,
     private router: Router) { }
+    chapterResponse:ChapterResponse[]=[]
   ngOnInit() {
     this.subjectId = this.activateRouter.snapshot.params[('id')];
-    this.getSubjectById(this.subjectId);
+    this.getAllChapters(this.subjectId);
   }
 
-  public getSubjectById(id: number) {
-    this.subjectService.getSubjectById(id).subscribe({
+  public getAllChapters(id: number) {
+    this.subjectService.getAllChapterWithSubjectId(id).subscribe({
       next: (data: any) => {
-        this.subject = data.subject
-        this.chapter = this.subject.chapters
+        this.chapterResponse = data.chapters
       }
     })
   }

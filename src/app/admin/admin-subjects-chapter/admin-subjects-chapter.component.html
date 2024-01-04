@@ -29,13 +29,13 @@
         <div class="subject-topic">
 
             <div class="row mt-3" >
-                <div class="col-md-3 bootstrap_cards" *ngFor="let obj of chapter">
+                <div class="col-md-3 bootstrap_cards" *ngFor="let obj of chapterResponse">
                     <div class="admin-subject_card">
                         <div class="admin-subject_card_top">
                             <div class="admin-subject_name_card">
                                 <div class="admin-sub-left">
                                     <div class="admin-subject-image">
-                                        <img [src]="techUrl+subject.technologyStack.imageName">
+                                        <img [src]="techUrl+obj.chapterImage">
                                     </div>
                                     <div class="subject-details">
                                         <h3 class="subject_heading txt-dark mb-0">{{obj.chapterName}}</h3>

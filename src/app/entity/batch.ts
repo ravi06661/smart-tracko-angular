@@ -4,7 +4,6 @@ import { Subject } from "./subject";
 
 
 export class Batch {
-
 	batchStartDate:Date | undefined;
     batchId:number = 0;
 	batchTiming:any ;

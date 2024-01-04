@@ -29,7 +29,7 @@ export class AdminSubjectsComponent implements OnInit {
     subjectName: ''
   };
   message: string = ''
-  subject: Subject = new Subject();
+  subject: SubjectResponse = new SubjectResponse
   subjectId: number = 0;
   imageName = ''
   subjectSubmissionForm: FormGroup;
@@ -49,11 +49,7 @@ export class AdminSubjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.message = ''
-    this.techService.getAllTechnologyStack().subscribe({
-      next: (data) => {
-        this.techImages = data
-      }
-    });
+
     this.getAllSubject();
   }
 
@@ -63,6 +59,14 @@ export class AdminSubjectsComponent implements OnInit {
         this.subjects = data;
       }
     })
+  }
+
+  public getAllTechImage() {
+    this.techService.getAllTechnologyStack().subscribe({
+      next: (data) => {
+        this.techImages = data
+      }
+    });
   }
 
   public saveSubject() {
@@ -93,11 +97,11 @@ export class AdminSubjectsComponent implements OnInit {
   }
 
   public getSubjectById(id: number) {
-    this.subjectService.getSubjectById(id).subscribe({
-      next: (data: any) => {
-        this.subject = data.subject
-      }
-    })
+    if (this.techImages.length == 0) {
+      this.getAllTechImage();
+    }
+    this.subject = this.subjects.find(obj => obj.subjectId === id) as SubjectResponse
+
   }
 
   public updateSubject() {
@@ -106,7 +110,7 @@ export class AdminSubjectsComponent implements OnInit {
         this.message = "Success.";
         this.subjects = this.subjects.map(item => (item.subjectId === data.subjectId ? data : item));
       },
-      error:(err)=>{
+      error: (err) => {
         this.message = err.error.message
       }
     })
@@ -122,7 +126,9 @@ export class AdminSubjectsComponent implements OnInit {
   public deleteSubect() {
     this.subjectService.deleteSubjectById(this.subjectId).subscribe(
       (data: any) => {
-        this.getAllSubject();
+    //this.getAllSubject();
+    let index =this.subjects.findIndex(obj=>obj.subjectId === this.subjectId)
+    this.subjects.splice(index ,1)
         this.subjectId = 0;
       }
     )

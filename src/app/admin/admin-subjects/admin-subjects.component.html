@@ -3,7 +3,7 @@
 
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Subjects</h1>
-            <button class="top_profile_sec_btn font-14 font-500 lh-1" data-bs-toggle="modal"
+            <button class="top_profile_sec_btn font-14 font-500 lh-1" data-bs-toggle="modal" (click)="getAllTechImage()"
                 data-bs-target="#subject-add-modal">Create New</button>
         </div>
 
@@ -100,15 +100,15 @@
             <div class="modal-body">
                 <div class="modal-header apply_title p-0">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                        id="exampleModalLabel1">Edit Course</h1>
+                        id="exampleModalLabel1">Edit Subject</h1>
                     <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reloadMessage()">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
 
                 <form action="">
-                    <div class="row">
-                        <div class="col-md-12 mb_18">
+                    <div class="row" *ngIf="subject">
+                        <div class="col-md-12 mb_18" >
                             <!-- <div
                                 class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative">
                                 <input type="file" name="fileupload" value="fileupload" class="d-none"

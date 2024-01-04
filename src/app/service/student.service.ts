@@ -118,7 +118,7 @@ export class StudentService {
   }
 
   public getByStudentById(studentId: number) {
-    return this.http.get(`${this.studentUrl}/getStudentById?studentId=${studentId}`);
+    return this.http.get(`${this.studentUrl}/getStudentByIdForWeb?studentId=${studentId}`);
   }
 
   public getStudentProfileData(studentId: number) {

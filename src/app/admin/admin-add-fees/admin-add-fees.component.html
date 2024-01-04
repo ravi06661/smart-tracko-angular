@@ -33,7 +33,7 @@
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Roll No.</label>
                         <input type="number" id="studentId" name="studentId" class="form-control input_text"
-                            [(ngModel)]="fees.student.studentId" placeholder="Roll no." formControlName="rollNo"
+                            [(ngModel)]="fees.studentId" placeholder="Roll no." formControlName="rollNo"
                             readonly>
                         <div *ngIf="isFieldInvalidForAddFeesDetailsForm('rollNo')" class="text-danger">Roll no is
                             required.</div>
@@ -44,7 +44,7 @@
                         <label for="email" class="mb_6 font-17 font-500 secondary">Email</label>
                         <div class="input_icon position-relative">
                             <input type="email" id="email" name="email" class="form-control input_text"
-                                [(ngModel)]="fees.student.email" placeholder="Enter Email" formControlName="email"
+                                [(ngModel)]="fees.email" placeholder="Enter Email" formControlName="email"
                                 readonly>
                             <div *ngIf="isFieldInvalidForAddFeesDetailsForm('email')" class="text-danger">email is
                                 required.</div>
@@ -54,7 +54,7 @@
                         <label for="mobile" class="mb_6 font-17 font-500 secondary">Mobile No.</label>
                         <div class="input_icon position-relative">
                             <input type="text" id="mobile" name="mobile" class="form-control input_text"
-                                [(ngModel)]="fees.student.mobile" placeholder="Enter Mobile No."
+                                [(ngModel)]="fees.mobile" placeholder="Enter Mobile No."
                                 formControlName="mobile" readonly>
                             <div *ngIf="isFieldInvalidForAddFeesDetailsForm('mobile')" class="text-danger">mobile no is
                                 required.</div>
@@ -70,7 +70,7 @@
                         </select> -->
                         <div class="input_icon position-relative">
                             <input type="text" id="course" name="course" class="form-control input_text"
-                                [(ngModel)]="fees.course.courseName" placeholder="Enter Course"
+                                [(ngModel)]="fees.courseName" placeholder="Enter Course"
                                 formControlName="course" readonly>
 
                         <!-- <div style="margin-top: -17px;"  *ngIf="isFieldInvalidForAddFeesDetailsForm('course')" class="text-danger">course is
@@ -88,7 +88,7 @@
                         <div class="input_icon position-relative">
                             <input type="number" id="courseFees" name="courseFees" formControlName="courseFees"
                                 class="form-control input_text" placeholder="Enter Course Fees"
-                                [(ngModel)]="fees.course.courseFees" readonly>
+                                [(ngModel)]="fees.courseFees" readonly>
                             <div *ngIf="isFieldInvalidForAddFeesDetailsForm('courseFees')" class="text-danger">Course
                                 fees is required.</div>
                         </div>

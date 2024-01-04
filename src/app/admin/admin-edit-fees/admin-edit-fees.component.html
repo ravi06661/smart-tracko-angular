@@ -17,7 +17,7 @@
                     <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary"> Full Name</label>
                         <input type="text" id="fullName" name="fullName"  class="form-control input_text"  placeholder="Full Name" 
-                        [(ngModel)]="fees.student.fullName" formControlName="fullName"
+                        [(ngModel)]="fees.fullName" formControlName="fullName"
                         readonly>
                         <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('fullName')" class="text-danger">Name is
                             required.</div>
@@ -26,7 +26,7 @@
                       <div class="col-md-4">
                         <label for="" class="mb_6 font-17 font-500 secondary">Email</label>
                         <input type="email" id="email" name="email" class="form-control input_text"  placeholder="email"
-                        [(ngModel)]="fees.student.email" formControlName="email"
+                        [(ngModel)]="fees.email" formControlName="email"
                          readonly>
                          <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('email')" class="text-danger">Email is
                             required.</div>
@@ -39,7 +39,7 @@
                         <div class="input_icon position-relative">
                             <input type="text" id="mobile" name="mobile" class="form-control input_text"
                              placeholder="Enter Email"
-                             [(ngModel)]="fees.student.mobile" formControlName="mobile"
+                             [(ngModel)]="fees.mobile" formControlName="mobile"
                               readonly>
                               <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('mobile')" class="text-danger">Mobile No is
                                 required.</div>
@@ -52,7 +52,7 @@
                             <input type="text" id="courseName" name="courseName" class="form-control input_text"
 
                               placeholder="Enter courseName"
-                              [(ngModel)]="fees.course.courseName" formControlName="courseName"
+                              [(ngModel)]="fees.courseName" formControlName="courseName"
                                readonly>
                                <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('courseName')" class="text-danger">Course Name is
                                 required.</div>

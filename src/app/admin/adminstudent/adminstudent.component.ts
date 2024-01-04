@@ -5,6 +5,7 @@ import { Course } from 'src/app/entity/course';
 import { StudentDetails } from 'src/app/entity/student-details';
 import { TechnologyStack } from 'src/app/entity/technology-stack';
 import { CourseRequest } from 'src/app/payload/course-request';
+import { Coursereponse } from 'src/app/payload/coursereponse';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { LoginService } from 'src/app/service/login.service';
 import { StudentService } from 'src/app/service/student.service';
@@ -17,42 +18,43 @@ import Swal from 'sweetalert2';
   templateUrl: './adminstudent.component.html',
   styleUrls: ['./adminstudent.component.scss']
 })
-export class AdminstudentComponent implements OnInit{
+export class AdminstudentComponent implements OnInit {
 
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
-  students:StudentDetails[]=[];
-  totalStudent:number=0;
-  search:string=''
+  students: StudentDetails[] = [];
+  totalStudent: number = 0;
+  search: string = ''
   id: number | null = null;
-  courseId:number = 0
-  studentId:number=0;
-   newStudent:StudentDetails=new StudentDetails();
+  courseId: number = 0
+  studentId: number = 0;
+  newStudent: StudentDetails = new StudentDetails();
    courses:Course[]=[];
-   courseRequest:CourseRequest = new CourseRequest();
-   course:Course=new Course();
-   techImages:TechnologyStack[] = [];
-   imageName = '';
-   imageUrlTec = this.utilityService.getBaseUrl()+"/file/getImageApi/technologyStackImage/";
+  courseResponse: Coursereponse[] = []
+  courseRequest: CourseRequest = new CourseRequest();
+  course: Course = new Course();
+  techImages: TechnologyStack[] = [];
+  imageName = '';
+  imageUrlTec = this.utilityService.getBaseUrl() + "/file/getImageApi/technologyStackImage/";
+  studentCourse:Coursereponse = new Coursereponse();
+  selectedCourse: number = 0;
 
-   selectedCourse: number=0;
-
-  constructor(private stuentService:StudentService,private utilityService: UtilityServiceService,private courseService:CourseServiceService,private techService:TechnologyStackService,private activateRoute:ActivatedRoute
-    ,private loginService:LoginService){}
+  constructor(private stuentService: StudentService, private utilityService: UtilityServiceService, private courseService: CourseServiceService, private techService: TechnologyStackService, private activateRoute: ActivatedRoute
+    , private loginService: LoginService) { }
   ngOnInit(): void {
-    this.courseId=this.activateRoute.snapshot.params[('courseId')];
-   this.getAllStudent(0,15);
-   this.getAllCourse();
-   this.getAllTechImages();
-  
-  
+    this.courseId = this.activateRoute.snapshot.params[('courseId')];
+    this.getAllStudent(0, 15);
+    this.getAllCourse();
+    this.getAllTechImages();
+
+
   }
-                                                               
+
   public getAllStudent(page: Number, size: number) {
-    this.stuentService.getAllStudent(page,size).subscribe(
+    this.stuentService.getAllStudent(page, size).subscribe(
       (data: any) => {
         this.students = data.response
-       this.totalStudent=data.totalElements
+        this.totalStudent = data.totalElements
       }
     )
   }
@@ -60,45 +62,47 @@ export class AdminstudentComponent implements OnInit{
     this.getAllStudent(event.pageIndex, event.pageSize);
   }
 
-  public searchStudentByName(){
-    if(this.search==''){
-      this.getAllStudent(0,15);
-    }else{
-    this.stuentService.searchStudentByName(this.search).subscribe(
-      (data: any) => {
-        this.students = data
-        this.totalStudent=data.totalElements
-      }
-    )
-  }}
+  public searchStudentByName() {
+    if (this.search == '') {
+      this.getAllStudent(0, 15);
+    } else {
+      this.stuentService.searchStudentByName(this.search).subscribe(
+        (data: any) => {
+          this.students = data
+          this.totalStudent = data.totalElements
+        }
+      )
+    }
+  }
 
-  public getAllCourse(){
-    this.courseService.getAllCourse(false).subscribe(
+  public getAllCourse() {
+    this.courseService.getAllNonStarterCourses().subscribe(
       (
-        (data:any)=>{
-          this.courses=data       
-       
-          
+        (data: any) => {
+          this.courseResponse = data.NonStarterCourse
         }
       )
     )
   }
-  public getAllTechImages(){
+  public getAllTechImages() {
     this.techService.getAllTechnologyStack().subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         this.techImages = data
       }
     });
   }
 
-  public upgradeCourseOfStudent(courseId:number){
+  public upgradeCourseOfStudent(courseId: number) {
 
 
-    this.courseService.upgradeStudentCourse(this.newStudent.studentId,this.selectedCourse).subscribe( 
-      (data:any)=>{
-        this.newStudent=data
+    this.courseService.upgradeStudentCourse(this.newStudent.studentId, this.selectedCourse).subscribe(
+      (data: any) => {
+         this.newStudent = data
+        //  let student = this.students.findIndex(obj=>obj.studentId === this.newStudent.studentId) 
+        //this.students = this.students.map(item => (item.studentId === data.studentId ? data : item));
+        //  this.students[student] = this.newStudent
         const Toast = Swal.mixin({
-          
+
           toast: true,
           position: 'top-end',
           showConfirmButton: false,
@@ -109,9 +113,9 @@ export class AdminstudentComponent implements OnInit{
           icon: 'success',
           title: 'Updated  success !!'
         }).then(e => {
-          this.newStudent=new StudentDetails
-           this.getAllStudent(0,15)
-         // this.router.navigate(['/admin/payfees']);
+          this.newStudent = new StudentDetails
+       //   this.getAllStudent(0, 15)
+          // this.router.navigate(['/admin/payfees']);
         })
       },
       (err) => {
@@ -136,12 +140,12 @@ export class AdminstudentComponent implements OnInit{
   //     confirmButtonText: 'Save',
   //     denyButtonText: `Don't save`,
   //   }).then((result) => {
-     
+
   //     if (result.isConfirmed) {
 
   //       this.courseService.upgradeStudentCourse(this.newStudent.studentId,this.selectedCourse).subscribe({
   //         next:(res:any)=>{
-            
+
   //           this.newStudent=res
   //         }
   //         })
@@ -149,18 +153,21 @@ export class AdminstudentComponent implements OnInit{
   //       this.newStudent=new StudentDetails
   //       this.getAllStudent(0,15)
   //     } else if (result.isDenied) {
-        
+
   //       Swal.fire('Changes are not saved', '', 'info')
   //     }
   //   })
   // }
-  public check(id:number){
-    if(this.course.courseId == id)
+  public check(id: number) {
+    if (this.studentCourse.courseId == id)
       return true
     return false;
   }
 
-  selectCourse(courseId:number): void {
+  selectCourse(courseId: number): void {
     this.selectedCourse = courseId;
+  }
+  public setCourse(course:any){
+     this.studentCourse = course
   }
 }

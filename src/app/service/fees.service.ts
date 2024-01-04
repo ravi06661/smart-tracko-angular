@@ -20,8 +20,8 @@ export class FeesService {
     //let params=new HttpParams();
 
     let params = new FormData()
-    params.append("studentId", fees.student.studentId.toString())
-    params.append("courseId", fees.course.courseId.toString())
+    params.append("studentId", fees.studentId.toString())
+    params.append("courseId", fees.courseId.toString())
     params.append("finalFees", fees.finalFees.toString())
     params.append("date", fees.date.toString());
     return this.http.post(`${this.feesUrl}/createStudentFees`, params)

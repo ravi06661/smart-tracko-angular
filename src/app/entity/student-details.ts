@@ -1,3 +1,4 @@
+import { Coursereponse } from "../payload/coursereponse";
 import { Course } from "./course";
 
 export class StudentDetails {
@@ -26,4 +27,5 @@ export class StudentDetails {
 	// public isCompleted:boolean | undefined;
 	// public isActive:boolean | undefined
 	public course:Course=new Course();
+	public courseResponse!:Coursereponse
 }

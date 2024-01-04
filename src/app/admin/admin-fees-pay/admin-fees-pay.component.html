@@ -62,18 +62,18 @@
               </thead>
               <tbody *ngFor="let feesPay of feesPayes">
                 <tr>
-                  <td class="d-flex align-items-center pointer" style="gap:5px; border-bottom: 0;" routerLink="/admin/studentprofile/{{feesPay.fees.student.studentId}}">
+                  <td class="d-flex align-items-center pointer" style="gap:5px; border-bottom: 0;" routerLink="/admin/studentprofile/{{feesPay.feesPay.studentId}}">
                     <div class="person_image">
-                      <img [src]="imageUrl+feesPay.fees.student.profilePic" alt="" class="img-fluid">
+                      <img [src]="imageUrl+feesPay.feesPay.profilePic" alt="" class="img-fluid">
                     </div>
-                    <h5 class="font-13 font-500 mb-0" >{{feesPay.fees.student.fullName}}<br>
+                    <h5 class="font-13 font-500 mb-0" >{{feesPay.feesPay.fullName}}<br>
                     </h5>
                   </td>
-                  <td>{{feesPay.fees.student.studentId}}</td>
-                <td>{{feesPay.fees.course.courseName}}</td>
-                <td>{{feesPay.fees.student.mobile}}</td>
-                <td>{{feesPay.fees.finalFees}}</td>
-                <td>{{feesPay.fees.feesPaid}}</td>
+                  <td>{{feesPay.feesPay.studentId}}</td>
+                <td>{{feesPay.feesPay.courseName}}</td>
+                <td>{{feesPay.feesPay.mobile}}</td>
+                <td>{{feesPay.feesPay.finalFees}}</td>
+                <td>{{feesPay.feesPay.feesPaid}}</td>
                 <td>{{feesPay.feesPayAmount}}</td>
                 <td>{{feesPay.payDate}}</td>
                 
