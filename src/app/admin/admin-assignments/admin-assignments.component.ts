@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, Routes } from '@angular/router';
 import { isThisQuarter } from 'date-fns';
 import { Assignment } from 'src/app/entity/assignment';
 import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
@@ -14,6 +14,7 @@ import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { AdminAssignmentSubmissionComponent } from '../admin-assignment-submission/admin-assignment-submission.component';
 
 @Component({
   selector: 'app-admin-assignments',
@@ -27,9 +28,7 @@ export class AdminAssignmentsComponent implements OnInit {
   courses: Course[] = [];
   subjects: Subject[] = [];
   subjectes: SubjectResponse[] = [];
-  allActiveAssignments: Assignment[] = []
-  assignmentQuestions: TaskQuestion[] = []
-  submitedAssignments: AssignmentSubmission[] = []
+  submitedAssignments: any[] = []
   submitedAssignmentObj: AssignmentSubmission = new AssignmentSubmission
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
   taskSubmissionStatus2: SubmissionAssignmentTaskStatus = new SubmissionAssignmentTaskStatus
@@ -49,6 +48,7 @@ export class AdminAssignmentsComponent implements OnInit {
     private router: Router,
     private utilityService: UtilityServiceService,
     private formBuilder: FormBuilder) {
+
     this.submissionForm = this.formBuilder.group({
       subjectId: ['', Validators.required],
       courseId: ['', Validators.required],
@@ -57,9 +57,9 @@ export class AdminAssignmentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.getAllCourses();
     this.getAllSubmitedAssignments();
-    this.getAllAssignment();
     this.getAllSubmissionAssignmentStatus()
     this.getOverAllAssignmentTaskStatus()
     this.getAllSubject()
@@ -94,7 +94,7 @@ export class AdminAssignmentsComponent implements OnInit {
     } else {
       this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
         next: (data: any) => {
-          this.router.navigate(['/admin/createassignments/' + data.id])
+          this.router.navigate(['/admin/createassignments/' + data.assignmentId])
         },
         error: (error) => {
           this.message = error.error.message
@@ -112,26 +112,16 @@ export class AdminAssignmentsComponent implements OnInit {
     })
   }
 
+
   public pageRanderWithObj(object: AssignmentSubmission) {
+    const dataParams = {
+      submissionId: object.submissionId,
+    };
     this.router.navigate(['/admin/assignmentsubmission'], {
-      queryParams: {
-        data: JSON.stringify(object)
-      }
-    })
+      queryParams: dataParams
+    });
   }
 
-  public getAllAssignment() {
-    this.assignmentService.getAllAssignments().subscribe((
-      (data: any) => {
-        this.allActiveAssignments = data
-        this.allActiveAssignments.forEach((temp: any) => {
-          temp.assignmentQuestion.forEach((t: any) => {
-            this.assignmentQuestions.push(t)
-          })
-        })
-      }
-    ))
-  }
   public getAllSubmissionAssignmentStatus() {
     this.assignmentService.getAllSubmissionAssignmentTaskStatus().subscribe(
       (data: any) => {
@@ -157,7 +147,6 @@ export class AdminAssignmentsComponent implements OnInit {
       this.courseService.getCourseByCourseId(selectedCourseId).subscribe(
         (data: any) => {
           this.assignmentRequest.courseId = data.courseId;
-
         }
       );
     } else {

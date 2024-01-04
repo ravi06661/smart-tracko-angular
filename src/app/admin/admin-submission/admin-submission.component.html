@@ -17,9 +17,9 @@
         <div class="row">
             <div class="col-md-12 d-flex align-items-center justify-content-between mb_24">
                 <div class="person-detail d-flex align-items-center gap_5">
-                    <img [src]="IMG_URL+submitedTask.student.profilePic" alt="" class="img-fluid imagestudent">
-                    <h5 class="font-18 font-600 mb-0">{{submitedTask.student.fullName}} <br>
-                        <p class="text_gray font-17 font-400 mb-0">{{submitedTask.student.applyForCourse}}</p>
+                    <img [src]="IMG_URL+submitedTask.studentProfilePic" alt="" class="img-fluid imagestudent">
+                    <h5 class="font-18 font-600 mb-0">{{submitedTask.fullName}} <br>
+                        <p class="text_gray font-17 font-400 mb-0">{{submitedTask.applyForCourse}}</p>
                     </h5>
                 </div>
                 <div class="right-reject-btn" *ngIf="submitedTask.status == 'Reviewing' || submitedTask.status == 'Unreviewed'" >

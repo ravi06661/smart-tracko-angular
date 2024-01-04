@@ -33,7 +33,7 @@ export class AssignmentServiceService {
 
   public addQuestionInTask(question: TaskQuestionRequest, assignmentId: number) {
     console.log(question);
-    
+
     let formData = new FormData();
     formData.append('question', question.question)
     formData.append('videoUrl', question.videoUrl)
@@ -94,6 +94,10 @@ export class AssignmentServiceService {
     formData.append('submissionId', submissionId.toString());
     formData.append('status', status);
     formData.append('review', review);
+    console.log(status);
+    console.log(review);
+    
+    
     return this.http.put(`${this.assignmentUrl}/updateSubmitedAssignmentStatus`, formData);
   }
 
@@ -104,15 +108,20 @@ export class AssignmentServiceService {
   public getOverAllAssignmentTaskStatus() {
     return this.http.get(`${this.assignmentUrl}/getOverAllAssignmentTaskStatus`)
   }
-  public getAllLockedAndUnlockedAssignment(studentId:number) {
+  public getAllLockedAndUnlockedAssignment(studentId: number) {
     return this.http.get(`${this.assignmentUrl}/getAllLockedAndUnlockedAssignment?studentId=${studentId}`)
   }
 
-   public isSubmitted(assignmentId: number, questionId: number,studentId:number) {
-    return this.http.get(`${this.assignmentUrl}/getAssignmentQuesSubmissionStatus?questionId=${questionId}&assignmentId=${assignmentId}&studentId=${studentId}`)
+  public isSubmitted(questionId: number, studentId: number) {
+    return this.http.get(`${this.assignmentUrl}/getAssignmentQuesSubmissionStatus?questionId=${questionId}&studentId=${studentId}`)
   }
 
-  public getAllSubmissionAssignmentTaskStatusByCourseIdFilter(courseId:number,subjectId:number){
+  public getAllSubmissionAssignmentTaskStatusByCourseIdFilter(courseId: number, subjectId: number) {
     return this.http.get(`${this.assignmentUrl}/getAllSubmissionAssignmentTaskStatusByCourseIdFilter?courseId=${courseId}&subjectId=${subjectId}`)
   }
+
+  public getSubmittedAssignmentBySubmissionId(submissionId: number) {
+    return this.http.get(`${this.assignmentUrl}/getSubmittedAssignmentBySubmissionId?submissionId=${submissionId}`)
+  }
+
 }
