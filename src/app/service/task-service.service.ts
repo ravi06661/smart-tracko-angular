@@ -29,7 +29,7 @@ export class TaskServiceService {
   }
   public submitTask(task: StudentTaskSubmittion, taskId: number) {
     let formData = new FormData();
-    formData.append('studentId', task.student.studentId.toString())
+    formData.append('studentId', task.studentId.toString())
     formData.append('submittionFileName', task.submittionFileName)
     formData.append('taskDescription', task.taskDescription)
     formData.append('taskId', taskId.toString())

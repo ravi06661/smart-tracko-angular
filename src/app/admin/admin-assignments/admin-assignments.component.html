@@ -210,15 +210,16 @@
                                 <td>
                                     <a class="d-flex align-items-center gap_5" (click)="pageRanderWithObj(obj)">
                                         <div class="person_image">
-                                            <img [src]="IMG_URL+obj.student.profilePic" alt="" class="img-fluid">
+                                            <img [src]="IMG_URL+obj.profilePic" alt="" class="img-fluid">
                                         </div>
-                                        <h5 class="font-13 font-500 mb-0 text_dark">{{obj.student.fullName}}<br>
-                                            <p class="text_gray font-13 font-400 mb-0">{{obj.student.applyForCourse}}
+                                        <h5 class="font-13 font-500 mb-0 text_dark">{{obj.fullName}}<br>
+                                            <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}
                                             </p>
                                         </h5>
                                     </a>
                                 </td>
-                                <td>Hello World! In Java</td>
+                                <td>{{obj.title}}</td>
+                                <!-- <td>{{obj.assignmentTitle}}</td> -->
                                 <td>{{obj.submissionDate | date:'short'}}</td>
                                 <td
                                     [ngClass]="{'active_txt_blue':(obj.status=='Reviewing')||(obj.status=='Unreviewed'),'active_txt_orange':obj.status=='Rejected','active_txt_green':obj.status=='Accepted'}">

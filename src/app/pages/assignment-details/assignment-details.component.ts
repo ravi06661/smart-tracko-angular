@@ -33,19 +33,21 @@ export class AssignmentDetailsComponent implements OnInit {
     private loginService: LoginService,
     private router: Router
     , private formBuilder: FormBuilder) {
-    this.isSubmitted()
+
     this.submissionForm = this.formBuilder.group({
       file: ['', Validators.required],
       description: ['', Validators.required]
     });
-  }
-
-  ngOnInit(): void {
     this.activateRoute.queryParams.subscribe(params => {
       this.questionId = params['questionId'];
       this.assignmentId = params['assignmentId'];
     });
+    this.isSubmitted()
+  }
+
+  ngOnInit(): void {
     this.getAssignmentQuestionById();
+
   }
 
   public getAssignmentQuestionById() {
@@ -54,7 +56,7 @@ export class AssignmentDetailsComponent implements OnInit {
       next: (data: any) => {
         this.assignmentQues = data.question
         this.attachment = data.attachment
-        this.isSubmitted()
+        // this.isSubmitted()
       }
     })
   }
@@ -82,12 +84,13 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   public isSubmitted() {
-    this.assignmentService.isSubmitted(this.assignmentId, this.questionId, this.loginService.getStudentId()).subscribe(
+    this.assignmentService.isSubmitted(this.questionId, this.loginService.getStudentId()).subscribe(
       (data: any) => {
-        if (data == true) {
+        if (data.status) {
           this.isSubmittedQuestion = false;
         } else
           this.isSubmittedQuestion = true;
+      }, (er: any) => {
       }
     )
   }

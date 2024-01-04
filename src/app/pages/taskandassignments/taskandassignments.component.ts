@@ -16,10 +16,10 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 export class TaskandassignmentsComponent implements OnInit {
 
   BASE_URL = this.utilityService.getBaseUrl();
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
+  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentImages/'
   assignments: Assignment[] = []
-  unLockAssignments: Assignment[] = []
-  lockAssignments: Assignment[] = []
+  unLockAssignments: any
+  lockAssignments: any
   assignmentSubmissionsList: AssignmentSubmission[] = []
   assignmentSubmissionsList2: AssignmentSubmission[] = []
   unLockAssignment: Assignment = new Assignment
@@ -27,21 +27,20 @@ export class TaskandassignmentsComponent implements OnInit {
   assignmentId: number = 0;
   assignmentTaskVisibility: boolean[] = [];
   assignmentCount: number = 0;
-  todayDate:Date = new Date()
+  todayDate: Date = new Date()
   constructor(
     private datePipe: DatePipe,
     private assignmentService: AssignmentServiceService,
     private router: Router,
     private loginService: LoginService,
     private utilityService: UtilityServiceService) {
-    this.unLockAssignments.forEach(() => {
-      this.assignmentTaskVisibility.push(false);
-    });
+    this.lockAssignments = []
+    this.unLockAssignments = 0
+    this.getSubmitedAssignment();
   }
 
   ngOnInit(): void {
     this.getAllAssignments();
-    this.getSubmitedAssignment();
   }
 
   public getAllAssignments() {
@@ -49,32 +48,14 @@ export class TaskandassignmentsComponent implements OnInit {
       (data: any) => {
         this.unLockAssignments = data.unLockedAssignment;
         this.assignmentCount = this.unLockAssignments.length
-        this.lockAssignments = data.lockedAssignment;
-        this.temp();
-        console.log(this.unLockAssignment);
-        
+        this.lockAssignments = Array(data.lockedAssignment).fill(0).map((x, i) => i);
+        this.unLockAssignments.forEach(() => {
+          this.assignmentTaskVisibility.push(false);
+        });
       }
     )
   }
-  //for counting total  completed assignment task
-  AssignMap = new Map<number, number>();
-  public temp() {
-    let count: number = 0;
-    this.unLockAssignments.forEach(element => {
-      element.assignmentQuestion.forEach(e => {
-        if (this.assignmentSubmissionsList.find(e1 => e1.taskId === e.questionId)) {
-          count += 1;
-        }
-      })
-      this.AssignMap.set(element.id, count);
-      count = 0;
-    });
-  }
-  public getTotalCompletedAssignmentCount(id: number) {
-    return this.AssignMap.get(id);
-  }
 
-  
   public pageRenderUsingRouterLink(path: string, questionId: number) {
     const dataParams = {
       assignmentId: this.assignmentId,
@@ -100,40 +81,27 @@ export class TaskandassignmentsComponent implements OnInit {
 
   public getAssignment(id: number) {
     this.assignmentId = id;
-    this.unLockAssignment = this.unLockAssignments.find(assignment => assignment.id === id) as Assignment;
+    this.unLockAssignment = this.unLockAssignments.find((assignment: any) => assignment.id === id) as Assignment;
   }
   toggleAssignment(index: number): void {
     this.assignmentTaskVisibility[index] = !this.assignmentTaskVisibility[index];
   }
 
   progressWidth: string = '';
-  // calculatePercentages(num1: number, num2: number) {
-  //   let per = Math.floor(num1 / num2 * 100);
-  //   let obj = per * (7.05);
-  //   this.progressWidth = obj.toString() + 'px'
-  //   return per
-  // }
+
   public calculatePercentages(num1: number, num2: number) {
-    let totalCompleted = this.getTotalCompletedAssignmentCount(num1);
-    let per
-      per = Math.floor( totalCompleted! / num2 * 100);
-      if(num2==0){
-        per=0
-      }
-    return per;
+    return (num2 == 0 )? 0 : Math.floor(num1 / num2 * 100)
   }
 
   public getSubmissionAssignmentFilterByStatus(status: string) {
+
     this.assignmentSubmissionsList2 = this.assignmentSubmissionsList
     this.assignmentSubmissionsList2 = this.assignmentSubmissionsList2.filter(obj => {
-      if (obj.status == status) {
-        return obj
-      } else
-        return null;
+      return (obj.status == status) ? obj : null;
     });
   }
 
-  public dateFormatter(date:Date){
+  public dateFormatter(date: Date) {
     return this.datePipe.transform(date, 'dd MMM yyyy');
   }
 }

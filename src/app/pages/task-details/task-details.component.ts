@@ -14,7 +14,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class TaskDetailsComponent {
   BASE_URL = this.utilityService.getBaseUrl();
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
+  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentImages/'
   imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
 
   taskId: number = 0;
@@ -55,7 +55,7 @@ export class TaskDetailsComponent {
         this.submissionFormFun()
         return
       }
-      this.taskSubmittion.student.studentId = this.loginService.getStudentId();
+      this.taskSubmittion.studentId = this.loginService.getStudentId();
       this.taskService.submitTask(this.taskSubmittion, this.taskId).subscribe(
         (data) => {
           this.taskSubmittion = new StudentTaskSubmittion
@@ -66,15 +66,15 @@ export class TaskDetailsComponent {
       if (this.submissionForm.invalid) {
         this.submissionFormFun()
       } else {
-        this.taskSubmittion.student.studentId = this.loginService.getStudentId();
+        this.taskSubmittion.studentId = this.loginService.getStudentId();
         this.taskService.submitTask(this.taskSubmittion, this.taskId).subscribe(
           {
-            next:(data) => {
+            next: (data) => {
               this.taskSubmittion = new StudentTaskSubmittion
               this.message = "Success.."
             },
-            error:(er)=>{
-               this.message =er.error.message
+            error: (er) => {
+              this.message = er.error.message
             }
           }
         )

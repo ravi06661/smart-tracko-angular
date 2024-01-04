@@ -10,7 +10,7 @@
         <div class="col-md-6 mb-4" *ngIf="unLockAssignments.length!==0 || lockAssignments.length!==0 ">
           <h3 class="title font-17 font-500 secondary position-relative">Assignments</h3>
 
-           <!-- ASSIGNMENT ACCORDION  START-->
+           <!-- ASSIGNMENT ACCORDION  START--
         <!-- <div class="scroller-bar"> -->
           <div class="AssignmentCard mb-1" id="head-show" *ngFor="let obj of unLockAssignments; let i=index">
             <div class="Head">
@@ -22,17 +22,17 @@
             </div>
             <div class="Bar">
               <div class="Progress">
-                <div class="Deadline">{{getTotalCompletedAssignmentCount(obj.id)}}/{{obj.assignmentQuestion.length}}</div>
-                <div class="Progress">{{calculatePercentages(obj.id,obj.assignmentQuestion.length)}}%</div>
+                <div class="Deadline">{{obj.totalTaskCompleted}}/{{obj.taskQuestion.length}}</div>
+                <div class="Progress">{{calculatePercentages(obj.totalTaskCompleted,obj.taskQuestion.length)}}%</div>
 
               </div>
             </div>
             <div class="progress">
-              <div class="progress-bar ProgressW bg-primary" role="progressbar" [style.width]="calculatePercentages(obj.id,obj.assignmentQuestion.length)+'%'" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar ProgressW bg-primary" role="progressbar" [style.width]="calculatePercentages(obj.totalTaskCompleted,obj.taskQuestion.length)+'%'" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
   
             </div>
             <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
-              <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.assignmentQuestion; let j=index">
+              <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.taskQuestion; let j=index">
                 <div class="TaskCard">
                   <div class="TaskName">Task {{j+1}}</div>
                   <div class="Button">View</div>
@@ -41,7 +41,7 @@
             </div>
           </div>
           
-          <div class="TaskCard" *ngFor="let assignment of lockAssignments;let i=index">
+          <div class="TaskCard" *ngFor="let assignment of lockAssignments ; let i=index">
             <div class="font-15 font-400 text_gray">Assignment Day {{(assignmentCount+1)+i}}</div>
             <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
           </div>

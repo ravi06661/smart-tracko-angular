@@ -4,7 +4,7 @@
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Announcements</h1>
             <a routerLink="/admin/createannouncements">
-            <button class="top_profile_sec_btn font-14 font-500" >New Announcement</button>
+                <button class="top_profile_sec_btn font-14 font-500">New Announcement</button>
             </a>
         </div>
 
@@ -18,7 +18,7 @@
         <div class="row">
 
             <div class="col-md-12">
-                    <h3 class="admin-title font-17 font-600 secondary position-relative">Announcements Log</h3>
+                <h3 class="admin-title font-17 font-600 secondary position-relative">Announcements Log</h3>
                 <div class="table_container mt-2">
                     <table class="table mb-0">
                         <thead style="background:#EDF9FB;">
@@ -31,13 +31,14 @@
                             </tr>
                         </thead>
                         <tbody class="bg-light">
-                            <tr *ngFor="let obj of announcements">
+                            <tr *ngFor="let obj of announcements ; let i  = index">
                                 <td>{{obj.date | date:'medium'}}</td>
                                 <td>{{obj.title}}</td>
                                 <td>{{obj.message}}</td>
-                                <td>Core Java 
-                                    <span class="secondary font-500 font-14">+4 more</span>
+                                <td>{{all[i]}}
+                                    <span class="secondary font-500 font-14" (click)="showMore(i)">+more</span>
                                 </td>
+                                <!-- {{obj.course.length-1}}{{visibilityStatus} -->
                                 <td>{{obj.seenBy.seenBy}} of {{obj.seenBy.totalStudents}}</td>
                         </tbody>
                     </table>

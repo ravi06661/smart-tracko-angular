@@ -19,7 +19,7 @@ export class UtilityServiceService {
   }
 
   public getTimeUrl() {
-    return this.TIME_URL;
+   // return this.TIME_URL;
   }
 
   public updateTimeline(date: any) {

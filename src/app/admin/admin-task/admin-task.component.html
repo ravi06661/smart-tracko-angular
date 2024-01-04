@@ -192,9 +192,9 @@
                         <tbody class="bg-light">
                             <tr *ngFor="let obj of submitedTasksList">
                                 <td class="d-flex align-items-center" style="gap:5px;" (click)="pageRanderWithObject(obj)">
-                                    <img [src]="IMG_URL+obj.student.profilePic" alt="" class="img-fluid imagestudent">
-                                    <h5 class="font-13 font-500 mb-0 pointer">{{obj.student.fullName}} <br>
-                                        <p class="text_gray font-13 font-400 mb-0">{{obj.student.applyForCourse}}</p>
+                                    <img [src]="IMG_URL+obj.studentProfilePic" alt="" class="img-fluid imagestudent">
+                                    <h5 class="font-13 font-500 mb-0 pointer">{{obj.fullName}} <br>
+                                        <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                                     </h5>
                                 </td>
                                 <td>Hello World! In Java</td>
