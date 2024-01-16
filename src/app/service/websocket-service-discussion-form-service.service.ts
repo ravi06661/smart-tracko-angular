@@ -14,7 +14,7 @@ export class WebsocketServiceDiscussionFormService {
   SOCKET_URL = this.utilityService.getBaseUrl() + "/socket"
 
   constructor(private utilityService: UtilityServiceService) {
-    this.connect();
+   // this.connect();
     this.messagesObservable = this.messagesSubject.asObservable().pipe(share());
   }
 

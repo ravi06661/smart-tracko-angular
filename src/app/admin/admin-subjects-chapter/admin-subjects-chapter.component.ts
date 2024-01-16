@@ -115,12 +115,10 @@ export class AdminSubjectsChapterComponent {
       {
         next: (data) => {
           this.message = 'success';
-          this.chapterId = 0;
           let ch = this.chapterResponse.find(obj => obj.chapterId === this.chapterId) as ChapterResponse
           ch.chapterName = this.chapterUpdate.chapterName;
-          this.chapterId = this.chapterUpdate.chapterId
+          this.chapterId = this.chapterId;
           ch.chapterId = this.chapterUpdate.chapterId
-         //this.chapterUpdate = new Chapter();
         },
         error: (error) => {
           this.message = error.error.message;
