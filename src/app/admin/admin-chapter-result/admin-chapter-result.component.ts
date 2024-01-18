@@ -28,9 +28,9 @@ export class AdminChapterResultComponent implements OnInit{
   showResult(){
 
     this.examService.getAllChapterExamResultByChaterId(this.chapterId).subscribe((data:any)=>{
-      console.log(data);
       
-        this.chapterExamResult=data.result
+      
+        this.chapterExamResult=data.examResult
 
     })
          

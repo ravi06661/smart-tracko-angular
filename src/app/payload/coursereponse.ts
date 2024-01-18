@@ -5,7 +5,7 @@ import { TechnologyStackResponse } from "./technology-stack-response";
 export class Coursereponse {
   public courseId!:number;
   public  courseName:string='';
-  public  courseFees!:number;
+  public  courseFees!:string;
   public  subjectCount!:number;
   public  batchesCount!:number;
  // public technologyImage!:string

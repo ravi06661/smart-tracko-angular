@@ -86,9 +86,10 @@ export class AdminCoursesBatchesComponent implements OnInit {
   }
 
   public createNewBatch() {
+    alert('ssssss')
     this.batchRequest.courseId = this.courseId;
     this.createBatchFrom.markAllAsTouched();
-    if (this.createBatchFrom.valid)
+    //if (this.createBatchFrom.valid)
       this.batchService.createNewBatch(this.batchRequest).subscribe({
         next: (data: any) => {
 
