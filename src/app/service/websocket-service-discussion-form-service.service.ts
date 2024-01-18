@@ -14,7 +14,7 @@ export class WebsocketServiceDiscussionFormService {
   SOCKET_URL = this.utilityService.getBaseUrl() + "/socket"
 
   constructor(private utilityService: UtilityServiceService) {
-   // this.connect();
+    this.connect();
     this.messagesObservable = this.messagesSubject.asObservable().pipe(share());
   }
 
@@ -23,8 +23,12 @@ export class WebsocketServiceDiscussionFormService {
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, (frame: any) => {
       this.stompClient.subscribe('/queue/messages', (message: any) => {
+        console.log(message.body);
+        
         const parsedMessage = JSON.parse(message.body);
-        console.log = () => { };
+        //console.log = () => { };
+        console.log(parsedMessage);
+        
         this.messagesSubject.next(parsedMessage);
       });
     });
@@ -39,6 +43,8 @@ export class WebsocketServiceDiscussionFormService {
     return this.messagesObservable;
   }
   public sendMessage(message: any): void {
+    console.log(message);
+    
     this.stompClient.send('/api/socket', {}, JSON.stringify(message));
   }
 

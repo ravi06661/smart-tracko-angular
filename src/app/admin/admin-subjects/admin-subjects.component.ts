@@ -44,7 +44,6 @@ export class AdminSubjectsComponent implements OnInit {
       subjectName: ['', Validators.required]
     });
 
-
   }
 
   ngOnInit(): void {
@@ -100,7 +99,7 @@ export class AdminSubjectsComponent implements OnInit {
     if (this.techImages.length == 0) {
       this.getAllTechImage();
     }
-    this.subject = this.subjects.find(obj => obj.subjectId === id) as SubjectResponse
+    this.subject = this.subjects.find(obj => obj.subjectId == id) as SubjectResponse
 
   }
 
@@ -108,7 +107,7 @@ export class AdminSubjectsComponent implements OnInit {
     this.subjectService.updateSubject(this.subject).subscribe({
       next: (data: any) => {
         this.message = "Success.";
-        this.subjects = this.subjects.map(item => (item.subjectId === data.subjectId ? data : item));
+        this.subjects = this.subjects.map(item => (item.subjectId == data.subjectId ? data : item));
       },
       error: (err) => {
         this.message = err.error.message
@@ -126,9 +125,9 @@ export class AdminSubjectsComponent implements OnInit {
   public deleteSubect() {
     this.subjectService.deleteSubjectById(this.subjectId).subscribe(
       (data: any) => {
-    //this.getAllSubject();
-    let index =this.subjects.findIndex(obj=>obj.subjectId === this.subjectId)
-    this.subjects.splice(index ,1)
+        //this.getAllSubject();
+        let index = this.subjects.findIndex(obj => obj.subjectId === this.subjectId)
+        this.subjects.splice(index, 1)
         this.subjectId = 0;
       }
     )
@@ -138,6 +137,7 @@ export class AdminSubjectsComponent implements OnInit {
     this.subjectSubmissionForm = this.formBuilder.group({
       subjectName: ['', Validators.required]
     });
+
   }
   public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
     const field = this.subjectSubmissionForm.get(fieldName);
