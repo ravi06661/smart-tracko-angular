@@ -22,7 +22,7 @@ export class WebsocketServiceDiscussionFormService {
     const socket = new SockJS(this.SOCKET_URL);
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, (frame: any) => {
-      this.stompClient.subscribe('/queue/messages', (message: any) => {
+      this.stompClient.subscribe('/queue/Chatmessages', (message: any) => {
         console.log(message.body);
         
         const parsedMessage = JSON.parse(message.body);

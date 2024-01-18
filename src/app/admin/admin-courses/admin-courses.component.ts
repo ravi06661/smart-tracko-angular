@@ -250,6 +250,7 @@ export class AdminCoursesComponent implements OnInit {
       modal.style.display = 'none';
     }
   }
-
-
+  trackById(item:any){
+    return item.courseId;
+  }
 }
