@@ -85,7 +85,7 @@
               </div>
               <h4 class="post_subtitle text_small font-17 font-400 lh-21">{{obj.content}} </h4>
               <div class="d-flex justify-content-center align-items-center mb-1">
-                <video *ngIf="obj.audioFile !== null && obj.audioFile !== '' && obj.audioFile !== undefined"
+                <video *ngIf="obj.audioFile !== 'null' && obj.audioFile !== '' && obj.audioFile !== undefined"
                   [src]="FILE_URL + obj.audioFile" class="post_img" controls></video>
 
 
