@@ -12,6 +12,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { Subject } from 'src/app/entity/subject';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Coursereponse } from 'src/app/payload/coursereponse';
+import { isThisISOWeek } from 'date-fns';
 
 @Component({
   selector: 'app-admin-courses',
@@ -22,11 +23,22 @@ export class AdminCoursesComponent implements OnInit {
   imageUrl = this.utilityService.getBaseUrl() + "/file/getImageApi/technologyStackImage/";
   subjects: any[] = [];
   courseRequest: CourseRequest = new CourseRequest();
+  courseUpdate: CourseRequest = new CourseRequest();
   selectedSubjectIds: number[] = [];
   techImages: TechnologyStack[] = [];
 
   courseResponse: Coursereponse[] = []
   courseResponse1 = new Coursereponse()
+
+  // obj = {
+  //   tech: new TechnologyStack(),
+  //   subject: [],
+  //   courseName: '',
+  //   courseFees: 0,
+  //   courseDuration: 0,
+  //   isStarter: false,
+  //   description: ''
+  // }
   // courseRequest:CourseRequest =  new CourseRequest()
 
   message = '';
@@ -61,8 +73,6 @@ export class AdminCoursesComponent implements OnInit {
     });
   }
 
-
-
   ngOnInit(): void {
     this.getAllCourses();
     this.getAllTechImages();
@@ -71,7 +81,6 @@ export class AdminCoursesComponent implements OnInit {
 
   checkboxChanged(subjectId: number) {
     const index = this.courseRequest.subjectIds.indexOf(subjectId);
-
     if (index === -1) {
       this.courseRequest.subjectIds.push(subjectId);
     } else {
@@ -154,10 +163,22 @@ export class AdminCoursesComponent implements OnInit {
   }
 
   public updateCourse() {
-    this.courseService.updatCourse(this.courseResponse1).subscribe({
+
+    this.courseUpdate.courseId=this.courseResponse1.courseId
+    this.courseUpdate.courseFees = this.courseResponse1.courseFees
+    this.courseUpdate.courseName = this.courseResponse1.courseName
+    this.courseUpdate.duration = this.courseResponse1.duration
+    this.courseUpdate.sortDescription = this.courseResponse1.sortDescription
+    this.courseUpdate.isStarterCourse = this.courseResponse1.isStarterCourse
+    this.courseUpdate.technologyStack = this.courseResponse1.technologyStack.id
+    this.courseUpdate.subjectIds = this.courseResponse1.subjectResponse.map(obj => obj.subjectId) as number[]
+   
+
+
+    this.courseService.updatCourse(this.courseUpdate).subscribe({
       next: (data: any) => {
-        this.courseResponse1 = new Coursereponse()
-        this.getAllCourses();
+        this.courseRequest = new CourseRequest()
+       this.getAllCourses();
         this.message = data.message;
         this.messageClass = 'text-success';
       },
@@ -183,12 +204,21 @@ export class AdminCoursesComponent implements OnInit {
   }
 
 
+  // public addAndRemoveSubjectsFromCourse(subject: any) {
+  //   let index = this.course.subjects.findIndex(e => e.subjectId == subject.subjectId);
+  //   if (index === -1)
+  //     this.course.subjects.push(subject);
+  //   else
+  //     this.course.subjects.splice(index, 1);
+  // }
+
   public addAndRemoveSubjectsFromCourse(subject: any) {
-    let index = this.course.subjects.findIndex(e => e.subjectId == subject.subjectId);
-    if (index === -1)
-      this.course.subjects.push(subject);
-    else
-      this.course.subjects.splice(index, 1);
+    let index = this.courseResponse1.subjectResponse.findIndex(e => e.subjectId == subject.subjectId);
+    if (index === -1) {
+      this.courseResponse1.subjectResponse.push(subject);
+    } else {
+      this.courseResponse1.subjectResponse.splice(index, 1);
+    }
   }
 
   public clearValidationForm() {

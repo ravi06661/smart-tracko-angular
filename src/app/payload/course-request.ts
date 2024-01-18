@@ -7,4 +7,5 @@ export class CourseRequest {
     public  subjectIds:number[]=[]
     public  technologyStack:number =0;
 	public isStarterCourse!:boolean;
+	public courseId!:number
 }
