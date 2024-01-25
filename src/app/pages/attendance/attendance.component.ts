@@ -73,10 +73,10 @@ export class AttendanceComponent implements OnInit {
     let today = new Date
     today.setDate(today.getDate() + 1)
     this.minStart = today.toISOString().slice(0, 10);
-  //  if(this.leaves.leaveDate ==null){
-  //   today.setDate(today.getDate()+2)
-  //   this.minEnd =  today.toISOString().slice(0, 10);
-  //  }
+    //  if(this.leaves.leaveDate ==null){
+    //   today.setDate(today.getDate()+2)
+    //   this.minEnd =  today.toISOString().slice(0, 10);
+    //  }
     this.presentsMap = new Map();
     this.attendanceOptions = this.attendanceChart.attendanceOptions;
 
@@ -252,11 +252,19 @@ export class AttendanceComponent implements OnInit {
         this.absentMap = data.absents;
         this.mispunchMap = data.mispunchs
         this.earlyCheckOutMap = data.earlyCheckOuts
-        this.setAbsentData();
+
         this.setPresentData();
+        this.setAbsentData();
         this.setLeavesData();
         this.setEarlyCheckOutData();
         this.setMishPunchData();
+
+        setTimeout(() => {
+          this.attendanceOptions.xaxis = {
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+          }
+          // window.dispatchEvent(new Event('resize'));
+        }, 100);
 
       });
   }
@@ -269,6 +277,7 @@ export class AttendanceComponent implements OnInit {
     for (const entry of resultMap.entries()) {
       arr[entry[0] - 1] = entry[1];
     }
+
     this.attendanceOptions.series[0].data = arr;
   }
 
@@ -282,6 +291,7 @@ export class AttendanceComponent implements OnInit {
       arr[entry[0] - 1] = entry[1];
     }
     this.attendanceOptions.series[2].data = arr;  /////
+
   }
 
   public setAbsentData() {

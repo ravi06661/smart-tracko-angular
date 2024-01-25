@@ -38,9 +38,9 @@ export class CreateAnnouncementsComponent implements OnInit {
   }
 
   public getAllCourses() {
-    this.courseService.getAllCourses(-1, 10).subscribe({
+    this.courseService.getAllCourses(0, 10).subscribe({
       next: (data: any) => {
-        this.courses = data;
+        this.courses = data.response;
       }
     })
   }
@@ -48,17 +48,17 @@ export class CreateAnnouncementsComponent implements OnInit {
   public publishAnnouncement() {
     this.announcementService.publishAnnouncement(this.announcementRequest).subscribe({
       next: (data: any) => {
-        let courses: number[] = []
-        data.course.forEach((e: any) => {
-          courses.push(e.courseId);
-        });
+        //let courses: number[] = []
+       /// data.course.forEach((e: any) => {
+       //   courses.push(e.courseId);
+       // });
 
         let obj = {
           type: 'announcement',
           date: data.date,
           message: data.message,
           title: data.title,
-          allCourse: courses
+          allCourse: this.announcementRequest.courseId
         }
 
         Swal.fire('Announcement Published').then(e => {

@@ -24,7 +24,8 @@ export class PresentAbsentLeaveBarChart {
         ],
         chart: {
           type: "bar",
-          height: 334
+          height: 334,
+          toolbar:{show:false}
         },
         plotOptions: {
           bar: {
@@ -34,8 +35,8 @@ export class PresentAbsentLeaveBarChart {
         dataLabels: {
           enabled: false
         },
-        xaxis: {
-          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+         xaxis: {
+          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         },
         colors: ["#5754E5", "#FF4A11", "#F8961E", "#88048f", "#10e317"],
       };

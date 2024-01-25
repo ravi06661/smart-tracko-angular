@@ -107,7 +107,7 @@ export class RightSideBarComponent implements OnInit {
   public async getStudentCourse(course: number[]): Promise<void> {
     let courseId = 0;
     const data: any = await this.studentService.getByStudentById(this.loginService.getStudentId()).toPromise();
-    courseId = data.course.courseId;
+    courseId = data.courseResponse.courseId;
     this.Coursestatus = course.includes(courseId);
   }
 
