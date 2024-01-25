@@ -29,14 +29,14 @@ export class AdminstudentComponent implements OnInit {
   courseId: number = 0
   studentId: number = 0;
   newStudent: StudentDetails = new StudentDetails();
-   courses:Course[]=[];
+  courses: Course[] = [];
   courseResponse: Coursereponse[] = []
   courseRequest: CourseRequest = new CourseRequest();
   course: Course = new Course();
   techImages: TechnologyStack[] = [];
   imageName = '';
   imageUrlTec = this.utilityService.getBaseUrl() + "/file/getImageApi/technologyStackImage/";
-  studentCourse:Coursereponse = new Coursereponse();
+  studentCourse: Coursereponse = new Coursereponse();
   selectedCourse: number = 0;
 
   constructor(private stuentService: StudentService, private utilityService: UtilityServiceService, private courseService: CourseServiceService, private techService: TechnologyStackService, private activateRoute: ActivatedRoute
@@ -46,7 +46,6 @@ export class AdminstudentComponent implements OnInit {
     this.getAllStudent(0, 15);
     this.getAllCourse();
     this.getAllTechImages();
-
 
   }
 
@@ -93,11 +92,11 @@ export class AdminstudentComponent implements OnInit {
   }
 
   public upgradeCourseOfStudent(courseId: number) {
-
-
     this.courseService.upgradeStudentCourse(this.newStudent.studentId, this.selectedCourse).subscribe(
       (data: any) => {
-         this.newStudent = data
+    
+       
+
         //  let student = this.students.findIndex(obj=>obj.studentId === this.newStudent.studentId) 
         //this.students = this.students.map(item => (item.studentId === data.studentId ? data : item));
         //  this.students[student] = this.newStudent
@@ -113,9 +112,9 @@ export class AdminstudentComponent implements OnInit {
           icon: 'success',
           title: 'Updated  success !!'
         }).then(e => {
+          let student = this.students.find(obj => obj.studentId == this.newStudent.studentId) as StudentDetails
+          student.applyForCourse = data.course.courseName;
           this.newStudent = new StudentDetails
-       //   this.getAllStudent(0, 15)
-          // this.router.navigate(['/admin/payfees']);
         })
       },
       (err) => {
@@ -167,7 +166,7 @@ export class AdminstudentComponent implements OnInit {
   selectCourse(courseId: number): void {
     this.selectedCourse = courseId;
   }
-  public setCourse(course:any){
-     this.studentCourse = course
+  public setCourse(course: any) {
+    this.studentCourse = course
   }
 }

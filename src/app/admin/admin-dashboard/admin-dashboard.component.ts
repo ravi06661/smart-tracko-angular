@@ -134,6 +134,10 @@ export class AdminDashboardComponent implements OnInit {
       next: (data: any) => {
         this.admissionMap = data
         this.getAdmissionBarChartData()
+       
+        this.admissinonOptions.xaxis= {
+          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        }
       }
     })
   }
@@ -150,7 +154,7 @@ export class AdminDashboardComponent implements OnInit {
       arr[entry[0] - 1] = entry[1];
     }
     this.admissinonOptions.series[0].data = arr
-    window.dispatchEvent(new Event('resize'));
+   // window.dispatchEvent(new Event('resize'));
   }
   public getFessBarData() {
     let arr: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -160,7 +164,7 @@ export class AdminDashboardComponent implements OnInit {
       arr[entry[0] - 1] = entry[1];
     }
     this.feesOptions.series[0].data = arr
-    window.dispatchEvent(new Event('resize'));
+  //  window.dispatchEvent(new Event('resize'));
   }
 
   public generateYearsArray(startYear: number, endYear: number): number[] {
@@ -176,6 +180,9 @@ export class AdminDashboardComponent implements OnInit {
       (data: any) => {
         this.feesMap = data.body
         this.getFessBarData();
+        this.feesOptions.xaxis= {
+          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        }
       }
     )
   }

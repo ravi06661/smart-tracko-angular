@@ -16,8 +16,8 @@
           <h4 class="font-17 font-400" [innerHTML]="assignmentQues.question"></h4>
         </div>
         <div class="assignment">
-          <div class="row advertisement" *ngIf="assignmentQues.videoUrl!=null && assignmentQues.videoUrl!=undefined && assignmentQues.videoUrl!=''">
-            <div class="col-md-3 col-sm-6 col-xs-12" >
+          <div class="row advertisement">
+            <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="assignmentQues.videoUrl!=null && assignmentQues.videoUrl!=undefined && assignmentQues.videoUrl!=''"  >
               <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
               {{assignmentQues.videoUrl}}
               <div class="assinment_image video-img">
