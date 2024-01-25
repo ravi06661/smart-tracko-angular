@@ -150,7 +150,6 @@ export class AdminAddFeesComponent implements OnInit {
     )
 }
 
-
 }
 
 

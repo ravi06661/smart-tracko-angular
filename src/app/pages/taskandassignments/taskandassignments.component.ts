@@ -17,7 +17,7 @@ export class TaskandassignmentsComponent implements OnInit {
 
   BASE_URL = this.utilityService.getBaseUrl();
   ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentImages/'
-  assignments: Assignment[] = []
+  //assignments: Assignment[] = []
   unLockAssignments: any
   lockAssignments: any
   assignmentSubmissionsList: AssignmentSubmission[] = []

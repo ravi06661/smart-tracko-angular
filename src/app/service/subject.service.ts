@@ -8,6 +8,7 @@ import { LoginService } from './login.service';
   providedIn: 'root'
 })
 export class SubjectService {
+  
 
 
   public getAllChapterWithSubjectId(id: number) {
@@ -46,5 +47,9 @@ export class SubjectService {
   }
   public deleteSubjectById(id: number) {
     return this.http.put(`${this.Subject_url}/deleteSubjectById?subjectId=${id}`, null)
+  }
+
+  public getAllSubjectsByCourseId(courseId:any) {
+   return this.http.get<any>(`${this.Subject_url}/getAllSubjectsByCourseId?courseId=${courseId}`)
   }
 }

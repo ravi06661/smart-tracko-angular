@@ -106,7 +106,6 @@ const routes: Routes = [
       { path: 'assignmentsubmission', component: AdminAssignmentSubmissionComponent, pathMatch: 'full' },
       { path: 'task', component: AdminTaskComponent, pathMatch: 'full' },
       { path: 'createtask/:id', component: AdminCreateTaskComponent, pathMatch: 'full' },
-      { path: 'edittask', component: AdminEditTaskComponent, pathMatch: 'full' },
       { path: 'attendance', component: AdminAttendanceComponent, pathMatch: 'full' },
       { path: 'leaverequest', component: AdminLeaveRequestComponent, pathMatch: 'full' },
       { path: 'fees', component: AdminFeesComponent, pathMatch: 'full' },
@@ -133,7 +132,7 @@ const routes: Routes = [
       { path: 'studentprofile/:studentId', component: StudentProfileComponent, pathMatch: 'full' },
       { path: 'studentregistration', component: AdminStudentRegistrationComponent, pathMatch: 'full' },
       { path: 'submission', component: AdminSubmissionComponent, pathMatch: 'full' },
-      { path: 'editetask', component: AdminEditTaskComponent },
+      { path: 'editetask/:id', component: AdminEditTaskComponent },
       { path: 'admindiscussion', component: AdminDiscussionForumComponent, pathMatch: 'full' },
       { path: 'result/:chapterId', component: AdminChapterResultComponent, pathMatch: 'full' },
 

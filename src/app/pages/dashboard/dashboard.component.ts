@@ -4,6 +4,7 @@ import { Route, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Observable, interval, map, switchMap } from 'rxjs';
 import { Assignment } from 'src/app/entity/assignment';
+import { AssignmentResponse } from 'src/app/entity/assignment-response';
 import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
 import { Attendance } from 'src/app/entity/attendance';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
@@ -50,9 +51,8 @@ export class DashboardComponent implements OnInit {
   assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
   ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   taskSubmissionObj: StudentTaskSubmittion = new StudentTaskSubmittion
-  toDoAssignment: Assignment = new Assignment
-  unLockAssignments: Assignment[] = []
-  lockAssignments: Assignment[] = []
+  toDoAssignment = new AssignmentResponse()
+  unLockAssignments: AssignmentResponse[] = []
   assignmentId: any;
 
   totalTask: number = 0;
@@ -65,6 +65,7 @@ export class DashboardComponent implements OnInit {
   tasksLength = 0;
 
   todayDate: Date = new Date()
+  message!: string
 
 
   constructor(private service: AssignmentServiceService,
@@ -188,15 +189,22 @@ export class DashboardComponent implements OnInit {
 
   public getdoAssignment() {
     this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId()).subscribe(
-      (data: any) => {
-        this.unLockAssignments = data.unLockedAssignment;
-        this.toDoAssignment = this.unLockAssignments[this.unLockAssignments.length - 1];
-        if (this.toDoAssignment == null) {
-          this.toDoAssignment = new Assignment
+      {
+        next: (data: any) => {
+          //   this.unLockAssignments = data.unLockedAssignment;
+          //   this.toDoAssignment = 
+          //   if (this.toDoAssignment == null) {
+          //     this.toDoAssignment = new Assignment
+          //   }
+          //   this.assignmentId = this.toDoAssignment.id
+          //   this.lockAssignments = data.lockedAssignment;
+          //  this.toDoAssignmentLength = this.toDoAssignment.assignmentQuestion.length
+          this.unLockAssignments = data.unLockedAssignment
+          this.toDoAssignment = this.unLockAssignments[this.unLockAssignments.length - 1];
+        },
+        error: (err: any) => {
+          this.message = err.error.message
         }
-        this.assignmentId = this.toDoAssignment.id
-        this.lockAssignments = data.lockedAssignment;
-        this.toDoAssignmentLength = this.toDoAssignment.assignmentQuestion.length
       }
     )
   }

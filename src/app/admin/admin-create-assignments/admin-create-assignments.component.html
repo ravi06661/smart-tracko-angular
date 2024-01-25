@@ -79,9 +79,9 @@
                         <div id="hideQuestion" id="hideQuestion" [hidden]="!expandedQuestions[i]">
                             <div class="row">
                                 <input id="file" type="file" onchange="loadFile(event)"  class="d-none">
-                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="obj.videoUrl!=null && obj.videoUrl!='' &&obj.videoUrl!=undefined ">
                                     <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
-                                   <div class="assinment_image video-img">
+                                   <div class="assinment_image video-img" >
                                      <video src="{{obj.videoUrl}}"  controls
                                        height="" width="270" type="video/mp4"></video>
                                    </div>
@@ -118,7 +118,7 @@
                                     data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="setQuestionId(obj.questionId)"><i
                                         class="fi fi-rr-trash line-height-0"></i>
                                     Delete</span>
-                               <a routerLink="/admin/editetask">
+                               <a routerLink="/admin/editetask/{{obj.questionId}}">
                                 <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"><i
                                     class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
                                </a>
@@ -150,7 +150,7 @@
                               </div>
                             <h3 class="font-15 font-500 assignment_sub_heading mt-1 mb-0">{{imageName[i]}}
                             </h3>
-                        </div>
+                        </div>  
 
                         <div class="col-lg-4 col-md-4">
                             <form class="attachment_file2 d-flex align-items-center justify-content-center  position-relative add-attechment add-media-attech">
@@ -168,7 +168,7 @@
                         <div class="input_icon position-relative">
                             <input type="text" name="videoUrl" class="form-control input_text gray-input-bg enabled_inp"
                                 placeholder="VIDEO-URL"  [(ngModel)]="taskQuestion.videoUrl">
-                                {{taskQuestion.videoUrl}}
+                        
                         </div>
                     </div>
 
@@ -182,7 +182,7 @@
                             <ckeditor  [editor]="Editor" name="question" formControlName="question" [(ngModel)]="taskQuestion.question"> </ckeditor>
                             <div  *ngIf="isFieldInvalidForAssignmentForm('question')" class="text-danger">Question is
                                 required.</div>
-                                {{taskQuestion.question}}
+                               
                     </div>
                     </form>
                     <!-- <div class="edit-delete-que mt-5">
@@ -223,7 +223,7 @@
                 <div class="add-que border-0" style="padding: 16px 12px;" *ngIf="attachmentInfo.name != ''">
                     <i class="fi fi-rr-file-zipper warning font-25 line-height-0"></i>
                     <h5 class="font-17 font-500 warning mb-0">{{attachmentInfo.name}} ({{attachmentInfo.size}} mb)</h5>
-                    <span data-bs-toggle="modal" data-bs-target="#delete-modal"><i
+                    <span data-bs-toggle="modal" data-bs-target="#delete-modal-file"><i
                         class="fi fi-rr-trash line-height-0 font-24 ms-3 delete-icon-color"></i></span>
                 </div>
             </div><!-- col-md-12 -->
@@ -269,7 +269,7 @@
 <!-- Modal Delete Modal End -->
 
 <!-- Modal Discard Changes Modal Start -->
-<div class="modal fade" id="discard-changes-modal" tabindex="-1" aria-labelledby="discard-changes-modal"
+<div class="modal fade" id="delete-modal-file" tabindex="-1" aria-labelledby="delete-modal-file"
 aria-hidden="true">
 <div class="modal-dialog position-relative leave_modal">
     <div class="modal-content">
@@ -279,13 +279,12 @@ aria-hidden="true">
                 <i class="fi fi-rr-cross close_icon"></i>
             </button>
 
-            <p class="secondary font-21 font-500 text-center">Are You Sure You Want To <br> Discard Changes?</p>
+            <p class="secondary font-21 font-500 text-center">Are You Sure You Want To <br> delete </p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                <a routerLink="/admin/createtask">
-                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color">Discard
-                        changes</button>
-                </a>
-                <a routerLink="/admin/createtask">
+               
+                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color pointer"  (click)="deleteAttachment()">Delete</button>
+              
+                <a  >
                     <button type="button" class="apply_modal_btn font-15 font-500">No, Do not delete</button>
                 </a>
             </div>

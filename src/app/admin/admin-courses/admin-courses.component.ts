@@ -27,6 +27,7 @@ export class AdminCoursesComponent implements OnInit {
   courseUpdate: CourseRequest = new CourseRequest();
   selectedSubjectIds: number[] = [];
   techImages: TechnologyStack[] = [];
+  courseIndex!: number
 
   courseResponse: Coursereponse[] = []
   courseResponse1 = new Coursereponse()
@@ -174,7 +175,7 @@ export class AdminCoursesComponent implements OnInit {
     this.courseUpdate.technologyStack = this.courseResponse1.technologyStack.id
     this.courseUpdate.subjectIds = []
     this.courseUpdate.subjectIds = this.courseResponse1.subjectResponse.map(obj => obj.subjectId) as number[]
-    console.log(this.courseResponse1.subjectResponse);
+
 
     this.courseService.updatCourse(this.courseUpdate).subscribe({
 
@@ -194,7 +195,8 @@ export class AdminCoursesComponent implements OnInit {
   public deleteCourse(id: number) {
     this.courseService.deleteCourse(id).subscribe({
       next: (data: any) => {
-        this.getAllCourses();
+        // this.getAllCourses();
+        this.courseResponse.splice(this.courseIndex, 1)
       }
     })
   }

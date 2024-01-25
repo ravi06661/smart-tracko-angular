@@ -93,6 +93,7 @@ import { AdminDiscussionForumComponent } from './admin/admin-discussion-forum/ad
 import { AdminChapterResultComponent } from './admin/admin-chapter-result/admin-chapter-result.component';
 import { EmogiComponent } from './pages/emogi/emogi.component';
 import { SafePipe } from './utils/pipe/safe.pipe';
+import { TaskQuestionComponent } from './payload/task-question/task-question.component';
 
 
 
@@ -169,6 +170,7 @@ import { SafePipe } from './utils/pipe/safe.pipe';
     AdminChapterResultComponent,
     EmogiComponent,
     SafePipe,
+    TaskQuestionComponent,
   
    
        

@@ -1,6 +1,9 @@
 import { Assignment } from "./assignment";
+import { TaskQuestion } from "./task-question";
 
 export class AssignmentResponse {
-    public assignment =  new Assignment
-    public taskCompleted:number=0;
+
+   id!:number 
+   title!:string
+   taskQuestion:TaskQuestion[]=[]
 }

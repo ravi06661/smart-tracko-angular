@@ -10,6 +10,7 @@ import { fr } from 'date-fns/locale';
 import { TaskQuestionRequest } from '../payload/task-question-request';
 import { an } from '@fullcalendar/core/internal-common';
 import { AssignmentSubmissionRequest } from '../payload/assignment-submission-request';
+import { TaskQuestion } from '../entity/task-question';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,30 @@ import { AssignmentSubmissionRequest } from '../payload/assignment-submission-re
 export class AssignmentServiceService {
 
 
+
   BASE_URL = this.utilityService.getBaseUrl();
   assignmentUrl = this.BASE_URL + '/assignment';
 
   constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
 
+  updateQuestion(question: TaskQuestion, imagePreview: File[]) {
+    let formData = new FormData();
+    formData.append('question', question.question)
+    formData.append('videoUrl', question.videoUrl)
+    formData.append('questionId', question.questionId.toString())
+    if (question.questionImages != null) {
+      question.questionImages.forEach((t) => {
+        formData.append('questionImages', t)
+      })
+    }
+
+    if (imagePreview != null) {
+      imagePreview.forEach((t) => {
+        formData.append('newImages', t)
+      })
+    }
+    return this.http.put<any>(`${this.assignmentUrl}/updateAssignmentQuestion`, formData)
+  }
 
   public createAssignment(assignmentRequest: AssignmentRequest) {
     return this.http.post(`${this.assignmentUrl}/createAssignment`, assignmentRequest);
@@ -76,8 +96,8 @@ export class AssignmentServiceService {
     return this.http.get(`${this.assignmentUrl}/getAllAssignments`);
   }
 
-  public getAssignmentQuestionById(questionId: number, assignmentId: number) {
-    return this.http.get(`${this.assignmentUrl}/getAssignmentQuesById?questionId=${questionId}&assignmentId=${assignmentId}`)
+  public getAssignmentQuestionById(questionId: number) {
+    return this.http.get(`${this.assignmentUrl}/getAssignmentQuesById?questionId=${questionId}`)
   }
 
   public getSubmitedAssignmetByStudentId(studentId: number) {
@@ -96,8 +116,8 @@ export class AssignmentServiceService {
     formData.append('review', review);
     console.log(status);
     console.log(review);
-    
-    
+
+
     return this.http.put(`${this.assignmentUrl}/updateSubmitedAssignmentStatus`, formData);
   }
 

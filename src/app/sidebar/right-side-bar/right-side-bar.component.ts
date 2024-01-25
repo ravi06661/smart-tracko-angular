@@ -59,7 +59,7 @@ export class RightSideBarComponent implements OnInit {
         }, 300);
       },
       error: (err: any) => {
-
+        this.isDataReloading = false
       }
     })
   }

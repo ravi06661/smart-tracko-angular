@@ -52,11 +52,10 @@ export class AssignmentDetailsComponent implements OnInit {
 
   public getAssignmentQuestionById() {
 
-    this.assignmentService.getAssignmentQuestionById(this.questionId, this.assignmentId).subscribe({
+    this.assignmentService.getAssignmentQuestionById(this.questionId).subscribe({
       next: (data: any) => {
         this.assignmentQues = data.question
         this.attachment = data.attachment
-        // this.isSubmitted()
       }
     })
   }

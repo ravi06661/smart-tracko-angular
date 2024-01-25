@@ -99,8 +99,8 @@ export class AdminSubjectsChapterQuizComponent {
         next: (data: any) => {
           this.message = 'success..';
           this.question = new ChapterQuizeQuestion();
-         let qr =  this.questions.findIndex(obj => obj.questionId === data.questionId)
-              this.questions[qr] = data
+          let qr = this.questions.findIndex(obj => obj.questionId === data.questionId)
+          this.questions[qr] = data
           //  this.getAllQuestions();
         },
         error: (error) => {
