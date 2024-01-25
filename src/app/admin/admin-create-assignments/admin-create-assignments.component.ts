@@ -74,6 +74,8 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   public getAssignmentById() {
     this.assignmentService.getAssignmentById(this.assignmentId).subscribe({
       next: (data: any) => {
+        console.log(data);
+
         this.assignment = data;
         this.assignmentQuestionsData.assignmentQuestion = data.assignmentQuestion
       },
@@ -96,19 +98,19 @@ export class AdminCreateAssignmentsComponent implements OnInit {
       this.imageName.push('');
     }
   }
-    url:string='';
+  url: string = '';
 
   public addAssignmentQuestion() {
     this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(
       {
-        next:(data: any) => {
+        next: (data: any) => {
           this.assignmentQuestionsData.assignmentQuestion = data.assignmentQuestion
           this.assignmentQuestionsData.assignmentQuestion.forEach(() => this.expandedQuestions.push(false));
           this.assignmentForm = this.formBuilder.group({
             question: ['', Validators.required]
           })
-        }, 
-        error:(er:any) => {
+        },
+        error: (er: any) => {
           this.assignmentQuestionsData.assignmentQuestion = er.assignmentQuestion
         }
       }
@@ -122,6 +124,13 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     this.attachmentInfo.name = event.target.files[0].name
     this.attachmentInfo.size = Math.floor(((event.target.files[0].size) / 1024) / 1024)
     this.assignmentQuestionsData.taskAttachment = event.target.files[0];
+  }
+
+  deleteAttachment(){
+    //const data = event.target.files[0];
+    this.attachmentInfo.name =''
+    this.attachmentInfo.size =0
+    this.assignmentQuestionsData.taskAttachment=undefined
   }
 
   public submitAssignmentQuestions() {
@@ -145,9 +154,15 @@ export class AdminCreateAssignmentsComponent implements OnInit {
 
   public deleteAssignmentQuestion() {
     this.assignmentService.deleteTaskQuestion(this.questionId).subscribe(
-      (data) => {
-        alert('Success..')
-        this.getAssignmentById();
+      {
+        next: (data) => {
+          alert('Success..')
+          let index = this.assignmentQuestionsData.assignmentQuestion.findIndex(obj => obj.questionId == this.questionId) as number
+          this.assignmentQuestionsData.assignmentQuestion.splice(index, 1)
+        },
+        error: (er: any) => {
+          console.log(er.error.message);
+        }
       }
     )
   }
@@ -167,4 +182,6 @@ export class AdminCreateAssignmentsComponent implements OnInit {
       this.imageName.splice(index, 1);
     }
   }
+
+ 
 }

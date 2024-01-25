@@ -6,6 +6,7 @@ import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { Subject } from 'src/app/entity/subject';
 import { SubmissionAssignmentTaskStatus } from 'src/app/entity/submission-assignment-task-status';
 import { Task } from 'src/app/entity/task';
+import { SubjectResponse } from 'src/app/payload/subject-response';
 import { TaskRequest } from 'src/app/payload/task-request';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
@@ -32,6 +33,7 @@ export class AdminTaskComponent {
 
   firstTaskForm: FormGroup;
   message: string = ''
+  subjectes: SubjectResponse[] = [];
 
   constructor(private subjectService: SubjectService,
     private courseService: CourseServiceService,
@@ -156,5 +158,19 @@ export class AdminTaskComponent {
       return Math.floor((num1 / num2) * 100);
     else
       return 0;
-  }
+  
+    }
+
+    public getCourseSubject(id?: any) {
+      
+      this.subjectService.getAllSubjectsByCourseId(this.task.course.courseId).subscribe({
+        next: (data: any) => {
+          this.subjectes = []
+          this.subjectes = data.subjects;
+        },
+        error: (er: any) => {
+  
+        }
+      })
+    }
 }

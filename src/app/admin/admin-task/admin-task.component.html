@@ -330,9 +330,10 @@
                         </div>
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
-                            <select class="form-select" aria-label="Default select example" formControlName="course" name="course"  (change)="getSubjects()" [(ngModel)]="task.course">
+                            <select class="form-select" aria-label="Default select example" formControlName="course" name="course"  (change)="getCourseSubject()" [(ngModel)]="task.course">
                                 <option value = "">Select Course</option>
                                 <option  [ngValue]="obj" *ngFor="let obj of courses">{{obj.courseName}}</option>
+                                
                               </select>
                               <div style="margin-top: -17px;" *ngIf="isFieldInvalidForTaskForm('course')" class="text-danger">Course is required</div>
                         </div>
@@ -340,7 +341,7 @@
                             <label for="" class="mb_6 font-15 font-500 secondary">Subject</label>
                             <select class="form-select" aria-label="Default select example" formControlName="subject" name="subject"  [(ngModel)]="task.subject">
                                 <option value = "">Select Subject</option>
-                              <option [ngValue]="obj" *ngFor="let obj of subjects">{{obj.subjectName}}</option>
+                              <option [ngValue]="obj" *ngFor="let obj of subjectes">{{obj.subjectName}}</option>
                             </select>
                             <div style="margin-top: -17px;"  *ngIf="isFieldInvalidForTaskForm('subject')" class="text-danger">Subject is required</div>
                           </div>

@@ -18,7 +18,7 @@
                     <h3 class="font-21 font-600 secondary position-relative" *ngIf="  totalCourses == 0">
                         NO COURSES AVAILABLE
                       </h3>
-                    <div class="col-md-3 bootstrap_cards" *ngFor="let course of courseResponse;trackBy:trackById(course)">
+                    <div class="col-md-3 bootstrap_cards" *ngFor="let course of courseResponse;trackBy:trackById(course);let i = index">
                         <div class="admin-subject_card">
                             <div class="admin-subject_card_top">
                                 <div class="admin-subject_name_card">
@@ -42,7 +42,7 @@
                                           data-bs-target="#course-edit-modal" (click)="getCourseById(course.courseId)"><i
                                               class="fi fi-rr-file-edit line-height-0"></i> Edit</p></li>
                                         <li> <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding pointer"
-                                          data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="courseId=course.courseId"><i
+                                          data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="courseId=course.courseId;courseIndex=i"><i
                                               class="fi fi-rr-trash line-height-0"></i> Delete</p></li>
                                       </ul>
                               </div>

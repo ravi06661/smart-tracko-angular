@@ -77,7 +77,7 @@
                                 Subject
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" *ngFor="let subject of subjects"
+                                <li><a class="dropdown-item" *ngFor="let subject of subjectes"
                                         (click)="selectCourseSubject(subject)"
                                         (click)="courseFilterByCourseIdAndSubjectId(course,subjectId)">
                                         {{subject.subjectName}}</a></li>
@@ -111,18 +111,19 @@
                             </tr>
                         </thead>
                         <tbody class="bg-light">
-                            <tr *ngFor="let obj of taskSubmissionStatus ;let i=index">
+                            <tr class="pointer" *ngFor="let obj of taskSubmissionStatus ;let i=index"
+                                routerLink="/admin/createassignments/{{obj.assignmentId}}">
                                 <td>
                                     <h5 class="font-15 font-500 mb-0">{{obj.assignmentTitle}}</h5>
                                     <p class="text_gray font-13 font-400 mb-0"> Task {{obj.taskCount}}</p>
                                 </td>
-                                <!-- <td class="text_light_blue">{{obj.status}}</td> -->
                                 <td class="text_light_blue">Active</td>
                                 <td class="txt_color_purple">{{obj.totalSubmitted}}</td>
                                 <td class="txt_color_light_green">{{obj.reveiwed}}</td>
                                 <td class="txt_color_yellow">{{obj.unReveiwed}}</td>
-                                <!-- <td class="txt_color_orange">16</td> -->
+
                             </tr>
+
                         </tbody>
                     </table>
                 </div>
@@ -276,7 +277,7 @@
                                 <div *ngIf=" isFieldInvalidForSubmissionForm('title')" class="text-danger">
                                     title is required.</div>
                             </div>
-                          
+
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 mb_24">
@@ -284,18 +285,20 @@
                                     <label for="" class="mb_6 font-17 font-500 secondary">Course</label>
                                     <select class="form-select form-control " name="courseId"
                                         [(ngModel)]="assignmentRequest.courseId" aria-label="Default select example"
-                                        (change)="getSubject(assignmentRequest.courseId)" formControlName="courseId">
-                                        <option value = "">Select Course</option>
+                                        (change)="getCourseSubject(assignmentRequest.courseId)"
+                                        formControlName="courseId">
+                                        <option value="">Select Course</option>
                                         <option selected="" [value]="course.courseId" *ngFor="let course of courses">
                                             {{course.courseName}}</option>
                                     </select>
-                                    <div style="margin-top: -17px;" *ngIf=" isFieldInvalidForSubmissionForm('courseId')" class="text-danger">
+                                    <div style="margin-top: -17px;" *ngIf=" isFieldInvalidForSubmissionForm('courseId')"
+                                        class="text-danger">
                                         course is required.</div>
                                 </div>
-                              
+
 
                             </div>
-                            
+
                         </div>
                         <div class="form-group">
                             <div class="col-md-12 mb_24">
@@ -304,17 +307,16 @@
                                     <select class="form-select   form-control" name="subjectId"
                                         [(ngModel)]="assignmentRequest.subjectId" aria-label="Default select example"
                                         formControlName="subjectId">
-                                        <option value = "">Select Subject</option>
+                                        <option value="">Select Subject</option>
                                         <option selected="" [value]="subject.subjectId"
-                                            *ngFor="let subject of subjects">{{subject.subjectName}}</option>
+                                            *ngFor="let subject of subjectes">{{subject.subjectName}}</option>
                                     </select>
-                                    <div style="margin-top: -17px;" *ngIf=" isFieldInvalidForSubmissionForm('subjectId')" class="text-danger">
+                                    <div style="margin-top: -17px;"
+                                        *ngIf=" isFieldInvalidForSubmissionForm('subjectId')" class="text-danger">
                                         subject is required.</div>
                                 </div>
-                               
-
                             </div>
-                            
+
                         </div>
                         <!-- <div class="col-md-12 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Duration</label>
@@ -326,7 +328,7 @@
 
                     </div><!-- row -->
                 </form>
-                  <h6 *ngIf="message!=''" style="color: red;">{{message}}</h6>
+                <h6 *ngIf="message!=''" style="color: red;">{{message}}</h6>
                 <a class="apply_modal_buttons d-flex justify-content-center align-items-center mt-2">
                     <button type="button" class="apply_modal_btn" (click)="createAssingment()">Create</button>
                 </a>

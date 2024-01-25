@@ -13,6 +13,7 @@ import { Subject } from 'src/app/entity/subject';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Coursereponse } from 'src/app/payload/coursereponse';
 import { isThisISOWeek } from 'date-fns';
+import { SubjectResponse } from 'src/app/payload/subject-response';
 
 @Component({
   selector: 'app-admin-courses',
@@ -21,11 +22,12 @@ import { isThisISOWeek } from 'date-fns';
 })
 export class AdminCoursesComponent implements OnInit {
   imageUrl = this.utilityService.getBaseUrl() + "/file/getImageApi/technologyStackImage/";
-  subjects: any[] = [];
+  subjects: SubjectResponse[] = [];
   courseRequest: CourseRequest = new CourseRequest();
   courseUpdate: CourseRequest = new CourseRequest();
   selectedSubjectIds: number[] = [];
   techImages: TechnologyStack[] = [];
+  courseIndex!: number
 
   courseResponse: Coursereponse[] = []
   courseResponse1 = new Coursereponse()
@@ -164,21 +166,22 @@ export class AdminCoursesComponent implements OnInit {
 
   public updateCourse() {
 
-    this.courseUpdate.courseId=this.courseResponse1.courseId
+    this.courseUpdate.courseId = this.courseResponse1.courseId
     this.courseUpdate.courseFees = this.courseResponse1.courseFees
     this.courseUpdate.courseName = this.courseResponse1.courseName
     this.courseUpdate.duration = this.courseResponse1.duration
     this.courseUpdate.sortDescription = this.courseResponse1.sortDescription
     this.courseUpdate.isStarterCourse = this.courseResponse1.isStarterCourse
     this.courseUpdate.technologyStack = this.courseResponse1.technologyStack.id
+    this.courseUpdate.subjectIds = []
     this.courseUpdate.subjectIds = this.courseResponse1.subjectResponse.map(obj => obj.subjectId) as number[]
-   
 
 
     this.courseService.updatCourse(this.courseUpdate).subscribe({
+
       next: (data: any) => {
         this.courseRequest = new CourseRequest()
-       this.getAllCourses();
+        this.getAllCourses();
         this.message = data.message;
         this.messageClass = 'text-success';
       },
@@ -192,7 +195,8 @@ export class AdminCoursesComponent implements OnInit {
   public deleteCourse(id: number) {
     this.courseService.deleteCourse(id).subscribe({
       next: (data: any) => {
-        this.getAllCourses();
+        // this.getAllCourses();
+        this.courseResponse.splice(this.courseIndex, 1)
       }
     })
   }
@@ -203,14 +207,6 @@ export class AdminCoursesComponent implements OnInit {
     return false;
   }
 
-
-  // public addAndRemoveSubjectsFromCourse(subject: any) {
-  //   let index = this.course.subjects.findIndex(e => e.subjectId == subject.subjectId);
-  //   if (index === -1)
-  //     this.course.subjects.push(subject);
-  //   else
-  //     this.course.subjects.splice(index, 1);
-  // }
 
   public addAndRemoveSubjectsFromCourse(subject: any) {
     let index = this.courseResponse1.subjectResponse.findIndex(e => e.subjectId == subject.subjectId);
@@ -250,7 +246,7 @@ export class AdminCoursesComponent implements OnInit {
       modal.style.display = 'none';
     }
   }
-  trackById(item:any){
+  trackById(item: any) {
     return item.courseId;
   }
 }

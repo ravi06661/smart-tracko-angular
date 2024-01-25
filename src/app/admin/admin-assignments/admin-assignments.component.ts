@@ -26,7 +26,7 @@ export class AdminAssignmentsComponent implements OnInit {
   IMG_URL = this.BASE_URL + '/file/getImageApi/images/'
   assignmentRequest: AssignmentRequest = new AssignmentRequest;
   courses: Course[] = [];
-  subjects: Subject[] = [];
+  //subjects: Subject[] = [];
   subjectes: SubjectResponse[] = [];
   submitedAssignments: any[] = []
   submitedAssignmentObj: AssignmentSubmission = new AssignmentSubmission
@@ -82,11 +82,24 @@ export class AdminAssignmentsComponent implements OnInit {
 
   public getSubject(id: number) {
     let subjects = this.courses.find(course => course.courseId == id)?.subjects;
-    if (subjects != null)
-      this.subjects = subjects
+    //  if (subjects != null)
+    // this.subjects = subjects
+
   }
 
+  public getCourseSubject(id: number) {
+    this.subjectService.getAllSubjectsByCourseId(id).subscribe({
+      next: (data: any) => {
+        this.subjectes = []
+        this.subjectes = data.subjects;
+      },
+      error: (er: any) => {
+
+      }
+    })
+  }
   public createAssingment() {
+    // this.router.navigate(['/admin/createassignments/' +4039])
     this.messageClear()
     if (this.submissionForm.invalid) {
       this.submissionFormFun()
@@ -157,10 +170,11 @@ export class AdminAssignmentsComponent implements OnInit {
 
   courseFilterByCourseIdAndSubjectId(course: Course, subjectId: number) {
     this.course = course;
+    this.getCourseSubject(course.courseId)
     this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(this.course.courseId, subjectId).subscribe((
       (data: any) => {
         this.taskSubmissionStatus = data
-        this.subjects = course.subjects
+        //  this.subjects = course.subjects
       }
     ))
   }

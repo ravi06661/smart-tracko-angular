@@ -70,7 +70,7 @@ export class DiscussionForumComponent implements OnInit {
       {
         next: (data: any) => {
           let form = this.discussionFormList.find(obj => obj.id === discussionFormId) as DiscussionFormResponse
-          form.likes = data.likes
+          //  form.likes = data.likes
           this.sendMessage(new LikeResponseForm(discussionFormId, 'likeResponse', data.likes, data.isLike, this.loginService.getStudentId()))
         },
         error: (er) => {
@@ -168,22 +168,85 @@ export class DiscussionForumComponent implements OnInit {
     this.commnetVisibility[index] = !this.commnetVisibility[index];
   }
 
+  // connect() {
+  //   this.webSocketService.getMessages().subscribe((message) => {
+  //     switch (message.type) {
+  //       case 'commentResponse':
+  //         let form = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
+  //         if (form && !form.comments.find(c => c.id === message.id)) {
+  //           form.comments.unshift(message);
+  //         }
+  //         break;
+  //       case 'likeResponse':
+  //         let form1 = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
+  //         form1.likes = message.likes
+  //         if (this.loginService.getStudentId() == message.studentId) {
+  //           form1.isLike = message.isLike
+  //         }
+  //         break;
+  //       case 'createDiscussionForm':
+  //         this.isMessageSend = false
+  //         if (!this.discussionFormList.find(e => e.id === message.id)) {
+  //           this.discussionFormList.unshift(message);
+  //         }
+  //         break;
+  //       case 'typing':
+  //         this.pushTypingMessage(message);
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   });
+  // }
   connect() {
     this.webSocketService.getMessages().subscribe((message) => {
       switch (message.type) {
+
         case 'commentResponse':
           let form = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
           if (form && !form.comments.find(c => c.id === message.id)) {
             form.comments.unshift(message);
           }
           break;
-        case 'likeResponse':
-          let form1 = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
-          form1.likes = message.likes
-          if (this.loginService.getStudentId() == message.studentId) {
-            form1.isLike = message.isLike
+        case 'removeComment':
+          let forum = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
+          if (forum) {
+            let index = forum.comments.findIndex(obj1 => obj1.id === message.commentId)
+            if (index !== -1) {
+              forum.comments.splice(index, 1); // Remove 1 element at the found index
+            }
           }
           break;
+        case 'likeResponse':
+          let form1 = this.discussionFormList.find(obj => obj.id == message.discussionFormId) as DiscussionFormResponse;
+
+          if (form1 && !form1.likes.find(o => o.id === message.likeId || message.likeId === undefined)) {
+            let newLike = new LikeResponse();
+            newLike.id = message.likeId;
+            form1.likes.push(newLike);
+            console.log('Like added');
+          }
+
+          if (this.loginService.getStudentId() == message.studentId) {
+            form1.isLike = message.isLike;
+          }
+          break;
+
+        case 'removeLike':
+          let form2 = this.discussionFormList.find(obj => obj.id == message.discussionFormId) as DiscussionFormResponse;
+          let likeIndex = form2.likes.findIndex(like => like.id == message.likeId);
+             console.log(likeIndex);
+             
+          if (likeIndex !== -1) {
+            form2.likes.splice(likeIndex, 1);
+            console.log('Like removed');
+          }
+
+          if (this.loginService.getStudentId() == message.studentId) {
+            form2.isLike = false;
+          }
+          break;
+
         case 'createDiscussionForm':
           this.isMessageSend = false
           if (!this.discussionFormList.find(e => e.id === message.id)) {
@@ -193,9 +256,13 @@ export class DiscussionForumComponent implements OnInit {
         case 'typing':
           this.pushTypingMessage(message);
           break;
+
         default:
+          // Handle unknown message type
+          console.error('Unknown message type:', message.type);
           break;
       }
+
     });
   }
 
