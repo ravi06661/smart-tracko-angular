@@ -56,9 +56,10 @@ export class AdminTaskComponent {
 
   ngOnInit() {
     this.getCourses();
-    this.getAllSubmitedTasks(0, 0)
+    this.getAllSubmittedTaskFilter(0, 0)
     this.getAllSubmissionTaskStatus()
     this.getOverAllAssignmentTaskStatus()
+    this.courseFilterByCourseIdAndSubjectId(0, 0)
   }
 
   public isFieldInvalidForTaskForm(fieldName: string): boolean {
@@ -109,11 +110,15 @@ export class AdminTaskComponent {
     }
   }
 
-  public getAllSubmitedTasks(courseId: number, subjectId: number) {
-    this.taskService.getAllSubmitedTasks(courseId,subjectId).subscribe({
+  public getAllSubmittedTaskFilter(courseId: number, subjectId: number) {
+    this.courseId = courseId;
+    if (courseId) {
+      this.getCourseSubject(courseId)
+    }
+    this.taskService.getAllSubmitedTasks(courseId, subjectId).subscribe({
       next: (data: any) => {
         this.submitedTasksList = data;
-       
+
       }
     })
   }
@@ -155,7 +160,7 @@ export class AdminTaskComponent {
         this.subjectes = data.subjects;
       },
       error: (er: any) => {
-        this.toast.showError(er.error.message, 'Error')
+      //  this.toast.showError(er.error.message, 'Error')
       }
     })
   }
@@ -168,12 +173,11 @@ export class AdminTaskComponent {
         this.taskSubmissionStatus = data.data
         //  this.subjects = course.subjects
         console.log(data.data);
-
       }
     ))
   }
 
-  public pageRanderWithObj(id:any) {
+  public pageRanderWithObj(id: any) {
     const dataParams = {
       submissionId: id
     };

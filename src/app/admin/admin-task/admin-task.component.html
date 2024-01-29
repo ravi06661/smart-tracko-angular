@@ -122,7 +122,7 @@
                           Course
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" (click)="getAllSubmitedTasks(obj.courseId,0)" *ngFor="let obj of courses">{{obj.courseName}}</a></li>
+                          <li><a class="dropdown-item" (click)="getAllSubmittedTaskFilter(obj.courseId,0)" *ngFor="let obj of courses">{{obj.courseName}}</a></li>
                         
                         </ul>
                       </div>
@@ -131,7 +131,7 @@
                             Subject
                           </a>
                           <ul class="dropdown-menu">
-                            <li><a class="dropdown-item"  (click)="getAllSubmitedTasks(obj.subjectId,courseId)"  *ngFor="let obj of  subjectes">{{obj.subjectName}}</a></li>
+                            <li><a class="dropdown-item"  (click)="getAllSubmittedTaskFilter(courseId,obj.subjectId)"  *ngFor="let obj of  subjectes">{{obj.subjectName}}</a></li>
                           </ul>
                         </div>
                         <div class="dropdown">

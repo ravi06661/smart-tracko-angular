@@ -245,10 +245,10 @@
                             <label for="" class="mb_6 font-15 font-500 secondary">Chapter Name.</label>
                             <div class="input_icon position-relative">
                                 <input type="text" id="" name="chapterName" class="form-control input_text"
-                                    placeholder="Chapter Title" [(ngModel)]="chapterUpdate.chapterName">
+                                    placeholder="Chapter Title" [(ngModel)]="chapterUpdate.chapterName" (input)="message=''">
                             </div>
                         </div>
-             
+             <h6 *ngIf="message!=null" style="color:red;">{{message}}</h6>
                     </div><!-- row -->
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">

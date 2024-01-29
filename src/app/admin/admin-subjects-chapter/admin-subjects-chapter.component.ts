@@ -72,6 +72,7 @@ export class AdminSubjectsChapterComponent {
             this.chapterUpdate = new ChapterResponse();
             this.chapterResponse.push(data.chapter)
             AppUtils.modelDismiss('chapter-save-modal')
+            this.message=''
             this.toast.showSuccess('Chapter added successfully!!', 'Success')
           },
           error: (error) => {
