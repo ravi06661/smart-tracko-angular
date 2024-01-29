@@ -19,11 +19,9 @@
           <div class="row advertisement">
             <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="assignmentQues.videoUrl!=null && assignmentQues.videoUrl!=undefined && assignmentQues.videoUrl!=''"  >
               <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
-              {{assignmentQues.videoUrl}}
               <div class="assinment_image video-img">
                 <!-- <video width="640" height="360" controls>
                   <source [src]="assignmentQues.videoUrl" type="video/mp4">
-
                   
               </video> -->
               <iframe [src]="assignmentQues.videoUrl | safe" frameborder="0" allowfullscreen></iframe>
@@ -84,7 +82,7 @@
                   <h5 class="sub-heading font-17 font-500 secondary mb-1">Description</h5>
                   <div class="">
                     <textarea class="form-control text_area" name="description" id="exampleFormControlTextarea1"
-                      rows="3" placeholder="Input Text Here" formControlName="description"></textarea>
+                      rows="3" placeholder="Input Text Here" formControlName="description"  [(ngModel)]="assignmentSubmission.description"></textarea>
                     <!-- Bind the form control -->
                   </div>
                   <div

@@ -29,7 +29,7 @@
         <div class="subject-topic">
 
             <div class="row mt-3" >
-                <div class="col-md-3 bootstrap_cards" *ngFor="let obj of chapterResponse">
+                <div class="col-md-3 bootstrap_cards" *ngFor="let obj of chapterResponse;let i=index">
                     <div class="admin-subject_card">
                         <div class="admin-subject_card_top">
                             <div class="admin-subject_name_card">
@@ -66,7 +66,7 @@
                                       data-bs-target="#chapter-edit-modal" (click)="getChapterById(obj.chapterId)" ><i
                                           class="fi fi-rr-file-edit line-height-0"></i> Edit</p></li>
                                     <li> <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding pointer"
-                                      data-bs-toggle="modal" data-bs-target="#delete-modal"  (click)="chapterId = obj.chapterId"><i
+                                      data-bs-toggle="modal" data-bs-target="#delete-modal"  (click)="chapterId = obj.chapterId;chapterIndex = i"><i
                                           class="fi fi-rr-trash line-hei " ></i > Delete</p></li>
                                   </ul>
                             </div>
@@ -185,10 +185,10 @@
 <div class="modal-dialog position-relative leave_modal">
     <div class="modal-content">
         <div class="modal-body">
-            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+            <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
                 style="top: -23%;">
                 <i class="fi fi-rr-cross close_icon"></i>
-            </button>
+            </button> -->
 
             <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Chapter</p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
@@ -216,9 +216,9 @@
                 <div class="modal-header apply_title p-0">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add Chapter</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reload()">
+                    <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"  id="chapter-save-modal" (click)="reload()">
                         <i class="fi fi-rr-cross close_icon"></i>
-                    </button>
+                    </button> -->
                 </div>
 
                 <form action="">
@@ -248,12 +248,12 @@
                                     placeholder="Chapter Title" [(ngModel)]="chapterUpdate.chapterName">
                             </div>
                         </div>
-                     <h6 *ngIf="message!=null" style="color: red;">{{message}}</h6>
+             
                     </div><!-- row -->
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close"(click)="cancel()" >Cancel</button>
+                        aria-label="Close"(click)="cancel()" id="chapter-save-modal">Cancel</button>
                     <a >
                         <button type="button" class="apply_modal_btn font-15 font-500" (click)="addChapter()">Save</button>
                     </a>
@@ -274,9 +274,9 @@
                     <div class="modal-header apply_title p-0">
                         <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                             id="exampleModalLabel1">Edit Chapter</h1>
-                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reload()">
+                        <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" id="chapter-update-modal" aria-label="Close" (click)="reload()">
                             <i class="fi fi-rr-cross close_icon"></i>
-                        </button>
+                        </button> -->
                     </div>
 
                     <form action="">
@@ -298,12 +298,12 @@
                                         placeholder="Chapter Title" [(ngModel)]="chapterUpdate.chapterName">
                                 </div>
                             </div>
-                          <h6 *ngIf="message!=null" style="color: red;">{{message}}</h6>
+                         
                         </div><!-- row -->
                     </form>
                     <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                         <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                            aria-label="Close" (click)="cancel()">Cancel</button>
+                            aria-label="Close" (click)="cancel()"  id="chapter-update-modal">Cancel</button>
                         <a >
                             <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateChapter()">Save</button>
                         </a>
@@ -324,9 +324,9 @@
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add Question</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                    <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fi fi-rr-cross close_icon"></i>
-                    </button>
+                    </button> -->
                 </div>
 
                 <form action="">
@@ -386,9 +386,9 @@
                     <div class="modal-header apply_title">
                         <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                             id="exampleModalLabel1">Edit Question</h1>
-                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                        <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
                             <i class="fi fi-rr-cross close_icon"></i>
-                        </button>
+                        </button> -->
                     </div>
 
                     <form action="">

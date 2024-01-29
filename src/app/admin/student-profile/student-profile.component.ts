@@ -53,8 +53,8 @@ export class StudentProfileComponent implements OnInit {
   assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
   taskSubmissionList: StudentTaskSubmittion[] = []
   taskSubmissionObj: StudentTaskSubmittion = new StudentTaskSubmittion
-  unLockAssignments: Assignment[] = []
-  lockAssignments: Assignment[] = []
+  unLockAssignments: any// Assignment[] = []
+  lockAssignments: number[] = []
   ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   assignmentId: number = 0;
   unLockAssignment: Assignment = new Assignment
@@ -161,14 +161,18 @@ export class StudentProfileComponent implements OnInit {
     this.assignmentService.getAllLockedAndUnlockedAssignment(this.studentId).subscribe(
       (data: any) => {
         this.unLockAssignments = data.unLockedAssignment;
-        this.lockAssignments = data.lockedAssignment;
+        //  this.lockAssignments = data.lockedAssignment;
+        this.lockAssignments = Array(data.lockedAssignment).fill(0).map((x, i) => i);
+        this.unLockAssignments.forEach(() => {
+          this.assignmentTaskVisibility.push(false);
+        });
         this.temp();
       }
     )
   }
   public getAssignment(id: number) {
     this.assignmentId = id;
-    this.unLockAssignment = this.unLockAssignments.find(assignment => assignment.id === id) as Assignment;
+    this.unLockAssignment = this.unLockAssignments.find((assignment: any) => assignment.id === id) as Assignment;
   }
   assignmentTaskVisibility: boolean[] = [];
 
@@ -186,16 +190,17 @@ export class StudentProfileComponent implements OnInit {
     });
   }
 
+
   //for counting total  completed assignment task
   AssignMap = new Map<number, number>();
   AssignSubmittionDates = new Map<number, Date>();
   public temp() {
     let count: number = 0;
-    this.unLockAssignments.forEach(element => {
-      element.assignmentQuestion.forEach(e => {
-        if (this.assignmentSubmissionsList.find(e1 => e1.taskId === e.questionId)) {
+    this.unLockAssignments?.forEach((element: any) => {
+      element.assignmentQuestion.forEach((e: any) => {
+        if (this.assignmentSubmissionsList.find((e1: any) => e1.taskId === e.questionId)) {
           count += 1;
-          let obj = this.assignmentSubmissionsList.find(e1 => e1.taskId === e.questionId) as AssignmentSubmission
+          let obj = this.assignmentSubmissionsList.find((e1: any) => e1.taskId === e.questionId) as AssignmentSubmission
           this.AssignSubmittionDates.set(e.questionId, obj.submissionDate);
         }
       })

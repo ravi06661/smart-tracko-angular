@@ -4,7 +4,7 @@
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Tasks</h1>
             <button class="top_profile_sec_btn font-14 font-500" data-bs-toggle="modal"
-                data-bs-target="#exampleModal1" (click)="clearTaskForm()">Create New</button>
+                data-bs-target="#exampleModal1" >Create New</button>
         </div>
 
        <app-profile-bar></app-profile-bar>
@@ -57,23 +57,20 @@
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Active Tasks</h3>
                    <div class="right-side-dropdown-btn d-flex">
                     <div class="dropdown">
-                        <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark"role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Course
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">January</a></li>
-                          <li><a class="dropdown-item" href="#">February</a></li>
-                          <li><a class="dropdown-item" href="#">March</a></li>
+                          <li><a class="dropdown-item"    (click)="courseFilterByCourseIdAndSubjectId(obj.courseId,0)"  *ngFor="let obj of courses">{{obj.courseName}}</a></li>
                         </ul>
                       </div>
                       <div class="dropdown">
-                          <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Subject
                           </a>
                           <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">January</a></li>
-                            <li><a class="dropdown-item" href="#">February</a></li>
-                            <li><a class="dropdown-item" href="#">March</a></li>
+                            <li><a class="dropdown-item"   (click)="courseFilterByCourseIdAndSubjectId(courseId,obj.subjectId)"   *ngFor="let obj of  subjectes">{{obj.subjectName}}</a></li>
+                            
                           </ul>
                         </div>
                         <div class="dropdown">
@@ -101,8 +98,8 @@
                             </tr>
                         </thead>
                         <tbody class="bg-light">
-                            <tr *ngFor="let obj of taskSubmissionStatus ;let i=index">
-                                <td>
+                            <tr *ngFor="let obj of taskSubmissionStatus ;let i=index" class="pointer" routerLink="/admin/createtask/{{obj.taskId}}">
+                                <td >
                                     <h5 class="font-15 font-500 mb-0">{{obj.taskTitle}}</h5>
                                 </td>
                                 <td class="txt_color_blue">Active</td>
@@ -125,18 +122,8 @@
                           Course
                         </a>
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">January</a></li>
-                          <li><a class="dropdown-item" href="#">February</a></li>
-                          <li><a class="dropdown-item" href="#">March</a></li>
-                          <li><a class="dropdown-item" href="#">April</a></li>
-                          <li><a class="dropdown-item" href="#">May</a></li>
-                          <li><a class="dropdown-item" href="#">June</a></li>
-                          <li><a class="dropdown-item" href="#">July</a></li>
-                          <li><a class="dropdown-item" href="#">August</a></li>
-                          <li><a class="dropdown-item" href="#">September</a></li>
-                          <li><a class="dropdown-item" href="#">October</a></li>
-                          <li><a class="dropdown-item" href="#">November </a></li>
-                          <li><a class="dropdown-item" href="#">December </a></li>
+                          <li><a class="dropdown-item" (click)="getAllSubmitedTasks(obj.courseId,0)" *ngFor="let obj of courses">{{obj.courseName}}</a></li>
+                        
                         </ul>
                       </div>
                       <div class="dropdown">
@@ -144,18 +131,7 @@
                             Subject
                           </a>
                           <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">January</a></li>
-                            <li><a class="dropdown-item" href="#">February</a></li>
-                            <li><a class="dropdown-item" href="#">March</a></li>
-                            <li><a class="dropdown-item" href="#">April</a></li>
-                            <li><a class="dropdown-item" href="#">May</a></li>
-                            <li><a class="dropdown-item" href="#">June</a></li>
-                            <li><a class="dropdown-item" href="#">July</a></li>
-                            <li><a class="dropdown-item" href="#">August</a></li>
-                            <li><a class="dropdown-item" href="#">September</a></li>
-                            <li><a class="dropdown-item" href="#">October</a></li>
-                            <li><a class="dropdown-item" href="#">November </a></li>
-                            <li><a class="dropdown-item" href="#">December </a></li>
+                            <li><a class="dropdown-item"  (click)="getAllSubmitedTasks(obj.subjectId,courseId)"  *ngFor="let obj of  subjectes">{{obj.subjectName}}</a></li>
                           </ul>
                         </div>
                         <div class="dropdown">
@@ -184,20 +160,20 @@
                         <thead style="background:#EDF9FB;">
                             <tr class="table_heading">
                                 <th scope="col" class="font-15 font-600 secondary">Student Name</th>
-                                <th scope="col" class="font-15 font-600 secondary">Assignment</th>
+                                <th scope="col" class="font-15 font-600 secondary">Task </th>
                                 <th scope="col" class="font-15 font-600 secondary">Time</th>
                                 <th scope="col" class="font-15 font-600 secondary">Status</th>
                             </tr>
                         </thead>
                         <tbody class="bg-light">
                             <tr *ngFor="let obj of submitedTasksList">
-                                <td class="d-flex align-items-center" style="gap:5px;" (click)="pageRanderWithObject(obj)">
-                                    <img [src]="IMG_URL+obj.studentProfilePic" alt="" class="img-fluid imagestudent">
+                                <td class="d-flex align-items-center" style="gap:5px;"   (click)="pageRanderWithObj(obj.submissionId)">
+                                    <img [src]="IMG_URL+obj.profilePic" alt="" class="img-fluid imagestudent">
                                     <h5 class="font-13 font-500 mb-0 pointer">{{obj.fullName}} <br>
                                         <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                                     </h5>
                                 </td>
-                                <td>Hello World! In Java</td>
+                                <td>{{obj.title}}</td>
                                 <td>{{obj.submissionDate|date:'short'}}</td>
                                 <td  [ngClass]="{'active_txt_green':obj.status == 'Accepted','active_txt_orange':obj.status=='Rejected','active_txt_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</td>
                             </tr>
@@ -313,7 +289,7 @@
                 <div class="modal-header apply_title p-0">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Task Details</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="clearTaskForm()">
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
@@ -330,7 +306,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
-                            <select class="form-select" aria-label="Default select example" formControlName="course" name="course"  (change)="getCourseSubject()" [(ngModel)]="task.course">
+                            <select class="form-select" aria-label="Default select example"  formControlName="course" name="course"  (change)="getCourseSubject()" [(ngModel)]="task.course">
                                 <option value = "">Select Course</option>
                                 <option  [ngValue]="obj" *ngFor="let obj of courses">{{obj.courseName}}</option>
                                 

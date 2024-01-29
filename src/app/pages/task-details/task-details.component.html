@@ -2,14 +2,13 @@
   <div class="profile d-flex mb-4">
     <div class="assign-detail-heading">
       <h1 class="font-27 font-700 secondary mb-0">Tasks</h1>
-      <button  *ngIf="isSubmittedTask" type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex" data-bs-toggle="modal"
-        data-bs-target="#submit_button"  > Submit</button>
+      <button *ngIf="isSubmittedTask" type="button" class="submit_buttons font-14 font-500 text-white d-inline-flex"
+        data-bs-toggle="modal" data-bs-target="#submit_button"> Submit</button>
       <div class="font-27 font-700 secondary mb-4" *ngIf="taskAttachment">
         <form class="attachment_file1 d-inline-flex align-items-center position-relative ">
           <!-- Instead of an input element, use an anchor (a) tag -->
 
           <a href="{{ATTACHMENT_URL+task.taskAttachment}}" download="{{task.taskName}}"
-
             class="font-15 font-700 secondary text-white attachment_file_text">
             <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
             Attachments
@@ -19,6 +18,9 @@
       </div>
     </div>
     <app-profile-bar></app-profile-bar>
+    <!-- <iframe width="420" height="315"
+src="https://www.youtube.com/embed/tgbNymZ7vqY">
+</iframe> -->
   </div>
 
   <div class="scroll_section">
@@ -31,27 +33,33 @@
         </div>
         <div class="row advertisement">
 
-          <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="obj.videoUrl!=null">
+          <div class="col-md-3 col-sm-6 col-xs-12"
+            *ngIf="obj.videoUrl!=null && obj.videoUrl!='' && obj.videoUrl!=undefined">
             <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
             <div class="assinment_image video-img">
-              <video src="{{obj.videoUrl}}" controls height="" width="270" type="video/mp4"></video>
+              <!-- <video src="{{obj.videoUrl}}" controls height="" width="270" type="video/mp4"></video> -->
+                     
+                        <div>
+                          <iframe controls height="" width="270" [src]="obj.videoUrl | safe" frameborder="0"  allowfullscreen></iframe>
+                        </div>
+              
             </div>
           </div>
-          
-         <div  class="col-md-3 col-sm-6 col-xs-12" *ngIf=" obj.questionImages.length!=0">
-          <div   *ngFor="let images of obj.questionImages; let i=index">
-            <h3 class="font-15 font-700 assignment_sub_heading">Image {{i + 1}}</h3>
-            <div class="assignment_image">
-              <img [src]="imageUrl + images" class="img-fluid image-zoom" (click)="toggleImageSize($event)">
+
+          <div class="col-md-3 col-sm-6 col-xs-12" *ngIf=" obj.questionImages.length!=0">
+            <div *ngFor="let images of obj.questionImages; let i=index">
+              <h3 class="font-15 font-700 assignment_sub_heading">Image {{i + 1}}</h3>
+              <div class="assignment_image">
+                <img [src]="imageUrl + images" class="img-fluid image-zoom" (click)="toggleImageSize($event)">
+              </div>
             </div>
           </div>
-         </div>
         </div>
       </div>
 
 
     </div>
-   
+
 
   </div>
 </div>
@@ -64,18 +72,19 @@
       <div class="modal-body">
         <div class="modal-header apply_title">
           <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Submit Assignment</h1>
-          <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close" (click)="reaload()" (click)="clearForm()">
+          <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close"
+            id="close-task-submission-form">
             <i class="fi fi-rr-cross close_icon"></i>
           </button>
 
         </div>
-      
 
 
 
-     
 
-<!-- 
+
+
+        <!-- 
         <div class="form_input">
           <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
           <div class="">
@@ -90,15 +99,16 @@
               <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
               <div class="">
                 <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                placeholder="Input Text Here" [(ngModel)]="taskSubmittion.taskDescription"   formControlName="taskDescription" name="taskDescription"></textarea>
+                  placeholder="Input Text Here" [(ngModel)]="taskSubmittion.taskDescription"
+                  formControlName="taskDescription" name="taskDescription"></textarea>
               </div>
               <div *ngIf=" isFieldInvalidForSubmissionForm('taskDescription')" class="text-danger">
                 taskDescription is required.</div>
-              </div>
-            
+            </div>
+
           </div>
         </form>
-        
+
 
         <!-- <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading</h4>
         <form class="select_file d-flex align-items-center file position-relative">
@@ -115,11 +125,12 @@
         <div class="form-group" *ngIf="task.attachmentStatus=='Required' ">
           <h4 class="sub-heading font-17 font-500 secondary mb-1">.pdf file only</h4>
           <form [formGroup]="submissionForm" class="select_file d-flex align-items-center file position-relative">
-            <input type="file" name="file" id="file"   accept=".pdf, application/pdf"class="d-none" formControlName="file" (change)="setImage($event)">
+            <input type="file" name="file" id="file" accept=".pdf, application/pdf" class="d-none"
+              formControlName="file" (change)="setImage($event)">
             <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
             <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">
               <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i>Upload File
-            </button>  
+            </button>
           </form>
           <div *ngIf=" isFieldInvalidForSubmissionForm('file')" class="text-danger">
             file is required.</div>
@@ -129,19 +140,21 @@
           <h4 class="sub-heading font-17 font-500 secondary mb-1">optional</h4>
           <h4 class="sub-heading font-17 font-500 secondary mb-1">.pdf file only</h4>
           <form class="select_file d-flex align-items-center file position-relative">
-            <input type="file" name="file" id="file"   accept=".pdf, application/pdf"class="d-none"  (change)="setImage($event)">
+            <input type="file" name="file" id="file" accept=".pdf, application/pdf" class="d-none"
+              (change)="setImage($event)">
             <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
             <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">
               <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i>Upload File
-            </button>  
+            </button>
           </form>
         </div>
 
         <div class="file_option">
-          <div class=" d-flex file_name">
-            <i class="fi fi-rr-paperclip-vertical secondary add_more"></i>
+          <div class=" d-flex file_name" *ngIf="task.attachmentStatus=='Required'">
+            <i class="fi fi-rr-paperclip-vertical secondary add_more" (click)="deleteFile()"></i>
             <i class="fi fi-rr-trash secondary delete pointer" (click)="deleteFile()"></i>
-            <h3 class="font-15 font-400 dark mx-1 mb-0">{{taskSubmittion.submittionFileName}}</h3>
+            <h3 class="font-15 font-400 dark mx-1 mb-0" *ngIf="taskSubmittion.submittionFileName!=null">
+              {{taskSubmittion.submittionFileName.name}}</h3>
           </div>
 
         </div>
@@ -150,7 +163,6 @@
           <button type="button" class="cancel_modal_btn">Save Draft</button>
           <button type="button" class="apply_modal_btn" (click)="submitTask()">Submit</button>
         </div>
-        <h6 *ngIf="message!=null">{{message}}</h6>
       </div>
     </div>
   </div>

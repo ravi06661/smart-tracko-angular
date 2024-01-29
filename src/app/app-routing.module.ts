@@ -132,7 +132,7 @@ const routes: Routes = [
       { path: 'studentprofile/:studentId', component: StudentProfileComponent, pathMatch: 'full' },
       { path: 'studentregistration', component: AdminStudentRegistrationComponent, pathMatch: 'full' },
       { path: 'submission', component: AdminSubmissionComponent, pathMatch: 'full' },
-      { path: 'editetask/:id', component: AdminEditTaskComponent },
+      { path: 'editetask', component: AdminEditTaskComponent },
       { path: 'admindiscussion', component: AdminDiscussionForumComponent, pathMatch: 'full' },
       { path: 'result/:chapterId', component: AdminChapterResultComponent, pathMatch: 'full' },
 

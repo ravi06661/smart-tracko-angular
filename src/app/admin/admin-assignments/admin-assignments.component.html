@@ -85,7 +85,7 @@
                                 <li><a class="dropdown-item" href="#">March</a></li> -->
                             </ul>
                         </div>
-                        <div class="dropdown">
+                        <!-- <div class="dropdown">
                             <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Status
@@ -95,7 +95,7 @@
                                 <li><a class="dropdown-item" href="#">February</a></li>
                                 <li><a class="dropdown-item" href="#">March</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="table_container">
@@ -140,18 +140,9 @@
                                 Course
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">January</a></li>
-                                <li><a class="dropdown-item" href="#">February</a></li>
-                                <li><a class="dropdown-item" href="#">March</a></li>
-                                <li><a class="dropdown-item" href="#">April</a></li>
-                                <li><a class="dropdown-item" href="#">May</a></li>
-                                <li><a class="dropdown-item" href="#">June</a></li>
-                                <li><a class="dropdown-item" href="#">July</a></li>
-                                <li><a class="dropdown-item" href="#">August</a></li>
-                                <li><a class="dropdown-item" href="#">September</a></li>
-                                <li><a class="dropdown-item" href="#">October</a></li>
-                                <li><a class="dropdown-item" href="#">November </a></li>
-                                <li><a class="dropdown-item" href="#">December </a></li>
+                                <li><a class="dropdown-item" *ngFor="let course of courses"
+                                    (click)="getAllSubmitedAssignments(course,0)">{{course.courseName}}</a>
+                            </li>
                             </ul>
                         </div>
                         <div class="dropdown">
@@ -160,18 +151,10 @@
                                 Subject
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">January</a></li>
-                                <li><a class="dropdown-item" href="#">February</a></li>
-                                <li><a class="dropdown-item" href="#">March</a></li>
-                                <li><a class="dropdown-item" href="#">April</a></li>
-                                <li><a class="dropdown-item" href="#">May</a></li>
-                                <li><a class="dropdown-item" href="#">June</a></li>
-                                <li><a class="dropdown-item" href="#">July</a></li>
-                                <li><a class="dropdown-item" href="#">August</a></li>
-                                <li><a class="dropdown-item" href="#">September</a></li>
-                                <li><a class="dropdown-item" href="#">October</a></li>
-                                <li><a class="dropdown-item" href="#">November </a></li>
-                                <li><a class="dropdown-item" href="#">December </a></li>
+                                <li><a class="dropdown-item" *ngFor="let subject of subjectes"
+                                        (click)="selectCourseSubject(subject)"
+                                        (click)="getAllSubmitedAssignments(course,subjectId)">
+                                        {{subject.subjectName}}</a></li>
                             </ul>
                         </div>
                         <div class="dropdown">
@@ -180,18 +163,10 @@
                                 Status
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">January</a></li>
-                                <li><a class="dropdown-item" href="#">February</a></li>
-                                <li><a class="dropdown-item" href="#">March</a></li>
-                                <li><a class="dropdown-item" href="#">April</a></li>
-                                <li><a class="dropdown-item" href="#">May</a></li>
-                                <li><a class="dropdown-item" href="#">June</a></li>
-                                <li><a class="dropdown-item" href="#">July</a></li>
-                                <li><a class="dropdown-item" href="#">August</a></li>
-                                <li><a class="dropdown-item" href="#">September</a></li>
-                                <li><a class="dropdown-item" href="#">October</a></li>
-                                <li><a class="dropdown-item" href="#">November </a></li>
-                                <li><a class="dropdown-item" href="#">December </a></li>
+                                <li><a class="dropdown-item" >Reviewed</a></li>
+                                <li><a class="dropdown-item" >Unreviewed</a></li>
+                                <li><a class="dropdown-item" >Reviewing</a></li>
+                             
                             </ul>
                         </div>
                     </div>

@@ -6,11 +6,14 @@ import { StudentTaskSubmittion } from '../entity/student-task-submittion';
 import { TaskQuestionRequest } from '../payload/task-question-request';
 import { Task } from '../entity/task';
 import { s } from '@fullcalendar/core/internal-common';
+import { TaskQuestion } from '../entity/task-question';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskServiceService {
+
+
 
 
   BASE_URL = this.utilityService.getBaseUrl();
@@ -55,8 +58,12 @@ export class TaskServiceService {
     return this.http.post(`${this.TASK_URL}/addTaskAttachment`, formData);
   }
 
-  public getAllSubmitedTasks() {
-    return this.http.get(`${this.TASK_URL}/getAllSubmitedTask`);
+  public getAllSubmitedTasks(courseId: any, subjectId: any) {
+    const params = {
+      courseId: courseId,
+      subjectId: subjectId
+    };
+    return this.http.get(`${this.TASK_URL}/getAllSubmitedTask`, { params });
   }
 
   getAllSubmissionTaskStatus() {
@@ -67,9 +74,9 @@ export class TaskServiceService {
     return this.http.get(`${this.TASK_URL}/getSubmitedTaskForStudent?studentId=${studentId}`)
   }
 
-  public updateSubmitedTaskStatus(submissionId: number, status: string, review: string) {
+  public updateSubmitedTaskStatus(submissionId: string, status: string, review: string) {
     let formData = new FormData();
-    formData.append('submissionId', submissionId.toString());
+    formData.append('submissionId', submissionId);
     formData.append('status', status);
     formData.append('review', review);
     return this.http.put(`${this.TASK_URL}/updateSubmitedAssignmentStatus`, formData);
@@ -85,5 +92,35 @@ export class TaskServiceService {
       .append('studentId', studentId.toString());
 
     return this.http.get(`${this.TASK_URL}/isTaskSubmitted`, { params });
+  }
+
+  getSubmissionTaskById(id: any) {
+    return this.http.get<any>(`${this.TASK_URL}/getSubmissionTaskById?id=${id}`)
+  }
+  public getQuestion(taskQuestionId: number) {
+    return this.http.get<any>(`${this.TASK_URL}/getTaskQuestion?questionId=${taskQuestionId}`)
+  }
+
+  public getAllSubmissionTaskStatusByCourseIdAndSubjectIdFilter(courseId: number, subjectId: number) {
+    return this.http.get(`${this.TASK_URL}/getAllSubmissionTaskStatusByCourseIdAndSubjectId?courseId=${courseId}&subjectId=${subjectId}`)
+  }
+
+  public updateTaskquestion(question: TaskQuestion, imagePreview: File[]) {
+    let formData = new FormData();
+    formData.append('question', question.question)
+    formData.append('videoUrl', question.videoUrl)
+    formData.append('questionId', question.questionId.toString())
+    if (question.questionImages != null) {
+      question.questionImages.forEach((t) => {
+        formData.append('questionImages', t)
+      })
+    }
+
+    if (imagePreview != null) {
+      imagePreview.forEach((t) => {
+        formData.append('newImages', t)
+      })
+    }
+    return this.http.put(`${this.TASK_URL}/updateTaskQuestion`, formData)
   }
 }

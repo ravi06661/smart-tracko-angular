@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { sub } from 'date-fns';
 import { Course } from 'src/app/entity/course';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { Subject } from 'src/app/entity/subject';
@@ -11,6 +12,7 @@ import { TaskRequest } from 'src/app/payload/task-request';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { TaskServiceService } from 'src/app/service/task-service.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
 @Component({
@@ -30,6 +32,7 @@ export class AdminTaskComponent {
   totalSubmitted = 0;
   reveiwed = 0;
   unReveiwed = 0;
+  courseId: number = 0
 
   firstTaskForm: FormGroup;
   message: string = ''
@@ -40,7 +43,8 @@ export class AdminTaskComponent {
     private taskService: TaskServiceService,
     private router: Router,
     private utilityService: UtilityServiceService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private toast: ToastService) {
 
     this.firstTaskForm = this.formBuilder.group({
       taskName: ['', Validators.required],
@@ -52,7 +56,7 @@ export class AdminTaskComponent {
 
   ngOnInit() {
     this.getCourses();
-    this.getAllSubmitedTasks()
+    this.getAllSubmitedTasks(0, 0)
     this.getAllSubmissionTaskStatus()
     this.getOverAllAssignmentTaskStatus()
   }
@@ -91,63 +95,45 @@ export class AdminTaskComponent {
     this.firstTaskFormControl();
     if (this.firstTaskForm.valid) {
       this.taskService.addTask(this.task).subscribe(
-        (data: any) => {
-          this.router.navigate(['/admin/createtask/' + data.taskId])
+        {
+          next: (data: any) => {
+            this.toast.showSuccess(data.message, 'Success')
+            // this.firstTaskForm.reset()
+            this.router.navigate(['/admin/createtask/' + data.taskId])
+          },
+          error: (er: any) => {
+            this.toast.showError(er.error.message, 'Error')
+          }
         }
       )
     }
   }
 
-  public getAllSubmitedTasks() {
-    this.taskService.getAllSubmitedTasks().subscribe({
+  public getAllSubmitedTasks(courseId: number, subjectId: number) {
+    this.taskService.getAllSubmitedTasks(courseId,subjectId).subscribe({
       next: (data: any) => {
         this.submitedTasksList = data;
-        this.getOverAllAssignmentTaskStatus()
+       
       }
     })
   }
 
-  public pageRanderWithObject(object: StudentTaskSubmittion) {
-    this.router.navigate(['/admin/submission'], {
-      queryParams: {
-        data: JSON.stringify(object)
-      }
-    })
-  }
   public getAllSubmissionTaskStatus() {
     this.taskService.getAllSubmissionTaskStatus().subscribe(
       (data: any) => {
         this.taskSubmissionStatus = data
-        this.getOverAllAssignmentTaskStatus()
       }
     )
-  }
-  public clearTaskForm() {
-    this.task = new TaskRequest();
-    this.firstTaskForm = this.formBuilder.group({
-      taskName: ['', Validators.required],
-      course: ['', Validators.required],
-      subject: ['', Validators.required],
-      taskAttachment: ['', Validators.required]
-    })
   }
 
   public getOverAllAssignmentTaskStatus() {
     this.taskService.getOverAllAssignmentTaskStatus().subscribe(
       (data: any) => {
-        this.taskSubmissionStatus2 = data;
-        let count = 0;
-        let arr: number[] = [];
-        this.submitedTasksList.forEach(obj => {
-          if (!arr.find(id => id === obj.taskId)) {
-            arr.push(obj.taskId);
-            count += 1;
-          }
-        });
-        this.totalSubmitted = count;
-        this.totalSubmitted = this.calculatePercentages(this.totalSubmitted, this.taskSubmissionStatus.length)
-        this.reveiwed = this.calculatePercentages(this.taskSubmissionStatus2.reveiwed, this.totalSubmitted)
-        this.unReveiwed = this.calculatePercentages(this.taskSubmissionStatus2.unReveiwed, this.totalSubmitted)
+        //  this.taskSubmissionStatus2 = data;
+        this.totalSubmitted = data.totalCount
+        //this.totalSubmitted = this.calculatePercentages(this.totalSubmitted,)
+        this.reveiwed = data.reviewedCount// = this.calculatePercentages(this.totalSubmitted , data.reviewedCount)
+        this.unReveiwed = data.unreviewedCount//= this.calculatePercentages(this.totalSubmitted , data.unreviewedCount)
       }
     )
   }
@@ -158,19 +144,41 @@ export class AdminTaskComponent {
       return Math.floor((num1 / num2) * 100);
     else
       return 0;
-  
-    }
 
-    public getCourseSubject(id?: any) {
-      
-      this.subjectService.getAllSubjectsByCourseId(this.task.course.courseId).subscribe({
-        next: (data: any) => {
-          this.subjectes = []
-          this.subjectes = data.subjects;
-        },
-        error: (er: any) => {
-  
-        }
-      })
-    }
+  }
+
+  public getCourseSubject(id?: any) {
+
+    this.subjectService.getAllSubjectsByCourseId(id ? id : this.task.course.courseId).subscribe({
+      next: (data: any) => {
+        this.subjectes = []
+        this.subjectes = data.subjects;
+      },
+      error: (er: any) => {
+        this.toast.showError(er.error.message, 'Error')
+      }
+    })
+  }
+
+  courseFilterByCourseIdAndSubjectId(course: number, subjectId: number) {
+    this.courseId = course;
+    this.getCourseSubject(course)
+    this.taskService.getAllSubmissionTaskStatusByCourseIdAndSubjectIdFilter(course, subjectId).subscribe((
+      (data: any) => {
+        this.taskSubmissionStatus = data.data
+        //  this.subjects = course.subjects
+        console.log(data.data);
+
+      }
+    ))
+  }
+
+  public pageRanderWithObj(id:any) {
+    const dataParams = {
+      submissionId: id
+    };
+    this.router.navigate(['/admin/submission'], {
+      queryParams: dataParams
+    });
+  }
 }

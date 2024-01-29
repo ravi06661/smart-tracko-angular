@@ -1,5 +1,3 @@
-import { MessageSeenBy } from './../../entity/message-seen-by';
-import { error } from 'console';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { CourseRequest } from './../../payload/course-request';
 import { Component, OnInit } from '@angular/core';
@@ -14,6 +12,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Coursereponse } from 'src/app/payload/coursereponse';
 import { isThisISOWeek } from 'date-fns';
 import { SubjectResponse } from 'src/app/payload/subject-response';
+import { AppUtils } from 'src/app/utils/app-utils';
+import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/service/toast.service';
 
 @Component({
   selector: 'app-admin-courses',
@@ -32,28 +33,14 @@ export class AdminCoursesComponent implements OnInit {
   courseResponse: Coursereponse[] = []
   courseResponse1 = new Coursereponse()
 
-  // obj = {
-  //   tech: new TechnologyStack(),
-  //   subject: [],
-  //   courseName: '',
-  //   courseFees: 0,
-  //   courseDuration: 0,
-  //   isStarter: false,
-  //   description: ''
-  // }
-  // courseRequest:CourseRequest =  new CourseRequest()
-
-  message = '';
   messageClass = '';
-
-  //courses: Course[] = [];
   totalBatches = 0;
   totalSubjects = 0;
   totalCourses = 0;
   course: Course = new Course();
   courseId: number = 0
   imageName: string | undefined
-  //selectedSubjects: Subject[] = [];
+
 
   courseresponseobj: Coursereponse = new Coursereponse()
 
@@ -63,8 +50,8 @@ export class AdminCoursesComponent implements OnInit {
     private techService: TechnologyStackService,
     private subjectService: SubjectService,
     private utilityService: UtilityServiceService,
-    private router: Router,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private toast: ToastService) {
     this.addCourseForm = this.formBuilder.group({
       courseName: ['', Validators.required],
       courseFees: ['', Validators.required],
@@ -79,6 +66,7 @@ export class AdminCoursesComponent implements OnInit {
     this.getAllCourses();
     this.getAllTechImages();
     this.getAllSubjects();
+
   }
 
   checkboxChanged(subjectId: number) {
@@ -116,16 +104,13 @@ export class AdminCoursesComponent implements OnInit {
 
     this.courseService.saveCourse(this.courseRequest).subscribe({
       next: (data: any) => {
-        this.message = data.message
         this.getAllCourses();
         this.courseRequest = new CourseRequest();
-        this.message = data.message
-        this.messageClass = 'text-success'
-        this.clearValidationForm();
+        this.toast.showSuccess(data.message, 'Success')
+        AppUtils.modelDismiss('course-form-close')
       },
       error: (err: any) => {
-        this.message = err.error.message
-        this.messageClass = 'text-danger'
+        this.toast.showError(err.error.message, 'Error')
       }
     })
   }
@@ -182,12 +167,12 @@ export class AdminCoursesComponent implements OnInit {
       next: (data: any) => {
         this.courseRequest = new CourseRequest()
         this.getAllCourses();
-        this.message = data.message;
-        this.messageClass = 'text-success';
+        this.toast.showSuccess(data.message, 'Success')
+        AppUtils.modelDismiss('course-update-modal')
       },
       error: (err: any) => {
-        this.message = err.error.message;
-        this.messageClass = 'text-danger';
+        this.toast.showError(err.error.message, 'Error')
+
       }
     })
   }
@@ -195,8 +180,11 @@ export class AdminCoursesComponent implements OnInit {
   public deleteCourse(id: number) {
     this.courseService.deleteCourse(id).subscribe({
       next: (data: any) => {
-        // this.getAllCourses();
         this.courseResponse.splice(this.courseIndex, 1)
+        this.toast.showSuccess('Successfully deleted', 'Success')
+      },
+      error: (er: any) => {
+        this.toast.showError('error', 'Error')
       }
     })
   }
@@ -249,4 +237,6 @@ export class AdminCoursesComponent implements OnInit {
   trackById(item: any) {
     return item.courseId;
   }
+
+
 }

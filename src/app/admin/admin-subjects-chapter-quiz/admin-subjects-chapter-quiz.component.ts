@@ -9,25 +9,37 @@ import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { Question } from 'src/app/entity/question';
 import { QuestionResponse } from 'src/app/payload/question-response';
 import { timeStamp } from 'console';
+import { AppUtils } from 'src/app/utils/app-utils';
+import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/service/toast.service';
 @Component({
   selector: 'app-admin-subjects-chapter-quiz',
   templateUrl: './admin-subjects-chapter-quiz.component.html',
   styleUrls: ['./admin-subjects-chapter-quiz.component.scss']
 })
 export class AdminSubjectsChapterQuizComponent {
+
   questionId: number = 0;
   questions: ChapterQuizeQuestion[] = []
   id: number = 0;
   question: ChapterQuizeQuestion = new ChapterQuizeQuestion();
   public Editor = ClassicEditor;
   image: File | null = null;
-  message: string = ''
   private editorInstance: any;
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   submissionForm: FormGroup
   subjectId: number = 0;
-  constructor(private activateRouter: ActivatedRoute, private questionService: QuestionServiceService, private route: ActivatedRoute, private router: Router, private utilityService: UtilityServiceService, private formBuilder: FormBuilder, private chapterService: ChapterServiceService) {
+  questionIndex = 0
+
+  constructor(private activateRouter: ActivatedRoute,
+    private questionService: QuestionServiceService,
+    private route: ActivatedRoute, private router: Router,
+    private utilityService: UtilityServiceService,
+    private formBuilder: FormBuilder,
+    private chapterService: ChapterServiceService,
+    private toast: ToastService) {
+
     this.submissionForm = this.formBuilder.group({
       correctOption: ['', Validators.required],
       option4: ['', Validators.required],
@@ -54,10 +66,11 @@ export class AdminSubjectsChapterQuizComponent {
           next: (data) => {
             this.questions.push(data)
             this.question = new ChapterQuizeQuestion();
-            this.message = 'success..';
+            AppUtils.modelDismiss('quize-save-modal')
+            this.toast.showSuccess('Quize successfully added!!', 'Success')
           },
           error: (er) => {
-
+            this.toast.showError('Error please try again!!', 'Error')
           }
         }
       )
@@ -84,10 +97,12 @@ export class AdminSubjectsChapterQuizComponent {
       {
         next: (data) => {
           this.questionId = 0;
-          this.getAllQuestions();
+          this.questions.splice(this.questionIndex, 1);
+          AppUtils.modelDismiss('delete-quize-modal')
+          this.toast.showSuccess('Successfully deleted', 'Sucsess')
         },
         error: (error) => {
-          alert("Error!!")
+          this.toast.showError('Error', 'Error')
         }
       }
     )
@@ -97,14 +112,15 @@ export class AdminSubjectsChapterQuizComponent {
     this.questionService.updateQuestionById(this.question).subscribe(
       {
         next: (data: any) => {
-          this.message = 'success..';
-          this.question = new ChapterQuizeQuestion();
-          let qr = this.questions.findIndex(obj => obj.questionId === data.questionId)
-          this.questions[qr] = data
+          AppUtils.modelDismiss('update-quize-modal')
+          //   this.question = new ChapterQuizeQuestion();
+          // let qr = this.questions.findIndex(obj => obj.questionId === data.questionId)
+          this.questions[this.questionIndex] = data.question
           //  this.getAllQuestions();
+          this.toast.showSuccess(data.messagge, 'Success')
         },
         error: (error) => {
-          this.message = 'error..';
+          this.toast.showError(error.error.message, 'Error')
         }
       }
     )
@@ -123,7 +139,7 @@ export class AdminSubjectsChapterQuizComponent {
   reload() {
     this.question = new ChapterQuizeQuestion();
     this.getAllQuestions();
-    this.message = ''
+
   }
 
   public clearFormSubmission() {
@@ -163,7 +179,8 @@ export class AdminSubjectsChapterQuizComponent {
     });
   }
 
-  public setQuestion(id: number) {
+  public setQuestion(id: number, index: number) {
+    this.questionIndex = index
     this.question = this.questions.find(obj => obj.questionId === id) as QuestionResponse
   }
 }

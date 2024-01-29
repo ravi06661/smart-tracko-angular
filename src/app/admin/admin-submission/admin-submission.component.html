@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-12 d-flex align-items-center justify-content-between mb_24">
                 <div class="person-detail d-flex align-items-center gap_5">
-                    <img [src]="IMG_URL+submitedTask.studentProfilePic" alt="" class="img-fluid imagestudent">
+                    <img [src]="IMG_URL+submitedTask.profilePic" alt="" class="img-fluid imagestudent">
                     <h5 class="font-18 font-600 mb-0">{{submitedTask.fullName}} <br>
                         <p class="text_gray font-17 font-400 mb-0">{{submitedTask.applyForCourse}}</p>
                     </h5>
@@ -44,7 +44,7 @@
                 </ul>
             </div>
   
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="submitedTask.submittionFileName!=null  && submitedTask.submittionFileName!=undefined">
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Attachments</h3>
                 <br>
                 <form class="attachment_file1 d-inline-flex align-items-center position-relative">
@@ -56,9 +56,7 @@
                       <span class="mx-0 ms-2 font-15 font-400 text-white">{{'Download Submited File'}}</span>
                     </a>
                   </form>
-
             </div>
-
         </div>
     </div>
     <!-- DASHBOARD END -->
@@ -75,63 +73,8 @@
 <!--DASHBOARD END -->
 
         <!-- Modal Create New Assignment start -->
-        <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1"
-        aria-hidden="true">
-        <div class="modal-dialog position-relative leave_modal">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="modal-header apply_title">
-                        <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                            id="exampleModalLabel1">Assignment Details</h1>
-                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="fi fi-rr-cross close_icon"></i>
-                        </button>
-                    </div>
-
-                    <form action="">
-                        <div class="row">
-                            <div class="col-md-12 mb_18">
-                                <label for="" class="mb_6 font-15 font-500 secondary">Assignment
-                                    Title</label>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Day 1">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <label for="" class="mb_6 font-15 font-500 secondary">Course</label>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Mern Stack">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <label for="" class="mb_6 font-15 font-500 secondary">Subject</label>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="Core Java">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <label for="" class="mb_6 font-15 font-500 secondary">Duration</label>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="1 Day">
-                                </div>
-                            </div>
-                           
-                        </div><!-- row -->
-                    </form>
-
-                    <a routerLink="/admin/createassignments" class="apply_modal_buttons d-flex justify-content-center align-items-center mt-2">
-                        <button type="button" class="apply_modal_btn">Create</button>
-                    </a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Create New Assignment end -->
+     
+ 
 
       <!-- Modal submit reviews start -->
 <div class="modal fade" id="submit_review_modal" tabindex="-1" aria-labelledby="submit_review_modal" aria-hidden="true">
@@ -153,9 +96,9 @@
   </div>
   <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
     <button type="button" class="cancel_modal_btn" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-    <a routerLink="/admin/submission">
+    <a >
     <button type="button" class="apply_modal_btn" data-bs-dismiss="modal" aria-label="Close" (click)="updateSubmitedTaskStatus(status)">Submit</button>
-    </a>
+</a>
   </div>
 
 </div>

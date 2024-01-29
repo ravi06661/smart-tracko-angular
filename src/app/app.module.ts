@@ -94,8 +94,7 @@ import { AdminChapterResultComponent } from './admin/admin-chapter-result/admin-
 import { EmogiComponent } from './pages/emogi/emogi.component';
 import { SafePipe } from './utils/pipe/safe.pipe';
 import { TaskQuestionComponent } from './payload/task-question/task-question.component';
-
-
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -200,10 +199,15 @@ import { TaskQuestionComponent } from './payload/task-question/task-question.com
     FullCalendarModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    MatProgressBarModule
-
+    MatProgressBarModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true ,
+      maxOpened:3
+    }),
+    
   ],
   providers: [DatePipe,authInterceptorProvider],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,]
 })
 export class AppModule { }

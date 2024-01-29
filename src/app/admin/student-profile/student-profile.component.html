@@ -111,6 +111,38 @@
 
                     </div>
                   </div> -->
+                  <!-- <div class="AssignmentCard mb-1" id="head-show" *ngFor="let obj of unLockAssignments; let i=index">
+                    <div class="Head">
+                      <div class="TaskName text-light">Assignment Day {{i+1}}</div>
+                      <div class="Toggle">
+                        <i class="fi fi-rr-angle-small-down fs-4 lh-2 secondary" id="down-arrow"   (click)="toggleAssignment(i)" (click)="getAssignment(obj.id)"></i>
+                        <i class="fi fi-rr-angle-small-up fs-4 lh-2 secondary" id="up-arrow" onclick="assignhide()"   style="display:none;" ></i>
+                      </div>
+                    </div>
+                    <div class="Bar">
+                      <div class="Progress">
+                        <div class="Deadline">{{getTotalCompletedAssignmentCount(obj.id)}}/{{obj.taskQuestion.length}}</div>
+                        <div class="Progress">{{calculatePercentages(obj.id,obj.taskQuestion.length)}}%</div>
+                      </div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar ProgressW bg-primary" role="progressbar" [style.width]="calculatePercentages(obj.id,obj.assignmentQuestion.length)+'%'" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                    <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
+                      <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.taskQuestion; let j=index">
+                        <div class="TaskCard">
+                          <div class="TaskName"  *ngIf="getAssignmentSubmissionDate(task.questionId)!=null">Task {{j+1 }}  <span class="font-15 font-400 text_gray">Summited on {{getAssignmentSubmissionDate(task.questionId) | date:'mediumDate' }}</span></div>
+                          <div class="TaskName" *ngIf="getAssignmentSubmissionDate(task.questionId)==null">Task {{j+1 }} <span class="font-15 font-400 text_gray" >Pending</span></div>
+                          <div class="Button warning">View Submission</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div> -->
+
+
+
+
                   <div class="AssignmentCard mb-1" id="head-show" *ngFor="let obj of unLockAssignments; let i=index">
                     <div class="Head">
                       <div class="TaskName text-light">Assignment Day {{i+1}}</div>
@@ -121,24 +153,54 @@
                     </div>
                     <div class="Bar">
                       <div class="Progress">
-                        <div class="Deadline">{{getTotalCompletedAssignmentCount(obj.id)}}/{{obj.assignmentQuestion.length}}</div>
-                        <div class="Progress">{{calculatePercentages(obj.id,obj.assignmentQuestion.length)}}%</div>
+                        <div class="Deadline">{{obj.totalTaskCompleted}}/{{obj.taskQuestion.length}}</div>
+                        <div class="Progress">{{calculatePercentages(obj.totalTaskCompleted,obj.taskQuestion.length)}}%</div>
+        
                       </div>
                     </div>
                     <div class="progress">
-                      <div class="progress-bar ProgressW bg-primary" role="progressbar" [style.width]="calculatePercentages(obj.id,obj.assignmentQuestion.length)+'%'" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar ProgressW bg-primary" role="progressbar" [style.width]="calculatePercentages(obj.totalTaskCompleted,obj.taskQuestion.length)+'%'" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+          
+                    </div>
+                    <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
+                      <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.taskQuestion; let j=index">
+                        <div class="TaskCard">
+                          <div class="TaskName">Task {{j+1}}</div>
+                          <div class="Button">View</div>
+                        </div>
+                      </a>
                     </div>
 
-                    <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
-                      <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.assignmentQuestion; let j=index">
+                    <!-- <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
+                      <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.taskQuestion; let j=index">
                         <div class="TaskCard">
                           <div class="TaskName"  *ngIf="getAssignmentSubmissionDate(task.questionId)!=null">Task {{j+1 }}  <span class="font-15 font-400 text_gray">Summited on {{getAssignmentSubmissionDate(task.questionId) | date:'mediumDate' }}</span></div>
                           <div class="TaskName" *ngIf="getAssignmentSubmissionDate(task.questionId)==null">Task {{j+1 }} <span class="font-15 font-400 text_gray" >Pending</span></div>
                           <div class="Button warning">View Submission</div>
                         </div>
                       </a>
-                    </div>
+                    </div> -->
                   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
 
                   <div class="TaskCard" *ngFor="let obj of lockAssignments;let i=index">
                     <div class="font-15 font-400 text_gray">Day {{i+1}}</div>

@@ -14,7 +14,9 @@ import { TaskRequest } from 'src/app/payload/task-request';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { TaskServiceService } from 'src/app/service/task-service.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { AppUtils } from 'src/app/utils/app-utils';
 
 @Component({
   selector: 'app-admin-create-task',
@@ -22,15 +24,15 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   styleUrls: ['./admin-create-task.component.scss']
 })
 export class AdminCreateTaskComponent {
-  task: TaskRequest = new TaskRequest()
+  task: Task = new Task()
   subjects: Subject[] = []
   courses: Course[] = []
   taskId: number = 0;
   question: TaskQuestion = new TaskQuestion()
   public Editor = ClassicEditor;
+  questionIndex!: number
 
-
-  taskData: Task = new Task
+  //taskData: Task = new Task
   taskQuestion: TaskQuestionRequest = new TaskQuestionRequest();
   imagePreview: string[] = [];
   imageName: string[] = [];
@@ -50,8 +52,8 @@ export class AdminCreateTaskComponent {
     private taskService: TaskServiceService,
     private router: Router,
     private utilityService: UtilityServiceService,
-    private formBuilder: FormBuilder) {
-
+    private formBuilder: FormBuilder,
+    private toast: ToastService) {
 
     this.secondTaskForm = this.formBuilder.group({
       question: ['', Validators.required]
@@ -63,31 +65,12 @@ export class AdminCreateTaskComponent {
     this.getTask()
   }
 
-
-  isFieldInvalidForSecondTaskForm(fieldName: string): boolean {
-    const field = this.secondTaskForm.get(fieldName);
-    return field ? field.invalid && field.touched : false;
-  }
-
-  public secondFormControl() {
-    Object.keys(this.secondTaskForm.controls).forEach(key => {
-      const control = this.secondTaskForm.get(key);
-      if (control) {
-        control.markAsTouched();
-      }
-    });
-    const firstInvalidControl = document.querySelector('input.ng-invalid');
-    if (firstInvalidControl) {
-      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }
-
   public getTask() {
     this.taskService.getTaskById(this.taskId).subscribe(
       (data: any) => {
-        this.task = data;
-        this.taskData.taskQuestion = data.taskQuestion;
-        this.taskData.taskQuestion.forEach(() => this.expandedQuestions.push(false));
+        this.task = data.task;
+        //   this.taskData.taskQuestion = data.taskQuestion;
+        this.task.taskQuestion.forEach(() => this.expandedQuestions.push(false));
       }
     )
   }
@@ -105,9 +88,15 @@ export class AdminCreateTaskComponent {
 
   public deleteTaskQuestion() {
     this.taskService.deleteTaskQuestion(this.questionId).subscribe(
-      (data) => {
-        alert('Success..')
-        this.getTask();
+      {
+        next: (data: any) => {
+          this.task.taskQuestion.splice(this.questionIndex, 1)
+          this.toast.showSuccess(data.message, 'Success')
+          AppUtils.modelDismiss('delete-task-modal')
+        },
+        error: (er: any) => {
+          this.toast.showError(er.error.message, 'Error')
+        }
       }
     )
   }
@@ -120,7 +109,7 @@ export class AdminCreateTaskComponent {
     const data = event.target.files[0];
     this.attachmentInfo.name = event.target.files[0].name
     this.attachmentInfo.size = Math.floor(((event.target.files[0].size) / 1024) / 1024)
-    this.taskData.taskAttachment = event.target.files[0];
+    // this.taskData.taskAttachment = event.target.files[0];
   }
 
   public addTaskQuestion() {
@@ -131,13 +120,13 @@ export class AdminCreateTaskComponent {
       this.taskService.addQuestionInTask(this.taskQuestion, this.taskId).subscribe(
         {
           next: (data: any) => {
-            this.taskData.taskQuestion = data.taskQuestion
-            this.secondTaskForm = this.formBuilder.group({
-              question: ['', Validators.required]
-            })
+            this.task.taskQuestion.push(data)
+            this.toast.showSuccess('Successfully added', 'Success')
+            this.secondTaskForm.reset()
+
           },
           error: (errore) => {
-            alert('Error')
+            this.toast.showError('Error occure', 'Error')
           }
         }
       )
@@ -148,18 +137,18 @@ export class AdminCreateTaskComponent {
   }
 
   public submitTask() {
-    if (this.taskData.taskQuestion.length !== 0) {
-      this.taskData.taskId = this.taskId
-      this.taskService.addAssignment(this.taskData)
-        .subscribe({
-          next: (data: any) => {
-            alert('Success..')
-            this.router.navigate(['/admin/task']);
-          }
-        })
-    } else {
-      return;
-    }
+    // if (this.taskData.taskQuestion.length !== 0) {
+    //   this.taskData.taskId = this.taskId
+    //   this.taskService.addAssignment(this.taskData)
+    //     .subscribe({
+    //       next: (data: any) => {
+    //         alert('Success..')
+    //         this.router.navigate(['/admin/task']);
+    //       }
+    //     })
+    // } else {
+    //   return;
+    // }
 
   }
   public addImageFile(event: any) {
@@ -194,5 +183,33 @@ export class AdminCreateTaskComponent {
       this.imagePreview.splice(index, 1);
       this.imageName.splice(index, 1);
     }
+  }
+
+  isFieldInvalidForSecondTaskForm(fieldName: string): boolean {
+    const field = this.secondTaskForm.get(fieldName);
+    return field ? field.invalid && field.touched : false;
+  }
+
+  public secondFormControl() {
+    Object.keys(this.secondTaskForm.controls).forEach(key => {
+      const control = this.secondTaskForm.get(key);
+      if (control) {
+        control.markAsTouched();
+      }
+    });
+    const firstInvalidControl = document.querySelector('input.ng-invalid');
+    if (firstInvalidControl) {
+      firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
+  public pageRenderUsingRouterLink(path: string, questionId: number) {
+    const dataParams = {
+      id: questionId,
+      type: "taskQuestion"
+    };
+    this.router.navigate([path], {
+      queryParams: dataParams
+    });
   }
 }

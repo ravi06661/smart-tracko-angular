@@ -32,7 +32,7 @@ export class TaskComponent {
   public getAllTask() {
     this.taskService.getAllTask(this.loginService.getStudentId()).subscribe(
       (data: any) => {
-        this.tasks = data
+        this.tasks = data.allTask
       }
     )
   }

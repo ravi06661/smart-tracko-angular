@@ -10,8 +10,7 @@
         <div class="col-md-6 mb-4" *ngIf="unLockAssignments.length!==0 || lockAssignments.length!==0 ">
           <h3 class="title font-17 font-500 secondary position-relative">Assignments</h3>
 
-           <!-- ASSIGNMENT ACCORDION  START--
-        <!-- <div class="scroller-bar"> -->
+           
           <div class="AssignmentCard mb-1" id="head-show" *ngFor="let obj of unLockAssignments; let i=index">
             <div class="Head">
               <div class="TaskName text-light">Assignment Day {{i+1}}</div>
@@ -63,7 +62,7 @@
          Status
        </a>
        <ul class="dropdown-menu">
-        <li><a class="dropdown-item" (click)="getAllAssignments()">All</a></li>
+        <li><a class="dropdown-item" (click)="getSubmitedAssignment()">All</a></li>
          <li><a class="dropdown-item" (click)="getSubmissionAssignmentFilterByStatus('Accepted')">Completed</a></li>
          <li><a class="dropdown-item" (click)="getSubmissionAssignmentFilterByStatus('Rejected')">Rejected</a></li>
          <li><a class="dropdown-item" (click)="getSubmissionAssignmentFilterByStatus('Reviewing')">Reviewing</a></li>              
@@ -143,7 +142,7 @@
         <div class="form_input">
           <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
           <div class="">
-            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3" 
               placeholder="Input Text Here"></textarea>
           </div>
         </div>
@@ -200,7 +199,14 @@
                   <li class="font-17 font-400 text_dark">{{assignmentSubmissionObj.description}}</li>
                   <!-- <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li> -->
                 </ol>
-              </div>           
+              </div>     
+              <div class="question_ans" *ngIf="assignmentSubmissionObj.status!='Unreviewed'">
+                <h3 class="font-17 font-500 secondary">Review</h3>
+                <ol class="ps-3">
+                  <li class="font-17 font-400 text_dark">{{assignmentSubmissionObj.review}}</li>
+                  <!-- <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li> -->
+                </ol>
+              </div>       
             <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file">
               <a href="{{ATTACHMENT_URL+assignmentSubmissionObj.submitFile}}" class="font-15 font-400 text_gray  attachment_file_text">
                 <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>

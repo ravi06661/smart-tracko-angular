@@ -7,6 +7,9 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Chapter } from 'src/app/entity/chapter';
 import { ChapterContentResponse } from 'src/app/payload/chapter-content-response';
+import { ToastrService } from 'ngx-toastr';
+import { AppUtils } from 'src/app/utils/app-utils';
+import { ToastService } from 'src/app/service/toast.service';
 @Component({
   selector: 'app-admin-subjects-topic-test',
   templateUrl: './admin-subjects-topic-test.component.html',
@@ -28,8 +31,15 @@ export class AdminSubjectsTopicTestComponent {
   private editorInstance: any;
   submissionForm: FormGroup
   chapteContentResponse: ChapterContentResponse[] = []
-  // chapterContent:ChapterContentResponse = new  ChapterContentResponse
-  constructor(private router: Router, private chapterService: ChapterServiceService, private route: ActivatedRoute, private questionService: QuestionServiceService, private formBuilder: FormBuilder, private activateRouter: ActivatedRoute) {
+  contentIndex = 0;
+  constructor(private router: Router,
+    private chapterService: ChapterServiceService,
+    private route: ActivatedRoute,
+    private questionService: QuestionServiceService,
+    private formBuilder: FormBuilder,
+    private activateRouter: ActivatedRoute,
+    private toast: ToastService) {
+
     this.submissionForm = this.formBuilder.group({
       content: ['', Validators.required],
       subTitle: ['', Validators.required],
@@ -50,14 +60,14 @@ export class AdminSubjectsTopicTestComponent {
       {
         next: (data: any) => {
           this.chapteContentResponse = data.chapterContent
-          if(data.chapterName){
+          if (data.chapterName) {
             this.chapterName = data.chapterName
-          }else{
+          } else {
             this.chapterName = this.chapteContentResponse[0].chapterName
           }
         },
         error: (er) => {
-          this.erroreMessage = er.error.message
+          this.toast.showError(er.error.message, 'Error')
         }
       }
     )
@@ -70,14 +80,15 @@ export class AdminSubjectsTopicTestComponent {
     } else {
       this.chapterService.addChapterContent(this.chapterContent, this.chapterId).subscribe(
         {
-          next: (data:any) => {
-            this.erroreMessage = 'Success'
+          next: (data: any) => {
             this.chapterContent = new ChapterContent();
             this.chapteContentResponse.push(data.chapterContent)
             this.editorInstance = ''
+            AppUtils.modelDismiss('add-content-modal')
+            this.toast.showSuccess('Successfully added', 'Success')
           },
           error: (error) => {
-            this.erroreMessage = "error occure please submit again.."
+            this.toast.showError('please try again!!', 'Error')
           }
         }
       )
@@ -93,11 +104,12 @@ export class AdminSubjectsTopicTestComponent {
     this.chapterService.updateChapterContent(this.chapterContent).subscribe(
       {
         next: (data: any) => {
-          this.erroreMessage = " Success.."
+          AppUtils.modelDismiss('content-update-modal')
+          this.toast.showSuccess('Successfully updated ', 'Success')
           this.chapterContent = data
         },
         error: (error) => {
-          this.erroreMessage = error.error.message
+          this.toast.showError(error.error.message, 'Error')
         }
       }
     )
@@ -114,11 +126,15 @@ export class AdminSubjectsTopicTestComponent {
     this.chapterService.deleteContent(this.deleteContentId).subscribe(
       {
         next: (data) => {
-          let index = this.chapteContentResponse.findIndex(obj => obj.id === this.deleteContentId)
-          this.chapteContentResponse.splice(index, 1);
+          this.chapteContentResponse.splice(this.contentIndex, 1);
           this.deleteContentId = 0;
+          this.contentIndex = 0
+          AppUtils.modelDismiss('content-delete-modal')
+          this.toast.showSuccess('Successfully deleted ', 'Success')
+
         },
         error: (er) => {
+          this.toast.showError('error', 'Error')
         }
       }
     )

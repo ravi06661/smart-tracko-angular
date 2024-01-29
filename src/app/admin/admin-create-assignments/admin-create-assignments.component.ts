@@ -7,7 +7,9 @@ import { Assignment } from 'src/app/entity/assignment';
 import { AssignmentQuestionRequest } from 'src/app/payload/assignment-question-request';
 import { TaskQuestionRequest } from 'src/app/payload/task-question-request';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { AppUtils } from 'src/app/utils/app-utils';
 
 @Component({
   selector: 'app-admin-create-assignments',
@@ -38,7 +40,8 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     private assignmentService: AssignmentServiceService,
     private router: Router,
     private utilityService: UtilityServiceService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toast: ToastService
   ) {
 
     this.assignmentForm = this.formBuilder.group({
@@ -74,10 +77,8 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   public getAssignmentById() {
     this.assignmentService.getAssignmentById(this.assignmentId).subscribe({
       next: (data: any) => {
-        console.log(data);
-
-        this.assignment = data;
-        this.assignmentQuestionsData.assignmentQuestion = data.assignmentQuestion
+        this.assignment = data.assignment;
+        this.assignmentQuestionsData.assignmentQuestion = data.assignment.assignmentQuestion
       },
     });
   }
@@ -104,14 +105,13 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(
       {
         next: (data: any) => {
-          this.assignmentQuestionsData.assignmentQuestion = data.assignmentQuestion
-          this.assignmentQuestionsData.assignmentQuestion.forEach(() => this.expandedQuestions.push(false));
-          this.assignmentForm = this.formBuilder.group({
-            question: ['', Validators.required]
-          })
+          this.assignmentQuestionsData.assignmentQuestion.push(data)
+          this.expandedQuestions.push(false)
+          this.assignmentForm.reset()
+          this.toast.showSuccess('Question added successsfully!!', 'Success');
         },
         error: (er: any) => {
-          this.assignmentQuestionsData.assignmentQuestion = er.assignmentQuestion
+          this.toast.showError(er.error.message, 'Error')
         }
       }
     )
@@ -126,11 +126,11 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     this.assignmentQuestionsData.taskAttachment = event.target.files[0];
   }
 
-  deleteAttachment(){
+  deleteAttachment() {
     //const data = event.target.files[0];
-    this.attachmentInfo.name =''
-    this.attachmentInfo.size =0
-    this.assignmentQuestionsData.taskAttachment=undefined
+    this.attachmentInfo.name = ''
+    this.attachmentInfo.size = 0
+    this.assignmentQuestionsData.taskAttachment = undefined
   }
 
   public submitAssignmentQuestions() {
@@ -156,12 +156,13 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     this.assignmentService.deleteTaskQuestion(this.questionId).subscribe(
       {
         next: (data) => {
-          alert('Success..')
+          AppUtils.modelDismiss('delete-assignment-modal')
+          this.toast.showSuccess('Successfully deleted!!', 'Success')
           let index = this.assignmentQuestionsData.assignmentQuestion.findIndex(obj => obj.questionId == this.questionId) as number
           this.assignmentQuestionsData.assignmentQuestion.splice(index, 1)
         },
         error: (er: any) => {
-          console.log(er.error.message);
+          this.toast.showError(er.error.message, 'Error')
         }
       }
     )
@@ -183,5 +184,14 @@ export class AdminCreateAssignmentsComponent implements OnInit {
     }
   }
 
- 
+  public pageRenderUsingRouterLink(path: string, questionId: number) {
+    const dataParams = {
+      id: questionId,
+      type:"assignmentQuestion"
+    };
+    this.router.navigate([path], {
+      queryParams: dataParams
+    });
+  }
+
 }

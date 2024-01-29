@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { an } from '@fullcalendar/core/internal-common';
-import { log } from 'console';
+
+import { ToastrService } from 'ngx-toastr';
 import { Chapter } from 'src/app/entity/chapter';
 import { Subject } from 'src/app/entity/subject';
 import { TechnologyStack } from 'src/app/entity/technology-stack';
 import { SubjectResponse } from 'src/app/payload/subject-response';
 import { SubjectService } from 'src/app/service/subject.service';
 import { TechnologyStackService } from 'src/app/service/technology-stack-service.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
-import Swal from 'sweetalert2';
+import { AppUtils } from 'src/app/utils/app-utils';
 
 @Component({
   selector: 'app-admin-subjects',
@@ -33,13 +34,13 @@ export class AdminSubjectsComponent implements OnInit {
   subjectId: number = 0;
   imageName = ''
   subjectSubmissionForm: FormGroup;
-
-  closeSubmiteButton: boolean = false
+  subjectIndex = 0;
   constructor(private techService: TechnologyStackService,
     private subjectService: SubjectService,
     private utilityService: UtilityServiceService
     , private formBuilder: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private toast: ToastService) {
     this.subjectSubmissionForm = this.formBuilder.group({
       subjectName: ['', Validators.required]
     });
@@ -77,18 +78,12 @@ export class AdminSubjectsComponent implements OnInit {
         {
           next: (data: any) => {
             this.clearFormSubmission()
-            this.subjectData = {
-              imageId: 0,
-              subjectName: ''
-            };
-            this.closeSubmiteButton = true
-            Swal.fire('Subject Added Successfully').then(e => {
-              this.router.navigate(['/admin/subject'])
-            })
-            this.getAllSubject()
+            this.subjects.push(data.subject)
+            this.toast.showSuccess('Subject Added Successfully!!', 'Success')
+            AppUtils.modelDismiss('subject-model-close');
           },
           error: (error) => {
-            this.message = error.error.message
+            this.toast.showError(error.error.message, 'Error')
           }
         }
       )
@@ -100,17 +95,17 @@ export class AdminSubjectsComponent implements OnInit {
       this.getAllTechImage();
     }
     this.subject = this.subjects.find(obj => obj.subjectId == id) as SubjectResponse
-
   }
 
   public updateSubject() {
     this.subjectService.updateSubject(this.subject).subscribe({
       next: (data: any) => {
-        this.message = "Success.";
         this.subjects = this.subjects.map(item => (item.subjectId == data.subjectId ? data : item));
+        AppUtils.modelDismiss('subject-edite-modal-close')
+        this.toast.showSuccess("subject update successfully!!", 'Success')
       },
       error: (err) => {
-        this.message = err.error.message
+        this.toast.showError(err.error.message, 'Error')
       }
     })
   }
@@ -119,16 +114,20 @@ export class AdminSubjectsComponent implements OnInit {
     this.message = ''
   }
 
-  setSubjectId(id: number) {
-    this.subjectId = id;
-  }
   public deleteSubect() {
     this.subjectService.deleteSubjectById(this.subjectId).subscribe(
-      (data: any) => {
-        //this.getAllSubject();
-        let index = this.subjects.findIndex(obj => obj.subjectId === this.subjectId)
-        this.subjects.splice(index, 1)
-        this.subjectId = 0;
+
+      {
+        next: (data: any) => {
+          this.subjects.splice(this.subjectIndex, 1)
+          this.subjectId = 0;
+          this.subjectIndex = 0
+          this.toast.showSuccess('Subject deleted successfully', 'Success')
+
+        },
+        error: (er: any) => {
+          this.toast.showError('Error Occure please try again', 'Error')
+        }
       }
     )
   }
