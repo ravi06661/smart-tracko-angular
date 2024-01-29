@@ -43,6 +43,7 @@
     "ngx-apexcharts": "^0.3.3",
     "ngx-device-detector": "^6.0.2",
     "ngx-pagination": "^6.0.3",
+    "ngx-toastr": "^18.0.0",
     "pagination": "^0.4.6",
     "popper.js": "^1.16.1",
     "rxjs": "~7.5.0",

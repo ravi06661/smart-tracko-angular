@@ -14,7 +14,7 @@
 
     <div class="scroll_sec mt-0">
         <div class="row">
-            <div class="col-md-3 bootstrap_cards" *ngFor="let subject of subjects">
+            <div class="col-md-3 bootstrap_cards" *ngFor="let subject of subjects;let i =index">
                 <div class="admin-subject_card">
                     <div class="admin-subject_card_top">
                         <div class="admin-subject_name_card">
@@ -41,7 +41,7 @@
                                           data-bs-target="#subject-edit-modal" (click)="getSubjectById(subject.subjectId)" ><i
                                               class="fi fi-rr-file-edit line-height-0"></i> Edit</p></li>
                                         <li> <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding pointer"
-                                          data-bs-toggle="modal" data-bs-target="#delete-modal"  (click)="setSubjectId(subject.subjectId)"><i
+                                          data-bs-toggle="modal" data-bs-target="#delete-modal"  (click)="subjectId=subject.subjectId;subjectIndex=i"><i
                                               class="fi fi-rr-trash line-hei " ></i > Delete</p></li>
                                       </ul>
                                     </div>
@@ -69,10 +69,10 @@
     <div class="modal-dialog position-relative leave_modal">
         <div class="modal-content">
             <div class="modal-body">
-                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reloadMessage() "
+                <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reloadMessage() "
                     style="top: -23%;">
                     <i class="fi fi-rr-cross close_icon"></i>
-                </button>
+                </button> -->
 
                 <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?
                 </p>
@@ -101,9 +101,9 @@
                 <div class="modal-header apply_title p-0">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Edit Subject</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reloadMessage()">
+                    <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"   id="subject-edite-modal-close" (click)="reloadMessage()">
                         <i class="fi fi-rr-cross close_icon"></i>
-                    </button>
+                    </button> -->
                 </div>
 
                 <form action="">
@@ -142,7 +142,7 @@
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close" (click)="reloadMessage() ">Cancel</button>
+                        aria-label="Close" (click)="reloadMessage() "  id="subject-edite-modal-close">Cancel</button>
                     <a >
                         <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateSubject()">Update Subject</button>
                     </a>
@@ -162,9 +162,9 @@
                 <div class="modal-header apply_title p-0">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add Subject</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" (click)="reloadMessage()" (click)="clearFormSubmission()">
+                    <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" id="subject-model-close" (click)="reloadMessage()" (click)="clearFormSubmission()">
                         <i class="fi fi-rr-cross close_icon"></i>
-                    </button>
+                    </button> -->
                 </div>
 
                 <form action="">
@@ -220,7 +220,7 @@
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close" (click)="reloadMessage() ">Cancel</button>
+                        aria-label="Close" (click)="reloadMessage() "  id="subject-model-close">Cancel</button>
                     <a routerLink="/admin/subject">
                         <button type="button" class="apply_modal_btn font-15 font-500" (click)="saveSubject()" >Save Subject</button>
                     </a>

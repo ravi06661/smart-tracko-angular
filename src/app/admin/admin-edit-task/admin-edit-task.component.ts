@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { isThisHour } from 'date-fns';
 import { TaskQuestion } from 'src/app/entity/task-question';
 import { TaskQuestionRequest } from 'src/app/payload/task-question-request';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { TaskServiceService } from 'src/app/service/task-service.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
 @Component({
@@ -23,23 +26,66 @@ export class AdminEditTaskComponent implements OnInit {
   BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
   public Editor = ClassicEditor;
+  type: string = ''
+  videoUrl: string = 'https://www.youtube.com/watch?v=ODLiJ2_CGXI';
+  videoIframe!: SafeResourceUrl;
+  constructor(public utilityService: UtilityServiceService,
+    private toast: ToastService,
+    private taskService: TaskServiceService,
+    private activateRoute: ActivatedRoute,
+    private assignmentService: AssignmentServiceService,
+    private sanitizer: DomSanitizer) {
+  }
 
-  constructor(public utilityService: UtilityServiceService, private router: Router, private taskService: TaskServiceService, private activateRoute: ActivatedRoute, private assignmentService: AssignmentServiceService) {
-    this.taskId = this.activateRoute.snapshot.params[('id')]
+  updateVideoUrl() {
+    // Replace 'VIDEO_ID' with the actual video ID or use your dynamic URL variable
+   // const videoId = 'ODLiJ2_CGXI';
+    this.videoUrl = `https://www.youtube.com/embed/${this.question.videoUrl}`;
+
+    // Use DomSanitizer to ensure the URL is safe for embedding
+    this.videoIframe = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl);
   }
   taskId!: number;
   ngOnInit(): void {
+    this.activateRoute.queryParams.subscribe((queryParams) => {
+      this.taskId = queryParams['id'];
+      this.type = queryParams['type'];
 
-    this.getTask(this.taskId);
+      if (this.type == "assignmentQuestion") {
+        this.getAssignmentQuestion(this.taskId);
+      } else if (this.type == 'taskQuestion') {
+        this.getTaskQuestion(this.taskId);
+       
+      }
+    });
   }
-  public getTask(id: any) {
-    this.assignmentService.getAssignmentQuestionById(id).subscribe({
+
+  public getTaskQuestion(taskId: number) {
+    this.taskService.getQuestion(taskId).subscribe({
       next: (data: any) => {
+
         this.question = data.question;
-        this.temp = data.question;
+        this.temp = { ...data.question };
+        this.updateVideoUrl()
       },
       error: (er: any) => {
-        this.message = er.error.message
+        this.toast.showError(er.error.message, 'Error')
+      }
+    })
+  }
+
+
+
+  public getAssignmentQuestion(id: any) {
+    this.assignmentService.getAssignmentQuestionById(id).subscribe({
+      next: (data: any) => {
+
+        this.question = data.question;
+        this.temp = { ...data.question };
+        this.updateVideoUrl()
+      },
+      error: (er: any) => {
+        this.toast.showError(er.error.message, 'Error')
       }
     })
   }
@@ -74,21 +120,49 @@ export class AdminEditTaskComponent implements OnInit {
   }
   url: string = '';
 
-  public updateQuestion() {
+  public updateAssignmenQuestion() {
     this.assignmentService.updateQuestion(this.question, this.updatingImages).subscribe({
       next: (data: any) => {
         this.updatingImages = []
         this.question = data.question;
         this.temp = data.question;
-        alert('success')
+        this.imagePreview = []
+        this.imageName = []
+        this.toast.showSuccess('Successfully updated!!', 'success')
       },
       error: (er: any) => {
-        console.log(er.error.message);
+        this.toast.showError(er.error.message, 'Error')
       }
     })
   }
+  public taskQuestionUpdate(){
+     this.taskService.updateTaskquestion(this.question, this.updatingImages).subscribe({
+      next:(data:any)=>{
+        this.updatingImages = []
+        this.question = data.question;
+        this.temp = data.question;
+        this.imagePreview = []
+        this.imageName = []
+        this.toast.showSuccess('Successfully updated!!', 'success')
+      },
+      error:(er:any)=>{
+        this.toast.showError(er.error.message, 'Error')
+      }
+     })
+  }
+
+  updateQuestion(){
+     if(this.type=="assignmentQuestion"){
+      this.updateAssignmenQuestion();
+     }else{
+      this.taskQuestionUpdate();
+     }
+  }
 
   public discardChanges() {
-    this.question = this.temp
+    this.question = { ...this.temp }
+    this.imagePreview = []
+    this.imageName = []
+    this.updatingImages = []
   }
 }

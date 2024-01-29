@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { error } from 'console';
+import { ToastrService } from 'ngx-toastr';
 import { Chapter } from 'src/app/entity/chapter';
 import { Subject } from 'src/app/entity/subject';
 import { TechnologyStack } from 'src/app/entity/technology-stack';
@@ -8,7 +9,9 @@ import { ChapterResponse } from 'src/app/payload/chapter-response';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { TechnologyStackService } from 'src/app/service/technology-stack-service.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { AppUtils } from 'src/app/utils/app-utils';
 
 @Component({
   selector: 'app-admin-subjects-chapter',
@@ -24,17 +27,20 @@ export class AdminSubjectsChapterComponent {
   chapterName: string = ''
   message: string = '';
   chapterId = 0;
-  chapterUpdate: Chapter = new Chapter();
+  chapterUpdate: ChapterResponse = new ChapterResponse()
+
   imageName = ''
   techImages: TechnologyStack[] = [];
-  //subject: Subject = new Subject
+  chapterIndex: number = 0;
   chapterResponse: ChapterResponse[] = []
+
   constructor(private subjectService: SubjectService,
     private route: ActivatedRoute,
     private chapterService: ChapterServiceService,
     private utilityService: UtilityServiceService,
     private techService: TechnologyStackService,
-    private router: Router) { }
+    private router: Router,
+    private toast: ToastService) { }
 
   ngOnInit() {
     this.subjectId = this.route.snapshot.params[('id')];
@@ -50,37 +56,26 @@ export class AdminSubjectsChapterComponent {
   public getSubjectById(subjectId: number) {
     this.subjectService.getAllChapterWithSubjectId(subjectId).subscribe({
       next: (data: any) => {
-        //  this.subject = data.subject
-        //this.chapter = this.subject.chapters
         this.chapterResponse = data.chapters
       }
     })
   }
 
-  // public getAllSubjectChapter() {
-  //   this.subjectService.getAllSubjectChapters(this.subjectId).subscribe(
-  //     (data: any) => {
-  //       this.chapter = data;
-  //     }
-  //   )
-  // }
-
-
   public addChapter() {
-    if (this.chapterUpdate.chapterName == '') {
+    if (this.chapterUpdate.chapterName.trim() == '') {
       this.message = "please enter subject name.."
       return;
     } else {
-      this.chapterService.addChapter(this.subjectId, this.chapterUpdate.chapterName).subscribe(
+      this.chapterService.addChapter(this.subjectId, this.chapterUpdate.chapterName.trim()).subscribe(
         {
           next: (data: any) => {
-            this.message = 'Success..'
-            this.chapterUpdate = new Chapter();
+            this.chapterUpdate = new ChapterResponse();
             this.chapterResponse.push(data.chapter)
-            //this.getSubjectById(this.subjectId)
+            AppUtils.modelDismiss('chapter-save-modal')
+            this.toast.showSuccess('Chapter added successfully!!', 'Success')
           },
           error: (error) => {
-            this.message = error.error.message
+            this.toast.showError(error.error.message, 'Error')
           }
         }
       )
@@ -89,56 +84,49 @@ export class AdminSubjectsChapterComponent {
   public deleteChapter() {
     this.chapterService.deleteChapter(this.chapterId).subscribe(
       {
-        next: (data) => {
+        next: (data: any) => {
+          this.chapterResponse.splice(this.chapterIndex, 1)
           this.chapterId = 0;
-          let index = this.chapterResponse.findIndex(obj => obj.chapterId === this.chapterId)
-          this.chapterResponse.splice(index, 1)
+          this.chapterIndex = 0
+          this.toast.showSuccess('chapter deleted successfully!!', 'Success')
         },
         error: (error) => {
-          this.message = 'Failed..'
+          this.toast.showError(error.error.message, 'Error')
         }
       }
     )
   }
   public cancel() {
-    this.chapterUpdate = new Chapter();
-    this.message = ''
+    this.chapterUpdate = new ChapterResponse();
   }
   public reload() {
     this.message = ''
-    this.chapterUpdate = new Chapter();
-    // this.getSubjectById(this.subjectId)
+    this.chapterUpdate = new ChapterResponse();
   }
 
   public updateChapter() {
     this.chapterService.updateChapter(this.chapterId, this.chapterUpdate.chapterName).subscribe(
       {
         next: (data) => {
-          this.message = 'success';
           let ch = this.chapterResponse.find(obj => obj.chapterId === this.chapterId) as ChapterResponse
           ch.chapterName = this.chapterUpdate.chapterName;
           this.chapterId = this.chapterId;
           ch.chapterId = this.chapterUpdate.chapterId
+
+          AppUtils.modelDismiss('chapter-update-modal')
+          this.toast.showSuccess('Chapter updated successfully!!', 'success')
         },
         error: (error) => {
-          this.message = error.error.message;
+          this.toast.showError(error.error.message,'Error')
         }
       }
     )
   }
   public getChapterById(id: number) {
     this.chapterId = id;
-    this.chapterService.getChapterById(id).subscribe(
-      {
-        next: (data: any) => {
-          this.chapterUpdate = data.chapter;
-        },
-        error: (error) => {
-          this.message = error.error.message
-        }
-      }
-    )
+    this.chapterUpdate = this.chapterResponse.find(obj => obj.chapterId == id) as ChapterResponse
   }
+
 
   public pageRenderUsingRouterLink(path: string, chapterId: number) {
     const dataParams = {

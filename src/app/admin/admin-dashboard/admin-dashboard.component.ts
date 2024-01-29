@@ -235,10 +235,9 @@ export class AdminDashboardComponent implements OnInit {
   public getOverAllAssignmentTaskStatus(){
     this.assignmentService.getOverAllAssignmentTaskStatus().subscribe(
        (data:any)=>{
-        this.taskSubmissionStatus2 = data;
-        this.totalSubmitted = this.taskSubmissionStatus2.totalSubmitted
-        this.reveiwed = this.taskSubmissionStatus2.reveiwed
-        this.unReveiwed = this.taskSubmissionStatus2.unReveiwed
+        this.totalSubmitted = data.totalCount
+        this.reveiwed =data.reviewedCount
+        this.unReveiwed = data.unreviewedCount
        }
     )
   }

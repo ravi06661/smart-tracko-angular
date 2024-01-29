@@ -12,8 +12,8 @@
             <div class="col-md-12">
                 <div class="top-edit-option">
                     <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Assignment Details</h3>
-                    <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer" id="edit_icon"><i
-                            class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
+                    <!-- <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer" id="edit_icon"><i
+                            class="fi fi-rr-file-edit line-height-0"></i> Edit</span> -->
                 </div>
                 <form action="">
                     <div class="row">
@@ -81,10 +81,13 @@
                                 <input id="file" type="file" onchange="loadFile(event)"  class="d-none">
                                 <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="obj.videoUrl!=null && obj.videoUrl!='' &&obj.videoUrl!=undefined ">
                                     <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
-                                   <div class="assinment_image video-img" >
+                                   <!-- <div class="assinment_image video-img" >
                                      <video src="{{obj.videoUrl}}"  controls
                                        height="" width="270" type="video/mp4"></video>
-                                   </div>
+                                   </div> -->
+                                   <div class="assinment_image">
+                                    <iframe controls  [src]="obj.videoUrl | safe" frameborder="0"  allowfullscreen></iframe>
+                                  </div>
                                   </div>
                                 <div class="col-md-3 col-sm-6 col-xs-12" *ngFor="let image of obj.questionImages;let i =index">
                                     <div class="assinment_image" >
@@ -118,7 +121,9 @@
                                     data-bs-toggle="modal" data-bs-target="#delete-modal" (click)="setQuestionId(obj.questionId)"><i
                                         class="fi fi-rr-trash line-height-0"></i>
                                     Delete</span>
-                               <a routerLink="/admin/editetask/{{obj.questionId}}">
+                               <a (click)="pageRenderUsingRouterLink('/admin/editetask/', obj.questionId)"> 
+                                <!-- <a routerLink="/admin/editetask/{{obj.questionId}}">  -->
+                                
                                 <span class="d-flex align-items-center gap_5 font-17 font-500 secondary pointer"><i
                                     class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
                                </a>
@@ -246,10 +251,10 @@
 <div class="modal-dialog position-relative leave_modal">
     <div class="modal-content">
         <div class="modal-body">
-            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+            <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
                 style="top: -23%;">
                 <i class="fi fi-rr-cross close_icon"></i>
-            </button>
+            </button> -->
 
             <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Question?</p>
             <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
@@ -258,7 +263,7 @@
                         delete</button>
                 </a>
                 <a>
-                    <button type="button" class="apply_modal_btn font-15 font-500" >No, Do not delete</button>
+                    <button type="button" class="apply_modal_btn font-15 font-500"   data-bs-dismiss="modal" aria-label="Close" id="delete-assignment-modal">No, Do not delete</button>
                 </a>
             </div>
 

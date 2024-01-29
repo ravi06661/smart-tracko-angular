@@ -15,6 +15,7 @@ import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { AdminAssignmentSubmissionComponent } from '../admin-assignment-submission/admin-assignment-submission.component';
+import { ToastService } from 'src/app/service/toast.service';
 
 @Component({
   selector: 'app-admin-assignments',
@@ -47,7 +48,8 @@ export class AdminAssignmentsComponent implements OnInit {
     private assignmentService: AssignmentServiceService,
     private router: Router,
     private utilityService: UtilityServiceService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private tost: ToastService) {
 
     this.submissionForm = this.formBuilder.group({
       subjectId: ['', Validators.required],
@@ -59,7 +61,7 @@ export class AdminAssignmentsComponent implements OnInit {
   ngOnInit(): void {
 
     this.getAllCourses();
-    this.getAllSubmitedAssignments();
+    this.getAllSubmitedAssignments(new Course, 0);
     this.getAllSubmissionAssignmentStatus()
     this.getOverAllAssignmentTaskStatus()
     this.getAllSubject()
@@ -99,33 +101,33 @@ export class AdminAssignmentsComponent implements OnInit {
     })
   }
   public createAssingment() {
-    // this.router.navigate(['/admin/createassignments/' +4039])
-    this.messageClear()
     if (this.submissionForm.invalid) {
       this.submissionFormFun()
       return;
     } else {
       this.assignmentService.createAssignment(this.assignmentRequest).subscribe({
         next: (data: any) => {
+          this.tost.showSuccess('Successfully added', 'Success')
           this.router.navigate(['/admin/createassignments/' + data.assignmentId])
         },
         error: (error) => {
-          this.message = error.error.message
+          this.tost.showError(error.error.message, 'Error')
         }
       }
       )
     }
   }
 
-  public getAllSubmitedAssignments() {
-    this.assignmentService.getAllSubmitedAssignments().subscribe({
+  public getAllSubmitedAssignments(course: Course, subjectId: number) {
+    this.course = course!;
+    this.assignmentService.getAllSubmitedAssignments(this.course.courseId, subjectId, '').subscribe({
       next: (data: any) => {
         this.submitedAssignments = data
       }
     })
   }
 
-
+  
   public pageRanderWithObj(object: AssignmentSubmission) {
     const dataParams = {
       submissionId: object.submissionId,
@@ -146,10 +148,9 @@ export class AdminAssignmentsComponent implements OnInit {
   public getOverAllAssignmentTaskStatus() {
     this.assignmentService.getOverAllAssignmentTaskStatus().subscribe(
       (data: any) => {
-        this.taskSubmissionStatus2 = data;
-        this.totalSubmitted = this.taskSubmissionStatus2.totalSubmitted
-        this.reveiwed = this.taskSubmissionStatus2.reveiwed
-        this.unReveiwed = this.taskSubmissionStatus2.unReveiwed
+        this.totalSubmitted = data.totalCount
+        this.reveiwed = data.reviewedCount
+        this.unReveiwed = data.unreviewedCount
       }
     )
   }
@@ -183,12 +184,7 @@ export class AdminAssignmentsComponent implements OnInit {
   }
 
   public clearFormSubmission() {
-    this.submissionForm = this.formBuilder.group({
-      subjectId: ['', Validators.required],
-      courseId: ['', Validators.required],
-      title: ['', Validators.required],
-    });
-    this.messageClear()
+    this.submissionForm.reset()
   }
 
   public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
@@ -206,10 +202,6 @@ export class AdminAssignmentsComponent implements OnInit {
     if (firstInvalidControl) {
       firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-  }
-
-  public messageClear() {
-    this.message = ''
   }
 }
 

@@ -105,8 +105,13 @@ export class AssignmentServiceService {
   }
 
   //This Method for Admin Uses
-  public getAllSubmitedAssignments() {
-    return this.http.get(`${this.assignmentUrl}/getAllSubmitedAssginments`);
+  public getAllSubmitedAssignments(courseId: any, subjectId: any, status: any) {
+    const params = {
+      courseId: courseId,
+      subjectId: subjectId,
+      status: status
+    };
+    return this.http.get(`${this.assignmentUrl}/getAllSubmitedAssginments`, { params: params });
   }
 
   public updateSubmitAssignmentStatus(submissionId: number, status: string, review: string) {
@@ -114,9 +119,6 @@ export class AssignmentServiceService {
     formData.append('submissionId', submissionId.toString());
     formData.append('status', status);
     formData.append('review', review);
-    console.log(status);
-    console.log(review);
-
 
     return this.http.put(`${this.assignmentUrl}/updateSubmitedAssignmentStatus`, formData);
   }

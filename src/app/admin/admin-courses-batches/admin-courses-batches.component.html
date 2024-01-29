@@ -141,10 +141,10 @@
     <div class="modal-dialog position-relative leave_modal">
         <div class="modal-content">
             <div class="modal-body">
-                <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
                     (click)="clearMassage()" style="top: -23%;">
                     <i class="fi fi-rr-cross close_icon"></i>
-                </button>
+                </button> -->
 
                 <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Batch?
                 </p>
@@ -177,10 +177,10 @@
                 <div class="modal-header apply_title p-0">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add New Batch</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
-                        (click)="clearMassage()">
+                    <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="clearMassage()" id="add-batch-modal">
                         <i class="fi fi-rr-cross close_icon"></i>
-                    </button>
+                    </button> -->
                 </div>
                 <form [formGroup]="createBatchFrom">
                     <div class="row">
@@ -245,7 +245,7 @@
                 <div [ngClass]="messageClass">{{message}}</div>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close">Cancel</button>
+                        aria-label="Close" id="add-batch-modal">Cancel</button>
                     <a>
                         <button type="button" class="apply_modal_btn font-15 font-500"
                             (click)="createNewBatch()">Save</button>
@@ -266,10 +266,10 @@
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Edit Batch</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                    <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" 
                         (click)="clearMassage()">
                         <i class="fi fi-rr-cross close_icon"></i>
-                    </button>
+                    </button> -->
                 </div>
 
                 <form action="">
@@ -325,7 +325,7 @@
                 <div [ngClass]="messageClass">{{message}}</div>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close">Cancel</button>
+                        aria-label="Close" id="edite-batch-modal">Cancel</button>
                     <a>
                         <button type="button" class="apply_modal_btn font-15 font-500"
                             (click)="updateBatch()">Save</button>

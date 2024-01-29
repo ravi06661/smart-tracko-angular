@@ -17,7 +17,6 @@ export class TaskandassignmentsComponent implements OnInit {
 
   BASE_URL = this.utilityService.getBaseUrl();
   ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentImages/'
-  //assignments: Assignment[] = []
   unLockAssignments: any
   lockAssignments: any
   assignmentSubmissionsList: AssignmentSubmission[] = []
@@ -90,15 +89,17 @@ export class TaskandassignmentsComponent implements OnInit {
   progressWidth: string = '';
 
   public calculatePercentages(num1: number, num2: number) {
-    return (num2 == 0 )? 0 : Math.floor(num1 / num2 * 100)
+    return (num2 == 0) ? 0 : Math.floor(num1 / num2 * 100)
   }
 
   public getSubmissionAssignmentFilterByStatus(status: string) {
 
     this.assignmentSubmissionsList2 = this.assignmentSubmissionsList
+
     this.assignmentSubmissionsList2 = this.assignmentSubmissionsList2.filter(obj => {
       return (obj.status == status) ? obj : null;
     });
+
   }
 
   public dateFormatter(date: Date) {

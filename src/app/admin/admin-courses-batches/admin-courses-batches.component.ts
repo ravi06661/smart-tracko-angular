@@ -12,7 +12,9 @@ import { Coursereponse } from 'src/app/payload/coursereponse';
 import { BatchesService } from 'src/app/service/batches.service';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { TechnologyStackService } from 'src/app/service/technology-stack-service.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { AppUtils } from 'src/app/utils/app-utils';
 
 @Component({
   selector: 'app-admin-courses-batches',
@@ -39,8 +41,13 @@ export class AdminCoursesBatchesComponent implements OnInit {
   message = '';
   messageClass = ''
 
-  constructor(private activateRoute: ActivatedRoute, private courseService: CourseServiceService,
-    private batchService: BatchesService, private techService: TechnologyStackService, private utilityService: UtilityServiceService, private formBuilder: FormBuilder) {
+  constructor(private activateRoute: ActivatedRoute,
+    private courseService: CourseServiceService,
+    private batchService: BatchesService,
+    private techService: TechnologyStackService,
+    private utilityService: UtilityServiceService,
+    private formBuilder: FormBuilder,
+    private toast: ToastService) {
     this.createBatchFrom = this.formBuilder.group({
       selectedOption: ['', Validators.required],
       batchName: ['', Validators.required],
@@ -86,23 +93,19 @@ export class AdminCoursesBatchesComponent implements OnInit {
   }
 
   public createNewBatch() {
-    alert('ssssss')
     this.batchRequest.courseId = this.courseId;
     this.createBatchFrom.markAllAsTouched();
-    //if (this.createBatchFrom.valid)
-      this.batchService.createNewBatch(this.batchRequest).subscribe({
-        next: (data: any) => {
-
-          this.batchRequest = new BatchRequest()
-          this.getCourseByCourseId();
-          this.message = data.message;
-          this.messageClass = 'text-success';
-        },
-        error: (err: any) => {
-          this.message = err.error.message;
-          this.messageClass = 'text-danger';
-        }
-      })
+    this.batchService.createNewBatch(this.batchRequest).subscribe({
+      next: (data: any) => {
+        this.batchRequest = new BatchRequest()
+        this.getCourseByCourseId();
+        this.toast.showSuccess(data.message, 'Success')
+        AppUtils.modelDismiss('add-batch-modal')
+      },
+      error: (err: any) => {
+        this.toast.showError(err.error.message, 'Error')
+      }
+    })
   }
 
   public getAllTechImages() {
@@ -117,7 +120,7 @@ export class AdminCoursesBatchesComponent implements OnInit {
     this.batchService.deletBatch(id).subscribe({
       next: (data: any) => {
         if (data.success) {
-          alert('success')
+          this.toast.showSuccess('Successfully deletd', 'Error')
           this.getCourseByCourseId();
         }
       }
@@ -137,13 +140,12 @@ export class AdminCoursesBatchesComponent implements OnInit {
       next: (data: any) => {
         this.batch = new BatchResponse();
         this.getCourseByCourseId();
-        this.message = data.message;
-        this.messageClass = 'text-success'
         this.clearValidationForm();
+        AppUtils.modelDismiss('edite-batch-modal')
+        this.toast.showSuccess(data.message, 'Success')
       },
       error: (err: any) => {
-        this.message = err.error.message;
-        this.messageClass = 'text-danger';
+        this.toast.showError(err.error.message, 'Error')
       }
     })
   }

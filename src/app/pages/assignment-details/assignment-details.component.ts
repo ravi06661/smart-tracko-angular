@@ -6,6 +6,7 @@ import { TaskQuestion } from 'src/app/entity/task-question';
 import { AssignmentSubmissionRequest } from 'src/app/payload/assignment-submission-request';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { LoginService } from 'src/app/service/login.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import Swal from 'sweetalert2';
 
@@ -32,7 +33,8 @@ export class AssignmentDetailsComponent implements OnInit {
     private utilityService: UtilityServiceService,
     private loginService: LoginService,
     private router: Router
-    , private formBuilder: FormBuilder) {
+    , private formBuilder: FormBuilder,
+    private toast: ToastService) {
 
     this.submissionForm = this.formBuilder.group({
       file: ['', Validators.required],
@@ -75,9 +77,8 @@ export class AssignmentDetailsComponent implements OnInit {
 
     this.assignmentService.submitAssignment(this.assignmentSubmission, this.file).subscribe({
       next: (data) => {
-        Swal.fire('Assignment Submit Successfully').then(e => {
-          this.router.navigate(['/student/taskAndAssignment'])
-        })
+        this.toast.showSuccess('Successfully submitted!!', 'Success')
+        this.router.navigate(['/student/taskAndAssignment'])
       }
     })
   }
@@ -90,6 +91,7 @@ export class AssignmentDetailsComponent implements OnInit {
         } else
           this.isSubmittedQuestion = true;
       }, (er: any) => {
+        this.toast.showError(er.error.message, 'Error')
       }
     )
   }

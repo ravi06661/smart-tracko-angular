@@ -7,5 +7,6 @@ export class TaskRequest {
     public subject!: Subject;
     public attachmentStatus:string=''
     public taskName:string=''
+        
 
 }

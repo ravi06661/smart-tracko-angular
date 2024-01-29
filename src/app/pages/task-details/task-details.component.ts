@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { clear } from 'console';
+import { uniqueDates } from 'igniteui-angular/lib/core/utils';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { Task } from 'src/app/entity/task';
 import { LoginService } from 'src/app/service/login.service';
 import { TaskServiceService } from 'src/app/service/task-service.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
+import { AppUtils } from 'src/app/utils/app-utils';
 
 @Component({
   selector: 'app-task-details',
@@ -20,11 +24,16 @@ export class TaskDetailsComponent {
   taskId: number = 0;
   task = new Task
   taskSubmittion: StudentTaskSubmittion = new StudentTaskSubmittion();
-  message: string = ''
+  //message: string = ''
   submissionForm: FormGroup;
   isSubmittedTask: boolean = false
   taskAttachment: boolean = false
-  constructor(private taskService: TaskServiceService, private router: ActivatedRoute, private utilityService: UtilityServiceService, private loginService: LoginService, private formBuilder: FormBuilder) {
+  constructor(private taskService: TaskServiceService,
+    private router: ActivatedRoute,
+    private utilityService: UtilityServiceService,
+    private loginService: LoginService,
+    private formBuilder: FormBuilder,
+    private toast: ToastService) {
     this.submissionForm = this.formBuilder.group({
       file: ['', Validators.required],
       taskDescription: ['', Validators.required]
@@ -34,12 +43,11 @@ export class TaskDetailsComponent {
 
   ngOnInit() {
     this.getTask();
-
   }
   public getTask() {
     this.taskService.getTaskById(this.taskId).subscribe(
       (data: any) => {
-        this.task = data;
+        this.task = data.task;
         if (data.attachment)
           this.taskAttachment = true
         this.isSubmitted()
@@ -57,9 +65,18 @@ export class TaskDetailsComponent {
       }
       this.taskSubmittion.studentId = this.loginService.getStudentId();
       this.taskService.submitTask(this.taskSubmittion, this.taskId).subscribe(
-        (data) => {
-          this.taskSubmittion = new StudentTaskSubmittion
-          this.message = "Success.."
+        {
+          next: (data) => {
+            this.taskSubmittion = new StudentTaskSubmittion
+            this.submissionForm.reset()
+            AppUtils.modelDismiss('close-task-submission-form')
+            this.isSubmittedTask = false
+            this.toast.showSuccess('Task successfully submitted', 'Success')
+
+          },
+          error: (er: any) => {
+            this.toast.showError(er.error.message, 'Error')
+          }
         }
       )
     } else {
@@ -71,10 +88,13 @@ export class TaskDetailsComponent {
           {
             next: (data) => {
               this.taskSubmittion = new StudentTaskSubmittion
-              this.message = "Success.."
+              this.submissionForm.reset()
+              this.isSubmittedTask = false
+              AppUtils.modelDismiss('close-task-submission-form')
+              this.toast.showSuccess('Task successfully submitted', 'Success')
             },
             error: (er) => {
-              this.message = er.error.message
+              this.toast.showError(er.error.message, 'Error')
             }
           }
         )
@@ -83,12 +103,8 @@ export class TaskDetailsComponent {
 
 
   }
-  public reaload() {
-    this.message = ''
-  }
-  public deleteFile() {
 
-  }
+
   public setImage(event: any) {
     this.taskSubmittion.submittionFileName = event.target.files[0];
   }
@@ -108,12 +124,6 @@ export class TaskDetailsComponent {
   }
 
 
-  public clearForm() {
-    this.submissionForm = this.formBuilder.group({
-      file: ['', Validators.required],
-      taskDescription: ['', Validators.required]
-    });
-  }
   public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
     const field = this.submissionForm.get(fieldName);
     return field ? field.invalid && field.touched : false;
@@ -142,6 +152,9 @@ export class TaskDetailsComponent {
           this.isSubmittedTask = true
       }
     )
+  }
+  public deleteFile() {
+    this.taskSubmittion.submittionFileName != null ? File : File
   }
 }
 
