@@ -105,7 +105,7 @@ export class AssignmentServiceService {
   }
 
   //This Method for Admin Uses
-  public getAllSubmitedAssignments(courseId: any, subjectId: any, status: any) {
+  public getAllSubmitedAssignments(courseId: any, subjectId: any, status: string) {
     const params = {
       courseId: courseId,
       subjectId: subjectId,

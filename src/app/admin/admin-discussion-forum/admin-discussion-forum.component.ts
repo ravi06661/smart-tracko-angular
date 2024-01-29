@@ -3,6 +3,7 @@ import { StudentDetails } from 'src/app/entity/student-details';
 import { CommentResponse } from 'src/app/payload/comment-response';
 import { DiscussionFormResponse } from 'src/app/payload/discussion-form-response';
 import { DiscussionFormServiceService } from 'src/app/service/discussion-form-service.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import Swal from 'sweetalert2';
 
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2';
 export class AdminDiscussionForumComponent implements OnInit {
 
   discussionFormResponse: DiscussionFormResponse[] = [];
+  temp: DiscussionFormResponse[] = [];
   commentResonse: CommentResponse[] = [];
   newDiscussion: DiscussionFormResponse = new DiscussionFormResponse
   student: StudentDetails = new StudentDetails
@@ -25,12 +27,15 @@ export class AdminDiscussionForumComponent implements OnInit {
     this.getAllDiscussion();
   }
 
-  constructor(private discussionFormSerice: DiscussionFormServiceService, public utilityService: UtilityServiceService) { }
+  constructor(private discussionFormSerice: DiscussionFormServiceService, public utilityService: UtilityServiceService
+    , private tost: ToastService
+  ) { }
 
   public getAllDiscussion() {
     this.discussionFormSerice.getAllDiscussionForm(0).subscribe((
       (data: any) => {
         this.discussionFormResponse = data.response
+        this.temp = { ...this.discussionFormResponse }
       }
     ))
   }
@@ -42,32 +47,10 @@ export class AdminDiscussionForumComponent implements OnInit {
     return Math.floor(differenceInDays); // Round down to the nearest integer
   }
 
+
   public removeComments(discussionFormId: number, commentsId: number) {
 
-    // Swal.fire({
-    //   title: 'Are you sure?',
-    //   text: "You won't be able to revert this!",
-    //   icon: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#3085d6',
-    //   cancelButtonColor: '#d33',
-    //   confirmButtonText: 'Yes, delete it!'
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     this.discussionFormSerice.removeComment(discussionFormId,commentsId).subscribe({
-    //      next:(data:any)=>{
-    //       this.newDiscussion.comments=data.comments
-    //      }
-    //     })
-    //     Swal.fire(
-    //       'Deleted!',
-    //       'Comment has been deleted.',
-    //       'success'
-    //     )
-    //   }
-    // })
-
-    Swal.fire('Comment Is Deleted Successfully!')
+    this.tost.showSuccess('Comment Is Deleted Successfully!', 'Success')
     this.discussionFormSerice.removeComment(discussionFormId, commentsId).subscribe({
       next: (data: any) => {
         this.newDiscussion.comments = data.comments
@@ -75,6 +58,19 @@ export class AdminDiscussionForumComponent implements OnInit {
     })
 
   }
+  search: string = ''
+  searching() {
+    this.discussionFormSerice.search(this.search).subscribe({
+      next: (data: any) => {
+        if (this.search == null || this.search == '') {
+          this.discussionFormResponse = { ...this.temp }
+        } else {
+          this.discussionFormResponse = data
+        }
+      },
+      error: (er: any) => {
 
-
+      }
+    })
+  }
 }

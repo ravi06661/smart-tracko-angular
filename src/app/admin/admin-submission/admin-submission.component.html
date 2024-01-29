@@ -43,6 +43,15 @@
                     <li>{{submitedTask.taskDescription}} </li>
                 </ul>
             </div>
+            <div class="col-md-12 mb_24">
+              <div class="d-flex align-items-center gap_24">
+                  <h3 class="report_title font-17 font-600 secondary position-relative">Description</h3>
+                  <!-- <p class="mb-0 font-17 font-400 text_gray">{{submitedTask.submissionDate | date:'short'}}</p> -->
+              </div>
+              <ul class="submission_report ps-0">
+                  <li>{{submitedTask.review}} </li>
+              </ul>
+          </div>
   
             <div class="col-md-12" *ngIf="submitedTask.submittionFileName!=null  && submitedTask.submittionFileName!=undefined">
                 <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Attachments</h3>

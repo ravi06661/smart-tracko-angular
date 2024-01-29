@@ -23,12 +23,8 @@ export class WebsocketServiceDiscussionFormService {
     this.stompClient = Stomp.over(socket);
     this.stompClient.connect({}, (frame: any) => {
       this.stompClient.subscribe('/queue/Chatmessages', (message: any) => {
-        console.log(message.body);
-
         const parsedMessage = JSON.parse(message.body);
-        //console.log = () => { };
-       // console.log(parsedMessage);
-
+     //   console.log = () => { };
         this.messagesSubject.next(parsedMessage);
       });
     });
@@ -39,9 +35,11 @@ export class WebsocketServiceDiscussionFormService {
   }
 
   public getMessages(): Observable<any> {
+ //   console.log = () => { };
     return this.messagesObservable;
   }
   public sendMessage(message: any): void {
+   // console.log = () => { };
     this.stompClient.send('/api/socket', {}, JSON.stringify(message));
   }
 

@@ -141,7 +141,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" *ngFor="let course of courses"
-                                    (click)="getAllSubmitedAssignments(course,0)">{{course.courseName}}</a>
+                                    (click)="getAllSubmitedAssignments(course,0,'NOT_CHECKED_WITH_IT')">{{course.courseName}}</a>
                             </li>
                             </ul>
                         </div>
@@ -153,7 +153,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" *ngFor="let subject of subjectes"
                                         (click)="selectCourseSubject(subject)"
-                                        (click)="getAllSubmitedAssignments(course,subjectId)">
+                                        (click)="getAllSubmitedAssignments(course,subjectId,'NOT_CHECKED_WITH_IT')">
                                         {{subject.subjectName}}</a></li>
                             </ul>
                         </div>
@@ -163,9 +163,9 @@
                                 Status
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" >Reviewed</a></li>
-                                <li><a class="dropdown-item" >Unreviewed</a></li>
-                                <li><a class="dropdown-item" >Reviewing</a></li>
+                                <li><a class="dropdown-item"  (click)="getAllSubmitedAssignments(course,subjectId,'Accepted')">Accepted</a></li>
+                                <li><a class="dropdown-item"  (click)="getAllSubmitedAssignments(course,subjectId,'Unreviewed')" >Unreviewed</a></li>
+                                <li><a class="dropdown-item"  (click)="getAllSubmitedAssignments(course,subjectId,'Rejected')">Rejected</a></li>
                              
                             </ul>
                         </div>

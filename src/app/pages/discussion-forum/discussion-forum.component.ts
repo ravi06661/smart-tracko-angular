@@ -12,6 +12,8 @@ import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket
 import { CommentResponseForm } from 'src/app/payload/comment-response-form';
 import { LikeResponseForm } from 'src/app/payload/like-response-form';
 import { Typing } from 'src/app/entity/typing';
+import { ToastService } from 'src/app/service/toast.service';
+import { log } from 'console';
 
 @Component({
   selector: 'app-discussion-forum',
@@ -41,7 +43,8 @@ export class DiscussionForumComponent implements OnInit {
     private loginService: LoginService,
     private utilityService: UtilityServiceService,
     private studentService: StudentService,
-    private webSocketService: WebsocketServiceDiscussionFormService
+    private webSocketService: WebsocketServiceDiscussionFormService,
+    private toast: ToastService
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +78,7 @@ export class DiscussionForumComponent implements OnInit {
         },
         error: (er) => {
           alert('something went wrong...')
+
         }
       }
     )
@@ -99,8 +103,8 @@ export class DiscussionForumComponent implements OnInit {
     this.discussionFormSerice.creatCommnet(this.loginService.getStudentId(), id, this.comment).subscribe(
       {
         next: (data: any) => {
-          //  let form = this.discussionFormList.find(obj => obj.id === id) as DiscussionFormResponse
-          // this.commentResponse = data
+            //let form = this.discussionFormList.find(obj => obj.id === id) as DiscussionFormResponse
+           //this.commentResponse = data
           //  form.comments.push(this.commentResponse)
           this.comment = ''
           this.sendTypingUser('typed')
@@ -108,7 +112,7 @@ export class DiscussionForumComponent implements OnInit {
 
         },
         error: (er) => {
-          alert('Already commented...')
+          this.toast.showSuccess('Already commented...', '')
         }
       }
     )
@@ -128,7 +132,7 @@ export class DiscussionForumComponent implements OnInit {
             let obj = new DiscussionResponseForm(data.studentProfilePic, data.studentName, data.content, (data.createdDate).toString(), data.id, 'createDiscussionForm', data.file, this.student.studentId, data.audioFile);
             this.discussionForm = new DiscussionFormResponse()
             this.sendMessage(obj);
-            this.isMessageSend = false
+            //  this.isMessageSend = false
           },
           error: (er) => {
             alert('something went wrong...')
@@ -167,37 +171,6 @@ export class DiscussionForumComponent implements OnInit {
     this.commnetVisibility = [false]
     this.commnetVisibility[index] = !this.commnetVisibility[index];
   }
-
-  // connect() {
-  //   this.webSocketService.getMessages().subscribe((message) => {
-  //     switch (message.type) {
-  //       case 'commentResponse':
-  //         let form = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
-  //         if (form && !form.comments.find(c => c.id === message.id)) {
-  //           form.comments.unshift(message);
-  //         }
-  //         break;
-  //       case 'likeResponse':
-  //         let form1 = this.discussionFormList.find(obj => obj.id === message.discussionFormId) as DiscussionFormResponse
-  //         form1.likes = message.likes
-  //         if (this.loginService.getStudentId() == message.studentId) {
-  //           form1.isLike = message.isLike
-  //         }
-  //         break;
-  //       case 'createDiscussionForm':
-  //         this.isMessageSend = false
-  //         if (!this.discussionFormList.find(e => e.id === message.id)) {
-  //           this.discussionFormList.unshift(message);
-  //         }
-  //         break;
-  //       case 'typing':
-  //         this.pushTypingMessage(message);
-  //         break;
-  //       default:
-  //         break;
-  //     }
-  //   });
-  // }
   connect() {
     this.webSocketService.getMessages().subscribe((message) => {
       switch (message.type) {
@@ -213,18 +186,17 @@ export class DiscussionForumComponent implements OnInit {
           if (forum) {
             let index = forum.comments.findIndex(obj1 => obj1.id === message.commentId)
             if (index !== -1) {
-              forum.comments.splice(index, 1); // Remove 1 element at the found index
+              forum.comments.splice(index, 1);
             }
           }
           break;
         case 'likeResponse':
           let form1 = this.discussionFormList.find(obj => obj.id == message.discussionFormId) as DiscussionFormResponse;
 
-          if (form1 && !form1.likes.find(o => o.id === message.likeId || message.likeId === undefined)) {
+          if (form1 && message.likeId && !form1.likes.find(o => o.id === message.likeId || message.likeId === undefined)) {
             let newLike = new LikeResponse();
             newLike.id = message.likeId;
             form1.likes.push(newLike);
-            console.log('Like added');
           }
 
           if (this.loginService.getStudentId() == message.studentId) {
@@ -235,13 +207,12 @@ export class DiscussionForumComponent implements OnInit {
         case 'removeLike':
           let form2 = this.discussionFormList.find(obj => obj.id == message.discussionFormId) as DiscussionFormResponse;
           let likeIndex = form2.likes.findIndex(like => like.id == message.likeId);
-             console.log(likeIndex);
-             
+          console.log(likeIndex);
+
           if (likeIndex !== -1) {
             form2.likes.splice(likeIndex, 1);
             console.log('Like removed');
           }
-
           if (this.loginService.getStudentId() == message.studentId) {
             form2.isLike = false;
           }
@@ -310,19 +281,6 @@ export class DiscussionForumComponent implements OnInit {
     }
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log('changes1');
-
-  //   if (changes['typing'] && changes['typing'].currentValue) {
-  //     this.updateLimitedTyping();
-  //     console.log('changes1');
-
-  //   }
-  // }
-  // limitedTyping: Typing[] = []
-  // private updateLimitedTyping(): void {
-  //   this.limitedTyping = this.typing.slice(0, 7);
-  // }
   isImageExpanded = false;
 
   toggleImageSize(event: Event) {
