@@ -103,8 +103,8 @@ export class DiscussionForumComponent implements OnInit {
     this.discussionFormSerice.creatCommnet(this.loginService.getStudentId(), id, this.comment).subscribe(
       {
         next: (data: any) => {
-          //  let form = this.discussionFormList.find(obj => obj.id === id) as DiscussionFormResponse
-          // this.commentResponse = data
+            //let form = this.discussionFormList.find(obj => obj.id === id) as DiscussionFormResponse
+           //this.commentResponse = data
           //  form.comments.push(this.commentResponse)
           this.comment = ''
           this.sendTypingUser('typed')
@@ -197,7 +197,6 @@ export class DiscussionForumComponent implements OnInit {
             let newLike = new LikeResponse();
             newLike.id = message.likeId;
             form1.likes.push(newLike);
-            // console.log('Like added');
           }
 
           if (this.loginService.getStudentId() == message.studentId) {
@@ -214,9 +213,6 @@ export class DiscussionForumComponent implements OnInit {
             form2.likes.splice(likeIndex, 1);
             console.log('Like removed');
           }
-          console.log(form2.likes);
-
-
           if (this.loginService.getStudentId() == message.studentId) {
             form2.isLike = false;
           }
@@ -285,19 +281,6 @@ export class DiscussionForumComponent implements OnInit {
     }
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   console.log('changes1');
-
-  //   if (changes['typing'] && changes['typing'].currentValue) {
-  //     this.updateLimitedTyping();
-  //     console.log('changes1');
-
-  //   }
-  // }
-  // limitedTyping: Typing[] = []
-  // private updateLimitedTyping(): void {
-  //   this.limitedTyping = this.typing.slice(0, 7);
-  // }
   isImageExpanded = false;
 
   toggleImageSize(event: Event) {

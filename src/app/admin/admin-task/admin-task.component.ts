@@ -56,7 +56,7 @@ export class AdminTaskComponent {
 
   ngOnInit() {
     this.getCourses();
-    this.getAllSubmittedTaskFilter(0, 0)
+    this.getAllSubmittedTaskFilter(0, 0,'NOT_CHECKED_WITH_IT')
     this.getAllSubmissionTaskStatus()
     this.getOverAllAssignmentTaskStatus()
     this.courseFilterByCourseIdAndSubjectId(0, 0)
@@ -109,13 +109,14 @@ export class AdminTaskComponent {
       )
     }
   }
-
-  public getAllSubmittedTaskFilter(courseId: number, subjectId: number) {
+subjectId!:number
+  public getAllSubmittedTaskFilter(courseId: number, subjectId: number,status:string) {
     this.courseId = courseId;
+    this.subjectId = subjectId
     if (courseId) {
       this.getCourseSubject(courseId)
     }
-    this.taskService.getAllSubmitedTasks(courseId, subjectId).subscribe({
+    this.taskService.getAllSubmitedTasks(courseId, subjectId,status).subscribe({
       next: (data: any) => {
         this.submitedTasksList = data;
 

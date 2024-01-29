@@ -12,14 +12,14 @@ export class UtilityServiceService {
  private BASE_URL = 'http://localhost:8080';
    //private BASE_URL = 'http://192.168.1.131:8080';
   //private BASE_URL = 'http://192.168.1.300:08080';
-  private readonly TIME_URL ='' //'http://worldtimeapi.org/api/ip';
+  private readonly TIME_URL ='http://worldtimeapi.org/api/ip';
 
   public getBaseUrl() {
     return this.BASE_URL;
   }
 
   public getTimeUrl() {
-   // return this.TIME_URL;
+  // return this.TIME_URL;
   }
 
   public updateTimeline(date: any) {

@@ -58,10 +58,11 @@ export class TaskServiceService {
     return this.http.post(`${this.TASK_URL}/addTaskAttachment`, formData);
   }
 
-  public getAllSubmitedTasks(courseId: any, subjectId: any) {
+  public getAllSubmitedTasks(courseId: any, subjectId: any,status:string) {
     const params = {
       courseId: courseId,
-      subjectId: subjectId
+      subjectId: subjectId,
+      status:status
     };
     return this.http.get(`${this.TASK_URL}/getAllSubmitedTask`, { params });
   }

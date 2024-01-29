@@ -198,9 +198,10 @@ export class DashboardComponent implements OnInit {
           //   }
           //   this.assignmentId = this.toDoAssignment.id
           //   this.lockAssignments = data.lockedAssignment;
-          //  this.toDoAssignmentLength = this.toDoAssignment.assignmentQuestion.length
+           
           this.unLockAssignments = data.unLockedAssignment
           this.toDoAssignment = this.unLockAssignments[this.unLockAssignments.length - 1];
+          this.toDoAssignmentLength =   this.toDoAssignment.taskQuestion.length;
         },
         error: (err: any) => {
           this.message = err.error.message

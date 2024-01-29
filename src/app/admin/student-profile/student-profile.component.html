@@ -139,10 +139,6 @@
                       </a>
                     </div>
                   </div> -->
-
-
-
-
                   <div class="AssignmentCard mb-1" id="head-show" *ngFor="let obj of unLockAssignments; let i=index">
                     <div class="Head">
                       <div class="TaskName text-light">Assignment Day {{i+1}}</div>
@@ -216,7 +212,7 @@
 
                     <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1" *ngFor="let obj of assignmentSubmissionsList;let i=index" (click)="assignmentSubmissionObj = obj">
                       <div class="d-flex align-items-center justify-content-between">
-                        <h3 class="font-14 font-500 mb-1 text-black">Assignment  <b class="ms-1 font-500" [ngClass]="{'text_light_green':obj.status == 'Accepted','text_light_red':obj.status=='Rejected','text_light_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</b></h3>
+                        <h3 class="font-14 font-500 mb-1 text-black">Assignment[{{obj.title}}] <b class="ms-1 font-500" [ngClass]="{'text_light_green':obj.status == 'Accepted','text_light_red':obj.status=='Rejected','text_light_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</b></h3>
                         <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
                       </div>
                       <div class="d-flex align-items-center justify-content-between mb-1">
@@ -676,8 +672,15 @@
                       <li class="font-17 font-400 text_dark">{{assignmentSubmissionObj.description}}</li>
                       <!-- <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li> -->
                     </ol>
+                  </div> 
+                  <div class="question_ans">
+                    <h3 class="font-17 font-500 secondary">Review</h3>
+                    <ol class="ps-3">
+                      <li class="font-17 font-400 text_dark">{{assignmentSubmissionObj.review}}</li>
+                      <!-- <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li> -->
+                    </ol>
                   </div>           
-                <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file">
+                <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file" *ngIf="assignmentSubmissionObj.submitFile!=null && assignmentSubmissionObj.submitFile!=''">
                   <a href="{{ATTACHMENT_URL+assignmentSubmissionObj.submitFile}}" class="font-15 font-400 text_gray  attachment_file_text">
                     <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
                     Download Submited File</a>
@@ -707,8 +710,14 @@
                     <ol class="ps-3">
                       <li class="font-17 font-400 text_dark">{{taskSubmissionObj.taskDescription}}</li>
                     </ol>
-                  </div>           
-                  <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file">
+                  </div>   
+                  <div class="question_ans">
+                    <h3 class="font-17 font-500 secondary">Reivew</h3>
+                    <ol class="ps-3">
+                      <li class="font-17 font-400 text_dark">{{taskSubmissionObj.review}}</li>
+                    </ol>
+                  </div>         
+                  <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file" *ngIf="taskSubmissionObj.submittionFileName!=null">
                     <a href="{{ATTACHMENT_URL+taskSubmissionObj.submittionFileName}}" class="font-15 font-400 text_gray  attachment_file_text">
                       <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
                       Download Submited File</a>

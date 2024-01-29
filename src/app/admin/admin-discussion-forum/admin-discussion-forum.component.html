@@ -11,10 +11,13 @@
       <div class="main_page">
         <div class="d-flex align-items-center justify-content-between">
           <h2 class="font-17 font-600 text_small mb-0">Discussion Forum</h2>
-          <form class="form-inline position-relative search_boxs">
-            <i class="fi fi-rr-search search_icon2 lh-0"></i>
-            <input class=" font-14 font-400 mx-0 search_massage" type="search" placeholder="Search here...">
-        </form>
+          <!-- <form >
+           
+        </form> -->
+        <div class="form-inline position-relative search_boxs ">
+          <i class="fi fi-rr-search search_icon2 lh-0"></i>
+          <input class=" font-14 font-400 mx-0 search_massage" type="search"   (keyup)="searching()"  [(ngModel)]="search" placeholder="Search here...">
+        </div>
         </div>
         <div class="scroll_section" >
           <div class="" >

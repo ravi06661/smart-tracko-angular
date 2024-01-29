@@ -61,7 +61,7 @@ export class AdminAssignmentsComponent implements OnInit {
   ngOnInit(): void {
 
     this.getAllCourses();
-    this.getAllSubmitedAssignments(new Course, 0);
+    this.getAllSubmitedAssignments(new Course, 0,'NOT_CHECKED_WITH_IT');
     this.getAllSubmissionAssignmentStatus()
     this.getOverAllAssignmentTaskStatus()
     this.getAllSubject()
@@ -118,9 +118,9 @@ export class AdminAssignmentsComponent implements OnInit {
     }
   }
 
-  public getAllSubmitedAssignments(course: Course, subjectId: number) {
+  public getAllSubmitedAssignments(course: Course, subjectId: number,status:string) {
     this.course = course!;
-    this.assignmentService.getAllSubmitedAssignments(this.course.courseId, subjectId, '').subscribe({
+    this.assignmentService.getAllSubmitedAssignments(this.course.courseId, subjectId, status).subscribe({
       next: (data: any) => {
         this.submitedAssignments = data
       }
