@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Action } from 'igniteui-angular';
@@ -13,13 +13,13 @@ import Swal from 'sweetalert2';
   templateUrl: './admin-edit-fees.component.html',
   styleUrls: ['./admin-edit-fees.component.scss']
 })
-export class AdminEditFeesComponent implements OnInit{
-  BASE_URL=this.utilityService.getBaseUrl();  
+export class AdminEditFeesComponent implements OnInit {
+  BASE_URL = this.utilityService.getBaseUrl();
   imageUrl = this.BASE_URL + '/file/getImageApi/images/';
-  feesId:number=0;
-  fees:Fees=new Fees();
-  updateFeesForm:FormGroup
-  constructor(private feesService:FeesService,private utilityService:UtilityServiceService,private activateRoute:ActivatedRoute,private router:Router,private formBuilder:FormBuilder){
+  feesId: number = 0;
+  fees: Fees = new Fees();
+  updateFeesForm: FormGroup
+  constructor(private feesService: FeesService, private utilityService: UtilityServiceService, private activateRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private zone: NgZone) {
     this.updateFeesForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       email: ['', Validators.required],
@@ -31,7 +31,7 @@ export class AdminEditFeesComponent implements OnInit{
     })
   }
   ngOnInit(): void {
-    this.feesId=this.activateRoute.snapshot.params[('feesId')];
+    this.feesId = this.activateRoute.snapshot.params[('feesId')];
     this.getFeesById();
   }
 
@@ -52,43 +52,71 @@ export class AdminEditFeesComponent implements OnInit{
       firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
- 
-  
-  public updateFees(){
-    this.updateFeesForm.markAllAsTouched();
-    if (this.updateFeesForm.valid )
-    Swal.fire({
-      title: 'Do you want to save the changes?',
-      showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'Save',
-      denyButtonText: `Don't save`,
-    }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
-      if (result.isConfirmed) {
-        this.fees.remainingFees = this.fees.finalFees - this.fees.feesPaid;
-        this.feesService.updateFeesDetalis(this.fees).subscribe({
-          next:(res:any)=>{
-            
-           this.fees=res
-          }
-          })
-        Swal.fire('Saved!', '', 'success')
-        this.router.navigate(['/admin/pendingfees'])
-      } else if (result.isDenied) {
-        this.getFeesById()
-        Swal.fire('Changes are not saved', '', 'info')
-      }
-    })
-  }
-  
 
-  public getFeesById(){
-this.feesService.findByFeesId(this.feesId).subscribe(
-  (data:any)=>{
-    this.fees=data
-    
+
+  public updateFees() {
+    this.updateFeesForm.markAllAsTouched();
+    if (this.updateFeesForm.valid) Swal.fire({
+      title: 'Do you want to save the changes?',
+      icon: 'question',
+      showDenyButton: true,
+      confirmButtonText: 'Save',
+      denyButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.feesService.updateFeesDetalis(this.fees).subscribe({
+          next: (res: any) => {
+            // Update the fees model within Angular's zone
+            this.zone.run(() => {
+              this.fees = res;
+            });
+            Swal.fire('Saved!', '', 'success');
+            this.router.navigate(['/admin/pendingfees']);
+          },
+          error: (error) => {
+            console.error(error);
+            Swal.fire('Error occurred while saving changes', '', 'error');
+          }
+        });
+      } else if (result.isDenied) {
+        this.getFeesById();
+        Swal.fire('Changes are not saved', '', 'info');
+      }
+    });
+
+    // Swal.fire({
+    //   title: 'Do you want to save the changes?',
+    //   showDenyButton: true,
+    //   showCancelButton: true,
+    //   confirmButtonText: 'Save',
+    //   denyButtonText: `Don't save`,
+    // }).then((result) => {
+    //   /* Read more about isConfirmed, isDenied below */
+    //   if (result.isConfirmed) {
+    //     this.fees.remainingFees = this.fees.finalFees - this.fees.feesPaid;
+    //     this.feesService.updateFeesDetalis(this.fees).subscribe({
+    //       next:(res:any)=>{
+
+    //        this.fees=res
+    //       }
+    //       })
+    //     Swal.fire('Saved!', '', 'success')
+    //     this.router.navigate(['/admin/pendingfees'])
+    //   } else if (result.isDenied) {
+    //     this.getFeesById()
+    //     Swal.fire('Changes are not saved', '', 'info')
+    //   }
+    // })
   }
-)
+
+
+  public getFeesById() {
+    this.feesService.findByFeesId(this.feesId).subscribe(
+      (data: any) => {
+        this.fees = data
+        this.fees.remainingFees = this.fees.finalFees - this.fees.feesPaid
+      }
+    )
   }
+
 }

@@ -125,6 +125,12 @@ export class AdminAssignmentsComponent implements OnInit {
     this.assignmentService.getAllSubmitedAssignments(this.course.courseId, subjectId, status).subscribe({
       next: (data: any) => {
         this.submitedAssignments = data
+        if(this.submitedAssignments.length==0){
+          this.message = " No Assignment Found !!"
+        }
+      },
+      error: (er: any) => {
+
       }
     })
   }

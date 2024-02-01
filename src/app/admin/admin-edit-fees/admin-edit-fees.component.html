@@ -80,7 +80,7 @@
                         <label for="" class="mb_6 font-17 font-500 secondary">Remainig Fees</label>
                         <div class="input_icon position-relative">
                             <input type="text" id="remainingFees" name="remainingFees" class="form-control input_text"
-                                placeholder="Enter Finial Fees" [(ngModel)]="fees.finalFees-fees.feesPaid" formControlName="remainingFees" readonly>
+                                placeholder="Enter Finial Fees" [(ngModel)]="fees.remainingFees" formControlName="remainingFees" readonly>
                                 <div  *ngIf="isFieldInvalidForUpdateFeesDetailsForm('remainingFees')" class="text-danger">RemainingFees is
                                     required.</div>
                         </div>

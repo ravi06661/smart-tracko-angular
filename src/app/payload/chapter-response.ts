@@ -3,6 +3,5 @@ export class ChapterResponse {
     public chapterName: string = ''
     chapterImage: string = '';
     subjectId: number = 0;
-    subjectName: string = '';
     scoreGet!: number;
 }

@@ -58,6 +58,7 @@ export class StudentProfileComponent implements OnInit {
   ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   assignmentId: number = 0;
   unLockAssignment: Assignment = new Assignment
+  
   constructor(private router: Router, private taskService: TaskServiceService, private assignmentService: AssignmentServiceService, private utilityService: UtilityServiceService, private activateRoute: ActivatedRoute, private webSoketService: WebsocketServiceDiscussionFormService
     , private studentService: StudentService, private leaveService: LeaveService, private feesPayService: FeesPayService, private loginService: LoginService) {
     this.chartOptions = this.pieChart.chartOptions;

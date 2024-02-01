@@ -4,5 +4,4 @@ export class ChapterContentResponse {
     title: string = '';
     subTitle: string = '';
     content: string = '';
-    chapterName: string = '';
 }

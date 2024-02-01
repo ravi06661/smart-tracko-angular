@@ -205,6 +205,16 @@
                                 required.</div>
                         </div>
 
+                        <div class="col-md-12 mb_18">
+                            <label  class="mb_6 font-15 font-500 secondary">Batch Title</label>
+                            <div class="input_icon position-relative">
+                                <input type="text" name="batchName" class="form-control input_text" formControlName="batchName"
+                                    placeholder="Title" [(ngModel)]="batchRequest.batchName">
+                            </div>{{batchRequest.batchName}}
+                            <div *ngIf="isFieldInvalidForCreateBatchDetailsForm('batchName')" class="text-danger">
+                                Batch Title is
+                                required.</div>
+                        </div>
                         <div class="col-md-6 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Date</label>
                             <div class="input_icon position-relative">
@@ -216,7 +226,7 @@
                                     required.</div>
                             </div>
                         </div>
-
+                      
                         <div class="col-md-6 mb_18">
                             <label for="" class="mb_6 font-15 font-500 secondary">Batch Start Time</label>
                             <div class="input_icon position-relative">
