@@ -4,6 +4,7 @@ import { Chapter } from 'src/app/entity/chapter';
 import { Subject } from 'src/app/entity/subject';
 import { ChapterResponse } from 'src/app/payload/chapter-response';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
+import { LoginService } from 'src/app/service/login.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 
@@ -22,7 +23,8 @@ export class ChapterComponent {
     private subjectService: SubjectService,
     private chapterService: ChapterServiceService,
     private utilityService: UtilityServiceService,
-    private router: Router) { }
+    private router: Router,
+    private loginService:LoginService) { }
     chapterResponse:ChapterResponse[]=[]
   ngOnInit() {
     this.subjectId = this.activateRouter.snapshot.params[('id')];
@@ -30,7 +32,7 @@ export class ChapterComponent {
   }
 
   public getAllChapters(id: number) {
-    this.subjectService.getAllChapterWithSubjectId(id).subscribe({
+    this.subjectService.getAllChapterWithSubjectIdAndStudentId(id,this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
         this.chapterResponse = data.chapters
       }

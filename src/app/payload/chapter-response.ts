@@ -4,4 +4,5 @@ export class ChapterResponse {
     chapterImage: string = '';
     subjectId: number = 0;
     subjectName: string = '';
+    scoreGet!: number;
 }

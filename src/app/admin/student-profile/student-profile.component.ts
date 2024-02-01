@@ -166,7 +166,6 @@ export class StudentProfileComponent implements OnInit {
         this.unLockAssignments.forEach(() => {
           this.assignmentTaskVisibility.push(false);
         });
-        this.temp();
       }
     )
   }
@@ -177,7 +176,6 @@ export class StudentProfileComponent implements OnInit {
   assignmentTaskVisibility: boolean[] = [];
 
   toggleAssignment(index: number): void {
-    // Toggle the visibility of assignment tasks for the selected assignment
     this.assignmentTaskVisibility[index] = !this.assignmentTaskVisibility[index];
   }
   public pageRenderUsingRouterLink(path: string, questionId: number) {
@@ -189,32 +187,6 @@ export class StudentProfileComponent implements OnInit {
       queryParams: dataParams
     });
   }
-
-
-  //for counting total  completed assignment task
-  AssignMap = new Map<number, number>();
-  AssignSubmittionDates = new Map<number, Date>();
-  public temp() {
-    let count: number = 0;
-    this.unLockAssignments?.forEach((element: any) => {
-      element.assignmentQuestion.forEach((e: any) => {
-        if (this.assignmentSubmissionsList.find((e1: any) => e1.taskId === e.questionId)) {
-          count += 1;
-          let obj = this.assignmentSubmissionsList.find((e1: any) => e1.taskId === e.questionId) as AssignmentSubmission
-          this.AssignSubmittionDates.set(e.questionId, obj.submissionDate);
-        }
-      })
-      this.AssignMap.set(element.id, count);
-      count = 0;
-    });
-  }
-  public getTotalCompletedAssignmentCount(id: number) {
-    return this.AssignMap.get(id);
-  }
-  public getAssignmentSubmissionDate(taskId: number) {
-    return this.AssignSubmittionDates.get(taskId);
-  }
-
   progressWidth: string = '';
   calculatePercentages(num1: number, num2: number) {
 
@@ -222,6 +194,16 @@ export class StudentProfileComponent implements OnInit {
       return 0;
     else
       return Math.floor((num1 / num2) * 100);
+  }
+
+  public pageRenderUsingRouterLink1(path: string, questionId: number) {
+    const dataParams = {
+      id: questionId,
+      type: "assignmentQuestion"
+    };
+    this.router.navigate([path], {
+      queryParams: dataParams
+    });
   }
 
 }

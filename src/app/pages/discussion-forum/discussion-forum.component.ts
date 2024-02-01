@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { StudentDetails } from 'src/app/entity/student-details';
 import { CommentResponse } from 'src/app/payload/comment-response';
 import { DiscussionFormResponse } from 'src/app/payload/discussion-form-response';
@@ -13,7 +13,6 @@ import { CommentResponseForm } from 'src/app/payload/comment-response-form';
 import { LikeResponseForm } from 'src/app/payload/like-response-form';
 import { Typing } from 'src/app/entity/typing';
 import { ToastService } from 'src/app/service/toast.service';
-import { log } from 'console';
 
 @Component({
   selector: 'app-discussion-forum',
@@ -103,8 +102,8 @@ export class DiscussionForumComponent implements OnInit {
     this.discussionFormSerice.creatCommnet(this.loginService.getStudentId(), id, this.comment).subscribe(
       {
         next: (data: any) => {
-            //let form = this.discussionFormList.find(obj => obj.id === id) as DiscussionFormResponse
-           //this.commentResponse = data
+          //let form = this.discussionFormList.find(obj => obj.id === id) as DiscussionFormResponse
+          //this.commentResponse = data
           //  form.comments.push(this.commentResponse)
           this.comment = ''
           this.sendTypingUser('typed')
@@ -227,9 +226,7 @@ export class DiscussionForumComponent implements OnInit {
         case 'typing':
           this.pushTypingMessage(message);
           break;
-
         default:
-          // Handle unknown message type
           console.error('Unknown message type:', message.type);
           break;
       }
