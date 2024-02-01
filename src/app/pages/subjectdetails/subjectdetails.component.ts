@@ -21,6 +21,7 @@ export class SubjectdetailsComponent {
   questionsInChapter = 0;
   isCompleted = false;
   resultId = 0;
+  exam:boolean =false
   chapterContentResponse: ChapterContentResponse[] = []
   constructor(
     private subjectService: SubjectService,

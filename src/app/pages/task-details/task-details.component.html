@@ -34,7 +34,7 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
         <div class="row advertisement">
 
           <div class="col-md-3 col-sm-6 col-xs-12"
-            *ngIf="obj.videoUrl!=null && obj.videoUrl!='' && obj.videoUrl!=undefined">
+            *ngIf="obj.videoUrl!=null && obj.videoUrl!='null' && obj.videoUrl!='' && obj.videoUrl!=undefined">
             <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
             <div class="assinment_image video-img">
               <!-- <video src="{{obj.videoUrl}}" controls height="" width="270" type="video/mp4"></video> -->

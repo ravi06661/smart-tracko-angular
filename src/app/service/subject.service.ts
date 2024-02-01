@@ -8,7 +8,7 @@ import { LoginService } from './login.service';
   providedIn: 'root'
 })
 export class SubjectService {
-  
+
 
 
   public getAllChapterWithSubjectId(id: number) {
@@ -49,7 +49,11 @@ export class SubjectService {
     return this.http.put(`${this.Subject_url}/deleteSubjectById?subjectId=${id}`, null)
   }
 
-  public getAllSubjectsByCourseId(courseId:any) {
-   return this.http.get<any>(`${this.Subject_url}/getAllSubjectsByCourseId?courseId=${courseId}`)
+  public getAllSubjectsByCourseId(courseId: any) {
+    return this.http.get<any>(`${this.Subject_url}/getAllSubjectsByCourseId?courseId=${courseId}`)
   }
+  getAllChapterWithSubjectIdAndStudentId(id: number, studentId: number) {
+    return this.http.get<any>(`${this.Subject_url}/getAllChapterWithSubjectIdAndStudentId?subjectId=${id}&studentId=${studentId}`)
+  }
+
 }

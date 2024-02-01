@@ -16,6 +16,7 @@ import { SubjectService } from 'src/app/service/subject.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { AdminAssignmentSubmissionComponent } from '../admin-assignment-submission/admin-assignment-submission.component';
 import { ToastService } from 'src/app/service/toast.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-admin-assignments',
@@ -49,7 +50,8 @@ export class AdminAssignmentsComponent implements OnInit {
     private router: Router,
     private utilityService: UtilityServiceService,
     private formBuilder: FormBuilder,
-    private tost: ToastService) {
+    private tost: ToastService,
+    private toster: ToastrService) {
 
     this.submissionForm = this.formBuilder.group({
       subjectId: ['', Validators.required],
@@ -61,7 +63,7 @@ export class AdminAssignmentsComponent implements OnInit {
   ngOnInit(): void {
 
     this.getAllCourses();
-    this.getAllSubmitedAssignments(new Course, 0,'NOT_CHECKED_WITH_IT');
+    this.getAllSubmitedAssignments(new Course, 0, 'NOT_CHECKED_WITH_IT');
     this.getAllSubmissionAssignmentStatus()
     this.getOverAllAssignmentTaskStatus()
     this.getAllSubject()
@@ -118,7 +120,7 @@ export class AdminAssignmentsComponent implements OnInit {
     }
   }
 
-  public getAllSubmitedAssignments(course: Course, subjectId: number,status:string) {
+  public getAllSubmitedAssignments(course: Course, subjectId: number, status: string) {
     this.course = course!;
     this.assignmentService.getAllSubmitedAssignments(this.course.courseId, subjectId, status).subscribe({
       next: (data: any) => {
@@ -127,7 +129,7 @@ export class AdminAssignmentsComponent implements OnInit {
     })
   }
 
-  
+
   public pageRanderWithObj(object: AssignmentSubmission) {
     const dataParams = {
       submissionId: object.submissionId,
