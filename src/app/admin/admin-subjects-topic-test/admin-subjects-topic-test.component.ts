@@ -5,7 +5,6 @@ import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Chapter } from 'src/app/entity/chapter';
 import { ChapterContentResponse } from 'src/app/payload/chapter-content-response';
 import { ToastrService } from 'ngx-toastr';
 import { AppUtils } from 'src/app/utils/app-utils';
@@ -60,11 +59,8 @@ export class AdminSubjectsTopicTestComponent {
       {
         next: (data: any) => {
           this.chapteContentResponse = data.chapterContent
-          if (data.chapterName) {
-            this.chapterName = data.chapterName
-          } else {
-            this.chapterName = this.chapteContentResponse[0].chapterName
-          }
+          this.chapterName = data.chapterName
+
         },
         error: (er) => {
           this.toast.showError(er.error.message, 'Error')
@@ -86,6 +82,7 @@ export class AdminSubjectsTopicTestComponent {
             this.editorInstance = ''
             AppUtils.modelDismiss('add-content-modal')
             this.toast.showSuccess('Successfully added', 'Success')
+            this.submissionForm.reset()
           },
           error: (error) => {
             this.toast.showError('please try again!!', 'Error')
@@ -107,6 +104,7 @@ export class AdminSubjectsTopicTestComponent {
           AppUtils.modelDismiss('content-update-modal')
           this.toast.showSuccess('Successfully updated ', 'Success')
           this.chapterContent = data
+          this.chapterContent = new ChapterContent();
         },
         error: (error) => {
           this.toast.showError(error.error.message, 'Error')

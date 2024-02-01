@@ -19,22 +19,24 @@ export class ChapterComponent {
   subjectId: number = 0;
   chapter: Chapter[] = []
   subject: Subject = new Subject();
+  subjectName!: string
   constructor(private activateRouter: ActivatedRoute,
     private subjectService: SubjectService,
     private chapterService: ChapterServiceService,
     private utilityService: UtilityServiceService,
     private router: Router,
-    private loginService:LoginService) { }
-    chapterResponse:ChapterResponse[]=[]
+    private loginService: LoginService) { }
+  chapterResponse: ChapterResponse[] = []
   ngOnInit() {
     this.subjectId = this.activateRouter.snapshot.params[('id')];
     this.getAllChapters(this.subjectId);
   }
 
   public getAllChapters(id: number) {
-    this.subjectService.getAllChapterWithSubjectIdAndStudentId(id,this.loginService.getStudentId()).subscribe({
+    this.subjectService.getAllChapterWithSubjectIdAndStudentId(id, this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
         this.chapterResponse = data.chapters
+        this.subjectName = data.subjectName
       }
     })
   }

@@ -85,6 +85,7 @@ export class AdminSubjectsChapterQuizComponent {
       {
         next: (data: any) => {
           this.questions = data.questions;
+
         },
         error: (er) => {
 
@@ -113,11 +114,8 @@ export class AdminSubjectsChapterQuizComponent {
       {
         next: (data: any) => {
           AppUtils.modelDismiss('update-quize-modal')
-          //   this.question = new ChapterQuizeQuestion();
-          // let qr = this.questions.findIndex(obj => obj.questionId === data.questionId)
           this.questions[this.questionIndex] = data.question
-          //  this.getAllQuestions();
-        
+          this.cancel()
           this.toast.showSuccess(data.message, 'Success')
         },
         error: (error) => {
@@ -138,7 +136,7 @@ export class AdminSubjectsChapterQuizComponent {
     this.question = new ChapterQuizeQuestion();
   }
   public clearFormSubmission() {
-   this.submissionForm.reset()
+    this.submissionForm.reset()
   }
   public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
     const field = this.submissionForm.get(fieldName);
@@ -169,6 +167,6 @@ export class AdminSubjectsChapterQuizComponent {
 
   public setQuestion(id: number, index: number) {
     this.questionIndex = index
-    this.question = {...this.questions.find(obj => obj.questionId === id) as QuestionResponse}
+    this.question = { ...this.questions.find(obj => obj.questionId === id) as QuestionResponse }
   }
 }

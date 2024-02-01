@@ -53,6 +53,7 @@ export class AdminAttendanceComponent {
   totalEarlyCheckOut: number = 0;
 
   attendanceChart:DonutChart = new DonutChart();
+  isDataFound:boolean = false
 
   constructor(private studentService: StudentService, private utilityService: UtilityServiceService) {
     this.chartOptions = this.attendanceChart.chartOptions
@@ -75,6 +76,7 @@ export class AdminAttendanceComponent {
     this.studentService.getTodayStudentAbsentData().subscribe(
       (data: any) => {
         this.absentData = data.totalAbsent;
+        
       }
     )
   }

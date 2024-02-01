@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ex } from '@fullcalendar/core/internal-common';
 import { ChapterContent } from 'src/app/entity/chapter-content';
 import { ChapterContentResponse } from 'src/app/payload/chapter-content-response';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
@@ -14,14 +15,15 @@ import { SubjectService } from 'src/app/service/subject.service';
 })
 export class SubjectdetailsComponent {
   chapterId: number = 0;
- // chapter: ChapterContent[] = []
+  // chapter: ChapterContent[] = []
   subjectId: number = 0;
   chapterContent: ChapterContent = new ChapterContent();
   chapterName: string = '';
   questionsInChapter = 0;
   isCompleted = false;
   resultId = 0;
-  exam:boolean =false
+  exam: boolean = false
+  isQuizeFound: boolean = false
   chapterContentResponse: ChapterContentResponse[] = []
   constructor(
     private subjectService: SubjectService,
@@ -45,9 +47,9 @@ export class SubjectdetailsComponent {
 
         this.chapterContentResponse = data.chapterContent
         this.questionsInChapter = this.chapterContentResponse.length
-        //  this.chapter = data.chapter.chapterContent;
-         this.chapterName = this.chapterContentResponse[0].chapterName;
-        // this.questionsInChapter = data.questionLength
+        if (this.chapterContentResponse.length == 0)
+          this.isQuizeFound = true
+        this.chapterName = data.chapterName
       }
     )
   }
@@ -72,10 +74,13 @@ export class SubjectdetailsComponent {
   public getChapterExamIsComplete() {
     this.examService.getChapterExamIsCompleted(this.chapterId, this.loginService.getStudentId()).subscribe({
       next: (data: any) => {
-        if (data != null) {
-          this.chapterId = data.chapterExamComplete.chapterId;
+
+        if (data.status) {
+          this.exam = false
           this.isCompleted = true;
           this.resultId = data.resultId;
+        } else {
+          this.isCompleted = false
         }
       },
       error: (err) => {

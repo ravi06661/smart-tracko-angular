@@ -125,7 +125,7 @@
                 <p class="text_gray font-13 font-400 mb-0" *ngIf="obj.checkInTime!=undefined">{{changeTimeFormat(obj.checkInTime)}}</p></td>
             </tr>
             <h1  class="font-15 font-600 secondary position-relative" 
-            *ngIf="presentAbsentAndEarlyCheckoutLength==0"><br>NO DATA AVAILABLE !!!</h1>
+            *ngIf="absentData.length==0 "><br>NO DATA AVAILABLE !!!</h1>
           </tbody>
         </table>
         <!-- <div class="table_container">
