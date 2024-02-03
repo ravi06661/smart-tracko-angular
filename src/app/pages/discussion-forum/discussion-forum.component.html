@@ -25,7 +25,7 @@
               </form>
               <span class="reply_svg d-flex align-items-center justify-content-center  button"
                 (click)="createDiscussionForm()" *ngIf="isMessageSend==false">
-               <a > <img src="assets/images/svg_img/reply.svg"></a>
+                <a> <img src="assets/images/svg_img/reply.svg"></a>
               </span>
               <span class="reply_svg d-flex align-items-center justify-content-center  button" *ngIf="isMessageSend">
                 <h6 style="color: white;"> <i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
@@ -63,7 +63,7 @@
           <div class="">
             <div class="post_details" *ngFor="let  obj of  discussionFormList ;let i =index">
               <div class="post_discription d-flex align-items-center">
-                <div class="" >
+                <div class="">
                   <img class="profilePic" [src]="IMAGE_URL+obj.studentProfilePic">
                 </div>
                 <div class="text mx-1">
@@ -84,22 +84,22 @@
                 </div>
               </div>
               <h4 class="post_subtitle text_small font-17 font-400 lh-21">{{obj.content}} </h4>
-           
-           
+
+
               <div class="d-flex justify-content-center align-items-center mb-1">
-             <div *ngIf="  obj.audioFile !== 'null'&& obj.audioFile !== null &&  obj.audioFile!=='' &&obj.audioFile !== undefined">
-              <video 
-              [src]="FILE_URL + obj.audioFile" class="post_img" controls></video>
+                <div
+                  *ngIf="  obj.audioFile !== 'null'&& obj.audioFile !== null &&  obj.audioFile!=='' &&obj.audioFile !== undefined">
+                  <video [src]="FILE_URL + obj.audioFile" class="post_img" controls></video>
 
-            </div>
-               
-          <div  *ngIf="obj.file!=='null' &&obj.file!==null && obj.file!=='' && obj.file !== undefined ">
-            <img [src]="FILE_URL+obj.file"
-            (click)="toggleImageSize($event)" class="post_img">
-          </div>
+                </div>
+
+                <div class="assignment_image"
+                  *ngIf="obj.file!=='null' &&obj.file!==null && obj.file!=='' && obj.file !== undefined ">
+                  <img [src]="FILE_URL+obj.file" (click)="toggleImageSize($event)" class="post_img">
+                </div>
 
 
-               
+
               </div>
               <ul class=" social_icon d-flex align-items-center justify-content-around position-relative mb-0">
                 <div class="d-flex align-items-center p-1 like">

@@ -163,12 +163,12 @@ export class AttendanceComponent implements OnInit {
   }
 
   public addStudentLeave() {
-    // if (  this.applyLeaveForm.invalid ) {
-    //   this.checkApplyLeaveForm();
-    //   console.log(this.applyLeaveForm.invalid);
-    //   return;
-    // }
-    console.log(this.leaves);
+    if (  this.applyLeaveForm.invalid ) {
+      this.checkApplyLeaveForm();
+     // console.log(this.applyLeaveForm.invalid);
+      return;
+    }
+    //console.log(this.leaves);
 
     this.leaveService.addLeave(this.leaves).subscribe({
       next: (res: any) => {

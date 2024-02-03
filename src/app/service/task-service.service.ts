@@ -7,6 +7,7 @@ import { TaskQuestionRequest } from '../payload/task-question-request';
 import { Task } from '../entity/task';
 import { s } from '@fullcalendar/core/internal-common';
 import { TaskQuestion } from '../entity/task-question';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class TaskServiceService {
   public getTaskById(id: number) {
     return this.http.get(`${this.TASK_URL}/getTaskById?taskId=${id}`)
   }
-  public getAllTask(studentId: number) {
+  public getAllTask(studentId: number):Observable<any> {
     return this.http.get(`${this.TASK_URL}/getAllTaskOfStudent?studentId=${studentId}`);
   }
   public submitTask(task: StudentTaskSubmittion, taskId: number) {

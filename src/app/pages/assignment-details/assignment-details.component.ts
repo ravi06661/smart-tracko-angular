@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
 import { TaskQuestion } from 'src/app/entity/task-question';
 import { AssignmentSubmissionRequest } from 'src/app/payload/assignment-submission-request';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { LoginService } from 'src/app/service/login.service';
 import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-assignment-details',
@@ -50,6 +48,11 @@ export class AssignmentDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getAssignmentQuestionById();
 
+  }
+  loading: boolean = true;
+
+  onVideoLoad() {
+    this.loading = false;
   }
 
   public getAssignmentQuestionById() {
@@ -110,10 +113,7 @@ export class AssignmentDetailsComponent implements OnInit {
   }
 
   public clearForm() {
-    this.submissionForm = this.formBuilder.group({
-      file: ['', Validators.required],
-      description: ['', Validators.required]
-    });
+    this.submissionForm.reset()
   }
   public isFieldInvalidForSubmissionForm(fieldName: string): boolean {
     const field = this.submissionForm.get(fieldName);

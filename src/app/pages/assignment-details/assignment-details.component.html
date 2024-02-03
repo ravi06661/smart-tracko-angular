@@ -17,14 +17,17 @@
         </div>
         <div class="assignment">
           <div class="row advertisement">
-            <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="assignmentQues.videoUrl!=null && assignmentQues.videoUrl!=undefined && assignmentQues.videoUrl!=''"  >
+            
+
+            <div class="col-md-3 col-sm-6 col-xs-12" *ngIf="  assignmentQues.videoUrl!=null && assignmentQues.videoUrl!=undefined && assignmentQues.videoUrl!=''"  >
               <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
               <div class="assinment_image video-img">
+                <div class="loader col-md-3 col-sm-6 col-xs-12" *ngIf="loading"></div>
                 <!-- <video width="640" height="360" controls>
                   <source [src]="assignmentQues.videoUrl" type="video/mp4">
                   
               </video> -->
-              <iframe [src]="assignmentQues.videoUrl | safe" frameborder="0" allowfullscreen></iframe>
+              <iframe [src]="assignmentQues.videoUrl | safe" frameborder="0" allowfullscreen (load)="onVideoLoad()"></iframe>
 
                 <!-- <iframe src="{{assignmentQues.videoUrl}}" autoplay controls height="" width="270"></iframe> -->
               </div>
