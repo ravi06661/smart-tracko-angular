@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, Routes } from '@angular/router';
-import { isThisQuarter } from 'date-fns';
-import { Assignment } from 'src/app/entity/assignment';
 import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
 import { Course } from 'src/app/entity/course';
 import { Subject } from 'src/app/entity/subject';
 import { SubmissionAssignmentTaskStatus } from 'src/app/entity/submission-assignment-task-status';
-import { TaskQuestion } from 'src/app/entity/task-question';
 import { AssignmentRequest } from 'src/app/payload/assignment-request';
 import { SubjectResponse } from 'src/app/payload/subject-response';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { CourseServiceService } from 'src/app/service/course-service.service';
 import { SubjectService } from 'src/app/service/subject.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
-import { AdminAssignmentSubmissionComponent } from '../admin-assignment-submission/admin-assignment-submission.component';
 import { ToastService } from 'src/app/service/toast.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -34,7 +30,7 @@ export class AdminAssignmentsComponent implements OnInit {
   submitedAssignmentObj: AssignmentSubmission = new AssignmentSubmission
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
   taskSubmissionStatus2: SubmissionAssignmentTaskStatus = new SubmissionAssignmentTaskStatus
-  message: string = ''
+ // message: string = ''
   course: Course = new Course
 
   totalSubmitted = 0;
@@ -125,9 +121,9 @@ export class AdminAssignmentsComponent implements OnInit {
     this.assignmentService.getAllSubmitedAssignments(this.course.courseId, subjectId, status).subscribe({
       next: (data: any) => {
         this.submitedAssignments = data
-        if(this.submitedAssignments.length==0){
-          this.message = " No Assignment Found !!"
-        }
+        // if(this.submitedAssignments.length==0){
+        //   this.message = " No Assignment Found !!"
+        // }
       },
       error: (er: any) => {
 
