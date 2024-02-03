@@ -80,6 +80,9 @@ export class SubjectdetailsComponent {
         } else {
           this.isCompleted = false
         }
+        if (data.message == "takeATest") {
+          this.exam = true
+        }
       },
       error: (err) => {
       }

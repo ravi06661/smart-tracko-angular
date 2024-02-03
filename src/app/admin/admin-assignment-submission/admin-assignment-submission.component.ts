@@ -12,7 +12,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 export class AdminAssignmentSubmissionComponent implements OnInit {
   BASE_URL = this.utilityService.getBaseUrl();
   IMG_URL = this.BASE_URL + '/file/getImageApi/images/'
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentImages/'
+  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   submitedAssignment: any
   review = '';
   status = 'Unreviewed';
@@ -24,7 +24,7 @@ export class AdminAssignmentSubmissionComponent implements OnInit {
 
     this.activateRoute.queryParams.subscribe(params => {
       this.submissionId = params['submissionId'];
-    });
+    });``
   }
 
   ngOnInit(): void {
