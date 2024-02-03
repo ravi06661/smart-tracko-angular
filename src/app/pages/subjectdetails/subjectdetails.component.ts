@@ -15,7 +15,6 @@ import { SubjectService } from 'src/app/service/subject.service';
 })
 export class SubjectdetailsComponent {
   chapterId: number = 0;
-  // chapter: ChapterContent[] = []
   subjectId: number = 0;
   chapterContent: ChapterContent = new ChapterContent();
   chapterName: string = '';
@@ -26,7 +25,6 @@ export class SubjectdetailsComponent {
   isQuizeFound: boolean = false
   chapterContentResponse: ChapterContentResponse[] = []
   constructor(
-    private subjectService: SubjectService,
     private chapterService: ChapterServiceService,
     private examService: ExamServiceService,
     private loginService: LoginService,
@@ -53,13 +51,13 @@ export class SubjectdetailsComponent {
       }
     )
   }
-  public getChapterContent(contentId: number) {
-    this.chapterService.getChapterContent(this.chapterId).subscribe(
-      (data) => {
-        this.chapterContent = data;
-      }
-    )
-  }
+  // public getChapterContent(contentId: number) {
+  //   this.chapterService.getChapterContent(this.chapterId).subscribe(
+  //     (data) => {
+  //       this.chapterContent = data;
+  //     }
+  //   )
+  // }
 
   public pageRenderUsingRouterLink(path: string, chapterId: number) {
     const dataParams = {

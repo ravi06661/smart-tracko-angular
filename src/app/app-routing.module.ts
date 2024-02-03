@@ -66,7 +66,6 @@ import { AdminDiscussionForumComponent } from './admin/admin-discussion-forum/ad
 import { AdminChapterResultComponent } from './admin/admin-chapter-result/admin-chapter-result.component';
 
 
-
 const routes: Routes = [
   { path: '', component: LoginQRComponent, pathMatch: 'full' },
   { path: 'login', component: AdminLoginComponent, pathMatch: 'full' },
