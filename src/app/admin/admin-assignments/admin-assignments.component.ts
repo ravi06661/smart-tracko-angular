@@ -20,8 +20,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./admin-assignments.component.scss']
 })
 export class AdminAssignmentsComponent implements OnInit {
-  BASE_URL = this.utilityService.getBaseUrl();
-  IMG_URL = this.BASE_URL + '/file/getImageApi/images/'
   assignmentRequest: AssignmentRequest = new AssignmentRequest;
   courses: Course[] = [];
   //subjects: Subject[] = [];

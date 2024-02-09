@@ -15,7 +15,7 @@ export class ReviewComponent implements OnInit {
 
   resultId = 0
   chapterExamResult: ChapterExamResult = new ChapterExamResult
-  questionResponse:QuestionResponse[]=[]
+  questionResponse: QuestionResponse[] = []
   review = new Map<number, string>;
   question: QuizeQuestion[] = []
   constructor(private activateRoute: ActivatedRoute, private examService: ExamServiceService) { }

@@ -56,7 +56,7 @@
                 <!-- Course Checkboxes -->
                 <div *ngFor="let obj of courses" class="input_icon position-relative input_text checkbox_area mb-3">
                   <div class="d-flex gap_5 align-items-center">
-                    <img [src]="imageUrl+obj.technologyStack.imageName" alt="" width="24" height="24">
+                    <img [src]="obj.technologyStack.imageName" alt="" width="24" height="24">
                     <h2 class="font-15 font-500 mb-0 secondary">{{ obj.courseName }}</h2>
                   </div>
                   <input

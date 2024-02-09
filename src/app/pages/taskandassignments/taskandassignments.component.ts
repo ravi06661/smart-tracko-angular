@@ -15,8 +15,6 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class TaskandassignmentsComponent implements OnInit {
 
-  BASE_URL = this.utilityService.getBaseUrl();
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentImages/'
   unLockAssignments: any
   lockAssignments: any
   assignmentSubmissionsList: AssignmentSubmission[] = []
@@ -31,8 +29,7 @@ export class TaskandassignmentsComponent implements OnInit {
     private datePipe: DatePipe,
     private assignmentService: AssignmentServiceService,
     private router: Router,
-    private loginService: LoginService,
-    private utilityService: UtilityServiceService) {
+    private loginService: LoginService) {
     this.lockAssignments = []
     this.unLockAssignments = 0
     this.getSubmitedAssignment();

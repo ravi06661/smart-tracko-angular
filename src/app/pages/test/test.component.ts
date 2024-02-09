@@ -16,8 +16,6 @@ export class TestComponent implements OnInit {
 
 
   subjectExamResponse: SubjectExamResponse[] = []
-  BASE_URL = this.utilityService.getBaseUrl()
-  IMAGE_URL = this.BASE_URL + "/file/getImageApi/technologyStackImage/";
   timer: any
   isExamStart: boolean = false
   resultId!: number
@@ -25,9 +23,7 @@ export class TestComponent implements OnInit {
   isCompleted = false;
   constructor(private router: Router,
     private questionService: QuestionServiceService,
-    private loginService: LoginService,
-    private utilityService: UtilityServiceService,
-    private examService: ExamServiceService) { }
+    private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.getAllExam()
@@ -60,21 +56,21 @@ export class TestComponent implements OnInit {
   }
 
 
-  public getSubectExamIsCompleteOrNot(subjectId: any) {
-    this.examService.getSubectExamIsCompleteOrNot(subjectId, this.loginService.getStudentId()).subscribe({
-      next: (data: any) => {
-        if (data.status) {
-          this.resultId = data.resultId;
-          return true;
-        } else {
-          return false;
-        }
-      },
-      error: (err) => {
-        console.log(err.error.message);
+  // public getSubectExamIsCompleteOrNot(subjectId: any) {
+  //   this.examService.getSubectExamIsCompleteOrNot(subjectId, this.loginService.getStudentId()).subscribe({
+  //     next: (data: any) => {
+  //       if (data.status) {
+  //         this.resultId = data.resultId;
+  //         return true;
+  //       } else {
+  //         return false;
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.log(err.error.message);
 
-      }
-    })
-  }
+  //     }
+  //   })
+  // }
 
 }

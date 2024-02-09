@@ -19,8 +19,6 @@ import { AppUtils } from 'src/app/utils/app-utils';
 export class AdminCreateAssignmentsComponent implements OnInit {
   assignmentId = 0;
   public Editor = ClassicEditor;
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
   assignment: Assignment = new Assignment();
   assignmentQuestionsData: AssignmentQuestionRequest = new AssignmentQuestionRequest();
   taskQuestion: TaskQuestionRequest = new TaskQuestionRequest();
@@ -102,6 +100,10 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   url: string = '';
 
   public addAssignmentQuestion() {
+if(this.assignmentForm.invalid){
+   
+}
+
     this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(
       {
         next: (data: any) => {

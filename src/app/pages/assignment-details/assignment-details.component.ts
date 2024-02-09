@@ -15,9 +15,6 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class AssignmentDetailsComponent implements OnInit {
 
-  BASE_URL = this.utilityService.getBaseUrl();
-  IMG_URL = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/'
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   questionId = 0;
   assignmentId = 0;
   assignmentQues: TaskQuestion = new TaskQuestion;

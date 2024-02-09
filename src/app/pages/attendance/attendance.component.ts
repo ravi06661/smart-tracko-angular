@@ -31,8 +31,6 @@ export class AttendanceComponent implements OnInit   {
   @ViewChild('chart') chart: ChartComponent | undefined;
   public attendanceOptions: Partial<ChartOptions>;
 
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
 
   monthCategories: string[] = [];
   selectedDate: any;

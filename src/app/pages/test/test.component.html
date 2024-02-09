@@ -9,14 +9,15 @@
                         <div class="test_card">
                             <div class="d-flex justify-content-between align-items-center mb_12">
                                 <div class="d-flex align-items-center gap_12">
-                                    <img [src]="IMAGE_URL+obj.examImage" class="test_icon">
+                                    <img [src]="obj.examImage" class="test_icon">
                                     <div class="test_details">
                                         <h3 class="mb-1">{{obj.subjectName}}</h3>
                                         <h4 class="mb-0">Best Score - {{obj.scoreGet}}%</h4>
                                     </div>
                                 </div>
                                 <button class="test_btn" *ngIf="isExamStart">Start Test</button>
-                                    <a  type="button" routerLink="/result/{{resultId}}" class="back_button font-15 font-700" *ngIf="getSubectExamIsCompleteOrNot(obj.subjectId)">View Result</a>
+                                <!-- *ngIf="getSubectExamIsCompleteOrNot(obj.subjectId)" -->
+                                    <!-- <a  type="button" routerLink="/result/{{resultId}}" class="back_button font-15 font-700" >View Result</a> -->
                                     <div class="lock_details" *ngIf="!isExamStart"  >
                                         <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
                                         <!-- <h3 class="mb-0">2 hrs 5 mins</h3> -->

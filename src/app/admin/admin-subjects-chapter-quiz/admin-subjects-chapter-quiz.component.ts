@@ -26,16 +26,13 @@ export class AdminSubjectsChapterQuizComponent {
   public Editor = ClassicEditor;
   image: File | null = null;
   private editorInstance: any;
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   submissionForm: FormGroup
   subjectId: number = 0;
   questionIndex = 0
 
   constructor(private activateRouter: ActivatedRoute,
     private questionService: QuestionServiceService,
-    private route: ActivatedRoute, private router: Router,
-    private utilityService: UtilityServiceService,
+    private router: Router,
     private formBuilder: FormBuilder,
     private chapterService: ChapterServiceService,
     private toast: ToastService) {

@@ -23,7 +23,6 @@ export class QuestionsComponent {
   index: number = 0
   questions: QuizeQuestion[] = []
   question: QuizeQuestion = new QuizeQuestion();
-  imageUrl = this.utilityService.getBaseUrl() + "/file/getImageApi/images/";
   previousButton: boolean = false;
   nextButton: boolean = false;
   questionClicked = new Map<number, string>();
@@ -46,8 +45,7 @@ export class QuestionsComponent {
   type!: string
   subjectTimer!: number
 
-  constructor(private utilityService: UtilityServiceService, private questionService: QuestionServiceService, private activateRouter: ActivatedRoute,
-    private subjectService: SubjectService,
+  constructor(private questionService: QuestionServiceService, private activateRouter: ActivatedRoute,
     private chapterService: ChapterServiceService,
     private router: Router,
     private loginService: LoginService,

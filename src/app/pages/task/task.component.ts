@@ -12,8 +12,6 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-  BASE_URL = this.utilityService.getBaseUrl();
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   tasks: Task[] = []
   taskSubmissionList: StudentTaskSubmittion[] = []
   taskSubmissionList2: StudentTaskSubmittion[] = []
@@ -21,7 +19,6 @@ export class TaskComponent {
 
   constructor(private taskService: TaskServiceService,
     private loginService: LoginService,
-    private utilityService: UtilityServiceService,
     private datePipe: DatePipe) { }
 
   ngOnInit() {

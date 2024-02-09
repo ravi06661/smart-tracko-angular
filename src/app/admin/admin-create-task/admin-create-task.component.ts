@@ -42,9 +42,6 @@ export class AdminCreateTaskComponent {
     size: 0
   };
   questionId: number = 0;
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
-
   secondTaskForm: FormGroup;
   constructor(private activateRouter: ActivatedRoute,
     private subjectService: SubjectService,

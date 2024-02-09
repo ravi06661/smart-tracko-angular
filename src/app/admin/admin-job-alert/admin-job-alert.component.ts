@@ -18,8 +18,6 @@ import Swal from 'sweetalert2';
   preserveWhitespaces: true
 })
 export class AdminJobAlertComponent implements OnInit {
-  BASE_URL=this.utilityService.getBaseUrl();  
-  imageUrl=this.BASE_URL+'/file/getImageApi/technologyStackImage/';
 
   jobs: JobAlert[] = [];
   jobData: JobAlertRequest = new JobAlertRequest();
@@ -38,7 +36,7 @@ export class AdminJobAlertComponent implements OnInit {
   numberOfJob = 0;
 
 
-  constructor(private jobAlertService: JobAlertService, private technologyStackService: TechnologyStackService, private router: Router,private utilityService:UtilityServiceService) { }
+  constructor(private jobAlertService: JobAlertService, private technologyStackService: TechnologyStackService) { }
 
   ngOnInit() {
     this.getAllJobs(0, 8);

@@ -8,7 +8,7 @@
         <form class="attachment_file1 d-inline-flex align-items-center position-relative ">
           <!-- Instead of an input element, use an anchor (a) tag -->
 
-          <a href="{{ATTACHMENT_URL+task.taskAttachment}}" download="{{task.taskName}}"
+          <a href="{{task.taskAttachment}}" download="{{task.taskName}}"
             class="font-15 font-700 secondary text-white attachment_file_text">
             <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
             Attachments
@@ -50,7 +50,7 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
             <div *ngFor="let images of obj.questionImages; let i=index">
               <h3 class="font-15 font-700 assignment_sub_heading">Image {{i + 1}}</h3>
               <div class="assignment_image">
-                <img [src]="imageUrl + images" class="img-fluid image-zoom" (click)="toggleImageSize($event)">
+                <img [src]="images" class="img-fluid image-zoom" (click)="toggleImageSize($event)">
               </div>
             </div>
           </div>
@@ -140,8 +140,9 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
           <h4 class="sub-heading font-17 font-500 secondary mb-1">optional</h4>
           <h4 class="sub-heading font-17 font-500 secondary mb-1">.pdf file only</h4>
           <form class="select_file d-flex align-items-center file position-relative">
-            <input type="file" name="file" id="file"accept="/*,.zip,.rar,.7zip,zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"class="d-none"
-              (change)="setImage($event)">
+            <!-- accept="/*,.zip,.rar,.7zip,zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed" -->
+            <input type="file" name="file" id="file" class="d-none"
+              >
             <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
             <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">
               <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i>Upload File

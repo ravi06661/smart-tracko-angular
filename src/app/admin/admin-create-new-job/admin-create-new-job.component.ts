@@ -15,14 +15,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin-create-new-job.component.scss']
 })
 export class AdminCreateNewJobComponent implements OnInit{
-  imageUrl = this.utilityService.getBaseUrl()+"/file/getImageApi/technologyStackImage/";
   jobAlert:JobAlert=new JobAlert();
   jobAlertRequest:JobAlertRequest=new JobAlertRequest();
   jobAlerts:JobAlert[]=[];
   technologyStack:TechnologyStack[]=[];
   imageName = ''
   jobDetailsForm: FormGroup ;
-  constructor(private jobAlertService: JobAlertService, private technologyStackService: TechnologyStackService, private router: Router,private utilityService:UtilityServiceService, private formBuilder: FormBuilder) {
+  constructor(private jobAlertService: JobAlertService, private technologyStackService: TechnologyStackService, private router: Router, private formBuilder: FormBuilder) {
     this.jobDetailsForm = this.formBuilder.group({
       jobType: ['', Validators.required],
       companyName: ['', Validators.required],

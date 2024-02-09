@@ -11,25 +11,19 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class NewsandEventsDescriptionComponent implements OnInit {
 
-  BASE_URL=this.utilityService.getBaseUrl();
-  imageUrl=this.BASE_URL+'/file/getImageApi/newsEventImage/';
+  newsAndEvents: NewsAndEvent = new NewsAndEvent
+  totalNewsAndEvent: number = 0;
+  id: number = 0
+  createdDate: Date | undefined
 
- // newsAndEvents:NewsAndEvent[]=[];
- newsAndEvents:NewsAndEvent=new NewsAndEvent
-  totalNewsAndEvent:number=0;
-  id:number=0
-  createdDate:Date | undefined
-   
-  
 
-  constructor (private activatedRoute: ActivatedRoute,private newsAndEventService:NewsEventServiceService,public utilityService:UtilityServiceService) {}
+  constructor(private activatedRoute: ActivatedRoute, private newsAndEventService: NewsEventServiceService, public utilityService: UtilityServiceService) { }
 
   ngOnInit(): void {
-    this.id=this.activatedRoute.snapshot.params[('id')]
-
+    this.id = this.activatedRoute.snapshot.params[('id')]
     this.newsAndEventService.getByNewsById(this.id).subscribe({
-      next:(data:any)=>{
-        this.newsAndEvents=data
+      next: (data: any) => {
+        this.newsAndEvents = data
       }
     })
   }

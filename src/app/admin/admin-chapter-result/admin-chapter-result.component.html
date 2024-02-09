@@ -38,7 +38,7 @@
                                 <tr *ngFor="let obj of chapterExamResult">
                                     <td>
                                        <a routerLink="/admin/studentprofile/{{obj.studentId}}"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                        <img [src]="imageUrl+obj.profilePic"  alt="" class="img-fluid imagestudent">
+                                        <img [src]="obj.profilePic"  alt="" class="img-fluid imagestudent">
                                     {{obj.studentName}}                                     
                                        </a>
                                     </td>

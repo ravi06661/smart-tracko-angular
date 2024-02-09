@@ -114,7 +114,7 @@
           <tbody>
             <tr *ngFor="let obj of absentData" routerLink="/admin/studentprofile/{{obj.studentId}}">
               <td class="d-flex align-items-center pointer" style="gap:5px;" >
-                <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
+                <img [src]="obj.profilePic" alt="" class="img-fluid imagestudent">
 
                 <h5 class="font-13 font-500 mb-0">{{obj.fullName}}<br>
                   <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
@@ -193,7 +193,7 @@
           <tbody>
             <tr *ngFor="let obj of leavesData">
               <td class="d-flex align-items-center pointer" style="gap:5px;" routerLink="/admin/studentprofile/{{obj.studentId}}">
-                <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
+                <img [src]="obj.profilePic" alt="" class="img-fluid imagestudent">
                 <h5 class="font-13 font-500 mb-0">{{obj.name}}<br>
                   <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                 </h5>
@@ -256,7 +256,7 @@
           <tbody>
             <tr *ngFor="let obj of leavesRequestData">
               <td class="d-flex pointer" style="gap:5px;" routerLink="/admin/studentprofile/{{obj.studentId}}">
-                <img [src]="imageUrl+obj.profilePic" alt="" class="img-fluid imagestudent">
+                <img [src]="obj.profilePic" alt="" class="img-fluid imagestudent">
                 <h5 class="font-13 font-500 mb-0">{{obj.fullName}} <br>
                   <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                 </h5>

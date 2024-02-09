@@ -18,7 +18,6 @@ import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket
 })
 export class CreateAnnouncementsComponent implements OnInit {
 
-  imageUrl = this.utilityService.getBaseUrl() + "/file/getImageApi/technologyStackImage/";
   courses: Course[] = [];
   announcementRequest: AnnouncementRequest = new AnnouncementRequest;
   selectedCourseIds: number[] = [];

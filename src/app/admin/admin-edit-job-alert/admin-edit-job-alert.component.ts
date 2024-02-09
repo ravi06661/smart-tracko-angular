@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin-edit-job-alert.component.scss']
 })
 export class AdminEditJobAlertComponent implements OnInit{
-  imageUrl = this.utilityService.getBaseUrl()+"/file/getImageApi/technologyStackImage/";
   jobAlert:JobAlert=new JobAlert();
   jobAlertRequest:JobAlertRequest=new JobAlertRequest();
   jobAlerts:JobAlert[]=[];

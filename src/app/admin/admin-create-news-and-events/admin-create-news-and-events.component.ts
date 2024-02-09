@@ -23,7 +23,7 @@ export class AdminCreateNewsAndEventsComponent implements OnInit{
     
   }
 
-  constructor (private newsEventService:NewsEventServiceService,private utilityService:UtilityServiceService,private router:Router,private formBuilder: FormBuilder)  {
+  constructor (private newsEventService:NewsEventServiceService,private router:Router,private formBuilder: FormBuilder)  {
     this.newsAndEventForm = this.formBuilder.group({
       title: ['', Validators.required],
       shortDesc: ['', Validators.required],

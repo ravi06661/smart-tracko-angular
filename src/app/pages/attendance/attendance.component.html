@@ -433,7 +433,7 @@
             <div class="col-md-4">
               <img class="imageSize" src="assets/images/temp_img/Options 01 _Selected.png"
                 *ngIf="attendance.checkInImage == undefined" />
-              <img class="imageSize" [src]="imageUrl + attendance.checkInImage"
+              <img class="imageSize" [src]="attendance.checkInImage"
                 *ngIf="attendance.checkInImage != undefined" />
             </div>
 
@@ -499,7 +499,7 @@
 
               <img class="imageSize" src="assets/images/temp_img/Options 01 _Selected.png"
                 *ngIf="attendance.checkOutImage == undefined" />
-              <img class="imageSize" [src]="imageUrl + attendance.checkOutImage"
+              <img class="imageSize" [src]="attendance.checkOutImage"
                 *ngIf="attendance.checkOutImage != undefined" />
             </div>
 

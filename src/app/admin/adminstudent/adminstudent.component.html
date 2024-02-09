@@ -52,7 +52,7 @@
                             <tr>
                                 <td>
                                    <a routerLink="/admin/studentprofile/{{student.studentId}}"  class="font-13 font-500 mb-0 text_gray d-flex align-items-center" style="gap:5px;">
-                                    <img [src]="imageUrl+student.profilePic" alt="" class="img-fluid imagestudent">
+                                    <img [src]="student.profilePic" alt="" class="img-fluid imagestudent">
                                     {{student.fullName }}                                        
                                    </a>
                                 </td>
@@ -138,7 +138,7 @@
                         <div class="col-md-12 mb_18" *ngFor="let course of courseResponse">
                             <div class="input_icon position-relative input_text checkbox_area">
                                 <div class="d-flex gap_5 align-items-center">
-                                    <img [src]="imageUrlTec+course.technologyStack.imageName" alt="" width="24" height="24">
+                                    <img [src]="course.technologyStack.imageName" alt="" width="24" height="24">
                                     <h2 class="font-15 font-500 mb-0 secondary">{{course.courseName}}</h2>
                                 </div>
                                 <input 

@@ -43,8 +43,6 @@ export class AdminDashboardComponent implements OnInit {
   public feesPieOptions: Partial<ChartOptions>;
   public attendanceOptions: Partial<ChartOptions>;
   students: StudentDetails[] = []
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/'
   admissionData: [] = []
   years: number[] = [];
   admissionYear: number = 0;
@@ -77,8 +75,7 @@ export class AdminDashboardComponent implements OnInit {
 
   constructor(private elementRef: ElementRef, 
     private localst: LocationStrategy, 
-    private studentService: StudentService, 
-    private utilityService: UtilityServiceService, 
+    private studentService: StudentService,  
     private feesService: FeesService,
     private feesPayService:FeesPayService,
     private taskService: TaskServiceService, 

@@ -23,8 +23,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   styleUrls: ['./admin-subjects-chapter.component.scss']
 })
 export class AdminSubjectsChapterComponent {
-  BASE_URL = this.utilityService.getBaseUrl();
-  techUrl = this.BASE_URL + "/file/getImageApi/technologyStackImage/";
   chapter: Chapter[] = []
   subjects: Subject[] = [];
   subjectId: number = 0;
@@ -46,12 +44,10 @@ export class AdminSubjectsChapterComponent {
   public Editor = ClassicEditor;
   image: File | null = null;
   private editorInstance: any;
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
 
   constructor(private subjectService: SubjectService,
     private route: ActivatedRoute,
     private chapterService: ChapterServiceService,
-    private utilityService: UtilityServiceService,
     private techService: TechnologyStackService,
     private router: Router,
     private toast: ToastService, private formBuilder: FormBuilder, private questionService: QuestionServiceService) {

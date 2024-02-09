@@ -17,8 +17,6 @@ export class AdminChapterResultComponent implements OnInit{
   chapterExamResult:any
   chapterId:number=0;
 
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   constructor(private examService:ExamServiceService,private activateRoute:ActivatedRoute,private utilityService: UtilityServiceService){}
   ngOnInit(): void {
     this.chapterId = this.activateRoute.snapshot.params[('chapterId')];

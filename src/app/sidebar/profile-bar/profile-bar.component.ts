@@ -20,8 +20,6 @@ import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket
 
 export class ProfileBarComponent implements OnInit {
   profileData: Profile = new Profile();
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   totalNotifications = 0;
 
   constructor(private studentService: StudentService,

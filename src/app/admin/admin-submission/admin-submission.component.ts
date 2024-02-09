@@ -11,18 +11,14 @@ declare let Swiper: any;
   styleUrls: ['./admin-submission.component.scss']
 })
 export class AdminSubmissionComponent implements OnInit, AfterViewInit {
-  BASE_URL = this.utilityService.getBaseUrl();
-  IMG_URL = this.BASE_URL + '/file/getImageApi/images/'
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
+
   status = 'Unreviewed';
   review = ''
   id!: number
   submitedTask: StudentTaskSubmittion = new StudentTaskSubmittion
 
   constructor(private taskService: TaskServiceService,
-    private activateRoute: ActivatedRoute,
-    private utilityService: UtilityServiceService,
-    private toast: ToastService) { }
+    private activateRoute: ActivatedRoute,) { }
 
   async ngOnInit() {
     this.activateRoute.queryParams.subscribe(params => {

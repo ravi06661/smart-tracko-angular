@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild ,HostListener} from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { JobAlert } from 'src/app/entity/job-alert';
 import { JobAlertService } from 'src/app/service/job-alert.service';
@@ -10,27 +10,25 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   styleUrls: ['./jobalert.component.scss']
 })
 export class JobalertComponent {
-  BASE_URL=this.utilityService.getBaseUrl();  
-  imageUrl=this.BASE_URL+'/file/getImageApi/technologyStackImage/';
 
   internshipJobs: JobAlert[] = []
   jobs: JobAlert[] = []
   totalInternJobs: number = 0
   totalJobs: number = 0
 
-  jobId:number=0
+  jobId: number = 0
   showFullMessage = false;
   numberOfJob = 0;
 
-  constructor(private jobAlertService: JobAlertService,private utilityService:UtilityServiceService) { }
-  ngOnInit() { 
+  constructor(private jobAlertService: JobAlertService) { }
+  ngOnInit() {
     this.getAllJobs(0, 8);
     this.getAllInternJobs(0, 8);
   }
 
   public getAllInternJobs(page: number, size: number) {
     this.jobAlertService.getInternShipJobs(page, size).subscribe(
-      (data: any) => { 
+      (data: any) => {
         this.internshipJobs = data.response
       }
     )
@@ -53,11 +51,11 @@ export class JobalertComponent {
     this.getAllInternJobs(event.pageIndex, event.pageSize);
   }
 
-  toggleShowMore(num:number,jobId:number) {
+  toggleShowMore(num: number, jobId: number) {
     this.jobId = jobId
     this.numberOfJob = num;
     this.showFullMessage = !this.showFullMessage;
   }
 
- 
+
 }

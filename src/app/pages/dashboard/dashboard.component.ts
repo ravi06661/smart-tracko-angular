@@ -40,16 +40,12 @@ export class DashboardComponent implements OnInit {
 
   tasks: Task[] = []
 
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/workReport/';
-
 
   check: boolean = false;
   assignment: Assignment = new Assignment()
   taskSubmissionList: StudentTaskSubmittion[] = []
   assignmentSubmissionsList: AssignmentSubmission[] = []
   assignmentSubmissionObj: AssignmentSubmission = new AssignmentSubmission
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   taskSubmissionObj: StudentTaskSubmittion = new StudentTaskSubmittion
   toDoAssignment = new AssignmentResponse()
   unLockAssignments: AssignmentResponse[] = []

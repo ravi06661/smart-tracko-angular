@@ -40,8 +40,6 @@ export type ChartOptions = {
 export class StudentProfileComponent implements OnInit {
   @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions: Partial<ChartOptions>;
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   studentId: number = 0;
   student: StudentDetails = new StudentDetails();
   attendanceLog: AttendanceLog[] = [];
@@ -55,12 +53,10 @@ export class StudentProfileComponent implements OnInit {
   taskSubmissionObj: StudentTaskSubmittion = new StudentTaskSubmittion
   unLockAssignments: any// Assignment[] = []
   lockAssignments: number[] = []
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
   assignmentId: number = 0;
   unLockAssignment: Assignment = new Assignment
-  
-  constructor(private router: Router, private taskService: TaskServiceService, private assignmentService: AssignmentServiceService, private utilityService: UtilityServiceService, private activateRoute: ActivatedRoute, private webSoketService: WebsocketServiceDiscussionFormService
-    , private studentService: StudentService, private leaveService: LeaveService, private feesPayService: FeesPayService, private loginService: LoginService) {
+
+  constructor(private router: Router, private taskService: TaskServiceService, private assignmentService: AssignmentServiceService, private activateRoute: ActivatedRoute,  private studentService: StudentService, private leaveService: LeaveService, private feesPayService: FeesPayService) {
     this.chartOptions = this.pieChart.chartOptions;
   }
 

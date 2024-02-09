@@ -14,8 +14,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   styleUrls: ['./chapter.component.scss']
 })
 export class ChapterComponent {
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/technologyStackImage/';
+
   subjectId: number = 0;
   chapter: Chapter[] = []
   subject: Subject = new Subject();

@@ -10,9 +10,7 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   styleUrls: ['./admin-assignment-submission.component.scss']
 })
 export class AdminAssignmentSubmissionComponent implements OnInit {
-  BASE_URL = this.utilityService.getBaseUrl();
-  IMG_URL = this.BASE_URL + '/file/getImageApi/images/'
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
+
   submitedAssignment: any
   review = '';
   status = 'Unreviewed';

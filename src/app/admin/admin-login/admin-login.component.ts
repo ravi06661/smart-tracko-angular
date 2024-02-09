@@ -11,44 +11,43 @@ import Swal from 'sweetalert2';
 })
 export class AdminLoginComponent {
 
-  constructor (private adminService:AdminServiceService,
-              private router:Router,
-              private loginService:LoginService          
-    ) {}
+  constructor(private adminService: AdminServiceService,
+    private router: Router,
+    private loginService: LoginService
+  ) { }
 
-  public logIn(formData:any){
-    console.log(formData.adminId)
-    console.log(formData.password)
-   this.adminService.adminLogin(formData.adminId,formData.password).subscribe({
-    next:(res:any)=>{
-      this.loginService.setToken(res.token);
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-      })
-      Toast.fire({
-        icon: 'success',
-        title: 'Signed in successfully'
-      }).then(e=>{
-        this.router.navigate(['admin'])
-      })
-    },
-    error:(err)=>{
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
-      })
-      Toast.fire({
-        icon: 'error',
-        title: err.error.message
-      })
-    }
-   })
+  public logIn(formData: any) {
+
+    this.adminService.adminLogin(formData.adminId, formData.password).subscribe({
+      next: (res: any) => {
+        this.loginService.setToken(res.token);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        })
+        Toast.fire({
+          icon: 'success',
+          title: 'Signed in successfully'
+        }).then(e => {
+          this.router.navigate(['admin'])
+        })
+      },
+      error: (err) => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+        })
+        Toast.fire({
+          icon: 'error',
+          title: err.error.message
+        })
+      }
+    })
   }
 }

@@ -10,15 +10,12 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class AdminFeesCompletedListComponent implements OnInit{
 
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
-
   feeses:Fees[]=[];
   feesList:number=0
   search:string=''
   startDate:string=''
   endDate:string=''
-  constructor(private feesService:FeesService,private utilityService:UtilityServiceService ){}
+  constructor(private feesService:FeesService){}
   ngOnInit(): void {
     this.getAllCompletedFeesList(0,8);
   }

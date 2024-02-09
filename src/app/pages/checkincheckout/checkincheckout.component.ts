@@ -38,13 +38,6 @@ export class CheckincheckoutComponent {
   message:string = '';
 
 
-
-  BASE_URL = this.utilityService.getBaseUrl();
-
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
-
-
-
   check: boolean = false;
   assignment: Assignment = new Assignment()
   constructor(private service: AssignmentServiceService,

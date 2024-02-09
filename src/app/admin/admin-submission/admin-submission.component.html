@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-12 d-flex align-items-center justify-content-between mb_24">
                             <div class="person-detail d-flex align-items-center gap_5">
-                                <img [src]="IMG_URL+submitedTask.profilePic" alt="" class="img-fluid imagestudent">
+                                <img [src]="submitedTask.profilePic" alt="" class="img-fluid imagestudent">
                                 <h5 class="font-18 font-600 mb-0">{{submitedTask.fullName}} <br>
                                     <p class="text_gray font-17 font-400 mb-0">{{submitedTask.applyForCourse}}</p>
                                 </h5>
@@ -69,8 +69,7 @@
                             <br>
                             <form class="attachment_file1 d-inline-flex align-items-center position-relative">
                                 <!-- Instead of an input element, use an anchor (a) tag -->
-                                <a href="{{ATTACHMENT_URL+submitedTask.submittionFileName}}"
-                                    download="Assignment Files.zip"
+                                <a href="{{submitedTask.submittionFileName}}" download="Assignment Files.zip"
                                     class="font-15 font-700 secondary text-white attachment_file_text">
                                     <i
                                         class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
@@ -82,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-              
+
             </div>
             <!-- <div class="pagination"></div> -->
 

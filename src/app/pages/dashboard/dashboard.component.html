@@ -215,7 +215,7 @@
                 </ol>
               </div>
               <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file">
-                <a href="{{ATTACHMENT_URL+assignmentSubmissionObj.submitFile}}"
+                <a href="{{assignmentSubmissionObj.submitFile}}"
                   class="font-15 font-400 text_gray  attachment_file_text">
                   <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
                   Download Submited File</a>
@@ -258,7 +258,7 @@
                 
               
               <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file" *ngIf="taskSubmissionObj.submittionFileName!=null && taskSubmissionObj.submittionFileName!=undefined">
-                <a href="{{ATTACHMENT_URL+taskSubmissionObj.submittionFileName}}"
+                <a href="{{taskSubmissionObj.submittionFileName}}"
                   class="font-15 font-400 text_gray  attachment_file_text">
                   <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
                   Download Submited File</a>
