@@ -173,7 +173,7 @@ export class AdminStudentRegistrationComponent {
 
     this.courseService.getAllCourse(true).subscribe({
       next:(data:any)=>{
-        this.courses = data;
+        this.courses = data.NonStarterCourse;
       },
       error:(err)=>{
 

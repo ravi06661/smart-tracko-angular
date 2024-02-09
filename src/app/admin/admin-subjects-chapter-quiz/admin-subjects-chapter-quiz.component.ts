@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChapterQuizeQuestion } from 'src/app/entity/chapter-quize-question';
+import { QuizeQuestion } from 'src/app/entity/quize-question';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
@@ -20,9 +20,9 @@ import { ToastService } from 'src/app/service/toast.service';
 export class AdminSubjectsChapterQuizComponent {
 
   questionId: number = 0;
-  questions: ChapterQuizeQuestion[] = []
+  questions: QuizeQuestion[] = []
   id: number = 0;
-  question: ChapterQuizeQuestion = new ChapterQuizeQuestion();
+  question: QuizeQuestion = new QuizeQuestion();
   public Editor = ClassicEditor;
   image: File | null = null;
   private editorInstance: any;
@@ -65,7 +65,7 @@ export class AdminSubjectsChapterQuizComponent {
         {
           next: (data) => {
             this.questions.push(data)
-            this.question = new ChapterQuizeQuestion();
+            this.question = new QuizeQuestion();
             AppUtils.modelDismiss('quize-save-modal')
             this.toast.showSuccess('Quize successfully added!!', 'Success')
           },
@@ -133,7 +133,7 @@ export class AdminSubjectsChapterQuizComponent {
     )
   }
   public cancel() {
-    this.question = new ChapterQuizeQuestion();
+    this.question = new QuizeQuestion();
   }
   public clearFormSubmission() {
     this.submissionForm.reset()

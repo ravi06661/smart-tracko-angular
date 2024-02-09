@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, HostListener } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild, HostListener, AfterViewInit } from '@angular/core';
 import * as moment from 'moment';
 import { ChartComponent } from 'ng-apexcharts';
 import { Attendance } from 'src/app/entity/attendance';
@@ -11,7 +11,6 @@ import { ViewEncapsulation } from '@angular/core';
 import { LoginService } from 'src/app/service/login.service';
 import { PresentAbsentLeaveBarChart } from 'src/app/charts/present-absent-leave-bar-chart';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 export type ChartOptions = {
   series: any;
   chart: any;
@@ -28,7 +27,7 @@ export type ChartOptions = {
   styleUrls: ['./attendance.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AttendanceComponent implements OnInit {
+export class AttendanceComponent implements OnInit   {
   @ViewChild('chart') chart: ChartComponent | undefined;
   public attendanceOptions: Partial<ChartOptions>;
 
@@ -88,16 +87,22 @@ export class AttendanceComponent implements OnInit {
       leaveEndDate: ['', Validators.required],
       leaveReason: ['', Validators.required],
     });
+
+    
   }
 
   ngOnInit(): void {
+   // this.cloneTicks();
+   // this.intervalId = setInterval(() => this.setTime(), 1000);
     this.attendanceMonth = 'Month';
     this.leaveMonth = 'Month';
     this.getAttendanceHistoy();
     // this.getLeaveType();
     this.getStudentLeaves();
     this.getStudentPresentsAbsentsAndLeavesYearWise();
+   this.loadClock ();
   }
+
 
   public isFieldInvalidForApplyLeaveForm(fieldName: string): boolean {
     const field = this.applyLeaveForm.get(fieldName);
@@ -163,9 +168,9 @@ export class AttendanceComponent implements OnInit {
   }
 
   public addStudentLeave() {
-    if (  this.applyLeaveForm.invalid ) {
+    if (this.applyLeaveForm.invalid) {
       this.checkApplyLeaveForm();
-     // console.log(this.applyLeaveForm.invalid);
+      // console.log(this.applyLeaveForm.invalid);
       return;
     }
     //console.log(this.leaves);
@@ -337,4 +342,140 @@ export class AttendanceComponent implements OnInit {
   public setDate() {
     this.minEnd = this.leaves.leaveDate
   }
+
+
+//   private cloneTicks(): void {
+//     for (let i = 1; i <= 12; i++) {
+//       const el = document.querySelector(".fiveminutes") as HTMLElement;
+//       const clone = el.cloneNode(true) as HTMLElement;
+//       clone.setAttribute('class', `fiveminutes f${i}`);
+//       const app = document.getElementById("clockface") as HTMLElement;
+//       app.appendChild(clone);
+//       const el2 = document.querySelector(`.f${i}`) as HTMLElement;
+//       el2.style.transform = `rotate(${30 * i}deg)`;
+//     }
+
+//     for (let i = 1; i <= 60; i++) {
+//       const el = document.querySelector(".minutes") as HTMLElement;
+//       const clone = el.cloneNode(true) as HTMLElement;
+//       clone.setAttribute('class', `minutes m${i}`);
+//       const app = document.getElementById("clockface") as HTMLElement;
+//       app.appendChild(clone);
+//       const el2 = document.querySelector(`.m${i}`) as HTMLElement;
+//       el2.style.transform = `rotate(${6 * i}deg)`;
+//     }
+//   }
+
+
+//   private setTime(): void {
+//     const now = new Date();
+//     const sec = now.getSeconds();
+//     const min = now.getMinutes();
+//     const hour = now.getHours();
+
+//     const secdeg = (sec / 60) * 360;
+//     const mindeg = (min / 60) * 360;
+//     const hourdeg = ((hour + min / 60) / 12) * 360;
+
+//     this.rotateElement('.sec', secdeg);
+//     this.rotateElement('.min', mindeg);
+//     this.rotateElement('.hour', hourdeg);
+
+//   }
+
+//   private rotateElement(selector: string, deg: number): void {
+//     const element = document.querySelector(selector) as HTMLElement;
+//     element.style.transform = `rotate(${deg}deg)`;
+//   }
+//   synth = window.speechSynthesis;
+//   intervalId: any;
+//  hr: HTMLElement | null = document.querySelector("#hr");
+//  mn: HTMLElement | null = document.querySelector("#mn");
+//  sc: HTMLElement | null = document.querySelector("#sc");
+
+//  intervalId: NodeJS.Timer | null = setInterval(() => {
+//   let day: Date = new Date();
+//   let hh: number = day.getHours() * 30;
+//   let mm: number = day.getMinutes() * 6;
+//   let ss: number = day.getSeconds() * 6;
+
+//   if (this.hr && this.mn && this.sc) {
+//     this.hr!.style.transform = `rotateZ(${hh + mm / 12}deg)`;
+//     this.mn!.style.transform = `rotateZ(${mm}deg)`;
+//     this.sc!.style.transform = `rotateZ(${ss}deg)`;
+//   }
+
+//   /* Digital Clock */
+
+//   let hours: HTMLElement | null = document.getElementById("hours");
+//   let minutes: HTMLElement | null = document.getElementById("minutes");
+//   let seconds: HTMLElement | null = document.getElementById("seconds");
+//   let ampm: HTMLElement | null = document.getElementById("ampm");
+
+//   let h: any = new Date().getHours();
+//   let m: any = new Date().getMinutes();
+//   let s: any = new Date().getSeconds();
+
+//   let am: string = h > 12 ? "PM" : "AM";
+
+//   if (h > 12) {
+//     h = h - 12;
+//   }
+
+//   h = h < 10 ? "0" + h : h;
+//   m = m < 10 ? "0" + m : m;
+//   s = s < 10 ? "0" + s : s;
+
+//   if (hours && minutes && seconds && ampm) {
+//     hours.innerHTML = h.toString();
+//     minutes.innerHTML = m.toString();
+//     seconds.innerHTML = s.toString();
+//     ampm.innerHTML = am;
+//   }
+// }, 1000); // 1000 milliseconds, equivalent to 1 second
+
+
+
+loadClock(){
+  let hr:any = document.querySelector("#hr");
+  let mn:any = document.querySelector("#mn");
+  let sc:any = document.querySelector("#sc");
+
+  setInterval(() => {
+    let day = new Date();
+    let hh = day.getHours() * 30;
+    let mm = day.getMinutes() * 6;
+    let ss = day.getSeconds() * 6;
+
+    hr.style.transform = `rotateZ(${hh + mm / 12}deg)`;
+    mn.style.transform = `rotateZ(${mm}deg)`;
+    sc.style.transform = `rotateZ(${ss}deg)`;
+
+    /* Digital Clock */
+
+    let hours:any = document.getElementById("hours");
+    let minutes:any = document.getElementById("minutes");
+    let seconds:any = document.getElementById("seconds");
+    let ampm:any = document.getElementById("ampm");
+
+    let h:any = new Date().getHours();
+    let m:any = new Date().getMinutes();
+    let s:any = new Date().getSeconds();
+
+    let am = h > 12 ? "PM" : "AM";
+
+    if (h > 12) {
+      h = h - 12;
+    }
+
+    h = h < 10 ? "0" + h : h;
+    m = m < 10 ? "0" + m : m;
+    s = s < 10 ? "0" + s : s;
+
+    hours.innerHTML = h;
+    minutes.innerHTML = m;
+    seconds.innerHTML = s;
+    ampm.innerHTML = am;
+  });
+}
 }

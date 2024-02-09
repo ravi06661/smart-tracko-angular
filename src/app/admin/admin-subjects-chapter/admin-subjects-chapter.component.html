@@ -84,83 +84,48 @@
         <!-- subject test start-->
         <div class="subject-test" style="display: none;">
             <div class="row mt-3">
-                <div class="col-md-12">
+                <div class="col-md-12" *ngFor="let obj of questions; let a =index">
                     <div class="top-test-question">
-                        <h2>Question 1</h2>
+                        <h2>Question {{a+1}}</h2>
                         <div class="test-que-edit-del">
-                            <span class="d-flex align-items-center gap_5 font-17 font-500 secondary" data-bs-toggle="modal"
-                            data-bs-target="#subject-edit_testques-modal" (click)="deleteChapter()"><i
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"
+                                data-bs-toggle="modal" data-bs-target="#subject-edit_testques-modal"
+                                (click)="setQuestion(obj.questionId,a)"><i
                                     class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
-                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"><i
-                                    class="fi fi-rr-trash line-height-0"></i> Delete</span>
+                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color"
+                                data-bs-toggle="modal" data-bs-target="#delete-modal2"
+                                (click)="questionId = obj?.questionId ?? 0;questionIndex=a"><i class="fi fi-rr-trash line-height-0"
+                                    data-bs-dismiss="modal" aria-label="Close"></i> Delete</span>
                         </div>
                     </div>
 
                     <div class="subject-test-question">
                         <ul class="ps-0 mb-0 list-unstyled">
-                            <li>
-                                In class of 27, the overall weight of the students is 997. Can you font out the
-                                average weight of each student in the class?
-                            </li>
-                            <li>
-                                In class of 27, the overall weight of the students is 997. Can you font out the
-                                average weight of each student in the class?
+                            <li [innerHTML]="obj.questionContent">{{obj.questionContent}}
                             </li>
                         </ul>
                     </div>
+                    <div class="subject-test-ques-ans "*ngIf="obj.questionImage!=null">
+                        <img [src]="imageUrl+obj.questionImage" style="width: 200px ;height: 200px">
+                    </div>
+                    <div class="subject-test-ques-ans"
+                        [ngClass]="obj.correctOption==obj.option1?'alert alert-success':''">
+                        <p>A. {{obj.option1}}</p>
+                    </div>
+                    <div class="subject-test-ques-ans"
+                        [ngClass]="obj.correctOption==obj.option2?'alert alert-success':''">
+                        <p>B. {{obj.option2}}</p>
+                    </div>
+                    <div class="subject-test-ques-ans"
+                        [ngClass]="obj.correctOption==obj.option3?'alert alert-success':''">
+                        <p>C. {{obj.option3}}</p>
+                    </div>
+                    <div class="subject-test-ques-ans"
+                        [ngClass]="obj.correctOption==obj.option4?'alert alert-success':''">
+                        <p>D. {{obj.option4}}</p>
+                    </div>
 
-                    <div class="subject-test-ques-ans">
-                        <p>A- 36.96</p>
-                    </div>
-                    <div class="subject-test-ques-ans">
-                        <p>B- 36.96</p>
-                    </div>
-                    <div class="subject-test-ques-ans">
-                        <p>C- 36.96</p>
-                    </div>
-                    <div class="subject-test-ques-ans">
-                        <p>D- 36.96</p>
-                    </div>
                 </div>
-
-                <div class="col-md-12">
-                    <div class="top-test-question">
-                        <h2>Question 1</h2>
-                        <div class="test-que-edit-del">
-                            <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"  data-bs-toggle="modal"
-                            data-bs-target="#subject-edit_testques-modal"><i class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
-                            <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"  ><i
-                                    class="fi fi-rr-trash line-height-0"></i> Delete</span>
-                        </div>
-                    </div>
-
-                    <div class="subject-test-question">
-                        <ul class="ps-0 mb-0 list-unstyled">
-                            <li>
-                                In class of 27, the overall weight of the students is 997. Can you font out the
-                                average weight of each student in the class?
-                            </li>
-                            <li>
-                                In class of 27, the overall weight of the students is 997. Can you font out the
-                                average weight of each student in the class?
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="subject-test-ques-ans">
-                        <p>A- 36.96</p>
-                    </div>
-                    <div class="subject-test-ques-ans">
-                        <p>B- 36.96</p>
-                    </div>
-                    <div class="subject-test-ques-ans">
-                        <p>C- 36.96</p>
-                    </div>
-                    <div class="subject-test-ques-ans">
-                        <p>D- 36.96</p>
-                    </div>
-                </div>
-
             </div>
 
         </div>
@@ -205,6 +170,32 @@
     </div>
 </div>
 </div>
+
+
+<div class="modal fade" id="delete-modal2" tabindex="-1" aria-labelledby="delete-modal2" aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                    style="top: -23%;">
+                    <i class="fi fi-rr-cross close_icon"></i>
+                </button> -->
+    
+                <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Subject</p>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <a >
+                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" data-bs-dismiss="modal" aria-label="Close" (click)="deleteQuestion()">Yes,
+                            delete</button>
+                    </a>
+                    <a >
+                        <button type="button" class="apply_modal_btn font-15 font-500" data-bs-dismiss="modal" aria-label="Close">No, Do not delete</button>
+                    </a>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+    </div>
 <!-- Modal Delete Modal End -->
 
 <!-- Modal Admin Subject Add Modal Start -->
@@ -318,56 +309,115 @@
 <!-- Modal Admin Subject Test Add Question Modal Start -->
 <div class="modal fade" id="subject-testques-modal" tabindex="-1" aria-labelledby="subject-testques-modal"
     aria-hidden="true">
-    <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-dialog position-relative leave_modal subject_modal">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                         id="exampleModalLabel1">Add Question</h1>
-                    <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" id="quize-save-modal"
+                       (click)="clearFormSubmission()">
                         <i class="fi fi-rr-cross close_icon"></i>
-                    </button> -->
+                    </button>
                 </div>
 
-                <form action="">
+                <form [formGroup]="submissionForm">
                     <div class="row">
-                        <div class="col-md-12 mb_18">
-                            <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
-                            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Start Typing....."></textarea>
-                        </div>
-                        <div class="col-md-12 mb_18">
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="A- 36.93">
+                        <div class="form-group">
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
+                                <ckeditor [editor]="Editor" name="questionContent" [(ngModel)]="question.questionContent" formControlName="questionContent" >
+                                </ckeditor>
+                                <div *ngIf=" isFieldInvalidForSubmissionForm('questionContent')" class="text-danger">
+                                    questionContent is required.</div>
                             </div>
                         </div>
-                        <div class="col-md-12 mb_18">
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="B- 36.93">
+                       
+                    
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
+                                <div class="input_icon position-relative">
+                                    <input type="file" (change)="handleImageInput($event)" value="file"  name="file" formControlName="file">
+                                </div>
+                             
                             </div>
-                        </div>
-                        <div class="col-md-12 mb_18">
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="C- 36.93">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="input_icon position-relative">
-                                <input type="text" id="" name="" class="form-control input_text"
-                                    placeholder="D- 36.93">
+                       
+                        <div class="form-group">
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Option-1</h4>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="option1" class="form-control input_text" placeholder=""
+                                        [(ngModel)]="question.option1" formControlName="option1">
+                                        <div *ngIf=" isFieldInvalidForSubmissionForm('option1')" class="text-danger">
+                                            option1 is required.</div>
+                                </div>
                             </div>
                         </div>
 
+                      
+                        <div class="form-group">
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Option-2</h4>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="option2" class="form-control input_text" placeholder=""
+                                        [(ngModel)]="question.option2"  formControlName="option2">
+                                        <div *ngIf=" isFieldInvalidForSubmissionForm('option2')" class="text-danger">
+                                            option2 is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                        <div class="form-group">
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Option-3</h4>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="option3" class="form-control input_text" placeholder=""
+                                        [(ngModel)]="question.option3"  formControlName="option3">
+                                        <div *ngIf=" isFieldInvalidForSubmissionForm('option3')" class="text-danger">
+                                            option3 is required.</div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Option-4</h4>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="option4" class="form-control input_text" placeholder=""
+                                        [(ngModel)]="question.option4"  formControlName="option4">
+                                        <div *ngIf=" isFieldInvalidForSubmissionForm('option4')" class="text-danger">
+                                            option4 is required.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                      
+                        <div class="form-group">
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Correct Option </h4>
+                                <select class="form-select" aria-label="Default select example" id="correctOption"
+                                    name="correctOption" [(ngModel)]="question.correctOption" formControlName="correctOption">
+                                    <option value = "">Select Correct Option</option>
+                                    <option [value]="question.option1">{{question.option1}}</option>
+                                    <option [value]="question.option2">{{question.option2}}</option>
+                                    <option [value]="question.option3">{{question.option3}}</option>
+                                    <option [value]="question.option4">{{question.option4}}</option>
+                                </select>
+                                <div *ngIf=" isFieldInvalidForSubmissionForm('correctOption')" class="text-danger">
+                                    correctOption is required.</div>
+                            </div>
+                        </div>
+
+                       
+                       
                     </div><!-- row -->
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close">Cancel</button>
-                    <a href="admin_subject_topic_test.html">
-                        <button type="button" class="apply_modal_btn font-15 font-500">Save Question</button>
+                        aria-label="Close" (click)="cancel()">Cancel</button>
+                    <a>
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="addQuestion()">Save
+                            Question</button>
                     </a>
                 </div>
 
@@ -380,59 +430,86 @@
         <!-- Modal Admin Subject Test Edit Question Modal Start -->
         <div class="modal fade" id="subject-edit_testques-modal" tabindex="-1" aria-labelledby="subject-edit_testques-modal"
         aria-hidden="true">
-        <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-dialog position-relative leave_modal subject_modal">
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="modal-header apply_title">
                         <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
                             id="exampleModalLabel1">Edit Question</h1>
-                        <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" id="update-quize-modal"
+                          >
                             <i class="fi fi-rr-cross close_icon"></i>
-                        </button> -->
+                        </button>
                     </div>
-
+    
                     <form action="">
                         <div class="row">
                             <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
-                                <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                                    placeholder="Start Typing....."></textarea>
+                                <h4 class="sub-heading font-17 font-500 text_gray">Question Content</h4>
+                                <ckeditor [editor]="Editor" name="questionContent" [(ngModel)]="question.questionContent">
+                                </ckeditor>
                             </div>
                             <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="A- 36.93">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="B- 36.93">
+                                    <input type="file" (change)="handleImageInput($event)"
+                                        [value]="imageUrl+question.questionImage">
                                 </div>
                             </div>
                             <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Option-1</h4>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="C- 36.93">
+                                    <input type="text" id="" name="option1" class="form-control input_text" placeholder=""
+                                        [(ngModel)]="question.option1">
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Option-2</h4>
                                 <div class="input_icon position-relative">
-                                    <input type="text" id="" name="" class="form-control input_text"
-                                        placeholder="D- 36.93">
+                                    <input type="text" id="" name="option2" class="form-control input_text" placeholder=""
+                                        [(ngModel)]="question.option2">
                                 </div>
                             </div>
-
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Option-3</h4>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="option3" class="form-control input_text" placeholder=""
+                                        [(ngModel)]="question.option3">
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Option-4</h4>
+                                <div class="input_icon position-relative">
+                                    <input type="text" id="" name="option4" class="form-control input_text" placeholder=""
+                                        [(ngModel)]="question.option4">
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Correct Option </h4>
+                                <div class="input_icon position-relative ">
+                                    <!-- <input type="text" id="" name="correctOption" class="form-control input_text" placeholder=""  [(ngModel)]="question.correctOption"> -->
+                                    <select class="form-select" aria-label="Default select example" id="correctOption"
+                                        name="correctOption" [(ngModel)]="question.correctOption">
+                                        <option value = "">Select Correct Option</option>
+                                        <option [value]="question.option1">{{question.option1}}</option>
+                                        <option [value]="question.option2">{{question.option2}}</option>
+                                        <option [value]="question.option3">{{question.option3}}</option>
+                                        <option [value]="question.option4">{{question.option4}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                           
                         </div><!-- row -->
                     </form>
                     <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                         <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                            aria-label="Close">Cancel</button>
-                        <a href="admin_subject_topic_test.html">
-                            <button type="button" class="apply_modal_btn font-15 font-500">Save Question</button>
+                            aria-label="Close" (click)="cancel()">Cancel</button>
+                        <a>
+                            <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateQuestion()">Save
+                                Question</button>
                         </a>
                     </div>
-
+    
                 </div>
             </div>
         </div>

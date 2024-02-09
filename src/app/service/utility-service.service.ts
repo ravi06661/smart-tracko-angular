@@ -7,9 +7,9 @@ export class UtilityServiceService {
 
   constructor() { }
 
-  private BASE_URL = 'http://cicoapi.dollopinfotech.com';
+  //private BASE_URL = 'http://cicoapi.dollopinfotech.com';
 
-  //private BASE_URL = 'http://localhost:8080';
+  private BASE_URL = 'http://localhost:8080';
   private readonly TIME_URL = 'http://worldtimeapi.org/api/ip';
 
   public getBaseUrl() {
@@ -17,7 +17,7 @@ export class UtilityServiceService {
   }
 
   public getTimeUrl() {
-     return this.TIME_URL;
+   //  return this.TIME_URL;
   }
 
   public updateTimeline(date: any) {

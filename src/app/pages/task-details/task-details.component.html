@@ -140,7 +140,7 @@ src="https://www.youtube.com/embed/tgbNymZ7vqY">
           <h4 class="sub-heading font-17 font-500 secondary mb-1">optional</h4>
           <h4 class="sub-heading font-17 font-500 secondary mb-1">.pdf file only</h4>
           <form class="select_file d-flex align-items-center file position-relative">
-            <input type="file" name="file" id="file" accept=".pdf, application/pdf" class="d-none"
+            <input type="file" name="file" id="file"accept="/*,.zip,.rar,.7zip,zip,application/octet-stream,application/zip,application/x-zip,application/x-zip-compressed"class="d-none"
               (change)="setImage($event)">
             <label for="file" class="font-15 font-400 secondary w-75">Select A File</label>
             <button type="button" class="submit_btn0 ms-auto" onclick="document.getElementById('file').click()">

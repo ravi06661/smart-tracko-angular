@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { TaskServiceService } from 'src/app/service/task-service.service';
 import { ToastService } from 'src/app/service/toast.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
-
+declare let Swiper: any;
 @Component({
   selector: 'app-admin-submission',
   templateUrl: './admin-submission.component.html',
   styleUrls: ['./admin-submission.component.scss']
 })
-export class AdminSubmissionComponent implements OnInit {
+export class AdminSubmissionComponent implements OnInit, AfterViewInit {
   BASE_URL = this.utilityService.getBaseUrl();
   IMG_URL = this.BASE_URL + '/file/getImageApi/images/'
   ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentAttachment/'
@@ -36,7 +36,7 @@ export class AdminSubmissionComponent implements OnInit {
         this.updateSubmitedTaskStatus('Reviewing');
       }
     } catch (error: any) {
-    //  this.toast.showError(error.message, 'Error');
+      //  this.toast.showError(error.message, 'Error');
     }
   }
 
@@ -80,5 +80,21 @@ export class AdminSubmissionComponent implements OnInit {
         this.submitedTask = data;
       }
     })
+  }
+
+  ngAfterViewInit() {
+    const swiper = new Swiper(".swiper", {
+      slidesPerView: 1,
+      // spaceBetween: 50,
+      loop: true,
+      grabCursor: true,
+      centeredSlides: true,
+
+      navigation: {
+        nextEl: ".next",
+        prevEl: ".prev"
+      },
+    });
+
   }
 }

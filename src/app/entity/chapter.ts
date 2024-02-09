@@ -1,6 +1,6 @@
 
 import { ChapterContent } from "./chapter-content"
-import { ChapterQuizeQuestion } from "./chapter-quize-question";
+import { QuizeQuestion } from "./quize-question";
 import { Exam } from "./exam";
 import { Question } from "./question";
 import { Subject } from "./subject";
