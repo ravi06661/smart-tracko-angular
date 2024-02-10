@@ -35,7 +35,6 @@ export class AdminCoursesBatchesComponent implements OnInit {
   //batch:Batch = new Batch(); 
   batch: BatchResponse = new BatchResponse()
   imageName = '';
-  imageUrl = this.utilityService.getBaseUrl() + "/file/getImageApi/technologyStackImage/";
   createBatchFrom: FormGroup
 
   message = '';

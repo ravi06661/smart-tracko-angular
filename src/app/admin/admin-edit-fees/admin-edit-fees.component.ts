@@ -14,12 +14,10 @@ import Swal from 'sweetalert2';
   styleUrls: ['./admin-edit-fees.component.scss']
 })
 export class AdminEditFeesComponent implements OnInit {
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   feesId: number = 0;
   fees: Fees = new Fees();
   updateFeesForm: FormGroup
-  constructor(private feesService: FeesService, private utilityService: UtilityServiceService, private activateRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private zone: NgZone) {
+  constructor(private feesService: FeesService, private activateRoute: ActivatedRoute, private router: Router, private formBuilder: FormBuilder, private zone: NgZone) {
     this.updateFeesForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       email: ['', Validators.required],

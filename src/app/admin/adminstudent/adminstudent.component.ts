@@ -20,8 +20,6 @@ import Swal from 'sweetalert2';
 })
 export class AdminstudentComponent implements OnInit {
 
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   students: StudentDetails[] = [];
   totalStudent: number = 0;
   search: string = ''
@@ -35,12 +33,11 @@ export class AdminstudentComponent implements OnInit {
   course: Course = new Course();
   techImages: TechnologyStack[] = [];
   imageName = '';
-  imageUrlTec = this.utilityService.getBaseUrl() + "/file/getImageApi/technologyStackImage/";
   studentCourse: Coursereponse = new Coursereponse();
   selectedCourse: number = 0;
 
-  constructor(private stuentService: StudentService, private utilityService: UtilityServiceService, private courseService: CourseServiceService, private techService: TechnologyStackService, private activateRoute: ActivatedRoute
-    , private loginService: LoginService) { }
+  constructor(private stuentService: StudentService, private courseService: CourseServiceService, private techService: TechnologyStackService, private activateRoute: ActivatedRoute
+  ) { }
   ngOnInit(): void {
     this.courseId = this.activateRoute.snapshot.params[('courseId')];
     this.getAllStudent(0, 15);
@@ -94,8 +91,8 @@ export class AdminstudentComponent implements OnInit {
   public upgradeCourseOfStudent(courseId: number) {
     this.courseService.upgradeStudentCourse(this.newStudent.studentId, this.selectedCourse).subscribe(
       (data: any) => {
-    
-       
+
+
 
         //  let student = this.students.findIndex(obj=>obj.studentId === this.newStudent.studentId) 
         //this.students = this.students.map(item => (item.studentId === data.studentId ? data : item));

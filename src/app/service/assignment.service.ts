@@ -11,6 +11,7 @@ import { TaskQuestionRequest } from '../payload/task-question-request';
 import { an } from '@fullcalendar/core/internal-common';
 import { AssignmentSubmissionRequest } from '../payload/assignment-submission-request';
 import { TaskQuestion } from '../entity/task-question';
+import { PageRequest } from '../payload/page-request';
 
 @Injectable({
   providedIn: 'root'
@@ -138,8 +139,14 @@ export class AssignmentServiceService {
     return this.http.get(`${this.assignmentUrl}/getAssignmentQuesSubmissionStatus?questionId=${questionId}&studentId=${studentId}`)
   }
 
-  public getAllSubmissionAssignmentTaskStatusByCourseIdFilter(courseId: number, subjectId: number) {
-    return this.http.get(`${this.assignmentUrl}/getAllSubmissionAssignmentTaskStatusByCourseIdFilter?courseId=${courseId}&subjectId=${subjectId}`)
+  public getAllSubmissionAssignmentTaskStatusByCourseIdFilter(courseId: number, subjectId: number, pageRequest: PageRequest) {
+    let params = {
+      courseId: courseId,
+      subjectId: subjectId,
+      pageNumber: pageRequest.pageNumber,
+      pageSize: pageRequest.pageSize
+    }
+    return this.http.get(`${this.assignmentUrl}/getAllSubmissionAssignmentTaskStatusByCourseIdFilter`, { params })
   }
 
   public getSubmittedAssignmentBySubmissionId(submissionId: number) {

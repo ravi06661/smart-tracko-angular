@@ -41,7 +41,7 @@
             <a routerLink="/student/newandseventsdescription/{{newsAndEvent.id}}" (onclick)="parentTochild(newsAndEvent.dayAgo)">
             <div class="news">
               <!-- <img src="/assets/images/temp_img/news.png" alt=""> -->
-              <img class="imageSize" [src]="imageUrl+newsAndEvent.image">
+              <img class="imageSize" [src]="newsAndEvent.image">
               <div class="news_text dark">
                 <h3 class="font-11 font-400 small_text">{{utilityService.updateTimeline(newsAndEvent.createdDate)}}</h3>
                 <h4 class="font-17 font-500 small_text">{{newsAndEvent.title}}</h4>

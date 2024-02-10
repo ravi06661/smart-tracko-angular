@@ -18,7 +18,7 @@
                 <i class="fi fi-rr-trash hover_icon delete-icon-color" data-bs-toggle="modal" data-bs-target="#delete-modal"></i>
               </div>
             </div>
-            <img [src]="imageUrl+student.profilePic" alr="" class="profile_image" id="output">
+            <img [src]="student.profilePic" alr="" class="profile_image" id="output">
            </div>
             <div>
               <h2 class="font-24 font-600 text-white java mb_6">{{student.fullName}}</h2>
@@ -682,7 +682,7 @@
                     </ol>
                   </div>           
                 <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file" *ngIf="assignmentSubmissionObj.submitFile!=null && assignmentSubmissionObj.submitFile!=''">
-                  <a href="{{ATTACHMENT_URL+assignmentSubmissionObj.submitFile}}" class="font-15 font-400 text_gray  attachment_file_text">
+                  <a href="{{assignmentSubmissionObj.submitFile}}" class="font-15 font-400 text_gray  attachment_file_text">
                     <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
                     Download Submited File</a>
                 </form>
@@ -719,7 +719,7 @@
                     </ol>
                   </div>         
                   <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file" *ngIf="taskSubmissionObj.submittionFileName!=null">
-                    <a href="{{ATTACHMENT_URL+taskSubmissionObj.submittionFileName}}" class="font-15 font-400 text_gray  attachment_file_text">
+                    <a href="{{taskSubmissionObj.submittionFileName}}" class="font-15 font-400 text_gray  attachment_file_text">
                       <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
                       Download Submited File</a>
                   </form>

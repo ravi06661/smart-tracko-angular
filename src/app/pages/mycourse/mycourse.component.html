@@ -11,7 +11,7 @@
       <div class="col-md-12">
         <div class="top-content mb-4 my_course" onclick="myfun1()">
           <div class="d-flex java">
-            <img [src]="imageUrl+courseImg">
+            <img [src]="courseImg">
             <div class="ms-2">
 
               <h2 class="font-27 font-600 text-white java mb-1 java_title">{{courseName}}</h2>
@@ -79,7 +79,7 @@
                 <div class="">
                   <div class="d-flex java">
                     <img style="height:60px;width:60px;" class="imageSize"
-                    [src]="imageUrl+batch.subject.technologyStack.imageName">
+                    [src]="batch.subject.technologyStack.imageName">
                     <div class="ms-2">
                       <h2 class="font-21 font-600 text-black java java_heading">{{batch.batchName}}</h2>
                      
@@ -106,7 +106,7 @@
                 <div class="">
                   <div class="d-flex java">
                     <img style="height:60px;width:60px;" class="imageSize"
-                      [src]="imageUrl+course.technologyStack.imageName">
+                      [src]="course.technologyStack.imageName">
                     <div class="ms-2">
                       <h2 class="font-21 font-600 text-black java java_heading">{{course.courseName}}</h2>
                       <h2 class="font-16 font-500 text-black java java_heading2">Duration {{course.duration}}</h2>

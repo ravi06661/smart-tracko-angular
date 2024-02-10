@@ -29,8 +29,7 @@ export type ChartOptions = {
   styleUrls: ['./admin-attendance.component.scss']
 })
 export class AdminAttendanceComponent {
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
+
   absentData: AbsentTodays[] = []
   leavesData: ActiveLeaves[] = []
   leavesRequestData: TodayLeavesRequest[] = []

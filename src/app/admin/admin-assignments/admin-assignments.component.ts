@@ -13,6 +13,8 @@ import { SubjectService } from 'src/app/service/subject.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
 import { ToastService } from 'src/app/service/toast.service';
 import { ToastrService } from 'ngx-toastr';
+import { PageRequest } from 'src/app/payload/page-request';
+import { PaginationManager } from 'src/app/entity/pagination-manager';
 
 @Component({
   selector: 'app-admin-assignments',
@@ -20,17 +22,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./admin-assignments.component.scss']
 })
 export class AdminAssignmentsComponent implements OnInit {
-  BASE_URL = this.utilityService.getBaseUrl();
-  IMG_URL = this.BASE_URL + '/file/getImageApi/images/'
   assignmentRequest: AssignmentRequest = new AssignmentRequest;
   courses: Course[] = [];
   //subjects: Subject[] = [];
   subjectes: SubjectResponse[] = [];
-  submitedAssignments: any[] = []
+  submitedAssignments: any[] = [];
   submitedAssignmentObj: AssignmentSubmission = new AssignmentSubmission
   taskSubmissionStatus: SubmissionAssignmentTaskStatus[] = []
   taskSubmissionStatus2: SubmissionAssignmentTaskStatus = new SubmissionAssignmentTaskStatus
- // message: string = ''
+  // message: string = ''
   course: Course = new Course
 
   totalSubmitted = 0;
@@ -38,6 +38,9 @@ export class AdminAssignmentsComponent implements OnInit {
   unReveiwed = 0;
   courseId = 0;
   subjectId = 0;
+
+  assignmentPageRequest: PageRequest = new PageRequest();
+  assignmentPagination: PaginationManager = new PaginationManager()
 
   submissionForm: FormGroup
   constructor(private courseService: CourseServiceService,
@@ -60,8 +63,9 @@ export class AdminAssignmentsComponent implements OnInit {
 
     this.getAllCourses();
     this.getAllSubmitedAssignments(new Course, 0, 'NOT_CHECKED_WITH_IT');
-    this.getAllSubmissionAssignmentStatus()
+    //    this.getAllSubmissionAssignmentStatus()
     this.getOverAllAssignmentTaskStatus()
+    this.courseFilterByCourseIdAndSubjectId(0, 0)
     this.getAllSubject()
   }
 
@@ -141,13 +145,14 @@ export class AdminAssignmentsComponent implements OnInit {
     });
   }
 
-  public getAllSubmissionAssignmentStatus() {
-    this.assignmentService.getAllSubmissionAssignmentTaskStatus().subscribe(
-      (data: any) => {
-        this.taskSubmissionStatus = data;
-      }
-    )
-  }
+  // public getAllSubmissionAssignmentStatus() {
+  //   this.assignmentService.getAllSubmissionAssignmentTaskStatus().subscribe(
+  //     (data: any) => {
+  //       this.taskSubmissionStatus = data;
+
+  //     }
+  //   )
+  // }
 
   public getOverAllAssignmentTaskStatus() {
     this.assignmentService.getOverAllAssignmentTaskStatus().subscribe(
@@ -173,16 +178,37 @@ export class AdminAssignmentsComponent implements OnInit {
     }
   }
 
-  courseFilterByCourseIdAndSubjectId(course: Course, subjectId: number) {
-    this.course = course;
-    this.getCourseSubject(course.courseId)
-    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(this.course.courseId, subjectId).subscribe((
+  courseFilterByCourseIdAndSubjectId(courseId: any, subjectId: number, pageRequest?: PageRequest) {
+    //this.course = course;
+    courseId != 0 ? this.getCourseSubject(this.courseId) : courseId
+    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(courseId, subjectId, pageRequest ? pageRequest : new PageRequest()).subscribe((
       (data: any) => {
-        this.taskSubmissionStatus = data
-        //  this.subjects = course.subjects
+        this.taskSubmissionStatus = data.content
+
+        this.taskSubmissionStatus = data.content
+        this.assignmentPagination.setPageData(data);
+        this.assignmentPageRequest.pageNumber = data.pageable.pageNumber;
       }
     ))
   }
+  public manageaAssignmentNextPrev(isNext: boolean) {
+
+    let i = 0;
+    if (isNext) i = this.assignmentPageRequest.pageNumber + 1;
+    else i = this.assignmentPageRequest.pageNumber - 1;
+    if (i >= 0 && i < this.assignmentPagination.totalPages)
+      this.getTaskPage(i);
+  }
+  getTaskPage(pageNumber: any) {
+    if (pageNumber !== this.assignmentPageRequest.pageNumber) {
+      this.assignmentPageRequest.pageNumber = pageNumber;
+      this.courseFilterByCourseIdAndSubjectId(this.courseId, this.subjectId, this.assignmentPageRequest);
+    }
+  }
+
+
+
+
   selectCourseSubject(subject: Subject) {
     this.subjectId = subject.subjectId
   }

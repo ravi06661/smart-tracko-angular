@@ -19,9 +19,7 @@ export class AdminDiscussionForumComponent implements OnInit {
   commentResonse: CommentResponse[] = [];
   newDiscussion: DiscussionFormResponse = new DiscussionFormResponse
   student: StudentDetails = new StudentDetails
-  BASE_URL = this.utilityService.getBaseUrl();
-  IMAGE_URL = this.BASE_URL + '/file/getImageApi/images/';
-  FILE_URL = this.BASE_URL + '/file/getImageApi/discussionFromFile/'
+
 
   ngOnInit(): void {
     this.getAllDiscussion();

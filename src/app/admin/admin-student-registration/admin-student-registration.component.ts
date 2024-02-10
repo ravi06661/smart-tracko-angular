@@ -23,16 +23,16 @@ export class AdminStudentRegistrationComponent {
   form2ProgressBar = 'form_2_progessbar'
   form3ProgressBar = 'form_3_progessbar'
 
-  courses:Course[] = [];
-  isStarter:boolean | undefined;
-  constructor(private studentService: StudentService, private router: Router, private formBuilder: FormBuilder,private courseService:CourseServiceService) {
+  courses: Course[] = [];
+  isStarter: boolean | undefined;
+  constructor(private studentService: StudentService, private router: Router, private formBuilder: FormBuilder, private courseService: CourseServiceService) {
     this.personlaDetailsForm = this.formBuilder.group({
       fullName: ['', Validators.required],
       dob: ['', Validators.required],
       fathersName: ['', Validators.required],
-        mothersName: ['', Validators.required],
+      mothersName: ['', Validators.required],
       fathersOccupation: ['', Validators.required],
-       contactFather: ['', Validators.required],
+      contactFather: ['', Validators.required],
       contactMother: ['', Validators.required],
       languageKnown: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -48,7 +48,7 @@ export class AdminStudentRegistrationComponent {
     });
     this.addressForm = this.formBuilder.group({
       localAddress: ['', Validators.required],
-      parmanentAddress:['', Validators.required]
+      parmanentAddress: ['', Validators.required]
     });
   }
 
@@ -108,7 +108,7 @@ export class AdminStudentRegistrationComponent {
   }
 
   submit() {
-    if (this.personlaDetailsForm.valid && this.inrollmentForm.valid && this.addressForm.valid){
+    if (this.personlaDetailsForm.valid && this.inrollmentForm.valid && this.addressForm.valid) {
       this.studentService.registerStudent(this.registrationDetails).subscribe(
         (data: any) => {
 
@@ -169,19 +169,19 @@ export class AdminStudentRegistrationComponent {
     }
   }
 
-  public getStarterCourse(){
+  public getStarterCourse() {
 
     this.courseService.getAllCourse(true).subscribe({
-      next:(data:any)=>{
-        this.courses = data;
+      next: (data: any) => {
+        this.courses = data.NonStarterCourse;
       },
-      error:(err)=>{
+      error: (err) => {
 
       }
     })
   }
 
-  public setCourse(event:any){
+  public setCourse(event: any) {
     this.registrationDetails.course.courseId = event.target.value
   }
 }

@@ -10,18 +10,17 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   styleUrls: ['./job-description.component.scss']
 })
 export class JobDescriptionComponent {
-  BASE_URL=this.utilityService.getBaseUrl();  
-  imageUrl=this.BASE_URL+'/file/getImageApi/technologyStackImage/';
-  id:number=0
-  jobAlert:JobAlert =  new JobAlert
-  constructor(private activatedRoute: ActivatedRoute ,private jobAlertService :JobAlertService,private utilityService:UtilityServiceService) {}
+
+  id: number = 0
+  jobAlert: JobAlert = new JobAlert
+  constructor(private activatedRoute: ActivatedRoute, private jobAlertService: JobAlertService) { }
 
   ngOnInit(): void {
-   this.id=this.activatedRoute.snapshot.params[('id')]
-   this.jobAlertService.getJob(this.id).subscribe(
-    (data)=>{
-      this.jobAlert =data
-     }
-   )
+    this.id = this.activatedRoute.snapshot.params[('id')]
+    this.jobAlertService.getJob(this.id).subscribe(
+      (data) => {
+        this.jobAlert = data
+      }
+    )
   }
 }

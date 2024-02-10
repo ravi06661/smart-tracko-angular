@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ChapterQuizeQuestion } from 'src/app/entity/chapter-quize-question';
+import { QuizeQuestion } from 'src/app/entity/quize-question';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
@@ -20,22 +20,19 @@ import { ToastService } from 'src/app/service/toast.service';
 export class AdminSubjectsChapterQuizComponent {
 
   questionId: number = 0;
-  questions: ChapterQuizeQuestion[] = []
+  questions: QuizeQuestion[] = []
   id: number = 0;
-  question: ChapterQuizeQuestion = new ChapterQuizeQuestion();
+  question: QuizeQuestion = new QuizeQuestion();
   public Editor = ClassicEditor;
   image: File | null = null;
   private editorInstance: any;
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
   submissionForm: FormGroup
   subjectId: number = 0;
   questionIndex = 0
 
   constructor(private activateRouter: ActivatedRoute,
     private questionService: QuestionServiceService,
-    private route: ActivatedRoute, private router: Router,
-    private utilityService: UtilityServiceService,
+    private router: Router,
     private formBuilder: FormBuilder,
     private chapterService: ChapterServiceService,
     private toast: ToastService) {
@@ -65,7 +62,7 @@ export class AdminSubjectsChapterQuizComponent {
         {
           next: (data) => {
             this.questions.push(data)
-            this.question = new ChapterQuizeQuestion();
+            this.question = new QuizeQuestion();
             AppUtils.modelDismiss('quize-save-modal')
             this.toast.showSuccess('Quize successfully added!!', 'Success')
           },
@@ -133,7 +130,7 @@ export class AdminSubjectsChapterQuizComponent {
     )
   }
   public cancel() {
-    this.question = new ChapterQuizeQuestion();
+    this.question = new QuizeQuestion();
   }
   public clearFormSubmission() {
     this.submissionForm.reset()

@@ -11,27 +11,27 @@ import Swal from 'sweetalert2';
 })
 export class AdminSideBarComponent {
 
-  check='';
-  constructor (private location:Location,private loginService:LoginService,private router:Router) {}
+  check = '';
+  constructor(private location: Location, private loginService: LoginService, private router: Router) { }
 
-  ngOnInit(){
-    this.getPath() ;
+  ngOnInit() {
+    this.getPath();
   }
 
-  public getValueById(value:any){
+  public getValueById(value: any) {
     this.check = value;
   }
 
   public getPath() {
     const path = this.location.path();
-    if(path.toString().substring(7)== ''){
+    if (path.toString().substring(7) == '') {
       this.check = 'dashboard'
-    }else{
+    } else {
       this.check = path.toString().substring(7);
     }
   }
 
-  public logout(){
+  public logout() {
     Swal.fire({
       title: 'Are you sure?',
       text: "Do you want to logout!",
@@ -42,7 +42,7 @@ export class AdminSideBarComponent {
       confirmButtonText: 'Yes, LogOut!'
     }).then((result) => {
       if (result.isConfirmed) {
-        
+
         Swal.fire(
           'SUCCESS!',
           'Your are logged out.',
@@ -52,5 +52,5 @@ export class AdminSideBarComponent {
         this.router.navigate(['login'])
       }
     })
-    }
+  }
 }

@@ -1,6 +1,6 @@
 import { FILE } from "dns"
 
-export class ChapterQuizeQuestion {
+export class QuizeQuestion {
   public questionId:number=0
   public option1:string=''
   public option2:string=''

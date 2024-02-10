@@ -4881,3 +4881,111 @@ button.toast-close-button {
     width: 25em;
   }
 }
+/* test css */
+.delete_post {
+  font-size: 14px;
+  font-weight: 600 !important;
+  color: #161616;
+}
+
+.dropdown-item:active {
+  background-color: #49bfcf !important;
+}
+
+.reply_ans {
+  cursor: pointer;
+}
+
+.test_card {
+  padding: 20px;
+  border-radius: 6px;
+  border: 0.329px solid #DDD;
+  background: #FFF;
+  box-shadow: 2px 4px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.test_icon {
+  width: 45.037px;
+  height: 48px;
+}
+
+.test_btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #FFF;
+  background: var(--Accent, #49BFCF);
+  backdrop-filter: blur(9px);
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.gap_12 {
+  gap: 12px;
+}
+
+.test_details h3 {
+  font-size: 17px;
+  font-weight: 500;
+  color: #161616;
+}
+
+.test_details h4 {
+  font-size: 13px;
+  font-weight: 400;
+  color: #515151;
+}
+
+.mb_12 {
+  margin-bottom: 12px;
+}
+
+.test_details2 h3 {
+  font-size: 13px;
+  font-weight: 500;
+  color: #515151;
+  margin-bottom: 6px;
+}
+
+.test_details2 h4 {
+  font-size: 15px;
+  font-weight: 500;
+  color: #161616;
+  margin-bottom: 0;
+}
+
+.lock_details h3 {
+  color: #515151;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.lock_details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+.font-20 {
+  font-size: 20px;
+}
+.lock{
+  color: #1C274C;
+}
+
+/* add css in 06/02 */
+.sidebar{
+  z-index: 999;
+}
+
+.side_tab.active {
+  border-right: 6px solid #49bfcf;
+}
+table tr td {
+  font-size: 13px;
+  font-weight: 400;
+  color: #161616;
+}
+/* .unread{
+  color: 
+} */

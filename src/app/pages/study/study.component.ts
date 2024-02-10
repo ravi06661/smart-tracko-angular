@@ -14,12 +14,11 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   styleUrls: ['./study.component.scss'],
 })
 export class StudyComponent {
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/technologyStackImage/';
+
   subjects: SubjectResponse[] = [];
   subject: Subject = new Subject();
   incodedId: number = 0;
-  constructor(private subjectService: SubjectService, private loginService: LoginService, private utilityService: UtilityServiceService, private router: Router) { }
+  constructor(private subjectService: SubjectService) { }
 
   ngOnInit() {
     this.getAllSubject()

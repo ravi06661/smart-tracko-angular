@@ -1,4 +1,4 @@
-import { Component, HostListener ,ViewEncapsulation} from '@angular/core';
+import { Component, HostListener, ViewEncapsulation } from '@angular/core';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { MyUploadAdapter } from 'src/app/entity/my-upload-adapter';
@@ -8,7 +8,7 @@ import { MyUploadAdapter } from 'src/app/entity/my-upload-adapter';
   templateUrl: './testing.component.html',
   styleUrls: ['./testing.component.scss'],
   preserveWhitespaces: true, // byfault it false for space between - -
-  encapsulation:ViewEncapsulation.Emulated 
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class TestingComponent {
 
@@ -24,7 +24,7 @@ export class TestingComponent {
   //     return new MyUploadAdapter(loader);
   //   };
   // }
-  
+
   // submit() {
   //   const textElement = document.createElement('div');
   //   textElement.innerHTML = this.editorInstance.getData();
@@ -40,6 +40,6 @@ export class TestingComponent {
   //   console.log(data.name)
   // }
 
-  
+
 }
 

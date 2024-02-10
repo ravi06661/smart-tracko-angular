@@ -21,15 +21,15 @@ export class AuthInterceptor implements HttpInterceptor {
       //consolex.log('inside interceptor')
       //add the jwt token(localstorage) request
       const token = this.studentService.getToken();
-      this.loaderService.show()
+    //  this.loaderService.show()
 
       if (token != null) {
         authReq = authReq.clone({
           setHeaders: { Authorization: `${token}` }
         });
       }
-      return next.handle(authReq).pipe(
-        finalize(() => this.loaderService.hide()));
+      return next.handle(authReq)///.pipe(
+       // finalize(() => this.loaderService.hide()));
     }
     return next.handle(request);
   }

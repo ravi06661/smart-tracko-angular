@@ -22,7 +22,7 @@ import { ToastService } from 'src/app/service/toast.service';
   styleUrls: ['./admin-courses.component.scss']
 })
 export class AdminCoursesComponent implements OnInit {
-  imageUrl = this.utilityService.getBaseUrl() + "/file/getImageApi/technologyStackImage/";
+
   subjects: SubjectResponse[] = [];
   courseRequest: CourseRequest = new CourseRequest();
   courseUpdate: CourseRequest = new CourseRequest();

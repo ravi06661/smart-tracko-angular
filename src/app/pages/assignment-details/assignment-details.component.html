@@ -37,7 +37,7 @@
                 <div *ngFor="let img of assignmentQues.questionImages;let i=index">
                   <h3 class="font-15 font-700  assignment_sub_heading">Image {{i+1}}</h3>
                   <div class="assinment_image">
-                    <img [src]="IMG_URL+img" class="img-fluid image-zoom" 
+                    <img [src]="img" class="img-fluid image-zoom" 
                       (click)="toggleImageSize($event)">
                   </div>
                 </div>
@@ -54,7 +54,7 @@
 
           <form class="attachment_file1 d-inline-flex align-items-center position-relative" *ngIf="attachment!=null">
             <!-- Instead of an input element, use an anchor (a) tag -->
-            <a href="{{ATTACHMENT_URL+attachment}}" download="Assignment Files.zip"
+            <a href="{{attachment}}" download="Assignment Files.zip"
               class="font-15 font-700 secondary text-white attachment_file_text">
               <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
               Attachments

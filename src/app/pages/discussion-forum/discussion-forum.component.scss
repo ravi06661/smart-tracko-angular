@@ -88,3 +88,9 @@ $speed: 1.1s;
   z-index: 9999;
   cursor: pointer;
 }
+.delete_dropdown{
+  position: absolute;
+  inset: 0px 0px auto auto;
+  margin: 0px;
+  transform: translate(-63px, 22px) !important; 
+}

@@ -13,17 +13,13 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class NewsandeventsComponent implements OnInit {
 
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/newsEventImage/';
-
-
   newsAndEvents: NewsAndEvent[] = [];
   news: NewsAndEvent[] = []
   totalNewsAndEvent: number = 0;
   currentDate: string | null | undefined;
   createdDate: any;
-  dayAgoForChild:number=0;
-  constructor(private newsAndEventService: NewsEventServiceService, public utilityService: UtilityServiceService, private datePipe: DatePipe) { }
+  dayAgoForChild: number = 0;
+  constructor(private newsAndEventService: NewsEventServiceService, public utilityService: UtilityServiceService) { }
 
 
   ngOnInit(): void {
@@ -33,7 +29,6 @@ export class NewsandeventsComponent implements OnInit {
   public getAllNewsAndEvents(page: number, size: number) {
     this.newsAndEventService.getAllNewsAndEventsIsActive(page, size).subscribe({
       next: (data: any) => {
-        // this.newsAndEvents = data.response;
         this.totalNewsAndEvent = data.totalElements;
         this.newsAndEvents = this.getNewsAndEvent(data);
       }
@@ -62,8 +57,8 @@ export class NewsandeventsComponent implements OnInit {
     const differenceInDays = differenceInTime / (1000 * 3600 * 24); // Convert milliseconds to days
     return Math.floor(differenceInDays); // Round down to the nearest integer
   }
-   public parentTochild(dayAgo:number){
-     
-   }
+  public parentTochild(dayAgo: number) {
+
+  }
 }
 

@@ -8,6 +8,7 @@ import { Task } from '../entity/task';
 import { s } from '@fullcalendar/core/internal-common';
 import { TaskQuestion } from '../entity/task-question';
 import { Observable } from 'rxjs';
+import { PageRequest } from '../payload/page-request';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class TaskServiceService {
   public getTaskById(id: number) {
     return this.http.get(`${this.TASK_URL}/getTaskById?taskId=${id}`)
   }
-  public getAllTask(studentId: number):Observable<any> {
+  public getAllTask(studentId: number): Observable<any> {
     return this.http.get(`${this.TASK_URL}/getAllTaskOfStudent?studentId=${studentId}`);
   }
   public submitTask(task: StudentTaskSubmittion, taskId: number) {
@@ -59,17 +60,22 @@ export class TaskServiceService {
     return this.http.post(`${this.TASK_URL}/addTaskAttachment`, formData);
   }
 
-  public getAllSubmitedTasks(courseId: any, subjectId: any,status:string) {
+  public getAllSubmitedTasks(courseId: any, subjectId: any, status: string, pageRequest: PageRequest) {
     const params = {
       courseId: courseId,
       subjectId: subjectId,
-      status:status
+      status: status,
+      pageNumber: pageRequest.pageNumber,
+      pageSize: pageRequest.pageSize
     };
     return this.http.get(`${this.TASK_URL}/getAllSubmitedTask`, { params });
   }
 
-  getAllSubmissionTaskStatus() {
-    return this.http.get(`${this.TASK_URL}/getAllSubmissionTaskStatus`)
+  getAllSubmissionTaskStatus(pageRequest: PageRequest): Observable<any> {
+    let params = new HttpParams()
+      .set('pageSize', pageRequest.pageSize.toString()) // Convert to string if needed
+      .set('pageNumber', pageRequest.pageNumber.toString());
+    return this.http.get(`${this.TASK_URL}/getAllSubmissionTaskStatus`, { params });
   }
 
   public getSubmitedTaskByStudent(studentId: number) {
@@ -103,8 +109,15 @@ export class TaskServiceService {
     return this.http.get<any>(`${this.TASK_URL}/getTaskQuestion?questionId=${taskQuestionId}`)
   }
 
-  public getAllSubmissionTaskStatusByCourseIdAndSubjectIdFilter(courseId: number, subjectId: number) {
-    return this.http.get(`${this.TASK_URL}/getAllSubmissionTaskStatusByCourseIdAndSubjectId?courseId=${courseId}&subjectId=${subjectId}`)
+  public getAllSubmissionTaskStatusByCourseIdAndSubjectIdFilter(courseId: number, subjectId: number, pageRequest: PageRequest) {
+    let params = {
+      courseId: courseId,
+      subjectId: subjectId,
+      pageSize: pageRequest.pageSize,
+      pageNumber: pageRequest.pageNumber
+
+    }
+    return this.http.get(`${this.TASK_URL}/getAllSubmissionTaskStatusByCourseIdAndSubjectId`, { params })
   }
 
   public updateTaskquestion(question: TaskQuestion, imagePreview: File[]) {

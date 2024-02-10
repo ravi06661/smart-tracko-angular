@@ -11,16 +11,13 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
 })
 export class AdminEditNewsAndEventsComponent implements OnInit{
   
-  IMG_URL = this.utlityService.getBaseUrl()+'/file/getImageApi/newsEventImage/'
   id:number=0;
   newsAndEventRequest:NewsAndEventRequest=new NewsAndEventRequest();
   imageName:string = '';
   imagePreview:string = '';
 
 constructor(private newsAndEventService:NewsEventServiceService,
-  private activateRoute:ActivatedRoute,
-  private router:Router,
-  private utlityService:UtilityServiceService){}
+  private activateRoute:ActivatedRoute,){}
 
 ngOnInit(): void {
  this.id=this.activateRoute.snapshot.params[('id')];
@@ -40,7 +37,7 @@ getNewsAndEventById(){
     (data:any)=>{
       this.newsAndEventRequest=data;
       this.newsAndEventRequest.fileName = data.image
-      this.imagePreview = this.IMG_URL+this.newsAndEventRequest.fileName
+      this.imagePreview =this.newsAndEventRequest.fileName
     }
   )
 }

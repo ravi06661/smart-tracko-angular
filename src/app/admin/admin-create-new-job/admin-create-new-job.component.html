@@ -87,7 +87,7 @@
                                     <h6 class="mb-4 font-15 font-500 secondary" >Selected Image :- {{imageName}}</h6>
                                     <div class="all-course-images d-flex flex-wrap">
                             <div class="add-course-img" *ngFor="let image of technologyStack">
-                               <img [ngClass]="imageName == image.technologyName ?'techImage-border':''" [src]="imageUrl + image.imageName" alt="" (click)="jobAlertRequest.technologyStackId= image.id"  (click)="imageName = image.technologyName" name=imageName  id=imageName >
+                               <img [ngClass]="imageName == image.technologyName ?'techImage-border':''" [src]="image.imageName" alt="" (click)="jobAlertRequest.technologyStackId= image.id"  (click)="imageName = image.technologyName" name=imageName  id=imageName >
                                
                             </div>
                            

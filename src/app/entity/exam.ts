@@ -1,4 +1,4 @@
-import { ChapterQuizeQuestion } from "./chapter-quize-question"
+import { QuizeQuestion } from "./quize-question"
 import { Question } from "./question"
 
 export class Exam {
@@ -7,6 +7,6 @@ export class Exam {
     public score: number | undefined
     public isDeleted: boolean | undefined
     public isActive: boolean | undefined
-    public questions:ChapterQuizeQuestion[]=[]
+    public questions:QuizeQuestion[]=[]
     public examTimer:number =0;
 }

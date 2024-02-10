@@ -22,9 +22,6 @@ import { ToastService } from 'src/app/service/toast.service';
 export class DiscussionForumComponent implements OnInit {
 
   discussionFormList: DiscussionFormResponse[] = []
-  BASE_URL = this.utilityService.getBaseUrl();
-  IMAGE_URL = this.BASE_URL + '/file/getImageApi/images/';
-  FILE_URL = this.BASE_URL + '/file/getImageApi/discussionFromFile/'
   student: StudentDetails = new StudentDetails
   comment: string = ''
   commentResponse: CommentResponse = new CommentResponse

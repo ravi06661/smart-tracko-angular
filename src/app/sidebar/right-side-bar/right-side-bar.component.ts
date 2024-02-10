@@ -14,8 +14,7 @@ import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket
   styleUrls: ['./right-side-bar.component.scss'],
 })
 export class RightSideBarComponent implements OnInit {
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/';
+
   profileData: Profile = new Profile();
   readMessage = false;
   messageNo = 0;

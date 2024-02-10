@@ -67,7 +67,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" *ngFor="let course of courses"
-                                        (click)="courseFilterByCourseIdAndSubjectId(course,0)">{{course.courseName}}</a>
+                                        (click)="courseFilterByCourseIdAndSubjectId(course.courseId,0)">{{course.courseName}}</a>
                                 </li>
                             </ul>
                         </div>
@@ -79,7 +79,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" *ngFor="let subject of subjectes"
                                         (click)="selectCourseSubject(subject)"
-                                        (click)="courseFilterByCourseIdAndSubjectId(course,subjectId)">
+                                        (click)="courseFilterByCourseIdAndSubjectId(course.courseId,subjectId)">
                                         {{subject.subjectName}}</a></li>
                                 <!-- <li><a class="dropdown-item" href="#">February</a></li>
                                 <li><a class="dropdown-item" href="#">March</a></li> -->
@@ -97,6 +97,8 @@
                             </ul>
                         </div> -->
                     </div>
+
+                    
                 </div>
                 <div class="table_container">
                     <table class="table mb-0 admin-table">
@@ -127,6 +129,19 @@
                         </tbody>
                     </table>
                 </div>
+                <nav aria-label="Page navigation example" class="table-pagination"  *ngIf="taskSubmissionStatus.length>5">
+                      
+                    <ul class="pagination">
+                        <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="assignmentPagination.first?'theading ':' cur-point'"  (click)="manageaAssignmentNextPrev(false)">Previous</a></li>
+                        <li class="page-item cur-point" *ngFor="let b of assignmentPagination.showButtoons ;"  (click)="getTaskPage(b-1)"><a class="page-link text_orange " [ngClass]="assignmentPageRequest.pageNumber==b-1?'active':''" id="{{b}}" href="javascript:void(0)">{{b}}</a>
+                        </li>
+                        <!-- <li class="page-item "><a class="page-link" >2</a></li>
+                        <li class="page-item "><a class="page-link" >3</a></li>
+                        <li class="page-item "><a class="page-link" >4</a></li>
+                        <li class="page-item "><a class="page-link" >5</a></li> -->
+                        <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"  [ngClass]="assignmentPagination.last?'theading':' cur-point'"   (click)="manageaAssignmentNextPrev(true)">Next</a></li>
+                    </ul>
+                </nav>
             </div>
 
             <div class="col-md-6 mb-4">
@@ -186,7 +201,7 @@
                                 <td>
                                     <a class="d-flex align-items-center gap_5" (click)="pageRanderWithObj(obj)">
                                         <div class="person_image">
-                                            <img [src]="IMG_URL+obj.profilePic" alt="" class="img-fluid">
+                                            <img [src]="obj.profilePic" alt="" class="img-fluid">
                                         </div>
                                         <h5 class="font-13 font-500 mb-0 text_dark">{{obj.fullName}}<br>
                                             <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}

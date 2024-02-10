@@ -16,9 +16,6 @@ import { LoginService } from 'src/app/service/login.service';
   styleUrls: ['./mycourse.component.scss']
 })
 export class MycourseComponent implements OnInit {
-  // @Input() localObject:any
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/technologyStackImage/';
 
   courses: Course[] = [];
   batches: Batch[] = []
@@ -33,7 +30,7 @@ export class MycourseComponent implements OnInit {
   courseName: any;
   courseImg = '';
 
-  constructor(private couserService: CourseServiceService, private utilityService: UtilityServiceService, private batchService: BatchesService, private feesPayService: FeesPayService, private activateRoute: ActivatedRoute, private loginService: LoginService) { }
+  constructor(private couserService: CourseServiceService, private batchService: BatchesService, private feesPayService: FeesPayService, private activateRoute: ActivatedRoute, private loginService: LoginService) { }
 
   ngOnInit(): void {
 

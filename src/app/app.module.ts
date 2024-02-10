@@ -96,6 +96,7 @@ import { SafePipe } from './utils/pipe/safe.pipe';
 import { TaskQuestionComponent } from './payload/task-question/task-question.component';
 import { ToastrModule } from 'ngx-toastr';
 import { LoaderComponentComponent } from './app/loader-component/loader-component.component';
+import { TestComponent } from './pages/test/test.component';
 
 
 @NgModule({
@@ -172,6 +173,7 @@ import { LoaderComponentComponent } from './app/loader-component/loader-componen
     SafePipe,
     TaskQuestionComponent,
     LoaderComponentComponent,
+    TestComponent,
   
    
        

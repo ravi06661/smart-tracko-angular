@@ -23,13 +23,12 @@ export class AdminEditTaskComponent implements OnInit {
   imageName: string[] = []
   updatingImages: File[] = []
   temp = new TaskQuestion()
-  BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
+
   public Editor = ClassicEditor;
   type: string = ''
   videoUrl: string = 'https://www.youtube.com/watch?v=ODLiJ2_CGXI';
   videoIframe!: SafeResourceUrl;
-  constructor(public utilityService: UtilityServiceService,
+  constructor(
     private toast: ToastService,
     private taskService: TaskServiceService,
     private activateRoute: ActivatedRoute,
@@ -39,7 +38,7 @@ export class AdminEditTaskComponent implements OnInit {
 
   updateVideoUrl() {
     // Replace 'VIDEO_ID' with the actual video ID or use your dynamic URL variable
-   // const videoId = 'ODLiJ2_CGXI';
+    // const videoId = 'ODLiJ2_CGXI';
     this.videoUrl = `https://www.youtube.com/embed/${this.question.videoUrl}`;
 
     // Use DomSanitizer to ensure the URL is safe for embedding
@@ -55,7 +54,7 @@ export class AdminEditTaskComponent implements OnInit {
         this.getAssignmentQuestion(this.taskId);
       } else if (this.type == 'taskQuestion') {
         this.getTaskQuestion(this.taskId);
-       
+
       }
     });
   }
@@ -135,9 +134,9 @@ export class AdminEditTaskComponent implements OnInit {
       }
     })
   }
-  public taskQuestionUpdate(){
-     this.taskService.updateTaskquestion(this.question, this.updatingImages).subscribe({
-      next:(data:any)=>{
+  public taskQuestionUpdate() {
+    this.taskService.updateTaskquestion(this.question, this.updatingImages).subscribe({
+      next: (data: any) => {
         this.updatingImages = []
         this.question = data.question;
         this.temp = data.question;
@@ -145,18 +144,18 @@ export class AdminEditTaskComponent implements OnInit {
         this.imageName = []
         this.toast.showSuccess('Successfully updated!!', 'success')
       },
-      error:(er:any)=>{
+      error: (er: any) => {
         this.toast.showError(er.error.message, 'Error')
       }
-     })
+    })
   }
 
-  updateQuestion(){
-     if(this.type=="assignmentQuestion"){
+  updateQuestion() {
+    if (this.type == "assignmentQuestion") {
       this.updateAssignmenQuestion();
-     }else{
+    } else {
       this.taskQuestionUpdate();
-     }
+    }
   }
 
   public discardChanges() {

@@ -12,24 +12,33 @@ export class ExamServiceService {
   EXAM_URL = this.BASE_URL + '/exam';
 
   constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
-  
+
   public addChapterExam(data: ChapterExamResultResponse) {
-    console.log(data);  
+    console.log(data);
     return this.http.post(`${this.EXAM_URL}/addChapterExam`, data)
   }
+  addSubjectExam(data: ChapterExamResultResponse) {
+    return this.http.post(`${this.EXAM_URL}/addSubjectExam`, data)
+  }
+
 
   public getChapterExamResult(id: number) {
     return this.http.get(`${this.EXAM_URL}/getChapterExamResult?resultId=${id}`);
   }
 
-  public getExamResultByChpaterIdAndStudentId(chapterId:number,studentId:number){
+  public getExamResultByChpaterIdAndStudentId(chapterId: number, studentId: number) {
     return this.http.get(`${this.EXAM_URL}/getExamResultByChapterIdAndStudentId?chapterId=${chapterId}&studentId=${studentId}`);
   }
 
-  public getChapterExamIsCompleted(chapterId:number,studentId:number){
+  public getChapterExamIsCompleted(chapterId: number, studentId: number) {
     return this.http.get(`${this.EXAM_URL}/checkExamCompleteOrNot?chapterId=${chapterId}&studentId=${studentId}`);
   }
-  public getAllChapterExamResultByChaterId(chapterId:number){
+
+  public getSubectExamIsCompleteOrNot(subjectId: any, studentId: any) {
+    return this.http.get(`${this.EXAM_URL}/getSubectExamIsCompleteOrNot?subjectId=${subjectId}&studentId=${studentId}`);
+  }
+
+  public getAllChapterExamResultByChaterId(chapterId: number) {
     return this.http.get(`${this.EXAM_URL}/getALLChapterExamResultesByChapterIdApi?chapterId=${chapterId}`);
   }
 }

@@ -10,15 +10,13 @@ import { NewsEventServiceService } from 'src/app/service/news-event-service.serv
 })
 export class AdminNewsAndEventComponent implements OnInit {
 
-  BASE_URL=this.utilityService.getBaseUrl();
-  imageUrl=this.BASE_URL+'/file/getImageApi/newsEventImage/'
   newsAndEvents:NewsAndEvent[]=[];
   newsAndEventss:NewsAndEvent=new NewsAndEvent();
   page=0;
   size=10;
   totalNewsAndEvents=0;
   id=0;
-  constructor (private newsEventService:NewsEventServiceService,private utilityService:UtilityServiceService)  {}
+  constructor (private newsEventService:NewsEventServiceService)  {}
 
   ngOnInit(): void {
     this.getAllNewsAndEvents(this.page,this.size);

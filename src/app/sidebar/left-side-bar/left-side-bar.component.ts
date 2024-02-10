@@ -25,8 +25,7 @@ export class LeftSideBarComponent implements OnInit {
 
   public getPath() {
     const path = this.location.path();
-    console.log(path);
-    
+
     if(path.toString().substring(9)== ''){
       this.check = 'dashboard'
     }else{

@@ -17,20 +17,16 @@ import { AppUtils } from 'src/app/utils/app-utils';
   styleUrls: ['./task-details.component.scss']
 })
 export class TaskDetailsComponent {
-  BASE_URL = this.utilityService.getBaseUrl();
-  ATTACHMENT_URL = this.BASE_URL + '/file/download/taskAndAssignmentImages/'
-  imageUrl = this.BASE_URL + '/file/getImageApi/taskAndAssignmentImages/';
 
   taskId: number = 0;
   task = new Task
   taskSubmittion: StudentTaskSubmittion = new StudentTaskSubmittion();
-  //message: string = ''
   submissionForm: FormGroup;
   isSubmittedTask: boolean = false
   taskAttachment: boolean = false
   constructor(private taskService: TaskServiceService,
     private router: ActivatedRoute,
-    private utilityService: UtilityServiceService,
+
     private loginService: LoginService,
     private formBuilder: FormBuilder,
     private toast: ToastService) {

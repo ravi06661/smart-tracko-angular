@@ -13,11 +13,13 @@ export class AnnouncementsComponent implements OnInit {
   public announcements: Announcement[] = []
   all: string[] = []
   visibilityStatus!: string
+  mp: Map<number, string> = new Map
+
   constructor(private announcementService: AnnouncementServiceService) {
     this.announcements
     this.visibilityStatus = ''
   }
-  mp: Map<number, string> = new Map
+
   ngOnInit(): void {
     this.getAllPublishedAnnouncement(0, 10);
   }
@@ -27,7 +29,7 @@ export class AnnouncementsComponent implements OnInit {
         this.announcements = data;
         this.visibilityStatus = 'showMore'
         this.fillData(this.announcements);
-      //  this.showMore()
+        //  this.showMore()
       },
       error: (err: any) => {
         console.log('error');
@@ -39,7 +41,7 @@ export class AnnouncementsComponent implements OnInit {
     let count = 0;
     data.filter((obj: any) => {
       this.all[count] = obj.courseName[0];
-     // map.put()
+      // map.put()
       count += 1
     });
   }
@@ -57,6 +59,6 @@ export class AnnouncementsComponent implements OnInit {
     //   this.all = this.announcements.courseName
     //   console.log(this.announcements.courseName);
 
- //   }
+    //   }
   }
 }

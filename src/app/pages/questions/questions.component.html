@@ -18,7 +18,7 @@
             </div>
             <div class="question_section">
                 <div class="d-flex justify-content-center align-items-center" *ngIf="question.questionImage!=null">
-                    <img [src]="imageUrl+question.questionImage " style="height: 250px; width: 600px;">
+                    <img [src]="question.questionImage " style="height: 250px; width: 600px;">
                 </div>
                 <div class="question_1 ">
                     <h5 class="font-17 font-500 txt-dark" [innerHTML]="question.questionContent"></h5>

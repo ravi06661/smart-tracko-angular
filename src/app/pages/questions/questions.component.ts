@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
 
 import { Chapter } from 'src/app/entity/chapter';
-import { ChapterQuizeQuestion } from 'src/app/entity/chapter-quize-question';
+import { QuizeQuestion } from 'src/app/entity/quize-question';
 import { ChapterExamResultResponse } from 'src/app/payload/chapter-exam-result-response';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { ExamServiceService } from 'src/app/service/exam-service.service';
@@ -21,9 +21,8 @@ import Swal from 'sweetalert2';
 export class QuestionsComponent {
   chapterId: number = 0;
   index: number = 0
-  questions: ChapterQuizeQuestion[] = []
-  question: ChapterQuizeQuestion = new ChapterQuizeQuestion();
-  imageUrl = this.utilityService.getBaseUrl() + "/file/getImageApi/images/";
+  questions: QuizeQuestion[] = []
+  question: QuizeQuestion = new QuizeQuestion();
   previousButton: boolean = false;
   nextButton: boolean = false;
   questionClicked = new Map<number, string>();
@@ -35,15 +34,18 @@ export class QuestionsComponent {
   second: any
   timerSubscription: Subscription | undefined;
   chapterExamResultResponse = new ChapterExamResultResponse
+  subjectExamResultResponse = new ChapterExamResultResponse
   subjectId: number = 0;
   chapter = new Chapter;
   totalQuestion = 0;
   questionNumber = 1;
 
   unrelatedActivityDetected = false;
+  subjectExamId!: number
+  type!: string
+  subjectTimer!: number
 
-  constructor(private utilityService: UtilityServiceService, private questionService: QuestionServiceService, private activateRouter: ActivatedRoute,
-    private subjectService: SubjectService,
+  constructor(private questionService: QuestionServiceService, private activateRouter: ActivatedRoute,
     private chapterService: ChapterServiceService,
     private router: Router,
     private loginService: LoginService,
@@ -53,18 +55,50 @@ export class QuestionsComponent {
   }
 
   ngOnInit() {
+    this.activateRouter.queryParams.subscribe((params: any) => {
 
-    this.activateRouter.queryParams.subscribe((params:any) => {
-      this.chapterId = params['chapterId'];
+      if (params['type'] == "subjectExam") {
+        this.subjectExamId = params['subjectExamId']
+      } else {
+        this.chapterId = params['chapterId'];
+      }
+      this.type = params['type'];
       this.subjectId = params['subjectId'];
     });
-   //this.getAllQuestions();
-   this.getChapeter(); 
+
+
+    setTimeout(() => {
+      if (this.type == "subjectExam") {
+        this.getSubjectExamQuestion();
+      } else {
+        this.getChapeter();
+      }
+    }, 500);
+
+  }
+
+  public getSubjectExamQuestion() {
+    this.questionService.getAllSubjectExamQuestion(this.subjectId).subscribe({
+
+      next: (data: any) => {
+        this.subjectTimer = data.timer;
+        this.question = data.questions
+        this.questions = data.questions
+        this.question = this.questions[0];
+        this.questionNotAnswered = this.questions.length;
+        setTimeout(() => {
+          this.timer();
+        }, 500);
+      },
+      error(err: any) {
+
+      },
+    })
   }
 
   public timer() {
-    const duration = 60*(this.chapter.exam.examTimer!)// in seconds
-    this.timerSubscription = timer(0, 1000).subscribe((elapsedTime:any) => {
+    const duration = 60 * (this.type == "chapterExam" ? this.chapter.exam.examTimer! : this.subjectTimer)// in seconds
+    this.timerSubscription = timer(0, 1000).subscribe((elapsedTime: any) => {
       this.second = duration - elapsedTime;
       this.remainingTime = new Date(this.second * 1000).toISOString().substr(11, 8);
       if (elapsedTime >= duration) {
@@ -78,8 +112,19 @@ export class QuestionsComponent {
     this.chapterExamResultResponse.chapterId = this.chapterId
     this.chapterExamResultResponse.studentId = this.loginService.getStudentId()
     this.chapterExamResultResponse.review = Object.fromEntries(this.questionClicked.entries());
-    this.chapterExamResultResponse.subjectId =this.subjectId
+    this.chapterExamResultResponse.subjectId = this.subjectId
     this.examServiceService.addChapterExam(this.chapterExamResultResponse).subscribe(
+      (data: any) => {
+        this.router.navigate(['result/' + data.id])
+      }
+    )
+  }
+
+  public SubjectExamsubmittion() {
+    this.subjectExamResultResponse.studentId = this.loginService.getStudentId()
+    this.subjectExamResultResponse.review = Object.fromEntries(this.questionClicked.entries());
+    this.subjectExamResultResponse.subjectId = this.subjectId
+    this.examServiceService.addSubjectExam(this.chapterExamResultResponse).subscribe(
       (data: any) => {
         this.router.navigate(['result/' + data.id])
       }
@@ -121,7 +166,7 @@ export class QuestionsComponent {
       this.question = this.questions[--this.index]
       this.questionNumber--;
     }
-    
+
   }
 
   questionClick(option: string, index: number) {
@@ -134,44 +179,44 @@ export class QuestionsComponent {
       this.questionClicked.set(index, option);
     }
 
-    console.log(this.questionClicked);
-    
   }
 
   isFullScreen = false;
 
   @HostListener('window:keydown', ['$event'])
-onKeyPress(event: KeyboardEvent) {
-  // Check for the keys you want to handle, including the Windows (Super) key
-  if (
-    event.key.startsWith('F') || // Function keys
-    event.key == 'Escape' || // Esc
-    event.key == 'Tab' || // Tab
-    event.key == 'CapsLock' || // Caps Lock
-    event.key == 'Shift' || // Shift
-    event.key == 'Control' || // Ctrl
-    event.key == 'Alt' || // Alt
-    event.key == 'Insert' || // Insert
-    event.key == 'Delete' || // Delete
-    event.key == 'Meta' // Windows (Super) key
-  ) {
-    this.submittion(); // Call your submission function
-  }
-}
+  onKeyPress(event: KeyboardEvent) {
+    // Check for the keys you want to handle, including the Windows (Super) key
+    if (
+      event.key.startsWith('F') || // Function keys
+      event.key == 'Escape' || // Esc
+      event.key == 'Tab' || // Tab
+      event.key == 'CapsLock' || // Caps Lock
+      event.key == 'Shift' || // Shift
+      event.key == 'Control' || // Ctrl
+      event.key == 'Alt' || // Alt
+      event.key == 'Insert' || // Insert
+      event.key == 'Delete' || // Delete
+      event.key == 'Meta' // Windows (Super) key
+    ) {
 
-@HostListener('mousemove', ['$event'])
+      this.type == "subjectExam" ? this.SubjectExamsubmittion() : this.submittion();
+      // Call your submission function                 // commented 24
+    }
+  }
+
+  @HostListener('mousemove', ['$event'])
   onMouseMove() {
     if (this.unrelatedActivityDetected) {
       // Automatically submit the test if unrelated activity persists
-     // alert("submit");
+      // alert("submit");
     } else {
       // Show a warning if unrelated activity is detected
       this.showWarning();
       this.unrelatedActivityDetected = true
     }
   }
-  public showWarning(){
-  //  alert("Please Don't Change the Window otherwise it will autosubmit");
+  public showWarning() {
+    //  alert("Please Don't Change the Window otherwise it will autosubmit");
   }
 
   // toggleFullScreen() {
@@ -180,13 +225,13 @@ onKeyPress(event: KeyboardEvent) {
   //     if (element.requestFullscreen) {
   //       element.requestFullscreen();
   //       console.log("if");
-        
+
   //     }
   //   } else {
   //     if (document.exitFullscreen) {
   //       document.exitFullscreen();
   //       console.log('else');
-        
+
   //     }
   //   }
   //   this.isFullScreen = !this.isFullScreen;
@@ -194,7 +239,7 @@ onKeyPress(event: KeyboardEvent) {
 
   toggleFullScreen() {
     const element = document.documentElement;
-  
+
     if (!this.isFullScreen) {
       // Enter fullscreen mode
       if (element.requestFullscreen) {
@@ -208,16 +253,16 @@ onKeyPress(event: KeyboardEvent) {
         console.log('Exited fullscreen mode');
       }
     }
-  
+
     // Toggle the fullscreen state
     this.isFullScreen = !this.isFullScreen;
   }
-  
+
 
 
   public getChapeter() {
     this.chapterService.getChapterById(this.chapterId).subscribe(
-      (data:any) => {
+      (data: any) => {
         this.questions = this.shuffleList(data.chapter.exam.questions);
         this.question = this.questions[0];
         this.questionNotAnswered = this.questions.length;
@@ -226,15 +271,15 @@ onKeyPress(event: KeyboardEvent) {
       }
     )
   }
-  
+
   public shuffleList<T>(list: T[]): T[] {
     return [...list].sort(() => Math.random() - 0.5);
   }
 
-  public clickQuitButton(){
+  public clickQuitButton() {
     Swal.fire({
       title: 'Are you sure ?',
-      text:'you want quit the test',
+      text: 'you want quit the test',
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: 'Yes',
@@ -242,18 +287,19 @@ onKeyPress(event: KeyboardEvent) {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-       // this.toggleFullScreen()
+        // this.toggleFullScreen()
         //this.router.navigate(['/student/chapterDetails/' + this.chapterId])
         this.timerSubscription?.unsubscribe();
-        this.submittion();
+        //  this.submittion();
+        this.type == "subjectExam" ? this.SubjectExamsubmittion() : this.submittion();
       }
     })
   }
 
-  public clickSubmitButton(){
+  public clickSubmitButton() {
     Swal.fire({
       title: 'Are you sure ?',
-      text:'you want submit the test',
+      text: 'you want submit the test',
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: 'Yes',
@@ -264,18 +310,19 @@ onKeyPress(event: KeyboardEvent) {
         // this.toggleFullScreen()
         // this.router.navigate(['/student/chapterDetails/' + this.chapterId])
         this.timerSubscription?.unsubscribe();
-        this.submittion();
+        //  this.submittion();
+        this.type == "subjectExam" ? this.SubjectExamsubmittion() : this.submittion();
       }
     })
-   }
+  }
 
-   public manageQuestionProgressBar(questionId:number){
+  public manageQuestionProgressBar(questionId: number) {
     if (this.questionClicked.has(questionId)) {
       // Value is present in the map
       return true;
     } else {
       // Value is not present in the map
-     return false;
+      return false;
     }
-   }
+  }
 }
