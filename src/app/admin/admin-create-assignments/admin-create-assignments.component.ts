@@ -100,9 +100,10 @@ export class AdminCreateAssignmentsComponent implements OnInit {
   url: string = '';
 
   public addAssignmentQuestion() {
-if(this.assignmentForm.invalid){
-   
-}
+    if (this.assignmentForm.invalid) {
+      this.taskFormControl()
+      return ;
+    }
 
     this.assignmentService.addQuestionInTask(this.taskQuestion, this.assignmentId).subscribe(
       {
@@ -189,7 +190,7 @@ if(this.assignmentForm.invalid){
   public pageRenderUsingRouterLink(path: string, questionId: number) {
     const dataParams = {
       id: questionId,
-      type:"assignmentQuestion"
+      type: "assignmentQuestion"
     };
     this.router.navigate([path], {
       queryParams: dataParams

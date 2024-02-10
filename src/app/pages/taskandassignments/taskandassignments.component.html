@@ -13,7 +13,7 @@
            
           <div class="AssignmentCard mb-1" id="head-show" *ngFor="let obj of unLockAssignments; let i=index">
             <div class="Head">
-              <div class="TaskName text-light">Assignment Day {{i+1}}</div>
+              <div class="TaskName text-light">Assignment Day {{i+1}} [{{obj.title}}]</div>
               <div class="Toggle">
                 <i class="fi fi-rr-angle-small-down fs-4 lh-2 secondary" id="down-arrow"   (click)="toggleAssignment(i)" (click)="getAssignment(obj.id)"></i>
                 <i class="fi fi-rr-angle-small-up fs-4 lh-2 secondary" id="up-arrow" onclick="assignhide()"   style="display:none;" ></i>
@@ -43,7 +43,7 @@
           </div>
           
           <div class="TaskCard" *ngFor="let assignment of lockAssignments ; let i=index">
-            <div class="font-15 font-400 text_gray">Assignment Day {{(assignmentCount+1)+i}}</div>
+            <div class="font-15 font-400 text_gray">Assignment Day {{(unLockAssignments.length+1)+i}}</div>
             <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
           </div>
 

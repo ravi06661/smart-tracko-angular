@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Course } from 'src/app/entity/course';
@@ -20,7 +20,7 @@ import { ToastService } from 'src/app/service/toast.service';
   templateUrl: './admin-task.component.html',
   styleUrls: ['./admin-task.component.scss']
 })
-export class AdminTaskComponent {
+export class AdminTaskComponent implements AfterViewInit {
 
   task: TaskRequest = new TaskRequest()
   subjects: Subject[] = []
@@ -58,12 +58,15 @@ export class AdminTaskComponent {
       taskAttachment: ['', Validators.required]
     })
   }
-
-  ngOnInit() {
+  ngAfterViewInit(): void {
     this.getCourses();
     this.getAllSubmittedTaskFilter(0, 0, 'NOT_CHECKED_WITH_IT', this.submissioTaskPageRequest)
     this.getOverAllAssignmentTaskStatus()
     this.courseFilterByCourseIdAndSubjectId(0, 0, this.pageRequest)
+  }
+
+  ngOnInit() {
+
   }
 
   public isFieldInvalidForTaskForm(fieldName: string): boolean {
@@ -139,7 +142,7 @@ export class AdminTaskComponent {
     }
     this.taskService.getAllSubmitedTasks(courseId, subjectId, status, data ? new PageRequest() : this.submissioTaskPageRequest).subscribe({
       next: (data: any) => {
-        this.taskSubmissionStatus = data.content
+        this.submitedTasksList = data.content
         this.submissioTaskpageManager.setPageData(data);
         this.submissioTaskPageRequest.pageNumber = data.pageable.pageNumber;
       }
@@ -196,19 +199,19 @@ export class AdminTaskComponent {
     })
   }
 
-  courseFilterByCourseIdAndSubjectId(courseId: number, subjectId: number, pageRequest: PageRequest, data?: any) {
+  public courseFilterByCourseIdAndSubjectId(courseId: number, subjectId: number, pageRequest: PageRequest, data?: any) {
     this.courseId = courseId;
-    this.getCourseSubject(courseId)
-    this.taskService.getAllSubmissionTaskStatusByCourseIdAndSubjectIdFilter(courseId, subjectId, data ? new PageRequest() : pageRequest).subscribe({
-      next: (data: any) => {
-        this.taskSubmissionStatus = data.data.content
-        this.pageManager.setPageData(data.data);
-        this.pageRequest.pageNumber = data.data.pageable.pageNumber;
-      },
-      error: (er: any) => {
-        console.log(er.error.message);
-      }
-    })
+    courseId != 0? this.getCourseSubject(courseId) :courseId
+      this.taskService.getAllSubmissionTaskStatusByCourseIdAndSubjectIdFilter(courseId, subjectId, data ? new PageRequest() : pageRequest).subscribe({
+        next: (data: any) => {
+          this.taskSubmissionStatus = data.data.content
+          this.pageManager.setPageData(data.data);
+          this.pageRequest.pageNumber = data.data.pageable.pageNumber;
+        },
+        error: (er: any) => {
+          console.log(er.error.message);
+        }
+      })
   }
 
   public pageRanderWithObj(id: any) {

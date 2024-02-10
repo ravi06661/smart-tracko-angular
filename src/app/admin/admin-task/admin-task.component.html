@@ -140,7 +140,7 @@
                             </li>
                         </ul>
                     </nav> -->
-                    <nav aria-label="Page navigation example" class="table-pagination">
+                    <nav aria-label="Page navigation example" class="table-pagination" *ngIf="taskSubmissionStatus.length>5">
                       
                         <ul class="pagination">
                             <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="pageManager.first?'theading ':' cur-point'"  (click)="manageNextPrev(false)">Previous</a></li>
@@ -312,11 +312,11 @@
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation example" class="table-pagination">
+                <nav aria-label="Page navigation example" class="table-pagination" *ngIf="submitedTasksList.length>5">
                       
                     <ul class="pagination">
                         <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="submissioTaskpageManager.first?'theading ':' cur-point'"  (click)="submissionManageNextPrev(false)">Previous</a></li>
-                        <li class="page-item cur-point" *ngFor="let b of submissioTaskpageManager.showButtoons ;"  (click)="submissionPage(b-1)"><a class="page-link text_orange " [ngClass]="submissioTaskPageRequest.pageNumber==b-1?'active':''" id="{{b}}" href="javascript:void(0)">{{b}}</a>
+                        <li class="page-item cur-point" *ngFor="let b1 of submissioTaskpageManager.showButtoons ;"  (click)="submissionPage(b1-1)"><a class="page-link text_orange " [ngClass]="submissioTaskPageRequest.pageNumber==b1-1?'active':''" id="{{b1}}" href="javascript:void(0)">{{b1}}</a>
                         </li>
                         <!-- <li class="page-item "><a class="page-link" >2</a></li>
                         <li class="page-item "><a class="page-link" >3</a></li>
