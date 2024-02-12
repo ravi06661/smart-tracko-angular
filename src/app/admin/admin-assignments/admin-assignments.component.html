@@ -114,13 +114,13 @@
                         </thead>
                         <tbody class="bg-light">
                             <tr class="pointer" *ngFor="let obj of taskSubmissionStatus ;let i=index"
-                                routerLink="/admin/createassignments/{{obj.assignmentId}}">
+                               >
                                 <td>
-                                    <h5 class="font-15 font-500 mb-0">{{obj.assignmentTitle}}</h5>
+                                    <h5 class="font-15 font-500 mb-0"  routerLink="/admin/createassignments/{{obj.assignmentId}}">{{obj.assignmentTitle}}</h5>
                                     <p class="text_gray font-13 font-400 mb-0"> Task {{obj.taskCount}}</p>
                                 </td>
-                                <td class="text_light_blue">Active</td>
-                                <td class="txt_color_purple">{{obj.totalSubmitted}}</td>
+                                <td class="txt_color_blue" [ngClass]="obj.status==false?'text-danger':'success'" (click)="activateTask(obj)"><div class="td">{{obj.status==false?' Active':'Deactive'}}</div></td>
+                                <td class="txt_color_purple ">{{obj.totalSubmitted}}</td>
                                 <td class="txt_color_light_green">{{obj.reveiwed}}</td>
                                 <td class="txt_color_yellow">{{obj.unReveiwed}}</td>
 
@@ -129,7 +129,7 @@
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation example" class="table-pagination"  *ngIf="taskSubmissionStatus.length>5">
+                <nav aria-label="Page navigation example" class="table-pagination"  >
                       
                     <ul class="pagination">
                         <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="assignmentPagination.first?'theading ':' cur-point'"  (click)="manageaAssignmentNextPrev(false)">Previous</a></li>
@@ -297,8 +297,8 @@
                                     <select class="form-select   form-control" name="subjectId"
                                         [(ngModel)]="assignmentRequest.subjectId" aria-label="Default select example"
                                         formControlName="subjectId">
-                                        <option value="">Select Subject</option>
-                                        <option selected="" [value]="subject.subjectId"
+                                        <option [value]="">Select Subject</option>
+                                        <option [value]="subject.subjectId"
                                             *ngFor="let subject of subjectes">{{subject.subjectName}}</option>
                                     </select>
                                     <div style="margin-top: -17px;"

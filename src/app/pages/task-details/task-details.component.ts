@@ -19,7 +19,7 @@ import { AppUtils } from 'src/app/utils/app-utils';
 export class TaskDetailsComponent {
 
   taskId: number = 0;
-  task = new Task
+  task = new Task();
   taskSubmittion: StudentTaskSubmittion = new StudentTaskSubmittion();
   submissionForm: FormGroup;
   isSubmittedTask: boolean = false
@@ -44,7 +44,7 @@ export class TaskDetailsComponent {
     this.taskService.getTaskById(this.taskId).subscribe(
       (data: any) => {
         this.task = data.task;
-        if (data.attachment)
+        if (this.task.taskAttachment!=null)
           this.taskAttachment = true
         this.isSubmitted()
       }

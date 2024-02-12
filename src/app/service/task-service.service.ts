@@ -16,8 +16,6 @@ import { PageRequest } from '../payload/page-request';
 export class TaskServiceService {
 
 
-
-
   BASE_URL = this.utilityService.getBaseUrl();
   TASK_URL = this.BASE_URL + '/task';
 
@@ -137,5 +135,14 @@ export class TaskServiceService {
       })
     }
     return this.http.put(`${this.TASK_URL}/updateTaskQuestion`, formData)
+  }
+
+  deleteAttachement(taskId: number) {
+    let params = { taskId: taskId }
+    return this.http.delete(`${this.TASK_URL}/deleteAttachement`, { params })
+  }
+  ActivateTask(id: number) {
+    let params = { id: id}
+    return this.http.put(`${this.TASK_URL}/activateTask?id=${id}`,null)
   }
 }

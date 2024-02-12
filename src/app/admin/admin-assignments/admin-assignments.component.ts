@@ -233,5 +233,13 @@ export class AdminAssignmentsComponent implements OnInit {
       firstInvalidControl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
+
+  activateTask(obj:SubmissionAssignmentTaskStatus){
+    this.assignmentService.activateTask(obj.assignmentId).subscribe({
+      next:(data:any)=>{
+        obj.status = data.status
+      }
+    })
+  }
 }
 

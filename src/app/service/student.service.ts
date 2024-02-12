@@ -22,8 +22,6 @@ export class StudentService {
   constructor(private http: HttpClient, private utilityService: UtilityServiceService, private datepipe: DatePipe, public loginService: LoginService) { }
 
   public registerStudent(data: StudentDetails) {
-    console.log('kapil rathore ', data);
-
     return this.http.post(`${this.studentUrl}/registerStudent`, data);
   }
 
@@ -50,7 +48,7 @@ export class StudentService {
   getAttendanceHistory() {
     let currentDate = this.datepipe.transform(new Date(), "yyyy-MM-dd");
     let date = new Date();
-    let startDate = this.datepipe.transform(date.setDate(date.getDate()-30), "yyyy-MM-dd");
+    let startDate = this.datepipe.transform(date.setDate(date.getDate() - 30), "yyyy-MM-dd");
     return this.http.get(`${this.studentUrl}/getStudentCheckInCheckOutHistory?startDate=${startDate}&endDate=${currentDate}&limit=30&offset=0`)
   }
 
@@ -80,7 +78,7 @@ export class StudentService {
             this.profileData.studentId = data.id
           },
           error: (error) => {
-            
+
           }
         }
       )
@@ -157,8 +155,8 @@ export class StudentService {
     return this.http.get(`${this.studentUrl}/allStudent`);
   }
 
-public getTodayAllAttendanceTypeForAdmin(){
-  return this.http.get(`${this.studentUrl}/todayAttendanceCountsForAdmin`);
-}
+  public getTodayAllAttendanceTypeForAdmin() {
+    return this.http.get(`${this.studentUrl}/todayAttendanceCountsForAdmin`);
+  }
 
 }

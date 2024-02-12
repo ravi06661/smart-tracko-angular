@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UtilityServiceService } from './utility-service.service';
 import { Profile } from '../entity/profile';
 import { AssignmentRequest } from '../payload/assignment-request';
-import { retry } from 'rxjs';
+import { BehaviorSubject, Observable, retry } from 'rxjs';
 import { Question } from '../entity/question';
 import { fr } from 'date-fns/locale';
 import { TaskQuestionRequest } from '../payload/task-question-request';
@@ -17,6 +17,7 @@ import { PageRequest } from '../payload/page-request';
   providedIn: 'root'
 })
 export class AssignmentServiceService {
+
 
 
 
@@ -131,8 +132,22 @@ export class AssignmentServiceService {
   public getOverAllAssignmentTaskStatus() {
     return this.http.get(`${this.assignmentUrl}/getOverAllAssignmentTaskStatus`)
   }
-  public getAllLockedAndUnlockedAssignment(studentId: number) {
-    return this.http.get(`${this.assignmentUrl}/getAllLockedAndUnlockedAssignment?studentId=${studentId}`)
+
+  private cachedData: any;
+  private dataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  public getAllLockedAndUnlockedAssignment(studentId: number): Observable<any> {
+    if (this.cachedData) {
+      return this.dataSubject.asObservable();
+    } else {
+      this.http.get(`${this.assignmentUrl}/getAllLockedAndUnlockedAssignment?studentId=${studentId}`).subscribe({
+        next: (data: any) => {
+          this.cachedData = data
+          this.dataSubject.next(data)
+        }
+      })
+
+    }
+    return this.dataSubject.asObservable();
   }
 
   public isSubmitted(questionId: number, studentId: number) {
@@ -153,4 +168,7 @@ export class AssignmentServiceService {
     return this.http.get(`${this.assignmentUrl}/getSubmittedAssignmentBySubmissionId?submissionId=${submissionId}`)
   }
 
+  public activateTask(assignmentId: number) {
+    return this.http.put(`${this.assignmentUrl}/activateAssignment?id=${assignmentId}`, null)
+  }
 }

@@ -40,7 +40,7 @@ export class TaskandassignmentsComponent implements OnInit {
   }
 
   public getAllAssignments() {
-    this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId()).subscribe(
+    this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId())?.subscribe(
       (data: any) => {
         this.unLockAssignments = data.unLockedAssignment;
         this.assignmentCount = this.unLockAssignments.length
