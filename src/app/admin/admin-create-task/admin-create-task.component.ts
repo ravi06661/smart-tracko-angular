@@ -31,6 +31,7 @@ export class AdminCreateTaskComponent {
   question: TaskQuestion = new TaskQuestion()
   public Editor = ClassicEditor;
   questionIndex!: number
+  taskData: Task = new Task()
 
   //taskData: Task = new Task
   taskQuestion: TaskQuestionRequest = new TaskQuestionRequest();
@@ -66,6 +67,7 @@ export class AdminCreateTaskComponent {
     this.taskService.getTaskById(this.taskId).subscribe(
       (data: any) => {
         this.task = data.task;
+        this.attachmentInfo.name = this.task.taskAttachment != null ? this.task.taskAttachment : ''
         //   this.taskData.taskQuestion = data.taskQuestion;
         this.task.taskQuestion.forEach(() => this.expandedQuestions.push(false));
       }
@@ -101,12 +103,13 @@ export class AdminCreateTaskComponent {
   setQuestionId(id: number) {
     this.questionId = id;
   }
-
+  at: Boolean = false
   public addAttachmentFile(event: any) {
     const data = event.target.files[0];
     this.attachmentInfo.name = event.target.files[0].name
     this.attachmentInfo.size = Math.floor(((event.target.files[0].size) / 1024) / 1024)
-    // this.taskData.taskAttachment = event.target.files[0];
+    this.taskData.taskAttachment = event.target.files[0];
+    this.taskData.taskId = this.taskId
   }
 
   public addTaskQuestion() {
@@ -134,18 +137,21 @@ export class AdminCreateTaskComponent {
   }
 
   public submitTask() {
-    // if (this.taskData.taskQuestion.length !== 0) {
-    //   this.taskData.taskId = this.taskId
-    //   this.taskService.addAssignment(this.taskData)
-    //     .subscribe({
-    //       next: (data: any) => {
-    //         alert('Success..')
-    //         this.router.navigate(['/admin/task']);
-    //       }
-    //     })
-    // } else {
-    //   return;
-    // }
+
+    if (this.attachmentInfo.name  != null) {
+
+      this.taskService.addAssignment(this.taskData)
+        .subscribe({
+          next: (data: any) => {
+            this.at = false
+            alert('Success..')
+            // this.router.navigate(['/admin/task']);
+          }
+        })
+    } else {
+      this.at = true
+      return
+    }
 
   }
   public addImageFile(event: any) {
@@ -208,5 +214,16 @@ export class AdminCreateTaskComponent {
     this.router.navigate([path], {
       queryParams: dataParams
     });
+  }
+
+  deleteAttachement() {
+
+    this.taskService.deleteAttachement(this.taskId).subscribe({
+      next: (data: any) => {
+        this.toast.showSuccess('success', '');
+        this.attachmentInfo.name = ''
+        AppUtils.modelDismiss('delete-task-modal1')
+      }
+    })
   }
 }

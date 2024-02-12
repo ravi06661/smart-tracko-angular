@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-6 mb-4">
                 <div class="assignment-stats">
-                    <h3 class="admin-title font-17 font-600 secondary position-relative">Stats</h3>
+                    <h3 class="admin-title font-17 font-600 secondary position-relative">Status</h3>
                     <div class="assignment-stats-area">
                         <div class="assignment-chart">
                             <div class="Present tool_tip" [style.width]="totalSubmitted+'%'">
@@ -110,11 +110,11 @@
                         </thead>
                         <tbody class="bg-light">
                             <tr *ngFor="let obj of taskSubmissionStatus ;let i=index" class="pointer"
-                                routerLink="/admin/createtask/{{obj.taskId}}">
+                               >
                                 <td>
-                                    <h5 class="font-15 font-500 mb-0">{{obj.taskTitle}}</h5>
+                                    <h5 class="font-15 font-500 mb-0"  routerLink="/admin/createtask/{{obj.taskId}}">{{obj.taskTitle}}</h5>
                                 </td>
-                                <td class="txt_color_blue">Active</td>
+                                <td class="txt_color_blue" [ngClass]="obj.status==false?'primary':'success'" (click)="ActivateTask(obj)"><div class="td">{{obj.status==false?' Active':'Deactive'}}</div></td>
                                 <td class="txt_color_purple">{{obj.totalSubmitted}}</td>
                                 <td class="txt_color_light_green">{{obj.reveiwed}}</td>
                                 <td class="txt_color_yellow">{{obj.unReveiwed}}</td>
@@ -140,7 +140,7 @@
                             </li>
                         </ul>
                     </nav> -->
-                    <nav aria-label="Page navigation example" class="table-pagination" *ngIf="taskSubmissionStatus.length>5">
+                    <nav aria-label="Page navigation example" class="table-pagination" >
                       
                         <ul class="pagination">
                             <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="pageManager.first?'theading ':' cur-point'"  (click)="manageNextPrev(false)">Previous</a></li>
@@ -312,7 +312,7 @@
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation example" class="table-pagination" *ngIf="submitedTasksList.length>5">
+                <nav aria-label="Page navigation example" class="table-pagination" >
                       
                     <ul class="pagination">
                         <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="submissioTaskpageManager.first?'theading ':' cur-point'"  (click)="submissionManageNextPrev(false)">Previous</a></li>

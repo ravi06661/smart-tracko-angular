@@ -5,7 +5,7 @@ export class SubmissionAssignmentTaskStatus {
     public taskId: number = 0;
     public totalSubmitted: number = 0;
     public unReveiwed: number = 0;
-    public status: boolean | undefined
+    public status!: boolean
     public reveiwed: number = 0;
     public taskCount: number = 0;
     public assignmentTitle:string=''

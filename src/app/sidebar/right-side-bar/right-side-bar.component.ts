@@ -1,5 +1,5 @@
 import { Announcement } from './../../entity/announcement';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Profile } from 'src/app/entity/profile';
 import { AdminServiceService } from 'src/app/service/admin-service.service';
 import { AnnouncementServiceService } from 'src/app/service/announcement-service.service';
@@ -13,7 +13,7 @@ import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket
   templateUrl: './right-side-bar.component.html',
   styleUrls: ['./right-side-bar.component.scss'],
 })
-export class RightSideBarComponent implements OnInit {
+export class RightSideBarComponent implements OnInit ,AfterViewInit{
 
   profileData: Profile = new Profile();
   readMessage = false;
@@ -32,14 +32,18 @@ export class RightSideBarComponent implements OnInit {
     private annoucementService: AnnouncementServiceService, private websocketService: WebsocketServiceDiscussionFormService) { }
 
   ngOnInit(): void {
-    if (this.loginService.getRole() == 'STUDENT') {
-      this.profileData = this.studentService.getStudentHeaderProfileData();
-      this.getAnnouncementsForStudents();
-    } else if (this.loginService.getRole() == 'ADMIN') {
-      this.profileData = this.adminService.getAdminProfileData()
-    }
+   
     this.connect()
   }
+
+ngAfterViewInit(): void {
+  if (this.loginService.getRole() == 'STUDENT') {
+    this.profileData = this.studentService.getStudentHeaderProfileData();
+    this.getAnnouncementsForStudents();
+  } else if (this.loginService.getRole() == 'ADMIN') {
+    this.profileData = this.adminService.getAdminProfileData()
+  }
+}
 
   public getAnnouncementsForStudents() {
 

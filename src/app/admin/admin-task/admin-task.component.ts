@@ -6,6 +6,7 @@ import { PaginationManager } from 'src/app/entity/pagination-manager';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { Subject } from 'src/app/entity/subject';
 import { SubmissionAssignmentTaskStatus } from 'src/app/entity/submission-assignment-task-status';
+import { Task } from 'src/app/entity/task';
 import { PageRequest } from 'src/app/payload/page-request';
 import { SubjectResponse } from 'src/app/payload/subject-response';
 import { TaskRequest } from 'src/app/payload/task-request';
@@ -21,6 +22,7 @@ import { ToastService } from 'src/app/service/toast.service';
   styleUrls: ['./admin-task.component.scss']
 })
 export class AdminTaskComponent implements AfterViewInit {
+
 
   task: TaskRequest = new TaskRequest()
   subjects: Subject[] = []
@@ -201,17 +203,17 @@ export class AdminTaskComponent implements AfterViewInit {
 
   public courseFilterByCourseIdAndSubjectId(courseId: number, subjectId: number, pageRequest: PageRequest, data?: any) {
     this.courseId = courseId;
-    courseId != 0? this.getCourseSubject(courseId) :courseId
-      this.taskService.getAllSubmissionTaskStatusByCourseIdAndSubjectIdFilter(courseId, subjectId, data ? new PageRequest() : pageRequest).subscribe({
-        next: (data: any) => {
-          this.taskSubmissionStatus = data.data.content
-          this.pageManager.setPageData(data.data);
-          this.pageRequest.pageNumber = data.data.pageable.pageNumber;
-        },
-        error: (er: any) => {
-          console.log(er.error.message);
-        }
-      })
+    courseId != 0 ? this.getCourseSubject(courseId) : courseId
+    this.taskService.getAllSubmissionTaskStatusByCourseIdAndSubjectIdFilter(courseId, subjectId, data ? new PageRequest() : pageRequest).subscribe({
+      next: (data: any) => {
+        this.taskSubmissionStatus = data.data.content
+        this.pageManager.setPageData(data.data);
+        this.pageRequest.pageNumber = data.data.pageable.pageNumber;
+      },
+      error: (er: any) => {
+        console.log(er.error.message);
+      }
+    })
   }
 
   public pageRanderWithObj(id: any) {
@@ -221,5 +223,13 @@ export class AdminTaskComponent implements AfterViewInit {
     this.router.navigate(['/admin/submission'], {
       queryParams: dataParams
     });
+  }
+
+  ActivateTask(task: SubmissionAssignmentTaskStatus) {
+    this.taskService.ActivateTask(task.taskId).subscribe({
+      next: (data: any) => {
+        task.status = data.status
+      }
+    })
   }
 }
