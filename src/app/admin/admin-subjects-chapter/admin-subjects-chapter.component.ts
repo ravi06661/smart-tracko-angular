@@ -261,4 +261,17 @@ export class AdminSubjectsChapterComponent {
       )
     }
   }
+
+  public addExam(type:string){
+     this.subjectService.addSubjectExam(type).subscribe({
+      next:(data:any)=>{
+       console.log(data.subjectExam);
+       
+      },
+      error:(er:any)=>{
+        this.toast.showError(er.error.message,'Error')
+      }
+     })
+  }
+
 }

@@ -13,6 +13,7 @@ import { CommentResponseForm } from 'src/app/payload/comment-response-form';
 import { LikeResponseForm } from 'src/app/payload/like-response-form';
 import { Typing } from 'src/app/entity/typing';
 import { ToastService } from 'src/app/service/toast.service';
+import { LoaderServiceService } from 'src/app/service/loader-service.service';
 
 @Component({
   selector: 'app-discussion-forum',
@@ -40,7 +41,8 @@ export class DiscussionForumComponent implements OnInit {
     private utilityService: UtilityServiceService,
     private studentService: StudentService,
     private webSocketService: WebsocketServiceDiscussionFormService,
-    private toast: ToastService
+    private toast: ToastService,
+    private loaderService: LoaderServiceService
   ) { }
 
   ngOnInit(): void {
@@ -50,14 +52,17 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   public getAllForms() {
-    this.isMessagLoading = true;
+    this.isMessagLoading = true;  
+    this.loaderService.show()
     this.discussionFormSerice.getAllDiscussionForm(this.loginService.getStudentId()).subscribe(
       {
         next: (data: any) => {
           this.discussionFormList = data.response
           this.isMessagLoading = false
+          this.loaderService.hide()
         },
         error: (er) => {
+          this.loaderService.hide()
           alert('something went wrong...')
         }
       }
@@ -65,14 +70,17 @@ export class DiscussionForumComponent implements OnInit {
   }
 
   public like(discussionFormId: number) {
+    this.loaderService.show()
     this.discussionFormSerice.addOrRemoveLike(this.loginService.getStudentId(), discussionFormId).subscribe(
       {
         next: (data: any) => {
+          this.loaderService.hide()
           let form = this.discussionFormList.find(obj => obj.id === discussionFormId) as DiscussionFormResponse
           //  form.likes = data.likes
           this.sendMessage(new LikeResponseForm(discussionFormId, 'likeResponse', data.likes, data.isLike, this.loginService.getStudentId()))
         },
         error: (er) => {
+          this.loaderService.hide()
           alert('something went wrong...')
 
         }
@@ -96,6 +104,7 @@ export class DiscussionForumComponent implements OnInit {
   public createComment(id: number) {
     if (this.comment === '' || this.comment === ' ')
       return
+      this.loaderService.show()
     this.discussionFormSerice.creatCommnet(this.loginService.getStudentId(), id, this.comment).subscribe(
       {
         next: (data: any) => {
@@ -105,10 +114,11 @@ export class DiscussionForumComponent implements OnInit {
           this.comment = ''
           this.sendTypingUser('typed')
           this.sendMessage(new CommentResponseForm(id, data.studentProfilePic, data.studentName, data.content, (data.createdDate).toString(), data.id, 'commentResponse'))
-
+          this.loaderService.hide()
         },
         error: (er) => {
           this.toast.showSuccess('Already commented...', '')
+          this.loaderService.hide()
         }
       }
     )
@@ -118,12 +128,14 @@ export class DiscussionForumComponent implements OnInit {
   isTrue: boolean = false
   public createDiscussionForm() {
     if (this.isTrue) {
+      this.loaderService.show()
       this.message = ''
       this.isTrue = false
       this.isMessageSend = true
       this.discussionFormSerice.createDiscussionForm(this.student.studentId, this.discussionForm.content, this.discussionForm.file, this.discussionForm.audioFile).subscribe(
         {
           next: (data: any) => {
+            this.loaderService.hide()
             // this.discussionFormList.push(data);
             let obj = new DiscussionResponseForm(data.studentProfilePic, data.studentName, data.content, (data.createdDate).toString(), data.id, 'createDiscussionForm', data.file, this.student.studentId, data.audioFile);
             this.discussionForm = new DiscussionFormResponse()
@@ -131,6 +143,7 @@ export class DiscussionForumComponent implements OnInit {
             //  this.isMessageSend = false
           },
           error: (er) => {
+            this.loaderService.hide()
             alert('something went wrong...')
           }
         }

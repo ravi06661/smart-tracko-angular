@@ -97,7 +97,9 @@ import { TaskQuestionComponent } from './payload/task-question/task-question.com
 import { ToastrModule } from 'ngx-toastr';
 import { LoaderComponentComponent } from './app/loader-component/loader-component.component';
 import { TestComponent } from './pages/test/test.component';
-
+import { GroupsRoutingModule, routedAccountComponents } from './groups-routing.module';
+import { SharedModule } from '../shared/shared.module';
+import { ModalModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -209,6 +211,7 @@ import { TestComponent } from './pages/test/test.component';
       preventDuplicates: true ,
       maxOpened:3
     }),
+    
     
   ],
   providers: [DatePipe,authInterceptorProvider],

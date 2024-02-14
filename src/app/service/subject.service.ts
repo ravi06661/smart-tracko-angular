@@ -8,6 +8,7 @@ import { LoginService } from './login.service';
   providedIn: 'root'
 })
 export class SubjectService {
+ 
 
   public getAllChapterWithSubjectId(id: number) {
     return this.http.get(`${this.Subject_url}/getAllChapterWithSubjectId?subjectId=${id}`);
@@ -17,6 +18,7 @@ export class SubjectService {
   Subject_url = this.BASE_URL + '/subject';
   Chapter_url = this.BASE_URL + '/chapter';
   Question_url = this.BASE_URL+ '/question'
+  EXAM_URL = this.BASE_URL +'/exam'
 
   constructor(private utilityService: UtilityServiceService, private http: HttpClient, private loginService: LoginService) { }
 
@@ -57,6 +59,10 @@ export class SubjectService {
   }
   getAllChapterWithSubjectIdAndStudentId(id: number, studentId: number) {
     return this.http.get<any>(`${this.Subject_url}/getAllChapterWithSubjectIdAndStudentId?subjectId=${id}&studentId=${studentId}`)
+  }
+
+  addSubjectExam(type: string) {
+    return this.http.post(`${this.EXAM_URL}/addSubjectExam`,type)
   }
 
 }
