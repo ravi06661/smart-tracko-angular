@@ -273,5 +273,7 @@ export class AdminSubjectsChapterComponent {
       }
      })
   }
-
+  deleteExam(){
+    
+  }
 }

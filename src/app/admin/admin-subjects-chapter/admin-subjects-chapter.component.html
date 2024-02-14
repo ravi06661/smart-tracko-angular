@@ -2,8 +2,8 @@
     <div class="profile d-flex mb-4">
         <div class="profile_top_heading d-flex gap_24">
             <h1 class="font-27 font-700 secondary mb-0">Core Java</h1>
-            <button class="top_profile_sec_btn font-14 font-500 lh-1" id="topic_create_new"
-                data-bs-toggle="modal" data-bs-target="#subject-subadd-modal">Create New</button>
+            <button class="top_profile_sec_btn font-14 font-500 lh-1" id="topic_create_new" data-bs-toggle="modal"
+                data-bs-target="#subject-subadd-modal">Create New</button>
             <button class="top_profile_sec_btn font-14 font-500 lh-1" id="test_add_ques" data-bs-toggle="modal"
                 data-bs-target="#subject-testques-modal" style="display: none;">Add Question</button>
         </div>
@@ -16,7 +16,8 @@
     <div class="scroll_sec mt-0">
         <div class="d-flex justify-content-between align-items-center">
             <div class="subjects_tabs">
-                <h2 id="subject_topic" class="tabs_heading warning tabs_heading_border_active" onclick="subject_topic()">Subject Topic
+                <h2 id="subject_topic" class="tabs_heading warning tabs_heading_border_active"
+                    onclick="subject_topic()">Subject Topic
                 </h2>
                 <h2 id="subject_test" class="tabs_heading text_gray" onclick="subject_test()">Subject Test</h2>
             </div>
@@ -28,7 +29,7 @@
         <!-- subject topics start-->
         <div class="subject-topic">
 
-            <div class="row mt-3" >
+            <div class="row mt-3">
                 <div class="col-md-3 bootstrap_cards" *ngFor="let obj of chapterResponse;let i=index">
                     <div class="admin-subject_card">
                         <div class="admin-subject_card_top">
@@ -56,19 +57,26 @@
                                         class="fi fi-rr-trash line-height-0 font-17"></i> Delete</p>
                             </div> -->
                             <div class="dropdown" id="hoverDropdown">
-                                <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <i class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5" role="button"
+                                    id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"></i>
 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="min-width: 8rem;">
                                     <li><a (click)="pageRenderUsingRouterLink('/admin/subjectContent', obj.chapterId)"
-                                      class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer"><i
-                                          class="fi fi-rr-document line-height-0"></i> View</a></li>
-                                    <li>  <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer" data-bs-toggle="modal"
-                                      data-bs-target="#chapter-edit-modal" (click)="getChapterById(obj.chapterId)" ><i
-                                          class="fi fi-rr-file-edit line-height-0"></i> Edit</p></li>
-                                    <li> <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding pointer"
-                                      data-bs-toggle="modal" data-bs-target="#delete-modal"  (click)="chapterId = obj.chapterId;chapterIndex = i"><i
-                                          class="fi fi-rr-trash line-hei " ></i > Delete</p></li>
-                                  </ul>
+                                            class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer"><i
+                                                class="fi fi-rr-document line-height-0"></i> View</a></li>
+                                    <li>
+                                        <p class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer"
+                                            data-bs-toggle="modal" data-bs-target="#chapter-edit-modal"
+                                            (click)="getChapterById(obj.chapterId)"><i
+                                                class="fi fi-rr-file-edit line-height-0"></i> Edit</p>
+                                    </li>
+                                    <li>
+                                        <p class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding pointer"
+                                            data-bs-toggle="modal" data-bs-target="#delete-modal"
+                                            (click)="chapterId = obj.chapterId;chapterIndex = i"><i
+                                                class="fi fi-rr-trash line-hei "></i> Delete</p>
+                                    </li>
+                                </ul>
                             </div>
 
                         </div><!-- subject_card_top -->
@@ -83,21 +91,48 @@
 
         <!-- subject test start-->
         <div class="subject-test" style="display: none;">
-
-            <div class="row">
+            <h3 _ngcontent-ghv-c53="" class="admin-title font-17 font-600 secondary position-relative">Test</h3>
+            <div class="row mt-4">
                 <div class="col-md-4 mb-4 ">
                     <div class="test_card">
                         <div class="d-flex justify-content-between align-items-center mb_12">
-                           <div class="d-flex align-items-center gap_12">
-                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
-                            <div class="test_details">
-                                <h3 class="mb-1">Core Java</h3>
-                                <h4 class="mb-0">Best Score - 36%</h4>
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
                             </div>
-                           </div>
-                           <button class="test_btn">Start Test</button>
+                            <!-- <button class="test_btn">Start Test</button> -->
+                            <div _ngcontent-wjk-c70="" id="hoverDropdown" class="dropdown"><i _ngcontent-wjk-c70=""
+                                    role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"
+                                    class="fi fi-ss-menu-dots-vertical text_gray fw-bold fs-5"></i>
+                                <ul _ngcontent-wjk-c70="" aria-labelledby="dropdownMenuLink" class="dropdown-menu"
+                                    style="min-width: 8rem;">
+                                    <li _ngcontent-wjk-c70=""><a _ngcontent-wjk-c70=""
+                                            class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer"
+                                            ng-reflect-router-link="/admin/subjectchapter/4237"
+                                            href="/admin/subjectchapter/4237"><i _ngcontent-wjk-c70=""
+                                                class="fi fi-rr-document line-height-0"></i> View</a></li>
+                                                <li _ngcontent-wjk-c70=""  id="test_add_ques1" data-bs-toggle="modal"
+                                                data-bs-target="#subject-testques-modal">
+                                                    <p _ngcontent-wjk-c70=""
+                                                        class="mb-0 warning d-flex align-items-center gap_5 dropdown-padding pointer">
+                                                        <i _ngcontent-wjk-c70="" class="fi fi-rr-file-edit line-height-0" 
+                                                        
+                                                        ></i> Edit
+                                                    </p>
+                                                </li>
+                                    <li _ngcontent-wjk-c70="">
+                                        <p _ngcontent-wjk-c70="" data-bs-toggle="modal" data-bs-target="#delete-exam-modal"
+                                            class="mb-0 delete-icon-color d-flex align-items-center gap_5 dropdown-padding pointer">
+                                            <i _ngcontent-wjk-c70="" class="fi fi-rr-trash line-hei"></i> Delete
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-    
+
                         <div class="d-flex justify-content-around">
                             <div class="test_details2">
                                 <h3>Questions</h3>
@@ -113,23 +148,20 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <div class="col-md-4 mb-4">
                     <div class="test_card">
                         <div class="d-flex justify-content-between align-items-center mb_12">
-                           <div class="d-flex align-items-center gap_12">
-                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
-                            <div class="test_details">
-                                <h3 class="mb-1">Core Java</h3>
-                                <h4 class="mb-0">Best Score - 36%</h4>
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
                             </div>
-                           </div>
-                           <div class="lock_details">
-                            <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
-                            <h3 class="mb-0">2 hrs 5 mins</h3>
-                           </div>
+                            <button class="test_btn">Start Test</button>
                         </div>
-    
+
                         <div class="d-flex justify-content-around">
                             <div class="test_details2">
                                 <h3>Questions</h3>
@@ -145,20 +177,20 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <div class="col-md-4 mb-4">
                     <div class="test_card">
                         <div class="d-flex justify-content-between align-items-center mb_12">
-                           <div class="d-flex align-items-center gap_12">
-                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
-                            <div class="test_details">
-                                <h3 class="mb-1">Core Java</h3>
-                                <h4 class="mb-0">Best Score - 36%</h4>
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
                             </div>
-                           </div>
-                           <button class="test_btn">Start Test</button>
+                            <button class="test_btn">Start Test</button>
                         </div>
-    
+
                         <div class="d-flex justify-content-around">
                             <div class="test_details2">
                                 <h3>Questions</h3>
@@ -174,8 +206,295 @@
                             </div>
                         </div>
                     </div>
-                </div> 
-              </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="test_card">
+                        <div class="d-flex justify-content-between align-items-center mb_12">
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
+                            </div>
+                            <button class="test_btn">Start Test</button>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="test_details2">
+                                <h3>Questions</h3>
+                                <h4>50</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Passing marks</h3>
+                                <h4>50%</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Duration</h3>
+                                <h4>2 hrs</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="test_card">
+                        <div class="d-flex justify-content-between align-items-center mb_12">
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
+                            </div>
+                            <button class="test_btn">Start Test</button>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="test_details2">
+                                <h3>Questions</h3>
+                                <h4>50</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Passing marks</h3>
+                                <h4>50%</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Duration</h3>
+                                <h4>2 hrs</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="test_card">
+                        <div class="d-flex justify-content-between align-items-center mb_12">
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
+                            </div>
+                            <button class="test_btn">Start Test</button>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="test_details2">
+                                <h3>Questions</h3>
+                                <h4>50</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Passing marks</h3>
+                                <h4>50%</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Duration</h3>
+                                <h4>2 hrs</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <h3 _ngcontent-ghv-c53="" class="admin-title font-17 font-600 secondary position-relative">Schedule Test
+            </h3>
+            <div class="row mt-4">
+                <div class="col-md-4 mb-4">
+                    <div class="test_card">
+                        <div class="d-flex justify-content-between align-items-center mb_12">
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
+                            </div>
+                            <div class="lock_details">
+                                <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                                <h3 class="mb-0">2 hrs 5 mins</h3>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="test_details2">
+                                <h3>Questions</h3>
+                                <h4>50</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Passing marks</h3>
+                                <h4>50%</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Duration</h3>
+                                <h4>2 hrs</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="test_card">
+                        <div class="d-flex justify-content-between align-items-center mb_12">
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
+                            </div>
+                            <div class="lock_details">
+                                <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                                <h3 class="mb-0">2 hrs 5 mins</h3>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="test_details2">
+                                <h3>Questions</h3>
+                                <h4>50</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Passing marks</h3>
+                                <h4>50%</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Duration</h3>
+                                <h4>2 hrs</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="test_card">
+                        <div class="d-flex justify-content-between align-items-center mb_12">
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
+                            </div>
+                            <div class="lock_details">
+                                <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                                <h3 class="mb-0">2 hrs 5 mins</h3>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="test_details2">
+                                <h3>Questions</h3>
+                                <h4>50</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Passing marks</h3>
+                                <h4>50%</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Duration</h3>
+                                <h4>2 hrs</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="test_card">
+                        <div class="d-flex justify-content-between align-items-center mb_12">
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
+                            </div>
+                            <div class="lock_details">
+                                <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                                <h3 class="mb-0">2 hrs 5 mins</h3>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="test_details2">
+                                <h3>Questions</h3>
+                                <h4>50</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Passing marks</h3>
+                                <h4>50%</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Duration</h3>
+                                <h4>2 hrs</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="test_card">
+                        <div class="d-flex justify-content-between align-items-center mb_12">
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
+                            </div>
+                            <div class="lock_details">
+                                <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                                <h3 class="mb-0">2 hrs 5 mins</h3>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="test_details2">
+                                <h3>Questions</h3>
+                                <h4>50</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Passing marks</h3>
+                                <h4>50%</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Duration</h3>
+                                <h4>2 hrs</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="test_card">
+                        <div class="d-flex justify-content-between align-items-center mb_12">
+                            <div class="d-flex align-items-center gap_12">
+                                <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                                <div class="test_details">
+                                    <h3 class="mb-1">Core Java</h3>
+                                    <h4 class="mb-0">Best Score - 36%</h4>
+                                </div>
+                            </div>
+                            <div class="lock_details">
+                                <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                                <h3 class="mb-0">2 hrs 5 mins</h3>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <div class="test_details2">
+                                <h3>Questions</h3>
+                                <h4>50</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Passing marks</h3>
+                                <h4>50%</h4>
+                            </div>
+                            <div class="test_details2">
+                                <h3>Duration</h3>
+                                <h4>2 hrs</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             <!-- <div class="row mt-3">
                 <div class="col-md-12" *ngFor="let obj of questions; let a =index">
                     <div class="top-test-question">
@@ -228,7 +547,7 @@
     <!-- DASHBOARD END -->
 
     <!-- RIGHT SIDE START-->
-   <app-right-side-bar></app-right-side-bar>
+    <app-right-side-bar></app-right-side-bar>
     <!-- RIGHT SIDE END -->
 
 
@@ -238,30 +557,32 @@
 </div>
 <!--DASHBOARD END -->
 
-    <!-- Modal Delete Modal Start -->
+<!-- Modal Delete Modal Start -->
 <div class="modal fade" id="delete-modal" tabindex="-1" aria-labelledby="delete-modal" aria-hidden="true">
-<div class="modal-dialog position-relative leave_modal">
-    <div class="modal-content">
-        <div class="modal-body">
-            <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
                 style="top: -23%;">
                 <i class="fi fi-rr-cross close_icon"></i>
             </button> -->
 
-            <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Chapter</p>
-            <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                <a >
-                    <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" data-bs-dismiss="modal" aria-label="Close" (click)="deleteChapter()">Yes,
-                        delete</button>
-                </a>
-                <a >
-                    <button type="button" class="apply_modal_btn font-15 font-500" data-bs-dismiss="modal" aria-label="Close">No, Do not delete</button>
-                </a>
-            </div>
+                <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Chapter</p>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <a>
+                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color"
+                            data-bs-dismiss="modal" aria-label="Close" (click)="deleteChapter()">Yes,
+                            delete</button>
+                    </a>
+                    <a>
+                        <button type="button" class="apply_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                            aria-label="Close">No, Do not delete</button>
+                    </a>
+                </div>
 
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 
@@ -273,22 +594,51 @@
                     style="top: -23%;">
                     <i class="fi fi-rr-cross close_icon"></i>
                 </button> -->
-    
+
                 <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Subject</p>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                    <a >
-                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color" data-bs-dismiss="modal" aria-label="Close" (click)="deleteQuestion()">Yes,
+                    <a>
+                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color"
+                            data-bs-dismiss="modal" aria-label="Close" (click)="deleteQuestion()">Yes,
                             delete</button>
                     </a>
-                    <a >
-                        <button type="button" class="apply_modal_btn font-15 font-500" data-bs-dismiss="modal" aria-label="Close">No, Do not delete</button>
+                    <a>
+                        <button type="button" class="apply_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                            aria-label="Close">No, Do not delete</button>
                     </a>
                 </div>
-    
+
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="delete-exam-modal" tabindex="-1" aria-labelledby="delete-modal3" aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                    style="top: -23%;">
+                    <i class="fi fi-rr-cross close_icon"></i>
+                </button> -->
+
+                <p class="secondary font-21 font-500 text-center">Are You Sure You Want To Delete This Exam</p>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <a>
+                        <button type="button" class="cancel_modal_btn font-15 font-500 delete-icon-color"
+                            data-bs-dismiss="modal" aria-label="Close" (click)="deleteExam()">Yes,
+                            delete</button>
+                    </a>
+                    <a>
+                        <button type="button" class="apply_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                            aria-label="Close">No, Do not delete</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
     </div>
+</div>
 <!-- Modal Delete Modal End -->
 
 <!-- Modal Admin Subject Add Modal Start -->
@@ -329,17 +679,19 @@
                             <label for="" class="mb_6 font-15 font-500 secondary">Chapter Name.</label>
                             <div class="input_icon position-relative">
                                 <input type="text" id="" name="chapterName" class="form-control input_text"
-                                    placeholder="Chapter Title" [(ngModel)]="chapterUpdate.chapterName" (input)="message=''">
+                                    placeholder="Chapter Title" [(ngModel)]="chapterUpdate.chapterName"
+                                    (input)="message=''">
                             </div>
                         </div>
-             <h6 *ngIf="message!=null" style="color:red;">{{message}}</h6>
+                        <h6 *ngIf="message!=null" style="color:red;">{{message}}</h6>
                     </div><!-- row -->
                 </form>
                 <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
                     <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close"(click)="cancel()" id="chapter-save-modal">Cancel</button>
-                    <a >
-                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="addChapter()">Save</button>
+                        aria-label="Close" (click)="cancel()" id="chapter-save-modal">Cancel</button>
+                    <a>
+                        <button type="button" class="apply_modal_btn font-15 font-500"
+                            (click)="addChapter()">Save</button>
                     </a>
                 </div>
 
@@ -349,23 +701,22 @@
 </div>
 <!-- Modal Admin Subject Add Modal End -->
 
-        <!-- Modal Admin Chapter Edit  Modal Start -->
-        <div class="modal fade" id="chapter-edit-modal" tabindex="-1" aria-labelledby="chapter-edit-modal"
-        aria-hidden="true">
-        <div class="modal-dialog position-relative leave_modal">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="modal-header apply_title p-0">
-                        <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                            id="exampleModalLabel1">Edit Chapter</h1>
-                        <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" id="chapter-update-modal" aria-label="Close" (click)="reload()">
+<!-- Modal Admin Chapter Edit  Modal Start -->
+<div class="modal fade" id="chapter-edit-modal" tabindex="-1" aria-labelledby="chapter-edit-modal" aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title p-0">
+                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                        id="exampleModalLabel1">Edit Chapter</h1>
+                    <!-- <button type="button" class="close_btn" data-bs-dismiss="modal" id="chapter-update-modal" aria-label="Close" (click)="reload()">
                             <i class="fi fi-rr-cross close_icon"></i>
                         </button> -->
-                    </div>
+                </div>
 
-                    <form action="">
-                        <div class="row">
-                            <!-- <div class="col-md-12 mb_18">
+                <form action="">
+                    <div class="row">
+                        <!-- <div class="col-md-12 mb_18">
                                 <div
                                     class="subject_edit_media_attech d-flex align-items-center justify-content-center  position-relative">
                                     <input type="file" name="fileupload" value="fileupload" class="d-none"
@@ -375,29 +726,30 @@
                                         Add Media</label>
                                 </div>
                             </div> -->
-                            <div class="col-md-12 mb_18">
-                                <label for="" class="mb_6 font-15 font-500 secondary">Chapter Name</label>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="chapterName" class="form-control input_text"
-                                        placeholder="Chapter Title" [(ngModel)]="chapterUpdate.chapterName">
-                                </div>
+                        <div class="col-md-12 mb_18">
+                            <label for="" class="mb_6 font-15 font-500 secondary">Chapter Name</label>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="chapterName" class="form-control input_text"
+                                    placeholder="Chapter Title" [(ngModel)]="chapterUpdate.chapterName">
                             </div>
-                         
-                        </div><!-- row -->
-                    </form>
-                    <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                        <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                            aria-label="Close" (click)="cancel()"  id="chapter-update-modal">Cancel</button>
-                        <a >
-                            <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateChapter()">Save</button>
-                        </a>
-                    </div>
+                        </div>
 
+                    </div><!-- row -->
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close" (click)="cancel()" id="chapter-update-modal">Cancel</button>
+                    <a>
+                        <button type="button" class="apply_modal_btn font-15 font-500"
+                            (click)="updateChapter()">Save</button>
+                    </a>
                 </div>
+
             </div>
         </div>
     </div>
-    <!-- Modal Admin Chapter Edit Modal End -->
+</div>
+<!-- Modal Admin Chapter Edit Modal End -->
 
 <!-- Modal Admin Subject Test Add Question Modal Start -->
 <div class="modal fade" id="subject-testques-modal" tabindex="-1" aria-labelledby="subject-testques-modal"
@@ -407,90 +759,23 @@
             <div class="modal-body">
                 <div class="modal-header apply_title">
                     <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                        id="exampleModalLabel1">Add Question</h1>
-                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" id="quize-save-modal"
-                       (click)="clearFormSubmission()">
+                        id="exampleModalLabel1">Add Test</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                        id="quize-save-modal" (click)="clearFormSubmission()">
                         <i class="fi fi-rr-cross close_icon"></i>
                     </button>
                 </div>
 
                 <form [formGroup]="submissionForm">
                     <div class="row">
-                        <div class="form-group">
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Quiz Question</h4>
-                                <ckeditor [editor]="Editor" name="questionContent" [(ngModel)]="question.questionContent" formControlName="questionContent" >
-                                </ckeditor>
-                                <div *ngIf=" isFieldInvalidForSubmissionForm('questionContent')" class="text-danger">
-                                    questionContent is required.</div>
-                            </div>
-                        </div>
-                       
-                    
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
-                                <div class="input_icon position-relative">
-                                    <input type="file" (change)="handleImageInput($event)" value="file"  name="file" formControlName="file">
-                                </div>
-                             
-                            </div>
-                       
-                        <div class="form-group">
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Option-1</h4>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="option1" class="form-control input_text" placeholder=""
-                                        [(ngModel)]="question.option1" formControlName="option1">
-                                        <div *ngIf=" isFieldInvalidForSubmissionForm('option1')" class="text-danger">
-                                            option1 is required.</div>
-                                </div>
-                            </div>
-                        </div>
 
-                      
-                        <div class="form-group">
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Option-2</h4>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="option2" class="form-control input_text" placeholder=""
-                                        [(ngModel)]="question.option2"  formControlName="option2">
-                                        <div *ngIf=" isFieldInvalidForSubmissionForm('option2')" class="text-danger">
-                                            option2 is required.</div>
-                                </div>
-                            </div>
-                        </div>
-                      
-                        <div class="form-group">
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Option-3</h4>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="option3" class="form-control input_text" placeholder=""
-                                        [(ngModel)]="question.option3"  formControlName="option3">
-                                        <div *ngIf=" isFieldInvalidForSubmissionForm('option3')" class="text-danger">
-                                            option3 is required.</div>
-                                </div>
-                            </div>
-                        </div>
-                       
                         <div class="form-group">
                             <div class="col-md-12  mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Option-4</h4>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="option4" class="form-control input_text" placeholder=""
-                                        [(ngModel)]="question.option4"  formControlName="option4">
-                                        <div *ngIf=" isFieldInvalidForSubmissionForm('option4')" class="text-danger">
-                                            option4 is required.</div>
-                                </div>
-                            </div>
-                        </div>
-
-                      
-                        <div class="form-group">
-                            <div class="col-md-12  mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Correct Option </h4>
+                                <h4 class="sub-heading font-17 font-500 text_gray">Test Name </h4>
                                 <select class="form-select" aria-label="Default select example" id="correctOption"
-                                    name="correctOption" [(ngModel)]="question.correctOption" formControlName="correctOption">
-                                    <option value = "">Select Correct Option</option>
+                                    name="correctOption" [(ngModel)]="question.correctOption"
+                                    formControlName="correctOption">
+                                    <option value="">Mern Stack</option>
                                     <option [value]="question.option1">{{question.option1}}</option>
                                     <option [value]="question.option2">{{question.option2}}</option>
                                     <option [value]="question.option3">{{question.option3}}</option>
@@ -499,18 +784,55 @@
                                 <div *ngIf=" isFieldInvalidForSubmissionForm('correctOption')" class="text-danger">
                                     correctOption is required.</div>
                             </div>
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Questions </h4>
+                                <div _ngcontent-xnu-c70="" class="input_icon position-relative"><input
+                                        _ngcontent-xnu-c70="" type="text" id="" name="subjectName"
+                                        placeholder="Enter Subject Name" formcontrolname="subjectName"
+                                        class="form-control input_text ng-pristine ng-invalid ng-touched"
+                                        ng-reflect-name="subjectName" ng-reflect-model=""></div>
+                            </div>
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Passing Marks </h4>
+                                <select class="form-select" aria-label="Default select example" id="correctOption"
+                                    name="correctOption" [(ngModel)]="question.correctOption"
+                                    formControlName="correctOption">
+                                    <option value="">50%</option>
+                                    <option [value]="question.option1">{{question.option1}}</option>
+                                    <option [value]="question.option2">{{question.option2}}</option>
+                                    <option [value]="question.option3">{{question.option3}}</option>
+                                    <option [value]="question.option4">{{question.option4}}</option>
+                                </select>
+                                <div *ngIf=" isFieldInvalidForSubmissionForm('correctOption')" class="text-danger">
+                                    correctOption is required.</div>
+                            </div>
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Duration </h4>
+                                <div _ngcontent-xnu-c70="" class="input_icon position-relative"><input
+                                        _ngcontent-xnu-c70="" type="text" id="" name="subjectName" placeholder="3hr"
+                                        formcontrolname="subjectName"
+                                        class="form-control input_text ng-pristine ng-invalid ng-touched"
+                                        ng-reflect-name="subjectName" ng-reflect-model=""></div>
+                            </div>
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Schedule Test (Optional) </h4>
+                                <div class="input_icon position-relative d-flex align-items-center"><input type="date"
+                                        id="birthday" formcontrolname="leaveDate" name="leaveDate" placeholder="From"
+                                        class="form-control input_text ng-untouched ng-pristine ng-invalid"
+                                        ng-reflect-name="leaveDate" min="2024-02-15"></div>
+                            </div>
                         </div>
 
-                       
-                       
+
+
                     </div><!-- row -->
                 </form>
-                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                        aria-label="Close" (click)="cancel()">Cancel</button>
+                <div class="apply_modal_buttons d-flex justify-content-center align-items-center">
+                    <!-- <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close" (click)="cancel()">Cancel</button> -->
                     <a>
-                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="addQuestion()">Save
-                            Question</button>
+                        <button type="button" class="apply_modal_btn font-15 font-500"
+                            (click)="addQuestion()">Create</button>
                     </a>
                 </div>
 
@@ -519,91 +841,187 @@
     </div>
 </div>
 <!-- Modal Admin Subject Test Add Question Modal End -->
-
-        <!-- Modal Admin Subject Test Edit Question Modal Start -->
-        <div class="modal fade" id="subject-edit_testques-modal" tabindex="-1" aria-labelledby="subject-edit_testques-modal"
-        aria-hidden="true">
-        <div class="modal-dialog position-relative leave_modal subject_modal">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="modal-header apply_title">
-                        <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
-                            id="exampleModalLabel1">Edit Question</h1>
-                        <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" id="update-quize-modal"
-                          >
-                            <i class="fi fi-rr-cross close_icon"></i>
-                        </button>
-                    </div>
-    
-                    <form action="">
-                        <div class="row">
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Question Content</h4>
-                                <ckeditor [editor]="Editor" name="questionContent" [(ngModel)]="question.questionContent">
-                                </ckeditor>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
-                                <div class="input_icon position-relative">
-                                    <input type="file" (change)="handleImageInput($event)"
-                                        [value]="question.questionImage">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Option-1</h4>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="option1" class="form-control input_text" placeholder=""
-                                        [(ngModel)]="question.option1">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Option-2</h4>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="option2" class="form-control input_text" placeholder=""
-                                        [(ngModel)]="question.option2">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Option-3</h4>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="option3" class="form-control input_text" placeholder=""
-                                        [(ngModel)]="question.option3">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Option-4</h4>
-                                <div class="input_icon position-relative">
-                                    <input type="text" id="" name="option4" class="form-control input_text" placeholder=""
-                                        [(ngModel)]="question.option4">
-                                </div>
-                            </div>
-                            <div class="col-md-12 mb_18">
-                                <h4 class="sub-heading font-17 font-500 text_gray">Correct Option </h4>
-                                <div class="input_icon position-relative ">
-                                    <!-- <input type="text" id="" name="correctOption" class="form-control input_text" placeholder=""  [(ngModel)]="question.correctOption"> -->
-                                    <select class="form-select" aria-label="Default select example" id="correctOption"
-                                        name="correctOption" [(ngModel)]="question.correctOption">
-                                        <option value = "">Select Correct Option</option>
-                                        <option [value]="question.option1">{{question.option1}}</option>
-                                        <option [value]="question.option2">{{question.option2}}</option>
-                                        <option [value]="question.option3">{{question.option3}}</option>
-                                        <option [value]="question.option4">{{question.option4}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                           
-                        </div><!-- row -->
-                    </form>
-                    <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-                        <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
-                            aria-label="Close" (click)="cancel()">Cancel</button>
-                        <a>
-                            <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateQuestion()">Save
-                                Question</button>
-                        </a>
-                    </div>
-    
+<div class="modal fade" id="#test_add_ques1" tabindex="-1" aria-labelledby="subject-testques-modal"
+    aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal subject_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title">
+                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                        id="exampleModalLabel1">Edite Test</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                        id="quize-save-modal" (click)="clearFormSubmission()">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
                 </div>
+
+                <form [formGroup]="submissionForm">
+                    <div class="row">
+
+                        <div class="form-group">
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Test Name </h4>
+                                <select class="form-select" aria-label="Default select example" id="correctOption"
+                                    name="correctOption" [(ngModel)]="question.correctOption"
+                                    formControlName="correctOption">
+                                    <option value="">Mern Stack</option>
+                                    <option [value]="question.option1">{{question.option1}}</option>
+                                    <option [value]="question.option2">{{question.option2}}</option>
+                                    <option [value]="question.option3">{{question.option3}}</option>
+                                    <option [value]="question.option4">{{question.option4}}</option>
+                                </select>
+                                <div *ngIf=" isFieldInvalidForSubmissionForm('correctOption')" class="text-danger">
+                                    correctOption is required.</div>
+                            </div>
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Questions </h4>
+                                <div _ngcontent-xnu-c70="" class="input_icon position-relative"><input
+                                        _ngcontent-xnu-c70="" type="text" id="" name="subjectName"
+                                        placeholder="Enter Subject Name" formcontrolname="subjectName"
+                                        class="form-control input_text ng-pristine ng-invalid ng-touched"
+                                        ng-reflect-name="subjectName" ng-reflect-model=""></div>
+                            </div>
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Passing Marks </h4>
+                                <select class="form-select" aria-label="Default select example" id="correctOption"
+                                    name="correctOption" [(ngModel)]="question.correctOption"
+                                    formControlName="correctOption">
+                                    <option value="">50%</option>
+                                    <option [value]="question.option1">{{question.option1}}</option>
+                                    <option [value]="question.option2">{{question.option2}}</option>
+                                    <option [value]="question.option3">{{question.option3}}</option>
+                                    <option [value]="question.option4">{{question.option4}}</option>
+                                </select>
+                                <div *ngIf=" isFieldInvalidForSubmissionForm('correctOption')" class="text-danger">
+                                    correctOption is required.</div>
+                            </div>
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Duration </h4>
+                                <div _ngcontent-xnu-c70="" class="input_icon position-relative"><input
+                                        _ngcontent-xnu-c70="" type="text" id="" name="subjectName" placeholder="3hr"
+                                        formcontrolname="subjectName"
+                                        class="form-control input_text ng-pristine ng-invalid ng-touched"
+                                        ng-reflect-name="subjectName" ng-reflect-model=""></div>
+                            </div>
+                            <div class="col-md-12  mb_18">
+                                <h4 class="sub-heading font-17 font-500 text_gray">Schedule Test (Optional) </h4>
+                                <div class="input_icon position-relative d-flex align-items-center"><input type="date"
+                                        id="birthday" formcontrolname="leaveDate" name="leaveDate" placeholder="From"
+                                        class="form-control input_text ng-untouched ng-pristine ng-invalid"
+                                        ng-reflect-name="leaveDate" min="2024-02-15"></div>
+                            </div>
+                        </div>
+
+
+
+                    </div><!-- row -->
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-center align-items-center">
+                    <!-- <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close" (click)="cancel()">Cancel</button> -->
+                    <a>
+                        <button type="button" class="apply_modal_btn font-15 font-500"
+                            (click)="addQuestion()">Create</button>
+                    </a>
+                </div>
+
             </div>
         </div>
     </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- Modal Admin Subject Test Edit Question Modal Start -->
+<div class="modal fade" id="subject-edit_testques-modal" tabindex="-1" aria-labelledby="subject-edit_testques-modal"
+    aria-hidden="true">
+    <div class="modal-dialog position-relative leave_modal subject_modal">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-header apply_title">
+                    <h1 class="modal-title fs-5 font-21 font-600 secondary modal_line position-relative"
+                        id="exampleModalLabel1">Edit Question</h1>
+                    <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close"
+                        id="update-quize-modal">
+                        <i class="fi fi-rr-cross close_icon"></i>
+                    </button>
+                </div>
+
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Question Content</h4>
+                            <ckeditor [editor]="Editor" name="questionContent" [(ngModel)]="question.questionContent">
+                            </ckeditor>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Image </h4>
+                            <div class="input_icon position-relative">
+                                <input type="file" (change)="handleImageInput($event)" [value]="question.questionImage">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Option-1</h4>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="option1" class="form-control input_text" placeholder=""
+                                    [(ngModel)]="question.option1">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Option-2</h4>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="option2" class="form-control input_text" placeholder=""
+                                    [(ngModel)]="question.option2">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Option-3</h4>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="option3" class="form-control input_text" placeholder=""
+                                    [(ngModel)]="question.option3">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Option-4</h4>
+                            <div class="input_icon position-relative">
+                                <input type="text" id="" name="option4" class="form-control input_text" placeholder=""
+                                    [(ngModel)]="question.option4">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb_18">
+                            <h4 class="sub-heading font-17 font-500 text_gray">Correct Option </h4>
+                            <div class="input_icon position-relative ">
+                                <!-- <input type="text" id="" name="correctOption" class="form-control input_text" placeholder=""  [(ngModel)]="question.correctOption"> -->
+                                <select class="form-select" aria-label="Default select example" id="correctOption"
+                                    name="correctOption" [(ngModel)]="question.correctOption">
+                                    <option value="">Select Correct Option</option>
+                                    <option [value]="question.option1">{{question.option1}}</option>
+                                    <option [value]="question.option2">{{question.option2}}</option>
+                                    <option [value]="question.option3">{{question.option3}}</option>
+                                    <option [value]="question.option4">{{question.option4}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div><!-- row -->
+                </form>
+                <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+                    <button type="button" class="cancel_modal_btn font-15 font-500" data-bs-dismiss="modal"
+                        aria-label="Close" (click)="cancel()">Cancel</button>
+                    <a>
+                        <button type="button" class="apply_modal_btn font-15 font-500" (click)="updateQuestion()">Save
+                            Question</button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

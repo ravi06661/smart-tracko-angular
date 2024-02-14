@@ -1,60 +1,24 @@
-<div class="Dashboard d-flex">
-    <!-- MIDDLE CONTENT START -->
-    <div id="main" class="main timeline_page position-relative">
-        <div class="">
+<div id="main" class="main main_task">
+    <div class="profile d-flex mb-4">
+    <h1 class="font-27 font-700 secondary mb-0">Assignments</h1>
+    <app-profile-bar></app-profile-bar>
+    </div>
 
-            <div class="scroll_section">
-                <div class="row">
-                    <div class="col-md-4 mb-4" *ngFor="let obj of subjectExamResponse">
-                        <div class="test_card">
-                            <div class="d-flex justify-content-between align-items-center mb_12">
-                                <div class="d-flex align-items-center gap_12">
-                                    <img [src]="obj.examImage" class="test_icon">
-                                    <div class="test_details">
-                                        <h3 class="mb-1">{{obj.subjectName}}</h3>
-                                        <h4 class="mb-0">Best Score - {{obj.scoreGet}}%</h4>
-                                    </div>
-                                </div>
-                                <button class="test_btn" *ngIf="isExamStart">Start Test</button>
-                                <!-- *ngIf="getSubectExamIsCompleteOrNot(obj.subjectId)" -->
-                                    <!-- <a  type="button" routerLink="/result/{{resultId}}" class="back_button font-15 font-700" >View Result</a> -->
-                                    <div class="lock_details" *ngIf="!isExamStart"  >
-                                        <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
-                                        <!-- <h3 class="mb-0">2 hrs 5 mins</h3> -->
-                                        <h3 class="mb-0">{{timer }}</h3>   
-                                    </div>
-                            </div>
-
-                            <div class="d-flex justify-content-around">
-                                <div class="test_details2">
-                                    <h3>Questions</h3>
-                                    <h4>{{obj.totalQuestion}}</h4>
-                                </div>
-                                <div class="test_details2">
-                                    <h3>Passing marks</h3>
-                                    <h4>{{obj.passingMarks}}%</h4>
-                                </div>
-                                <div class="test_details2">
-                                    <h3>Duration</h3>
-                                    <h4>{{obj.examTimer}}</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
+    <div class="subject-test" >
+        <h3 _ngcontent-ghv-c53="" class="admin-title font-17 font-600 secondary position-relative">Test</h3>
+        <div class="row mt-4">
+            <div class="col-md-4 mb-4 ">
                 <div class="test_card">
                     <div class="d-flex justify-content-between align-items-center mb_12">
-                       <div class="d-flex align-items-center gap_12">
-                        <img src="assets/images/temp_img/test-icon.png" class="test_icon">
-                        <div class="test_details">
-                            <h3 class="mb-1">Core Java</h3>
-                            <h4 class="mb-0">Best Score - 36%</h4>
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
                         </div>
-                       </div>
-                       <div class="lock_details">
-                        <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
-                        <h3 class="mb-0">2 hrs 5 mins</h3>
-                       </div>
+                        <button class="test_btn">Start Test</button>
+        
                     </div>
 
                     <div class="d-flex justify-content-around">
@@ -72,19 +36,18 @@
                         </div>
                     </div>
                 </div>
-            </div> 
-                    <!--
+            </div>
             <div class="col-md-4 mb-4">
                 <div class="test_card">
                     <div class="d-flex justify-content-between align-items-center mb_12">
-                       <div class="d-flex align-items-center gap_12">
-                        <img src="assets/images/temp_img/test-icon.png" class="test_icon">
-                        <div class="test_details">
-                            <h3 class="mb-1">Core Java</h3>
-                            <h4 class="mb-0">Best Score - 36%</h4>
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
                         </div>
-                       </div>
-                       <button class="test_btn">Start Test</button>
+                        <button class="test_btn">Start Test</button>
                     </div>
 
                     <div class="d-flex justify-content-around">
@@ -102,13 +65,368 @@
                         </div>
                     </div>
                 </div>
-            </div>  -->
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <button class="test_btn">Start Test</button>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <a href="#updown_btn" class="scroll_btn d-flex justify-content-center align-items-center">
-                <img src="assets/images/svg_img/uparrow.svg">
-            </a>
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <button class="test_btn">Start Test</button>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <button class="test_btn">Start Test</button>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <button class="test_btn">Start Test</button>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+        <h3 _ngcontent-ghv-c53="" class="admin-title font-17 font-600 secondary position-relative">Schedule Test
+        </h3>
+        <div class="row mt-4">
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <div class="lock_details">
+                            <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                            <h3 class="mb-0">2 hrs 5 mins</h3>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <div class="lock_details">
+                            <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                            <h3 class="mb-0">2 hrs 5 mins</h3>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <div class="lock_details">
+                            <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                            <h3 class="mb-0">2 hrs 5 mins</h3>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <div class="lock_details">
+                            <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                            <h3 class="mb-0">2 hrs 5 mins</h3>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <div class="lock_details">
+                            <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                            <h3 class="mb-0">2 hrs 5 mins</h3>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <div class="lock_details">
+                            <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
+                            <h3 class="mb-0">2 hrs 5 mins</h3>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- <div class="row mt-3">
+            <div class="col-md-12" *ngFor="let obj of questions; let a =index">
+                <div class="top-test-question">
+                    <h2>Question {{a+1}}</h2>
+                    <div class="test-que-edit-del">
+                        <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"
+                            data-bs-toggle="modal" data-bs-target="#subject-edit_testques-modal"
+                            (click)="setQuestion(obj.questionId,a)"><i
+                                class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
+                        <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color"
+                            data-bs-toggle="modal" data-bs-target="#delete-modal2"
+                            (click)="questionId = obj?.questionId ?? 0;questionIndex=a"><i class="fi fi-rr-trash line-height-0"
+                                data-bs-dismiss="modal" aria-label="Close"></i> Delete</span>
+                    </div>
+                </div>
+
+                <div class="subject-test-question">
+                    <ul class="ps-0 mb-0 list-unstyled">
+                        <li [innerHTML]="obj.questionContent">{{obj.questionContent}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="subject-test-ques-ans "*ngIf="obj.questionImage!=null">
+                    <img [src]="obj.questionImage" style="width: 200px ;height: 200px">
+                </div>
+                <div class="subject-test-ques-ans"
+                    [ngClass]="obj.correctOption==obj.option1?'alert alert-success':''">
+                    <p>A. {{obj.option1}}</p>
+                </div>
+                <div class="subject-test-ques-ans"
+                    [ngClass]="obj.correctOption==obj.option2?'alert alert-success':''">
+                    <p>B. {{obj.option2}}</p>
+                </div>
+                <div class="subject-test-ques-ans"
+                    [ngClass]="obj.correctOption==obj.option3?'alert alert-success':''">
+                    <p>C. {{obj.option3}}</p>
+                </div>
+                <div class="subject-test-ques-ans"
+                    [ngClass]="obj.correctOption==obj.option4?'alert alert-success':''">
+                    <p>D. {{obj.option4}}</p>
+                </div>
+
+            </div>
+        </div> -->
+
     </div>
-    <!-- MIDDLE CONTENT END -->
 </div>
