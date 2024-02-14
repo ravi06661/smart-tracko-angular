@@ -30,7 +30,7 @@ export class WebsocketServiceDiscussionFormService {
     });
     // Reconnect logic
     socket.onclose = (event: CloseEvent) => {
-      this.connect();
+     // this.connect();
     };
   }
 

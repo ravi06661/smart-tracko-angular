@@ -24,6 +24,7 @@ export class StudentDetails {
 	public parmanentAddress:string = '';
 	public languageKnown: string = '';
 	public currentCourse: string = '';
+	public finalFees!:number;
 	// public isCompleted:boolean | undefined;
 	// public isActive:boolean | undefined
 	public course:Course=new Course();
