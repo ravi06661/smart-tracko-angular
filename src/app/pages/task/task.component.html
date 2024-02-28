@@ -1,256 +1,272 @@
 <div id="main" class="main main_task">
-    <div class="profile d-flex mb-4">
+  <div class="profile d-flex mb-4">
     <h1 class="font-27 font-700 secondary mb-0">Tasks</h1>
     <app-profile-bar></app-profile-bar>
-    </div>
-  
-    <div class="scroll_section">
-      <div class="task_assignment mt-0">
-          <div class="row">
-             <div class="col-md-6 mb-4" *ngIf="tasks.length!=0">
-               <h3 class="title font-17 font-500 secondary position-relative">Tasks</h3>
+  </div>
 
-             <!-- TASK ACCORDION  START-->
-               <div class="left-tasks"  *ngFor="let obj of tasks;let i =index">
-                <a routerLink="/student/taskdetails/{{obj.taskId}}">
-                  <div class="TaskCard">
-                    <div class="TaskName">Task {{i+1}}</div>
-                    <div class="Button">View</div>
-                  </div>
-                </a>
-               </div>  
+  <div class="scroll_section">
+    <div class="task_assignment mt-0">
+      <div class="row">
+        <div class="col-md-6 mb-4" *ngIf="tasks.length!=0">
+          <h3 class="title font-17 font-500 secondary position-relative">Tasks</h3>
+
+          <!-- TASK ACCORDION  START-->
+          <div class="left-tasks" *ngFor="let obj of tasks;let i =  index">
+            <a routerLink="/student/taskdetails/{{obj.taskId}}">
+              <div class="TaskCard">
+                <div class="TaskName">Task {{i+taskIndexing}}</div>
+                <div class="Button">View</div>
               </div>
-              <div class="col-md-6 mb-4" *ngIf="tasks.length==0">
-                <h3 class="font-21 font-600 secondary position-relative">
-                  No task found!!
-                </h3>
-               </div>
-          <!-- ASSIGNMENT ACCORDION  END-->
+            </a>
+          </div>
+          <app-pagination (eventEmit)="taskPage($event)" (eventEmit)="taskManageNextPrev($event)"
+          [paginationManager]="TaskpageManager" [pageRequest]="TaskPageRequest"></app-pagination>
+        </div>
+      
+        <div class="col-md-6 mb-4" *ngIf="tasks.length==0">
+          <h3 class="font-21 font-600 secondary position-relative">
+            No task found!!
+          </h3>
+        </div>
+        <!-- ASSIGNMENT ACCORDION  END-->
 
-              <div class="col-md-6" *ngIf="taskSubmissionList.length!=0">
-           <div class="assignment-updates-top">
+        <div class="col-md-6">
+          <div class="assignment-updates-top">
             <h3 class="title font-17 font-500 secondary position-relative">Updates</h3>
             <div class="top-status-month d-flex gap-3">
               <div class="dropdown">
-                <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="status1" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
                   Status
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" (click)="getSubmitedTaskByStudent()">All</a></li>
-         <li><a class="dropdown-item" (click)="getSubmissionTaskFilterByStatus('Accepted')">Completed</a></li>
-         <li><a class="dropdown-item" (click)="getSubmissionTaskFilterByStatus('Rejected')">Rejected</a></li>
-         <li><a class="dropdown-item" (click)="getSubmissionTaskFilterByStatus('Reviewing')">Reviewing</a></li>          
+                  <li><a class="dropdown-item" (click)="getSubmitedTaskByStudent('')">All</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedTaskByStudent('Accepted')">Completed</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedTaskByStudent('Rejected')">Rejected</a></li>
+                  <li><a class="dr  opdown-item" (click)="getSubmitedTaskByStudent('Reviewing')">Reviewing</a></li>
                 </ul>
               </div>
-              <!-- <div class="dropdown">
-                <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  January
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">January</a></li>
-                  <li><a class="dropdown-item" href="#">February</a></li>
-                  <li><a class="dropdown-item" href="#">March</a></li>
-                  <li><a class="dropdown-item" href="#">April</a></li>
-                  <li><a class="dropdown-item" href="#">May</a></li>
-                  <li><a class="dropdown-item" href="#">June</a></li>
-                  <li><a class="dropdown-item" href="#">July</a></li>
-                  <li><a class="dropdown-item" href="#">August</a></li>
-                  <li><a class="dropdown-item" href="#">September</a></li>
-                  <li><a class="dropdown-item" href="#">October</a></li>
-                  <li><a class="dropdown-item" href="#">November </a></li>
-                  <li><a class="dropdown-item" href="#">December </a></li>
-                </ul>
-              </div> -->
+
             </div>
-           </div>
-            <div class="all_summary assignment-updates">
+          </div>
+          <div class="all_summary assignment-updates">
 
-              <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1" *ngFor="let obj of taskSubmissionList2;let i = index" (click)="taskSubmissionObj = obj">
-                <div class="d-flex align-items-center justify-content-between">
-                  <h3 class="font-14 font-500 mb-1 text-black">Task {{i+1}} [{{obj.taskName}}] <b class="ms-1 font-500" [ngClass]="{'text_light_green':obj.status == 'Accepted','text_light_red':obj.status=='Rejected','text_light_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</b></h3>
-                  <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-                </div>
-                <div class="d-flex align-items-center justify-content-between mb-1">
-                  <h3 class="font-13 font-400 mb-0">Submission is {{obj.status}}</h3>
-                  <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">
-                    <ng-container *ngIf="dateFormatter(todayDate) === dateFormatter(obj.submissionDate); else otherDate">
-                      Today {{ obj.submissionDate | date:'shortTime' }}
-                    </ng-container>
-                    <ng-template #otherDate>
-                   {{ obj.submissionDate | date:' d MMM y h:mm a' }}
-                    </ng-template>
-                  </h4>
+            <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+              *ngFor="let obj of taskSubmissionList2;let i = index" (click)="taskSubmissionObj = obj">
+              <div class="d-flex align-items-center justify-content-between">
+                <h3 class="font-14 font-500 mb-1 text-black">Task {{i+1}} [{{obj.taskName}}] <b class="ms-1 font-500"
+                    [ngClass]="{'text_light_green':obj.status == 'Accepted','text_light_red':obj.status=='Rejected','text_light_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</b>
+                </h3>
+                <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <h3 class="font-13 font-400 mb-0">Submission is {{obj.status}}</h3>
+                <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">
+                  <ng-container *ngIf="dateFormatter(todayDate) === dateFormatter(obj.submissionDate); else otherDate">
+                    Today {{ obj.submissionDate | date:'shortTime' }}
+                  </ng-container>
+                  <ng-template #otherDate>
+                    {{ obj.submissionDate | date:' d MMM y h:mm a' }}
+                  </ng-template>
+                </h4>
 
-                </div>
               </div>
             </div>
-            </div>
-            <div class="col-md-6" *ngIf="taskSubmissionList.length==0">
-              <h3 class="title font-17 font-500 secondary position-relative">Updates</h3>
-              <h3 class="font-21 font-600 secondary position-relative">
-                No task submission found!!
-              </h3>
-             </div>
+          </div>
+          <!-- <nav aria-label="Page navigation example" class="table-pagination"
+            *ngIf="taskSubmissionList2.length >=submissioTaskPageRequest.pageSize">
 
+            <ul class="pagination">
+              <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "
+                  [ngClass]="submissioTaskpageManager.first?'theading ':' cur-point'"
+                  (click)="submissionManageNextPrev(false)">Previous</a></li>
+              <li class="page-item cur-point" *ngFor="let b1 of submissioTaskpageManager.showButtoons ;"
+                (click)="submissionPage(b1-1)"><a class="page-link text_orange "
+                  [ngClass]="submissioTaskPageRequest.pageNumber==b1-1?'active':''" id="{{b1}}"
+                  href="javascript:void(0)">{{b1}}</a>
+              </li>
+              <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"
+                  [ngClass]="submissioTaskpageManager.last?'theading':' cur-point'"
+                  (click)="submissionManageNextPrev(true)">Next</a></li>
+            </ul>
+          </nav> -->
+          <!-- <app-pagination (eventEmit)="taskPage($event)" (eventEmit)="taskManageNextPrev($event)"
+          [paginationManager]="submissioTaskpageManager" [pageRequest]="submissioTaskPageRequest"></app-pagination> -->
+               <app-pagination [paginationManager]="submissioTaskpageManager" [pageRequest]="submissioTaskPageRequest"></app-pagination>
+          <div class="col-md-6" *ngIf="taskSubmissionList.length==0">
+            <!-- <h3 class="title font-17 font-500 secondary position-relative">Updates</h3> -->
+            <h3 class="font-21 font-600 secondary position-relative">
+              No task submission found!!
+            </h3>
+          </div>
         </div>
+
+
       </div>
     </div>
   </div>
-  <app-right-side-bar></app-right-side-bar>
+</div>
+<app-right-side-bar></app-right-side-bar>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog position-relative assignment_modal">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5 font-21 font-700 secondary modal_line position-relative" id="exampleModalLabel">
-              Assignment - 1</h1>
-            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
-              <i class="fi fi-rr-cross close_modal"></i>
-            </button>
-            <button type="button" class="submit_buttons font-14 font-500 text-white" data-bs-toggle="modal" data-bs-target="#submit_button">Submit</button>
-          </div>
-          <div class="">
-            <div class="assignment">
-              <div class="question_ans">
-                <h3 class="font-17 font-600">Question - 1</h3>
-                <h4 class="font-17 font-400">How would you reverse the order of elements in an array in Java without
-                  using any built-in methods or additional data structures?</h4>
-              </div>
-              <div class="advertisement d-flex align-items-center">
-                <div class="assinment_image">
-                  <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
-                  <video src="assets/images/temp_img/pexels-max-fischer-5198159-3840x2160-50fps.mp4" autoplay
-                    height="170" width="300"></video>
-                </div>
-                <div class="assinment_image">
-                  <h3 class="font-15 font-700  assignment_sub_heading">Image 1</h3>
-                  <img src="assets/images/temp_img/modal.png">
-                </div>
-                <div class="assinment_image">
-                  <h3 class="font-15 font-700  assignment_sub_heading">Image 2</h3>
-                  <img src="assets/images/temp_img/modal.png">
-                </div>
-              </div>
-            </div>
-
-            <div class="assignment">
-              <h3 class="font-17 font-700 list_bottom1">Hints:-</h3>
-              <ul class="font-17 list_bottom mb-0">
-                <li>How would you reverse the order of elements in an array in Java without using any built-in methods
-                  or additional data structures?</li>
-                <li>How would you reverse the order of elements in an array in Java without using any built-in methods
-                  or additional data structures?</li>
-                <li>How would you reverse the order of elements in an array in Java without using any built-in methods
-                  or additional data structures?</li>
-              </ul>
-            </div>
-
-            <form class="attachment_file1 d-flex align-items-center  position-relative">
-              <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
-              <label for="fileupload" class="font-15 font-700 secondary text-white attachment_file_text">
-                <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
-                Attachments <span class="mx-0 ms-2 font-15 font-400 text-white">Assignment Files.zip</span></label>
-            </form>
-
-          </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog position-relative assignment_modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 font-21 font-700 secondary modal_line position-relative" id="exampleModalLabel">
+            Assignment - 1</h1>
+          <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fi fi-rr-cross close_modal"></i>
+          </button>
+          <button type="button" class="submit_buttons font-14 font-500 text-white" data-bs-toggle="modal"
+            data-bs-target="#submit_button">Submit</button>
         </div>
-      </div>
-    </div>
-  </div>
-  <!-- end Assignment  modal -->
-
-  <!-- Modal submit button start -->
-  <div class="modal fade" id="submit_button" tabindex="-1" aria-labelledby="submit_button" aria-hidden="true">
-    <div class="modal-dialog position-relative leave_modal">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="modal-header apply_title">
-            <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Submit Assignment</h1>
-            <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close">
-              <i class="fi fi-rr-cross close_icon"></i>
-            </button>
-          </div>
-          <div class="form_input">
-            <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
-            <div class="">
-              <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
-                placeholder="Input Text Here"></textarea>
+        <div class="">
+          <div class="assignment">
+            <div class="question_ans">
+              <h3 class="font-17 font-600">Question - 1</h3>
+              <h4 class="font-17 font-400">How would you reverse the order of elements in an array in Java without
+                using any built-in methods or additional data structures?</h4>
+            </div>
+            <div class="advertisement d-flex align-items-center">
+              <div class="assinment_image">
+                <h3 class="font-15 font-700  assignment_sub_heading">Video 1</h3>
+                <video src="assets/images/temp_img/pexels-max-fischer-5198159-3840x2160-50fps.mp4" autoplay height="170"
+                  width="300"></video>
+              </div>
+              <div class="assinment_image">
+                <h3 class="font-15 font-700  assignment_sub_heading">Image 1</h3>
+                <img src="assets/images/temp_img/modal.png">
+              </div>
+              <div class="assinment_image">
+                <h3 class="font-15 font-700  assignment_sub_heading">Image 2</h3>
+                <img src="assets/images/temp_img/modal.png">
+              </div>
             </div>
           </div>
 
-          <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading</h4>
-          <form class="select_file d-flex align-items-center  file position-relative">
+          <div class="assignment">
+            <h3 class="font-17 font-700 list_bottom1">Hints:-</h3>
+            <ul class="font-17 list_bottom mb-0">
+              <li>How would you reverse the order of elements in an array in Java without using any built-in methods
+                or additional data structures?</li>
+              <li>How would you reverse the order of elements in an array in Java without using any built-in methods
+                or additional data structures?</li>
+              <li>How would you reverse the order of elements in an array in Java without using any built-in methods
+                or additional data structures?</li>
+            </ul>
+          </div>
+
+          <form class="attachment_file1 d-flex align-items-center  position-relative">
             <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
-            <label for="fileupload" class="font-15 font-400 secondary w-75">Select A File</label>
-            <button type="button" class="submit_btn0 ms-auto">
-              <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i><a type="btn" value=""
-                class=" font-15 font-400 text-white">Upload File</a>
-            </button>
+            <label for="fileupload" class="font-15 font-700 secondary text-white attachment_file_text">
+              <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
+              Attachments <span class="mx-0 ms-2 font-15 font-400 text-white">Assignment Files.zip</span></label>
           </form>
 
-          <div class="file_option">
-            <div class=" d-flex file_name">
-              <i class="fi fi-rr-paperclip-vertical secondary add_more"></i>
-              <i class="fi fi-rr-trash secondary delete"></i>
-              <h3 class="font-15 font-400 dark mx-1 mb-0">File_name.pdf</h3>
-            </div>
-
-          </div>
-
-
-          <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
-            <button type="button" class="cancel_modal_btn">Save Draft</button>
-            <button type="button" class="apply_modal_btn">Submit</button>
-          </div>
-
         </div>
       </div>
     </div>
   </div>
-  <!-- Modal submit button end -->
+</div>
+<!-- end Assignment  modal -->
 
-    <!-- Dashboard Updates  Modal -->
-    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-      <div class="modal-dialog position-relative assignment_modal" style="width: 514px;">
-        <div class="modal-content">
-          <div class="modal-body">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5 font-17 font-600 secondary modal_line position-relative mb-2" id="exampleModalLabel1">
-                Submission Details</h1>
-              <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -15%;">
-                <i class="fi fi-rr-cross close_modal"></i>
-              </button>
-              <h3 class="font-15 font-500" [ngClass]="{'text_light_green':taskSubmissionObj.status == 'Accepted','text_light_red':taskSubmissionObj.status=='Rejected','text_light_blue':(taskSubmissionObj.status=='Unreviewed')||(taskSubmissionObj.status=='Reviewing')}">{{taskSubmissionObj.status}}</h3>
+<!-- Modal submit button start -->
+<div class="modal fade" id="submit_button" tabindex="-1" aria-labelledby="submit_button" aria-hidden="true">
+  <div class="modal-dialog position-relative leave_modal">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header apply_title">
+          <h1 class="modal-title  font-21 font-600 secondary modal_line position-relative">Submit Assignment</h1>
+          <button type="button" class="close_btn1" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fi fi-rr-cross close_icon"></i>
+          </button>
+        </div>
+        <div class="form_input">
+          <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
+          <div class="">
+            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
+              placeholder="Input Text Here"></textarea>
+          </div>
+        </div>
+
+        <h4 class="sub-heading font-17 font-500 secondary mb-1">Heading</h4>
+        <form class="select_file d-flex align-items-center  file position-relative">
+          <input type="file" name="fileupload" value="fileupload" class="d-none" id="fileupload">
+          <label for="fileupload" class="font-15 font-400 secondary w-75">Select A File</label>
+          <button type="button" class="submit_btn0 ms-auto">
+            <i class="fi fi-rr-upload mx-1 mb-0 lh-0"></i><a type="btn" value=""
+              class=" font-15 font-400 text-white">Upload File</a>
+          </button>
+        </form>
+
+        <div class="file_option">
+          <div class=" d-flex file_name">
+            <i class="fi fi-rr-paperclip-vertical secondary add_more"></i>
+            <i class="fi fi-rr-trash secondary delete"></i>
+            <h3 class="font-15 font-400 dark mx-1 mb-0">File_name.pdf</h3>
+          </div>
+
+        </div>
+
+
+        <div class="apply_modal_buttons d-flex justify-content-between align-items-center">
+          <button type="button" class="cancel_modal_btn">Save Draft</button>
+          <button type="button" class="apply_modal_btn">Submit</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal submit button end -->
+
+<!-- Dashboard Updates  Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog position-relative assignment_modal" style="width: 514px;">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 font-17 font-600 secondary modal_line position-relative mb-2"
+            id="exampleModalLabel1">
+            Submission Details</h1>
+          <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -15%;">
+            <i class="fi fi-rr-cross close_modal"></i>
+          </button>
+          <h3 class="font-15 font-500"
+            [ngClass]="{'text_light_green':taskSubmissionObj.status == 'Accepted','text_light_red':taskSubmissionObj.status=='Rejected','text_light_blue':(taskSubmissionObj.status=='Unreviewed')||(taskSubmissionObj.status=='Reviewing')}">
+            {{taskSubmissionObj.status}}</h3>
+        </div>
+        <div class="">
+          <div class="assignment">
+            <div class="question_ans">
+              <h3 class="font-17 font-500 secondary">Report</h3>
+              <ol class="ps-3">
+                <li class="font-17 font-400 text_dark">{{taskSubmissionObj.taskDescription}}</li>
+              </ol>
+
             </div>
-            <div class="">
-              <div class="assignment">
-                <div class="question_ans">
-                  <h3 class="font-17 font-500 secondary">Report</h3>
-                  <ol class="ps-3">
-                    <li class="font-17 font-400 text_dark">{{taskSubmissionObj.taskDescription}}</li>
-                  </ol>
-                  
-                </div> 
-                <div class="question_ans" *ngIf="taskSubmissionObj.review!=null && taskSubmissionObj.review!=''">
-                 
-                  <h3 class="font-17 font-500 secondary" >Review</h3>
-                  <ol class="ps-3" >
-                    <li class="font-17 font-400 text_dark">{{taskSubmissionObj.review}}</li>
-                  </ol>
-                </div>   
-                
-                
-                <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file" *ngIf="taskSubmissionObj.submittionFileName!=null && taskSubmissionObj.submittionFileName!=undefined">
-                  <a href="{{taskSubmissionObj.submittionFileName}}" class="font-15 font-400 text_gray  attachment_file_text">
-                    <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
-                    Download Submited File</a>
-                </form>
+            <div class="question_ans" *ngIf="taskSubmissionObj.review!=null && taskSubmissionObj.review!=''">
+
+              <h3 class="font-17 font-500 secondary">Review</h3>
+              <ol class="ps-3">
+                <li class="font-17 font-400 text_dark">{{taskSubmissionObj.review}}</li>
+              </ol>
             </div>
+
+
+            <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file"
+              *ngIf="taskSubmissionObj.submittionFileName!=null && taskSubmissionObj.submittionFileName!=undefined">
+              <a href="{{taskSubmissionObj.submittionFileName}}"
+                class="font-15 font-400 text_gray  attachment_file_text">
+                <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
+                Download Submited File</a>
+            </form>
           </div>
         </div>
       </div>
     </div>
-    </div>
-    <app-right-side-bar></app-right-side-bar>
-    <!-- end dashboard updates modal -->
+  </div>
+</div>
+<app-right-side-bar></app-right-side-bar>
+<!-- end dashboard updates modal -->

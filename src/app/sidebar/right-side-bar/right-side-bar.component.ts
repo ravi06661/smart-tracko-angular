@@ -32,7 +32,6 @@ export class RightSideBarComponent implements OnInit ,AfterViewInit{
     private annoucementService: AnnouncementServiceService, private websocketService: WebsocketServiceDiscussionFormService) { }
 
   ngOnInit(): void {
-   
     this.connect()
   }
 

@@ -70,6 +70,15 @@ export class SubjectdetailsComponent {
     });
   }
 
+  public getReview() {
+    const dataParams = {
+      resultId: this.resultId,
+      type: "chapterExamResult"
+    };
+    this.router.navigate(['result'], {
+      queryParams: dataParams
+    });
+  }
   public getChapterExamIsComplete() {
     this.examService.getChapterExamIsCompleted(this.chapterId, this.loginService.getStudentId()).subscribe({
       next: (data: any) => {

@@ -111,6 +111,21 @@
               </div>
             </div>
           </div>
+          <nav aria-label="Page navigation example" class="table-pagination"  *ngIf="tasks.length >=submissioTaskPageRequest.pageSize">
+            <ul class="pagination">
+              <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "
+                  [ngClass]="TaskpageManager.first?'theading ':' cur-point'"
+                  (click)="taskManageNextPrev(false)">Previous</a></li>
+              <li class="page-item cur-point" *ngFor="let b1 of TaskpageManager.showButtoons ;"
+                (click)="taskPage(b1-1)"><a class="page-link text_orange "
+                  [ngClass]="TaskPageRequest.pageNumber==b1-1?'active':''" id="{{b1}}"
+                  href="javascript:void(0)">{{b1}}</a>
+              </li>
+              <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"
+                  [ngClass]="TaskpageManager.last?'theading':' cur-point'" (click)="taskManageNextPrev(true)">Next</a>
+              </li>
+            </ul>
+          </nav>
         </div>
 
         <div class="col-md-4">
@@ -118,6 +133,34 @@
           <div class="d-flex justify-content-between">
             <h3 class="title font-17 font-600 secondary position-relative">Updates</h3>
             <div class=" d-flex  justify-content-end gap-3">
+
+
+              <div class="dropdown" *ngIf="taskSubmissionIsActive==true">
+                <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark"  id="status1" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Status
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" (click)="getSubmitedTaskByStudent('')">All</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedTaskByStudent('Accepted')">Completed</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedTaskByStudent('Rejected')">Rejected</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedTaskByStudent('Reviewing')">Reviewing</a></li>
+                </ul>
+              </div>
+
+
+              <div class="dropdown" *ngIf="AssignmentsSubmissionIsactive==true">
+                <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="status2" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Status
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" (click)="getSubmitedAssignment('')">All</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedAssignment('Accepted')">Completed</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedAssignment('Rejected')">Rejected</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedAssignment('Reviewing')">Reviewing</a></li>
+                </ul>
+              </div>
 
               <div class="dropdown">
                 <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
@@ -158,6 +201,23 @@
                 </div>
               </div>
             </div>
+            <nav aria-label="Page navigation example" class="table-pagination"  *ngIf="assignmentSubmissionsList.length >=submissioTaskPageRequest.pageSize">
+
+              <ul class="pagination">
+                <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "
+                    [ngClass]="assignmentSubmissionPagination.first?'theading ':' cur-point'"
+                    (click)="manageaAssignmentSubmissionNextPrev(false)">Previous</a></li>
+                <li class="page-item cur-point" *ngFor="let b of assignmentSubmissionPagination.showButtoons ;"
+                  (click)="getTaskPage(b-1)"><a class="page-link text_orange "
+                    [ngClass]="assignmentSubmissionPageRequest.pageNumber==b-1?'active':''" id="{{b}}"
+                    href="javascript:void(0)">{{b}}</a>
+                </li>
+
+                <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"
+                    [ngClass]="assignmentSubmissionPagination.last?'theading':' cur-point'"
+                    (click)="manageaAssignmentSubmissionNextPrev(true)">Next</a></li>
+              </ul>
+            </nav>
           </div>
           <div class="all_summary assignment-updates" *ngIf="taskSubmissionIsActive==true">
             <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal2"
@@ -175,6 +235,13 @@
                   | date:'short'}}</h4>
               </div>
             </div>
+            <ul class="pagination">
+              <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="submissioTaskpageManager.first?'theading ':' cur-point'"  (click)="submissionManageNextPrev(false)">Previous</a></li>
+              <li class="page-item cur-point" *ngFor="let b1 of submissioTaskpageManager.showButtoons ;"  (click)="submissionPage(b1-1)"><a class="page-link text_orange " [ngClass]="submissioTaskPageRequest.pageNumber==b1-1?'active':''" id="{{b1}}" href="javascript:void(0)">{{b1}}</a>
+              </li>
+
+              <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"  [ngClass]="submissioTaskpageManager.last?'theading':' cur-point'"   (click)="submissionManageNextPrev(true)">Next</a></li>
+          </ul>
           </div>
         </div>
       </div>
@@ -255,9 +322,10 @@
                   <li class="font-17 font-400 text_dark">{{taskSubmissionObj.review}}</li>
                 </ol>
               </div>
-                
-              
-              <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file" *ngIf="taskSubmissionObj.submittionFileName!=null && taskSubmissionObj.submittionFileName!=undefined">
+
+
+              <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file"
+                *ngIf="taskSubmissionObj.submittionFileName!=null && taskSubmissionObj.submittionFileName!=undefined">
                 <a href="{{taskSubmissionObj.submittionFileName}}"
                   class="font-15 font-400 text_gray  attachment_file_text">
                   <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>

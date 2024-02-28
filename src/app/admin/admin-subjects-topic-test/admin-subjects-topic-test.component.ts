@@ -181,9 +181,11 @@ export class AdminSubjectsTopicTestComponent {
     const dataParams = {
       subjectId: this.subjectId,
       chapterId: chapterId,
+      type:"chapterExam"
     };
     this.router.navigate([path], {
       queryParams: dataParams
     });
   }
+
 }

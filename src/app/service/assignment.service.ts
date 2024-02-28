@@ -18,9 +18,6 @@ import { PageRequest } from '../payload/page-request';
 })
 export class AssignmentServiceService {
 
-
-
-
   BASE_URL = this.utilityService.getBaseUrl();
   assignmentUrl = this.BASE_URL + '/assignment';
 
@@ -102,17 +99,26 @@ export class AssignmentServiceService {
     return this.http.get(`${this.assignmentUrl}/getAssignmentQuesById?questionId=${questionId}`)
   }
 
-  public getSubmitedAssignmetByStudentId(studentId: number) {
-    return this.http.get(`${this.assignmentUrl}/getSubmitedAssignmetByStudentId?studentId=${studentId}`);
+  public getSubmitedAssignmetByStudentId(studentId: number, pageRequest: PageRequest, status: string) {
+    const params = {
+      pageNumber: pageRequest.pageNumber,
+      pageSize: pageRequest.pageSize,
+      studentId: studentId,
+      status: status
+    };
+    return this.http.get(`${this.assignmentUrl}/getSubmitedAssignmetByStudentId`, { params: params });
   }
 
   //This Method for Admin Uses
-  public getAllSubmitedAssignments(courseId: any, subjectId: any, status: string) {
+  public getAllSubmitedAssignments(courseId: any, subjectId: any, status: string, pageRequest: PageRequest) {
     const params = {
       courseId: courseId,
       subjectId: subjectId,
-      status: status
+      status: status,
+      pageNumber: pageRequest.pageNumber,
+      pageSize: pageRequest.pageSize
     };
+
     return this.http.get(`${this.assignmentUrl}/getAllSubmitedAssginments`, { params: params });
   }
 
@@ -135,19 +141,25 @@ export class AssignmentServiceService {
 
   private cachedData: any;
   private dataSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
   public getAllLockedAndUnlockedAssignment(studentId: number): Observable<any> {
-    if (this.cachedData) {
-      return this.dataSubject.asObservable();
-    } else {
-      this.http.get(`${this.assignmentUrl}/getAllLockedAndUnlockedAssignment?studentId=${studentId}`).subscribe({
-        next: (data: any) => {
-          this.cachedData = data
-          this.dataSubject.next(data)
-        }
-      })
+    let params = {
+      studentId: studentId,
 
     }
-    return this.dataSubject.asObservable();
+    return this.http.get(`${this.assignmentUrl}/getAllLockedAndUnlockedAssignment`, { params: params })
+    // if (this.cachedData) {
+    //   return this.dataSubject.asObservable();
+    // } else {
+    //   this.http.get(`${this.assignmentUrl}/getAllLockedAndUnlockedAssignment?studentId=${studentId}`).subscribe({
+    //     next: (data: any) => {
+    //       this.cachedData = data
+    //       this.dataSubject.next(data)
+    //     }
+    //   })
+
+    // }
+    // return this.dataSubject.asObservable();
   }
 
   public isSubmitted(questionId: number, studentId: number) {
@@ -170,5 +182,9 @@ export class AssignmentServiceService {
 
   public activateTask(assignmentId: number) {
     return this.http.put(`${this.assignmentUrl}/activateAssignment?id=${assignmentId}`, null)
+  }
+
+  public getAllSubmittedAssignmentTask(assignmentId: number) {
+    return this.http.get(`${this.assignmentUrl}/getAllSubmittedAssignmentTask?assignmentId=${assignmentId}`)
   }
 }

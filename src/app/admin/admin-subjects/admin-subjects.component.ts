@@ -20,8 +20,6 @@ import { AppUtils } from 'src/app/utils/app-utils';
 })
 export class AdminSubjectsComponent implements OnInit {
   BASE_URL = this.utilityService.getBaseUrl();
-  imageUrl = this.BASE_URL + '/file/getImageApi/images/'
-  techUrl = this.BASE_URL + "/file/getImageApi/technologyStackImage/";
   techImages: TechnologyStack[] = [];
   chapter: Chapter[] = []
   subjects: SubjectResponse[] = [];

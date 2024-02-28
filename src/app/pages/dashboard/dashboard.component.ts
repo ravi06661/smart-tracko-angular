@@ -1,5 +1,5 @@
 import { DatePipe, LocationStrategy } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import * as moment from 'moment';
 import { Observable, interval, map, switchMap } from 'rxjs';
@@ -7,8 +7,10 @@ import { Assignment } from 'src/app/entity/assignment';
 import { AssignmentResponse } from 'src/app/entity/assignment-response';
 import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
 import { Attendance } from 'src/app/entity/attendance';
+import { PaginationManager } from 'src/app/entity/pagination-manager';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { Task } from 'src/app/entity/task';
+import { PageRequest } from 'src/app/payload/page-request';
 
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { LoginService } from 'src/app/service/login.service';
@@ -22,7 +24,7 @@ import { WebsocketServiceDiscussionFormService } from 'src/app/service/websocket
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
 
   timer: number = 0;
   interval: any;
@@ -63,9 +65,16 @@ export class DashboardComponent implements OnInit {
   todayDate: Date = new Date()
   message!: string
 
+  // for task
+  TaskpageManager: PaginationManager = new PaginationManager();
+  TaskPageRequest: PageRequest = new PageRequest();
+
+  // for task submission
+  submissioTaskpageManager: PaginationManager = new PaginationManager();
+  submissioTaskPageRequest: PageRequest = new PageRequest();
+
 
   constructor(private service: AssignmentServiceService,
-    private utilityService: UtilityServiceService,
     private loginService: LoginService,
     private localst: LocationStrategy, private studentService: StudentService,
     private taskService: TaskServiceService, private assignmentService: AssignmentServiceService,
@@ -73,12 +82,10 @@ export class DashboardComponent implements OnInit {
     private datePipe: DatePipe
   ) {
   }
-
-  ngOnInit(): void {
-
+  ngAfterViewInit(): void {
     this.getAllTask();
     this.preventBackButton();
-    this.getSubmitedTaskByStudent();
+
     this.getSubmitedAssignment();
     this.getdoAssignment()
     //Timer API
@@ -95,6 +102,12 @@ export class DashboardComponent implements OnInit {
 
     //Student Attendance API
     this.getStudentAttendance();
+    //this.getSubmitedTaskByStudent('Unreviewed');
+   this.getSubmitedTaskByStudent('')
+
+  }
+
+  ngOnInit(): void {
 
   }
 
@@ -156,54 +169,139 @@ export class DashboardComponent implements OnInit {
     return moment(time, "HH:mm:ss").format("hh:mm A");
   }
 
+
+
+  //-----------------------------------
+  taskIndexing: number = 0
   public getAllTask() {
-    this.taskService.getAllTask(this.loginService.getStudentId()).subscribe(
+    this.taskService.getAllTask(this.loginService.getStudentId(), this.TaskPageRequest).subscribe(
       (data: any) => {
-        this.tasks = data.allTask
+        this.tasks = data.allTask.content
         this.totalTask = this.tasks.length
         this.tasksLength = this.tasks.length;
+        this.TaskpageManager.setPageData(data.allTask)
+        this.taskIndexing = data.allTask.pageable.pageSize * data.allTask.pageable.pageNumber + 1
+        this.TaskPageRequest.pageNumber = data.allTask.pageable.pageNumber
       }
     )
   }
 
-  public getSubmitedTaskByStudent() {
-    this.taskService.getSubmitedTaskByStudent(this.loginService.getStudentId()).subscribe({
+  public taskManageNextPrev(isNext: boolean) {
+    let i = 0;
+    if (isNext) i = this.TaskPageRequest.pageNumber + 1;
+    else i = this.TaskPageRequest.pageNumber - 1;
+    if (i >= 0 && i < this.TaskpageManager.totalPages)
+      this.taskPage(i);
+  }
+  taskPage(pageNumber: any) {
+    if (pageNumber !== this.TaskPageRequest.pageNumber) {
+      this.TaskPageRequest.pageNumber = pageNumber;
+      this.getAllTask()
+    }
+  }
+  //-----------------------------------------------------------------------
+
+  // public getSubmitedAssignment() {
+  //   // this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId()).subscribe({
+  //   //   next: (data: any) => {
+  //   //     this.assignmentSubmissionsList = data
+  //   //     this.totalAssignmnetSubmitted = this.assignmentSubmissionsList.length
+  //   //   }
+  //   // })
+  // }
+  status: any
+  //for assignment submission 
+  assignmentSubmissionPageRequest: PageRequest = new PageRequest();
+  assignmentSubmissionPagination: PaginationManager = new PaginationManager()
+  public getSubmitedAssignment(status?: string) {
+    this.status = status;
+    let element = document.getElementById('status2');
+    element!.innerText = status ? status : 'All'
+    this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId(), this.assignmentSubmissionPageRequest, status ? status : '').subscribe({
       next: (data: any) => {
-        this.taskSubmissionList = data
+        this.assignmentSubmissionsList = data.content
+        this.assignmentSubmissionPagination.setPageData(data)
+        this.assignmentSubmissionPageRequest.pageNumber = data.pageable.pageNumber
+      }
+    })
+  }
+
+  // for assignment submission 
+  public manageaAssignmentSubmissionNextPrev(isNext: boolean) {
+    let i = 0;
+    if (isNext) i = this.assignmentSubmissionPageRequest.pageNumber + 1;
+    else i = this.assignmentSubmissionPageRequest.pageNumber - 1;
+    if (i >= 0 && i < this.assignmentSubmissionPagination.totalPages)
+      this.getTaskPage(i);
+  }
+  getTaskPage(pageNumber: any) {
+    if (pageNumber !== this.assignmentSubmissionPageRequest.pageNumber) {
+      this.assignmentSubmissionPageRequest.pageNumber = pageNumber;
+      this.getSubmitedAssignment()
+    }
+  }
+  //-----------------------------------------------------------------------------------------
+  // public getSubmitedTaskByStudent() {
+  //   // this.taskService.getSubmitedTaskByStudent(this.loginService.getStudentId()).subscribe({
+  //   //   next: (data: any) => {
+  //   //     this.taskSubmissionList = data
+  //   //     this.totalTaskSubmitted = this.taskSubmissionList.length
+  //   //   }
+  //   // })
+  // }
+
+  public getSubmitedTaskByStudent(status?: string) {
+    this.status = status;
+   setTimeout(() => {
+    
+   }, 500);
+    this.taskService.getSubmitedTaskByStudent(this.loginService.getStudentId(), this.submissioTaskPageRequest, status ? status : '').subscribe({
+      next: (data: any) => {
+        this.taskSubmissionList = data.content
         this.totalTaskSubmitted = this.taskSubmissionList.length
-      }
-    })
-  }
-  public getSubmitedAssignment() {
-    this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId()).subscribe({
-      next: (data: any) => {
-        this.assignmentSubmissionsList = data
-        this.totalAssignmnetSubmitted = this.assignmentSubmissionsList.length
+        this.submissioTaskpageManager.setPageData(data)
+        this.submissioTaskPageRequest.pageNumber = data.pageable.pageNumber
+        let element = document.getElementById('status1');
+    element!.innerText = status?status:'ALL'
       }
     })
   }
 
+  public submissionManageNextPrev(isNext: boolean) {
+    let i = 0;
+    if (isNext) i = this.submissioTaskPageRequest.pageNumber + 1;
+    else i = this.submissioTaskPageRequest.pageNumber - 1;
+    if (i >= 0 && i < this.submissioTaskpageManager.totalPages)
+      this.submissionPage(i);
+  }
+  submissionPage(pageNumber: any) {
+    if (pageNumber !== this.submissioTaskPageRequest.pageNumber) {
+      this.submissioTaskPageRequest.pageNumber = pageNumber;
+      this.getSubmitedTaskByStudent(this.status)
+    }
+  }
+  //------------------------------------------------------------------
   public getdoAssignment() {
-    this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId()).subscribe(
-      {
-        next: (data: any) => {
-          //   this.unLockAssignments = data.unLockedAssignment;
-          //   this.toDoAssignment = 
-          //   if (this.toDoAssignment == null) {
-          //     this.toDoAssignment = new Assignment
-          //   }
-          //   this.assignmentId = this.toDoAssignment.id
-          //   this.lockAssignments = data.lockedAssignment;
+    // this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId()).subscribe(
+    //   {
+    //     next: (data: any) => {
+    //       //   this.unLockAssignments = data.unLockedAssignment;
+    //       //   this.toDoAssignment = 
+    //       //   if (this.toDoAssignment == null) {
+    //       //     this.toDoAssignment = new Assignment
+    //       //   }
+    //       //   this.assignmentId = this.toDoAssignment.id
+    //       //   this.lockAssignments = data.lockedAssignment;
 
-          this.unLockAssignments = data.unLockedAssignment
-          this.toDoAssignment = this.unLockAssignments[this.unLockAssignments.length - 1];
-          this.toDoAssignmentLength = this.toDoAssignment.taskQuestion.length;
-        },
-        error: (err: any) => {
-          this.message = err.error.message
-        }
-      }
-    )
+    //       this.unLockAssignments = data.unLockedAssignment
+    //       this.toDoAssignment = this.unLockAssignments[this.unLockAssignments.length - 1];
+    //       this.toDoAssignmentLength = this.toDoAssignment.taskQuestion.length;
+    //     },
+    //     error: (err: any) => {
+    //       this.message = err.error.message
+    //     }
+    //   }
+    // )
   }
   public pageRenderUsingRouterLink(path: string, questionId: number) {
     const dataParams = {

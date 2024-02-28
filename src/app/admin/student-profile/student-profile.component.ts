@@ -9,8 +9,11 @@ import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
 import { AttendanceLog } from 'src/app/entity/attendance-log';
 import { FeesPay } from 'src/app/entity/fees-pay';
 import { Leaves } from 'src/app/entity/leaves';
+import { PaginationManager } from 'src/app/entity/pagination-manager';
 import { StudentDetails } from 'src/app/entity/student-details';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
+import { Task } from 'src/app/entity/task';
+import { PageRequest } from 'src/app/payload/page-request';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { FeesPayService } from 'src/app/service/fees-pay.service';
 import { LeaveService } from 'src/app/service/leave.service';
@@ -38,6 +41,7 @@ export type ChartOptions = {
   styleUrls: ['./student-profile.component.scss']
 })
 export class StudentProfileComponent implements OnInit {
+
   @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions: Partial<ChartOptions>;
   studentId: number = 0;
@@ -55,8 +59,18 @@ export class StudentProfileComponent implements OnInit {
   lockAssignments: number[] = []
   assignmentId: number = 0;
   unLockAssignment: Assignment = new Assignment
+  tasks: Task[] = []
 
-  constructor(private router: Router, private taskService: TaskServiceService, private assignmentService: AssignmentServiceService, private activateRoute: ActivatedRoute,  private studentService: StudentService, private leaveService: LeaveService, private feesPayService: FeesPayService) {
+
+  // for attandance
+  attandancePageManager: PaginationManager = new PaginationManager();
+  attandancePageRequest: PageRequest = new PageRequest();
+  // for task
+  TaskpageManager: PaginationManager = new PaginationManager();
+  TaskPageRequest: PageRequest = new PageRequest();
+
+
+  constructor(private router: Router, private taskService: TaskServiceService, private assignmentService: AssignmentServiceService, private activateRoute: ActivatedRoute, private studentService: StudentService, private leaveService: LeaveService, private feesPayService: FeesPayService) {
     this.chartOptions = this.pieChart.chartOptions;
   }
 
@@ -64,8 +78,9 @@ export class StudentProfileComponent implements OnInit {
     this.studentId = this.activateRoute.snapshot.params[('studentId')];
     this.getStudentProfileData();
     this.getSubmitedAssignment();
-    this.getSubmitedTaskByStudent();
+    this.getSubmitedTaskByStudent('');
     this.getAllAssignments();
+    this.getAllTask()
   }
 
   public getStudentProfileData() {
@@ -98,15 +113,31 @@ export class StudentProfileComponent implements OnInit {
     })
   }
 
+  //-----------------start------------
+  public attandanceManageNextPrev(isNext: boolean) {
+    let i = 0;
+    if (isNext) i = this.attandancePageRequest.pageNumber + 1;
+    else i = this.attandancePageRequest.pageNumber - 1;
+    if (i >= 0 && i < this.attandancePageManager.totalPages)
+      this.attandancePageGet(i);
+  }
+  attandancePageGet(pageNumber: any) {
+    if (pageNumber !== this.attandancePageRequest.pageNumber) {
+      this.attandancePageRequest.pageNumber = pageNumber;
+      this.getStudentOverAllAttendancesAndLeaves();
+    }
+  }
+
   public getStudentOverAllAttendancesAndLeaves() {
-    this.studentService.getStudentOverAllAttendancesAndLeave(this.studentId).subscribe({
+    this.studentService.getStudentOverAllAttendancesAndLeave(this.studentId, this.attandancePageRequest).subscribe({
       next: (data: any) => {
-        this.attendanceLog = data.attendanceList;
-        // this.chartOptions.series = [data.presentsCount, 0, data.leavesCount];
+        this.attendanceLog = data.content;
+        this.attandancePageManager.setPageData(data)
+        this.attandancePageRequest.pageNumber = data.pageable.pageManager;
       }
     })
   }
-
+  //------------------------ end--------------
   public changeTimeFormat(time: any) {
     return moment(time, "HH:mm:ss").format("hh:mm:ss A");
   }
@@ -140,20 +171,74 @@ export class StudentProfileComponent implements OnInit {
       }
     })
   }
-  public getSubmitedAssignment() {
-    this.assignmentService.getSubmitedAssignmetByStudentId(this.studentId).subscribe({
+
+  //for assignment submission 
+  assignmentSubmissionPageRequest: PageRequest = new PageRequest();
+  assignmentSubmissionPagination: PaginationManager = new PaginationManager()
+
+
+  // for task submission
+  submissioTaskpageManager: PaginationManager = new PaginationManager();
+  submissioTaskPageRequest: PageRequest = new PageRequest();
+
+
+  status: any
+  public getSubmitedAssignment(status?: string) {
+    this.status = status;
+    // let element = document.getElementById('status2');
+    // element!.innerText = status ? status : 'All'
+    this.assignmentService.getSubmitedAssignmetByStudentId(this.studentId, this.assignmentSubmissionPageRequest, status ? status : '').subscribe({
       next: (data: any) => {
-        this.assignmentSubmissionsList = data
+        this.assignmentSubmissionsList = data.content
+        this.assignmentSubmissionPagination.setPageData(data)
+        this.assignmentSubmissionPageRequest.pageNumber = data.pageable.pageNumber
       }
     })
   }
-  public getSubmitedTaskByStudent() {
-    this.taskService.getSubmitedTaskByStudent(this.studentId).subscribe({
+  // for assignment submission 
+  public manageaAssignmentSubmissionNextPrev(isNext: boolean) {
+    let i = 0;
+    if (isNext) i = this.assignmentSubmissionPageRequest.pageNumber + 1;
+    else i = this.assignmentSubmissionPageRequest.pageNumber - 1;
+    if (i >= 0 && i < this.assignmentSubmissionPagination.totalPages)
+      this.getTaskPage(i);
+  }
+  getTaskPage(pageNumber: any) {
+    if (pageNumber !== this.assignmentSubmissionPageRequest.pageNumber) {
+      this.assignmentSubmissionPageRequest.pageNumber = pageNumber;
+      this.getSubmitedAssignment()
+    }
+  }
+
+  public submissionManageNextPrev(isNext: boolean) {
+    let i = 0;
+    if (isNext) i = this.submissioTaskPageRequest.pageNumber + 1;
+    else i = this.submissioTaskPageRequest.pageNumber - 1;
+    if (i >= 0 && i < this.submissioTaskpageManager.totalPages)
+      this.submissionPage(i);
+  }
+  submissionPage(pageNumber: any) {
+    if (pageNumber !== this.submissioTaskPageRequest.pageNumber) {
+      this.submissioTaskPageRequest.pageNumber = pageNumber;
+      this.getSubmitedTaskByStudent(this.status)
+    }
+  }
+
+  public getSubmitedTaskByStudent(status: string) {
+    this.status = status;
+    // let element = document.getElementById('status1');
+    /// element!.innerText = status ? status : 'ALL'
+    this.taskService.getSubmitedTaskByStudent(this.studentId, this.submissioTaskPageRequest, status ? status : '').subscribe({
       next: (data: any) => {
-        this.taskSubmissionList = data
+        this.taskSubmissionList = data.content
+
+        this.submissioTaskpageManager.setPageData(data)
+        this.submissioTaskPageRequest.pageNumber = data.pageable.pageNumber
       }
     })
   }
+
+
   public getAllAssignments() {
     this.assignmentService.getAllLockedAndUnlockedAssignment(this.studentId).subscribe(
       (data: any) => {
@@ -203,4 +288,30 @@ export class StudentProfileComponent implements OnInit {
     });
   }
 
+
+  taskIndexing: number = 0
+  public getAllTask() {
+    this.taskService.getAllTask(this.studentId, this.TaskPageRequest).subscribe(
+      (data: any) => {
+        this.tasks = data.allTask.content
+        this.TaskpageManager.setPageData(data.allTask)
+        this.taskIndexing = data.allTask.pageable.pageSize * data.allTask.pageable.pageNumber + 1
+        this.TaskPageRequest.pageNumber = data.allTask.pageable.pageNumber
+      }
+    )
+  }
+
+  public taskManageNextPrev(isNext: boolean) {
+    let i = 0;
+    if (isNext) i = this.TaskPageRequest.pageNumber + 1;
+    else i = this.TaskPageRequest.pageNumber - 1;
+    if (i >= 0 && i < this.TaskpageManager.totalPages)
+      this.taskPage(i);
+  }
+  taskPage(pageNumber: any) {
+    if (pageNumber !== this.TaskPageRequest.pageNumber) {
+      this.TaskPageRequest.pageNumber = pageNumber;
+      this.getAllTask()
+    }
+  }
 }

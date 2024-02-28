@@ -8,17 +8,17 @@ import { ChapterExamResultResponse } from '../payload/chapter-exam-result-respon
 })
 export class ExamServiceService {
 
+
   BASE_URL = this.utilityService.getBaseUrl();
   EXAM_URL = this.BASE_URL + '/exam';
 
   constructor(private http: HttpClient, private utilityService: UtilityServiceService) { }
 
   public addChapterExam(data: ChapterExamResultResponse) {
-    console.log(data);
     return this.http.post(`${this.EXAM_URL}/addChapterExam`, data)
   }
   addSubjectExam(data: ChapterExamResultResponse) {
-    return this.http.post(`${this.EXAM_URL}/addSubjectExam`, data)
+    return this.http.post(`${this.EXAM_URL}/addSubjectExamResult`, data)
   }
 
 
@@ -41,4 +41,16 @@ export class ExamServiceService {
   public getAllChapterExamResultByChaterId(chapterId: number) {
     return this.http.get(`${this.EXAM_URL}/getALLChapterExamResultesByChapterIdApi?chapterId=${chapterId}`);
   }
+  public geSubjectExamResultByExamId(resultId: number) {
+    return this.http.get(`${this.EXAM_URL}/getSubjectExamResult?resultId=${resultId}`)
+  }
+
+  getALLSubjectExamResultesBySubjectId(subjectExamId: number) {
+    return this.http.get(`${this.EXAM_URL}/getALLSubjectExamResultesBySubjectId?examId=${subjectExamId}`)
+  }
+
+  public getSubjectExamResult(resultId: number) {
+    return this.http.get(`${this.EXAM_URL}/getSubjectExamResult?resultId=${resultId}`)
+  }
+
 }

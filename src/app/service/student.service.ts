@@ -7,6 +7,8 @@ import { LoginService } from './login.service';
 import { TodayLeavesRequest } from '../entity/today-leaves-request';
 import { Observable } from 'rxjs';
 import { StudentDetails } from '../entity/student-details';
+import { PageRequest } from '../payload/page-request';
+import { PassThrough } from 'stream';
 
 
 @Injectable({
@@ -92,14 +94,27 @@ export class StudentService {
     }
   }
 
-  public getTodayStudentAbsentData() {
-    return this.http.get(`${this.studentUrl}/getTotalTodayAbsentStudentAndPresent`);
+  public getTodayStudentAbsentData(pageRequest: PageRequest) {
+    let params = {
+      pageNumber: pageRequest.pageNumber,
+      pageSize: pageRequest.pageSize
+    }
+    return this.http.get(`${this.studentUrl}/getTotalTodayAbsentStudentAndPresent`, { params: params });
   }
-  public getStudentAtiveLeaves() {
-    return this.http.get(`${this.studentUrl}/getTotalStudentInLeaves`);
+
+  public getStudentAtiveLeaves(pageRequest: PageRequest) {
+    let params = {
+      pageNumber: pageRequest.pageNumber,
+      pageSize: pageRequest.pageSize
+    }
+    return this.http.get(`${this.studentUrl}/getTotalStudentInLeaves`, { params: params });
   }
-  public getTodayLeavesRequest(): Observable<TodayLeavesRequest> {
-    return this.http.get<TodayLeavesRequest>(`${this.studentUrl}/getTotalStudentTodaysInLeaves`);
+  public getTodayLeavesRequest(pageRequest: PageRequest) {
+    let params = {
+      pageNumber: pageRequest.pageNumber,
+      pageSize: pageRequest.pageSize
+    }
+    return this.http.get<any>(`${this.studentUrl}/getTotalStudentTodaysInLeaves`, { params: params });
   }
   public approveStudentLeaveReqeust(studentId: number, leaveId: number, status: string) {
     return this.http.put(`${this.studentUrl}/approveStudentLeaveReqeust/${studentId}/${leaveId}/${status}`, null);
@@ -109,10 +124,13 @@ export class StudentService {
     return this.http.get<StudentDetails[]>(`${this.studentUrl}/getAllStudentData?page=${page}&size=${size}`);
   }
 
-  public searchStudentByName(fullName: string) {
-
-
-    return this.http.get<StudentDetails[]>(`${this.studentUrl}/searchStudentByName?fullName=${fullName}`)
+  public searchStudentByName(pageNumber: number, pageSize: number, fullName: string) {
+    let params = {
+      pageSize: pageSize,
+      pageNumber: pageNumber,
+      fullName: fullName
+    }
+    return this.http.get<StudentDetails[]>(`${this.studentUrl}/searchStudentByName`, { params: params })
   }
 
   public getByStudentById(studentId: number) {
@@ -127,8 +145,12 @@ export class StudentService {
     return this.http.put(`${this.studentUrl}/updateStudentApi`, student);
   }
 
-  public getStudentOverAllAttendancesAndLeave(studentId: number) {
-    return this.http.get(`${this.studentUrl}/getStudentOverAllAttendanceAndLeavesAndAbsents?studentId=${studentId}`);
+  public getStudentOverAllAttendancesAndLeave(studentId: number, pageRequest: PageRequest) {
+    let params = {
+      pageNumber: pageRequest.pageNumber,
+      pageSize: pageRequest.pageSize
+    }
+    return this.http.get(`${this.studentUrl}/getStudentOverAllAttendanceAndLeavesAndAbsents?studentId=${studentId}`, { params: params });
   }
 
   public getTodayAttendanceFilter(value: string) {

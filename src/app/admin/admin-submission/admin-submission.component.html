@@ -20,37 +20,38 @@
         <!-- slider section -->
         <div class="swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
+                <div class="swiper-slide" *ngFor="let obj of submitedTasksList;let i = index">
                     <div class="row">
                         <div class="col-md-12 d-flex align-items-center justify-content-between mb_24">
                             <div class="person-detail d-flex align-items-center gap_5">
-                                <img [src]="submitedTask.profilePic" alt="" class="img-fluid imagestudent">
-                                <h5 class="font-18 font-600 mb-0">{{submitedTask.fullName}} <br>
-                                    <p class="text_gray font-17 font-400 mb-0">{{submitedTask.applyForCourse}}</p>
+                                <img [src]="obj.profilePic" alt="" class="img-fluid imagestudent">
+                                <h5 class="font-18 font-600 mb-0">{{obj.fullName}} <br>
+                                    <p class="text_gray font-17 font-400 mb-0">{{obj.applyForCourse}}</p>
                                 </h5>
                             </div>
                             <div class="right-reject-btn"
-                                *ngIf="submitedTask.status == 'Reviewing' || submitedTask.status == 'Unreviewed'">
+                                *ngIf="obj.status == 'Reviewing' || obj.status == 'Unreviewed'">
                                 <button class="top_profile_sec_btn font-15 font-500 reject-btn" data-bs-toggle="modal"
-                                    data-bs-target="#submit_review_modal" (click)="status='Rejected'">Reject</button>
+                                    data-bs-target="#submit_review_modal"
+                                    (click)="status='Rejected';index= i;id=obj.submissionId">Reject</button>
                                 <button class="top_profile_sec_btn font-15 font-500" data-bs-toggle="modal"
-                                    data-bs-target="#submit_review_modal" (click)="status='Accepted'">Accept & Mark
+                                    data-bs-target="#submit_review_modal" (click)="status='Accepted';index=i;id=obj.submissionId">Accept & Mark
                                     Complete</button>
                             </div>
                         </div>
 
                         <div class="col-md-12 mb_24">
-                            <h2 class="mb-0 font-17 font-500 secondary">Assignment/Task Name</h2>
+                            <h2 class="mb-0 font-17 font-500 secondary" [innerHTML]="obj.title"></h2>
                         </div>
 
                         <div class="col-md-12 mb_24">
                             <div class="d-flex align-items-center gap_24">
                                 <h3 class="report_title font-17 font-600 secondary position-relative">Report</h3>
-                                <p class="mb-0 font-17 font-400 text_gray">{{submitedTask.submissionDate |
+                                <p class="mb-0 font-17 font-400 text_gray">{{obj.submissionDate |
                                     date:'short'}}</p>
                             </div>
                             <ul class="submission_report ps-0">
-                                <li>{{submitedTask.taskDescription}} </li>
+                                <li>{{obj.taskDescription}} </li>
                             </ul>
                         </div>
                         <div class="col-md-12 mb_24">
@@ -59,17 +60,17 @@
                                 <!-- <p class="mb-0 font-17 font-400 text_gray">{{submitedTask.submissionDate | date:'short'}}</p> -->
                             </div>
                             <ul class="submission_report ps-0">
-                                <li>{{submitedTask.review}} </li>
+                                <li>{{obj.review}} </li>
                             </ul>
                         </div>
 
                         <div class="col-md-12"
-                            *ngIf="submitedTask.submittionFileName!=null  && submitedTask.submittionFileName!=undefined">
+                            *ngIf="obj.submittionFileName!=null  && obj.submittionFileName!=undefined">
                             <h3 class="admin-title font-17 font-600 secondary position-relative mb_20">Attachments</h3>
                             <br>
                             <form class="attachment_file1 d-inline-flex align-items-center position-relative">
                                 <!-- Instead of an input element, use an anchor (a) tag -->
-                                <a href="{{submitedTask.submittionFileName}}" download="Assignment Files.zip"
+                                <a href="{{obj.submittionFileName}}" download="Assignment Files.zip"
                                     class="font-15 font-700 secondary text-white attachment_file_text">
                                     <i
                                         class="fi fi-rr-paperclip-vertical secondary add_more position-absolute light mx-2"></i>
@@ -110,55 +111,20 @@
                     </tr>
                 </thead>
                 <tbody class="bg-light">
-                    <tr>
+                    <tr *ngFor="let obj of submitedTasksList">
                         <td class="d-flex align-items-center" style="gap:5px;">
-                            <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid" height="36"
-                                width="36">
-                            <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                <p class="text_gray font-13 font-400 mb-0">Core Java</p>
+                            <img [src]="obj.profilePic" alt="" class="img-fluid" height="36" width="36">
+                            <h5 class="font-13 font-500 mb-0">{{obj.fullName}} <br>
+                                <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
                             </h5>
                         </td>
-                        <td>Hello World! In Java</td>
-                        <td>08:48 PM, 11/07/23</td>
-                        <td><span class="unread">Unread</span></td>
+                        <td [innerHTML]="obj.title"></td>
+                        <td>{{obj.submissionDate}}</td>
+                        <td><span class="unread">{{obj.status}}</span></td>
                     </tr>
-                    <tr>
-                        <td class="d-flex align-items-center" style="gap:5px;">
-                            <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid" height="36"
-                                width="36">
-                            <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                            </h5>
-                        </td>
-                        <td>Hello World! In Java</td>
-                        <td>08:48 PM, 11/07/23</td>
-                        <td><span class="unread">Unread</span></td>
-                    </tr>
-                    <tr>
-                        <td class="d-flex align-items-center" style="gap:5px;">
-                            <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid" height="36"
-                                width="36">
-                            <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                            </h5>
-                        </td>
-                        <td>Hello World! In Java</td>
-                        <td>08:48 PM, 11/07/23</td>
-                        <td><span class="unread">Unread</span></td>
-                    </tr>
-                    <tr>
-                        <td class="d-flex align-items-center" style="gap:5px;">
-                            <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid" height="36"
-                                width="36">
-                            <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                            </h5>
-                        </td>
-                        <td>Hello World! In Java</td>
-                        <td>08:48 PM, 11/07/23</td>
-                        <td><span class="unread">Unread</span></td>
-                    </tr>
+
                 </tbody>
+
             </table>
         </div>
     </div>

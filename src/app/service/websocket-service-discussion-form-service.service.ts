@@ -24,18 +24,26 @@ export class WebsocketServiceDiscussionFormService {
     this.stompClient.connect({}, (frame: any) => {
       this.stompClient.subscribe('/queue/Chatmessages', (message: any) => {
         const parsedMessage = JSON.parse(message.body);
-        //   console.log = () => { };
+     //   console.log = () => { };
         this.messagesSubject.next(parsedMessage);
       });
     });
+    let countConnectCalls: number = 0
     // Reconnect logic
     socket.onclose = (event: CloseEvent) => {
-     // this.connect();
+      if (countConnectCalls <= 15 && navigator.onLine) {
+        setTimeout(() => {
+          this.connect();
+          countConnectCalls += 1
+        }, 2000);
+      } else {
+        countConnectCalls = 0;
+      }
     };
   }
 
   public getMessages(): Observable<any> {
-    //   console.log = () => { };
+   // console.log = () => { };
     return this.messagesObservable;
   }
   public sendMessage(message: any): void {

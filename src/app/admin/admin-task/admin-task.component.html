@@ -61,24 +61,24 @@
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Active Tasks</h3>
                     <div class="right-side-dropdown-btn d-flex">
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="course1"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Course
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item"
-                                        (click)="courseFilterByCourseIdAndSubjectId(obj.courseId,0,pageRequest,'1')"
+                                        (click)="courseFilterByCourseIdAndSubjectId(obj,this.subject,pageRequest)"
                                         *ngFor="let obj of courses">{{obj.courseName}}</a></li>
                             </ul>
                         </div>
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="subject1"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Subject
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item"
-                                        (click)="courseFilterByCourseIdAndSubjectId(courseId,obj.subjectId,pageRequest,'1')"
+                                        (click)="courseFilterByCourseIdAndSubjectId(course,obj,pageRequest)"
                                         *ngFor="let obj of  subjectes">{{obj.subjectName}}</a></li>
 
                             </ul>
@@ -109,12 +109,15 @@
                             </tr>
                         </thead>
                         <tbody class="bg-light">
-                            <tr *ngFor="let obj of taskSubmissionStatus ;let i=index" class="pointer"
-                               >
+                            <tr *ngFor="let obj of taskSubmissionStatus ;let i=index" class="pointer">
                                 <td>
-                                    <h5 class="font-15 font-500 mb-0"  routerLink="/admin/createtask/{{obj.taskId}}">{{obj.taskTitle}}</h5>
+                                    <h5 class="font-15 font-500 mb-0" routerLink="/admin/createtask/{{obj.taskId}}">
+                                        {{obj.taskTitle}}</h5>
                                 </td>
-                                <td class="txt_color_blue" [ngClass]="obj.status==false?'primary':'success'" (click)="ActivateTask(obj)"><div class="td">{{obj.status==false?' Active':'Deactive'}}</div></td>
+                                <td class="txt_color_blue" [ngClass]="obj.status==false?'primary':'success'"
+                                    (click)="ActivateTask(obj)">
+                                    <div class="td">{{obj.status==false?' Active':'Deactive'}}</div>
+                                </td>
                                 <td class="txt_color_purple">{{obj.totalSubmitted}}</td>
                                 <td class="txt_color_light_green">{{obj.reveiwed}}</td>
                                 <td class="txt_color_yellow">{{obj.unReveiwed}}</td>
@@ -140,17 +143,24 @@
                             </li>
                         </ul>
                     </nav> -->
-                    <nav aria-label="Page navigation example" class="table-pagination" >
-                      
+                    <nav aria-label="Page navigation example" class="table-pagination"  *ngIf="taskSubmissionStatus.length >=submissioTaskPageRequest.pageSize"> 
+
                         <ul class="pagination">
-                            <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="pageManager.first?'theading ':' cur-point'"  (click)="manageNextPrev(false)">Previous</a></li>
-                            <li class="page-item cur-point" *ngFor="let b of pageManager.showButtoons ;"  (click)="getTaskPage(b-1)"><a class="page-link text_orange " [ngClass]="pageRequest.pageNumber==b-1?'active':''" id="{{b}}" href="javascript:void(0)">{{b}}</a>
+                            <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "
+                                    [ngClass]="pageManager.first?'theading ':' cur-point'"
+                                    (click)="manageNextPrev(false)">Previous</a></li>
+                            <li class="page-item cur-point" *ngFor="let b of pageManager.showButtoons ;"
+                                (click)="getTaskPage(b-1)"><a class="page-link text_orange "
+                                    [ngClass]="pageRequest.pageNumber==b-1?'active':''" id="{{b}}"
+                                    href="javascript:void(0)">{{b}}</a>
                             </li>
                             <!-- <li class="page-item "><a class="page-link" >2</a></li>
                             <li class="page-item "><a class="page-link" >3</a></li>
                             <li class="page-item "><a class="page-link" >4</a></li>
                             <li class="page-item "><a class="page-link" >5</a></li> -->
-                            <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"  [ngClass]="pageManager.last?'theading':' cur-point'"   (click)="manageNextPrev(true)">Next</a></li>
+                            <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"
+                                    [ngClass]="pageManager.last?'theading':' cur-point'"
+                                    (click)="manageNextPrev(true)">Next</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -161,42 +171,42 @@
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Submissions (Recent)</h3>
                     <div class="right-side-dropdown-btn d-flex">
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" id="course2"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Course
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item"
-                                        (click)="getAllSubmittedTaskFilter(obj.courseId,0,'NOT_CHECKED_WITH_IT',submissioTaskPageRequest,'1')"
+                                        (click)="getAllSubmittedTaskFilter(obj,0,'NOT_CHECKED_WITH_IT',submissioTaskPageRequest)"
                                         *ngFor="let obj of courses">{{obj.courseName}}</a></li>
 
                             </ul>
                         </div>
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="subject2"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Subject
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"
-                                        (click)="getAllSubmittedTaskFilter(courseId,obj.subjectId,'NOT_CHECKED_WITH_IT',submissioTaskPageRequest,'1')"
+                                <li><a class="dropdown-item" (click)="getCourseSubjects(obj)"
+                                        (click)="getAllSubmittedTaskFilter(course1,subjectId,'NOT_CHECKED_WITH_IT',submissioTaskPageRequest)"
                                         *ngFor="let obj of  subjectes">{{obj.subjectName}}</a></li>
                             </ul>
                         </div>
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="status2"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Status
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item"
-                                        (click)="getAllSubmittedTaskFilter(courseId,subjectId,'Accepted',submissioTaskPageRequest,'1')">Accept</a>
+                                        (click)="getAllSubmittedTaskFilter(course1,subjectId,'Accepted',submissioTaskPageRequest)">Accept</a>
                                 </li>
                                 <li><a class="dropdown-item"
-                                        (click)="getAllSubmittedTaskFilter(courseId,subjectId,'Unreviewed',submissioTaskPageRequest,'1')">Unreviewed</a>
+                                        (click)="getAllSubmittedTaskFilter(course1,subjectId,'Unreviewed',submissioTaskPageRequest)">Unreviewed</a>
                                 </li>
                                 <li><a class="dropdown-item"
-                                        (click)="getAllSubmittedTaskFilter(courseId,subjectId,'Rejected',submissioTaskPageRequest,'1')">Rejected</a>
+                                        (click)="getAllSubmittedTaskFilter(course1,subjectId,'Rejected',submissioTaskPageRequest)">Rejected</a>
                                 </li>
                             </ul>
                         </div>
@@ -216,7 +226,7 @@
                         <tbody class="bg-light">
                             <tr *ngFor="let obj of submitedTasksList">
                                 <td class="d-flex align-items-center" style="gap:5px;"
-                                    (click)="pageRanderWithObj(obj.submissionId)">
+                                    (click)="pageRanderWithObj(obj.submissionId,obj.taskId)">
                                     <img [src]="obj.profilePic" alt="" class="img-fluid imagestudent">
                                     <h5 class="font-13 font-500 mb-0 pointer">{{obj.fullName}} <br>
                                         <p class="text_gray font-13 font-400 mb-0">{{obj.applyForCourse}}</p>
@@ -228,101 +238,25 @@
                                     [ngClass]="{'active_txt_green':obj.status == 'Accepted','active_txt_orange':obj.status=='Rejected','active_txt_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">
                                     {{obj.status}}</td>
                             </tr>
-                            <!-- <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
-                            </tr>
-                            <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
-                            </tr>
-                            <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
-                            </tr>
-
-                            <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
-                            </tr>
-
-                            <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_blue">Unreviewed</td>
-                            </tr>
-                            <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_orange">Reassigned</td>
-                            </tr>
-                            <tr>
-                                <td class="d-flex align-items-center" style="gap:5px;">
-                                    <img src="assets/images/temp_img/Ellipse 2325.png" alt="" class="img-fluid">
-                                    <h5 class="font-13 font-500 mb-0">Wade Warren <br>
-                                        <p class="text_gray font-13 font-400 mb-0">Core Java</p>
-                                    </h5>
-                                </td>
-                                <td>Hello World! In Java</td>
-                                <td>08:48 PM, 11/07/23</td>
-                                <td class="active_txt_green">Accepted</td>
-                            </tr> -->
-
 
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation example" class="table-pagination" >
-                      
+                <nav aria-label="Page navigation example" class="table-pagination" *ngIf="submitedTasksList.length >=submissioTaskPageRequest.pageSize">
+
                     <ul class="pagination">
-                        <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="submissioTaskpageManager.first?'theading ':' cur-point'"  (click)="submissionManageNextPrev(false)">Previous</a></li>
-                        <li class="page-item cur-point" *ngFor="let b1 of submissioTaskpageManager.showButtoons ;"  (click)="submissionPage(b1-1)"><a class="page-link text_orange " [ngClass]="submissioTaskPageRequest.pageNumber==b1-1?'active':''" id="{{b1}}" href="javascript:void(0)">{{b1}}</a>
+                        <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "
+                                [ngClass]="submissioTaskpageManager.first?'theading ':' cur-point'"
+                                (click)="submissionManageNextPrev(false)">Previous</a></li>
+                        <li class="page-item cur-point" *ngFor="let b1 of submissioTaskpageManager.showButtoons ;"
+                            (click)="submissionPage(b1-1)"><a class="page-link text_orange "
+                                [ngClass]="submissioTaskPageRequest.pageNumber==b1-1?'active':''" id="{{b1}}"
+                                href="javascript:void(0)">{{b1}}</a>
                         </li>
-                        <!-- <li class="page-item "><a class="page-link" >2</a></li>
-                        <li class="page-item "><a class="page-link" >3</a></li>
-                        <li class="page-item "><a class="page-link" >4</a></li>
-                        <li class="page-item "><a class="page-link" >5</a></li> -->
-                        <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"  [ngClass]="submissioTaskpageManager.last?'theading':' cur-point'"   (click)="submissionManageNextPrev(true)">Next</a></li>
+
+                        <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"
+                                [ngClass]="submissioTaskpageManager.last?'theading':' cur-point'"
+                                (click)="submissionManageNextPrev(true)">Next</a></li>
                     </ul>
                 </nav>
             </div>

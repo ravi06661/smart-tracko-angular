@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { Assignment } from 'src/app/entity/assignment';
 import { AssignmentSubmission } from 'src/app/entity/assignment-submission';
+import { PaginationManager } from 'src/app/entity/pagination-manager';
+import { PageRequest } from 'src/app/payload/page-request';
 import { AssignmentServiceService } from 'src/app/service/assignment.service';
 import { LoginService } from 'src/app/service/login.service';
 import { UtilityServiceService } from 'src/app/service/utility-service.service';
@@ -24,7 +26,15 @@ export class TaskandassignmentsComponent implements OnInit {
   assignmentId: number = 0;
   assignmentTaskVisibility: boolean[] = [];
   assignmentCount: number = 0;
-  todayDate: Date = new Date()
+  todayDate: Date = new Date();
+
+  //for assignment submission 
+  assignmentSubmissionPageRequest: PageRequest = new PageRequest();
+  assignmentSubmissionPagination: PaginationManager = new PaginationManager()
+
+  assignmentPageRequest: PageRequest = new PageRequest();
+  assignmentPagination: PaginationManager = new PaginationManager()
+
   constructor(
     private datePipe: DatePipe,
     private assignmentService: AssignmentServiceService,
@@ -32,25 +42,14 @@ export class TaskandassignmentsComponent implements OnInit {
     private loginService: LoginService) {
     this.lockAssignments = []
     this.unLockAssignments = 0
-    this.getSubmitedAssignment();
+
   }
 
   ngOnInit(): void {
+    this.getSubmitedAssignment();
     this.getAllAssignments();
   }
 
-  public getAllAssignments() {
-    this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId())?.subscribe(
-      (data: any) => {
-        this.unLockAssignments = data.unLockedAssignment;
-        this.assignmentCount = this.unLockAssignments.length
-        this.lockAssignments = Array(data.lockedAssignment).fill(0).map((x, i) => i);
-        this.unLockAssignments.forEach(() => {
-          this.assignmentTaskVisibility.push(false);
-        });
-      }
-    )
-  }
 
   public pageRenderUsingRouterLink(path: string, questionId: number) {
     const dataParams = {
@@ -62,14 +61,14 @@ export class TaskandassignmentsComponent implements OnInit {
     });
   }
 
-  public getSubmitedAssignment() {
-    this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId()).subscribe({
-      next: (data: any) => {
-        this.assignmentSubmissionsList = data
-        this.assignmentSubmissionsList2 = data
-      }
-    })
-  }
+  // public getSubmitedAssignment() {
+  //   this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId()).subscribe({
+  //     next: (data: any) => {
+  //       this.assignmentSubmissionsList = data
+  //       this.assignmentSubmissionsList2 = data
+  //     }
+  //   })
+  // }
 
   public changeTimeFormat(date: any) {
     return moment(date, "YYYY-MM-dd HH:mm:ss").format("hh:mm A");
@@ -89,17 +88,80 @@ export class TaskandassignmentsComponent implements OnInit {
     return (num2 == 0) ? 0 : Math.floor(num1 / num2 * 100)
   }
 
-  public getSubmissionAssignmentFilterByStatus(status: string) {
+  // public getSubmissionAssignmentFilterByStatus(status: string) {
 
-    this.assignmentSubmissionsList2 = this.assignmentSubmissionsList
+  //   this.assignmentSubmissionsList2 = this.assignmentSubmissionsList
 
-    this.assignmentSubmissionsList2 = this.assignmentSubmissionsList2.filter(obj => {
-      return (obj.status == status) ? obj : null;
-    });
+  //   this.assignmentSubmissionsList2 = this.assignmentSubmissionsList2.filter(obj => {
+  //     return (obj.status == status) ? obj : null;
+  //   });
 
-  }
+  // }
 
   public dateFormatter(date: Date) {
     return this.datePipe.transform(date, 'dd MMM yyyy');
   }
+
+  status: any
+  public getSubmitedAssignment(status?: string) {
+    this.status = status;
+    let element = document.getElementById('status2');
+    element!.innerText = status ? status : 'All'
+    this.assignmentService.getSubmitedAssignmetByStudentId(this.loginService.getStudentId(), this.assignmentSubmissionPageRequest, status ? status : '').subscribe({
+      next: (data: any) => {
+        this.assignmentSubmissionsList = data.content
+        this.assignmentSubmissionsList2 = data.content
+        this.assignmentSubmissionPagination.setPageData(data)
+        this.assignmentSubmissionPageRequest.pageNumber = data.pageable.pageNumber
+      }
+    })
+  }
+
+  // for assignment submission 
+  public manageaAssignmentSubmissionNextPrev(isNext: boolean) {
+    let i = 0;
+    if (isNext) i = this.assignmentSubmissionPageRequest.pageNumber + 1;
+    else i = this.assignmentSubmissionPageRequest.pageNumber - 1;
+    if (i >= 0 && i < this.assignmentSubmissionPagination.totalPages)
+      this.getTaskPage(i);
+  }
+  getTaskPage(pageNumber: any) {
+    if (pageNumber !== this.assignmentSubmissionPageRequest.pageNumber) {
+      this.assignmentSubmissionPageRequest.pageNumber = pageNumber;
+      this.getSubmitedAssignment()
+    }
+  }
+
+///---------------  locked and unlocked -----
+  
+  public getAllAssignments() {
+    this.assignmentService.getAllLockedAndUnlockedAssignment(this.loginService.getStudentId()).subscribe(
+      (data: any) => {
+        this.unLockAssignments = data.unLockedAssignment;
+        this.assignmentCount = this.unLockAssignments.length
+        this.lockAssignments = Array(data.lockedAssignment).fill(0).map((x, i) => i);
+        this.unLockAssignments.forEach(() => {
+          this.assignmentTaskVisibility.push(false);
+        });
+        // this.assignmentPagination.setPageData(data.pagination)
+        // this.assignmentPageRequest.pageNumber = data.pagination.pageable.pageNumber
+      }
+    )
+  }
+
+  // public assignmentManageNextPrev(isNext: boolean) {
+  //   let i = 0;
+  //   if (isNext) i = this.assignmentPageRequest.pageNumber + 1;
+  //   else i = this.assignmentPageRequest.pageNumber - 1;
+  //   if (i >= 0 && i < this.assignmentPagination.totalPages)
+  //     this.assignmentPage(i);
+  // }
+  // assignmentPage(pageNumber: any) {
+  //   if (pageNumber !== this.assignmentPageRequest.pageNumber) {
+  //     this.assignmentPageRequest.pageNumber = pageNumber;
+  //     this.getAllAssignments()
+  //   }
+  // }
+
+
 }

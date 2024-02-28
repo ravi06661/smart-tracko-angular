@@ -165,12 +165,26 @@
             </div>
           </table>
         </div> -->
+        <nav aria-label="Page navigation example" class="table-pagination"  *ngIf="absentData.length>=absentPageRequest.pageSize" >
+                      
+          <ul class="pagination">
+              <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="absentPageManager.first?'theading ':' cur-point'"  (click)="absentManageNextPrev(false)">Previous</a></li>
+              <li class="page-item cur-point" *ngFor="let b of absentPageManager.showButtoons ;"  (click)="absentPageGet(b-1)"><a class="page-link text_orange " [ngClass]="absentPageRequest.pageNumber==b-1?'active':''" id="{{b}}" href="javascript:void(0)">{{b}}</a>
+              </li>
+              <!-- <li class="page-item "><a class="page-link" >2</a></li>
+              <li class="page-item "><a class="page-link" >3</a></li>
+              <li class="page-item "><a class="page-link" >4</a></li>
+              <li class="page-item "><a class="page-link" >5</a></li> -->
+              <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"  [ngClass]="absentPageManager.last?'theading':' cur-point'"   (click)="absentManageNextPrev(true)">Next</a></li>
+          </ul>
+      </nav>
       </div>
+     
 
       <div class="col-md-4 mb-4">
         <div class="d-flex justify-content-between align-items-center mb_12">
           <h3 class="admin-title font-17 font-600 secondary position-relative">On Leave</h3>
-          <div class="dropdown">
+          <!-- <div class="dropdown">
             <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Course
             </a>
@@ -179,7 +193,7 @@
               <li><a class="dropdown-item" href="#">February</a></li>
               <li><a class="dropdown-item" href="#">March</a></li>
             </ul>
-          </div>
+          </div> -->
          </div>
          <table class="scrollable">
           <thead>
@@ -236,6 +250,20 @@
             </div>
           </table>
         </div> -->
+
+        <nav aria-label="Page navigation example" class="table-pagination"  *ngIf="leavesData.length>=absentPageRequest.pageSize" >
+                      
+          <ul class="pagination">
+              <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="leavesPageManager.first?'theading ':' cur-point'"  (click)="leavesManageNextPrev(false)">Previous</a></li>
+              <li class="page-item cur-point" *ngFor="let b of leavesPageManager.showButtoons ;"  (click)="leavestPageGet(b-1)"><a class="page-link text_orange " [ngClass]="leavesPageRequest.pageNumber==b-1?'active':''" id="{{b}}" href="javascript:void(0)">{{b}}</a>
+              </li>
+              <!-- <li class="page-item "><a class="page-link" >2</a></li>
+              <li class="page-item "><a class="page-link" >3</a></li>
+              <li class="page-item "><a class="page-link" >4</a></li>
+              <li class="page-item "><a class="page-link" >5</a></li> -->
+              <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"  [ngClass]="leavesPageManager.last?'theading':' cur-point'"   (click)="leavesManageNextPrev(true)">Next</a></li>
+          </ul>
+      </nav>
       </div>
 
       <div class="col-md-5 mb-4">
@@ -319,8 +347,21 @@
             </div>
           </table>
         </div> -->
+        <nav aria-label="Page navigation example" class="table-pagination"  *ngIf="leavesRequestData.length>=absentPageRequest.pageSize" >
+                      
+          <ul class="pagination">
+              <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="leavesRequestPageManager.first?'theading ':' cur-point'"  (click)="leavesRequestManageNextPrev(false)">Previous</a></li>
+              <li class="page-item cur-point" *ngFor="let b of leavesRequestPageManager.showButtoons ;"  (click)="leavestRequestPageGet(b-1)"><a class="page-link text_orange " [ngClass]="leavesRequestPageRequest.pageNumber==b-1?'active':''" id="{{b}}" href="javascript:void(0)">{{b}}</a>
+              </li>
+              <!-- <li class="page-item "><a class="page-link" >2</a></li>
+              <li class="page-item "><a class="page-link" >3</a></li>
+              <li class="page-item "><a class="page-link" >4</a></li>
+              <li class="page-item "><a class="page-link" >5</a></li> -->
+              <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"  [ngClass]="leavesRequestPageManager.last?'theading':' cur-point'"   (click)="leavesRequestManageNextPrev(true)">Next</a></li>
+          </ul>
+      </nav>
       </div>
-
+     
     </div>
   </div>
   <!-- DASHBOARD END -->

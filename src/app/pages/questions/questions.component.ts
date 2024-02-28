@@ -1,24 +1,22 @@
-import { Component, HostListener } from '@angular/core';
+import { AfterViewInit, Component, HostListener, Type } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, timer } from 'rxjs';
-
 import { Chapter } from 'src/app/entity/chapter';
 import { QuizeQuestion } from 'src/app/entity/quize-question';
+import { Exam } from 'src/app/enum/exam';
 import { ChapterExamResultResponse } from 'src/app/payload/chapter-exam-result-response';
 import { ChapterServiceService } from 'src/app/service/chapter-service.service';
 import { ExamServiceService } from 'src/app/service/exam-service.service';
 import { LoginService } from 'src/app/service/login.service';
 import { QuestionServiceService } from 'src/app/service/question-service.service';
-import { SubjectService } from 'src/app/service/subject.service';
-import { UtilityServiceService } from 'src/app/service/utility-service.service';
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.scss']
 })
-export class QuestionsComponent {
+export class QuestionsComponent implements AfterViewInit {
   chapterId: number = 0;
   index: number = 0
   questions: QuizeQuestion[] = []
@@ -54,10 +52,17 @@ export class QuestionsComponent {
     this.toggleFullScreen()
   }
 
+  ngAfterViewInit(): void {
+    if (this.type == Exam.subjectExam) {
+      this.getSubjectExamQuestion();
+    } else {
+      this.getChapeter();
+    }
+  }
+
   ngOnInit() {
     this.activateRouter.queryParams.subscribe((params: any) => {
-
-      if (params['type'] == "subjectExam") {
+      if (params['type'] == Exam.subjectExam) {
         this.subjectExamId = params['subjectExamId']
       } else {
         this.chapterId = params['chapterId'];
@@ -65,20 +70,11 @@ export class QuestionsComponent {
       this.type = params['type'];
       this.subjectId = params['subjectId'];
     });
-
-
-    setTimeout(() => {
-      if (this.type == "subjectExam") {
-        this.getSubjectExamQuestion();
-      } else {
-        this.getChapeter();
-      }
-    }, 500);
-
   }
 
+
   public getSubjectExamQuestion() {
-    this.questionService.getAllSubjectExamQuestion(this.subjectId).subscribe({
+    this.questionService.getAllSubjectExamQuestion(this.subjectExamId, this.loginService.getStudentId()).subscribe({
 
       next: (data: any) => {
         this.subjectTimer = data.timer;
@@ -86,24 +82,27 @@ export class QuestionsComponent {
         this.questions = data.questions
         this.question = this.questions[0];
         this.questionNotAnswered = this.questions.length;
+        this.toggleFullScreen()
         setTimeout(() => {
           this.timer();
+          console.table(this.questions);
+          
         }, 500);
       },
-      error(err: any) {
-
+      error: (err: any) => {
+        console.log(err.error.message);
       },
     })
   }
 
   public timer() {
-    const duration = 60 * (this.type == "chapterExam" ? this.chapter.exam.examTimer! : this.subjectTimer)// in seconds
+    const duration = 60 * (this.type == Exam.chapterExam ? this.chapter.exam.examTimer! : this.subjectTimer)// in seconds
     this.timerSubscription = timer(0, 1000).subscribe((elapsedTime: any) => {
       this.second = duration - elapsedTime;
       this.remainingTime = new Date(this.second * 1000).toISOString().substr(11, 8);
       if (elapsedTime >= duration) {
         this.timerSubscription?.unsubscribe();
-        this.submittion();
+        this.type == Exam.subjectExam ? this.SubjectExamsubmittion() : this.submittion()
       }
     });
   }
@@ -115,7 +114,13 @@ export class QuestionsComponent {
     this.chapterExamResultResponse.subjectId = this.subjectId
     this.examServiceService.addChapterExam(this.chapterExamResultResponse).subscribe(
       (data: any) => {
-        this.router.navigate(['result/' + data.id])
+        let params = {
+          resultId: data.id,
+          type: Exam.chapterExamResult
+        }
+        this.router.navigate(['result'], {
+          queryParams: params
+        })
       }
     )
   }
@@ -124,24 +129,24 @@ export class QuestionsComponent {
     this.subjectExamResultResponse.studentId = this.loginService.getStudentId()
     this.subjectExamResultResponse.review = Object.fromEntries(this.questionClicked.entries());
     this.subjectExamResultResponse.subjectId = this.subjectId
-    this.examServiceService.addSubjectExam(this.chapterExamResultResponse).subscribe(
-      (data: any) => {
-        this.router.navigate(['result/' + data.id])
+    this.subjectExamResultResponse.examId = this.subjectExamId
+    this.subjectExamResultResponse.questionList = this.questions.map(obj => obj.questionId) as number[]
+
+    this.examServiceService.addSubjectExam(this.subjectExamResultResponse).subscribe(
+      {
+        next: (data: any) => {
+          let params = {
+            resultId: data.id,
+            type: Exam.subjectExamResult
+          }
+          this.router.navigate(['result'], {
+            queryParams: params
+          })
+        }
       }
     )
-  }
 
-  // public getAllQuestions() {
-  //   if (this.chapterId) {
-  //     this.questionService.getAllQuestionByChapterId(this.chapterId).subscribe(
-  //       (data) => {
-  //         this.questions = data;
-  //         this.question = this.questions[0];
-  //         this.questionNotAnswered = this.questions.length;
-  //       }
-  //     )
-  //   }
-  // }
+  }
 
   public nextQuestion(id: number) {
     if (this.index == this.questions.length - 1) {
@@ -199,7 +204,7 @@ export class QuestionsComponent {
       event.key == 'Meta' // Windows (Super) key
     ) {
 
-      this.type == "subjectExam" ? this.SubjectExamsubmittion() : this.submittion();
+      this.type == Exam.subjectExam ? this.SubjectExamsubmittion() : this.submittion();
       // Call your submission function                 // commented 24
     }
   }
@@ -244,21 +249,17 @@ export class QuestionsComponent {
       // Enter fullscreen mode
       if (element.requestFullscreen) {
         element.requestFullscreen();
-        console.log("Entered fullscreen mode");
       }
     } else {
       // Exit fullscreen mode
       if (document.exitFullscreen) {
         document.exitFullscreen();
-        console.log('Exited fullscreen mode');
       }
     }
 
     // Toggle the fullscreen state
     this.isFullScreen = !this.isFullScreen;
   }
-
-
 
   public getChapeter() {
     this.chapterService.getChapterById(this.chapterId).subscribe(
@@ -268,6 +269,7 @@ export class QuestionsComponent {
         this.questionNotAnswered = this.questions.length;
         this.chapter = data.chapter;
         this.timer();
+        this.toggleFullScreen()
       }
     )
   }
@@ -291,7 +293,7 @@ export class QuestionsComponent {
         //this.router.navigate(['/student/chapterDetails/' + this.chapterId])
         this.timerSubscription?.unsubscribe();
         //  this.submittion();
-        this.type == "subjectExam" ? this.SubjectExamsubmittion() : this.submittion();
+        this.type == Exam.subjectExam ? this.SubjectExamsubmittion() : this.submittion();
       }
     })
   }
@@ -311,7 +313,9 @@ export class QuestionsComponent {
         // this.router.navigate(['/student/chapterDetails/' + this.chapterId])
         this.timerSubscription?.unsubscribe();
         //  this.submittion();
-        this.type == "subjectExam" ? this.SubjectExamsubmittion() : this.submittion();
+
+        alert(this.type)
+        this.type == Exam.subjectExam ? this.SubjectExamsubmittion() : this.submittion();
       }
     })
   }

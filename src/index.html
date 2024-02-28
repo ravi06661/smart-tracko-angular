@@ -300,23 +300,58 @@
 
     function subject_test() {
       $(".subject-topic").hide();
+      $(".subject-exam").hide();
       $(".subject-test").show();
+
       $("#subject_test").css("color", "#49bfcf");
       $("#subject_topic").css("color", "#515151");
+      $("#subject_exam").css("color", "#515151");
+
       $("#subject_test").addClass("tabs_heading_border_active");
       $("#subject_topic").removeClass("tabs_heading_border_active");
+      $("#subject_exam").removeClass("tabs_heading_border_active");
+
+
+
+
       $("#topic_create_new").hide();
+      $("#add-exam").hide();
       $("#test_add_ques").show();
     }
 
     function subject_topic() {
       $(".subject-topic").show();
       $(".subject-test").hide();
+      $(".subject-exam").hide();
+
       $("#subject_topic").css("color", "#49bfcf");
       $("#subject_test").css("color", "#515151");
+      $("#subject_exam").css("color", "#515151");
+
       $("#subject_test").removeClass("tabs_heading_border_active");
       $("#subject_topic").addClass("tabs_heading_border_active");
+      $("#subject_exam").removeClass("tabs_heading_border_active");
+
+
+      $("#add-exam").hide();
       $("#topic_create_new").show();
+      $("#test_add_ques").hide();
+    }
+
+    function subject_exam() {
+      $(".subject-topic").hide();
+      $(".subject-test").hide();
+      $(".subject-exam").show();
+      $("#subject_exam").css("color", "#49bfcf");
+      $("#subject_test").css("color", "#515151");
+      $("#subject_topic").css("color", "#515151");
+
+      $("#subject_test").removeClass("tabs_heading_border_active");
+      $("#subject_topic").removeClass("tabs_heading_border_active");
+      $("#subject_exam").addClass("tabs_heading_border_active");
+
+      $("#add-exam").show();
+      $("#topic_create_new").hide();
       $("#test_add_ques").hide();
     }
 

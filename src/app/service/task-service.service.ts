@@ -27,8 +27,13 @@ export class TaskServiceService {
   public getTaskById(id: number) {
     return this.http.get(`${this.TASK_URL}/getTaskById?taskId=${id}`)
   }
-  public getAllTask(studentId: number): Observable<any> {
-    return this.http.get(`${this.TASK_URL}/getAllTaskOfStudent?studentId=${studentId}`);
+  public getAllTask(studentId: number, pageRequest: PageRequest): Observable<any> {
+    const params = {
+      pageNumber: pageRequest.pageNumber,
+      pageSize: pageRequest.pageSize,
+      studentId: studentId
+    };
+    return this.http.get(`${this.TASK_URL}/getAllTaskOfStudent`, { params: params });
   }
   public submitTask(task: StudentTaskSubmittion, taskId: number) {
     let formData = new FormData();
@@ -76,8 +81,14 @@ export class TaskServiceService {
     return this.http.get(`${this.TASK_URL}/getAllSubmissionTaskStatus`, { params });
   }
 
-  public getSubmitedTaskByStudent(studentId: number) {
-    return this.http.get(`${this.TASK_URL}/getSubmitedTaskForStudent?studentId=${studentId}`)
+  public getSubmitedTaskByStudent(studentId: number, pageRequest: PageRequest, status: string) {
+    const params = {
+      pageNumber: pageRequest.pageNumber,
+      pageSize: pageRequest.pageSize,
+      studentId: studentId,
+      status: status
+    };
+    return this.http.get(`${this.TASK_URL}/getSubmitedTaskForStudent`, { params })
   }
 
   public updateSubmitedTaskStatus(submissionId: string, status: string, review: string) {
@@ -142,7 +153,12 @@ export class TaskServiceService {
     return this.http.delete(`${this.TASK_URL}/deleteAttachement`, { params })
   }
   ActivateTask(id: number) {
-    let params = { id: id}
-    return this.http.put(`${this.TASK_URL}/activateTask?id=${id}`,null)
+    let params = { id: id }
+    return this.http.put(`${this.TASK_URL}/activateTask?id=${id}`, null)
   }
+
+  public getAllTaskSubmissionBYTaskId(taskId: number) {
+    return this.http.get(`${this.TASK_URL}/getAllTaskSubmissionBYTaskId?taskId=${taskId}`)
+  }
+
 }

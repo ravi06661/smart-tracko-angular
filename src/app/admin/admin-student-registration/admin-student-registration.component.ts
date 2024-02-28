@@ -137,7 +137,8 @@ export class AdminStudentRegistrationComponent {
           })
           Toast.fire({
             icon: 'error',
-            title: 'Registration failed !!'
+            title: err.error.message
+            
           })
         }
       )

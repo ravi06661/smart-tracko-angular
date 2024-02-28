@@ -28,7 +28,9 @@ export class AdminSubjectsChapterQuizComponent {
   private editorInstance: any;
   submissionForm: FormGroup
   subjectId: number = 0;
-  questionIndex = 0
+  questionIndex = 0;
+  type!: string;
+  examId!: number
 
   constructor(private activateRouter: ActivatedRoute,
     private questionService: QuestionServiceService,
@@ -44,6 +46,7 @@ export class AdminSubjectsChapterQuizComponent {
       option2: ['', Validators.required],
       option1: ['', Validators.required],
       questionContent: ['', Validators.required]
+
     });
   }
   ngOnInit() {
@@ -51,8 +54,14 @@ export class AdminSubjectsChapterQuizComponent {
     this.activateRouter.queryParams.subscribe(params => {
       this.id = params['chapterId'];
       this.subjectId = params['subjectId'];
+      this.type = params['type'],
+        this.examId = params['examId']
     });
-    this.getAllQuestions();
+    if (this.type == "subjectExamQuestion") {
+      this.getAllSubjectExamQuestion();
+    } else {
+      this.getAllQuestions();
+    }
   }
   public addQuestion() {
     if (this.submissionForm.invalid) {
@@ -89,6 +98,9 @@ export class AdminSubjectsChapterQuizComponent {
         }
       }
     )
+  }
+  public getAllSubjectExamQuestion() {
+    alert('getting subect exam question ')
   }
   public deleteQuestion() {
     this.questionService.deleteQuestionById(this.questionId).subscribe(
@@ -129,6 +141,7 @@ export class AdminSubjectsChapterQuizComponent {
       }
     )
   }
+
   public cancel() {
     this.question = new QuizeQuestion();
   }
@@ -166,4 +179,6 @@ export class AdminSubjectsChapterQuizComponent {
     this.questionIndex = index
     this.question = { ...this.questions.find(obj => obj.questionId === id) as QuestionResponse }
   }
+
+
 }

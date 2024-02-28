@@ -2,11 +2,11 @@
     <div class="profile d-flex">
 
         <div class="profile_top_heading d-flex gap_24">
-            <h1 class="font-27 font-700 secondary mb-0">Core Java</h1>
+            <h1 class="font-27 font-700 secondary mb-0">{{ this.chapterName}}</h1>
             <button class="top_profile_sec_btn font-14 font-500 lh-1" data-bs-toggle="modal"
                 data-bs-target="#chapter-add-content-modal" (click)="cancelContent()">Create New</button>
 
-                <button class="top_profile_sec_btn font-14 font-500 lh-1"  routerLink="/admin/result/{{chapterId}}">RESULT</button>
+                <button class="top_profile_sec_btn font-14 font-500 lh-1"(click)=" pageRenderUsingRouterLink('/admin/result/',chapterId)">RESULT</button>
         </div>
 
         <app-profile-bar></app-profile-bar>

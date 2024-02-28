@@ -1,7 +1,7 @@
 <div id="main" class="main main_task">
   <div class="profile d-flex mb-4">
-  <h1 class="font-27 font-700 secondary mb-0">Assignments</h1>
-  <app-profile-bar></app-profile-bar>
+    <h1 class="font-27 font-700 secondary mb-0">Assignments</h1>
+    <app-profile-bar></app-profile-bar>
   </div>
 
   <div class="scroll_section">
@@ -10,13 +10,16 @@
         <div class="col-md-6 mb-4" *ngIf="unLockAssignments.length!==0 || lockAssignments.length!==0 ">
           <h3 class="title font-17 font-500 secondary position-relative">Assignments</h3>
 
-           
+
           <div class="AssignmentCard mb-1" id="head-show" *ngFor="let obj of unLockAssignments; let i=index">
             <div class="Head">
               <div class="TaskName text-light">Day {{i+1}} [{{obj.title}}]</div>
               <div class="Toggle">
-                <i class="fi fi-rr-angle-small-down fs-4 lh-2 secondary" id="down-arrow"   (click)="toggleAssignment(i)" (click)="getAssignment(obj.id)"></i>
-                <i class="fi fi-rr-angle-small-up fs-4 lh-2 secondary" id="up-arrow" onclick="assignhide()"   style="display:none;" ></i>
+                <i class="fi fi-rr-angle-small-down fs-4 lh-2 secondary" id="down-arrow" (click)="toggleAssignment(i)"
+                  (click)="getAssignment(obj.id)"></i>
+                <i class="fi fi-rr-angle-small-up fs-4 lh-2 secondary" id="up-arrow" onclick="assignhide()"
+                  style="display:none;"></i>
+                  
               </div>
             </div>
             <div class="Bar">
@@ -27,50 +30,57 @@
               </div>
             </div>
             <div class="progress">
-              <div class="progress-bar ProgressW bg-primary" role="progressbar" [style.width]="calculatePercentages(obj.totalTaskCompleted,obj.taskQuestion.length)+'%'" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-  
+              <div class="progress-bar ProgressW bg-primary" role="progressbar"
+                [style.width]="calculatePercentages(obj.totalTaskCompleted,obj.taskQuestion.length)+'%'"
+                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+
             </div>
             <div id="taskcard_show_{{i}}" [style.display]="assignmentTaskVisibility[i] ? 'block' : 'none'">
-              <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)" *ngFor="let task of obj.taskQuestion; let j=index">
+              <a (click)="pageRenderUsingRouterLink('/student/assignmentdetails', task.questionId)"
+                *ngFor="let task of obj.taskQuestion; let j=index">
                 <div class="TaskCard">
                   <!-- <div class="TaskName">Task {{j+1}}</div> -->
-                  <div class="TaskName" *ngIf="task.submissionDate!=null">Task {{j+1 }}  <span class="font-15 font-400 text_gray">Summited on {{task.submissionDate | date:'mediumDate' }}</span></div>
-                  <div class="TaskName" *ngIf="task.submissionDate==null"  >Task {{j+1 }}  <span class="font-15 font-400 text_gray">Pending</span></div>
+                  <div class="TaskName" *ngIf="task.submissionDate!=null">Task {{j+1 }} <span
+                      class="font-15 font-400 text_gray">Summited on {{task.submissionDate | date:'mediumDate' }}</span>
+                  </div>
+                  <div class="TaskName" *ngIf="task.submissionDate==null">Task {{j+1 }} <span
+                      class="font-15 font-400 text_gray">Pending</span></div>
                   <div class="Button">View</div>
                 </div>
               </a>
             </div>
           </div>
-          
+
           <div class="TaskCard" *ngFor="let assignment of lockAssignments ; let i=index">
             <div class="font-15 font-400 text_gray">Assignment Day {{(unLockAssignments.length+1)+i}}</div>
             <div class=""><i class="fi fi-rr-lock ms-auto"></i></div>
           </div>
 
-          </div>
-          <div class="col-md-6 mb-4" *ngIf="unLockAssignments.length ==0  && lockAssignments.length ==0 ">
-            <h3 class="font-21 font-600 secondary position-relative">
-              No Assignments found!!
-            </h3>
-          </div>
+        </div>
+        <div class="col-md-6 mb-4" *ngIf="unLockAssignments.length ==0  && lockAssignments.length ==0 ">
+          <h3 class="font-21 font-600 secondary position-relative">
+            No Assignments found!!
+          </h3>
+        </div>
         <!-- </div> -->
 
- <div class="col-md-6 mb-4" >
-  <div class="assignment-updates-top">
-   <h3 class="title font-17 font-500 secondary position-relative">Updates</h3>
-   <div class="top-status-month d-flex gap-3">
-     <div class="dropdown">
-       <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-         Status
-       </a>
-       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" (click)="getSubmitedAssignment()">All</a></li>
-         <li><a class="dropdown-item" (click)="getSubmissionAssignmentFilterByStatus('Accepted')">Completed</a></li>
-         <li><a class="dropdown-item" (click)="getSubmissionAssignmentFilterByStatus('Rejected')">Rejected</a></li>
-         <li><a class="dropdown-item" (click)="getSubmissionAssignmentFilterByStatus('Reviewing')">Reviewing</a></li>              
-       </ul>
-     </div>
-     <!-- <div class="dropdown">
+        <div class="col-md-6 mb-4">
+          <div class="assignment-updates-top">
+            <h3 class="title font-17 font-500 secondary position-relative">Updates</h3>
+            <div class="top-status-month d-flex gap-3">
+              <div class="dropdown">
+                <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="status2" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Status
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" (click)="getSubmitedAssignment()">All</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedAssignment('Accepted')">Completed</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedAssignment('Rejected')">Rejected</a></li>
+                  <li><a class="dropdown-item" (click)="getSubmitedAssignment('Reviewing')">Reviewing</a></li>
+                </ul>
+              </div>
+              <!-- <div class="dropdown">
        <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
          January
        </a>
@@ -89,31 +99,55 @@
          <li><a class="dropdown-item" href="#">December </a></li>
        </ul>
      </div> -->
-   </div>
-  </div>
-   <div class="all_summary assignment-updates">
+            </div>
+          </div>
+          <div class="all_summary assignment-updates">
 
-     <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1" *ngFor="let obj of assignmentSubmissionsList2;let i=index" (click)="assignmentSubmissionObj = obj">
-       <div class="d-flex align-items-center justify-content-between">
-         <h3 class="font-14 font-500 mb-1 text-black">Assignment [{{obj.title}}] <b class="ms-1 font-500" [ngClass]="{'text_light_green':obj.status == 'Accepted','text_light_red':obj.status=='Rejected','text_light_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</b></h3>
-         <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
-       </div>
-       <div class="d-flex align-items-center justify-content-between mb-1">
-         <h3 class="font-13 font-400 mb-0">Task-{{i+1}}: Submission is {{obj.status}}.</h3>
-         <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">
-          <ng-container *ngIf="dateFormatter(todayDate) === dateFormatter(obj.submissionDate); else otherDate">
-            Today {{ obj.submissionDate | date:'shortTime' }}
-          </ng-container>
-          <ng-template #otherDate>
-            {{ obj.submissionDate | date:' d MMM y h:mm a' }}
-          </ng-template>
-        </h4>
-        
-       </div>
-      </div>   
-   </div>
- </div>
- <!-- <div class="col-md-6" *ngIf="assignmentSubmissionsList.length==0">
+            <div class="task_summary" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+              *ngFor="let obj of assignmentSubmissionsList2;let i=index" (click)="assignmentSubmissionObj = obj">
+              <div class="d-flex align-items-center justify-content-between">
+                <h3 class="font-14 font-500 mb-1 text-black">Assignment [{{obj.title}}] <b class="ms-1 font-500"
+                    [ngClass]="{'text_light_green':obj.status == 'Accepted','text_light_red':obj.status=='Rejected','text_light_blue':(obj.status=='Unreviewed')||(obj.status=='Reviewing')}">{{obj.status}}</b>
+                </h3>
+                <h4 class="font-13 font-400 warning ms-auto mb-0 task_modal">View</h4>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-1">
+                <h3 class="font-13 font-400 mb-0">Task-{{i+1}}: Submission is {{obj.status}}.</h3>
+                <h4 class="font-11 font-400 text_gray ms-auto mb-0 task_modal">
+                  <ng-container *ngIf="dateFormatter(todayDate) === dateFormatter(obj.submissionDate); else otherDate">
+                    Today {{ obj.submissionDate | date:'shortTime' }}
+                  </ng-container>
+                  <ng-template #otherDate>
+                    {{ obj.submissionDate | date:' d MMM y h:mm a' }}
+                  </ng-template>
+                </h4>
+
+              </div>
+            </div>
+          </div>
+
+          <nav aria-label="Page navigation example" class="table-pagination" *ngIf="assignmentSubmissionsList2.length >=assignmentPageRequest.pageSize">
+
+            <ul class="pagination">
+              <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "
+                  [ngClass]="assignmentSubmissionPagination.first?'theading ':' cur-point'"
+                  (click)="manageaAssignmentSubmissionNextPrev(false)">Previous</a></li>
+              <li class="page-item cur-point" *ngFor="let b of assignmentSubmissionPagination.showButtoons ;"
+                (click)="getTaskPage(b-1)"><a class="page-link text_orange "
+                  [ngClass]="assignmentSubmissionPageRequest.pageNumber==b-1?'active':''" id="{{b}}"
+                  href="javascript:void(0)">{{b}}</a>
+              </li>
+              <!-- <li class="page-item "><a class="page-link" >2</a></li>
+        <li class="page-item "><a class="page-link" >3</a></li>
+        <li class="page-item "><a class="page-link" >4</a></li>
+        <li class="page-item "><a class="page-link" >5</a></li> -->
+              <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"
+                  [ngClass]="assignmentSubmissionPagination.last?'theading':' cur-point'"
+                  (click)="manageaAssignmentSubmissionNextPrev(true)">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+        <!-- <div class="col-md-6" *ngIf="assignmentSubmissionsList.length==0">
   <h3 class="title font-17 font-500 secondary position-relative">Updates</h3>
   <h3 class="font-21 font-600 secondary position-relative">
     No task submission found!!
@@ -122,9 +156,9 @@
 
 
 
-</div>
-</div>
-</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -144,7 +178,7 @@
         <div class="form_input">
           <h5 class="sub-heading font-17 font-500 secondary mb-1">Discription</h5>
           <div class="">
-            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3" 
+            <textarea class="form-control text_area" id="exampleFormControlTextarea1" rows="3"
               placeholder="Input Text Here"></textarea>
           </div>
         </div>
@@ -180,45 +214,48 @@
 </div>
 <!-- Modal submit button end -->
 
-  <!-- Dashboard Updates  Modal -->
-  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-    <div class="modal-dialog position-relative assignment_modal" style="width: 514px;">
-      <div class="modal-content">
-        <div class="modal-body">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5 font-17 font-600 secondary modal_line position-relative mb-2" id="exampleModalLabel1">
-              Submission Details</h1>
-            <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -15%;">
-              <i class="fi fi-rr-cross close_modal"></i>
-            </button>
-            <h3 class="font-15 font-500" [ngClass]="{'text_light_green':assignmentSubmissionObj.status == 'Accepted','text_light_red':assignmentSubmissionObj.status=='Rejected','text_light_blue':(assignmentSubmissionObj.status=='Unreviewed')||(assignmentSubmissionObj.status=='Reviewing')}">{{assignmentSubmissionObj.status}}</h3>
-          </div>
-          <div class="">
-            <div class="assignment">
-              <div class="question_ans">
-                <h3 class="font-17 font-500 secondary">Report</h3>
-                <ol class="ps-3">
-                  <li class="font-17 font-400 text_dark">{{assignmentSubmissionObj.description}}</li>
-                  <!-- <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li> -->
-                </ol>
-              </div>     
-              <div class="question_ans" *ngIf="assignmentSubmissionObj.status!='Unreviewed'">
-                <h3 class="font-17 font-500 secondary">Review</h3>
-                <ol class="ps-3">
-                  <li class="font-17 font-400 text_dark">{{assignmentSubmissionObj.review}}</li>
-                  <!-- <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li> -->
-                </ol>
-              </div>       
+<!-- Dashboard Updates  Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+  <div class="modal-dialog position-relative assignment_modal" style="width: 514px;">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 font-17 font-600 secondary modal_line position-relative mb-2"
+            id="exampleModalLabel1">
+            Submission Details</h1>
+          <button type="button" class="close_btn" data-bs-dismiss="modal" aria-label="Close" style="top: -15%;">
+            <i class="fi fi-rr-cross close_modal"></i>
+          </button>
+          <h3 class="font-15 font-500"
+            [ngClass]="{'text_light_green':assignmentSubmissionObj.status == 'Accepted','text_light_red':assignmentSubmissionObj.status=='Rejected','text_light_blue':(assignmentSubmissionObj.status=='Unreviewed')||(assignmentSubmissionObj.status=='Reviewing')}">
+            {{assignmentSubmissionObj.status}}</h3>
+        </div>
+        <div class="">
+          <div class="assignment">
+            <div class="question_ans">
+              <h3 class="font-17 font-500 secondary">Report</h3>
+              <ol class="ps-3">
+                <li class="font-17 font-400 text_dark">{{assignmentSubmissionObj.description}}</li>
+                <!-- <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li> -->
+              </ol>
+            </div>
+            <div class="question_ans" *ngIf="assignmentSubmissionObj.status!='Unreviewed'">
+              <h3 class="font-17 font-500 secondary">Review</h3>
+              <ol class="ps-3">
+                <li class="font-17 font-400 text_dark">{{assignmentSubmissionObj.review}}</li>
+                <!-- <li class="font-17 font-400 text_dark">Maintain a high level of creativity</li> -->
+              </ol>
+            </div>
             <form class="attachment_file1 d-flex align-items-center  position-relative attechment_file">
               <a href="{{assignmentSubmissionObj.submitFile}}" class="font-15 font-400 text_gray  attachment_file_text">
                 <i class="fi fi-rr-paperclip-vertical secondary add_more position-absolute  mx-2"></i>
-                Download Submited File {{assignmentSubmissionObj.submitFile}}</a>
+                Download Submited File</a>
             </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
+</div>
 
 <app-right-side-bar></app-right-side-bar>

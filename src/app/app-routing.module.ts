@@ -95,8 +95,8 @@ const routes: Routes = [
     ]
   },
 
-  { path: 'result/:id', component: ResultComponent, pathMatch: 'full' },
-  { path: 'review/:id', component: ReviewComponent, pathMatch: 'full' },
+  { path: 'result', component: ResultComponent, pathMatch: 'full' },
+  { path: 'review', component: ReviewComponent, pathMatch: 'full' },
   { path: 'questions', component: QuestionsComponent, pathMatch: 'full' },
   {
     path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuardGuard], children: [
@@ -135,7 +135,7 @@ const routes: Routes = [
       { path: 'submission', component: AdminSubmissionComponent, pathMatch: 'full' },
       { path: 'editetask', component: AdminEditTaskComponent },
       { path: 'admindiscussion', component: AdminDiscussionForumComponent, pathMatch: 'full' },
-      { path: 'result/:chapterId', component: AdminChapterResultComponent, pathMatch: 'full' },
+      { path: 'result', component: AdminChapterResultComponent, pathMatch: 'full' },
 
 
     ]

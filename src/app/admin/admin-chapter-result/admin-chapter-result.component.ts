@@ -12,25 +12,43 @@ import { UtilityServiceService } from 'src/app/service/utility-service.service';
   templateUrl: './admin-chapter-result.component.html',
   styleUrls: ['./admin-chapter-result.component.scss']
 })
-export class AdminChapterResultComponent implements OnInit{
-     
-  chapterExamResult:any
-  chapterId:number=0;
+export class AdminChapterResultComponent implements OnInit {
 
-  constructor(private examService:ExamServiceService,private activateRoute:ActivatedRoute,private utilityService: UtilityServiceService){}
+  chapterExamResult: any
+  chapterId: number = 0;
+  type!: string
+  subjectExamId!: number;
+
+  constructor(private examService: ExamServiceService, private activateRoute: ActivatedRoute, private utilityService: UtilityServiceService) { }
   ngOnInit(): void {
-    this.chapterId = this.activateRoute.snapshot.params[('chapterId')];
-    this.showResult();
+
+    this.activateRoute.queryParams.subscribe((params: any) => {
+
+      if (params['type'] == "subjectExam") {
+        this.subjectExamId = params['subjectExamId']
+        this.showSubjectExamResult(params['subjectExamId'])
+      } else {
+        this.chapterId = params['chapterId'];
+        this.showChapterExamResult(params['chapterId']);
+      }
+      this.type = params['type'];
+    });
   }
 
-  showResult(){
-
-    this.examService.getAllChapterExamResultByChaterId(this.chapterId).subscribe((data:any)=>{
-      
-      
-        this.chapterExamResult=data.examResult
-
+  showChapterExamResult(chapterId:any) {
+    this.examService.getAllChapterExamResultByChaterId(chapterId).subscribe((data: any) => {
+      this.chapterExamResult = data.examResult
     })
-         
+  }
+
+  showSubjectExamResult(subjectExamId: number) {
+    this.examService.getALLSubjectExamResultesBySubjectId(subjectExamId).subscribe({
+      next: (data: any) => {
+        this.chapterExamResult = data.examResult
+      },
+      error: (er: any) => {
+
+      }
+    })
   }
 }

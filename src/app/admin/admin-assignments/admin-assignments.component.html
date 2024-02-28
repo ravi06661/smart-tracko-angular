@@ -61,25 +61,25 @@
                     <h3 class="admin-title font-17 font-600 secondary position-relative">Active Assignments</h3>
                     <div class="right-side-dropdown-btn d-flex">
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="course1" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Course
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" *ngFor="let course of courses"
-                                        (click)="courseFilterByCourseIdAndSubjectId(course.courseId,0)">{{course.courseName}}</a>
+                                        (click)="courseFilterByCourseIdAndSubjectId(course,0)">{{course.courseName}}</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="subject1" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Subject
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" *ngFor="let subject of subjectes"
                                         (click)="selectCourseSubject(subject)"
-                                        (click)="courseFilterByCourseIdAndSubjectId(course.courseId,subjectId)">
+                                        (click)="courseFilterByCourseIdAndSubjectId(course,subjectId)">
                                         {{subject.subjectName}}</a></li>
                                 <!-- <li><a class="dropdown-item" href="#">February</a></li>
                                 <li><a class="dropdown-item" href="#">March</a></li> -->
@@ -116,8 +116,8 @@
                             <tr class="pointer" *ngFor="let obj of taskSubmissionStatus ;let i=index"
                                >
                                 <td>
-                                    <h5 class="font-15 font-500 mb-0"  routerLink="/admin/createassignments/{{obj.assignmentId}}">{{obj.assignmentTitle}}</h5>
-                                    <p class="text_gray font-13 font-400 mb-0"> Task {{obj.taskCount}}</p>
+                                    <h5 class="font-15 font-500 mb-0"  routerLink="/admin/createassignments/{{obj.assignmentId}}"  *ngIf="!isDuplicateAssignment(obj.assignmentTitle, i)">{{obj.assignmentTitle}}</h5>
+                                    <p class="text_gray font-13 font-400 mb-0" [innerHTML]="obj.taskTitle"></p>
                                 </td>
                                 <td class="txt_color_blue" [ngClass]="obj.status==false?'text-danger':'success'" (click)="activateTask(obj)"><div class="td">{{obj.status==false?' Active':'Deactive'}}</div></td>
                                 <td class="txt_color_purple ">{{obj.totalSubmitted}}</td>
@@ -129,7 +129,7 @@
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation example" class="table-pagination"  >
+                <nav aria-label="Page navigation example" class="table-pagination"  *ngIf="taskSubmissionStatus.length >=assignmentPageRequest.pageSize">
                       
                     <ul class="pagination">
                         <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="assignmentPagination.first?'theading ':' cur-point'"  (click)="manageaAssignmentNextPrev(false)">Previous</a></li>
@@ -150,7 +150,7 @@
                     </h3>
                     <div class="right-side-dropdown-btn d-flex">
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="course2" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Course
                             </a>
@@ -161,7 +161,7 @@
                             </ul>
                         </div>
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="subject2" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Subject
                             </a>
@@ -173,7 +173,7 @@
                             </ul>
                         </div>
                         <div class="dropdown">
-                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" href="#" role="button"
+                            <a class="attendance_dropdown1 dropdown-toggle font-15 font-500 dark" id="status2" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Status
                             </a>
@@ -199,7 +199,7 @@
                         <tbody class="bg-light">
                             <tr *ngFor="let obj of submitedAssignments">
                                 <td>
-                                    <a class="d-flex align-items-center gap_5" (click)="pageRanderWithObj(obj)">
+                                    <a class="d-flex align-items-center gap_5" (click)="pageRanderWithObj(obj,obj.assignmentId)">
                                         <div class="person_image">
                                             <img [src]="obj.profilePic" alt="" class="img-fluid">
                                         </div>
@@ -219,8 +219,21 @@
                         </tbody>
                     </table>
                 </div>
-
+                <nav aria-label="Page navigation example" class="table-pagination"  *ngIf="submitedAssignments.length >=assignmentPageRequest.pageSize" >
+                      
+                    <ul class="pagination">
+                        <li class="p-2  mx-2 ms-0 "><a class="fs-16 fw-500 secondary "  [ngClass]="assignmentSubmissionPagination.first?'theading ':' cur-point'"  (click)="manageaAssignmentSubmissionNextPrev(false)">Previous</a></li>
+                        <li class="page-item cur-point" *ngFor="let b of assignmentSubmissionPagination.showButtoons ;"  (click)="getAssignmentSubmissionkPage(b-1)"><a class="page-link text_orange " [ngClass]="assignmentSubmissionPageRequest.pageNumber==b-1?'active':''" id="{{b}}" href="javascript:void(0)">{{b}}</a>
+                        </li>
+                        <!-- <li class="page-item "><a class="page-link" >2</a></li>
+                        <li class="page-item "><a class="page-link" >3</a></li>
+                        <li class="page-item "><a class="page-link" >4</a></li>
+                        <li class="page-item "><a class="page-link" >5</a></li> -->
+                        <li class="p-2  mx-0 ms-2"><a class="fs-16 fw-500 secondary"  [ngClass]="assignmentSubmissionPagination.last?'theading':' cur-point'"   (click)="manageaAssignmentSubmissionNextPrev(true)">Next</a></li>
+                    </ul>
+                </nav>
             </div>
+            
 
         </div>
     </div>

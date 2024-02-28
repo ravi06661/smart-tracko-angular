@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { co } from '@fullcalendar/core/internal-common';
 import { Course } from 'src/app/entity/course';
 import { PaginationManager } from 'src/app/entity/pagination-manager';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
@@ -45,6 +46,8 @@ export class AdminTaskComponent implements AfterViewInit {
 
   submissioTaskpageManager: PaginationManager = new PaginationManager();
   submissioTaskPageRequest: PageRequest = new PageRequest();
+  course = new Course()
+  subject = new Subject
 
   constructor(private subjectService: SubjectService,
     private courseService: CourseServiceService,
@@ -62,9 +65,9 @@ export class AdminTaskComponent implements AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.getCourses();
-    this.getAllSubmittedTaskFilter(0, 0, 'NOT_CHECKED_WITH_IT', this.submissioTaskPageRequest)
+    this.getAllSubmittedTaskFilter(new Course, 0, 'NOT_CHECKED_WITH_IT', this.submissioTaskPageRequest)
     this.getOverAllAssignmentTaskStatus()
-    this.courseFilterByCourseIdAndSubjectId(0, 0, this.pageRequest)
+    this.courseFilterByCourseIdAndSubjectId(new Course, new Subject, this.pageRequest)
   }
 
   ngOnInit() {
@@ -108,7 +111,7 @@ export class AdminTaskComponent implements AfterViewInit {
         {
           next: (data: any) => {
             this.toast.showSuccess(data.message, 'Success')
-            // this.firstTaskForm.reset()
+            this.firstTaskForm.reset()
             this.router.navigate(['/admin/createtask/' + data.taskId])
           },
           error: (er: any) => {
@@ -132,17 +135,32 @@ export class AdminTaskComponent implements AfterViewInit {
   submissionPage(pageNumber: any) {
     if (pageNumber !== this.submissioTaskPageRequest.pageNumber) {
       this.submissioTaskPageRequest.pageNumber = pageNumber;
-      this.getAllSubmittedTaskFilter(this.courseId, this.subjectId, 'NOT_CHECKED_WITH_IT', this.submissioTaskPageRequest);
+      this.getAllSubmittedTaskFilter(this.course1, this.subjectId, 'NOT_CHECKED_WITH_IT', this.submissioTaskPageRequest);
     }
   }
+
   subjectId!: number
-  public getAllSubmittedTaskFilter(courseId: number, subjectId: number, status: string, pageRequest: PageRequest, data?: any) {
-    this.courseId = courseId;
-    this.subjectId = subjectId
-    if (courseId) {
-      this.getCourseSubject(courseId)
-    }
-    this.taskService.getAllSubmitedTasks(courseId, subjectId, status, data ? new PageRequest() : this.submissioTaskPageRequest).subscribe({
+  course1 = new Course
+  subject1 = new Subject
+  subjectName !: string
+
+  getCourseSubjects(subject: Subject) {
+    this.subjectId = subject.subjectId
+    this.subjectName = subject.subjectName
+  }
+
+  public getAllSubmittedTaskFilter(course: Course, subjectId: number, status: string, pageRequest: PageRequest) {
+    this.course1 = course
+    course.courseId != 0 ? this.getCourseSubject(course.courseId) : course
+    let c = document.getElementById('course2');
+    let s = document.getElementById('subject2');
+    let st = document.getElementById('status2');
+    s!.innerText = subjectId != 0 ? this.subjectName : 'Subject'
+    c!.innerText = course.courseName != '' ? course.courseName : 'Course'
+    st!.innerText = status != 'NOT_CHECKED_WITH_IT' ? status : 'Status'
+
+
+    this.taskService.getAllSubmitedTasks(course.courseId, subjectId, status, pageRequest).subscribe({
       next: (data: any) => {
         this.submitedTasksList = data.content
         this.submissioTaskpageManager.setPageData(data);
@@ -163,33 +181,26 @@ export class AdminTaskComponent implements AfterViewInit {
   getTaskPage(pageNumber: any) {
     if (pageNumber !== this.pageRequest.pageNumber) {
       this.pageRequest.pageNumber = pageNumber;
-      this.courseFilterByCourseIdAndSubjectId(this.courseId, this.subjectId, this.pageRequest);
+      this.courseFilterByCourseIdAndSubjectId(this.course, this.subject, this.pageRequest);
     }
   }
 
   public getOverAllAssignmentTaskStatus() {
     this.taskService.getOverAllAssignmentTaskStatus().subscribe(
       (data: any) => {
-        //  this.taskSubmissionStatus2 = data;
         this.totalSubmitted = data.totalCount
-        //this.totalSubmitted = this.calculatePercentages(this.totalSubmitted,)
-        this.reveiwed = data.reviewedCount// = this.calculatePercentages(this.totalSubmitted , data.reviewedCount)
-        this.unReveiwed = data.unreviewedCount//= this.calculatePercentages(this.totalSubmitted , data.unreviewedCount)
+        this.reveiwed = data.reviewedCount
+        this.unReveiwed = data.unreviewedCount
       }
     )
   }
 
 
   calculatePercentages(num1: number, num2: number) {
-    if (num2 !== 0)
-      return Math.floor((num1 / num2) * 100);
-    else
-      return 0;
-
+    return num2 == 0 ? 0 : Math.floor((num1 / num2) * 100);
   }
 
   public getCourseSubject(id?: any) {
-
     this.subjectService.getAllSubjectsByCourseId(id ? id : this.task.course.courseId).subscribe({
       next: (data: any) => {
         this.subjectes = []
@@ -201,10 +212,14 @@ export class AdminTaskComponent implements AfterViewInit {
     })
   }
 
-  public courseFilterByCourseIdAndSubjectId(courseId: number, subjectId: number, pageRequest: PageRequest, data?: any) {
-    this.courseId = courseId;
-    courseId != 0 ? this.getCourseSubject(courseId) : courseId
-    this.taskService.getAllSubmissionTaskStatusByCourseIdAndSubjectIdFilter(courseId, subjectId, data ? new PageRequest() : pageRequest).subscribe({
+  public courseFilterByCourseIdAndSubjectId(course: Course, subject: Subject, pageRequest: PageRequest) {
+    this.course = course;
+    course.courseId != 0 ? this.getCourseSubject(course.courseId) : course
+    let c = document.getElementById('course1');
+    let s = document.getElementById('subject1');
+    s!.innerText = subject.subjectName != '' && subject.subjectId != 0 ? subject.subjectName : 'Subject'
+    c!.innerText = course.courseName != '' ? course.courseName : 'Course'
+    this.taskService.getAllSubmissionTaskStatusByCourseIdAndSubjectIdFilter(course.courseId, subject.subjectId, pageRequest).subscribe({
       next: (data: any) => {
         this.taskSubmissionStatus = data.data.content
         this.pageManager.setPageData(data.data);
@@ -216,9 +231,10 @@ export class AdminTaskComponent implements AfterViewInit {
     })
   }
 
-  public pageRanderWithObj(id: any) {
+  public pageRanderWithObj(id: any, taskId: number) {
     const dataParams = {
-      submissionId: id
+      submissionId: id,
+      taskId: taskId
     };
     this.router.navigate(['/admin/submission'], {
       queryParams: dataParams

@@ -1,28 +1,68 @@
+import { DatePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { log } from 'console';
+import { Observable, catchError, map, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilityServiceService {
 
-  constructor() { }
+  constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
   //private BASE_URL = 'http://cicoapi.dollopinfotech.com';
 
   private BASE_URL = 'http://localhost:8080';
   private readonly TIME_URL = 'http://worldtimeapi.org/api/ip';
 
+
+  getCurrentTime(): Observable<any> {
+    return this.http.get(this.TIME_URL).pipe(
+      catchError(error => {
+        console.error('Error fetching time:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  getCurrentDate(): Observable<any> {
+    return this.getCurrentTime().pipe(
+      map((data: any) => this.transformData(data)),
+      catchError(error => {
+        console.error('Error transforming data:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  private transformData(data: any): any {
+    let date = new Date(data.datetime);
+    let date2 = this.datePipe.transform(date, 'yyyy-MM-dd');
+    let dateWithTime = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    let time = date.toLocaleTimeString();
+
+    return {
+      date: date2,
+      dateWithTime: dateWithTime,
+      time: time,
+      actualDate:date
+    };
+  }
+
+
   public getBaseUrl() {
     return this.BASE_URL;
   }
 
   public getTimeUrl() {
-   //  return this.TIME_URL;
+   // return this.TIME_URL;
   }
 
   public updateTimeline(date: any) {
     // Calculate the time difference and update the timestamp
-    const now = new Date();
+    const now = new Date(); 
+    
     const messageDate = new Date(date); // Replace with the actual message date
     const timeDiff = now.getTime() - messageDate.getTime();
 

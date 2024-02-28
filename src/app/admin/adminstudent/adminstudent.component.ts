@@ -40,13 +40,14 @@ export class AdminstudentComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.courseId = this.activateRoute.snapshot.params[('courseId')];
-    this.getAllStudent(0, 15);
+   this.searchStudentByName(0, 15);
+  // this.getAllStudent(0,15)
     this.getAllCourse();
     this.getAllTechImages();
 
   }
 
-  public getAllStudent(page: Number, size: number) {
+  public getAllStudent(page: number, size: number, searchName?: string) {
     this.stuentService.getAllStudent(page, size).subscribe(
       (data: any) => {
         this.students = data.response
@@ -54,21 +55,30 @@ export class AdminstudentComponent implements OnInit {
       }
     )
   }
+  // public onChangePage(event: any) {
+  //   this.getAllStudent(event.pageIndex, event.pageSize);
+  // }
+
   public onChangePage(event: any) {
-    this.getAllStudent(event.pageIndex, event.pageSize);
+    this.searchStudentByName(event.pageIndex, event.pageSize);
+  }
+  public searchStudentByName(pageNumber: number, pageSize: number) {
+    if (this.search == '') {
+      this.getStudentData(pageNumber, pageSize);
+    } else {
+      this.getStudentData(pageNumber, pageSize);
+      
+    }
   }
 
-  public searchStudentByName() {
-    if (this.search == '') {
-      this.getAllStudent(0, 15);
-    } else {
-      this.stuentService.searchStudentByName(this.search).subscribe(
-        (data: any) => {
-          this.students = data
-          this.totalStudent = data.totalElements
-        }
-      )
-    }
+  getStudentData(pageNumber: number, pageSize: number) {
+    this.stuentService.searchStudentByName(pageNumber, pageSize, this.search).subscribe(
+      (data: any) => {
+        this.students = []
+        this.students = data.response
+        this.totalStudent = data.totalElements
+      }
+    )
   }
 
   public getAllCourse() {

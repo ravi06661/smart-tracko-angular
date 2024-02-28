@@ -12,15 +12,34 @@ export class ResultComponent implements OnInit {
 
   resultId = 0
   chapterExamResult: ChapterExamResult = new ChapterExamResult
+  type!: string
   constructor(private activateRoute: ActivatedRoute, private examService: ExamServiceService, private router: Router) { }
 
   ngOnInit(): void {
-    this.resultId = this.activateRoute.snapshot.params['id'];
-    this.examService.getChapterExamResult(this.resultId).subscribe({
-      next: (data: any) => {
-        this.chapterExamResult = data.examResult;
-      }
+    this.activateRoute.queryParams.subscribe((param: any) => {
+      this.type = param['type']
+      this.resultId = param['resultId']
     })
+    setTimeout(() => {
+      if (this.type == "chapterExamResult") {
+        this.examService.getChapterExamResult(this.resultId).subscribe({
+          next: (data: any) => {
+            this.chapterExamResult = data.examResult;
+          }
+        })
+
+      } else if (this.type == "subjectExamResult") {
+
+        this.examService.getSubjectExamResult(this.resultId).subscribe({
+          next: (data: any) => {
+            this.chapterExamResult = data.examResult
+          },
+          error: (er: any) => {
+
+          }
+        });
+      }
+    }, 500);
   }
 
   isFullScreen = true;
@@ -33,5 +52,15 @@ export class ResultComponent implements OnInit {
   exite() {
     this.toggleFullScreen();
     this.router.navigate(['/student'])
+  }
+
+  viewReview() {
+    let params = {
+      resultId: this.resultId,
+      type: this.type == "chapterExamResult" ? "chapterExamReview" : "subjectExamReview"
+    }
+    this.router.navigate(['review'], {
+      queryParams: params
+    })
   }
 }

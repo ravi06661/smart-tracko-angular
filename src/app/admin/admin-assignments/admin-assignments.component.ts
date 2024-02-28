@@ -39,8 +39,14 @@ export class AdminAssignmentsComponent implements OnInit {
   courseId = 0;
   subjectId = 0;
 
+
+  // for assignment 
   assignmentPageRequest: PageRequest = new PageRequest();
   assignmentPagination: PaginationManager = new PaginationManager()
+  //for assignment submission 
+  assignmentSubmissionPageRequest: PageRequest = new PageRequest();
+  assignmentSubmissionPagination: PaginationManager = new PaginationManager()
+
 
   submissionForm: FormGroup
   constructor(private courseService: CourseServiceService,
@@ -65,7 +71,7 @@ export class AdminAssignmentsComponent implements OnInit {
     this.getAllSubmitedAssignments(new Course, 0, 'NOT_CHECKED_WITH_IT');
     //    this.getAllSubmissionAssignmentStatus()
     this.getOverAllAssignmentTaskStatus()
-    this.courseFilterByCourseIdAndSubjectId(0, 0)
+    this.courseFilterByCourseIdAndSubjectId(new Course, 0)
     this.getAllSubject()
   }
 
@@ -120,25 +126,11 @@ export class AdminAssignmentsComponent implements OnInit {
     }
   }
 
-  public getAllSubmitedAssignments(course: Course, subjectId: number, status: string) {
-    this.course = course!;
-    this.assignmentService.getAllSubmitedAssignments(this.course.courseId, subjectId, status).subscribe({
-      next: (data: any) => {
-        this.submitedAssignments = data
-        // if(this.submitedAssignments.length==0){
-        //   this.message = " No Assignment Found !!"
-        // }
-      },
-      error: (er: any) => {
 
-      }
-    })
-  }
-
-
-  public pageRanderWithObj(object: AssignmentSubmission) {
+  public pageRanderWithObj(object: AssignmentSubmission, assignmentId: number) {
     const dataParams = {
       submissionId: object.submissionId,
+      assignmentId: assignmentId
     };
     this.router.navigate(['/admin/assignmentsubmission'], {
       queryParams: dataParams
@@ -178,19 +170,26 @@ export class AdminAssignmentsComponent implements OnInit {
     }
   }
 
-  courseFilterByCourseIdAndSubjectId(courseId: any, subjectId: number, pageRequest?: PageRequest) {
-    //this.course = course;
-    courseId != 0 ? this.getCourseSubject(this.courseId) : courseId
-    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(courseId, subjectId, pageRequest ? pageRequest : new PageRequest()).subscribe((
+
+
+  courseFilterByCourseIdAndSubjectId(course: Course, subjectId: number, pageRequest?: PageRequest) {
+    this.course = course;
+    //course != 0 ? this.getCourseSubject(this.courseId) : courseId
+    let c = document.getElementById('course1');
+    let s = document.getElementById('subject1');
+    s!.innerText = this.subjectName != '' && subjectId != 0 ? this.subjectName : 'Subject'
+    c!.innerText = course.courseName != '' ? course.courseName : 'Course'
+    this.assignmentService.getAllSubmissionAssignmentTaskStatusByCourseIdFilter(course.courseId, subjectId, pageRequest ? pageRequest : new PageRequest()).subscribe((
       (data: any) => {
         this.taskSubmissionStatus = data.content
-
         this.taskSubmissionStatus = data.content
         this.assignmentPagination.setPageData(data);
         this.assignmentPageRequest.pageNumber = data.pageable.pageNumber;
       }
     ))
   }
+
+  // for assignment  
   public manageaAssignmentNextPrev(isNext: boolean) {
 
     let i = 0;
@@ -202,15 +201,55 @@ export class AdminAssignmentsComponent implements OnInit {
   getTaskPage(pageNumber: any) {
     if (pageNumber !== this.assignmentPageRequest.pageNumber) {
       this.assignmentPageRequest.pageNumber = pageNumber;
-      this.courseFilterByCourseIdAndSubjectId(this.courseId, this.subjectId, this.assignmentPageRequest);
+      this.courseFilterByCourseIdAndSubjectId(this.course, this.subjectId, this.assignmentPageRequest);
     }
   }
 
 
+  public getAllSubmitedAssignments(course: Course, subjectId: number, status: string, pageRequest?: PageRequest) {
+
+    // managing the dropdown label
+    this.course = course!;
+    let c = document.getElementById('course2');
+    let s = document.getElementById('subject2');
+    let st = document.getElementById('status2');
+    s!.innerText = this.subjectName != '' && subjectId != 0 ? this.subjectName : 'Subject'
+    c!.innerText = course.courseName != '' ? course.courseName : 'Course'
+    st!.innerText = status != 'NOT_CHECKED_WITH_IT' ? status : 'Status'
 
 
+    this.assignmentService.getAllSubmitedAssignments(this.course.courseId, subjectId, status, pageRequest ? pageRequest : new PageRequest()).subscribe({
+      next: (data: any) => {
+        this.submitedAssignments = data.content
+        this.assignmentSubmissionPagination.setPageData(data)
+        this.assignmentSubmissionPageRequest.pageNumber = data.pageable.pageNumber
+      },
+      error: (er: any) => {
+
+      }
+    })
+  }
+
+  // for assignment submission 
+  public manageaAssignmentSubmissionNextPrev(isNext: boolean) {
+    let i = 0;
+    if (isNext) i = this.assignmentSubmissionPageRequest.pageNumber + 1;
+    else i = this.assignmentSubmissionPageRequest.pageNumber - 1;
+    if (i >= 0 && i < this.assignmentSubmissionPagination.totalPages)
+      this.getTaskPage(i);
+  }
+  getAssignmentSubmissionkPage(pageNumber: any) {
+    if (pageNumber !== this.assignmentSubmissionPageRequest.pageNumber) {
+      this.assignmentSubmissionPageRequest.pageNumber = pageNumber;
+      this.getAllSubmitedAssignments(this.course, this.subjectId, 'NOT_CHECKED_WITH_IT', this.assignmentSubmissionPageRequest);
+    }
+  }
+
+
+  subjectName: string = ''
   selectCourseSubject(subject: Subject) {
     this.subjectId = subject.subjectId
+    this.subjectName = subject.subjectName
   }
 
   public clearFormSubmission() {
@@ -234,12 +273,16 @@ export class AdminAssignmentsComponent implements OnInit {
     }
   }
 
-  activateTask(obj:SubmissionAssignmentTaskStatus){
+  activateTask(obj: SubmissionAssignmentTaskStatus) {
     this.assignmentService.activateTask(obj.assignmentId).subscribe({
-      next:(data:any)=>{
+      next: (data: any) => {
         obj.status = data.status
       }
     })
+  }
+
+  isDuplicateAssignment(name: string, currentIndex: number): boolean {
+    return this.taskSubmissionStatus.findIndex((assignment, index) => index < currentIndex && assignment.assignmentTitle === name) !== -1;
   }
 }
 

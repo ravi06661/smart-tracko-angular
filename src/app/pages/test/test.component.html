@@ -1,72 +1,45 @@
 <div id="main" class="main main_task">
     <div class="profile d-flex mb-4">
-    <h1 class="font-27 font-700 secondary mb-0">Assignments</h1>
-    <app-profile-bar></app-profile-bar>
+        <h1 class="font-27 font-700 secondary mb-0">Assignments</h1>
+        <app-profile-bar></app-profile-bar>
     </div>
 
-    <div class="subject-test" >
+    <div class="subject-test">
         <h3 _ngcontent-ghv-c53="" class="admin-title font-17 font-600 secondary position-relative">Test</h3>
         <div class="row mt-4">
-            <div class="col-md-4 mb-4 ">
+            <div class="col-md-4 mb-4 " *ngFor="let obj of normlaExam">
                 <div class="test_card">
                     <div class="d-flex justify-content-between align-items-center mb_12">
                         <div class="d-flex align-items-center gap_12">
-                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <img src="{{obj.examImage}}" class="test_icon">
                             <div class="test_details">
-                                <h3 class="mb-1">Core Java</h3>
-                                <h4 class="mb-0">Best Score - 36%</h4>
+                                <h3 class="mb-1">{{obj.examName}}</h3>
+                                <h4 class="mb-0" *ngIf="obj.scoreGet!=null">Best Score -> {{obj.scoreGet}}%</h4>
                             </div>
                         </div>
-                        <button class="test_btn">Start Test</button>
-        
+                        <button *ngIf="obj.resultId==null" class="test_btn" (click)="startTest(obj.examId,obj.subjectId)">Start
+                            Test</button>
+                        <button *ngIf="obj.resultId!=null" class="test_btn" (click)="viewExamReview(obj.resultId)">View
+                            Result</button>
                     </div>
 
                     <div class="d-flex justify-content-around">
                         <div class="test_details2">
                             <h3>Questions</h3>
-                            <h4>50</h4>
+                            <h4>{{obj.totalQuestionForTest}}</h4>
                         </div>
                         <div class="test_details2">
                             <h3>Passing marks</h3>
-                            <h4>50%</h4>
+                            <h4>{{obj.passingMarks}} %</h4>
                         </div>
                         <div class="test_details2">
                             <h3>Duration</h3>
-                            <h4>2 hrs</h4>
+                            <h4>{{obj.examTimer}}Min</h4>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="test_card">
-                    <div class="d-flex justify-content-between align-items-center mb_12">
-                        <div class="d-flex align-items-center gap_12">
-                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
-                            <div class="test_details">
-                                <h3 class="mb-1">Core Java</h3>
-                                <h4 class="mb-0">Best Score - 36%</h4>
-                            </div>
-                        </div>
-                        <button class="test_btn">Start Test</button>
-                    </div>
-
-                    <div class="d-flex justify-content-around">
-                        <div class="test_details2">
-                            <h3>Questions</h3>
-                            <h4>50</h4>
-                        </div>
-                        <div class="test_details2">
-                            <h3>Passing marks</h3>
-                            <h4>50%</h4>
-                        </div>
-                        <div class="test_details2">
-                            <h3>Duration</h3>
-                            <h4>2 hrs</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
+            <!-- <div class="col-md-4 mb-4">
                 <div class="test_card">
                     <div class="d-flex justify-content-between align-items-center mb_12">
                         <div class="d-flex align-items-center gap_12">
@@ -95,36 +68,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="test_card">
-                    <div class="d-flex justify-content-between align-items-center mb_12">
-                        <div class="d-flex align-items-center gap_12">
-                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
-                            <div class="test_details">
-                                <h3 class="mb-1">Core Java</h3>
-                                <h4 class="mb-0">Best Score - 36%</h4>
-                            </div>
-                        </div>
-                        <button class="test_btn">Start Test</button>
-                    </div>
-
-                    <div class="d-flex justify-content-around">
-                        <div class="test_details2">
-                            <h3>Questions</h3>
-                            <h4>50</h4>
-                        </div>
-                        <div class="test_details2">
-                            <h3>Passing marks</h3>
-                            <h4>50%</h4>
-                        </div>
-                        <div class="test_details2">
-                            <h3>Duration</h3>
-                            <h4>2 hrs</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="col-md-4 mb-4">
                 <div class="test_card">
                     <div class="d-flex justify-content-between align-items-center mb_12">
@@ -183,13 +126,112 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <button class="test_btn">Start Test</button>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">Core Java</h3>
+                                <h4 class="mb-0">Best Score - 36%</h4>
+                            </div>
+                        </div>
+                        <button class="test_btn">Start Test</button>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>50</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>50%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>2 hrs</h4>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
         </div>
 
 
         <h3 _ngcontent-ghv-c53="" class="admin-title font-17 font-600 secondary position-relative">Schedule Test
         </h3>
         <div class="row mt-4">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 mb-4" *ngFor="let obj of scheduleExam;let i =index">
+                <div class="test_card">
+                    <div class="d-flex justify-content-between align-items-center mb_12">
+                        <div class="d-flex align-items-center gap_12">
+                            <img src="{{obj.examImage}}" class="test_icon">
+                            <div class="test_details">
+                                <h3 class="mb-1">{{obj.examName}}</h3>
+                                <h4 class="mb-0" *ngIf="obj.scoreGet!=null" [ngStyle]="{'color':obj.scoreGet <=obj.passingMarks?'red':''}" > Best Score -> {{obj.scoreGet}}%  ({{obj.scoreGet <=obj.passingMarks?'Fail':'Pass'}})</h4>
+                            </div>
+                        </div>
+                        <div class="lock_details">
+
+                            <h3  class="mb-0" [id]="'testId'+obj.examId"></h3>
+                            <i class="fi fi-rr-lock lh-0 font-20 lock" *ngIf="!obj.isExamEnd && obj.resultId==null && !obj.isExamStarted"></i>
+                            <h3  [ngStyle]="{ 'color': obj.remainingTime?.split(' ')[1] <= '600' ||  obj.remainingTime?.split(' ')[0] <= '60'  && obj.remainingTime!=null ? 'red' : '' }"
+                            class="mb-0" id="{'remainingTime'+{{obj.examId}}}" *ngIf="!obj.isExamStarted  && obj.resultId==null && obj.remainingTime!=null ">Time Left{{obj.remainingTime}}</h3>
+                            <h3  class="mb-0"id="{'date'+{{i}}}" *ngIf="obj.remainingTime==null && obj.resultId==null && !obj.isExamEnd ">{{obj.scheduleTestDate}}</h3>
+                           <button  *ngIf="obj.isExamStarted && obj.resultId ==null && !obj.isExamEnd" class="test_btn" (click)="startTest(obj.examId,obj.subjectId)">Start
+                            Test</button>  <button *ngIf="obj.resultId!=null" class="test_btn" (click)="viewExamReview(obj.resultId)">View
+                                Result</button>
+                                <button  *ngIf="obj.isExamEnd &&  obj.resultId==null  " class="test_btn">Exam-End</button> 
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-around">
+                        <div class="test_details2">
+                            <h3>Questions</h3>
+                            <h4>{{obj.totalQuestionForTest}}</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Passing marks</h3>
+                            <h4>{{obj.passingMarks}}%</h4>
+                        </div>
+                        <div class="test_details2">
+                            <h3>Duration</h3>
+                            <h4>{{obj.examTimer}}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-4 mb-4">
                 <div class="test_card">
                     <div class="d-flex justify-content-between align-items-center mb_12">
                         <div class="d-flex align-items-center gap_12">
@@ -348,85 +390,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="test_card">
-                    <div class="d-flex justify-content-between align-items-center mb_12">
-                        <div class="d-flex align-items-center gap_12">
-                            <img src="assets/images/temp_img/test-icon.png" class="test_icon">
-                            <div class="test_details">
-                                <h3 class="mb-1">Core Java</h3>
-                                <h4 class="mb-0">Best Score - 36%</h4>
-                            </div>
-                        </div>
-                        <div class="lock_details">
-                            <i class="fi fi-rr-lock lh-0 font-20 lock"></i>
-                            <h3 class="mb-0">2 hrs 5 mins</h3>
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-around">
-                        <div class="test_details2">
-                            <h3>Questions</h3>
-                            <h4>50</h4>
-                        </div>
-                        <div class="test_details2">
-                            <h3>Passing marks</h3>
-                            <h4>50%</h4>
-                        </div>
-                        <div class="test_details2">
-                            <h3>Duration</h3>
-                            <h4>2 hrs</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </div> -->
 
         </div>
-        <!-- <div class="row mt-3">
-            <div class="col-md-12" *ngFor="let obj of questions; let a =index">
-                <div class="top-test-question">
-                    <h2>Question {{a+1}}</h2>
-                    <div class="test-que-edit-del">
-                        <span class="d-flex align-items-center gap_5 font-17 font-500 secondary"
-                            data-bs-toggle="modal" data-bs-target="#subject-edit_testques-modal"
-                            (click)="setQuestion(obj.questionId,a)"><i
-                                class="fi fi-rr-file-edit line-height-0"></i> Edit</span>
-                        <span class="d-flex align-items-center gap_5 font-17 font-500 delete-icon-color"
-                            data-bs-toggle="modal" data-bs-target="#delete-modal2"
-                            (click)="questionId = obj?.questionId ?? 0;questionIndex=a"><i class="fi fi-rr-trash line-height-0"
-                                data-bs-dismiss="modal" aria-label="Close"></i> Delete</span>
-                    </div>
-                </div>
-
-                <div class="subject-test-question">
-                    <ul class="ps-0 mb-0 list-unstyled">
-                        <li [innerHTML]="obj.questionContent">{{obj.questionContent}}
-                        </li>
-                    </ul>
-                </div>
-                <div class="subject-test-ques-ans "*ngIf="obj.questionImage!=null">
-                    <img [src]="obj.questionImage" style="width: 200px ;height: 200px">
-                </div>
-                <div class="subject-test-ques-ans"
-                    [ngClass]="obj.correctOption==obj.option1?'alert alert-success':''">
-                    <p>A. {{obj.option1}}</p>
-                </div>
-                <div class="subject-test-ques-ans"
-                    [ngClass]="obj.correctOption==obj.option2?'alert alert-success':''">
-                    <p>B. {{obj.option2}}</p>
-                </div>
-                <div class="subject-test-ques-ans"
-                    [ngClass]="obj.correctOption==obj.option3?'alert alert-success':''">
-                    <p>C. {{obj.option3}}</p>
-                </div>
-                <div class="subject-test-ques-ans"
-                    [ngClass]="obj.correctOption==obj.option4?'alert alert-success':''">
-                    <p>D. {{obj.option4}}</p>
-                </div>
-
-            </div>
-        </div> -->
-
+        <app-right-side-bar></app-right-side-bar>
     </div>
 </div>

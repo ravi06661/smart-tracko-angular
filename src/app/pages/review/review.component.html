@@ -4,9 +4,9 @@
     <div class="row">
       <div class="col-md-12">
         <div class="review  d-flex justify-content-between align-items-center">
-          <a routerLink="/result/{{resultId}}" type="button"
+          <a  type="button" (click)="resultView()"
             class="back_button font-15 font-500 d-flex justify-content-center align-items-center"><i
-              class="fi fi-rr-arrow-left lh-0"></i>Back</a>
+              class="fi fi-rr-arrow-left lh-0" ></i>Back</a>
           <h5 class="font-24 font-700 light-black mb-0">Review Answers</h5>
           <h6 class="font-19 font-600 light-black mb-0">Your Score : {{chapterExamResult.scoreGet}}/{{chapterExamResult.totalQuestion}}</h6>
         </div>

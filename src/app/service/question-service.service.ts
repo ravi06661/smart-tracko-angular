@@ -12,6 +12,7 @@ export class QuestionServiceService {
 
   BASE_URL = this.utilityService.getBaseUrl();
   QUESTION_URL = this.BASE_URL + '/question';
+  EXAM_URL = this.BASE_URL + '/exam'
 
   constructor(private utilityService: UtilityServiceService, private http: HttpClient) { }
   public getAllQuestionByChapterId(chapterId: number): Observable<QuizeQuestion[]> {
@@ -62,12 +63,12 @@ export class QuestionServiceService {
     formData.append('option4', question.option4)
     formData.append('image', question.questionImage)
 
-    return this.http.post<QuizeQuestion>(`${this.QUESTION_URL}/addQuestionToSubjectExam`, formData)
+    return this.http.post<QuizeQuestion>(`${this.QUESTION_URL}/addQuestionToSubject`, formData)
   }
   public getAllSubjectExam(studentId: any) {
-    return this.http.get(`${this.QUESTION_URL}/getAllSubjectExam?studentId=${studentId}`)
+    return this.http.get(`${this.EXAM_URL}/getAllSubjectNormalAndScheduleExamForStudent?studentId=${studentId}`)
   }
-  getAllSubjectExamQuestion(subjectId: number) {
-    return this.http.get(`${this.QUESTION_URL}/getAllSubjectQuestionForTest?subjectId=${subjectId}`)
+  getAllSubjectExamQuestion(examId: number, studentId: number) {
+    return this.http.get(`${this.QUESTION_URL}/getAllSubjectQuestionForTest?examId=${examId}&studentId=${studentId}`)
   }
 }

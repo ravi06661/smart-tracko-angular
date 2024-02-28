@@ -7,6 +7,14 @@ export class Exam {
     public score: number | undefined
     public isDeleted: boolean | undefined
     public isActive: boolean | undefined
-    public questions:QuizeQuestion[]=[]
-    public examTimer:number =0;
+    public questions: QuizeQuestion[] = []
+    public examTimer!: number;
+    public totalQuestionForTest!: number
+    public passingMarks!: number
+    public examType!: string;
+    public scheduleTestDate!: Date
+    public subjectId!: number
+    public totalExamQuestion!: number
+    public examImage!: string
+    public examStartTime: any
 }

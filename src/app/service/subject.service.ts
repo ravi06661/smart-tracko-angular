@@ -3,12 +3,15 @@ import { UtilityServiceService } from './utility-service.service';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { LoginService } from './login.service';
+import { Exam } from '../entity/exam';
+import { ht } from 'date-fns/locale';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
- 
+
+
 
   public getAllChapterWithSubjectId(id: number) {
     return this.http.get(`${this.Subject_url}/getAllChapterWithSubjectId?subjectId=${id}`);
@@ -17,8 +20,8 @@ export class SubjectService {
   BASE_URL = this.utilityService.getBaseUrl();
   Subject_url = this.BASE_URL + '/subject';
   Chapter_url = this.BASE_URL + '/chapter';
-  Question_url = this.BASE_URL+ '/question'
-  EXAM_URL = this.BASE_URL +'/exam'
+  Question_url = this.BASE_URL + '/question'
+  EXAM_URL = this.BASE_URL + '/exam'
 
   constructor(private utilityService: UtilityServiceService, private http: HttpClient, private loginService: LoginService) { }
 
@@ -29,7 +32,7 @@ export class SubjectService {
   }
 
   public getAllSubjectQuestion(subjectId: number) {
-    return this.http.get<any>(`${this.Question_url}/getAllSubjectQuestion?subjectId=${subjectId}`)
+    return this.http.get<any>(`${this.Question_url}/getAllSubjectQuestionBySubjectId?subjectId=${subjectId}`)
   }
 
   public getAllSubjects() {
@@ -61,8 +64,20 @@ export class SubjectService {
     return this.http.get<any>(`${this.Subject_url}/getAllChapterWithSubjectIdAndStudentId?subjectId=${id}&studentId=${studentId}`)
   }
 
-  addSubjectExam(type: string) {
-    return this.http.post(`${this.EXAM_URL}/addSubjectExam`,type)
+  addSubjectExam(exam: Exam) {
+    return this.http.post(`${this.EXAM_URL}/addSubjectExam`, exam)
   }
+
+  getAllSubjectExamNormalAndSchedule(subjectId: number) {
+    return this.http.get(`${this.EXAM_URL}/getAllSubjectNormalAndScheduleExam?subjectId=${subjectId}`)
+  }
+
+  public updateSubjectExam(updateExam: Exam) {
+    return this.http.put(`${this.EXAM_URL}/updateSubjectExam`, updateExam)
+  }
+  deleteSubjectExam(examId: number) {
+    return this.http.delete(`${this.EXAM_URL}/deleteSubjectExam?examId=${examId}`)
+  }
+
 
 }

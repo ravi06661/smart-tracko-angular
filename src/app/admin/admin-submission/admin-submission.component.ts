@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { stat } from 'fs';
 import { StudentTaskSubmittion } from 'src/app/entity/student-task-submittion';
 import { TaskServiceService } from 'src/app/service/task-service.service';
 import { ToastService } from 'src/app/service/toast.service';
@@ -15,7 +16,9 @@ export class AdminSubmissionComponent implements OnInit, AfterViewInit {
   status = 'Unreviewed';
   review = ''
   id!: number
+  taskId!: number
   submitedTask: StudentTaskSubmittion = new StudentTaskSubmittion
+  submitedTasksList: StudentTaskSubmittion[] = []
 
   constructor(private taskService: TaskServiceService,
     private activateRoute: ActivatedRoute,) { }
@@ -23,6 +26,7 @@ export class AdminSubmissionComponent implements OnInit, AfterViewInit {
   async ngOnInit() {
     this.activateRoute.queryParams.subscribe(params => {
       this.id = params['submissionId'];
+      this.taskId = params['taskId']
     });
 
     try {
@@ -32,8 +36,10 @@ export class AdminSubmissionComponent implements OnInit, AfterViewInit {
         this.updateSubmitedTaskStatus('Reviewing');
       }
     } catch (error: any) {
-      //  this.toast.showError(error.message, 'Error');
+      console.log(error.error.message);
+
     }
+    this.getAllTaskSubmission()
   }
 
   public async getTaskSubmission() {
@@ -46,51 +52,43 @@ export class AdminSubmissionComponent implements OnInit, AfterViewInit {
     }
   }
 
-  //   this.id = this.activateRoute.snapshot.params['id']
-  //   this.getTaskSubmission().then(() => {
-  //     if (this.submitedTask.status == this.status) {
-  //       this.updateSubmitedTaskStatus('Reviewing')
-  //     }
-  //   })
-
-  // }
-
-  // public async getTaskSubmission() {
-  //  return  await this.taskService.getSubmissionTaskById(this.id).subscribe({
-  //     next: (data: any) => {
-  //         this.submitedTask = data.submission
-  //         // if (this.submitedTask.status == this.status) {
-  //         //   this.updateSubmitedTaskStatus('Reviewing')
-  //         // }
-  //     },
-  //     error: (er: any) => {
-  //      this.toast.showError(er.error.message,'Error') 
-  //     }
-  //   })
-
-  // }
-
+  index: number = 0
   public updateSubmitedTaskStatus(status: string) {
     this.taskService.updateSubmitedTaskStatus(this.id.toString(), status, this.review).subscribe({
       next: (data: any) => {
         this.submitedTask = data;
+        if (status != 'Reviewing') {
+          this.removeTaskFromList(this.index)
+        }
       }
     })
+
   }
 
   ngAfterViewInit() {
     const swiper = new Swiper(".swiper", {
       slidesPerView: 1,
-      // spaceBetween: 50,
       loop: true,
       grabCursor: true,
       centeredSlides: true,
-
       navigation: {
         nextEl: ".next",
         prevEl: ".prev"
       },
     });
 
+  }
+
+  getAllTaskSubmission() {
+    this.taskService.getAllTaskSubmissionBYTaskId(this.taskId).subscribe({
+      next: (data: any) => {
+        this.submitedTasksList = data
+      },
+      error: (er: any) => {
+      }
+    })
+  }
+  removeTaskFromList(index: number) {
+    this.submitedTasksList.splice(index, 1);
   }
 }

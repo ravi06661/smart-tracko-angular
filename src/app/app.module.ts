@@ -93,11 +93,11 @@ import { AdminDiscussionForumComponent } from './admin/admin-discussion-forum/ad
 import { AdminChapterResultComponent } from './admin/admin-chapter-result/admin-chapter-result.component';
 import { EmogiComponent } from './pages/emogi/emogi.component';
 import { SafePipe } from './utils/pipe/safe.pipe';
-import { TaskQuestionComponent } from './payload/task-question/task-question.component';
 import { ToastrModule } from 'ngx-toastr';
 import { LoaderComponentComponent } from './app/loader-component/loader-component.component';
 import { TestComponent } from './pages/test/test.component';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { PaginationComponent } from './pagination/pagination.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -170,13 +170,11 @@ import { TestComponent } from './pages/test/test.component';
     AdminChapterResultComponent,
     EmogiComponent,
     SafePipe,
-    TaskQuestionComponent,
     LoaderComponentComponent,
     TestComponent,
-  
+    PaginationComponent
    
        
- 
   ],
   imports: [
     BrowserModule,
@@ -201,6 +199,7 @@ import { TestComponent } from './pages/test/test.component';
     NgApexchartsModule,
     FullCalendarModule,
     ReactiveFormsModule,
+    MatCheckboxModule,
     MatSnackBarModule,
     MatProgressBarModule,
     BrowserAnimationsModule,
